@@ -46,10 +46,10 @@ class PaymentController extends Controller
             $itemname = $row->model->slug;
             array_push($items,$qty,$itemname );
         }
-        $price = Cart::total();
+        $price = str_replace(',', '', (Cart::total()));
 
-        //create the User
-        // $user = User::create(request([$name, $email, $password]));
+        //create the Order
+
         $order = new Payment();
         $order->name = $name;
         $order->last_name = $last_name;
