@@ -1,6 +1,5 @@
 @if (count($errors))
     <div class="form-group">
-
         <div>
             <ul class="list-group">
                 @foreach($errors->all() as $error)
