@@ -29,8 +29,6 @@ class PaymentController extends Controller
             'zipcode' => 'required',
             'phone_number' => 'required',
             'email' => 'required',
-            // 'items' => 'required',
-            // 'price' => 'required',
         ]);
 
         $name = $request['name'];
