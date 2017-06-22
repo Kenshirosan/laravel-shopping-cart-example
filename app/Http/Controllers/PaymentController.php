@@ -8,7 +8,7 @@ use App\Payment;
 use App\Http\Requests;
 use \Cart as Cart;
 use Illuminate\Http\Request;
-// use App\Mail\Order;
+use App\Mail\Order;
 
 class PaymentController extends Controller
 {
@@ -62,6 +62,8 @@ class PaymentController extends Controller
         $order->price = $price;
 
         $order->save();
+        $user = User::where('email', $email)->firstOrFail();
+        \Mail::to($user)->send(new Order($order));
         Cart::destroy();
         return redirect('/thankyou')->with(['success_message' => 'Thank You, Your order is complete, We sent you a detailed email, Please call us if you need to make a change.']);
     }

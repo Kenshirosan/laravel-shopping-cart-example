@@ -48,6 +48,7 @@ class RegisterController extends Controller
     */
     protected function validator(array $data)
     {
+
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -68,7 +69,8 @@ class RegisterController extends Controller
     */
     protected function create(array $data)
     {
-        return $user = User::create([
+
+         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
@@ -77,8 +79,10 @@ class RegisterController extends Controller
             'address2' => $data['address2'],
             'zipcode' => $data['zipcode'],
             'phone_number' => $data['phone_number'],
-            \Mail::to($data['email'])->send(new welcome)
         ]);
-
+        $email = $data['email'];
+        $user = User::where('email', $email)->firstOrFail();
+        \Mail::to($data['email'])->send(new Welcome($user));
+        return $user;
     }
 }

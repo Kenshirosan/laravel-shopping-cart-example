@@ -26,7 +26,7 @@
                             document.getElementById('logout-form').submit();">
                             Logout
                         </a></li>
-                        @if( Auth::user()->theboss )
+                        @if( Auth::user()->theboss or Auth::user()->employee )
                             <li><a href="/restaurantpanel">Admin</a></li>
                         @endif
                         <li class="dropdown">
