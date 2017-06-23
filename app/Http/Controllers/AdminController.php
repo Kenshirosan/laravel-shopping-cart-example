@@ -32,7 +32,7 @@ class AdminController extends Controller
         $product = Product::where('slug', $slug)->firstOrFail();
 
         $this->validate($request, [
-            'photos' => 'require|mimes:jpg,jpeg,png,bmp'
+            'photos' => 'required|mimes:jpg,jpeg,png,bmp'
         ]);
 
         $file = $request->file('photos');
