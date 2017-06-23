@@ -34,4 +34,9 @@ class User extends Authenticatable
     {
         return $this->theboss; // this looks for an theboss(instead of admin) column in your users table
     }
+
+    public function userOrders()
+    {
+        return $this->hasMany(Payment::class);
+    }
 }

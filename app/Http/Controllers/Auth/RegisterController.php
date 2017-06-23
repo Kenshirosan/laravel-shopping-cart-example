@@ -80,6 +80,7 @@ class RegisterController extends Controller
             'zipcode' => $data['zipcode'],
             'phone_number' => $data['phone_number'],
         ]);
+        
         $email = $data['email'];
         $user = User::where('email', $email)->firstOrFail();
         \Mail::to($data['email'])->send(new Welcome($user));

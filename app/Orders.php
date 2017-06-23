@@ -3,15 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-// use App\User;
-// use App\Product;
+use App\User;
 use App\Http\Requests;
 use \Cart as Cart;
 use Illuminate\Http\Request;
-use App\Mail\Order;
-// use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Payment extends Model
+
+class Orders extends Model
 {
     // use Notifiable;
     /**
@@ -20,7 +18,12 @@ class Payment extends Model
     * @var array
     */
     protected $fillable = [
-        'name','last_name', 'address','address2', 'zipcode', 'phone_number', 'email', 'items', 'price'
+        'user_id', 'name','last_name', 'address','address2', 'zipcode', 'phone_number', 'email', 'items', 'price'
     ];
+
+    public function order()
+    {
+        return $this->belongsTo(User::class);
+    }
 
 }

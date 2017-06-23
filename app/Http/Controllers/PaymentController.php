@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Support\Facades\Auth;
-use App\Payment;
+use App\Orders;
 use App\Http\Requests;
 use \Cart as Cart;
 use Illuminate\Http\Request;
@@ -12,14 +12,19 @@ use App\Mail\Order;
 
 class PaymentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         return view('layouts.payment_form');
     }
 
-    public function store(Request $request)
+    public function store( Request $request)
     {
-        $data = $request->session('cart');
+        $user = Auth::user();
 
         $this->validate($request, [
             'name' => 'required',
@@ -48,7 +53,8 @@ class PaymentController extends Controller
 
         //create the Order
 
-        $order = new Payment();
+        $order = new Orders();
+        $order->user_id = $user->id;
         $order->name = $name;
         $order->last_name = $last_name;
         $order->email = $email;
@@ -60,7 +66,6 @@ class PaymentController extends Controller
         $order->price = $price;
 
         $order->save();
-        $user = User::where('email', $email)->firstOrFail();
         \Mail::to($user)->send(new Order($order));
         Cart::destroy();
         return redirect('/thankyou')->with(['success_message' => 'Thank You, Your order is complete, We sent you a detailed email, Please call us if you need to make a change.']);

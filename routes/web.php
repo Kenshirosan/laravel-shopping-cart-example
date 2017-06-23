@@ -25,6 +25,8 @@ Route::delete('emptyCart', 'CartController@emptyCart');
 Route::get('/restaurantpanel', 'AdminController@index');
 Route::get('/delete/{slug}', 'ProductController@delete')->name('/delete');
 Route::post('/insertproduct', 'ProductController@store');
+
+//ADD A BUNCH OF PICS ON PRODUCT VIEW
 Route::post('/shop/{slug}/{photo}','AdminController@store');
 
 //CHECKOUT AND CART ROUTES
@@ -40,5 +42,11 @@ Route::resource('wishlist', 'WishlistController');
 Route::delete('emptyWishlist', 'WishlistController@emptyWishlist');
 Route::post('switchToCart/{id}', 'WishlistController@switchToCart');
 
+
+/*******
+*
+* TO DO
+*
+********/
 //STRIPE (or payment route)
 // Route::post('/order', 'PaymentController@store');

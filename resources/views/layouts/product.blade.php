@@ -28,7 +28,7 @@
 
                 @if( !Auth::guest() && Auth::user()->theboss )
 
-                    <form class="dropzone" action="/shop/{{ $product->slug }}/photo" method="POST">
+                    <form id="addPhotosForm" class="dropzone" action="/shop/{{ $product->slug }}/photo" method="POST">
                         {{ csrf_field() }}
                     </form>
                 @endif
@@ -48,4 +48,11 @@
 
 @section('dropzone.script')
     <script src="/js/dropzone.min.js" charset="utf-8"></script>
+    <script>
+        Dropzone.options.addPhotosForm = {
+            paramName: 'photos',
+            maxFilesize: 2,
+            acceptedFiles: '.jpg, .jpeg, .png, .bmp'
+        };
+    </script>
 @endsection

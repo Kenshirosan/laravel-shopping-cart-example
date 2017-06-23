@@ -15,7 +15,7 @@
         @endif
         <div class="container">
             <h1>Hello, {{ Auth::user()->name }}</h1>
-            <form class="form-horizontal dropzone" method="POST" action="/insertproduct" enctype="multipart/form-data">
+            <form class="form-horizontal" method="POST" action="/insertproduct" enctype="multipart/form-data">
                 {{ csrf_field() }}
 
                 {{--  NAME OF MEAL --}}
@@ -106,17 +106,26 @@
                 {{ csrf_field() }}
                 <div class="form-group">
                     <div class="col-md-12">
-                        <input type=submit value='logout'class="btn btn-danger">
+                        <input type=submit value='logout' class="btn btn-danger">
                     </div>
                 </div>
             </form>
         </div>
 
+        <div class="container">
+            <ul class=list-group>
+                @foreach( $orders as $order )
+                    {{-- @foreach( $orders as $order ) --}}
+                        <li class="list-group-item"><h4>Order number: {{ $order->id }}</h4>{{ $order->name }} {{ $order->last_name }} paid $<strong>{{ $order->price }}</strong> for {{ $order->items }} on <strong>{{ $order->created_at->toFormattedDateString() }}</strong> at {{ $order->created_at->toTimeString() }}</li>
+                    {{-- @endforeach --}}
+                @endforeach
+            </ul>
+        </div>
     @elseif( (!Auth::user()->theboss) || (!Auth::user()->employee) )
-        
-<script type="text/javascript">
-window.location = "{{ url('/shop') }}";//here double curly bracket
-</script>
-@endif
-<div class="spacer"></div>
+
+        <script type="text/javascript">
+        window.location = "{{ url('/shop') }}";
+        </script>
+    @endif
+    <div class="spacer"></div>
 @endsection

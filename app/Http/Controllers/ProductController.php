@@ -19,7 +19,8 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-        return view('layouts.shop')->with('products', $products);
+
+        return view('layouts.shop', compact('products'));
     }
 
     /**
@@ -31,8 +32,8 @@ class ProductController extends Controller
     public function show($slug)
     {
         $product = Product::where('slug', $slug)->firstOrFail();
-        $user = Auth::user();
-        return view('layouts.product')->with(['product' => $product]);
+        
+        return view('layouts.product', compact('product') );
     }
 
     public function delete($product)
