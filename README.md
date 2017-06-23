@@ -14,3 +14,4 @@ Github: https://github.com/drehimself/laravel-shopping-cart-example#laravel-shop
 order table, added admin(boss)and employee rows in users table, to be set manually directly in database, 
 added a form to add product(employees and admin)
 and a delete product button on the shop view when logged in as an admin(boss)
+added dropzone.js on product page(must be admin)
