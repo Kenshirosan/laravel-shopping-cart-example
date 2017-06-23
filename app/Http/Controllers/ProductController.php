@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests;
 use App\Product;
+use App\User;
 use Image;
 
 class ProductController extends Controller
@@ -30,7 +31,7 @@ class ProductController extends Controller
     public function show($slug)
     {
         $product = Product::where('slug', $slug)->firstOrFail();
-
+        $user = Auth::user();
         return view('layouts.product')->with(['product' => $product]);
     }
 

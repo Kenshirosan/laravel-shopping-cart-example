@@ -12,6 +12,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Stylesheets -->
+    <link rel="stylesheet" href="/css/dropzone.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/app.css">
     @yield('extra-css')
@@ -37,6 +38,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
     @yield('extra-js')
+    @yield('dropzone.script')
 
 </body>
 </html>

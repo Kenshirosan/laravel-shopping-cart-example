@@ -15,7 +15,7 @@
         @endif
         <div class="container">
             <h1>Hello, {{ Auth::user()->name }}</h1>
-            <form class="form-horizontal" method="POST" action="/insertproduct" enctype="multipart/form-data">
+            <form class="form-horizontal dropzone" method="POST" action="/insertproduct" enctype="multipart/form-data">
                 {{ csrf_field() }}
 
                 {{--  NAME OF MEAL --}}
@@ -113,12 +113,7 @@
         </div>
 
     @elseif( (!Auth::user()->theboss) || (!Auth::user()->employee) )
-        {{-- <div class="container">
-        <div class="col-md-12">
-        <h1>Dear {{ Auth::user()->name }}, you fried my systems..</h1>
-        <a href="/" class="btn btn-danger">Back to the store</a>
-    </div>
-</div> --}}
+        
 <script type="text/javascript">
 window.location = "{{ url('/shop') }}";//here double curly bracket
 </script>

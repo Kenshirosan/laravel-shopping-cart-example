@@ -23,8 +23,9 @@ Route::delete('emptyCart', 'CartController@emptyCart');
 
 //ADMIN AND EMPLOYEE ROUTES
 Route::get('/restaurantpanel', 'AdminController@index');
-route::get('/delete/{slug}', 'ProductController@delete')->name('/delete');
-route::post('/insertproduct', 'ProductController@store');
+Route::get('/delete/{slug}', 'ProductController@delete')->name('/delete');
+Route::post('/insertproduct', 'ProductController@store');
+Route::post('/shop/{slug}/{photo}','AdminController@store');
 
 //CHECKOUT AND CART ROUTES
 Route::get('/checkout', 'PaymentController@index');
