@@ -12,10 +12,10 @@ use Image;
 class ProductController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Display a listing of the resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
     public function index()
     {
         $products = Product::all();
@@ -24,30 +24,38 @@ class ProductController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  string  $slug
-     * @return \Illuminate\Http\Response
-     */
+    * Display the specified resource.
+    *
+    * @param  string  $slug
+    * @return \Illuminate\Http\Response
+    */
     public function show($slug)
     {
         $product = Product::where('slug', $slug)->firstOrFail();
-        
+
         return view('layouts.product', compact('product') );
     }
 
     public function delete($product)
     {
-        $product = Product::where('slug', $product)->firstOrFail();
+        // only the boss can delete stuff
         if ( !Auth::user()->theboss ) {
             return redirect()->back()->with(['error_message' => 'You\'re not allowed !']);
         }
+
+        $product = Product::where('slug', $product)->firstOrFail();
+
         $product->delete();
         return redirect()->back()->with(['success_message' => 'Successfully deleted!']);
     }
 
     public function store(Request $request)
     {
+        // only the boss and employee can add products
+        if ( !Auth::user()->employee && !Auth::user()->theboss ) {
+            return redirect()->back()->with(['error_message' => 'You\'re not allowed !']);
+        }
+
         $this->validate($request, [
             'name' => 'required',
             'slug' => 'required',

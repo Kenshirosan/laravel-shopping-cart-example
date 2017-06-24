@@ -21,14 +21,22 @@ class AdminController extends Controller
 
     public function index()
     {
+        $users = User::orderBy('created_at', 'desc')->get();
+
+
         $orders = Orders::orderBy('created_at', 'desc')->get();
 
-         return view('admin.restaurantindex',compact('orders'));
+         return view('admin.restaurantindex',compact('orders'), compact('users'));
 
     }
 
     public function store($slug, Request $request)
     {
+        // only the boss and employees can add photos
+        if ( !Auth::user()->theboss && !Auth::user()->employee ) {
+            return response()->json(['error' => 'You\'re not allowed !'],403);
+        }
+
         $product = Product::where('slug', $slug)->firstOrFail();
 
         $this->validate($request, [

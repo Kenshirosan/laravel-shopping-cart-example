@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Photo;
 
 class Product extends Model
 {
@@ -18,6 +19,6 @@ class Product extends Model
 
     public function photos()
     {
-        return $this->hasMany(Photo::class);
+        return $this->hasMany('App\Photo');
     }
 }

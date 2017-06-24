@@ -26,8 +26,7 @@
                     <input type="submit" class="btn btn-success btn-lg" value="Add to Cart">
                 </form>
 
-                @if( !Auth::guest() && Auth::user()->theboss )
-
+                @if( !Auth::guest() && Auth::user()->employee )
                     <form id="addPhotosForm" class="dropzone" action="/shop/{{ $product->slug }}/photo" method="POST">
                         {{ csrf_field() }}
                     </form>

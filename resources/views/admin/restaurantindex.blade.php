@@ -114,11 +114,12 @@
 
         <div class="container">
             <ul class=list-group>
-                @foreach( $orders as $order )
-                    {{-- @foreach( $orders as $order ) --}}
-                        <li class="list-group-item"><h4>Order number: {{ $order->id }}</h4>{{ $order->name }} {{ $order->last_name }} paid $<strong>{{ $order->price }}</strong> for {{ $order->items }} on <strong>{{ $order->created_at->toFormattedDateString() }}</strong> at {{ $order->created_at->toTimeString() }}</li>
-                    {{-- @endforeach --}}
-                @endforeach
+                @if(Auth::user()->theboss)
+                    @foreach( $orders as $order )
+                        <li class="list-group-item"><h4>Order number: {{ $order->id }}</h4>{{ $order->name }} {{ $order->last_name }} paid $<strong>{{ $order->price }}</strong> for {{ $order->items }} on <strong>{{ $order->created_at->toFormattedDateString() }}</strong> at {{    $order->created_at->toTimeString() }}</li>
+                    @endforeach
+                @endif
+
             </ul>
         </div>
     @elseif( (!Auth::user()->theboss) || (!Auth::user()->employee) )
