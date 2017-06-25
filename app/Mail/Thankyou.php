@@ -6,9 +6,9 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use App\Payment;
+use App\Order;
 
-class Order extends Mailable
+class Thankyou extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -18,7 +18,7 @@ class Order extends Mailable
      *
      * @return void
      */
-    public function __construct(Payment $order)
+    public function __construct(Order $order)
     {
         $this->order = $order;
     }

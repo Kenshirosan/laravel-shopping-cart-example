@@ -6,9 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests;
 Use App\User;
-Use App\Orders;
+Use App\Order;
 Use App\Product;
 Use App\Photo;
+use DB;
 Use Image;
 
 
@@ -21,12 +22,14 @@ class AdminController extends Controller
 
     public function index()
     {
-        $users = User::orderBy('created_at', 'desc')->get();
 
+        $orders = Order::limit(5)->orderBy('created_at', 'desc')->get();
 
-        $orders = Orders::orderBy('created_at', 'desc')->get();
+        $todaysorders = Order::all();
+        $todaysorders->where('date(created_at) = ?', [date('Y-m-d')]);
+        $price = DB::table('orders')->sum('price');
 
-         return view('admin.restaurantindex',compact('orders'), compact('users'));
+        return view('admin.restaurantindex',compact('orders', 'todaysorders', 'price'));
 
     }
 

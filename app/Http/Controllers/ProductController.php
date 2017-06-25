@@ -18,9 +18,12 @@ class ProductController extends Controller
     */
     public function index()
     {
-        $products = Product::all();
-
-        return view('layouts.shop', compact('products'));
+        $appetizers = Product::all()->where('category', 'Appetizers');
+        $main = Product::all()->where('category', 'Main');
+        $burgers = Product::all()->where('category', 'Burgers and sandwiches');
+        $dessert = Product::all()->where('category', 'Dessert');
+        $drinks = Product::all()->where('category', 'Drinks');
+        return view('layouts.shop', compact('appetizers', 'main', 'burgers', 'dessert', 'drinks'));
     }
 
     /**
@@ -58,6 +61,7 @@ class ProductController extends Controller
 
         $this->validate($request, [
             'name' => 'required',
+            'category' => 'required',
             'slug' => 'required',
             'description' => 'required',
             'price' => 'required',
@@ -65,6 +69,7 @@ class ProductController extends Controller
         ]);
 
         $name = $request['name'];
+        $category = $request['category'];
         $slug = $request['slug'];
         $description = $request['description'];
         $price = $request['price'];
@@ -74,11 +79,11 @@ class ProductController extends Controller
             $image = time() . '.' . $avatar->getClientOriginalExtension();
             $path = public_path('img/' . $image);
             Image::make($avatar->getRealPath())->resize(800,500)->save($path);
-            // $product->image = $filename;
         }
-        // $image = $request['image'];
+
         $product = new Product();
         $product->name = $name;
+        $product->category = $category;
         $product->slug = $slug;
         $product->description = $description;
         $product->price = $price;

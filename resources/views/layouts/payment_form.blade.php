@@ -12,11 +12,18 @@
                 </div>
             @endif
 
+            @if (session()->has('warning_message'))
+                <div class="alert alert-warning">
+                    {{ session()->get('warning_message') }}
+                </div>
+            @endif
+
             @if (session()->has('error_message'))
                 <div class="alert alert-danger">
                     {{ session()->get('error_message') }}
                 </div>
             @endif
+            
             <form class="form-horizontal" method="POST" action="/order">
                 @include('layouts.error')
                 {{ csrf_field() }}

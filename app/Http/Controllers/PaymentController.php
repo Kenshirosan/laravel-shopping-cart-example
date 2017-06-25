@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Support\Facades\Auth;
-use App\Orders;
+use App\Order;
 use App\Http\Requests;
 use \Cart as Cart;
 use Illuminate\Http\Request;
-use App\Mail\Order;
+use App\Mail\Thankyou;
 
 class PaymentController extends Controller
 {
@@ -24,6 +24,16 @@ class PaymentController extends Controller
 
     public function store( Request $request)
     {
+        if(Cart::total() == 0)
+        {
+            return back()->with(['error_message' => 'Your cart is empty !']);
+        }
+
+        if(Cart::total() < 15)
+        {
+            return back()->with(['warning_message' => 'You need to order at least $15 worth of food, Your total is $' . Cart::total() ]);
+        }
+
         $user = Auth::user();
 
         $this->validate($request, [
@@ -53,7 +63,7 @@ class PaymentController extends Controller
 
         //create the Order
 
-        $order = new Orders();
+        $order = new Order();
         $order->user_id = $user->id;
         $order->name = $name;
         $order->last_name = $last_name;
@@ -66,7 +76,7 @@ class PaymentController extends Controller
         $order->price = $price;
 
         $order->save();
-        \Mail::to($user)->send(new Order($order));
+        \Mail::to($user)->send(new Thankyou($order));
         Cart::destroy();
         return redirect('/thankyou')->with(['success_message' => 'Thank You, Your order is complete, We sent you a detailed email, Please call us if you need to make a change.']);
     }

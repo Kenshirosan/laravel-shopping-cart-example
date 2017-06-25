@@ -7,6 +7,7 @@ use App\Photo;
 
 class Product extends Model
 {
+
     /**
      * The attributes that are mass assignable.
      *
@@ -14,11 +15,11 @@ class Product extends Model
      */
 
     protected $fillable = [
-        'name','slug', 'description', 'price', 'image'
+        'name', 'category', 'slug', 'description', 'price', 'image'
     ];
 
     public function photos()
     {
-        return $this->hasMany('App\Photo');
+        return $this->hasMany(Photo::class);
     }
 }

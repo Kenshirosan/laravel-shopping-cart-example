@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Orders;
+use App\Order;
 
 class User extends Authenticatable
 {
@@ -18,6 +18,7 @@ class User extends Authenticatable
         'theboss' => 'boolean',
         'employee' => 'boolean',
     ];
+
     protected $fillable = [
         'name','last_name', 'password', 'address','address2', 'zipcode', 'phone_number', 'email'
     ];
@@ -36,7 +37,7 @@ class User extends Authenticatable
         return $this->theboss; // this looks for an theboss(instead of admin) column in your users table
     }
 
-    public function userOrders()
+    public function order()
     {
         return $this->hasMany(Orders::class);
     }

@@ -9,7 +9,7 @@ use \Cart as Cart;
 use Illuminate\Http\Request;
 
 
-class Orders extends Model
+class Order extends Model
 {
     // use Notifiable;
     /**
@@ -21,7 +21,7 @@ class Orders extends Model
         'user_id', 'name','last_name', 'address','address2', 'zipcode', 'phone_number', 'email', 'items', 'price'
     ];
 
-    public function order()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
