@@ -2,16 +2,20 @@
 Fork of drehimself/laravel-shopping-cart-example
 Laravel Shopping Cart Example
 
-An example Laravel App with Shopping Cart functionality. Uses Crinsane/LaravelShoppingcart
+An example Laravel App with Shopping Cart functionality. Uses Crinsane/LaravelShoppingcart  
 
-Demo: http://cartdemo.andredemos.ca/
+[Live demo](http://cartdemo.andredemos.ca/"Demo")
 
-Blog Post: http://andremadarang.com/implementing-a-shopping-cart-in-laravel/
+[Blog post](http://andremadarang.com/implementing-a-shopping-cart-in-laravel/ "Blog post")
 
-Github: https://github.com/drehimself/laravel-shopping-cart-example#laravel-shopping-cart-example
+[Github](https://github.com/drehimself/laravel-shopping-cart-example#laravel-shopping-cart-example/"Github")
 
-#Main differences : added user registration, reworked everything to match laravel 5.4 folder structure, added mail functionality (make sure you have postfix installed and properly configured), added order form and 
-order table, added admin(boss)and employee rows in users table, to be set manually directly in database, 
-added a form to add product(employees and admin)
-and a delete product button on the shop view when logged in as an admin(boss)
-added dropzone.js on product page(must be admin)
+Features :
+---
+* added user registration, reworked everything to match laravel 5.4 folder structure
+* mail functionality on registration an order. (make sure you have postfix installed and properly configured)
+* order form and order table
+* admin(boss)and employee rows in users table, to be set manually directly in database
+* a form to add product(employees and admin)
+* a delete product button on the shop view when logged in as an admin(boss)
+* dropzone.js on product page(must be admin)
