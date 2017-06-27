@@ -126,13 +126,11 @@
 @section('extra-js')
     <script>
         (function(){
-
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-
             $('.quantity').on('change', function() {
                 var id = $(this).attr('data-id')
                 $.ajax({
@@ -145,10 +143,7 @@
                     window.location.href = '{{ url('/cart') }}';
                   }
                 });
-
             });
-
         })();
-
     </script>
 @endsection

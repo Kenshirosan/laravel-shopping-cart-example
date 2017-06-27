@@ -26,6 +26,7 @@
         {{--  Appetizers --}}
         @foreach ($appetizers->chunk(4) as $items)
             <div class="response"></div>
+            <a href="{{ url('/cart') }}" class="btn btn-info pull-right">Go to cart</a>
             <div class="row">
                 <h1>Appetizers</h1>
                 @foreach ($items as $product)
@@ -61,6 +62,7 @@
         {{--  Main --}}
         @foreach ($main->chunk(4) as $items)
             <div class="response"></div>
+            <a href="{{ url('/cart') }}" class="btn btn-info pull-right">Go to cart</a>
             <div class="row">
                 <h1>Meat and Fish</h1>
                 @foreach ($items as $product)
@@ -94,6 +96,7 @@
         {{--  Burgers and sandwiches --}}
         @foreach ($burgers->chunk(4) as $items)
             <div class="response"></div>
+            <a href="{{ url('/cart') }}" class="btn btn-info pull-right">Go to cart</a>
             <div class="row">
                 <h1>Burgers and sandwiches</h1>
                 @foreach ($items as $product)
@@ -127,6 +130,7 @@
         {{--  Desserts --}}
         @foreach ($dessert->chunk(4) as $items)
             <div class="response"></div>
+            <a href="{{ url('/cart') }}" class="btn btn-info pull-right">Go to cart</a>
             <div class="row">
                 <h1>Desserts</h1>
                 @foreach ($items as $product)
@@ -160,6 +164,7 @@
         {{--  Drinks --}}
         @foreach ($drinks->chunk(4) as $items)
             <div class="response"></div>
+            <a href="{{ url('/cart') }}" class="btn btn-info pull-right">Go to cart</a>
             <div class="row">
                 <h1>Drinks</h1>
                 @foreach ($items as $product)
@@ -185,16 +190,18 @@
                             <button name ="submit" class="btn btn-success btn-lg add_to_cart" data-id="{{ $product->id }}"  data-name="{{ $product->name }}" data-price="{{ $product->price }}">Add to Cart</button>
                         </form>
                         <div class="spacer"></div>
+
                     </div> <!-- end col-md-3 -->
                 @endforeach
+
             </div> <!-- end row -->
         @endforeach
+        <a href="#top" class="btn btn-info">Back to top</a>
     </div> <!-- end container -->
 @endsection
 
 @section('ajax')
     <script>
-
     $(document).ready( function() {
         $.ajaxSetup({
             headers: {
@@ -208,16 +215,17 @@
             $.ajax({
                 url: '{{ url('/cart') }}',
                 method: 'POST',
-                data: {id:product_id, name:product_name, price:product_price},
+                data: {
+                    id:product_id,
+                    name:product_name,
+                    price:product_price
+                },
                 success: function(data){
-                    // $('button').after("Added to cart");
+                    $('.response').append('<p>' + product_name + ' was added to cart !</p>');
                 }
             });
-            $('.response').append('<p>' + product_name + ' was added to cart !</p>');
             return false;
         });
     });
-
-
     </script>
 @endsection

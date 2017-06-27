@@ -6,7 +6,7 @@
     <meta name="description" content="Shopping Cart Example">
 
     <!-- Mobile Specific Meta -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Store CSRF token for AJAX calls -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
