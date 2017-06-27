@@ -52,19 +52,19 @@ class CartController extends Controller
     {
         // Validation on max quantity
         $validator = Validator::make($request->all(), [
-            'quantity' => 'required|numeric|between:1,5'
+            'quantity' => 'required|numeric|between:1,6'
         ]);
-
+        // dd($request);
         if ($validator->fails()) {
-            session()->flash('error_message', 'Quantity must be between 1 and 5.');
-            return response()->json(['success' => false]);
+            session()->flash('error_message' , 'Quantity must be between 1 and 6.');
+            response()->json(['success' => false]);
+            return response()->view('layouts.cart',$request, 403);
         }
 
         Cart::update($id, $request->quantity);
         session()->flash('success_message', 'Quantity was updated successfully!');
-
-        return response()->json(['success' => true]);
-
+        response()->json(['success' => true]);
+        return response()->view('layouts.cart',$request, 200);
     }
 
     /**

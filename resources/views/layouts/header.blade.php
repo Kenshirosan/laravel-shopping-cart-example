@@ -50,7 +50,6 @@
                     </li>
                 @endif
                 <li class="{{ set_active('cart') }}"><a href="{{ url('/cart') }}">Cart ({{ Cart::instance()->count() }})</a></li>
-                <div id="top"></div>
             </ul>
         </div><!--/.nav-collapse -->
     </div>

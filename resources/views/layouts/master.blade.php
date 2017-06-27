@@ -24,6 +24,7 @@
 <body>
 
     @include('layouts.header')
+    <div id="top"></div>
     @yield('content')
 
     <footer>
@@ -33,6 +34,7 @@
     </footer>
 
     <!-- JavaScript -->
+    <script src="/js/smoothscroll.js" charset="utf-8"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     @yield('ajax')

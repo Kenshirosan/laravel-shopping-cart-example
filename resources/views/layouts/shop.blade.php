@@ -221,7 +221,7 @@
                     price:product_price
                 },
                 success: function(data){
-                    $('.response').append('<p>' + product_name + ' was added to cart !</p>');
+                    $('.response').append('<p class=\'alert alert-info\'>' + product_name + ' was added to cart !</p>');
                 }
             });
             return false;
