@@ -12,21 +12,21 @@ class CartController extends Controller
 {
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Display a listing of the resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
     public function index()
     {
         return view('layouts.cart');
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    * Store a newly created resource in storage.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
     public function store(Request $request)
     {
         $duplicates = Cart::search(function ($cartItem, $rowId) use ($request) {
@@ -42,12 +42,12 @@ class CartController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
-     */
+    * Update the specified resource in storage.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @param  int  $id
+    * @return \Illuminate\Http\JsonResponse
+    */
     public function update(Request $request, $id)
     {
         // Validation on max quantity
@@ -55,10 +55,10 @@ class CartController extends Controller
             'quantity' => 'required|numeric|between:1,5'
         ]);
 
-         if ($validator->fails()) {
+        if ($validator->fails()) {
             session()->flash('error_message', 'Quantity must be between 1 and 5.');
             return response()->json(['success' => false]);
-         }
+        }
 
         Cart::update($id, $request->quantity);
         session()->flash('success_message', 'Quantity was updated successfully!');
@@ -68,11 +68,11 @@ class CartController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    * Remove the specified resource from storage.
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
     public function destroy($id)
     {
         Cart::remove($id);
@@ -80,10 +80,10 @@ class CartController extends Controller
     }
 
     /**
-     * Remove the resource from storage.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Remove the resource from storage.
+    *
+    * @return \Illuminate\Http\Response
+    */
     public function emptyCart()
     {
         Cart::destroy();
@@ -91,11 +91,11 @@ class CartController extends Controller
     }
 
     /**
-     * Switch item from shopping cart to wishlist.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    * Switch item from shopping cart to wishlist.
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
     public function switchToWishlist($id)
     {
         $item = Cart::get($id);
@@ -111,7 +111,7 @@ class CartController extends Controller
         }
 
         Cart::instance('wishlist')->add($item->id, $item->name, 1, $item->price)
-                                  ->associate('App\Product');
+        ->associate('App\Product');
 
         return redirect('wishlist')->withSuccessMessage('Item has been moved to your Wishlist!');
 

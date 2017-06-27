@@ -32,13 +32,13 @@ class User extends Authenticatable
         'password', 'remember_token', 'theboss', 'employee'
     ];
 
-    public function isAdmin($user)
+    public function isAdmin()
     {
         return $this->theboss; // this looks for an theboss(instead of admin) column in your users table
     }
 
     public function order()
     {
-        return $this->hasMany(Orders::class);
+        return $this->hasMany(Order::class);
     }
 }

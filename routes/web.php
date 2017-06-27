@@ -14,6 +14,7 @@
 Route::get('/', function () {
     return redirect('shop');
 });
+
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -25,6 +26,7 @@ Route::delete('emptyCart', 'CartController@emptyCart');
 Route::get('/restaurantpanel', 'AdminController@index');
 Route::get('/delete/{slug}', 'ProductController@delete')->name('/delete');
 Route::post('/insertproduct', 'ProductController@store');
+Route::get('/panel', 'AdminController@show');
 
 //ADD A BUNCH OF PICS ON PRODUCT VIEW
 Route::post('/shop/{slug}/{photo}','AdminController@store');
@@ -49,4 +51,3 @@ Route::post('switchToCart/{id}', 'WishlistController@switchToCart');
 *
 ********/
 //STRIPE (or payment route)
-// Route::post('/order', 'PaymentController@store');

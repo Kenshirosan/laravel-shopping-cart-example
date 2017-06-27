@@ -133,12 +133,10 @@
             </div>
 
             <div class="container">
-                @foreach( $todaysorders as $todaysOrder)
-                    {{  $todaysOrder->price }}
-                    {{ $price }}
-                @endforeach
+
                 <ul class=list-group>
                     @if(Auth::user()->theboss)
+                        <li class="list-group-item"><a href="/panel" class="btn btn-primary">View all</a></li>
                         @foreach( $orders as $order )
                             <li class="list-group-item"><h4>Latest Orders: {{ $order->id }}</h4>{{ $order->name }} {{ $order->last_name }} paid $<strong>{{ $order->price }}</strong> for {{ $order->items }} on <strong>{{ $order->created_at->toFormattedDateString() }}</strong> at {{    $order->created_at->toTimeString() }}</li>
                         @endforeach

@@ -17,7 +17,9 @@ class AdminController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+
+        return $this->middleware('auth');
+
     }
 
     public function index()
@@ -25,19 +27,26 @@ class AdminController extends Controller
 
         $orders = Order::limit(5)->orderBy('created_at', 'desc')->get();
 
-        $todaysorders = Order::all();
-        $todaysorders->where('date(created_at) = ?', [date('Y-m-d')]);
-        $price = DB::table('orders')->sum('price');
-
-        return view('admin.restaurantindex',compact('orders', 'todaysorders', 'price'));
+        return view('admin.restaurantindex',compact('orders'));
 
     }
+
+    public function show()
+    {
+        $orders = Order::orderBy('created_at', 'desc')->get();
+        $price = Order::sum('price');
+        return view('admin.panel', compact('orders', 'price'));
+    }
+
+
 
     public function store($slug, Request $request)
     {
         // only the boss and employees can add photos
         if ( !Auth::user()->theboss && !Auth::user()->employee ) {
+
             return response()->json(['error' => 'You\'re not allowed !'],403);
+
         }
 
         $product = Product::where('slug', $slug)->firstOrFail();
