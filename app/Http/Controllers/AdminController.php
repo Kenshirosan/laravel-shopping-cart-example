@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Requests;
-Use App\User;
-Use App\Order;
-Use App\Product;
-Use App\Photo;
+
 use DB;
 Use Image;
+Use App\User;
+Use App\Order;
+Use App\Photo;
+Use App\Product;
+use App\Http\Requests;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class AdminController extends Controller
@@ -22,6 +23,12 @@ class AdminController extends Controller
 
     }
 
+    /**
+    * Display a listing of the resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
+
     public function index()
     {
 
@@ -31,11 +38,22 @@ class AdminController extends Controller
 
     }
 
+    /**
+    * Display the specified resource.
+    *
+    * @param  string  $slug
+    * @return \Illuminate\Http\Response
+    */
+
     public function show()
     {
-        $orders = Order::orderBy('created_at', 'desc')->get();
-        $price = Order::sum('price');
-        return view('admin.panel', compact('orders', 'price'));
+        $yearlyTotal = Order::selectRaw('year(created_at) year, sum(price) total')->groupBy('year')->get();
+        $orders = Order::orderBy('created_at', 'desc')->paginate(15);
+        $totalOrders = Order::selectRaw('year(created_at) year, monthname(created_at) month, sum(price) total')
+        ->groupBy('year', 'month')
+        ->get();
+
+        return view('admin.panel', compact('orders', 'totalOrders', 'yearlyTotal'));
     }
 
 

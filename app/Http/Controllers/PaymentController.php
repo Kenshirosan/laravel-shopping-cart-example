@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use Illuminate\Support\Facades\Auth;
 use App\Order;
-use App\Http\Requests;
 use \Cart as Cart;
-use Illuminate\Http\Request;
+use App\Http\Requests;
 use App\Mail\Thankyou;
+use App\Events\UserOrdered;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class PaymentController extends Controller
 {
@@ -46,6 +48,21 @@ class PaymentController extends Controller
             'email' => 'required',
         ]);
 
+        // TO WORK ON
+        // $price = str_replace(',', '', (Cart::total()));
+        // $items = [];
+        //     foreach(Cart::content() as $row) {
+        //         $qty = $row->qty;
+        //         $itemname = $row->model->slug;
+        //         array_push($items,$qty,$itemname );
+        //     }
+        //     $items = implode(': ',$items);
+        //     // dd($items);
+        //
+        // auth()->user()->pay(
+        //     new Order(request(['name', 'last_name', 'email', 'address' , 'address2' => 'nullable', 'zipcode', 'phone_number','items'=> $items, $price  ]))
+        // );
+
         $name = $request['name'];
         $last_name = $request['last_name'];
         $email = $request['email'];
@@ -76,6 +93,9 @@ class PaymentController extends Controller
         $order->price = $price;
 
         $order->save();
+
+        //WORK ON EVENTS
+        // event(new UserOrdered($order));
         \Mail::to($user)->send(new Thankyou($order));
         Cart::destroy();
         return redirect('/thankyou')->with(['success_message' => 'Thank You, Your order is complete, We sent you a detailed email, Please call us if you need to make a change.']);

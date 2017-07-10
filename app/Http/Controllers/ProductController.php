@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+
+use Image;
+use App\User;
+use App\Product;
+use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests;
-use App\Product;
-use App\User;
-use Image;
+
 
 class ProductController extends Controller
 {
