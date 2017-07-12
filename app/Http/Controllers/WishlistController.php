@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use \Cart as Cart;
+use App\Http\Requests;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
-use \Cart as Cart;
 
 
 class WishlistController extends Controller

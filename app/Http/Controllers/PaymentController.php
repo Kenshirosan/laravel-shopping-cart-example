@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\Mail\Thankyou;
 use App\Events\UserOrdered;
 use Illuminate\Http\Request;
+use Stripe\{Stripe, Charge, Customer};
 use Illuminate\Support\Facades\Auth;
 
 
@@ -19,26 +20,63 @@ class PaymentController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+    * Display a listing of the resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
     public function index()
     {
         return view('layouts.payment_form');
     }
 
-    public function store( Request $request)
+    /**
+    * Store a newly created resource in storage.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
+    public function store(Request $request)
     {
+
         if(Cart::total() == 0)
         {
             return back()->with(['error_message' => 'Your cart is empty !']);
         }
 
-        if(Cart::total() < 15)
+        if(Cart::total() < 1500)
         {
-            return back()->with(['warning_message' => 'You need to order at least $15 worth of food, Your total is $' . Cart::total() ]);
+            return back()->with(['warning_message' => 'You need to order at least $15 worth of food, Your total is $' . Cart::total() /100 ]);
         }
+
+        Stripe::setApiKey(config('services.stripe.secret'));
+
+        $customer = Customer::create([
+            'email' => request('stripeEmail'),
+            'source' => request('stripeToken')
+        ]);
+
+
+        $price = Cart::total();
+
+        Charge::create([
+            'customer' => $customer->id,
+            'amount' => $price,
+            'currency' => 'usd'
+        ]);
 
         $user = Auth::user();
 
-        $this->validate($request, [
+        $items = [];
+        foreach(Cart::content() as $row) {
+            $qty = $row->qty;
+            $itemname = $row->model->name;
+            echo($itemname);
+            echo($qty);
+            array_push($items,$qty,$itemname );
+        }
+
+        $this->validate(request(), [
             'name' => 'required',
             'last_name' => 'required',
             'address' => 'required',
@@ -46,22 +84,9 @@ class PaymentController extends Controller
             'zipcode' => 'required',
             'phone_number' => 'required',
             'email' => 'required',
+            'Cart::content() => required',
+            'Cart::total() => required',
         ]);
-
-        // TO WORK ON
-        // $price = str_replace(',', '', (Cart::total()));
-        // $items = [];
-        //     foreach(Cart::content() as $row) {
-        //         $qty = $row->qty;
-        //         $itemname = $row->model->slug;
-        //         array_push($items,$qty,$itemname );
-        //     }
-        //     $items = implode(': ',$items);
-        //     // dd($items);
-        //
-        // auth()->user()->pay(
-        //     new Order(request(['name', 'last_name', 'email', 'address' , 'address2' => 'nullable', 'zipcode', 'phone_number','items'=> $items, $price  ]))
-        // );
 
         $name = $request['name'];
         $last_name = $request['last_name'];
@@ -70,13 +95,7 @@ class PaymentController extends Controller
         $address2 = $request['address2'];
         $zipcode = $request['zipcode'];
         $phone = $request['phone_number'];
-        $items = [];
-        foreach(Cart::content() as $row) {
-            $qty = $row->qty;
-            $itemname = $row->model->slug;
-            array_push($items,$qty,$itemname );
-        }
-        $price = str_replace(',', '', (Cart::total()));
+        $price;
 
         //create the Order
 
@@ -90,15 +109,17 @@ class PaymentController extends Controller
         $order->zipcode = $zipcode;
         $order->phone_number = $phone;
         $order->items = implode(': ',$items);
+        $price = str_replace(',', '', ($price));
         $order->price = $price;
 
         $order->save();
+
 
         //WORK ON EVENTS
         // event(new UserOrdered($order));
         \Mail::to($user)->send(new Thankyou($order));
         Cart::destroy();
-        return redirect('/thankyou')->with(['success_message' => 'Thank You, Your order is complete, We sent you a detailed email, Please call us if you need to make a change.']);
+        return redirect('/thankyou')->with(['success_message' => 'Thank You ' . Auth::user()->name . ', Your order is complete, We sent you a detailed email, Please call us if you need to make a change.']);
     }
 
     public function thankyou()

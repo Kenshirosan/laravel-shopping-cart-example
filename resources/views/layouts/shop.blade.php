@@ -33,17 +33,17 @@
                     <div class="col-md-3">
                         <div class="thumbnail">
                             <div class="caption text-center">
-                                {{$product->name}}
+                                {{ $product->name }}
                                 <a href="{{ url('shop', [$product->slug]) }}"><img src="{{ asset('img/' . $product->image) }}" alt="product" class="img-responsive"></a>
                                 <a href="{{ url('shop', [$product->slug]) }}"><h3>{{ $product->name }}</h3>
-                                    <p>{{ $product->price }}</p>
+                                    <p>{{ $product->price /100 }}</p>
                                 </a>
                                 @if( !Auth::guest() && Auth::user()->theboss )
                                     <a href="{{ route('/delete', ['slug' => $product->slug]) }}" class="btn btn-danger">Delete</a>
                                 @endif
                             </div> <!-- end caption -->
                         </div> <!-- end thumbnail -->
-                        <h3>${{ $product->price }}</h3>
+                        <h3>${{ $product->price / 100}}</h3>
 
                         <form action="{{ url('/cart') }}" method="POST" class="side-by-side">
                             {{ csrf_field() }}
@@ -72,14 +72,14 @@
                                 {{$product->name}}
                                 <a href="{{ url('shop', [$product->slug]) }}"><img src="{{ asset('img/' . $product->image) }}" alt="product" class="img-responsive"></a>
                                 <a href="{{ url('shop', [$product->slug]) }}"><h3>{{ $product->name }}</h3>
-                                    <p>{{ $product->price }}</p>
+                                    <p>{{ $product->price / 100 }}</p>
                                 </a>
                                 @if( !Auth::guest() && Auth::user()->theboss )
                                     <a href="{{ route('/delete', ['slug' => $product->slug]) }}" class="btn btn-danger">Delete</a>
                                 @endif
                             </div> <!-- end caption -->
                         </div> <!-- end thumbnail -->
-                        <h3>${{ $product->price }}</h3>
+                        <h3>${{ $product->price / 100 }}</h3>
                         <form action="{{ url('/cart') }}" method="POST" class="side-by-side">
                             {{ csrf_field() }}
                             <input type="hidden" name="id" value="{{ $product->id }}">
@@ -106,14 +106,14 @@
                                 {{$product->name}}
                                 <a href="{{ url('shop', [$product->slug]) }}"><img src="{{ asset('img/' . $product->image) }}" alt="product" class="img-responsive"></a>
                                 <a href="{{ url('shop', [$product->slug]) }}"><h3>{{ $product->name }}</h3>
-                                    <p>{{ $product->price }}</p>
+                                    <p>{{ $product->price /100 }}</p>
                                 </a>
                                 @if( !Auth::guest() && Auth::user()->theboss )
                                     <a href="{{ route('/delete', ['slug' => $product->slug]) }}" class="btn btn-danger">Delete</a>
                                 @endif
                             </div> <!-- end caption -->
                         </div> <!-- end thumbnail -->
-                        <h3>${{ $product->price }}</h3>
+                        <h3>${{ $product->price /100 }}</h3>
                         <form action="{{ url('/cart') }}" method="POST" class="side-by-side">
                             {{ csrf_field() }}
                             <input type="hidden" name="id" value="{{ $product->id }}">
@@ -140,14 +140,14 @@
                                 {{$product->name}}
                                 <a href="{{ url('shop', [$product->slug]) }}"><img src="{{ asset('img/' . $product->image) }}" alt="product" class="img-responsive"></a>
                                 <a href="{{ url('shop', [$product->slug]) }}"><h3>{{ $product->name }}</h3>
-                                    <p>{{ $product->price }}</p>
+                                    <p>{{ $product->price /100 }}</p>
                                 </a>
                                 @if( !Auth::guest() && Auth::user()->theboss )
                                     <a href="{{ route('/delete', ['slug' => $product->slug]) }}" class="btn btn-danger">Delete</a>
                                 @endif
                             </div> <!-- end caption -->
                         </div> <!-- end thumbnail -->
-                        <h3>${{ $product->price }}</h3>
+                        <h3>${{ $product->price /100 }}</h3>
                         <form action="{{ url('/cart') }}" method="POST" class="side-by-side">
                             {{ csrf_field() }}
                             <input type="hidden" name="id" value="{{ $product->id }}">
@@ -174,14 +174,14 @@
                                 {{$product->name}}
                                 <a href="{{ url('shop', [$product->slug]) }}"><img src="{{ asset('img/' . $product->image) }}" alt="product" class="img-responsive"></a>
                                 <a href="{{ url('shop', [$product->slug]) }}"><h3>{{ $product->name }}</h3>
-                                    <p>{{ $product->price }}</p>
+                                    <p>{{ $product->price /100 }}</p>
                                 </a>
                                 @if( !Auth::guest() && Auth::user()->theboss )
                                     <a href="{{ route('/delete', ['slug' => $product->slug]) }}" class="btn btn-danger">Delete</a>
                                 @endif
                             </div> <!-- end caption -->
                         </div> <!-- end thumbnail -->
-                        <h3>${{ $product->price }}</h3>
+                        <h3>${{ $product->price /100 }}</h3>
                         <form action="{{ url('/cart') }}" method="POST" class="side-by-side">
                             {{ csrf_field() }}
                             <input type="hidden" name="id" value="{{ $product->id }}">

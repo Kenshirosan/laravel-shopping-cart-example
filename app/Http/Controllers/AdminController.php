@@ -48,7 +48,9 @@ class AdminController extends Controller
     public function show()
     {
         $yearlyTotal = Order::selectRaw('year(created_at) year, sum(price) total')->groupBy('year')->get();
+
         $orders = Order::orderBy('created_at', 'desc')->paginate(15);
+
         $totalOrders = Order::selectRaw('year(created_at) year, monthname(created_at) month, sum(price) total')
         ->groupBy('year', 'month')
         ->get();
@@ -57,7 +59,12 @@ class AdminController extends Controller
     }
 
 
-
+    /**
+    * Store a newly created resource in storage.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
     public function store($slug, Request $request)
     {
         // only the boss and employees can add photos

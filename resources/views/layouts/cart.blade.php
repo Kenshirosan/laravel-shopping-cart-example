@@ -61,7 +61,7 @@
                                     <input type="submit" name="submit" value="Remove 1" class="btn btn-danger btn-sm">
                                 </form>
                             </td>
-                            <td>${{ $item->subtotal }}</td>
+                            <td>${{ $item->subtotal /100 }}</td>
                             <td class=""></td>
                             <td>
                                 <form action="{{ url('cart', [$item->rowId]) }}" method="POST" class="side-by-side">
@@ -82,7 +82,7 @@
                     <td class="table-image"></td>
                     <td></td>
                     <td class="small-caps table-bg" style="text-align: right">Subtotal</td>
-                    <td>${{ Cart::instance('default')->subtotal() }}</td>
+                    <td>${{ Cart::subtotal() /100 }}</td>
                     <td></td>
                     <td></td>
                 </tr>
@@ -90,7 +90,7 @@
                     <td class="table-image"></td>
                     <td></td>
                     <td class="small-caps table-bg" style="text-align: right">Tax</td>
-                    <td>${{ Cart::instance('default')->tax() }}</td>
+                    <td>${{ Cart::tax() /100 }}</td>
                     <td></td>
                     <td></td>
                 </tr>
@@ -99,7 +99,7 @@
                     <td class="table-image"></td>
                     <td style="padding: 40px;"></td>
                     <td class="small-caps table-bg" style="text-align: right">Your Total</td>
-                    <td class="table-bg">${{ Cart::total() }}</td>
+                    <td class="table-bg">${{ Cart::total() /100 }}</td>
                     <td class="column-spacer"></td>
                     <td></td>
                 </tr>

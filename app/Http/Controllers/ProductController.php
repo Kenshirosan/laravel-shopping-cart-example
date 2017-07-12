@@ -25,8 +25,18 @@ class ProductController extends Controller
         $burgers = Product::all()->where('category', 'Burgers and sandwiches');
         $dessert = Product::all()->where('category', 'Dessert');
         $drinks = Product::all()->where('category', 'Drinks');
+
         return view('layouts.shop', compact('appetizers', 'main', 'burgers', 'dessert', 'drinks'));
     }
+
+    // public function getPrices()
+    // {
+    //     $prices = Product::all();  //UNUSED, BUT WILL BE ONE DAY....
+    //     foreach($prices as $product){
+    //         // echo($product->price . ' ');
+    //         return number_format(($product->price /100), 2, '.', ' ') . ' ' ;
+    //     }
+    // }
 
     /**
     * Display the specified resource.
@@ -41,6 +51,12 @@ class ProductController extends Controller
         return view('layouts.product', compact('product') );
     }
 
+    /**
+    * Remove the specified resource from storage.
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
     public function delete($product)
     {
         // only the boss can delete stuff
@@ -54,6 +70,12 @@ class ProductController extends Controller
         return redirect()->back()->with(['success_message' => 'Successfully deleted!']);
     }
 
+    /**
+    * Store a newly created resource in storage.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
     public function store(Request $request)
     {
         // only the boss and employee can add products

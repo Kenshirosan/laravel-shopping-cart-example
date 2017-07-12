@@ -37,14 +37,15 @@ class User extends Authenticatable
         return $this->theboss; // this looks for an theboss(instead of admin) column in your users table
     }
 
+    public function pay(Order $order)
+    {
+        $this->orders()->save($order);
+        return $this->belongsTo(Order::class);
+    }
+
     public function orders()
     {
         return $this->hasMany(Order::class);
     }
 
-    // public function pay(Order $order)
-    // {
-    //     $this->orders()->save($order);
-    //     return $this->belongsTo(Order::class);
-    // }
 }

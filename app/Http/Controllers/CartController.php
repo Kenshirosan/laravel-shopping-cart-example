@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use \Cart as Cart;
 use Validator;
+use \Cart as Cart;
+use App\Http\Requests;
+use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
