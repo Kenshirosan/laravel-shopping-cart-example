@@ -20,3 +20,4 @@ Features :
 * a delete product button on the shop view when logged in as an admin(boss)
 * dropzone.js on product page(must be admin)
 * stripe payment functionnal, just add your key in .env
+* basic user account
