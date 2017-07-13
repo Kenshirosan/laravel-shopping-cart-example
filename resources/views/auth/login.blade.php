@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.master')
 
 @section('content')
-<div class="container">
+
     <div class="row">
         @if ( Auth::guest() )
         {{-- <div class="col-md-8 col-md-offset-2"> --}}
@@ -61,9 +61,13 @@
                                     Login
                                 </button>
 
+
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     Forgot Your Password?
                                 </a>
+
+                                or
+                                <small><a class="text-primary text-right" href="/register">Register</a></small>
                             </div>
                         </div>
                     </form>
@@ -74,6 +78,6 @@
         <h1>You're already logged in !</h1>
     @endif
     </div>
-</div>
+
 {{-- </div> --}}
 @endsection

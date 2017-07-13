@@ -2,20 +2,6 @@
 
 @section('content')
 
-    <div class="container">
-
-        @if (session()->has('success_message'))
-            <div class="alert alert-success">
-                {{ session()->get('success_message') }}
-            </div>
-        @endif
-
-        @if (session()->has('error_message'))
-            <div class="alert alert-danger">
-                {{ session()->get('error_message') }}
-            </div>
-        @endif
-
         <div class="jumbotron text-center clearfix">
             <h2>Name of your restaurant</h2>
             <p>Place your order !</p>
@@ -197,7 +183,7 @@
             </div> <!-- end row -->
         @endforeach
         <a href="#top" class="btn btn-info">Back to top</a>
-    </div> <!-- end container -->
+
 @endsection
 
 @section('ajax')

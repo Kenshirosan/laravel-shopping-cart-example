@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Photo;
+use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
@@ -22,4 +22,5 @@ class Product extends Model
     {
         return $this->hasMany(Photo::class);
     }
+
 }

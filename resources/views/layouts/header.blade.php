@@ -20,12 +20,15 @@
                     @if ( Auth::guest() )
                         <li><a href="/login">Sign in</a></li>
                         <li><a href="/register">Register</a></li>
-                    @else ( Auth::user() )
-                        <li><a href="{{ route('logout') }}"
+                    @elseif ( Auth::check() )
+                        <li><a href="/edit-profile">Your profile</a></li>
+                        <li>
+                            <a href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
-                            Logout
-                        </a></li>
+                            Logout</a>
+                        </li>
+
                         @if( Auth::user()->theboss or Auth::user()->employee )
                             <li><a href="/restaurantpanel">Admin</a></li>
                         @endif

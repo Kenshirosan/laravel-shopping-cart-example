@@ -17,6 +17,11 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
+// EDIT USER PROFILE
+Route::get('/edit-profile', 'UserController@index');
+Route::post('/edit-profile/{user_id}', 'UserController@edit');
+Route::get('/delete/{user_id}', 'UserController@delete');
+Route::post('/delete/{account}', 'UserController@deleteaccount');
 
 Route::resource('shop', 'ProductController', ['only' => ['index', 'show']]);
 Route::resource('cart', 'CartController');
@@ -38,16 +43,8 @@ Route::get('/thankyou', 'PaymentController@thankyou');
 
 
 
-// WISHLIST ROUTES(took it away from views..)
+// WISHLIST ROUTES(took it away from views.. for now)
 Route::post('switchToWishlist/{id}', 'CartController@switchToWishlist');
 Route::resource('wishlist', 'WishlistController');
 Route::delete('emptyWishlist', 'WishlistController@emptyWishlist');
 Route::post('switchToCart/{id}', 'WishlistController@switchToCart');
-
-
-/*******
-*
-* TO DO
-*
-********/
-//STRIPE (or payment route)

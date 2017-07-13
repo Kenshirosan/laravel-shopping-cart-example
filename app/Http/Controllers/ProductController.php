@@ -83,14 +83,30 @@ class ProductController extends Controller
             return redirect()->back()->with(['error_message' => 'You\'re not allowed !']);
         }
 
-        $this->validate($request, [
+        $this->validateRequest($request);
+        $this->createNewProduct($request);
+        //redirect to homepage or somewhere else
+        return back()->with(['success_message' => 'Product successfully added !']);
+    }
+
+
+    private function validateRequest(Request $request)
+    {
+        $rules = [
             'name' => 'required',
             'category' => 'required',
             'slug' => 'required',
             'description' => 'required',
             'price' => 'required',
             'image' => 'required',
-        ]);
+        ];
+
+        return $this->validate($request, $rules);
+
+    }
+
+    private function createNewProduct(Request $request)
+    {
 
         $name = $request['name'];
         $category = $request['category'];
@@ -103,20 +119,16 @@ class ProductController extends Controller
             $image = time() . '.' . $avatar->getClientOriginalExtension();
             $path = public_path('img/' . $image);
             Image::make($avatar->getRealPath())->resize(800,500)->save($path);
+
+            $product = new Product();
+            $product->name = $name;
+            $product->category = $category;
+            $product->slug = $slug;
+            $product->description = $description;
+            $product->price = $price;
+            $product->image = $image;
+
+            $product->save();
         }
-
-        $product = new Product();
-        $product->name = $name;
-        $product->category = $category;
-        $product->slug = $slug;
-        $product->description = $description;
-        $product->price = $price;
-        $product->image = $image;
-
-        $product->save();
-
-
-        //redirect to homepage or somewhere else
-        return back()->with(['success_message' => 'Product successfully added !']);
     }
 }
