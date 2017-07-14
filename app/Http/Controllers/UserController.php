@@ -54,7 +54,12 @@ class UserController extends Controller
     public function delete(Request $request, $id)
     {
 
-        $user = Auth::user()->findOrFail( Auth::user()->id );
+        $user = Auth::user();
+
+        if($user->theboss || $user->employee)
+        {
+            return back()->with(['error_message' =>'This account can\'t be deleted']);
+        }
 
         return view('auth.deleteaccount', compact('user'));
 
@@ -62,11 +67,15 @@ class UserController extends Controller
 
     public function deleteAccount()
     {
-        $user_id = Auth::user()->id;
-        $user = User::find($user_id);
+        $user = Auth::user();
+
+        if($user->theboss || $user->employee)
+        {
+            return back()->with(['error_message' =>'This account can\'t be deleted']);
+        }
+
         $user->delete();
 
-        return redirect('/register')->with(['success_message' => 'Your account was successfully deleted !, We\'re sad to see you go, sign up again :-)']);
+        return redirect('/register')->with(['success_message' => 'Your account was successfully deleted !, We\'re &#x1f622; to see you go, sign up again :-)']);
     }
-
 }

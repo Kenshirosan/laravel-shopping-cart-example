@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
-// EDIT USER PROFILE
+// EDIT/DELETE USER PROFILE
 Route::get('/edit-profile', 'UserController@index');
 Route::post('/edit-profile/{user_id}', 'UserController@edit');
 Route::get('/delete/{user_id}', 'UserController@delete');
@@ -32,6 +32,11 @@ Route::get('/restaurantpanel', 'AdminController@index');
 Route::get('/delete/{slug}', 'ProductController@delete')->name('/delete');
 Route::post('/insertproduct', 'ProductController@store');
 Route::get('/panel', 'AdminController@show');
+
+//VIEW ORDERS AND PRINT
+Route::get('/customer-orders', 'CheckController@index');
+Route::get('/order/{id}', 'CheckController@show');
+Route::get('/print/{id}', 'CheckController@print');
 
 //ADD A BUNCH OF PICS ON PRODUCT VIEW
 Route::post('/shop/{slug}/{photo}','AdminController@store');

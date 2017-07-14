@@ -1,8 +1,6 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="container">
-
         <ul class=list-group>
             @if(Auth::user()->theboss)
                 <a href="/restaurantpanel" class="btn btn-primary">Add a product</a>
@@ -31,7 +29,4 @@
             window.location = "{{ url('/shop') }}";
             </script>
         @endif
-
-
-    </div>
 @endsection

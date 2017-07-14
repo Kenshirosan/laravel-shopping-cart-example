@@ -132,7 +132,7 @@
                                 </div>
                             </div>
                         </form>
-                        <a class="btn btn-danger pull-right" href="/delete/{user_id}">
+                        <a class="btn btn-danger pull-right" href="/delete/{{ $user->id }}">
                             Delete your account
                         </a>
                     </div>
