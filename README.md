@@ -21,3 +21,4 @@ Features :
 * dropzone.js on product page(must be admin)
 * stripe payment functionnal, just add your key in .env
 * basic user account
+* pdf printing
