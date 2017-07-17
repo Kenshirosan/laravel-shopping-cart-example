@@ -41,21 +41,26 @@ class AdminController extends Controller
     /**
     * Display the specified resource.
     *
-    * @param  string  $slug
     * @return \Illuminate\Http\Response
     */
 
     public function show()
     {
-        $yearlyTotal = Order::selectRaw('year(created_at) year, sum(price) total')->groupBy('year')->get();
 
-        $orders = Order::orderBy('created_at', 'desc')->paginate(15);
+        $yearlyTotal = Order::selectRaw('year(created_at) year, sum(price) total')
+                            ->groupBy('year')
+                            ->orderBy('year', 'desc')
+                            ->get();
+
+
 
         $totalOrders = Order::selectRaw('year(created_at) year, monthname(created_at) month, sum(price) total')
-        ->groupBy('year', 'month')
-        ->get();
+                            ->groupBy('year', 'month')
+                            ->orderBy('year', 'desc')
+                            ->get();
 
         return view('admin.panel', compact('orders', 'totalOrders', 'yearlyTotal'));
+
     }
 
 
@@ -68,7 +73,7 @@ class AdminController extends Controller
     public function store($slug, Request $request)
     {
         // only the boss and employees can add photos
-        if ( !Auth::user()->theboss && !Auth::user()->employee ) {
+        if ( !Auth::user()->isAdmin() && !Auth::user()->isEmployee() ) {
 
             return response()->json(['error' => 'You\'re not allowed !'],403);
 

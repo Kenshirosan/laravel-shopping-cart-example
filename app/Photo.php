@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Product;
+use Illuminate\Database\Eloquent\Model;
 
 class Photo extends Model
 {

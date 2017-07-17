@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    @if( (Auth::user()->theboss) || (Auth::user()->employee) )
+    @if(  Auth::user()->isAdmin() )
         @if (session()->has('success_message'))
             <div class="alert alert-success">
                 {{ session()->get('success_message') }}
@@ -144,7 +144,7 @@
 
                 </ul>
             </div>
-        @elseif( (!Auth::user()->theboss) || (!Auth::user()->employee) )
+        @elseif( !Auth::user()->isAdmin() )
 
             <script type="text/javascript">
             window.location = "{{ url('/shop') }}";

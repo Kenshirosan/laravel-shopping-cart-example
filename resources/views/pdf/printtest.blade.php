@@ -6,8 +6,6 @@
     <link rel="stylesheet" href="css/pdf.css">
 </head>
 <body>
-
-    
     <header>
         <h1>Your restaurant Name</h1>
         <h3>Order number: 00{{ $order->created_at->format('Ym') . $order->id }}</h3>

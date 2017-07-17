@@ -53,7 +53,7 @@ class CartController extends Controller
         $validator = Validator::make($request->all(), [
             'quantity' => 'required|numeric|between:1,6'
         ]);
-        // dd($request);
+
         if ($validator->fails()) {
             session()->flash('error_message' , 'Quantity must be between 1 and 6.');
             response()->json(['success' => false]);
@@ -75,6 +75,7 @@ class CartController extends Controller
     public function destroy($id)
     {
         Cart::remove($id);
+
         return redirect('/cart')->withSuccessMessage('Item has been removed!');
     }
 
@@ -86,6 +87,7 @@ class CartController extends Controller
     public function emptyCart()
     {
         Cart::destroy();
+        
         return redirect('/cart')->withSuccessMessage('Your cart has been cleared!');
     }
 

@@ -54,13 +54,13 @@ class ProductController extends Controller
     /**
     * Remove the specified resource from storage.
     *
-    * @param  int  $id
+    * @param    $product
     * @return \Illuminate\Http\Response
     */
     public function delete($product)
     {
         // only the boss can delete stuff
-        if ( !Auth::user()->theboss ) {
+        if ( !Auth::user()->isAdmin() ) {
             return redirect()->back()->with(['error_message' => 'You\'re not allowed !']);
         }
 
@@ -79,7 +79,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         // only the boss and employee can add products
-        if ( !Auth::user()->employee && !Auth::user()->theboss ) {
+        if ( !Auth::user()->isEmployee() && !Auth::user()->isAdmin() ) {
             return redirect()->back()->with(['error_message' => 'You\'re not allowed !']);
         }
 

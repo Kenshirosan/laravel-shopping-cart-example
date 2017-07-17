@@ -2,16 +2,17 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+
 use App\User;
-use App\Http\Requests;
 use \Cart as Cart;
+use App\Http\Requests;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Model;
 
 
 class Order extends Model
 {
-    // use Notifiable;
+
     /**
     * The attributes that are mass assignable.
     *

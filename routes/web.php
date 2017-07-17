@@ -20,8 +20,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 // EDIT/DELETE USER PROFILE
 Route::get('/edit-profile', 'UserController@index');
 Route::post('/edit-profile/{user_id}', 'UserController@edit');
-Route::get('/delete/{user_id}', 'UserController@delete');
-Route::post('/delete/{account}', 'UserController@deleteaccount');
+Route::get('/erase/{user_id}', 'UserController@delete');
+Route::post('/erase/{account}', 'UserController@deleteaccount');
 
 Route::resource('shop', 'ProductController', ['only' => ['index', 'show']]);
 Route::resource('cart', 'CartController');
@@ -32,6 +32,8 @@ Route::get('/restaurantpanel', 'AdminController@index');
 Route::get('/delete/{slug}', 'ProductController@delete')->name('/delete');
 Route::post('/insertproduct', 'ProductController@store');
 Route::get('/panel', 'AdminController@show');
+Route::get('/search-orders', 'SearchController@search');
+Route::get('/livesearch','SearchController@liveSearch');
 
 //VIEW ORDERS AND PRINT
 Route::get('/customer-orders', 'CheckController@index');
@@ -45,8 +47,6 @@ Route::post('/shop/{slug}/{photo}','AdminController@store');
 Route::get('/checkout', 'PaymentController@index');
 Route::post('/order', 'PaymentController@store');
 Route::get('/thankyou', 'PaymentController@thankyou');
-
-
 
 // WISHLIST ROUTES(took it away from views.. for now)
 Route::post('switchToWishlist/{id}', 'CartController@switchToWishlist');

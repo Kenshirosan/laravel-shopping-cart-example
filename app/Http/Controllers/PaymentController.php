@@ -41,10 +41,18 @@ class PaymentController extends Controller
 
         $this->checkCartIsValid();
 
+        try {
+            $this->validatePayment();
+
+        } catch (\Exception $e){
+
+            return back()->with(['error_message' => $e->getMessage() ]);
+        }
+
         $this->validateOrder($request);
+
         $this->processOrder($request);
 
-        $this->validatePayment();
 
         $user = Auth::user();
 
@@ -54,25 +62,6 @@ class PaymentController extends Controller
 
     }
 
-
-    private function validatePayment()
-    {
-        Stripe::setApiKey(config('services.stripe.secret'));
-
-        $customer = Customer::create([
-            'email' => request('stripeEmail'),
-            'source' => request('stripeToken')
-        ]);
-
-
-        $price = Cart::total();
-
-        Charge::create([
-            'customer' => $customer->id,
-            'amount' => $price,
-            'currency' => 'usd'
-        ]);
-    }
 
     private function checkCartIsValid()
     {
@@ -87,10 +76,11 @@ class PaymentController extends Controller
         }
     }
 
+
     private function validateOrder(Request $request)
     {
-        $user = User::findOrFail( Auth::user()->id );
-        // dd($request->email);
+        $user = Auth::user();
+
         if (Auth::user()->email != $request->email || Auth::user()->phone_number != $request->phone_number){
 
             die('Something went wrong, please check your credentials or update them in the dedicated section' . ' ' .'<a href="/" >back</a>');
@@ -154,9 +144,48 @@ class PaymentController extends Controller
         \Mail::to($user)->send(new Thankyou($order));
     }
 
+
+    private function validatePayment()
+    {
+        Stripe::setApiKey(config('services.stripe.secret'));
+
+
+        $customer = Customer::create([
+            'email' => request('stripeEmail'),
+            'source' => request('stripeToken')
+        ]);
+
+        // try {
+
+        $price = Cart::total();
+
+        $charge = Charge::create([
+            'customer' => $customer->id,
+            'amount' => $price,
+            'currency' => 'usd'
+        ]);
+
+        // } catch ( \Exception $e ) {
+
+        // return back();
+        // }
+    }
+
+
+
+    public function delete($order)
+    {
+        if( !Auth::user()->isAdmin() )
+        {
+            return redirect()->back()->with(['error_message' => 'You\'re not allowed !']);
+        }
+    }
+
+
     public function thankyou()
     {
         $user = Auth::user();
+
         return view('layouts.thankyou');
     }
 

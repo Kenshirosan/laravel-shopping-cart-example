@@ -32,7 +32,7 @@ class UserController extends Controller
 
     public function edit(Request $request, $id)
     {
-        $user = Auth::user()->findOrFail( $auth->user()->id );
+        $user = Auth::user();
 
         $this->validate($request, [
             'address' =>'required',
@@ -51,12 +51,12 @@ class UserController extends Controller
         return  back()->with(['success_message' => 'Credentials successfully updated']);
     }
 
-    public function delete(Request $request, $id)
+    public function delete($id)
     {
 
         $user = Auth::user();
 
-        if($user->theboss || $user->employee)
+        if($user->isAdmin() || $user->isEmployee())
         {
             return back()->with(['error_message' =>'This account can\'t be deleted']);
         }
@@ -69,7 +69,7 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        if($user->theboss || $user->employee)
+        if($user->isAdmin() || $user->isEmployee())
         {
             return back()->with(['error_message' =>'This account can\'t be deleted']);
         }

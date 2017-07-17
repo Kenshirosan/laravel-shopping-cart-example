@@ -26,7 +26,7 @@
                 <input type="submit" class="btn btn-success btn-lg" value="Add to Cart">
             </form>
 
-            @if( !Auth::guest() && Auth::user()->employee )
+            @if( !Auth::guest() && Auth::user()->isAdmin() )
                 <form id="addPhotosForm" class="dropzone" action="/shop/{{ $product->slug }}/photo" enctype="multipart/form-data" method="POST">
                     {{ csrf_field() }}
                 </form>
@@ -41,7 +41,7 @@
 
     <p><a class="btn btn-primary" href="{{ url('/shop') }}">Back to menu</a></p>
     <div class="spacer"></div>
-    
+
 @endsection
 
 @section('dropzone.script')
