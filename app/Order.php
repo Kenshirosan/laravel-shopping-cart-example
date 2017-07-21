@@ -2,13 +2,11 @@
 
 namespace App;
 
-
 use App\User;
 use \Cart as Cart;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
-
 
 class Order extends Model
 {
@@ -26,5 +24,4 @@ class Order extends Model
     {
         return $this->belongsTo(User::class);
     }
-
 }

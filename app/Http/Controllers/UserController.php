@@ -53,24 +53,20 @@ class UserController extends Controller
 
     public function delete($id)
     {
-
         $user = Auth::user();
 
-        if($user->isAdmin() || $user->isEmployee())
-        {
+        if ($user->isAdmin() || $user->isEmployee()) {
             return back()->with(['error_message' =>'This account can\'t be deleted']);
         }
 
         return view('auth.deleteaccount', compact('user'));
-
     }
 
     public function deleteAccount()
     {
         $user = Auth::user();
 
-        if($user->isAdmin() || $user->isEmployee())
-        {
+        if ($user->isAdmin() || $user->isEmployee()) {
             return back()->with(['error_message' =>'This account can\'t be deleted']);
         }
 

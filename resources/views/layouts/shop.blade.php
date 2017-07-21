@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('title')
+    Shop with us
+@endsection
+
 @section('content')
 
         <div class="jumbotron text-center clearfix">
@@ -151,6 +155,7 @@
         @foreach ($drinks->chunk(4) as $items)
             <div class="response"></div>
             <a href="{{ url('/cart') }}" class="btn btn-info pull-right">Go to cart</a>
+
             <div class="row">
                 <h1>Drinks</h1>
                 @foreach ($items as $product)
@@ -182,7 +187,10 @@
 
             </div> <!-- end row -->
         @endforeach
-        <a href="#top" class="btn btn-info">Back to top</a>
+        <div class="container text-center">
+            <a href="#top" class="btn btn-info">Back to top</a>
+        </div>
+
 
 @endsection
 

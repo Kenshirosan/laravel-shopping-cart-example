@@ -27,6 +27,10 @@ Route::resource('shop', 'ProductController', ['only' => ['index', 'show']]);
 Route::resource('cart', 'CartController');
 Route::delete('emptyCart', 'CartController@emptyCart');
 
+//daily_specials
+Route::get('/daily-specials', 'ProductController@dailyspecialIndex');
+Route::get('/special/{slug}', 'ProductController@showDaily');
+
 //ADMIN AND EMPLOYEE ROUTES
 Route::get('/restaurantpanel', 'AdminController@index');
 Route::get('/delete/{slug}', 'ProductController@delete')->name('/delete');

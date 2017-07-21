@@ -1,26 +1,22 @@
-<?php
+<?php 
 
 namespace App\Http\Controllers;
 
-
 use DB;
-Use Image;
-Use App\User;
-Use App\Order;
-Use App\Photo;
-Use App\Product;
+use Image;
+use App\User;
+use App\Order;
+use App\Photo;
+use App\Product;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
 
 class AdminController extends Controller
 {
     public function __construct()
     {
-
         return $this->middleware('auth');
-
     }
 
     /**
@@ -31,11 +27,9 @@ class AdminController extends Controller
 
     public function index()
     {
-
         $orders = Order::limit(5)->orderBy('created_at', 'desc')->get();
 
-        return view('admin.restaurantindex',compact('orders'));
-
+        return view('admin.restaurantindex', compact('orders'));
     }
 
     /**
@@ -46,7 +40,6 @@ class AdminController extends Controller
 
     public function show()
     {
-
         $yearlyTotal = Order::selectRaw('year(created_at) year, sum(price) total')
                             ->groupBy('year')
                             ->orderBy('year', 'desc')
@@ -60,7 +53,6 @@ class AdminController extends Controller
                             ->get();
 
         return view('admin.panel', compact('orders', 'totalOrders', 'yearlyTotal'));
-
     }
 
 
@@ -73,10 +65,8 @@ class AdminController extends Controller
     public function store($slug, Request $request)
     {
         // only the boss and employees can add photos
-        if ( !Auth::user()->isAdmin() && !Auth::user()->isEmployee() ) {
-
-            return response()->json(['error' => 'You\'re not allowed !'],403);
-
+        if (!Auth::user()->isAdmin() && !Auth::user()->isEmployee()) {
+            return response()->json(['error' => 'You\'re not allowed !'], 403);
         }
 
         $product = Product::where('slug', $slug)->firstOrFail();
@@ -88,7 +78,7 @@ class AdminController extends Controller
         $file = $request->file('photos');
         $name = time() . $file->getClientOriginalName();
         $path = 'meals/photos/' . $name;
-        $file = Image::make($file->getRealPath())->resize(800,500)->save($path);
+        $file = Image::make($file->getRealPath())->resize(800, 500)->save($path);
 
         $photo = new Photo();
         $photo->product_id = $product->id;

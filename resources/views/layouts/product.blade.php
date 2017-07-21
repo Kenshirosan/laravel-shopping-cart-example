@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('title')
+    {{ $product->name }}
+@endsection
+
 @section('content')
 
 

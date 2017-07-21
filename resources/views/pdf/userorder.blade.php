@@ -11,9 +11,9 @@
 
             @foreach( $orders as $order )
                 <li class="list-group-item">
-                    <h4>Order: {{ $order->id }}</h4>
+                    <a href="/order/{{ $order->id }}" class="admin-links"><h4>Order: {{ $order->id }}</h4>
                     <p>{{ $order->name }} {{ $order->last_name }} paid $<strong>{{ $order->price /100}}</strong> for {{ $order->items }} on <strong>{{ $order->created_at->toFormattedDateString() }}</strong> at {{ $order->created_at->toTimeString() }}
-                    </p>
+                    </p></a>
                     <p class="text-right"><a href="/order/{{ $order->id }}" class="btn btn-primary">View order</a></p>
 
                 </li>

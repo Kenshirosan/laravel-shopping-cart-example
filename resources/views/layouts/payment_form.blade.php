@@ -2,11 +2,9 @@
 
 @section('content')
 
-
     <div class="container wrapper">
 
         <div class="row cart-body">
-        
 
             <form class="form-horizontal" method="POST" action="/order">
                 @include('layouts.error')
@@ -66,8 +64,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <div class="col-md-12"><strong>Address:</strong></div>
                                     <div class="col-md-12">
+                                    <div class="col-md-12"><strong>Address:</strong></div><span class="text-info text-center">You may modify the address field if you wish to be delivered somewhere else</span>
                                         <input type="text" name="address" class="form-control" value=" {{ Auth::user()->address }} " />
                                     </div>
                                 </div>
@@ -120,7 +118,7 @@
                                 </script>
                             </form>
                         @else
-                            <small class="text-danger">You need at least $15 to order</small>
+                            <small class="text-danger">You need to order at least $15 worth to order</small>
                         @endif
                     </div>
                 </div>

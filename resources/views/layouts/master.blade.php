@@ -14,6 +14,7 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="/css/dropzone.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/link.css">
     <link rel="stylesheet" href="/css/app.css">
     @yield('extra-css')
 

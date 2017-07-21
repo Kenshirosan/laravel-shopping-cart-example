@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-
 use Image;
 use App\User;
 use App\Product;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
 
 class ProductController extends Controller
 {
@@ -29,14 +27,13 @@ class ProductController extends Controller
         return view('layouts.shop', compact('appetizers', 'main', 'burgers', 'dessert', 'drinks'));
     }
 
-    // public function getPrices()
-    // {
-    //     $prices = Product::all();  //UNUSED, BUT WILL BE ONE DAY....
-    //     foreach($prices as $product){
-    //         // echo($product->price . ' ');
-    //         return number_format(($product->price /100), 2, '.', ' ') . ' ' ;
-    //     }
-    // }
+    public function dailyspecialIndex()
+    {
+        $dailys = Product::all()->where('category', 'Daily Specials');
+
+        return view('layouts.dailySpecials', compact('dailys'));
+    }
+
 
     /**
     * Display the specified resource.
@@ -48,7 +45,21 @@ class ProductController extends Controller
     {
         $product = Product::where('slug', $slug)->firstOrFail();
 
-        return view('layouts.product', compact('product') );
+        return view('layouts.product', compact('product'));
+    }
+
+
+    /**
+    * Display the specified resource.
+    *
+    * @param  string  $slug
+    * @return \Illuminate\Http\Response
+    */
+    public function showDaily($slug)
+    {
+        $product = Product::where('slug', $slug)->firstOrFail();
+
+        return view('layouts.product', compact('product'));
     }
 
     /**
@@ -60,7 +71,7 @@ class ProductController extends Controller
     public function delete($product)
     {
         // only the boss can delete stuff
-        if ( !Auth::user()->isAdmin() ) {
+        if (!Auth::user()->isAdmin()) {
             return redirect()->back()->with(['error_message' => 'You\'re not allowed !']);
         }
 
@@ -79,13 +90,14 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         // only the boss and employee can add products
-        if ( !Auth::user()->isEmployee() && !Auth::user()->isAdmin() ) {
+        if (!Auth::user()->isEmployee() && !Auth::user()->isAdmin()) {
             return redirect()->back()->with(['error_message' => 'You\'re not allowed !']);
         }
 
         $this->validateRequest($request);
+
         $this->createNewProduct($request);
-        //redirect to homepage or somewhere else
+        
         return back()->with(['success_message' => 'Product successfully added !']);
     }
 
@@ -102,12 +114,10 @@ class ProductController extends Controller
         ];
 
         return $this->validate($request, $rules);
-
     }
 
     private function createNewProduct(Request $request)
     {
-
         $name = $request['name'];
         $category = $request['category'];
         $slug = $request['slug'];
@@ -118,7 +128,7 @@ class ProductController extends Controller
             $avatar = $request->file('image');
             $image = time() . '.' . $avatar->getClientOriginalExtension();
             $path = public_path('img/' . $image);
-            Image::make($avatar->getRealPath())->resize(800,500)->save($path);
+            Image::make($avatar->getRealPath())->resize(800, 500)->save($path);
 
             $product = new Product();
             $product->name = $name;
@@ -131,4 +141,13 @@ class ProductController extends Controller
             $product->save();
         }
     }
+
+    // public function getPrices()
+    // {
+    //     $prices = Product::all();  //UNUSED, BUT WILL BE ONE DAY....
+    //     foreach($prices as $product){
+    //         // echo($product->price . ' ');
+    //         return number_format(($product->price /100), 2, '.', ' ') . ' ' ;
+    //     }
+    // }
 }

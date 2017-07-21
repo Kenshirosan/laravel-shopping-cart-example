@@ -6,8 +6,6 @@ use \Cart as Cart;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 
-
-
 class WishlistController extends Controller
 {
 
@@ -102,6 +100,5 @@ class WishlistController extends Controller
                                  ->associate('App\Product');
 
         return redirect('wishlist')->withSuccessMessage('Item has been moved to your shopping cart!');
-
     }
 }

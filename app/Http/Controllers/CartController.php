@@ -55,15 +55,15 @@ class CartController extends Controller
         ]);
 
         if ($validator->fails()) {
-            session()->flash('error_message' , 'Quantity must be between 1 and 6.');
+            session()->flash('error_message', 'Quantity must be between 1 and 6.');
             response()->json(['success' => false]);
-            return response()->view('layouts.cart',$request, 403);
+            return response()->view('layouts.cart', $request, 403);
         }
 
         Cart::update($id, $request->quantity);
         session()->flash('success_message', 'Quantity was updated successfully!');
         response()->json(['success' => true]);
-        return response()->view('layouts.cart',$request, 200);
+        return response()->view('layouts.cart', $request, 200);
     }
 
     /**
@@ -87,7 +87,7 @@ class CartController extends Controller
     public function emptyCart()
     {
         Cart::destroy();
-        
+
         return redirect('/cart')->withSuccessMessage('Your cart has been cleared!');
     }
 
@@ -115,6 +115,5 @@ class CartController extends Controller
         ->associate('App\Product');
 
         return redirect('wishlist')->withSuccessMessage('Item has been moved to your Wishlist!');
-
     }
 }
