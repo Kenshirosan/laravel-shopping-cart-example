@@ -2,18 +2,6 @@
 
 @section('content')
     @if(  Auth::user()->isAdmin() )
-        @if (session()->has('success_message'))
-            <div class="alert alert-success">
-                {{ session()->get('success_message') }}
-            </div>
-        @endif
-
-        @if (session()->has('error_message'))
-            <div class="alert alert-danger">
-                {{ session()->get('error_message') }}
-            </div>
-        @endif
-
                     <h1>Hello, {{ Auth::user()->name }}</h1>
                     <form class="form-horizontal" method="POST" action="/insertproduct" enctype="multipart/form-data">
                         {{ csrf_field() }}
@@ -121,7 +109,7 @@
                     </form>
 
                     <form class="form-horizontal" method="get" action="/logout">
-                        @include('layouts.error')
+                        @include('includes.error')
                         {{ csrf_field() }}
                         <div class="form-group">
                             <div class="col-md-12">

@@ -14,6 +14,7 @@ use App\Events\UserOrdered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class PaymentController extends Controller
 {
     public function __construct()
@@ -42,18 +43,25 @@ class PaymentController extends Controller
         $this->checkCartIsValid();
 
         try {
-            $this->validatePayment();
+            $this->validateStripePayment();
         } catch (\Exception $e) {
             return back()->with(['error_message' => $e->getMessage() ]);
         }
-
+        try {
         $this->validateOrder($request);
-
+        } catch (\Exception $e) {
+            return back()->with(['error_message' => $e->getMessage() ]);
+        }
+        
+        try {
         $this->processOrder($request);
-
-        $user = Auth::user();
+        }
+        catch (\Exception $e) {
+            return back()->with(['error_message' => $e->getMessage() ]);
+        }
 
         Cart::destroy();
+
         return redirect('/thankyou')->with(['success_message' => 'Thank You ' . Auth::user()->name . ', Your order is complete, We sent you a detailed email, Please call us if you need to make a change.']);
     }
 
@@ -70,11 +78,13 @@ class PaymentController extends Controller
     }
 
 
+    /**
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
     private function validateOrder(Request $request)
     {
-        $user = Auth::user();
-
-        $rules = [
+        return $this->validate($request, [
             'name' => 'required|exists:users,name',
             'last_name' => 'required|exists:users,last_name',
             'address' => 'required',
@@ -84,16 +94,16 @@ class PaymentController extends Controller
             'email' => 'required|exists:users,email',
             'Cart::content() => required',
             'Cart::total() => required',
-        ];
-
-        return $this->validate(request(), $rules);
+        ]);
     }
 
-
+    /**
+    * @param \Illuminate\Http\Request $request
+    * 
+    * @return \Illuminate\Http\Response
+    */
     private function processOrder(Request $request)
     {
-        $user = Auth::user();
-
         $items = [];
         foreach (Cart::content() as $row) {
             $qty = $row->qty;
@@ -116,11 +126,13 @@ class PaymentController extends Controller
         ]);
         //WORK ON EVENTS
         // event(new UserOrdered($order));
-        \Mail::to($user)->send(new Thankyou($order));
+        \Mail::to(auth()->user()->email)->send(new Thankyou($order));
     }
 
-
-    private function validatePayment()
+    /**
+    * Stripe validation
+    */
+    private function validateStripePayment()
     {
         Stripe::setApiKey(config('services.stripe.secret'));
 
@@ -138,7 +150,9 @@ class PaymentController extends Controller
         ]);
     }
 
-
+    /**
+    * delete the specified resource
+    */
     public function delete($order) //unused unless someone asks for it
     {
         if (!Auth::user()->isAdmin()) {
@@ -146,11 +160,11 @@ class PaymentController extends Controller
         }
     }
 
-
+    /**
+    * redirect after successful payment
+    */
     public function thankyou()
     {
-        $user = Auth::user();
-
         return view('layouts.thankyou');
     }
 }

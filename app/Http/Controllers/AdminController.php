@@ -47,6 +47,7 @@ class AdminController extends Controller
 
 
 
+
         $totalOrders = Order::selectRaw('year(created_at) year, monthname(created_at) month, sum(price) total')
                             ->groupBy('year', 'month')
                             ->orderBy('year', 'desc')

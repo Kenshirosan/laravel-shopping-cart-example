@@ -139,11 +139,5 @@
                 </div>
             @endif
         </div>
-        {{-- <a class="btn btn-link" href="/password/reset">
-            Reset Your Password?
-        </a> --}}
-        {{-- <a class="btn btn-link" onclick="{{ Auth::logout() }}" href="/password/reset">
-            Reset Your Password?
-        </a> --}}
         <div class="spacer"></div>
     @endsection

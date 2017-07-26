@@ -24,7 +24,7 @@
 </head>
 <body>
 
-    @include('layouts.header')
+    @include('includes.header')
 
     <div class="container">
         @include('messages.messages')
@@ -33,12 +33,13 @@
     </div>
 
 
-    @include('layouts.footer')
+    @include('includes.footer')
 
     <!-- JavaScript -->
     <script src="/js/smoothscroll.js" charset="utf-8"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    
     @yield('ajax')
     @yield('extra-js')
     @yield('dropzone.script')

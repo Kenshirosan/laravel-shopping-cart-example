@@ -47,6 +47,6 @@
     <p><strong>Order received on : {{ $order->created_at->format('D, F d, Y') }} at : {{ $order->created_at->toTimeString() }}</strong></p>
 
 
-    @include('layouts.footer')
+    @include('includes.footer')
 </body>
 </html>

@@ -34,7 +34,7 @@
             var data = google.visualization.arrayToDataTable([
                 ['Month', 'Sales','Sales Tax'],
                 @foreach ($totalOrders as $monthlyTotal)
-                ['{{ $monthlyTotal->month}} {{ $monthlyTotal->year }}',  {{ $monthlyTotal->total /100 }}, {{ $monthlyTotal->total /100 * 0.08 }} ],
+                ['{{ $total->month}} {{ $monthlyTotal->year }}',  {{ $monthlyTotal->total /100 }}, {{ $monthlyTotal->total /100 * 0.08 }} ],
                 @endforeach
 
             ]);
@@ -51,20 +51,17 @@
         }
         </script>
 
-
         <script type="text/javascript">
         google.charts.load("current", {packages:['bar']});
         google.charts.setOnLoadCallback(drawChart);
         function drawChart() {
             var data = google.visualization.arrayToDataTable([
-                ['Year', 'Sales', 'Taxes', 'Profit'],
+                ['Year', 'Sales', 'Taxes', 'Raw Profit'],
 
                 @foreach ($yearlyTotal as $total)
                 ["{{ $total->year }}", {{ $total->total /100 }}, {{ $total->total /100 }} *0.08, {{ $total->total/100 }} - ({{ $total->total /100 }} * 0.08)],
                 @endforeach
             ]);
-
-            // var view = new google.visualization.DataView(data);
 
                 var options = {
                     chart: {

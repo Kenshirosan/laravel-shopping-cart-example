@@ -18,11 +18,11 @@ class ProductController extends Controller
     */
     public function index()
     {
-        $appetizers = Product::all()->where('category', 'Appetizers');
-        $main = Product::all()->where('category', 'Main');
-        $burgers = Product::all()->where('category', 'Burgers and sandwiches');
-        $dessert = Product::all()->where('category', 'Dessert');
-        $drinks = Product::all()->where('category', 'Drinks');
+        $appetizers = Product::where('category', 'Appetizers')->get();
+        $main = Product::where('category', 'Main')->get();
+        $burgers = Product::where('category', 'Burgers and sandwiches')->get();
+        $dessert = Product::where('category', 'Dessert')->get();
+        $drinks = Product::where('category', 'Drinks')->get();
 
         return view('layouts.shop', compact('appetizers', 'main', 'burgers', 'dessert', 'drinks'));
     }
@@ -42,20 +42,6 @@ class ProductController extends Controller
     * @return \Illuminate\Http\Response
     */
     public function show($slug)
-    {
-        $product = Product::where('slug', $slug)->firstOrFail();
-
-        return view('layouts.product', compact('product'));
-    }
-
-
-    /**
-    * Display the specified resource.
-    *
-    * @param  string  $slug
-    * @return \Illuminate\Http\Response
-    */
-    public function showDaily($slug)
     {
         $product = Product::where('slug', $slug)->firstOrFail();
 
@@ -94,51 +80,51 @@ class ProductController extends Controller
             return redirect()->back()->with(['error_message' => 'You\'re not allowed !']);
         }
 
+        try{
         $this->validateRequest($request);
-
-        $this->createNewProduct($request);
+        }
+         catch (\Exception $e) {
+            return back()->with(['error_message' => $e->getMessage() ]);
+        }
         
+        try{
+        $this->createNewProduct($request);
+        }
+         catch (\Exception $e) {
+            return back()->with(['error_message' => $e->getMessage() ]);
+        }
         return back()->with(['success_message' => 'Product successfully added !']);
     }
 
 
     private function validateRequest(Request $request)
     {
-        $rules = [
+        return $this->validate($request,[
             'name' => 'required',
             'category' => 'required',
             'slug' => 'required',
             'description' => 'required',
             'price' => 'required',
             'image' => 'required',
-        ];
-
-        return $this->validate($request, $rules);
+        ]);
     }
 
     private function createNewProduct(Request $request)
     {
-        $name = $request['name'];
-        $category = $request['category'];
-        $slug = $request['slug'];
-        $description = $request['description'];
-        $price = $request['price'];
-
         if ($request->hasFile('image')) {
             $avatar = $request->file('image');
             $image = time() . '.' . $avatar->getClientOriginalExtension();
             $path = public_path('img/' . $image);
             Image::make($avatar->getRealPath())->resize(800, 500)->save($path);
-
-            $product = new Product();
-            $product->name = $name;
-            $product->category = $category;
-            $product->slug = $slug;
-            $product->description = $description;
-            $product->price = $price;
-            $product->image = $image;
-
-            $product->save();
+            
+            Product::create([
+                'name' => request('name'),
+                'category' => request('category'),
+                'slug' => request('slug'),
+                'description' => request('description'),
+                'price' => request('price'),
+                'image' => $image
+                ]);
         }
     }
 

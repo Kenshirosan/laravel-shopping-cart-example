@@ -29,7 +29,7 @@ Route::delete('emptyCart', 'CartController@emptyCart');
 
 //daily_specials
 Route::get('/daily-specials', 'ProductController@dailyspecialIndex');
-Route::get('/special/{slug}', 'ProductController@showDaily');
+Route::get('/special/{slug}', 'ProductController@show');
 
 //ADMIN AND EMPLOYEE ROUTES
 Route::get('/restaurantpanel', 'AdminController@index');

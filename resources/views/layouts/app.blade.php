@@ -14,7 +14,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    @include('layouts.header')
+    @include('includes.header')
 
     <div class="container">
         @include('messages.messages')
@@ -22,7 +22,7 @@
     </div>
 
 
-    @include('layouts.footer')
+    @include('includes.footer')
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
