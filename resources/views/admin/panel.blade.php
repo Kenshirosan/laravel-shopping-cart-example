@@ -7,6 +7,40 @@
 <style media="screen">
     .container{width:100%;}
 </style>
+{{-- <div class="container">
+    <div class="col-xs-2">
+        <ul class="list-group">
+            @foreach($averageOrder->chunk(4) as $order)
+                @foreach($order as $averageOrder)
+                    <li class="list-group-item text-center text-info">
+                        Average Order for {{ $averageOrder['month'] }} {{ $averageOrder['year'] }} : ${{ $averageOrder['Average'] / 100 }}
+                    </li>
+                @endforeach
+            @endforeach
+        </ul>    
+    </div>
+</div> --}}
+
+<div class="well">
+    <h4>Average Orders :</h4>
+{{-- {{ $averageOrder }} --}}
+    <div class="row">
+        @foreach($averageOrder->chunk(4) as $order)
+        {{-- {{ $order }} --}}
+        <div class="col-xs-2">
+            <ul class="list-group">
+                    @foreach ($order as $averageOrder)
+                    <li class="list-group-item">
+                        Average Order for {{ $averageOrder['month'] }} {{ $averageOrder['year'] }} : ${{ $averageOrder['Average'] / 100 }}
+                    </li>
+                    @endforeach
+            </ul>
+        </div>
+        @endforeach
+    </div>
+
+    <!-- /.row -->
+</div>
     <ul class=list-group>
         @if(Auth::user()->isAdmin())
 
@@ -19,8 +53,12 @@
             @endforeach
 
             {{-- CHARTS --}}
-            <li class="list-group-item"><div id="curve_chart" style="width: 100%; height: 500px"></div></li>
-            <li class="list-group-item"><div id="columnchart_material" style="width: 100%; height: 300px;"></div></li>
+            <div class="col-md-6">
+                <li class="list-group-item"><div id="curve_chart" style="width: 100%; height: 500px"></div></li>    
+            </div>
+            <div class="col-md-6">
+                <li class="list-group-item"><div id="columnchart_material" style="width: 100%; height: 300px;"></div></li>
+            </div>
 
 
         </ul>
@@ -34,7 +72,7 @@
             var data = google.visualization.arrayToDataTable([
                 ['Month', 'Sales','Sales Tax'],
                 @foreach ($totalOrders as $monthlyTotal)
-                ['{{ $total->month}} {{ $monthlyTotal->year }}',  {{ $monthlyTotal->total /100 }}, {{ $monthlyTotal->total /100 * 0.08 }} ],
+                ['{{ $monthlyTotal->month}} {{ $monthlyTotal->year }}',  {{ $monthlyTotal->total /100 }}, {{ $monthlyTotal->total /100 * 0.08 }} ],
                 @endforeach
 
             ]);

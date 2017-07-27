@@ -45,15 +45,18 @@ class AdminController extends Controller
                             ->orderBy('year', 'desc')
                             ->get();
 
-
-
-
         $totalOrders = Order::selectRaw('year(created_at) year, monthname(created_at) month, sum(price) total')
                             ->groupBy('year', 'month')
                             ->orderBy('year', 'desc')
                             ->get();
 
-        return view('admin.panel', compact('orders', 'totalOrders', 'yearlyTotal'));
+        $averageOrder = Order::selectRaw('avg(price) Average, monthname(created_at) month, year(created_at) year' )
+                            ->whereRaw('year(created_at) = year(curdate())')
+                            ->groupBy('month', 'year')
+                            ->orderBy('month', 'desc' )
+                            ->get();
+
+        return view('admin.panel', compact('orders', 'totalOrders', 'yearlyTotal', 'averageOrder'));
     }
 
 
