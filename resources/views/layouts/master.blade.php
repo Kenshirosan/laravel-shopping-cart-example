@@ -44,6 +44,7 @@
     @yield('extra-js')
     @yield('dropzone.script')
     @yield('search-ajax')
+    @yield('hide')
 
 
 </body>

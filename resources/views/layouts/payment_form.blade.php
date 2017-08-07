@@ -7,7 +7,7 @@
         <div class="row cart-body">
 
             <form class="form-horizontal" method="POST" action="/order">
-                @include('layouts.error')
+                @include('includes.error')
                 {{ csrf_field() }}
 
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-push-6 col-sm-push-6">
@@ -109,9 +109,9 @@
                                 src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                                 data-key="{{ config('services.stripe.key') }}"
                                 data-amount="{{ Cart::total() }}"
-                                data-name="Demo Site"
-                                data-description="Widget"
-                                data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                                data-name="Name of restaurant"
+                                data-description="Bon appetit"
+                                data-image="/img/hero_pdt_hamburger.png"
                                 data-locale="auto"
                                 data-currency="usd"
                                 data-zip-code="true">
@@ -127,6 +127,4 @@
         </form>
     </div>
 </div>
-
-
 @endsection

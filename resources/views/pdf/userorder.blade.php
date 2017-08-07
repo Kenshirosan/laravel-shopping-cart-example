@@ -15,6 +15,7 @@
                     <p>{{ $order->name }} {{ $order->last_name }} paid $<strong>{{ $order->price /100}}</strong> for {{ $order->items }} on <strong>{{ $order->created_at->toFormattedDateString() }}</strong> at {{ $order->created_at->toTimeString() }}
                     </p></a>
                     <p class="text-right"><a href="/order/{{ $order->id }}" class="btn btn-primary">View order</a></p>
+                    <p class="text-right clickToHideTheOrder"><a href="" class="btn btn-danger">Hide</a></p>
 
                 </li>
 
@@ -25,4 +26,8 @@
         window.location = "{{ url('/shop') }}";
         </script>
     @endif
+@endsection
+
+@section('hide')
+    @include('javascript.hideOrders')
 @endsection
