@@ -24,4 +24,29 @@ class Order extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+     public function isHidden()
+    {
+        return Hideable::where('order_id', request('id'))->count();
+    }
+
+    public function numberOfOrdersToday()
+    {
+        $attribute = 'created_at';
+        $when =  date('Y-m-d');
+
+        return Hideable::whereDate($attribute, $when)->count();
+    }
+
+    public function isHiddenOrder()
+    {
+        return $this->hasMany(Hideable::class);
+    }
+
+    public function hiddenOrder()
+    {
+        $attributes = ['order_id' => $this->id];
+
+        return $this->isHiddenOrder()->where($attributes)->exists();
+    }
 }

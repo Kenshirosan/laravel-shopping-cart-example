@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.masterPageForPayment')
 
 @section('content')
 
@@ -106,15 +106,15 @@
                             <form action="/order" method="POST">
 
                                 <script
-                                src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                                data-key="{{ config('services.stripe.key') }}"
-                                data-amount="{{ Cart::total() }}"
-                                data-name="Name of restaurant"
-                                data-description="Bon appetit"
-                                data-image="/img/hero_pdt_hamburger.png"
-                                data-locale="auto"
-                                data-currency="usd"
-                                data-zip-code="true">
+                                    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                    data-key="{{ config('services.stripe.key') }}"
+                                    data-amount="{{ Cart::total() }}"
+                                    data-name="Name of restaurant"
+                                    data-description="Bon appetit"
+                                    data-image="/img/hero_pdt_hamburger.png"
+                                    data-locale="auto"
+                                    data-currency="usd"
+                                    data-zip-code="true">
                                 </script>
                             </form>
                         @else

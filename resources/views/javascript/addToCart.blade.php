@@ -18,7 +18,7 @@ $(document).ready( function() {
                     price:product_price
                 },
                 success: function(data){
-                    $('.response').append('<p class=\'alert alert-info\'>' + product_name + ' was added to cart !</p>');
+                    $('.response').append('<p class=\'alert alert-success\'> ' + product_name + ' added !</p>').fadeIn().fadeOut(2000);
                 }
             });
             return false;

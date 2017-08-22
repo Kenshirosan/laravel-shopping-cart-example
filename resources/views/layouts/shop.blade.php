@@ -15,8 +15,6 @@
 
         {{--  Appetizers --}}
         @foreach ($appetizers->chunk(4) as $items)
-        {{-- <img src="asset/{{ $items->image }}> --}}
-        {{-- <img src="{{ asset('img/' . $items->image) }}" alt="product" class="img-responsive"> --}}
             <div class="response"></div>
             <a href="{{ url('/cart') }}" class="btn btn-info pull-right">Go to cart</a>
             <div class="row">
@@ -70,12 +68,13 @@
 
             <div class="row">
                 <h1>Drinks</h1>
-                
+
                @include('includes.productslayout')
 
             </div> <!-- end row -->
         @endforeach
         <div class="container text-center">
+
             <a href="#top" class="btn btn-info">Back to top</a>
         </div>
 

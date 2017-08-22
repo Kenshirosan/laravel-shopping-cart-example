@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Auth;
 
 class SearchController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function search()
     {
         if (!Auth::user()->isAdmin()) {

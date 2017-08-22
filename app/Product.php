@@ -18,6 +18,13 @@ class Product extends Model
         'name', 'category', 'slug', 'description', 'price', 'image'
     ];
 
+    // protected $with = ['id', 'name', 'price'];
+
+    // public function getIdAttribute()
+    // {
+    //     return $this->id;
+    // }
+
     public function photos()
     {
         return $this->hasMany(Photo::class);

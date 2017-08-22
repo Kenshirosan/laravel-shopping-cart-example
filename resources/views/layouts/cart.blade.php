@@ -2,7 +2,6 @@
 
 @section('content')
 
-
         <p><a href="{{ url('shop') }}">Home</a> / Cart</p>
         <h1>Your Cart</h1>
 

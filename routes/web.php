@@ -38,6 +38,8 @@ Route::post('/insertproduct', 'ProductController@store');
 Route::get('/panel', 'AdminController@show');
 Route::get('/search-orders', 'SearchController@search');
 Route::get('/livesearch','SearchController@liveSearch');
+Route::post('/hide-orders/{order}', 'AdminController@hide');
+Route::post('/show-order/{order}', 'AdminController@showOrder');
 
 //VIEW ORDERS AND PRINT
 Route::get('/customer-orders', 'CheckController@index');

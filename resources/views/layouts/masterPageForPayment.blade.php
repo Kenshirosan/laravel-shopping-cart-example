@@ -26,11 +26,10 @@
 
     @include('includes.header')
 
-    <div class="container" id="app">
+    <div class="container">
         @include('messages.messages')
         <div id="top"></div>
         @yield('content')
-        <flash message={{ session('flash') }}></flash>
     </div>
 
 

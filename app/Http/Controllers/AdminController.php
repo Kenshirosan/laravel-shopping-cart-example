@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers;
 
@@ -8,6 +8,7 @@ use App\User;
 use App\Order;
 use App\Photo;
 use App\Product;
+use App\Hideable;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -57,6 +58,45 @@ class AdminController extends Controller
                             ->get();
 
         return view('admin.panel', compact('orders', 'totalOrders', 'yearlyTotal', 'averageOrder'));
+    }
+
+    public function hide(Request $request, $order)
+    {
+        if (! Auth::user()->isAdmin() || ! Auth::user()->isEmployee() ) {
+            return response()->json(['error' => 'Page not found !'], 404);
+        }
+
+        $order = Order::where('id', $request->id)->firstOrFail();
+
+        if($order->isHidden()){
+            return back()->with(['error_message' => 'This order is already hidden']);
+        }
+
+        $this->validate($request, [
+                'id' => 'required'
+        ]);
+
+        Hideable::create([
+                'order_id' => request('id')
+        ]);
+
+        return back()->with('success_message', 'Order processed');
+    }
+
+    public function showOrder(Request $request, $order)
+    {
+        if (! Auth::user()->isAdmin() || ! Auth::user()->isEmployee() ) {
+            return response()->json(['error' => 'Page not found'], 404);
+        }
+
+        $this->validate($request, [
+                'id' => 'required'
+        ]);
+
+        $order = Hideable::where('order_id', request('id'));
+
+        $order->delete();
+        return back()->with('success_message', 'Success');
     }
 
 

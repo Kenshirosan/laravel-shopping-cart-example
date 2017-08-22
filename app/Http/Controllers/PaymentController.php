@@ -42,17 +42,18 @@ class PaymentController extends Controller
     {
         $this->checkCartIsValid();
 
+         try {
+        $this->validateOrder($request);
+        } catch (\Exception $e) {
+            return back()->with(['error_message' => $e->getMessage() ]);
+        }
+
         try {
             $this->validateStripePayment();
         } catch (\Exception $e) {
             return back()->with(['error_message' => $e->getMessage() ]);
         }
-        try {
-        $this->validateOrder($request);
-        } catch (\Exception $e) {
-            return back()->with(['error_message' => $e->getMessage() ]);
-        }
-        
+
         try {
         $this->processOrder($request);
         }
@@ -99,7 +100,7 @@ class PaymentController extends Controller
 
     /**
     * @param \Illuminate\Http\Request $request
-    * 
+    *
     * @return \Illuminate\Http\Response
     */
     private function processOrder(Request $request)
@@ -153,7 +154,7 @@ class PaymentController extends Controller
     /**
     * delete the specified resource
     */
-    public function delete($order) //unused unless someone asks for it
+    public function delete($order) //unused / just a protection
     {
         if (!Auth::user()->isAdmin()) {
             return redirect()->back()->with(['error_message' => 'You\'re not allowed !']);

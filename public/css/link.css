@@ -1,3 +1,19 @@
+.jumbotron{
+    background-image: url('../img/hero_pdt_hamburger.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 .admin-links:visited {
     color: white;
+}
+
+.table-image img{
+    max-width: 25%;
+}
+
+.response {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
 }
