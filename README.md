@@ -38,6 +38,11 @@ mv .env.example .env && vim .env
 ```
 update database info and stripe key
 ```
+php artisan migrate
+```
+if there's any problem with migrations, try deleting the boot method in the AppServiceProvider file.
+If you're using mariadb leave it alone tho.
+```
 php artisan serve
 ```
 and let me know all what's wrong.
