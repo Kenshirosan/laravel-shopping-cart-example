@@ -3,6 +3,7 @@
 namespace App;
 
 use App\User;
+use App\Hideable;
 use \Cart as Cart;
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -10,7 +11,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-
     /**
     * The attributes that are mass assignable.
     *
@@ -25,17 +25,17 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-     public function isHidden()
+    public function isHidden()
     {
         return Hideable::where('order_id', request('id'))->count();
     }
 
     public function numberOfOrdersToday()
     {
-        $attribute = 'created_at';
-        $when =  date('Y-m-d');
+        $when = 'created_at';
+        $today =  date('Y-m-d');
 
-        return Hideable::whereDate($attribute, $when)->count();
+        return Hideable::whereDate($when, $today)->count();
     }
 
     public function isHiddenOrder()

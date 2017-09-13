@@ -163,15 +163,17 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
-        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class,
-        Barryvdh\Debugbar\ServiceProvider::class,
 
 
         /*
          * Package Service Providers...
          */
+        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
+        JeroenNoten\LaravelAdminLte\ServiceProvider::class,
         Laravel\Tinker\TinkerServiceProvider::class,
+        Gabievi\Promocodes\PromocodesServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -181,6 +183,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\OptionsServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
@@ -235,6 +238,7 @@ return [
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Promocodes' => Gabievi\Promocodes\Facades\Promocodes::class,
 
     ],
 

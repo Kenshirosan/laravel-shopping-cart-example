@@ -14,9 +14,18 @@ require('./bootstrap');
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
 Vue.component('flash', require('./components/Flash.vue'));
 Vue.component('addtocart', require('./components/addToCart.vue'));
+Vue.component('modal', require('./components/Modal.vue'));
+// Vue.component('checkoutform', require('./components/addToCart.vue'));
 
 const app = new Vue({
     el: '#app',
+
+    data: {
+        showModal: false,
+        selected: '',
+        originalSelect: ''
+    },
 });

@@ -2,12 +2,13 @@
 
 namespace App;
 
+use DB;
 use App\Photo;
+use App\OptionGroup;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-
     /**
      * The attributes that are mass assignable.
      *
@@ -15,18 +16,21 @@ class Product extends Model
      */
 
     protected $fillable = [
-        'name', 'category', 'slug', 'description', 'price', 'image'
+        'name', 'option_group_id', 'category', 'slug', 'description', 'price', 'image'
     ];
-
-    // protected $with = ['id', 'name', 'price'];
-
-    // public function getIdAttribute()
-    // {
-    //     return $this->id;
-    // }
 
     public function photos()
     {
         return $this->hasMany(Photo::class);
+    }
+
+    public function options()
+    {
+        return $this->group->options;
+    }
+
+    public function group()
+    {
+        return $this->belongsTo(OptionGroup::class, 'option_group_id');
     }
 }

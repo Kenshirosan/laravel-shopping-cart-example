@@ -25,20 +25,22 @@
         <tbody>
             <tr>
 
-                <td><h4 class="text-info">{{ $order->name }}</h4></td>
+                <td><strong class="text-info">{{ $order->name }}</strong></td>
 
-                <td><h4 class="text-info">{{ $order->last_name }}</h4></td>
+                <td><strong class="text-info">{{ $order->last_name }}</strong></td>
 
-                <td><h4 class="text-info">{{ $order->email }}</h4></td>
+                <td><strong class="text-info">{{ $order->email }}</strong></td>
 
-                <td><h4 class="text-info">{{ $order->phone_number }}</h4></td>
+                <td><strong class="text-info">{{ $order->phone_number }}</strong></td>
 
-                <td><h4 class="text-info">${{ $order->price /100 }}</h4></td>
+                <td><strong class="text-info">${{ $order->price /100 }}</strong></td>
             </tr>
         </tbody>
     </table>
+
     <div class="spacer"></div>
     <ul>
+    Ordered :
         @foreach ($items as $item)
             <li>{{ $item }}</li>
         @endforeach

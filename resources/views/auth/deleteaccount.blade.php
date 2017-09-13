@@ -1,12 +1,10 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
 @section('title')
     Delete your account
 @endsection
 
 @section('content')
-
-
         <h4 class="text-center text-danger">{{ $user->name }}, Are you sure you want to delete your account? this cannot be undone !</h4>
         <h5 class="text-center">All your data will be erased, except orders you made through our websites, due to legal concerns.</h5>
 

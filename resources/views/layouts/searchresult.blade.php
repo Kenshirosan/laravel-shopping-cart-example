@@ -29,7 +29,7 @@ if(!empty($orders ))
         <tr>
         <td>'.$count++.'</td>
         <td>'.$order->id.'</td>
-        <td>'.$order->items.'</td>
+        <td>'.$order->email.'</td>
         <td>'.$order->created_at.'</td>
         <td><a href="'.$show.'" target="_blank" title="SHOW" ><span class="glyphicon glyphicon-list"></span></a></td>
         </tr>

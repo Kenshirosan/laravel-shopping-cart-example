@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>@yield('title')</title>
+    @yield('auto-refresh')
     <meta name="description" content="Shopping Cart">
 
     <!-- Mobile Specific Meta -->
@@ -20,13 +21,12 @@
 
     <!-- Favicon and Apple Icons -->
     <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}">
-
 </head>
 <body>
 
     @include('includes.header')
 
-    <div class="container" id="app">
+     <div class="container" id="app">
         @include('messages.messages')
         <div id="top"></div>
         @yield('content')
@@ -37,15 +37,14 @@
     @include('includes.footer')
 
     <!-- JavaScript -->
-    <script src="/js/app.js"></script>
-    <script src="/js/smoothscroll.js" charset="utf-8"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/smoothscroll.js" charset="utf-8"></script>
 
     @yield('extra-js')
     @yield('dropzone.script')
-    @yield('search-ajax')
-    {{-- @yield('hide') --}}
+    @yield('ajax')
 
 
 </body>

@@ -16,6 +16,7 @@
                         <div class="panel-heading">
                             Review Order
                         </div>
+
                         @foreach (Cart::content() as $item)
                             <div class="panel-body">
                                 <div class="form-group">
@@ -32,9 +33,13 @@
                                     <div class="spacer"></div>
                                 </div>
                             </div>
-
                         @endforeach
-                        <h4 class="text-right text-success" style="padding-right:10px;"><span>Your total : $</span>{{ Cart::total() /100 }}</h4>
+                        {{-- <h4 class="text-right text-success" style="padding-right:10px;"><span>Your total : $</span>{{ Cart::subtotal() / 100}}</h4>
+                        <h4 class="text-right text-success" style="padding-right:10px;"><span>Your total : $</span>{{ Cart::tax() / 100}}</h4> --}}
+                        <h4 class="text-right text-success" style="padding-right:10px;"><span>Your total : $</span>{{ $total / 100  }}</h4>
+                        @if($discount != null)
+                            <span class="text-info">Congratulations ! {{ $discount * 100 }} % discount applied with code {{ $code }}</span>
+                        @endif
                     </div>
                     <!--REVIEW ORDER END-->
                 </div>
@@ -77,7 +82,6 @@
                                     </div>
                                 </div>
 
-
                                 <div class="form-group">
                                     <div class="col-md-12"><strong>Zipcode:</strong></div>
                                     <div class="col-md-12">
@@ -92,39 +96,62 @@
 
                                 <div class="form-group">
                                     <div class="col-md-12"><strong>Phone Number:</strong></div>
-                                    <div class="col-md-12"><input type="tel" readonly name="phone_number" class="form-control" value="{{ Auth::user()->phone_number }}" /></div>
+                                    <div class="col-md-12">
+                                        <input type="tel" readonly name="phone_number" class="form-control" value="{{ Auth::user()->phone_number }}" />
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
                                     <div class="col-md-12"><strong>Email Address:</strong></div>
-                                    <div class="col-md-12"><input type="email" readonly name="email" class="form-control" value="{{ Auth::user()->email }}" /></div>
+                                    <div class="col-md-12">
+                                        <input type="email" readonly name="email" class="form-control" value="{{ Auth::user()->email }}" />
+                                    </div>
                                 </div>
 
+                            <input type="hidden" name="code" value="{{ $code }}">
+                            <input type="hidden" name="total" value="{{ $total }}">
                                 <!--SHIPPING METHOD END-->
-
                         @if(Cart::total() > 1500)
                             <form action="/order" method="POST">
-
                                 <script
                                     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                                     data-key="{{ config('services.stripe.key') }}"
+                                    @if($total != null)
+                                        data-amount="{{ $total }}"
+                                    @else
                                     data-amount="{{ Cart::total() }}"
-                                    data-name="Name of restaurant"
-                                    data-description="Bon appetit"
-                                    data-image="/img/hero_pdt_hamburger.png"
+                                    @endif
+                                    data-name="Demo Site"
+                                    data-description="Widget"
+                                    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
                                     data-locale="auto"
                                     data-currency="usd"
                                     data-zip-code="true">
                                 </script>
                             </form>
+                            {{-- <checkoutform></checkoutform> --}}
                         @else
                             <small class="text-danger">You need to order at least $15 worth to order</small>
                         @endif
                     </div>
                 </div>
             @endif
-
         </form>
+        {{-- COUPON --}}
+        <div class="container text-right">
+            <h2>Do you have a coupon ?</h2>
+            <div class="form-group">
+                <form action="/apply-coupon" method="POST" class="side-by-side">
+                    {{ csrf_field() }}
+                    <div class="col-md-6">
+                        <input type="text" name="coupon" placeholder="R5AH-JHXE">
+                    </div>
+                    <div class="col-md-6">
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 @endsection

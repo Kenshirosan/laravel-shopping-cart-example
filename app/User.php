@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Order;
+use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -42,9 +43,9 @@ class User extends Authenticatable
         return $this->employee;
     }
 
-    // public function pay(Order $order)
+    // public function pay(Request $request, $order)
     // {
-    //     $this->orders()->save($order); unused for now (need  user_id in orders table..)
+    //     $this->orders()->save($order); //unused for now (need  user_id in orders table..)
     //     return $this->belongsTo(Order::class);
     // }
 

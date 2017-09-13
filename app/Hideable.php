@@ -8,8 +8,9 @@ class Hideable extends Model
 {
     protected $fillable = ['order_id'];
 
+
     public function isHiddenOrder()
     {
-        return $this->belongsToMany(Order::class);
+        return $this->hasMany(Order::class);
     }
 }

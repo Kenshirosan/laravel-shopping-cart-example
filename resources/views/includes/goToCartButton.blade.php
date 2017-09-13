@@ -1,0 +1,1 @@
+<a href="{{ url('/cart') }}" class="btn btn-info pull-right">Go to cart</a>

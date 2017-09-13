@@ -16,7 +16,7 @@
             <img src="{{ asset('img/' . $product->image) }}" alt="product" class="img-responsive">
             @foreach( $product->photos as $item)
                 <img src="{{ asset($item->photos) }}" alt="{{ $product->name }}" class="img-responsive">
-                
+
             @endforeach
         </div>
 

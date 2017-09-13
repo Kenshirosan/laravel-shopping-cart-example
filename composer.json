@@ -10,9 +10,11 @@
         "barryvdh/laravel-dompdf": "^0.8.0",
         "gloudemans/shoppingcart": "^2.3",
         "intervention/image": "^2.3",
+        "jeroennoten/laravel-adminlte": "^1.20",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
-        "stripe/stripe-php": "^5.1"
+        "stripe/stripe-php": "^5.1",
+        "zgabievi/promocodes": "1.0.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -33,7 +35,8 @@
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
-        }
+        },
+        "files": ["tests/utilities/functions.php"]
     },
     "scripts": {
         "post-root-package-install": [

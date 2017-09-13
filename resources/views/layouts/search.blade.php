@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('adminlte::page')
 
 @section('title')
     Search
@@ -21,7 +21,18 @@
         <!-- search box container ends  -->
         <div id="txtHint" class="title-color" style="padding-top:50px; text-align:center;" ><b>Results :</b></div>
 @endsection
-
-@section('search-ajax')
-   @include('javascript.research')
-@endsection
+<script src="/js/app.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#search").keyup(function(){
+            var str=  $("#search").val();
+            if(str == "") {
+                $( "#txtHint" ).html("<b>Results ..</b>");
+            }else {
+                $.get( "{{ url('/livesearch?id=') }}"+str, function( data ) {
+                    $( "#txtHint" ).html( data );
+                });
+            }
+        });
+    });
+</script>

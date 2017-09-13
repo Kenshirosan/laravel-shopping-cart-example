@@ -52,7 +52,6 @@ if (token) {
 //     key: 'your-pusher-key'
 // });
 
-
 window.Vue = require('vue');
 window.events = new Vue();
 

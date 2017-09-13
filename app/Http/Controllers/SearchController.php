@@ -14,23 +14,23 @@ class SearchController extends Controller
     {
         $this->middleware('auth');
     }
-    
-    public function search()
+
+    public function index()
     {
         if (!Auth::user()->isAdmin()) {
-            return back()->with(['error_message' => 'You\'re not allowed !']);
+            return redirect('shop')->with(['error_message' => 'You\'re not allowed !']);
         }
 
         return view('layouts.search');
     }
 
 
-    public function liveSearch(Request $request)
+    public function show(Request $request)
     {
         if (!Auth::user()->isAdmin()) {
-            return back()->with(['error_message' => 'You\'re not allowed !']);
+            return redirect('shop')->with(['error_message' => 'You\'re not allowed !']);
         }
-        
+
         $search = $request->id;
 
         if (is_null($search)) {

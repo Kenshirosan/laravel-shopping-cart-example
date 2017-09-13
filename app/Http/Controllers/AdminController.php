@@ -7,6 +7,7 @@ use Image;
 use App\User;
 use App\Order;
 use App\Photo;
+use App\Option;
 use App\Product;
 use App\Hideable;
 use App\Http\Requests;
@@ -28,9 +29,15 @@ class AdminController extends Controller
 
     public function index()
     {
+        if(!Auth::user()->isAdmin()){
+            return redirect('/shop');
+        }
+
+        $options = Option::all();
+
         $orders = Order::limit(5)->orderBy('created_at', 'desc')->get();
 
-        return view('admin.restaurantindex', compact('orders'));
+        return view('admin.restaurantindex', compact('orders', 'options'));
     }
 
     /**
@@ -41,6 +48,10 @@ class AdminController extends Controller
 
     public function show()
     {
+        if(!Auth::user()->isAdmin()){
+            return redirect('/shop');
+        }
+
         $yearlyTotal = Order::selectRaw('year(created_at) year, sum(price) total')
                             ->groupBy('year')
                             ->orderBy('year', 'desc')
@@ -57,76 +68,6 @@ class AdminController extends Controller
                             ->orderBy('month', 'desc' )
                             ->get();
 
-        return view('admin.panel', compact('orders', 'totalOrders', 'yearlyTotal', 'averageOrder'));
-    }
-
-    public function hide(Request $request, $order)
-    {
-        if (! Auth::user()->isAdmin() || ! Auth::user()->isEmployee() ) {
-            return response()->json(['error' => 'Page not found !'], 404);
-        }
-
-        $order = Order::where('id', $request->id)->firstOrFail();
-
-        if($order->isHidden()){
-            return back()->with(['error_message' => 'This order is already hidden']);
-        }
-
-        $this->validate($request, [
-                'id' => 'required'
-        ]);
-
-        Hideable::create([
-                'order_id' => request('id')
-        ]);
-
-        return back()->with('success_message', 'Order processed');
-    }
-
-    public function showOrder(Request $request, $order)
-    {
-        if (! Auth::user()->isAdmin() || ! Auth::user()->isEmployee() ) {
-            return response()->json(['error' => 'Page not found'], 404);
-        }
-
-        $this->validate($request, [
-                'id' => 'required'
-        ]);
-
-        $order = Hideable::where('order_id', request('id'));
-
-        $order->delete();
-        return back()->with('success_message', 'Success');
-    }
-
-
-    /**
-    * Store a newly created resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\Response
-    */
-    public function store($slug, Request $request)
-    {
-        // only the boss and employees can add photos
-        if (!Auth::user()->isAdmin() && !Auth::user()->isEmployee()) {
-            return response()->json(['error' => 'You\'re not allowed !'], 403);
-        }
-
-        $product = Product::where('slug', $slug)->firstOrFail();
-
-        $this->validate($request, [
-            'photos' => 'required|mimes:jpg,jpeg,png,bmp'
-        ]);
-
-        $file = $request->file('photos');
-        $name = time() . $file->getClientOriginalName();
-        $path = 'meals/photos/' . $name;
-        $file = Image::make($file->getRealPath())->resize(800, 500)->save($path);
-
-        $photo = new Photo();
-        $photo->product_id = $product->id;
-        $photo->photos = $path;
-        $photo->save();
+        return view('admin.panel', compact('totalOrders', 'yearlyTotal', 'averageOrder'));
     }
 }

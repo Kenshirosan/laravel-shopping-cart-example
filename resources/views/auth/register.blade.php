@@ -10,7 +10,9 @@
                         {{ csrf_field() }}
                         <!--SHIPPING METHOD-->
                         <div class="panel panel-info">
-                            <div class="panel-heading">Register</div>
+                            <div class="panel-heading">
+                                Register
+                            </div>
                             <div class="panel-body">
 
                                 <div class="form-group">
@@ -18,7 +20,6 @@
                                         <h4>All fields are mandatory</h4>
                                     </div>
                                 </div>
-                                {{-- <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}"> --}}
                                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                     <div class="col-md-12">
                                         <strong>First Name:</strong>
@@ -58,7 +59,7 @@
                                 <div class="form-group{{ $errors->has('address2') ? ' has-error' : '' }}">
                                     <div class="col-md-12"><strong>Address 2:</strong></div>
                                     <div class="col-md-12">
-                                        <input type="text" name="address2" class="form-control" value="{{ old('address2') }}" placeholder="Address 2" required/>
+                                        <input type="text" name="address2" class="form-control" value="{{ old('address2') }}" placeholder="Address 2"/>
                                     </div>
                                     @if ($errors->has('address2'))
                                         <span class="help-block">
@@ -126,13 +127,13 @@
                                         <input type="submit" value ="Register" class="btn btn-primary">
                                     </div>
                                 </div>
-                            </form>
-
+                            </div>
                         </div>
-                    </div>
-                @else
-                    <h1>You're already registered and logged in {{ Auth::user()->name }} !</h1>
-                @endif
+                    </form>
+                </div>
             </div>
-            <div class="spacer"></div>
-        @endsection
+    @else
+        <h1>You're already registered and logged in {{ Auth::user()->name }} !</h1>
+    @endif
+</div>
+@endsection

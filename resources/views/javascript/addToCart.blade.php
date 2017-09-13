@@ -9,6 +9,7 @@ $(document).ready( function() {
             var product_id = $(this).data('id');
             var product_name = $(this).data('name');
             var product_price = $(this).data('price');
+            var product_options = $(this).data('options');
             $.ajax({
                 url: '{{ url('/cart') }}',
                 method: 'POST',

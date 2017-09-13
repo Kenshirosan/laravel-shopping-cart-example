@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Validator;
+use App\Option;
+use App\Product;
 use \Cart as Cart;
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -28,17 +30,9 @@ class CartController extends Controller
     */
     public function store(Request $request)
     {
-        $duplicates = Cart::search(function ($cartItem, $rowId) use ($request) {
-            return $cartItem->id === $request->id;
-        });
+        Cart::add( $request->id, $request->name, 1, $request->price, [ $request->options ] )->associate(Product::class);
 
-        if (!$duplicates->isEmpty()) {
-            return redirect('/cart')->with(['error_message', 'Item is already in your cart!']);
-        }
-
-        Cart::add($request->id, $request->name, 1, $request->price)->associate('App\Product');
-
-        return back()->with("success_message", "Item was added to your cart!");
+        return redirect('/shop')->with(['flash' => 'Item added']);
     }
 
     /**
@@ -112,8 +106,8 @@ class CartController extends Controller
             return redirect('wishlist')->withSuccessMessage('Item is already in your Wishlist!');
         }
 
-        Cart::instance('wishlist')->add($item->id, $item->name, 1, $item->price)
-        ->associate('App\Product');
+        Cart::instance('wishlist')->add($item->id, $item->name, 1, $item->price, $item->options)
+            ->associate('App\Product');
 
         return redirect('wishlist')->withSuccessMessage('Item has been moved to your Wishlist!');
     }

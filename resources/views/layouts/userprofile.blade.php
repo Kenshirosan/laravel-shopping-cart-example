@@ -1,11 +1,11 @@
-@extends('layouts.master')
+@extends('adminlte::page')
 
 @section('title')
     Edit Your profile
 @endsection
 
 @section('content')
-
+@include('messages.messages')
     @if( Auth::user()->id )
         <div class="row">
             <div class="panel-body">

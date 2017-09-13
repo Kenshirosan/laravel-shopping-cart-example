@@ -13,8 +13,7 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="{{ set_active('/') }}"><a href="{{ url('/shop') }}">Regular Menu</a></li>
-                    <li class="{{ set_active('/daily-specials') }}"><a href="{{ url('/daily-specials') }}" style="color:blue;">Daily Specials</a></li>
+                    <li class="{{ set_active('/') }}"><a href="{{ url('/shop') }}">Our Menu</a></li>
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

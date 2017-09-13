@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('adminlte::page')
 @section('title')
     Print Order
 @endsection
@@ -6,6 +6,7 @@
 @section('content')
     @if( Auth::user()->isAdmin() || Auth::user()->employee )
 
+    <div class="col-md-6">
         @foreach ($items as $item)
 
             <h4 class="text-danger" style="display:inline; margin-left:1em;">{{ $item }}</h4>
@@ -35,10 +36,12 @@
         <hr>
         <a href="/print/{{ $order->id }}" class="btn btn-success">Print</a>
 
-        <a href="/delete" class="btn btn-danger pull-right">Delete</a>
+        {{-- not implemented fully: route missing, feature in PaymentController but should be moved to OrderProcessedController --}}
+        {{-- <a href="/delete/{{ $order->id }}" class="btn btn-danger pull-right">Delete</a> --}}
+    </div>
     @elseif( !Auth::user()->isAdmin() || !Auth::user()->employee)
         <script type="text/javascript">
-        window.location = "{{ url('/shop') }}";
+            window.location = "{{ url('/shop') }}";
         </script>
     @endif
 

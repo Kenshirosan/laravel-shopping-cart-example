@@ -48,10 +48,11 @@ class UserController extends Controller
         $user->phone_number = $request->phone_number;
         $user->email = $request->email;
         $user->save();
-        return  back()->with(['success_message' => 'Credentials successfully updated']);
+
+        return redirect('/edit-profile')->with(['success_message' => 'Credentials successfully updated']);
     }
 
-    public function delete($id)
+    public function show($id)
     {
         $user = Auth::user();
 
@@ -62,7 +63,7 @@ class UserController extends Controller
         return view('auth.deleteaccount', compact('user'));
     }
 
-    public function deleteAccount()
+    public function destroy()
     {
         $user = Auth::user();
 

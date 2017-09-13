@@ -4,12 +4,10 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Order;
-use Stripe\Stripe;
-use Stripe\Charge;
 use \Cart as Cart;
-use Stripe\Customer;
 use App\Http\Requests;
 use App\Mail\Thankyou;
+use App\Payments\Payments;
 use App\Events\UserOrdered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,7 +27,10 @@ class PaymentController extends Controller
     */
     public function index()
     {
-        return view('layouts.payment_form');
+        $total = Cart::total();
+        $discount = null;
+        $code = null;
+        return view('layouts.payment_form', compact('total', 'discount', 'code'));
     }
 
     /**
@@ -40,24 +41,30 @@ class PaymentController extends Controller
     */
     public function store(Request $request)
     {
-        $this->checkCartIsValid();
+        if (Cart::total() == 0) {
+            return back()->with(['error_message' => 'Your cart is empty !']);
+        }
 
-         try {
-        $this->validateOrder($request);
+        if (Cart::total() < 1500) {
+            return back()->with(['warning_message' => 'You need to order at least $15 worth of food, Your total is $' . Cart::total() /100 ]);
+        }
+
+        try {
+            $this->validateOrder($request);
+        } catch (\Exception $e) {
+            return back()->with(['error_message' => $e->getMessage() ]);
+        }
+
+        $payment = new Payments();
+        try {
+            $payment->validateStripePayment($request);
         } catch (\Exception $e) {
             return back()->with(['error_message' => $e->getMessage() ]);
         }
 
         try {
-            $this->validateStripePayment();
+            $this->processOrder($request);
         } catch (\Exception $e) {
-            return back()->with(['error_message' => $e->getMessage() ]);
-        }
-
-        try {
-        $this->processOrder($request);
-        }
-        catch (\Exception $e) {
             return back()->with(['error_message' => $e->getMessage() ]);
         }
 
@@ -66,18 +73,10 @@ class PaymentController extends Controller
         return redirect('/thankyou')->with(['success_message' => 'Thank You ' . Auth::user()->name . ', Your order is complete, We sent you a detailed email, Please call us if you need to make a change.']);
     }
 
-
-    private function checkCartIsValid()
+     private function checkCartIsValid()
     {
-        if (Cart::total() == 0) {
-            return back()->with(['error_message' => 'Your cart is empty !']);
-        }
 
-        if (Cart::total() < 1500) {
-            return back()->with(['warning_message' => 'You need to order at least $15 worth of food, Your total is $' . Cart::total() /100 ]);
-        }
     }
-
 
     /**
     * @param  \Illuminate\Http\Request  $request
@@ -93,8 +92,8 @@ class PaymentController extends Controller
             'zipcode' => 'required',
             'phone_number' => 'required|exists:users,phone_number',
             'email' => 'required|exists:users,email',
-            'Cart::content() => required',
-            'Cart::total() => required',
+            'total' => 'nullable',
+            'code' => 'nullable',
         ]);
     }
 
@@ -109,10 +108,18 @@ class PaymentController extends Controller
         foreach (Cart::content() as $row) {
             $qty = $row->qty;
             $itemname = $row->model->name;
+            $options = $row->options;
+            echo ($options);
             echo($itemname);
             echo($qty);
-            array_push($items, $qty, $itemname);
+            array_push($items, $qty, $itemname, $options);
         }
+
+        if(request('total')){
+            $price = request('total');
+        }
+        else $price = Cart::total();
+
         $order = Order::create([
             'user_id' => auth()->id(),
             'name' => request('name'),
@@ -123,41 +130,26 @@ class PaymentController extends Controller
             'zipcode' => request('zipcode'),
             'phone_number' => request('phone_number'),
             'items' => implode(': ', $items),
-            'price' => Cart::total()
+            'price' => $price
         ]);
+
+        if($code = request('code')){
+            \Promocodes::apply($code);
+            \Promocodes::disable($code);
+        }
+
         //WORK ON EVENTS
         // event(new UserOrdered($order));
-        \Mail::to(auth()->user()->email)->send(new Thankyou($order));
-    }
-
-    /**
-    * Stripe validation
-    */
-    private function validateStripePayment()
-    {
-        Stripe::setApiKey(config('services.stripe.secret'));
-
-        $customer = Customer::create([
-            'email' => request('stripeEmail'),
-            'source' => request('stripeToken')
-        ]);
-
-        $price = Cart::total();
-
-        $charge = Charge::create([
-            'customer' => $customer->id,
-            'amount' => $price,
-            'currency' => 'usd'
-        ]);
+        \Mail::to( auth()->user()->email )->send(new Thankyou($order));
     }
 
     /**
     * delete the specified resource
     */
-    public function delete($order) //unused / just a protection
+    public function delete($order) //unused unless someone asks for it, just don't want orders to be deleted. route protection
     {
         if (!Auth::user()->isAdmin()) {
-            return redirect()->back()->with(['error_message' => 'You\'re not allowed !']);
+            return redirect()->back()->with(['error_message' => 'Page not found!']);
         }
     }
 
