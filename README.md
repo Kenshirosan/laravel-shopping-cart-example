@@ -1,14 +1,8 @@
 # laravel-shopping-cart-example
-Fork of drehimself/laravel-shopping-cart-example
+Inspired by drehimself/laravel-shopping-cart-example
 Laravel Shopping Cart Example
 
-An example Laravel App with Shopping Cart functionality. Uses Crinsane/LaravelShoppingcart  
-
-[Live demo](http://cartdemo.andredemos.ca/"Demo")
-
-[Blog post](http://andremadarang.com/implementing-a-shopping-cart-in-laravel/ "Blog post")
-
-[Github](https://github.com/drehimself/laravel-shopping-cart-example#laravel-shopping-cart-example/"Github")
+Almost ready to ship laravel e-commerce application. Uses Crinsane/LaravelShoppingcart  
 
 Features :
 ---
@@ -22,3 +16,33 @@ Features :
 * stripe payment functionnal, just add your key in .env
 * basic user account
 * pdf printing
+* product options
+* coupons / promotion codes
+* backend with adminLTE
+
+download or clone then
+```
+cd path/to/app
+```
+```
+npm install
+```
+```
+composer install
+```
+```
+php artisan key:generate
+```
+```
+mv .env.example .env && vim .env
+```
+update database info and stripe key
+```
+php artisan migrate
+```
+if there's any problem with migrations, try deleting the boot method in the AppServiceProvider file.
+If you're using mariadb leave it alone tho.
+```
+php artisan serve
+```
+and let me know all what's wrong.
