@@ -26,10 +26,9 @@
             <div class="col-md-6">
                 <select id="option_group_id" class="form-control" name="option_group_id">
                     <option value="3">Please pick one</option>
-                    <option value="1">Steak</option>
-                    <option value="2">Eggs</option>
-                    <option value="4">Gluten Free</option>
-                    <option value="5">Vegetarian</option>
+                    @foreach($optionGroups as $optionGroup)
+                        <option value="{{ $optionGroup->id }}">{{ $optionGroup->name }}</option>
+                    @endforeach
                 </select>
             </div>
         </div>

@@ -12,13 +12,17 @@
                 quantity: 1,
                 name: this.product.name,
                 price: this.product.price,
-                options: ''
+                options: '',
+                default: ''
             }
         },
 
         watch: {
             selected: function() {
                 return this.options = this.originalData;
+            },
+            update: function() {
+                return this.options = this.newData;
             }
         },
 
@@ -27,26 +31,34 @@
                 get: function(){
                     return this.data = this.selected;
                 },
-                set: function (newdata) {
+                set: function(){
+                    return this.data = '';
+                },
+            },
+            newData: {
+                get: function () {
                     return this.newdata = ''
+                },
+                set: function () {
+                    return this.options = this.newdata
                 }
             }
         },
-
         methods: {
             addtocart() {
                     axios.post('/cart/', this.$data)
-                        .then(this.originalData = this.newdata)
                         .then(flash(this.product.name + ' was added to cart'))
                         .then( setTimeout( function() {
-                            this.originalData = '';
                             let select = document.getElementsByClassName('options');
                             let i = 0;
                             while ( i < select.length) {
                                 let option = select[i].options.selectedIndex = 0;
+                                $(option).trigger('click')
                                 i++;
                             }
-                        }, 500) );
+                        }, 500)
+                    )
+                    .then(this.$emit('update'))
                 },
 
             resetForm() {
@@ -65,3 +77,11 @@
         }
     }
 </script>
+<style>
+    .option{
+        color: orangered;
+    }
+    .reset {
+        color: red;
+    }
+</style>

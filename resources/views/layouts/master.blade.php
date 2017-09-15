@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>@yield('title')</title>
-    @yield('auto-refresh')
+
     <meta name="description" content="Shopping Cart">
 
     <!-- Mobile Specific Meta -->
@@ -28,7 +28,7 @@
 
      <div class="container" id="app">
         @include('messages.messages')
-        <div id="top"></div>
+        {{-- <div id="top"></div> --}}
         @yield('content')
         <flash message={{ session('flash') }}></flash>
     </div>

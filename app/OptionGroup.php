@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class OptionGroup extends Model
 {
-    protected $fillables = [
+    protected $fillable = [
         'name'
     ];
 

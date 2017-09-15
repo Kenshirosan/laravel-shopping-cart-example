@@ -853,7 +853,7 @@ var app = new Vue({
   data: {
     showModal: false,
     selected: '',
-    originalSelect: ''
+    originalData: ''
   }
 });
 
@@ -1824,7 +1824,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             quantity: 1,
             name: this.product.name,
             price: this.product.price,
-            options: ''
+            options: '',
+            default: ''
         };
     },
 
@@ -1832,6 +1833,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     watch: {
         selected: function selected() {
             return this.options = this.originalData;
+        },
+        update: function update() {
+            return this.options = this.newData;
         }
     },
 
@@ -1840,23 +1844,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             get: function get() {
                 return this.data = this.selected;
             },
-            set: function set(newdata) {
+            set: function set() {
+                return this.data = '';
+            }
+        },
+        newData: {
+            get: function get() {
                 return this.newdata = '';
+            },
+            set: function set() {
+                return this.options = this.newdata;
             }
         }
     },
-
     methods: {
+        // update() {
+        //         this.options = this.default
+        //     },
         addtocart: function addtocart() {
-            axios.post('/cart/', this.$data).then(this.originalData = this.newdata).then(flash(this.product.name + ' was added to cart')).then(setTimeout(function () {
-                this.originalData = '';
+            axios.post('/cart/', this.$data).then(flash(this.product.name + ' was added to cart')).then(setTimeout(function () {
                 var select = document.getElementsByClassName('options');
                 var i = 0;
                 while (i < select.length) {
                     var option = select[i].options.selectedIndex = 0;
+                    $(option).trigger('click');
                     i++;
                 }
-            }, 500));
+            }, 500)).then(this.$emit('update'));
         },
         resetForm: function resetForm() {
             var select = document.getElementsByClassName('options');
@@ -32002,6 +32016,10 @@ module.exports = Component.exports
 /* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
+
+/* styles */
+__webpack_require__(60)
+
 var Component = __webpack_require__(2)(
   /* script */
   __webpack_require__(31),
@@ -42597,6 +42615,47 @@ module.exports = function(module) {
 __webpack_require__(9);
 module.exports = __webpack_require__(10);
 
+
+/***/ }),
+/* 51 */,
+/* 52 */,
+/* 53 */,
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(35)();
+exports.push([module.i, "\n.option{\n    color: orangered;\n}\n.reset {\n    color: red;\n}\n", ""]);
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(59);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(46)("08c33347", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-e4dd70de\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./addToCart.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-e4dd70de\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./addToCart.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
 
 /***/ })
 /******/ ]);

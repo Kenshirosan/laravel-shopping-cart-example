@@ -38,10 +38,14 @@ Route::get('/search-orders', 'SearchController@index');
 Route::get('/livesearch','SearchController@show');
 Route::get('create-coupon', 'CouponController@index');
 Route::post('create-coupon', 'CouponController@store');
+Route::get('add-option-group', 'OptionGroupController@index');
+Route::get('add-options', 'OptionsController@index');
+Route::post('add-option-group', 'OptionGroupController@store');
+Route::post('add-options', 'OptionsController@store');
 
 Route::post('apply-coupon', 'CouponController@update');
 
-Route::post('/product_type', 'ProductController@getProductType');
+// Route::post('/product_type', 'ProductController@getProductType');
 
 //DEALING WITH ORDERS
 Route::get('/customer-orders', 'CheckController@index');

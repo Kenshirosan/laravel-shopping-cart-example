@@ -29,7 +29,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         if ( ! Auth::user()->isAdmin()) {
-            return redirect('/shop')->with(['error_message' => 'Thanks for playing !']);
+            return redirect('/shop')->with(['error_message' => 'Page not found']);
         }
 
         try{
@@ -90,7 +90,6 @@ class ProductController extends Controller
     */
     public function delete($product)
     {
-        // only the boss can delete stuff
         if (!Auth::user()->isAdmin()) {
             return redirect('/shop')->with(['error_message' => 'Thanks for playing !']);
         }

@@ -140,6 +140,18 @@ return [
             'icon_color' => 'success',
         ],
         [
+            'text'       => 'Add an option group',
+            'url'        => '/add-option-group',
+            'icon'       => 'file',
+            'icon_color' => 'success',
+        ],
+        [
+            'text'       => 'Add options',
+            'url'        => '/add-options',
+            'icon'       => 'file',
+            'icon_color' => 'success',
+        ],
+        [
             'text'       => 'Create a Coupon',
             'url'        => '/create-coupon',
             'icon'       => 'file',

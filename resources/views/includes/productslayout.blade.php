@@ -16,7 +16,7 @@
         </div> <!-- end thumbnail -->
         <h3>${{ $product->price / 100}}</h3>
 
-        <form action="{{ url('/cart') }}" method="POST" class="side-by-side reset">
+        <form action="{{ url('/cart') }}" method="POST" class="side-by-side" id="form">
             {{ csrf_field() }}
             {{-- form for my super not working with options vue component --}}
             <input type="hidden" name="id" v-model="this.id" value="{{ $product->id }}">
@@ -29,17 +29,17 @@
 
             @if( ! $product->group->options->isEmpty() )
                 <select name="options" class="options" v-model="selected" autofocus required>
-                    <option value="">Please select one</option>
+                    <option value="" class="reset">Please select one</option>
                 @foreach($product->group->options as $option)
-                    <option class="reset" value="{{ $option->name }}">{{ $option->name }}</option>
+                    <option class="option" value="{{ $option->name }}">{{ $option->name }}</option>
                 @endforeach
                 </select>
             @endif
-                {{-- <addToCart :product="{{ $product }}" :selected="selected"></addToCart> --}}
+                <addToCart :product="{{ $product }}" :selected="selected"></addToCart>
 
-            {{-- <noscript> --}}
+            <noscript>
                 <input type="submit"  value="Add To Cart" class="btn btn-success">
-            {{-- </noscript> --}}
+            </noscript>
         </form>
 
         <div class="spacer"></div>

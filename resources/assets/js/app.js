@@ -26,6 +26,6 @@ const app = new Vue({
     data: {
         showModal: false,
         selected: '',
-        originalSelect: ''
+        originalData: '',
     },
 });

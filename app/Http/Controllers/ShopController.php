@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Option;
 use App\Product;
 
-
 class ShopController extends Controller
 {
     /**
