@@ -31,12 +31,12 @@ npm install
 composer install
 ```
 ```
-php artisan key:generate
-```
-```
 mv .env.example .env && vim .env
 ```
 update database info and stripe key
+```
+php artisan key:generate
+```
 ```
 php artisan migrate
 ```
