@@ -1,4 +1,5 @@
-# laravel-shopping-cart work in progress
+# laravel-shopping-cart
+# work in progress
 Inspired by drehimself/laravel-shopping-cart-example
 Laravel Shopping Cart Example
 
