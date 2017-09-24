@@ -28,6 +28,7 @@ class ProductController extends Controller
     */
     public function store(Request $request)
     {
+        // dd($request->all());
         if ( ! Auth::user()->isAdmin()) {
             return redirect('/shop')->with(['error_message' => 'Page not found']);
         }
@@ -55,6 +56,7 @@ class ProductController extends Controller
             'name' => 'required',
             'category' => 'required',
             'option_group_id' => 'required',
+            'category_id' => 'required',
             'slug' => 'required',
             'description' => 'required',
             'price' => 'required',
@@ -74,6 +76,7 @@ class ProductController extends Controller
                 'name' => request('name'),
                 'category' => request('category'),
                 'option_group_id' => request('option_group_id'),
+                'category_id' => request('category_id'),
                 'slug' => request('slug'),
                 'description' => request('description'),
                 'price' => request('price'),

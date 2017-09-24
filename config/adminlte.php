@@ -108,7 +108,7 @@ return [
     */
 
     'menu' => [
-        'MAIN NAVIGATION',
+        'Store Administration',
         [
             'text' => 'Add a product',
             'url'  => '/restaurantpanel',
@@ -139,30 +139,40 @@ return [
             'icon'       => 'file',
             'icon_color' => 'success',
         ],
+
         [
-            'text'       => 'Add an option group',
-            'url'        => '/add-option-group',
-            'icon'       => 'file',
-            'icon_color' => 'success',
-        ],
-        [
-            'text'       => 'Add options',
-            'url'        => '/add-options',
-            'icon'       => 'file',
-            'icon_color' => 'success',
-        ],
-        [
-            'text'       => 'Create a Coupon',
-            'url'        => '/create-coupon',
-            'icon'       => 'file',
-            'icon_color' => 'success',
+            'text'    => 'Add options/Categories',
+            'icon'    => 'share',
+            'submenu' => [
+                [
+                    'text' => 'Add an option group',
+                    'url'  => '/add-option-group',
+                    'icon_color' => 'green',
+                ],
+                [
+                    'text'       => 'Add options',
+                    'url'        => '/add-options',
+                    'icon_color' => 'aqua',
+
+                ],
+                [
+                    'text'       => 'Add a category',
+                    'url'        => '/add-category',
+                    'icon_color' => 'success',
+                ],
+                [
+                    'text'       => 'Create a Coupon',
+                    'url'        => '/create-coupon',
+                    'icon_color' => 'aqua',
+                ],
+            ],
         ],
         'ACCOUNT SETTINGS',
-        [
-            'text' => 'Profile',
-            'url'  => '/edit-profile',
-            'icon' => 'user',
-        ],
+            [
+                'text' => 'Profile',
+                'url'  => '/edit-profile',
+                'icon' => 'user',
+            ],
 
     ],
 

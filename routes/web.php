@@ -42,6 +42,8 @@ Route::get('add-option-group', 'OptionGroupController@index');
 Route::get('add-options', 'OptionsController@index');
 Route::post('add-option-group', 'OptionGroupController@store');
 Route::post('add-options', 'OptionsController@store');
+Route::get('add-category', 'CategoriesController@index');
+Route::post('add-category', 'CategoriesController@store');
 
 Route::post('apply-coupon', 'CouponController@update');
 

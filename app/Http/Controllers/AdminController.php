@@ -10,6 +10,7 @@ use App\Photo;
 use App\Option;
 use App\Product;
 use App\Hideable;
+use App\Category;
 use App\OptionGroup;
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -34,11 +35,12 @@ class AdminController extends Controller
             return redirect('/shop');
         }
 
+        $categories = Category::all();
         $options = Option::all();
         $optionGroups = OptionGroup::all();
         $orders = Order::limit(5)->orderBy('created_at', 'desc')->get();
 
-        return view('admin.restaurantindex', compact('orders', 'options', 'optionGroups'));
+        return view('admin.restaurantindex', compact('orders', 'options', 'optionGroups', 'categories'));
     }
 
     /**

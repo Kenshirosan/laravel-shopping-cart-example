@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Option;
 use App\Product;
+use App\Category;
+use App\OptionGroup;
 
 class ShopController extends Controller
 {
@@ -14,14 +16,9 @@ class ShopController extends Controller
     */
     public function index()
     {
-        $appetizers = Product::where('category', 'Appetizers')->get();
-        $main = Product::where('category', 'Main')->get();
-        $burgers = Product::where('category', 'Burgers and sandwiches')->get();
-        $dessert = Product::where('category', 'Desserts')->get();
-        $drinks = Product::where('category', 'Drinks')->get();
-        $dailys = Product::where('category', 'Daily Specials')->get();
+        $categories = Category::with('products')->get();
 
-        return view('layouts.shop', compact('appetizers', 'main', 'burgers', 'dessert', 'drinks', 'dailys'));
+        return view('layouts.shop', compact('categories'));
     }
 
     /**

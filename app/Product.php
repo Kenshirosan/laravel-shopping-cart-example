@@ -16,7 +16,7 @@ class Product extends Model
      */
 
     protected $fillable = [
-        'name', 'option_group_id', 'category', 'slug', 'description', 'price', 'image'
+        'name', 'option_group_id', 'category_id', 'category', 'slug', 'description', 'price', 'image'
     ];
 
     public function photos()
@@ -24,9 +24,14 @@ class Product extends Model
         return $this->hasMany(Photo::class);
     }
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
+
     public function options()
     {
-        return $this->group->options;
+        return $this->group->options();
     }
 
     public function group()

@@ -43,14 +43,14 @@ class User extends Authenticatable
         return $this->employee;
     }
 
-    // public function pay(Request $request, $order)
-    // {
-    //     $this->orders()->save($order); //unused for now (need  user_id in orders table..)
-    //     return $this->belongsTo(Order::class);
-    // }
-
     public function orders()
     {
         return $this->hasMany(Order::class);
     }
+
+    public function pay(Order $order)
+    {
+        $this->orders()->save($order); //unused for now (need  to figure out something for cart content..)
+    }
+
 }

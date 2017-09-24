@@ -14,4 +14,9 @@ class Option extends Model
     {
         return $this->belongsTo(OptionGroup::class);
     }
+
+    public function products()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

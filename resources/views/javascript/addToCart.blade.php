@@ -1,3 +1,5 @@
+
+{{-- Unused, keeping file as a reference for some stuff --}}
 <script>
 $(document).ready( function() {
         $.ajaxSetup({

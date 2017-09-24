@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->string('name')->unique();
             $table->unsignedInteger('option_group_id');
+            $table->unsignedInteger('category_id');
             $table->string('category');
             $table->string('slug')->unique();
             $table->text('description');
@@ -25,6 +26,7 @@ class CreateProductsTable extends Migration
             $table->timestamps();
 
             // $table->foreign('option_group_id')->references('id')->on('option_groups');
+            // $table->foreign('category_id')->references('id')->on('categories'); NEED TO FIX THESE THINGS
         });
     }
 

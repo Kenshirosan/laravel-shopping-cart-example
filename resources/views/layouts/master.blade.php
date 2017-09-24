@@ -44,8 +44,6 @@
 
     @yield('extra-js')
     @yield('dropzone.script')
-    @yield('ajax')
-
 
 </body>
 </html>
