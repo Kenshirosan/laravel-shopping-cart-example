@@ -1,4 +1,5 @@
-# laravel-shopping-cart-example
+# laravel-shopping-cart
+# work in progress
 Inspired by drehimself/laravel-shopping-cart-example
 Laravel Shopping Cart Example
 
@@ -31,12 +32,12 @@ npm install
 composer install
 ```
 ```
-php artisan key:generate
-```
-```
 mv .env.example .env && vim .env
 ```
 update database info and stripe key
+```
+php artisan key:generate
+```
 ```
 php artisan migrate
 ```
