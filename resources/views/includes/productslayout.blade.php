@@ -28,8 +28,8 @@
         <input type="hidden" name="price"  value="{{ $product->price }}">
 
         @if( ! $product->group->options->isEmpty() )
-             <select name="options" class="options" v-model="selected" autofocus required>
-                <option value="" class="reset">Please select one</option>
+             <select name="options" class="options minimal" v-model="selected" autofocus required>
+                <option value="" class="reset">Choose</option>
             @foreach($product->group->options as $option)
                 <option class="option" value="{{ $option->name }}">{{ $option->name }}</option>
             @endforeach

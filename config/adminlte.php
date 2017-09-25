@@ -167,6 +167,21 @@ return [
                 ],
             ],
         ],
+
+        [
+            'text'    => 'Devs only',
+            'icon'    => 'exclamation-triangle',
+            'icon_color' => 'red',
+            'submenu' => [
+                [
+                    'text' => 'Edit css',
+                    'url'  => '/edit-css',
+                    'icon_color' => 'green',
+                ],
+            ]
+        ],
+
+
         'ACCOUNT SETTINGS',
             [
                 'text' => 'Profile',

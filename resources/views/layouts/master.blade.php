@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="/css/link.css">
     <link rel="stylesheet" href="/css/app.css">
     @yield('extra-css')
+    <link rel="stylesheet" href="/css/custom.css">
 
     <!-- Favicon and Apple Icons -->
     <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}">
@@ -28,7 +29,6 @@
 
      <div class="container" id="app">
         @include('messages.messages')
-        {{-- <div id="top"></div> --}}
         @yield('content')
         <flash message={{ session('flash') }}></flash>
     </div>

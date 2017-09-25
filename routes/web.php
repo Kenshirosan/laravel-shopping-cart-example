@@ -44,9 +44,8 @@ Route::post('add-option-group', 'OptionGroupController@store');
 Route::post('add-options', 'OptionsController@store');
 Route::get('add-category', 'CategoriesController@index');
 Route::post('add-category', 'CategoriesController@store');
-
-Route::post('apply-coupon', 'CouponController@update');
-
+Route::get('/edit-css', 'CssController@index');
+Route::post('/edit-css', 'CssController@update');
 // Route::post('/product_type', 'ProductController@getProductType');
 
 //DEALING WITH ORDERS
@@ -63,6 +62,7 @@ Route::post('/shop/{slug}/{photo}','PhotosController@store');
 Route::get('/checkout', 'PaymentController@index');
 Route::post('/order', 'PaymentController@store');
 Route::get('/thankyou', 'PaymentController@thankyou');
+Route::post('apply-coupon', 'CouponController@update');
 
 // WISHLIST ROUTES(took it away from views.. commented out the html in templates)
 // Route::post('switchToWishlist/{id}', 'CartController@switchToWishlist');

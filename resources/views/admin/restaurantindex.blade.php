@@ -36,28 +36,8 @@
 
 
         {{--  CATEGORY --}}
-        <div class="form-group{{ $errors->has('category') ? ' has-error' : '' }}">
-            <label for="name" class="col-md-4 control-label">Category</label>
-            <div class="col-md-6">
-                <select id="category" class="form-control" name="category" value="{{ old('category') }}" autofocus required>
-                    <option value="Appetizers">Appetizers</option>
-                    <option value="Burgers and sandwiches">Burgers and sandwiches</option>
-                    <option value="Daily Specials">Daily Specials</option>
-                    <option value="Main">Main</option>
-                    <option value="Desserts">Desserts</option>
-                    <option value="Drinks">Drinks</option>
-                @if ($errors->has('category'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('category') }}</strong>
-                    </span>
-                @endif
-                </select>
-            </div>
-        </div>
-
-        {{--  CATEGORY --}}
         <div class="form-group{{ $errors->has('category_id') ? ' has-error' : '' }}">
-            <label for="category_id" class="col-md-4 control-label">Category(test)</label>
+            <label for="category_id" class="col-md-4 control-label">Category</label>
             <div class="col-md-6">
                 <select id="category_id" class="form-control" name="category_id" value="{{ old('category_id') }}" autofocus required>
                     <option value="8">Please pick one</option>

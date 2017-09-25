@@ -15,8 +15,7 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedInteger('user_id')->unique();
             $table->string('name')->required();
             $table->string('last_name')->required();
             $table->string('address')->required();
@@ -27,6 +26,8 @@ class CreateOrdersTable extends Migration
             $table->string('items')->required();
             $table->decimal('price', 10, 2)->required();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

@@ -15,7 +15,7 @@ class CreateHideablesTable extends Migration
     {
         Schema::create('hideables', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('order_id')->unsigned();
+            $table->unsignedInteger('order_id')->unique();
             $table->timestamps();
         });
     }

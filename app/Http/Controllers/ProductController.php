@@ -54,7 +54,7 @@ class ProductController extends Controller
     {
         return $this->validate($request,[
             'name' => 'required',
-            'category' => 'required',
+            'category' => 'nullable',
             'option_group_id' => 'required',
             'category_id' => 'required',
             'slug' => 'required',
@@ -74,7 +74,7 @@ class ProductController extends Controller
 
             $product = Product::create([
                 'name' => request('name'),
-                'category' => request('category'),
+                // 'category' => request('category'),
                 'option_group_id' => request('option_group_id'),
                 'category_id' => request('category_id'),
                 'slug' => request('slug'),
