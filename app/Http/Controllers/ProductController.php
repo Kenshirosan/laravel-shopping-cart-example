@@ -46,7 +46,7 @@ class ProductController extends Controller
          catch (\Exception $e) {
             return back()->with(['error_message' => $e->getMessage() ]);
         }
-        return back()->with('success_message', 'Product successfully added !');
+        return redirect('/restaurantpanel')->with('success_message', 'Product successfully added !');
     }
 
 
