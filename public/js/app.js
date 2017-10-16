@@ -2101,8 +2101,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             quantity: 1,
             name: this.product.name,
             price: this.product.price,
-            options: '',
-            default: ''
+            options: ''
         };
     },
 
@@ -2140,11 +2139,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 var select = document.getElementsByClassName('options');
                 var i = 0;
                 while (i < select.length) {
-                    var option = select[i].options.selectedIndex = 0;
+                    var option = select.options.selectedIndex = 0;
                     $(option).trigger('click');
                     i++;
+                    this.options = this.newData;
                 }
-            }, 500)).then(this.$emit('update'));
+            }, 500));
         },
         resetForm: function resetForm() {
             var select = document.getElementsByClassName('options');
@@ -4621,7 +4621,7 @@ exports.push([module.i, "\n.alert-flash {\n    position: fixed;\n    right: 25px
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(8)();
-exports.push([module.i, "\n.option{\n    color: orangered;\n}\n.reset {\n    color: red;\n}\n", ""]);
+exports.push([module.i, "\n.option{\n    color: orangered;\n}\n.reset {\n    color: red;\n}\n\n\n", ""]);
 
 /***/ }),
 /* 38 */

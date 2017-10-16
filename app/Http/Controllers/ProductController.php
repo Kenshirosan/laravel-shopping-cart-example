@@ -74,7 +74,6 @@ class ProductController extends Controller
 
             $product = Product::create([
                 'name' => request('name'),
-                // 'category' => request('category'),
                 'option_group_id' => request('option_group_id'),
                 'category_id' => request('category_id'),
                 'slug' => request('slug'),

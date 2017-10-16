@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use App\User;
-use App\Product;
 use App\Photo;
+use App\Product;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -48,7 +48,7 @@ class CreateProductsTest extends TestCase
     /** @test */
     function admin_may_add_a_product()
     {
-        $product = ['name' => 'toto', 'category' => 'Appetizers', 'slug' => 'toto', 'price' => 1900,
+        $product = ['name' => 'toto', 'option_group_id' => 999, 'category_id'=> 999, 'category' => 'Appetizers', 'slug' => 'toto', 'price' => 1900,
             'description' => 'description', 'image' => 'image.jpg'];
 
         $this->withExceptionHandling();

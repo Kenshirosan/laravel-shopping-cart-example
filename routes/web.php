@@ -42,7 +42,7 @@ Route::get('add-option-group', 'OptionGroupController@index');
 Route::get('add-options', 'OptionsController@index');
 Route::post('add-option-group', 'OptionGroupController@store');
 Route::post('add-options', 'OptionsController@store');
-Route::get('add-category', 'CategoriesController@index');
+Route::get('add-category', 'CategoriesController@create');
 Route::post('add-category', 'CategoriesController@store');
 Route::get('/edit-css', 'CssController@index');
 Route::post('/edit-css', 'CssController@update');

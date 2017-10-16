@@ -43,8 +43,9 @@ $factory->define(App\Product::class, function (Faker\Generator $faker) {
     $price = $faker->numberBetween($min = 2500, $max = 35000);
     return [
         'name' => $faker->name,
-        'category' => $faker->name,
-        'product_type' => 'steak',
+        'option_group_id' => 999,
+        'category_id' => 999,
+        'category' => 'Appetizers',
         'slug' => $faker->name,
         'description' => $faker->text,
         'price' => $price,

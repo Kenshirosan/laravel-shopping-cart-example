@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class CategoriesController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,12 +21,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        if( ! Auth::user()->isAdmin() ) {
-            return redirect('/')->with('error_message', '404 Page not found');
-        }
-        $categories = Category::all();
 
-        return view('layouts.categories', compact('categories'));
     }
 
     /**
@@ -31,7 +31,12 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        //
+        if( ! Auth::user()->isAdmin() ) {
+            return redirect('/')->with('error_message', '404 Page not found');
+        }
+        $categories = Category::all();
+
+        return view('layouts.categories', compact('categories'));
     }
 
     /**

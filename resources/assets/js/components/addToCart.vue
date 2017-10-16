@@ -12,8 +12,7 @@
                 quantity: 1,
                 name: this.product.name,
                 price: this.product.price,
-                options: '',
-                default: ''
+                options: ''
             }
         },
 
@@ -52,13 +51,13 @@
                             let select = document.getElementsByClassName('options');
                             let i = 0;
                             while ( i < select.length) {
-                                let option = select[i].options.selectedIndex = 0;
+                                let option = select.options.selectedIndex = 0;
                                 $(option).trigger('click')
                                 i++;
+                            this.options = this.newData;
                             }
                         }, 500)
                     )
-                    .then(this.$emit('update'))
                 },
 
             resetForm() {
@@ -77,11 +76,15 @@
         }
     }
 </script>
+
+
 <style>
-    .option{
-        color: orangered;
-    }
-    .reset {
-        color: red;
-    }
+.option{
+    color: orangered;
+}
+.reset {
+    color: red;
+}
+
+
 </style>

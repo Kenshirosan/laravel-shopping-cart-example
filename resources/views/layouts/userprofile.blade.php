@@ -22,7 +22,7 @@
                                     <h4>All fields are mandatory</h4>
                                 </div>
                             </div>
-                            {{-- <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}"> --}}
+
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                 <div class="col-md-12">
                                     <strong>First Name:</strong>
