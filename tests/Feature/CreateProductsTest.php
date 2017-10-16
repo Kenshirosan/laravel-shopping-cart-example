@@ -2,9 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\User;
-use App\Photo;
-use App\Product;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -14,11 +11,6 @@ class CreateProductsTest extends TestCase
     use DatabaseMigrations;
 
 
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
     /** @test */
     public function guests_may_not_add_products()
     {
@@ -48,7 +40,7 @@ class CreateProductsTest extends TestCase
     /** @test */
     function admin_may_add_a_product()
     {
-        $product = ['name' => 'toto', 'option_group_id' => 999, 'category_id'=> 999, 'category' => 'Appetizers', 'slug' => 'toto', 'price' => 1900,
+        $product = ['name' => 'toto', 'option_group_id' => '1', 'category_id' => '2', 'slug' => 'toto', 'price' => 1900,
             'description' => 'description', 'image' => 'image.jpg'];
 
         $this->withExceptionHandling();
@@ -57,9 +49,8 @@ class CreateProductsTest extends TestCase
             'theboss' => 1,
             'employee' => 1
         ]);
-
-        $this->actingAs($user);
-        $this->post('/insertproduct/', $product)
+        $this->be($user);
+        $this->post('/insertproduct', $product)
             // ->assertRedirect('/restaurantpanel')
             ->assertSessionHas('success_message');
     }
@@ -67,7 +58,7 @@ class CreateProductsTest extends TestCase
     /** @test */
     function guests_may_not_add_photos_to_products()
     {
-        $product = ['name' => 'toto', 'category' => 'Appetizers', 'slug' => 'toto-toto', 'price' => 1900,
+        $product = ['name' => 'toto', 'option_group_id' => '1', 'category_id' => '2', 'slug' => 'toto', 'price' => 1900,
             'description' => 'description', 'image' => 'image.jpg'];
 
         $this->withExceptionHandling();
@@ -81,7 +72,7 @@ class CreateProductsTest extends TestCase
      /** @test */
     function any_auth_users_may_not_add_photos_to_products()
     {
-        $product = ['name' => 'toto', 'category' => 'Appetizers', 'slug' => 'toto-toto', 'price' => 1900,
+        $product = ['name' => 'toto', 'option_group_id' => '1', 'category_id' => '2', 'slug' => 'toto', 'price' => 1900,
             'description' => 'description', 'image' => 'image.jpg'];
 
         $this->signIn();
@@ -95,7 +86,7 @@ class CreateProductsTest extends TestCase
       /** @test */
     // function admin_may_add_photos_to_products()
     // {
-    //     $product = ['name' => 'toto', 'category' => 'Appetizers', 'slug' => 'toto-toto', 'price' => 1900,
+    //     $product = ['name' => 'toto', 'option_group_id' => '1', 'category_id' => '2', 'slug' => 'toto', 'price' => 1900,
     //         'description' => 'description', 'image' => 'image.jpg'];
 
     //    $user = factory('App\User')->make([
@@ -106,15 +97,18 @@ class CreateProductsTest extends TestCase
     //     $this->be($user);
     //     $this->withExceptionHandling();
 
-    //     $photo = ['photos' => '~/Pictures/toto.jpg'];
+    //     $photo = ['photos' => 'toto.jpg'];
     //     $this->post('/insertproduct/', $product);
-    //     $this->post("/shop/{$product['slug']}/photo", $photo)
+    //     $this->post("/shop/{{$product['slug']}}/photo", $photo)
     //         ->assertRedirect('/shop');
     // }
 
     /** @test */
     function guests_may_not_delete_a_product()
     {
+        $product = ['name' => 'toto', 'option_group_id' => '1', 'category_id' => '2', 'slug' => 'toto', 'price' => 1900,
+            'description' => 'description', 'image' => 'image.jpg'];
+
         $this->withExceptionHandling();
 
         $this->get('/delete/{{$product->slug}}')
@@ -124,51 +118,13 @@ class CreateProductsTest extends TestCase
     /** @test */
     function an_auth_user_may_not_delete_products()
     {
+        $product = ['name' => 'toto', 'option_group_id' => '1', 'category_id' => '2', 'slug' => 'toto', 'price' => 1900,
+            'description' => 'description', 'image' => 'image.jpg'];
+
         $this->signIn();
 
         $this->get('/delete/{{$product->slug}}')
             ->assertRedirect('/shop')
             ->assertSessionHas('error_message');
-    }
-
-    /** @test */
-    function auth_user_may_not_hide_an_order()
-    {
-        $this->signIn();
-        $this->withExceptionHandling();
-
-        $this->post('/hide-order')
-            ->assertStatus(404);
-    }
-
-    /** @test */
-    function auth_user_may_not_show_an_order()
-    {
-        $this->signIn();
-        $this->withExceptionHandling();
-
-        $this->post('/show-order')
-            ->assertStatus(404);
-    }
-
-    /** @test */
-    function admin_may_hide_and_show_an_order()
-    {
-        $order = create('App\Order', ['user_id' => 1]);
-
-        $this->withExceptionHandling();
-
-        $user = factory('App\User')->make([
-            'theboss' => 1,
-            'employee' => 1
-        ]);
-
-        $this->be($user);
-
-        $this->post('/hide-orders/'. $order->id, $order->toArray())
-            ->assertSessionHas('success_message');
-
-        $this->post('/show-order/'. $order->id, $order->toArray())
-            ->assertSessionHas('success_message');
     }
 }
