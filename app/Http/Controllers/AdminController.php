@@ -20,7 +20,7 @@ class AdminController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('admin');
     }
 
     /**
@@ -31,10 +31,6 @@ class AdminController extends Controller
 
     public function index()
     {
-        if(!Auth::user()->isAdmin()){
-            return redirect('/shop');
-        }
-
         $categories = Category::all();
         $options = Option::all();
         $optionGroups = OptionGroup::all();
@@ -51,10 +47,6 @@ class AdminController extends Controller
 
     public function show()
     {
-        if(!Auth::user()->isAdmin()){
-            return redirect('/shop');
-        }
-
         $yearlyTotal = Order::selectRaw('year(created_at) year, sum(price) total')
                             ->groupBy('year')
                             ->orderBy('year', 'desc')

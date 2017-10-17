@@ -12,25 +12,17 @@ class SearchController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('admin');
     }
 
     public function index()
     {
-        if (!Auth::user()->isAdmin()) {
-            return redirect('shop')->with(['error_message' => 'You\'re not allowed !']);
-        }
-
         return view('layouts.search');
     }
 
 
     public function show(Request $request)
     {
-        if (!Auth::user()->isAdmin()) {
-            return redirect('shop')->with(['error_message' => 'You\'re not allowed !']);
-        }
-
         $search = $request->id;
 
         if (is_null($search)) {

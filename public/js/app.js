@@ -1129,8 +1129,8 @@ var app = new Vue({
 
   data: {
     showModal: false,
-    selected: '',
-    originalData: ''
+    selected: ''
+    // originalData: '',
   }
 });
 
@@ -2108,7 +2108,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     watch: {
         selected: function selected() {
-            return this.options = this.originalData;
+            return this.options = this.selected;
         },
         update: function update() {
             return this.options = this.newData;
@@ -2142,18 +2142,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     var option = select.options.selectedIndex = 0;
                     $(option).trigger('click');
                     i++;
-                    this.options = this.newData;
                 }
             }, 500));
-        },
-        resetForm: function resetForm() {
-            var select = document.getElementsByClassName('options');
-            var i = 0;
-            while (i < select.length) {
-                var option = select[i].options.selectedIndex = 0;
-                i++;
-                this.options = this.option;
-            }
         },
         remove: function remove() {
             axios.delete('/cart/', this.$data).then(flash(this.product.name + 'removed !'));
@@ -4621,7 +4611,7 @@ exports.push([module.i, "\n.alert-flash {\n    position: fixed;\n    right: 25px
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(8)();
-exports.push([module.i, "\n.option{\n    color: orangered;\n}\n.reset {\n    color: red;\n}\n\n\n", ""]);
+exports.push([module.i, "\n.option{\n    color: orangered;\n}\n.reset {\n    color: red;\n}\n", ""]);
 
 /***/ }),
 /* 38 */

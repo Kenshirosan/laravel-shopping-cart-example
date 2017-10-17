@@ -21,25 +21,25 @@ class RoutesTest extends TestCase
         $this->withExceptionHandling();
 
         $this->get('/restaurantpanel')
-            ->assertRedirect('/login');
+            ->assertRedirect('/shop');
 
         $this->get('/panel')
-            ->assertRedirect('/login');
+            ->assertRedirect('/shop');
 
         $this->get('/search-orders')
-            ->assertRedirect('/login');
+            ->assertRedirect('/shop');
 
-        $this->get('/livesearch')
-            ->assertRedirect('/login');
+        // $this->get('/livesearch')
+        //     ->assertRedirect('/login');
 
-        $this->get('/customer-orders')
-            ->assertRedirect('/login');
+        // $this->get('/customer-orders')
+        //     ->assertRedirect('/login');
 
-        $this->get('/order/{id}')
-            ->assertRedirect('/login');
+        // $this->get('/order/{id}')
+        //     ->assertRedirect('/login');
 
-        $this->get('/print/{id}')
-            ->assertRedirect('/login');
+        // $this->get('/print/{id}')
+        //     ->assertRedirect('/login');
     }
 
     /** @test */

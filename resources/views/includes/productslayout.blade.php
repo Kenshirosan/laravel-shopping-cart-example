@@ -35,11 +35,11 @@
             @endforeach
             </select>
         @endif
-            <addToCart :product="{{ $product }}" :selected="selected"></addToCart>
+            {{-- <addToCart :product="{{ $product }}" :selected="selected"></addToCart> --}}
 
-        <noscript>
+        {{-- <noscript> --}}
             <input type="submit"  value="Add To Cart" class="btn btn-success">
-        </noscript>
+        {{-- </noscript> --}}
     </form>
 
     <div class="spacer"></div>

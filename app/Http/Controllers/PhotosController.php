@@ -13,7 +13,7 @@ class PhotosController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('admin');
     }
 
      /**
@@ -24,11 +24,6 @@ class PhotosController extends Controller
     */
     public function store($slug, Request $request)
     {
-        // only the boss and employees can add photos
-        if (!Auth::user()->isAdmin() && !Auth::user()->isEmployee()) {
-            return redirect('/shop')->with(['error' => 'Thanks for playing']);
-        }
-
         $product = Product::where('slug', $slug)->firstOrFail();
 
         $this->validate($request, [

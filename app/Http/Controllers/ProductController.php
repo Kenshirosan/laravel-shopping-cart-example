@@ -17,7 +17,7 @@ class ProductController extends Controller
 
     public function __construct()
     {
-        return $this->middleware('auth');
+        return $this->middleware('admin');
     }
 
     /**
@@ -28,11 +28,6 @@ class ProductController extends Controller
     */
     public function store(Request $request)
     {
-        // dd($request->all());
-        if ( ! Auth::user()->isAdmin()) {
-            return redirect('/shop')->with(['error_message' => 'Page not found']);
-        }
-
         try{
         $this->validateRequest($request);
         }
@@ -92,10 +87,6 @@ class ProductController extends Controller
     */
     public function delete($product)
     {
-        if (!Auth::user()->isAdmin()) {
-            return redirect('/shop')->with(['error_message' => 'Thanks for playing !']);
-        }
-
         $product = Product::where('slug', $product)->firstOrFail();
 
         $product->delete();

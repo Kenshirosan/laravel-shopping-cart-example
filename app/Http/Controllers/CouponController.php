@@ -14,15 +14,13 @@ class CouponController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('admin');
     }
 
     public function index()
     {
-        if(! Auth::user()->isAdmin()){
-            return redirect('/')->with('error_message', '404 Page not found');
-        }
         $coupons = Promocode::all();
+
         return view('layouts.createCoupon', compact('coupons'));
     }
 

@@ -11,15 +11,11 @@ class CssController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('admin');
     }
 
     public function index()
     {
-        if ( ! Auth::user()->isAdmin() ) {
-            return redirect('/shop')->with('error_message', 'Page not found');
-        }
-
         $url = '/home/laurent/public_html/webcreation/public/css/custom.css';
 
         return view('layouts.css', compact('url'));
@@ -28,10 +24,6 @@ class CssController extends Controller
 
     public function update(Request $request)
     {
-        if ( ! Auth::user()->isAdmin() ) {
-            return redirect('/')->with('error_message', 'Page not found');
-        }
-
         $this->validate($request, ['custom-css' => 'nullable']);
         $content = request('custom-css');
         $url = '/home/laurent/public_html/webcreation/public/css/custom.css';

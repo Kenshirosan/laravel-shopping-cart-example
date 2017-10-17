@@ -12,15 +12,11 @@ class BestCustomerController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('admin');
     }
 
     public function index()
     {
-        if(!Auth::user()->isAdmin()){
-            return redirect('/shop');
-        }
-
         $users = User::all()->count();
 
         $bestCustomers = Order::selectRaw('year(created_at) year, sum(price) total,user_id, name, last_name, email')

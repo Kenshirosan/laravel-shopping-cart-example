@@ -17,10 +17,10 @@ class CreateProductsTest extends TestCase
         $this->withExceptionHandling();
 
         $this->post('/insertproduct')
-            ->assertRedirect('/login');
+            ->assertRedirect('/shop');
 
         $this->post('/shop/{slug}/photo')
-            ->assertRedirect('/login');
+            ->assertRedirect('/shop');
     }
 
     /** @test */
@@ -66,7 +66,7 @@ class CreateProductsTest extends TestCase
         $photo = ['photos' => 'toto.jpg'];
 
         $this->post("/shop/{$product['slug']}/photo", $photo)
-            ->assertRedirect('/login');
+            ->assertRedirect('/shop');
     }
 
      /** @test */
@@ -112,7 +112,7 @@ class CreateProductsTest extends TestCase
         $this->withExceptionHandling();
 
         $this->get('/delete/{{$product->slug}}')
-            ->assertRedirect('/login');
+            ->assertRedirect('/shop');
     }
 
     /** @test */

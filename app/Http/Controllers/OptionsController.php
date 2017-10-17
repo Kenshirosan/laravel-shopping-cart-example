@@ -13,24 +13,18 @@ class OptionsController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('admin');
     }
 
     public function index()
     {
-        if( ! Auth::user()->isAdmin()){
-            return view('layouts.shop')->with('error_message', 'Page not found');
-        }
         $optionGroups = OptionGroup::all();
+
         return view('layouts.addOptions', compact('optionGroups'));
     }
 
     public function store(Request $request)
     {
-        if( ! Auth::user()->isAdmin()){
-            return view('layouts.shop')->with('error_message', 'Page not found');
-        }
-
         try {
             $this->validate($request, [
                 'name' => 'required',

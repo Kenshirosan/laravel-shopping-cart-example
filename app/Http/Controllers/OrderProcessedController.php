@@ -15,15 +15,11 @@ class OrderProcessedController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('admin');
     }
 
      public function show(Request $request, $order)
     {
-        if (! Auth::user()->isAdmin() || ! Auth::user()->isEmployee() ) {
-            return response()->json(['error' => 'Page not found'], 404);
-        }
-
         $this->validate($request, [
             'id' => 'required'
         ]);
@@ -36,10 +32,6 @@ class OrderProcessedController extends Controller
 
     public function destroy(Request $request, $order)
     {
-        if (! Auth::user()->isAdmin() || ! Auth::user()->isEmployee() ) {
-            return response()->json(['error' => 'Page not found !'], 404);
-        }
-
         $order = Order::where('id', $request->id)->firstOrFail();
 
         if($order->isHidden()){

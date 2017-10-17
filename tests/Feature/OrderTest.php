@@ -14,12 +14,24 @@ class OrderTest extends TestCase
     /** @test */
     function auth_user_may_not_show_an_order()
     {
-    	$order = create('App\Order', ['user_id' => 1]);
+    	$order = create('App\Order', ['user_id' => 2]);
 
         $this->signIn();
         $this->withExceptionHandling();
 
         $this->post('/show-order/'. $order->id, $order->toArray())
+            ->assertRedirect('/shop')
+            ->assertSessionHas('error_message');
+    }
+
+    /** @test */
+    function auth_user_may_not_hide_an_order()
+    {
+        $order = create('App\Order', ['user_id' => 2]);
+
+        $this->signIn();
+        $this->withExceptionHandling();
+        $this->post('/hide-order/'. $order->id, $order->toArray())
             ->assertStatus(404);
     }
 
@@ -42,17 +54,5 @@ class OrderTest extends TestCase
 
         $this->post('/show-order/'. $order->id, $order->toArray())
             ->assertSessionHas('success_message');
-    }
-
-    /** @test */
-    function auth_user_may_not_hide_an_order()
-    {
-    	$order = create('App\Order', ['user_id' => 1]);
-
-        $this->signIn();
-        $this->withExceptionHandling();
-
-        $this->post('/hide-order/'. $order->id, $order->toArray())
-            ->assertStatus(404);
     }
 }
