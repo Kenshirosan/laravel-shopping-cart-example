@@ -34,7 +34,7 @@ composer install
 ```
 mv .env.example .env && vim .env
 ```
-update database info and stripe key
+update database info, stripe key, and mail driver
 ```
 php artisan key:generate
 ```
