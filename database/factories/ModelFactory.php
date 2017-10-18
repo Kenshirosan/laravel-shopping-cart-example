@@ -59,11 +59,11 @@ $factory->define(App\Order::class, function ($faker) {
     $zipcode = 10001;
     $name = $faker->name;
     $email = $faker->unique()->safeEmail;
-    // $price = 14;
     $price = $faker->numberBetween($min = 2500, $max = 35000);
     $phone = $faker->phoneNumber;
 
     return [
+        'id' => 999,
         'user_id' => $faker->numberBetween($min = 2, $max = 100),
         'name' => $faker->name,
         'last_name' => $faker->name,

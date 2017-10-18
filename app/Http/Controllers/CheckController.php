@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use DB;
 use App\User;
 use App\Order;
-use App\Hideable;
 use Carbon\Carbon;
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -21,7 +20,7 @@ class CheckController extends Controller
     */
     public function __construct()
     {
-        $this->middleware('admin');
+        $this->middleware('employee');
     }
 
     /**
@@ -52,10 +51,15 @@ class CheckController extends Controller
         return view('pdf.print', compact('order', 'items'));
     }
 
-
+    /**
+    * create a pdf of orders
+    *
+    * @param $id
+    * @return DOMpdf instance
+    **/
     public function create($id)
     {
-        $order = Order::find($id);
+        $order = Order::findOrFail($id);
 
         $items = explode(':', $order->items);
         $items = preg_replace('/[]["]/ ', '', $items);

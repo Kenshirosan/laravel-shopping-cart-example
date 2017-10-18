@@ -15,7 +15,7 @@ class OrderProcessedController extends Controller
 
     public function __construct()
     {
-        $this->middleware('admin');
+        $this->middleware('employee');
     }
 
      public function show(Request $request, $order)

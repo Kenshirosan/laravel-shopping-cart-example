@@ -51,7 +51,6 @@ class CreateProductsTest extends TestCase
         ]);
         $this->be($user);
         $this->post('/insertproduct', $product)
-            // ->assertRedirect('/restaurantpanel')
             ->assertSessionHas('success_message');
     }
 
@@ -116,7 +115,7 @@ class CreateProductsTest extends TestCase
     }
 
     /** @test */
-    function an_auth_user_may_not_delete_products()
+    function auth_users_may_not_delete_products()
     {
         $product = ['name' => 'toto', 'option_group_id' => '1', 'category_id' => '2', 'slug' => 'toto', 'price' => 1900,
             'description' => 'description', 'image' => 'image.jpg'];
