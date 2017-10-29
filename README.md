@@ -20,6 +20,7 @@ Features :
 * product options
 * coupons / promotion codes
 * backend with adminLTE
+* user must confirm their email
 
 download or clone then
 ```
