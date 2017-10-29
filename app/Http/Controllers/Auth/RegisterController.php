@@ -79,7 +79,7 @@ class RegisterController extends Controller
             'address2' => $data['address2'],
             'zipcode' => $data['zipcode'],
             'phone_number' => $data['phone_number'],
-            'confirmation_token' => str_limit(md5($data['email'] . str_random()), 25, '')
+            'confirmation_token' => str_limit($data['email'] . hash('sha256', $data['email'] . str_random()), 100)
         ]);
 
         $email = $data['email'];

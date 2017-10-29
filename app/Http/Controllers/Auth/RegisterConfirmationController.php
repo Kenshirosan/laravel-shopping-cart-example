@@ -13,7 +13,7 @@ class RegisterConfirmationController extends Controller
     {
         $user = User::where('confirmation_token', request('token'))->first();
         if(! $user) {
-            return redirect(route('shop'))->with('error_message', 'Something wrong happened');
+            return redirect('/shop')->with('error_message', 'Something wrong happened');
         }
 
         $user->confirm();
