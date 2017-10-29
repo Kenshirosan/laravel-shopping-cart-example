@@ -3,7 +3,6 @@
 namespace App\Listeners;
 
 use App\User;
-use App\Mail\Thankyou;
 use App\Events\UserOrdered;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Queue\InteractsWithQueue;

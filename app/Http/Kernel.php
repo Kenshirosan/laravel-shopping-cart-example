@@ -59,5 +59,6 @@ class Kernel extends HttpKernel
 
         'admin' => \App\Http\Middleware\Admin::class,
         'employee' => \App\Http\Middleware\Employee::class,
+        'must-be-confirmed' => \App\Http\Middleware\RedirectIfEmailNotConfirmed::class,
     ];
 }

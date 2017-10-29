@@ -1,16 +1,12 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>Welcome !</title>
-    </head>
-    <style>
-         /*Style this however you want*/
-    </style>
-    <body>
+@component('mail::message')
+# One Last Step
 
-        <h1>Thanks for signing up, {{ $user->name }}!</h1>
-        <h2>You can now order for delivery !</h2>
-        <p>As a reminder, we do  not store your credit card info on our server, our payment provider handles all the encryption and is fully PCI compliant.</p>
-    </body>
-</html>
+We just need you to confirm your email address to prove that you're a human.
+
+@component('mail::button', ['url' => 'http://127.0.0.1:8000/register/confirm?token=' . $user->confirmation_token])
+Confirm Email
+@endcomponent
+
+Thanks,<br>
+{{ config('app.name') }}
+@endcomponent

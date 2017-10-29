@@ -13,7 +13,9 @@
 
 Route::get('/', function () {
     return redirect('shop');
-});
+})->name('shop');
+
+Route::get('/register/confirm', 'Auth\RegisterConfirmationController@index')->name('register.confirm');
 
 Auth::routes();
 // EDIT/DELETE USER PROFILE
@@ -59,7 +61,7 @@ Route::post('/hide-orders/{order}', 'OrderProcessedController@destroy');
 Route::post('/shop/{slug}/{photo}','PhotosController@store');
 
 //CHECKOUT AND CART ROUTES
-Route::get('/checkout', 'PaymentController@index');
+Route::get('/checkout', 'PaymentController@index')->middleware('must-be-confirmed');
 Route::post('/order', 'PaymentController@store');
 Route::get('/thankyou', 'PaymentController@thankyou');
 Route::post('apply-coupon', 'CouponController@update');

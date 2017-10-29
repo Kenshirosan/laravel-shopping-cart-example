@@ -2,12 +2,12 @@
 
 namespace App\Mail;
 
+use App\User;
+use App\Events\UserRegistered;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use App\Mail\Welcome;
-use App\User;
 
 class Welcome extends Mailable
 {
@@ -31,6 +31,6 @@ class Welcome extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.welcome');
+        return $this->markdown('mail.welcome');
     }
 }

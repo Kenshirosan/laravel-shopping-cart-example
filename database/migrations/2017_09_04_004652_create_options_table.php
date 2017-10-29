@@ -19,7 +19,7 @@ class CreateOptionsTable extends Migration
             $table->string('name', 30)->unique();
             $table->timestamps();
 
-            // $table->foreign('option_group_id')->references('id')->on('option_groups');
+            $table->foreign('option_group_id')->references('id')->on('option_groups')->onDelete('cascade');
         });
     }
 

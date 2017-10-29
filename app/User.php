@@ -18,10 +18,11 @@ class User extends Authenticatable
     protected $casts = [
         'theboss' => 'boolean',
         'employee' => 'boolean',
+        'confirmed' => 'boolean'
     ];
 
     protected $fillable = [
-        'name','last_name', 'password', 'address','address2', 'zipcode', 'phone_number', 'email'
+        'name','last_name', 'password', 'address','address2', 'zipcode', 'phone_number', 'email', 'confirmation_token'
     ];
 
     /**
@@ -41,6 +42,14 @@ class User extends Authenticatable
     public function isEmployee()
     {
         return $this->employee;
+    }
+
+    public function confirm()
+    {
+        $this->confirmed = true;
+        $this->confirmation_token = null;
+
+        $this->save();
     }
 
     public function orders()

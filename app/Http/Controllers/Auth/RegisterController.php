@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Mail\Welcome;
+use App\Events\UserRegistered;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -57,7 +58,7 @@ class RegisterController extends Controller
             'address' => 'required',
             'address2' => 'nullable',
             'zipcode' => 'required',
-            'phone_number' => 'required',
+            'phone_number' => 'required|numeric|min:10',
         ]);
     }
 
@@ -69,8 +70,7 @@ class RegisterController extends Controller
     */
     protected function create(array $data)
     {
-
-         $user = User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
@@ -79,10 +79,13 @@ class RegisterController extends Controller
             'address2' => $data['address2'],
             'zipcode' => $data['zipcode'],
             'phone_number' => $data['phone_number'],
+            'confirmation_token' => str_limit(md5($data['email'] . str_random()), 25, '')
         ]);
-        
+
         $email = $data['email'];
         $user = User::where('email', $email)->firstOrFail();
+        // $event = event(new UserRegistered($user)); working but unecessary ?
+
         \Mail::to($data['email'])->send(new Welcome($user));
         return $user;
     }

@@ -49,7 +49,6 @@ class ProductController extends Controller
     {
         return $this->validate($request,[
             'name' => 'required',
-            'category' => 'nullable',
             'option_group_id' => 'required',
             'category_id' => 'required',
             'slug' => 'required',
