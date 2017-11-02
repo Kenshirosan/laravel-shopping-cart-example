@@ -14,9 +14,10 @@ class OrderTest extends TestCase
     /** @test */
     function auth_user_may_not_show_an_order()
     {
-    	$order = create('App\Order', ['user_id' => 2]);
+        $user = create('App\User');
+        $this->signIn($user);
+    	$order = create('App\Order', ['id' => 100, 'user_id' => $user->id]);
 
-        $this->signIn();
         $this->withExceptionHandling();
 
         $this->post('/show-order/'. $order->id, $order->toArray())

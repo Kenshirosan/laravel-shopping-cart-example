@@ -15,14 +15,14 @@ Route::get('/', function () {
     return redirect('shop');
 })->name('shop');
 
+Auth::routes();
 Route::get('/register/confirm', 'Auth\RegisterConfirmationController@index')->name('register.confirm');
 
-Auth::routes();
 // EDIT/DELETE USER PROFILE
-Route::get('/edit-profile', 'UserController@index');
-Route::post('/edit-profile/{user_id}', 'UserController@edit');
-Route::get('/erase/{user_id}', 'UserController@show');
-Route::post('/erase/{account}', 'UserController@destroy');
+Route::get('/edit-profile', 'UserController@index')->middleware('must-be-confirmed');
+Route::post('/edit-profile/{user_id}', 'UserController@edit')->middleware('must-be-confirmed');
+Route::get('/erase/{user_id}', 'UserController@show')->middleware('must-be-confirmed');
+Route::post('/erase/{account}', 'UserController@destroy')->middleware('must-be-confirmed');
 
 Route::resource('shop', 'ShopController', ['only' => ['index', 'show']]);
 Route::resource('cart', 'CartController');
@@ -62,9 +62,9 @@ Route::post('/shop/{slug}/{photo}','PhotosController@store');
 
 //CHECKOUT AND CART ROUTES
 Route::get('/checkout', 'PaymentController@index')->middleware('must-be-confirmed');
-Route::post('/order', 'PaymentController@store');
+Route::post('/order', 'PaymentController@store')->middleware('must-be-confirmed');
 Route::get('/thankyou', 'PaymentController@thankyou');
-Route::post('apply-coupon', 'CouponController@update');
+Route::post('apply-coupon', 'CouponController@update')->middleware('must-be-confirmed');
 
 // WISHLIST ROUTES(took it away from views.. commented out the html in templates)
 // Route::post('switchToWishlist/{id}', 'CartController@switchToWishlist');

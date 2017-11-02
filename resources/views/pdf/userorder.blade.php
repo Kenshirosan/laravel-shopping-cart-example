@@ -7,7 +7,8 @@
 @endsection
 
 @section('content')
-<div class="col-md-6">
+<div class="col-md-6 col-md-offset-3">
+    @include('messages.messages')
     @if ( Auth::user()->isAdmin() || Auth::user()->isEmployee())
         <h4 class="text-center">Today's Order</h4>
         <ul class=list-group>

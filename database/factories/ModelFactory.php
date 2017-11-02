@@ -36,6 +36,8 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'theboss' => 0,
         'remember_token' => str_random(10),
         'phone_number' => $faker->phoneNumber,
+        'confirmed' => true,
+        'confirmation_token' => null
     ];
 });
 

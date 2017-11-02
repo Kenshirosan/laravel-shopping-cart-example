@@ -17,7 +17,7 @@ class BestCustomerController extends Controller
 
     public function index()
     {
-        $users = User::all()->count();
+        $user_count = User::all()->count();
 
         $bestCustomers = Order::selectRaw('year(created_at) year, sum(price) total,user_id, name, last_name, email')
                             ->whereRaw('year(created_at) = year(curdate())')
@@ -25,6 +25,6 @@ class BestCustomerController extends Controller
                             ->orderBy('total', 'desc')
                             ->get();
 
-        return view('admin.bestcustomers', compact('users', 'bestCustomers'));
+        return view('admin.bestcustomers', compact('user_count', 'bestCustomers'));
     }
 }

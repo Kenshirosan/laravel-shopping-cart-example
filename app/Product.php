@@ -31,7 +31,7 @@ class Product extends Model
 
     public function options()
     {
-        return $this->group->options();
+        return $this->group->options;
     }
 
     public function group()

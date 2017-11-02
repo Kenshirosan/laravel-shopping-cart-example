@@ -43,9 +43,7 @@
     @if(!$coupons->isEmpty())
         <h1>Valid Coupons :</h1>
         @foreach($coupons as $coupon)
-            @if(\Promocodes::check($coupon->code))
-                <p class="col-md-4">{{ $coupon->code }} : <span class="text-info">{{ $coupon->reward }}% </span></p>
-            @endif
+            <p class="col-md-4">{{ $coupon->code }} : <span class="text-info">{{ $coupon->reward }}% </span></p>
         @endforeach
     @else
         <h1>No coupons created</h1>

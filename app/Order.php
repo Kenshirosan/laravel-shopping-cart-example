@@ -2,10 +2,6 @@
 
 namespace App;
 
-use App\User;
-use App\Hideable;
-use \Cart as Cart;
-use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 
@@ -30,13 +26,6 @@ class Order extends Model
         return Hideable::where('order_id', request('id'))->count();
     }
 
-    public function numberOfOrdersToday()
-    {
-        $when = 'created_at';
-        $today =  date('Y-m-d');
-
-        return Hideable::whereDate($when, $today)->count();
-    }
 
     public function isHiddenOrder()
     {
@@ -48,5 +37,13 @@ class Order extends Model
         $attributes = ['order_id' => $this->id];
 
         return $this->isHiddenOrder()->where($attributes)->exists();
+    }
+
+    public function numberOfOrdersToday()
+    {
+        $when = 'created_at';
+        $today =  date('Y-m-d');
+
+        return Hideable::whereDate($when, $today)->count();
     }
 }

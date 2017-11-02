@@ -19,7 +19,7 @@ class CouponController extends Controller
 
     public function index()
     {
-        $coupons = Promocode::all();
+        $coupons = Promocode::where('expires_at', null)->get();
 
         return view('layouts.createCoupon', compact('coupons'));
     }

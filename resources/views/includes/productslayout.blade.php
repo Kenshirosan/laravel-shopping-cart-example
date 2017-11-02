@@ -1,4 +1,3 @@
-
 <div class="col-md-3">
     <div class="thumbnail">
         <div class="caption text-center">
@@ -27,10 +26,10 @@
         <input type="hidden" name="name"  value="{{ $product->name }}">
         <input type="hidden" name="price"  value="{{ $product->price }}">
 
-        @if( ! $product->group->options->isEmpty() )
+        @if( ! $product->options()->isEmpty() )
              <select name="options" class="options minimal" v-model="selected" autofocus required>
                 <option value="" class="reset">Choose</option>
-            @foreach($product->group->options as $option)
+            @foreach($product->options() as $option)
                 <option class="option" value="{{ $option->name }}">{{ $option->name }}</option>
             @endforeach
             </select>
