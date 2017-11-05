@@ -239,7 +239,6 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Promocodes' => Gabievi\Promocodes\Facades\Promocodes::class,
-
     ],
 
 ];

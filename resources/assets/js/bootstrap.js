@@ -1,4 +1,3 @@
-
 window._ = require('lodash');
 
 /**
@@ -11,7 +10,9 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap-sass');
-} catch (e) {}
+} catch (e) {
+    // console.log(e);
+}
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -51,6 +52,9 @@ if (token) {
 //     broadcaster: 'pusher',
 //     key: 'your-pusher-key'
 // });
+
+window.moment = require('moment');
+
 
 window.Vue = require('vue');
 window.events = new Vue();

@@ -31,6 +31,8 @@ Route::delete('emptyCart', 'CartController@emptyCart');
 //daily_specials
 
 //ADMIN AND EMPLOYEE ROUTES
+Route::get('/calendar', 'CalendarController@index');
+Route::get('/things-to-do', 'CalendarController@index');
 Route::get('/restaurantpanel', 'AdminController@index');
 Route::get('/best-customers', 'BestCustomerController@index');
 Route::get('/delete/{slug}', 'ProductController@delete')->name('/delete');
