@@ -18,7 +18,7 @@ class CreateCalendarsTable extends Migration
             $table->string('title');
             $table->boolean('full_day')->default(false);
             $table->dateTime('start');
-            $table->dateTime('end');
+            $table->dateTime('end')->nullable();
             $table->string('url')->nullable();
             $table->string('color');
             $table->timestamps();

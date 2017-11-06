@@ -1,5 +1,9 @@
 @extends('adminlte::page')
 
+@section('calendar-css')
+  <link rel="stylesheet" type="text/css" href="/css/calendar.min.css">
+@endsection
+
 @section('title')
     Calendar
 @endsection
@@ -72,10 +76,8 @@
           <div class="box box-primary">
             <div class="box-body no-padding">
               <!-- THE CALENDAR -->
-              <!-- <calendar></calendar> -->
-              <div class="col mt-5">
-                  <div id="calendar"></div>
-              </div>
+              <calendar></calendar>
+
             </div>
           </div>
         </div>

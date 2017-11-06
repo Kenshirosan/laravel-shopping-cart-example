@@ -18,4 +18,21 @@ class CalendarController extends Controller
 
         return view('admin.calendar', compact('thingsToDo'));
     }
+
+    public function store(Request $request)
+    {
+        $this->validate($request,[
+            'title' => 'required',
+            'start' => 'required',
+            'allDay' => 'required',
+            'backgroundColor' => 'required'
+        ]);
+        Calendar::create([
+            'title' => request('title'),
+            'start' => request('start'),
+            'full_day' => request('allDay'),
+            'color' => request('backgroundColor')
+        ]);
+        return session()->flash('flash', 'Event added !');
+    }
 }

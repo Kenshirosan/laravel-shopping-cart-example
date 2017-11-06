@@ -17966,7 +17966,6 @@ $(function () {
       var eventObject = {
         title: $.trim($(this).text()) // use the element's text as the event title
 
-
         // store the Event Object in the DOM element so we can get to it later
       };$(this).data('eventObject', eventObject);
 
@@ -18007,6 +18006,7 @@ $(function () {
         url: '/things-to-do',
         dataType: 'json',
 
+        // display on calendar
         success: function success(doc) {
           var events = [];
           $(doc).each(function () {
@@ -18026,7 +18026,6 @@ $(function () {
     droppable: true, // this allows things to be dropped onto the calendar !!!
     drop: function drop(date, allDay) {
       // this function is called when something is dropped
-
       // retrieve the dropped element's stored Event Object
       var originalEventObject = $(this).data('eventObject');
 
@@ -18035,9 +18034,11 @@ $(function () {
 
       // assign it the date that was reported
       copiedEventObject.start = date;
-      copiedEventObject.allDay = allDay;
+      copiedEventObject.allDay = false;
       copiedEventObject.backgroundColor = $(this).css('background-color');
       copiedEventObject.borderColor = $(this).css('border-color');
+      // persist event
+      axios.post('/things-to-do', copiedEventObject).then(flash('event added'));
 
       // render the event on the calendar
       // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
@@ -18051,6 +18052,15 @@ $(function () {
     }
   });
 
+  // axios.post('/things-to-do', copiedEventObject)
+  //     $.ajax({
+  //         type: "POST",
+  //         url: 'things-to-do',
+  //         data: copiedEventObject.serialize(),
+  //         success: console.log('ok'),
+  //         dataType: 'json'
+  //     });
+  // }
   /* ADDING EVENTS */
   var currColor = '#3c8dbc'; //Red by default
   //Color chooser button
