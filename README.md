@@ -21,6 +21,7 @@ Features :
 * coupons / promotion codes
 * backend with adminLTE
 * user must confirm their email
+* [fullcalendar.io](https://fullcalendar.io)
 
 download or clone then
 ```
