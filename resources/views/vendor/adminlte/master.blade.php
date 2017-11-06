@@ -36,8 +36,8 @@
 <div id="app">
     @include('messages.messages')
     @yield('body')
+    <flash message={{ session('flash') }}></flash>
 </div>
-<flash message={{ session('flash') }}></flash>
 <script src="/js/app.js"></script>
 <script src="{{ asset('vendor/adminlte/bootstrap/js/bootstrap.min.js') }}"></script>
 

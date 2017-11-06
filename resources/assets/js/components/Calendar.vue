@@ -5,6 +5,7 @@
 </template>
 
 <script>
+
     require('fullcalendar')
     export default {
             $('#calendar').fullCalendar({});
@@ -93,6 +94,7 @@
         copiedEventObject.allDay          = false
         copiedEventObject.backgroundColor = $(this).css('background-color')
         copiedEventObject.borderColor     = $(this).css('border-color')
+
         // persist event
         axios.post('/things-to-do', copiedEventObject).then(flash('event added'))
 
@@ -109,16 +111,6 @@
       }
     })
 
-
-            // axios.post('/things-to-do', copiedEventObject)
-            //     $.ajax({
-            //         type: "POST",
-            //         url: 'things-to-do',
-            //         data: copiedEventObject.serialize(),
-            //         success: console.log('ok'),
-            //         dataType: 'json'
-            //     });
-            // }
     /* ADDING EVENTS */
     var currColor = '#3c8dbc' //Red by default
     //Color chooser button

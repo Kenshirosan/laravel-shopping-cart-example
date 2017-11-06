@@ -33,6 +33,7 @@ class CalendarController extends Controller
             'full_day' => request('allDay'),
             'color' => request('backgroundColor')
         ]);
-        return session()->flash('flash', 'Event added !');
+        return $request->session()->flash('status', 'Task was successful!');
+        // return session()->flash('success_message', 'Event added !');
     }
 }
