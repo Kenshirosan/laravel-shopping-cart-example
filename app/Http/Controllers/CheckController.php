@@ -30,7 +30,7 @@ class CheckController extends Controller
     */
     public function index()
     {
-        $orders = new Order;
+        $orders = new Order();
         $orders = $orders->todaysOrders();
 
         return view('pdf.userorder', compact('orders'));

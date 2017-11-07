@@ -19,7 +19,7 @@ class Calendar extends Model
         'title', 'start','end', 'color', 'url', 'full_day'
     ];
 
-    public function getappointments()
+    public function getAppointmentsCount()
     {
         return $this->whereDate('created_at', '>=', date('Y-m-d'))->count();
     }

@@ -2,12 +2,13 @@
     @if (is_string($item))
         <li class="header">{{ $item }}</li>
     @else
+    {{-- this is not spaghetti code, it's a nice small block of php that eases my life :-) --}}
+    {{-- display the count in the sidebar --}}
     <?php
-        // {{-- display the count in the sidebar --}}
         $calendar = new \App\Calendar();
-        if($item['href'] == 'http://127.0.0.1:8000/calendar' && $calendar->getappointments() > 0)
+        if($item['href'] == 'http://127.0.0.1:8000/calendar' && $calendar->getAppointmentsCount() > 0)
         {
-            $item['label'] = $calendar->getappointments();
+            $item['label'] = $calendar->getAppointmentsCount();
         }
 
         $messages = new \App\Message();
@@ -22,6 +23,7 @@
             $item['label'] = $orders->todaysOrdersCount();
         }
     ?>
+
         <li class="{{ $item['class'] }}">
             <a href="{{ $item['href'] }}"
                @if (isset($item['target'])) target="{{ $item['target'] }}" @endif
