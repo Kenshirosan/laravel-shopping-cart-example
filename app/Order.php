@@ -39,11 +39,22 @@ class Order extends Model
         return $this->isHiddenOrder()->where($attributes)->exists();
     }
 
-    public function numberOfOrdersToday()
+    public function numberOfOrdersProcessedToday()
     {
         $when = 'created_at';
         $today =  date('Y-m-d');
 
         return Hideable::whereDate($when, $today)->count();
     }
+
+    public function todaysOrders()
+    {
+        return $this->whereDate('created_at', date('Y-m-d'))->orderBy('id', 'desc')->get();
+    }
+
+    public function todaysOrdersCount()
+    {
+        return $this->whereDate('created_at', date('Y-m-d'))->orderBy('id', 'desc')->count();
+    }
+
 }

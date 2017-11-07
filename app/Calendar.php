@@ -18,4 +18,9 @@ class Calendar extends Model
     protected $fillable = [
         'title', 'start','end', 'color', 'url', 'full_day'
     ];
+
+    public function getappointments()
+    {
+        return $this->whereDate('created_at', '>=', date('Y-m-d'))->count();
+    }
 }

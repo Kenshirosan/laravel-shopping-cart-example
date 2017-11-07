@@ -30,7 +30,8 @@ class CheckController extends Controller
     */
     public function index()
     {
-        $orders = Order::whereDate('created_at', date('Y-m-d'))->orderBy('id', 'desc')->get();
+        $orders = new Order;
+        $orders = $orders->todaysOrders();
 
         return view('pdf.userorder', compact('orders'));
     }

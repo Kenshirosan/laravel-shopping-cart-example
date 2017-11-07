@@ -48,8 +48,8 @@
                     @endif
             @endforeach
             <p class="text-info">
-                {{ $order->numberOfOrdersToday() }}
-                {{ str_plural('order', $order->numberOfOrdersToday()) }} processed today
+                {{ $order->numberOfOrdersProcessedToday() }}
+                {{ str_plural('order', $order->numberOfOrdersProcessedToday()) }} processed today
             </p>
 
             @elseif($orders->isEmpty())

@@ -4,17 +4,22 @@
     @else
     <?php
         // {{-- display the count in the sidebar --}}
-        if($item['href'] == 'http://127.0.0.1:8000/calendar'){
-            $calendar = new \App\Calendar();
-            $item['label'] = $calendar->whereDate('created_at', '>=', date('Y-m-d'))->count();
+        $calendar = new \App\Calendar();
+        if($item['href'] == 'http://127.0.0.1:8000/calendar' && $calendar->getappointments() > 0)
+        {
+            $item['label'] = $calendar->getappointments();
         }
-        if($item['href'] == 'http://127.0.0.1:8000/contact-us') {
-            $messages = new \App\Message();
+
+        $messages = new \App\Message();
+        if($item['href'] == 'http://127.0.0.1:8000/contact-us' && $messages->count() > 0)
+        {
             $item['label'] = $messages->count();
         }
-        if($item['href'] == 'http://127.0.0.1:8000/customer-orders') {
-            $orders = new \App\Order();
-            $item['label'] = $orders->whereDate('created_at', '=', date('Y-m-d'))->count();
+
+        $orders = new \App\Order();
+        if($item['href'] == 'http://127.0.0.1:8000/customer-orders' && $orders->count() > 0)
+        {
+            $item['label'] = $orders->todaysOrdersCount();
         }
     ?>
         <li class="{{ $item['class'] }}">
