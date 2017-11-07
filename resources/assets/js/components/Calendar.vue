@@ -85,7 +85,8 @@
       drop      : function ( date, allDay) { // this function is called when something is dropped
         // retrieve the dropped element's stored Event Object
         var originalEventObject = $(this).data('eventObject')
-
+        var start = $('#timepicker1').val();
+        console.log(start);
         // we need to copy it, so that multiple events don't have a reference to the same object
         var copiedEventObject = $.extend({}, originalEventObject)
 
@@ -94,7 +95,6 @@
         copiedEventObject.allDay          = false
         copiedEventObject.backgroundColor = $(this).css('background-color')
         copiedEventObject.borderColor     = $(this).css('border-color')
-
         // persist event
         axios.post('/things-to-do', copiedEventObject).then(flash('event added'))
 

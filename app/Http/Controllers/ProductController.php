@@ -84,7 +84,7 @@ class ProductController extends Controller
     * @param    $product
     * @return \Illuminate\Http\Response
     */
-    public function delete($product)
+    public function destroy($product)
     {
         $product = Product::where('slug', $product)->firstOrFail();
 

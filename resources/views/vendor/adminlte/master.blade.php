@@ -5,8 +5,8 @@
      <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>@yield('title_prefix', config('adminlte.title_prefix', ''))
-@yield('title', config('adminlte.title', 'AdminLTE 2'))
-@yield('title_postfix', config('adminlte.title_postfix', ''))</title>
+        @yield('title', config('adminlte.title', 'AdminLTE 2'))
+        @yield('title_postfix', config('adminlte.title_postfix', ''))</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/AdminLTE.min.css') }}">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.6.2/fullcalendar.print.css" media="print"> -->
     @yield('calendar-css')
 
     @if(config('adminlte.plugins.datatables'))
@@ -34,16 +33,13 @@
 </head>
 <body class="hold-transition @yield('body_class')">
 <div id="app">
-    @include('messages.messages')
     @yield('body')
     <flash message={{ session('flash') }}></flash>
 </div>
 <script src="/js/app.js"></script>
 <script src="{{ asset('vendor/adminlte/bootstrap/js/bootstrap.min.js') }}"></script>
-
 <script src="/js/calendar.js"></script>
 <script src="/js/jqueryui.js"></script>
-
 @if(config('adminlte.plugins.datatables'))
     <!-- DataTables -->
     <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>

@@ -1,5 +1,8 @@
 <?php
 
+use App\Calendar;
+$calendar = new \App\Calendar;
+
 return [
 
     /*
@@ -13,7 +16,7 @@ return [
     |
     */
 
-    'title' => 'Admin',
+    'title' => 'Restaurant Name',
 
     'title_prefix' => '',
 
@@ -112,41 +115,43 @@ return [
         [
             'text' => 'Add a product',
             'url'  => '/restaurantpanel',
-            'icon' => 'file',
+            'icon' => 'shopping-cart',
             'icon_color' => 'success',
         ],
         [
             'text'        => 'View sales',
             'url'         => '/panel',
-            'icon'        => 'file',
+            'icon'        => 'dollar',
             'icon_color' => 'success',
         ],
         [
             'text'        => 'Search an order',
             'url'         => '/search-orders',
-            'icon'        => 'file',
-            'icon_color' => 'success',
+            'icon'        => 'search',
+            'icon_color' => 'info',
         ],
         [
             'text'        => 'Today\'s orders',
             'url'         => '/customer-orders',
-            'icon'        => 'file',
+            'icon'        => 'info-circle',
             'icon_color' => 'success',
         ],
         [
             'text'       => 'Best Customers',
             'url'        => '/best-customers',
-            'icon'       => 'file',
+            'icon'       => 'plus',
             'icon_color' => 'success',
         ],
 
         [
             'text'    => 'Add options/Categories',
             'icon'    => 'share',
+            'icon_color' => 'aqua',
             'submenu' => [
                 [
                     'text' => 'Add an option group',
                     'url'  => '/add-option-group',
+                    'icon' => 'glyphicon glyphicon-option-horizontal',
                     'icon_color' => 'green',
                 ],
                 [
@@ -167,7 +172,21 @@ return [
                 ],
             ],
         ],
-
+        [
+            'text'    => 'Booking / appointments',
+            'url'  => '/calendar',
+            'icon'    => 'calendar-plus-o',
+            'icon_color' => 'green',
+            'label' => ''
+        ],
+        [
+            'text'    => 'Messages',
+            'url'  => '/contact-us',
+            'icon'    => 'envelope',
+            'icon_color' => 'green',
+            'label'       => \App\Message::count(),
+            'label_color' => 'success',
+        ],
         [
             'text'    => 'Devs only',
             'icon'    => 'exclamation-triangle',

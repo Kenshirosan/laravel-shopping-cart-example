@@ -12,11 +12,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="/css/dropzone.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/link.css">
     <link rel="stylesheet" href="/css/app.css">
     @yield('extra-css')
+    <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/AdminLTE.min.css') }}">
 
     <!-- Favicon and Apple Icons -->
     <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}">

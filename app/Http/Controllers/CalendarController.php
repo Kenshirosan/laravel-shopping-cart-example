@@ -7,16 +7,21 @@ use Illuminate\Http\Request;
 
 class CalendarController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('employee');
+    }
 
     public function index()
     {
+        return view('admin.calendar');
+    }
+
+    public function jsonIndex()
+    {
         $thingsToDo = Calendar::all();
 
-        if (request()->wantsJson()) {
-            return $thingsToDo;
-        }
-
-        return view('admin.calendar', compact('thingsToDo'));
+        return response($thingsToDo, 200);
     }
 
     public function store(Request $request)
@@ -33,7 +38,6 @@ class CalendarController extends Controller
             'full_day' => request('allDay'),
             'color' => request('backgroundColor')
         ]);
-        return $request->session()->flash('status', 'Task was successful!');
-        // return session()->flash('success_message', 'Event added !');
+        return response('success', 200);
     }
 }

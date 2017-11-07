@@ -14,6 +14,7 @@
         Calendar
         <small>Control panel</small>
       </h1>
+
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Calendar</li>
@@ -29,7 +30,6 @@
             </div>
             <div class="box-body">
               <div id="external-events">
-                {{--  --}}
                 <div class="checkbox">
                   <label for="drop-remove">
                     <input type="checkbox" id="drop-remove">

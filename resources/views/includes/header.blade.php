@@ -17,6 +17,7 @@
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/contact-us">Contact</a></li>
                     @if ( Auth::guest() )
                         <li><a href="/login">Sign in</a></li>
                         <li><a href="/register">Register</a></li>

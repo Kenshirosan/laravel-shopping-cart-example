@@ -17955,6 +17955,7 @@ module.exports = function spread(callback) {
 //
 //
 //
+//
 
 $(function () {
   /* initialize the external events
@@ -18028,7 +18029,8 @@ $(function () {
       // this function is called when something is dropped
       // retrieve the dropped element's stored Event Object
       var originalEventObject = $(this).data('eventObject');
-
+      var start = $('#timepicker1').val();
+      console.log(start);
       // we need to copy it, so that multiple events don't have a reference to the same object
       var copiedEventObject = $.extend({}, originalEventObject);
 
@@ -18052,15 +18054,6 @@ $(function () {
     }
   });
 
-  // axios.post('/things-to-do', copiedEventObject)
-  //     $.ajax({
-  //         type: "POST",
-  //         url: 'things-to-do',
-  //         data: copiedEventObject.serialize(),
-  //         success: console.log('ok'),
-  //         dataType: 'json'
-  //     });
-  // }
   /* ADDING EVENTS */
   var currColor = '#3c8dbc'; //Red by default
   //Color chooser button

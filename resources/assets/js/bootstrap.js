@@ -55,7 +55,6 @@ if (token) {
 
 window.moment = require('moment');
 
-
 window.Vue = require('vue');
 window.events = new Vue();
 

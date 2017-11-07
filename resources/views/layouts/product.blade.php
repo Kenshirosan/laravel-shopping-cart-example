@@ -5,18 +5,16 @@
 @endsection
 
 @section('content')
-
-
     <h1>{{ $product->name }}</h1>
 
     <hr>
 
     <div class="row">
+
         <div class="col-md-4">
             <img src="{{ asset('img/' . $product->image) }}" alt="product" class="img-responsive">
             @foreach( $product->photos as $item)
                 <img src="{{ asset($item->photos) }}" alt="{{ $product->name }}" class="img-responsive">
-
             @endforeach
         </div>
 
@@ -39,6 +37,7 @@
 
             {{ $product->description }}
         </div> <!-- end col-md-8 -->
+
     </div> <!-- end row -->
 
     <div class="spacer"></div>

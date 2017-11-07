@@ -31,12 +31,12 @@ Route::delete('emptyCart', 'CartController@emptyCart');
 //daily_specials
 
 //ADMIN AND EMPLOYEE ROUTES
-Route::get('/calendar', 'CalendarController@index')->middleware('employee');
-Route::get('/things-to-do', 'CalendarController@index');
+Route::get('/calendar', 'CalendarController@index');
+Route::get('/things-to-do', 'CalendarController@jsonIndex');
 Route::post('/things-to-do', 'CalendarController@store');
 Route::get('/restaurantpanel', 'AdminController@index');
 Route::get('/best-customers', 'BestCustomerController@index');
-Route::get('/delete/{slug}', 'ProductController@delete')->name('/delete');
+Route::delete('/delete/{slug}/product', 'ProductController@destroy');
 Route::post('/insertproduct', 'ProductController@store');
 Route::get('/panel', 'AdminController@show');
 Route::get('/search-orders', 'SearchController@index');
@@ -60,6 +60,11 @@ Route::get('/print/{id}', 'CheckController@create');
 Route::post('/show-order/{order}', 'OrderProcessedController@show');
 Route::post('/hide-orders/{order}', 'OrderProcessedController@destroy');
 
+// Customers messages
+Route::get('/contact-us', 'MessageController@index');
+Route::get('/message/{id}', 'MessageController@show')->middleware('admin');
+Route::post('/contact-us', 'MessageController@store');
+Route::delete('/delete/{id}', 'MessageController@destroy')->middleware('admin');
 //ADD A BUNCH OF PICS ON PRODUCT VIEW
 Route::post('/shop/{slug}/{photo}','PhotosController@store');
 

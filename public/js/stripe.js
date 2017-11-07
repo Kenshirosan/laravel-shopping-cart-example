@@ -8,4 +8,3 @@
       data-locale="auto"
       data-currency="usd"
       data-zip-code="true">
-  </script>
