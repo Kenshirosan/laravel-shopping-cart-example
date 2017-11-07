@@ -1,8 +1,5 @@
 <?php
 
-use App\Calendar;
-$calendar = new \App\Calendar;
-
 return [
 
     /*
@@ -135,6 +132,8 @@ return [
             'url'         => '/customer-orders',
             'icon'        => 'info-circle',
             'icon_color' => 'success',
+            'label' => '',
+            'label_color' => 'info'
         ],
         [
             'text'       => 'Best Customers',
@@ -177,14 +176,15 @@ return [
             'url'  => '/calendar',
             'icon'    => 'calendar-plus-o',
             'icon_color' => 'green',
-            'label' => ''
+            'label' => '',
+            'label_color' => 'info'
         ],
         [
             'text'    => 'Messages',
             'url'  => '/contact-us',
             'icon'    => 'envelope',
             'icon_color' => 'green',
-            'label'       => \App\Message::count(),
+            // 'label'       => \App\Message::count(),
             'label_color' => 'success',
         ],
         [
