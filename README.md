@@ -22,6 +22,7 @@ Features :
 * backend with adminLTE
 * user must confirm their email
 * [fullcalendar.io](https://fullcalendar.io)
+* google analytics
 
 download or clone then
 ```
