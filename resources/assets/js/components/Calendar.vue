@@ -40,7 +40,7 @@
 
     /* initialize the calendar
      -----------------------------------------------------------------*/
-    //Date for the calendar events (dummy data)
+    //Date for the calendar events
     var date = new Date()
     var d    = date.getDate(),
         m    = date.getMonth(),
@@ -61,7 +61,7 @@
       events: function(start, end, timezone, callback) {
 
         $.ajax({
-            url: '/things-to-do',
+            url: '/calendar',
             dataType: 'json',
 
             // display on calendar

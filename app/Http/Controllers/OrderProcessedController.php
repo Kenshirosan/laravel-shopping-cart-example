@@ -18,6 +18,7 @@ class OrderProcessedController extends Controller
         $this->middleware('employee');
     }
 
+    // we delete a resource but we show a previously hidden item in the view
      public function show(Request $request, $order)
     {
         $this->validate($request, [
@@ -30,6 +31,7 @@ class OrderProcessedController extends Controller
         return back()->with('success_message', 'Success');
     }
 
+    // we show a resource but we hide a previously visible item in the view
     public function destroy(Request $request, $order)
     {
         $order = Order::where('id', $request->id)->firstOrFail();

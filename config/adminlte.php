@@ -185,7 +185,7 @@ return [
             'url'  => '/contact-us',
             'icon'    => 'envelope',
             'icon_color' => 'green',
-            // 'label'       => \App\Message::count(),
+            'label'       => '',
             'label_color' => 'success',
         ],
         [

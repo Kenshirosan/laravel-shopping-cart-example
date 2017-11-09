@@ -10,6 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/analytics', 'AnalyticsController@analytics')->middleware('admin');
+
 
 Route::get('/', function () {
     return redirect('shop');
@@ -32,7 +34,6 @@ Route::delete('emptyCart', 'CartController@emptyCart');
 
 //ADMIN AND EMPLOYEE ROUTES
 Route::get('/calendar', 'CalendarController@index');
-Route::get('/things-to-do', 'CalendarController@jsonIndex');
 Route::post('/things-to-do', 'CalendarController@store');
 Route::get('/restaurantpanel', 'AdminController@index');
 Route::get('/best-customers', 'BestCustomerController@index');
@@ -44,8 +45,8 @@ Route::get('/livesearch','SearchController@show');
 Route::get('create-coupon', 'CouponController@index');
 Route::post('create-coupon', 'CouponController@store');
 Route::get('add-option-group', 'OptionGroupController@index');
-Route::get('add-options', 'OptionsController@index');
 Route::post('add-option-group', 'OptionGroupController@store');
+Route::get('add-options', 'OptionsController@index');
 Route::post('add-options', 'OptionsController@store');
 Route::get('add-category', 'CategoriesController@create');
 Route::post('add-category', 'CategoriesController@store');
@@ -57,7 +58,7 @@ Route::post('/edit-css', 'CssController@update');
 Route::get('/customer-orders', 'CheckController@index');
 Route::get('/order/{id}', 'CheckController@show');
 Route::get('/print/{id}', 'CheckController@create');
-Route::post('/show-order/{order}', 'OrderProcessedController@show');
+Route::delete('/show-order/{order}', 'OrderProcessedController@show');
 Route::post('/hide-orders/{order}', 'OrderProcessedController@destroy');
 
 // Customers messages

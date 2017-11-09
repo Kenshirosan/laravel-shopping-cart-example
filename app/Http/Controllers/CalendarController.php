@@ -14,14 +14,12 @@ class CalendarController extends Controller
 
     public function index()
     {
+        if(request()->wantsJson()){
+            $thingsToDo = Calendar::all();
+            return response($thingsToDo, 200);
+        }
+
         return view('admin.calendar');
-    }
-
-    public function jsonIndex()
-    {
-        $thingsToDo = Calendar::all();
-
-        return response($thingsToDo, 200);
     }
 
     public function store(Request $request)

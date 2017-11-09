@@ -174,6 +174,7 @@ return [
         JeroenNoten\LaravelAdminLte\ServiceProvider::class,
         Laravel\Tinker\TinkerServiceProvider::class,
         Gabievi\Promocodes\PromocodesServiceProvider::class,
+        Spatie\Analytics\AnalyticsServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -239,6 +240,7 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Promocodes' => Gabievi\Promocodes\Facades\Promocodes::class,
+        'Analytics' => Spatie\Analytics\AnalyticsFacade::class,
     ],
 
 ];

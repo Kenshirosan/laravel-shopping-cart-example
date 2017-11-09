@@ -2,7 +2,6 @@
 
 @section('content')
 @include('messages.messages')
-    @if(  Auth::user()->isAdmin() )
     <h1>Hello, {{ Auth::user()->name }}</h1>
     <form class="form-horizontal" method="POST" action="/insertproduct" enctype="multipart/form-data">
         {{ csrf_field() }}
@@ -142,12 +141,5 @@
 
         </ul>
     </div>
-
-    @elseif( !Auth::user()->isAdmin() )
-
-        <script type="text/javascript">
-            window.location = "{{ url('/shop') }}";
-        </script>
-    @endif
     <div class="spacer"></div>
 @endsection

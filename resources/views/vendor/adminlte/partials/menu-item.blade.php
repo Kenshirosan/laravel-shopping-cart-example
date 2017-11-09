@@ -6,21 +6,22 @@
     {{-- display the count in the sidebar --}}
     <?php
         $calendar = new \App\Calendar();
-        if($item['href'] == 'http://127.0.0.1:8000/calendar' && $calendar->getAppointmentsCount() > 0)
+        if($item['href'] == 'http://127.0.0.1:8000/calendar')
         {
-            $item['label'] = $calendar->getAppointmentsCount();
+            $calendar->getAppointmentsCount() > 0 ? $item['label'] = $calendar->getAppointmentsCount() : $item['label'];
         }
 
         $messages = new \App\Message();
-        if($item['href'] == 'http://127.0.0.1:8000/contact-us' && $messages->count() > 0)
+        if($item['href'] == 'http://127.0.0.1:8000/contact-us')
         {
-            $item['label'] = $messages->count();
+            $messages->count() > 0 ? $item['label'] = $messages->count() : $item['label'];
         }
 
         $orders = new \App\Order();
-        if($item['href'] == 'http://127.0.0.1:8000/customer-orders' && $orders->count() > 0)
+        if($item['href'] == 'http://127.0.0.1:8000/customer-orders')
         {
-            $item['label'] = $orders->todaysOrdersCount();
+            $orders->todaysOrderscount() > 0 ? $item['label'] = $orders->todaysOrdersCount() : $item['label'];
+
         }
     ?>
 

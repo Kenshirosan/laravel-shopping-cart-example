@@ -9,7 +9,6 @@
 @section('content')
 <div class="col-md-6 col-md-offset-3">
     @include('messages.messages')
-    @if ( Auth::user()->isAdmin() || Auth::user()->isEmployee())
         <h4 class="text-center">Today's Order</h4>
         <ul class=list-group>
 
@@ -40,6 +39,7 @@
 
                         <form action="/show-order/{{ $order->id }}" method="POST">
                             {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
                             <input type="hidden" value="{{ $order->id }}" name="id">
                             <input type="hidden" value="{{ $order->name }}" name="name">
                             <input type="hidden" value="{{ $order->address }}" name="address">
@@ -59,11 +59,6 @@
                     </h2>
                 </li>
             @endif
-        </ul>
+    </ul>
 </div>
-    @elseif( !Auth::user()->isAdmin() || !Auth::user()->employee)
-        <script type="text/javascript">
-            window.location = "{{ url('/shop') }}";
-        </script>
-    @endif
 @endsection

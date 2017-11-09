@@ -33,8 +33,9 @@
                         @if( Auth::user()->isAdmin() )
                             <li><a href="/restaurantpanel">Admin</a></li>
                         @endif
-                        @if(  Auth::user()->employee )
+                        @if(  Auth::user()->isEmployee() )
                             <li><a href="/customer-orders">Today's order</a></li>
+                            <li><a href="/calendar">Calendar</a></li>
                         @endif
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    @if(  Auth::user()->isAdmin() )
     @include('messages.messages');
     <h1>Hello, {{ Auth::user()->name }}</h1>
     <form class="form-horizontal" method="POST" action="/add-option-group" enctype="multipart/form-data">
@@ -32,5 +31,4 @@
             </div>
         </div>
     </form>
-    @endif
 @endsection

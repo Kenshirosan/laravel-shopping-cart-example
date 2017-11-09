@@ -6,7 +6,7 @@
 
 @section('content')
 @include('messages.messages')
-    @if( Auth::user()->id )
+    @if( Auth::user()->id == $user->id)
         <div class="row">
             <div class="panel-body">
 

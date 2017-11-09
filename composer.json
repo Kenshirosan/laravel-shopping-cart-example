@@ -13,6 +13,7 @@
         "jeroennoten/laravel-adminlte": "^1.20",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
+        "spatie/laravel-analytics": "^3.3",
         "stripe/stripe-php": "^5.1",
         "zgabievi/promocodes": "1.0.1"
     },
