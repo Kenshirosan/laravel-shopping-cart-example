@@ -123,6 +123,12 @@ return [
             'icon_color' => 'success',
         ],
         [
+            'text'        => 'View analytics',
+            'url'         => '/analytics',
+            'icon'        => 'dollar',
+            'icon_color' => 'success',
+        ],
+        [
             'text'        => 'Search an order',
             'url'         => '/search-orders',
             'icon'        => 'search',

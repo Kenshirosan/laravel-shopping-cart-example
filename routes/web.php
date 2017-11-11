@@ -30,7 +30,6 @@ Route::resource('shop', 'ShopController', ['only' => ['index', 'show']]);
 Route::resource('cart', 'CartController');
 Route::delete('emptyCart', 'CartController@emptyCart');
 
-//daily_specials
 
 //ADMIN AND EMPLOYEE ROUTES
 Route::get('/calendar', 'CalendarController@index');
@@ -38,10 +37,10 @@ Route::post('/things-to-do', 'CalendarController@store');
 Route::patch('/things-to-do/{id}', 'CalendarController@update');
 Route::delete('/things-to-do/{id}', 'CalendarController@destroy');
 Route::get('/restaurantpanel', 'AdminController@index');
+Route::get('/panel', 'AdminController@show');
 Route::get('/best-customers', 'BestCustomerController@index');
 Route::delete('/delete/{slug}/product', 'ProductController@destroy');
 Route::post('/insertproduct', 'ProductController@store');
-Route::get('/panel', 'AdminController@show');
 Route::get('/search-orders', 'SearchController@index');
 Route::get('/livesearch','SearchController@show');
 Route::get('create-coupon', 'CouponController@index');
