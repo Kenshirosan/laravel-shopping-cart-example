@@ -38,4 +38,24 @@ class CalendarController extends Controller
         ]);
         return response('success', 200);
     }
+
+    public function update($id)
+    {
+        $event = Calendar::where('id', $id)->firstOrFail();
+
+        $this->validate(request(), ['title' => 'nullable', 'start' => 'nullable']);
+
+        $event->update(request(['title', 'start']));
+
+        return response('success', 200);
+    }
+
+    public function destroy($id)
+    {
+         $event = Calendar::where('id', $id)->firstOrFail();
+
+         $event->delete();
+
+         return response('success', 200);
+    }
 }

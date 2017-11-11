@@ -35,6 +35,8 @@ Route::delete('emptyCart', 'CartController@emptyCart');
 //ADMIN AND EMPLOYEE ROUTES
 Route::get('/calendar', 'CalendarController@index');
 Route::post('/things-to-do', 'CalendarController@store');
+Route::patch('/things-to-do/{id}', 'CalendarController@update');
+Route::delete('/things-to-do/{id}', 'CalendarController@destroy');
 Route::get('/restaurantpanel', 'AdminController@index');
 Route::get('/best-customers', 'BestCustomerController@index');
 Route::delete('/delete/{slug}/product', 'ProductController@destroy');
