@@ -12,12 +12,6 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderProcessedController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('employee');
-    }
-
     // we delete a resource but we show a previously hidden item in the view
      public function show(Request $request, $order)
     {

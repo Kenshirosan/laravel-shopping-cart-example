@@ -14,6 +14,7 @@
             <div class="col-md-6 text-center">
                 <form class="horizontal" action="/erase/{{ $user->id }}" method="POST">
                     {{ csrf_field() }}
+                    {{ method_field('DELETE') }}
                     <button class="btn btn-danger list-group-item-danger">Yes, Delete my account</button>
                 </form>
             </div>

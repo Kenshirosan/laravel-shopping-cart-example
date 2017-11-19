@@ -10,12 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class OptionsController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('admin');
-    }
-
     public function index()
     {
         $optionGroups = OptionGroup::all();

@@ -7,11 +7,6 @@ use Illuminate\Http\Request;
 
 class CalendarController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('employee');
-    }
-
     public function index()
     {
         if(request()->wantsJson()){
@@ -51,10 +46,10 @@ class CalendarController extends Controller
 
     public function destroy($id)
     {
-         $event = Calendar::where('id', $id)->firstOrFail();
+        $event = Calendar::where('id', $id)->firstOrFail();
 
-         $event->delete();
+        $event->delete();
 
-         return response('success', 200);
+        return response('success', 200);
     }
 }

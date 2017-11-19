@@ -12,6 +12,7 @@
 
                 <form class="form-horizontal" method="POST" action="/edit-profile/{user_id}">
                     {{ csrf_field() }}
+                    {{ method_field('PATCH') }}
                     <!--SHIPPING METHOD-->
                     <div class="panel panel-info">
                         <div class="panel-heading">Register</div>

@@ -14,16 +14,6 @@ use Illuminate\Support\Facades\Auth;
 class CheckController extends Controller
 {
     /**
-    * Create a new controller instance.
-    *
-    * @return void
-    */
-    public function __construct()
-    {
-        $this->middleware('employee');
-    }
-
-    /**
     * Display a listing of the resource.
     *
     * @return \Illuminate\Http\Response

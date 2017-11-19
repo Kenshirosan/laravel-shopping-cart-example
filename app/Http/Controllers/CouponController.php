@@ -11,12 +11,6 @@ use Illuminate\Support\Facades\Auth;
 
 class CouponController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('admin');
-    }
-
     public function index()
     {
         $coupons = Promocode::where('expires_at', null)->get();

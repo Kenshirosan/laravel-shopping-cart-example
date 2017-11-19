@@ -9,16 +9,6 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
@@ -30,7 +20,7 @@ class UserController extends Controller
         return view('layouts.userprofile', compact('user'));
     }
 
-    public function edit(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $user = Auth::user();
 

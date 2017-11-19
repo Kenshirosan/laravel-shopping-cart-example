@@ -16,7 +16,7 @@ class MessageController extends Controller
             return view('admin.messages', compact('messages'));
         }
 
-        return view('layouts.messages', compact('messages'));
+        return view('layouts.messages');
     }
 
     public function show($id)

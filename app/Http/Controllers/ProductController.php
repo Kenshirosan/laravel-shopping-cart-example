@@ -14,12 +14,6 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
-
-    public function __construct()
-    {
-        return $this->middleware('admin');
-    }
-
     /**
     * Store a newly created resource in storage.
     *
@@ -29,7 +23,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         try{
-        $this->validateRequest($request);
+            $this->validateRequest($request);
         }
          catch (\Exception $e) {
             return back()->with(['error_message' => $e->getMessage() ]);

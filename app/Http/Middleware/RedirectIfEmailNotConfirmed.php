@@ -16,7 +16,7 @@ class RedirectIfEmailNotConfirmed
     public function handle($request, Closure $next)
     {
         if(! $request->user()->confirmed ) {
-            return back()->with('warning_message', 'You must first confirm your email address, please chek your emails.');
+            return back()->with('warning_message', 'You must first confirm your email address, please check your emails.');
         }
         return $next($request);
     }

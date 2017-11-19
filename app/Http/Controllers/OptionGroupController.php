@@ -9,11 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class OptionGroupController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('admin');
-    }
-
     public function index()
     {
         return view('layouts.addOptionGroup');

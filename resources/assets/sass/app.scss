@@ -6,8 +6,6 @@
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
-/*@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);@charset "UTF-8";/*!*/
-@import "timepicker";
 
 .jumbotron{
     background-image: url('../img/hero_pdt_hamburger.png');
@@ -34,4 +32,13 @@ footer {
 
 .side-by-side {
     display: inline-block;
+}
+
+.swal-modal {
+  border: 3px solid white;
+  z-index: -1;
+}
+
+.swal-overlay {
+    font-size: 1em!important;
 }

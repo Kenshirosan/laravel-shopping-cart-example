@@ -9,15 +9,9 @@ use Illuminate\Support\Facades\Auth;
 
 class BestCustomerController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('admin');
-    }
-
     public function index()
     {
-        $user_count = User::all()->count();
+        $user_count = User::where('confirmed', true)->count();
 
         $bestCustomers = Order::selectRaw('year(created_at) year, sum(price) total,user_id, name, last_name, email')
                             ->whereRaw('year(created_at) = year(curdate())')

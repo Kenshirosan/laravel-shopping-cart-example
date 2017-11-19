@@ -9,12 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class SearchController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('admin');
-    }
-
     public function index()
     {
         return view('layouts.search');
@@ -28,8 +22,7 @@ class SearchController extends Controller
         if (is_null($search)) {
             return view('layouts.search');
         } else {
-            $orders = Order::where('id', 'LIKE', "%{$search}%")
-                           ->get();
+            $orders = Order::where('id', 'LIKE', "%{$search}%")->get();
 
             return view('layouts.searchresult', compact('orders'));
         }

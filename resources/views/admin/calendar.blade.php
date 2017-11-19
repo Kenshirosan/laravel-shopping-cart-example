@@ -1,7 +1,9 @@
 @extends('adminlte::page')
 
 @section('calendar-css')
-  <link rel="stylesheet" type="text/css" href="/css/calendar.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/calendar.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css" />
+    <link rel="stylesheet" href="/css/app.css" />
 @endsection
 
 @section('title')

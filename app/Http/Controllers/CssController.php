@@ -8,12 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class CssController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('admin');
-    }
-
     public function index()
     {
         $url = '/home/laurent/public_html/webcreation/public/css/custom.css';

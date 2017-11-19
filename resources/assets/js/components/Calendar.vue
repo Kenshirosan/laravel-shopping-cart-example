@@ -1,6 +1,17 @@
 <template>
-    <div class="col mt-5">
-        <div id="calendar"></div>
+    <div>
+        <div class="col mt-5">
+            <div id="calendar"></div>
+        </div>
+        <div style="overflow:hidden;">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="datetimepicker"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -37,11 +48,6 @@
 
     init_events($('#external-events div.external-event'))
 
-    function addNew() {
-        var newDate = document.createElement('input');
-        newDate.type = "input";
-        newDate.placeholder = "2017-11-01 00:00:00";
-    }
     /* initialize the calendar
      -----------------------------------------------------------------*/
 
@@ -62,14 +68,33 @@
             week : 'week',
             day  : 'day'
         },
-        // update events on click
 
+        // update events on click
         eventClick: function(event, element) {
-            event.title = prompt(event.title+' change the title?');
+            // Trying to get sweetalert to update events
+            // swal({
+            //     text: 'Pick a new date and/or time.',
+            //     content: 'div',
+            //     className: 'datetimepicker',
+            //     button: {
+            //         text: "Go!",
+            //         closeModal: false,
+            //   },
+            // })
+
+            // $('.datetimepicker').datetimepicker({
+            //     inline: true,
+            //     sideBySide: true
+            // });
+            // var date = $(".datetimepicker").data("DateTimePicker").date();
+            // $(".datetimepicker").on('click', function(){
+            //     console.log($(this).html());
+            // });
+            event.title = prompt(event.title +' change the title?');
             if(event.title == 'delete') {
                 return axios.delete('/things-to-do/'+event.id, event).then(flash('Event successfully deleted'))
             } else {
-                event.start = prompt(addNew());
+                event.start = prompt('new date ? eg 2017-11-11 14:00:00');
                 event = {
                     id: event.id,
                     title: event.title,
@@ -109,7 +134,6 @@
     drop      : function ( date, allDay) { // this function is called when something is dropped
         // retrieve the dropped element's stored Event Object
         var originalEventObject = $(this).data('eventObject')
-        // var start = $('#timepicker1').val(); //removed it for now.. not sure we need it yet
         // we need to copy it, so that multiple events don't have a reference to the same object
         var copiedEventObject = $.extend({}, originalEventObject)
         // assign it the date that was reported
@@ -143,28 +167,28 @@
       $('#add-new-event').css({ 'background-color': currColor, 'border-color': currColor })
     })
     $('#add-new-event').click(function (e) {
-      e.preventDefault()
+        e.preventDefault()
       //Get value and make sure it is not null
-      var val = $('#new-event').val()
-      if (val.length == 0) {
+        var val = $('#new-event').val()
+        if (val.length == 0) {
         return
-      }
+        }
 
-      //Create events
-      var event = $('<div />')
-      event.css({
+        //Create events
+        var event = $('<div />')
+        event.css({
         'background-color': currColor,
         'border-color'    : currColor,
         'color'           : '#fff'
-      }).addClass('external-event')
-      event.html(val)
-      $('#external-events').prepend(event)
+        }).addClass('external-event')
+        event.html(val)
+        $('#external-events').prepend(event)
 
-      //Add draggable funtionality
-      init_events(event)
+        //Add draggable funtionality
+        init_events(event)
 
-      //Remove event from text input
-      $('#new-event').val('')
+        //Remove event from text input
+        $('#new-event').val('')
     })
-  })
+})
 </script>
