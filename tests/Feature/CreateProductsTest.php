@@ -40,8 +40,7 @@ class CreateProductsTest extends TestCase
     /** @test */
     function admin_may_add_a_product()
     {
-        $product = ['name' => 'toto', 'option_group_id' => '1', 'category_id' => '2', 'slug' => 'toto', 'price' => 1900,
-            'description' => 'description', 'image' => 'image.jpg'];
+        $product = create('App\Product');
 
         $this->withExceptionHandling();
 
@@ -57,8 +56,7 @@ class CreateProductsTest extends TestCase
     /** @test */
     function guests_may_not_add_photos_to_products()
     {
-        $product = ['name' => 'toto', 'option_group_id' => '1', 'category_id' => '2', 'slug' => 'toto', 'price' => 1900,
-            'description' => 'description', 'image' => 'image.jpg'];
+        $product = create('App\Product');
 
         $this->withExceptionHandling();
 
@@ -71,8 +69,7 @@ class CreateProductsTest extends TestCase
      /** @test */
     function any_auth_users_may_not_add_photos_to_products()
     {
-        $product = ['name' => 'toto', 'option_group_id' => '1', 'category_id' => '2', 'slug' => 'toto', 'price' => 1900,
-            'description' => 'description', 'image' => 'image.jpg'];
+        $product = create('App\Product');
 
         $this->signIn();
         $this->withExceptionHandling();
@@ -85,8 +82,7 @@ class CreateProductsTest extends TestCase
       /** @test */
     // function admin_may_add_photos_to_products()
     // {
-    //     $product = ['name' => 'toto', 'option_group_id' => '1', 'category_id' => '2', 'slug' => 'toto', 'price' => 1900,
-    //         'description' => 'description', 'image' => 'image.jpg'];
+        // $product = create('App\Product');
 
     //    $user = factory('App\User')->make([
     //         'theboss' => 1,
@@ -105,8 +101,7 @@ class CreateProductsTest extends TestCase
     /** @test */
     function guests_may_not_delete_a_product()
     {
-        $product = ['name' => 'toto', 'option_group_id' => '1', 'category_id' => '2', 'slug' => 'toto', 'price' => 1900,
-            'description' => 'description', 'image' => 'image.jpg'];
+        $product = create('App\Product');
 
         $this->withExceptionHandling();
 
@@ -117,8 +112,7 @@ class CreateProductsTest extends TestCase
     /** @test */
     function auth_users_may_not_delete_products()
     {
-        $product = ['name' => 'toto', 'option_group_id' => '1', 'category_id' => '2', 'slug' => 'toto', 'price' => 1900,
-            'description' => 'description', 'image' => 'image.jpg'];
+        $product = create('App\Product');
 
         $this->signIn();
 

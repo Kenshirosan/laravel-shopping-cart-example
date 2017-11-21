@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Option;
+use App\Product;
 use Illuminate\Support\ServiceProvider;
 
 class OptionsServiceProvider extends ServiceProvider
@@ -15,11 +15,10 @@ class OptionsServiceProvider extends ServiceProvider
     public function boot()
     {
         // \View::composer('*', function ($view) {
-        //     $options = \Cache::rememberForever('options', function () {
-        //         return Option::all();
-        //     });
 
-        //     $view->with('options', $options);
+        //     $holidaySpecials = Product::where('holiday_special', true)->get();
+
+        //     $view->with('holidaySpecials', $holidaySpecials);
         // });
     }
 

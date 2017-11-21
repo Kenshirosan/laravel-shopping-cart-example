@@ -7,7 +7,7 @@
     "require": {
         "php": ">=5.6.4",
         "barryvdh/laravel-debugbar": "^2.4",
-        "barryvdh/laravel-dompdf": "^0.8.0",
+        "barryvdh/laravel-dompdf": "^0.8.1",
         "gloudemans/shoppingcart": "^2.3",
         "intervention/image": "^2.3",
         "jeroennoten/laravel-adminlte": "^1.20",

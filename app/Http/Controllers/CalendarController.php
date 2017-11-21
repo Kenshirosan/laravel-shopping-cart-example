@@ -39,7 +39,18 @@ class CalendarController extends Controller
 
         $this->validate(request(), ['title' => 'nullable', 'start' => 'nullable']);
 
-        $event->update(request(['title', 'start']));
+        $title = request('title');
+        $start = request('start');
+
+        if(request('title') == null) {
+            $title = $event->title;
+        }
+
+        if(request('start') == null) {
+            $start = $event->start;
+        }
+
+        $event->update(['title' => $title, 'start' => $start]);
 
         return response('success', 200);
     }

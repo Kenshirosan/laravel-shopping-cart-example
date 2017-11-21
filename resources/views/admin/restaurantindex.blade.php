@@ -8,10 +8,22 @@
 
         {{--  NAME OF MEAL --}}
         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-
             <label for="name" class="col-md-4 control-label">Name of Meal</label>
             <div class="col-md-6">
                 <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" autofocus required>
+                @if ($errors->has('name'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('name') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+        {{-- holiday_special --}}
+        <div class="form-group{{ $errors->has('holiday_special') ? ' has-error' : '' }}">
+            <label for="name" class="col-md-4 control-label">Holiday Special ?</label>
+            <div class="col-md-6">
+                <input type="radio" name="holiday_special" value="0" checked> No<br>
+                <input type="radio" name="holiday_special" value="1"> Yes<br>
                 @if ($errors->has('name'))
                     <span class="help-block">
                         <strong>{{ $errors->first('name') }}</strong>

@@ -22,6 +22,7 @@ class ProductController extends Controller
     */
     public function store(Request $request)
     {
+        // dd(request('holiday_special'));
         try{
             $this->validateRequest($request);
         }
@@ -43,6 +44,7 @@ class ProductController extends Controller
     {
         return $this->validate($request,[
             'name' => 'required',
+            'holiday_special' => 'required|boolean',
             'option_group_id' => 'required',
             'category_id' => 'required',
             'slug' => 'required',
@@ -62,6 +64,7 @@ class ProductController extends Controller
 
             $product = Product::create([
                 'name' => request('name'),
+                'holiday_special' => request('holiday_special'),
                 'option_group_id' => request('option_group_id'),
                 'category_id' => request('category_id'),
                 'slug' => request('slug'),

@@ -55,8 +55,7 @@ class CheckController extends Controller
         $items = explode(':', $order->items);
         $items = preg_replace('/[]["]/ ', '', $items);
 
-        $pdf = PDF::loadView('pdf.printtest', ['order' =>$order, 'items' => $items]);
-
-        return $pdf->stream('order.pdf');
+        return PDF::loadView('pdf.printtest', ['order' =>$order, 'items' => $items])
+                    ->stream('order.pdf');
     }
 }

@@ -17,6 +17,8 @@ Route::resource('shop', 'ShopController', ['only' => ['index', 'show']]);
 Route::resource('cart', 'CartController');
 Route::delete('emptyCart', 'CartController@emptyCart');
 
+// Holiday menus
+Route::get('holidays-special', 'HolidaySpecialController@index');
 
 Route::middleware(['auth', 'must-be-confirmed'])->group(function () {
     Route::get('/edit-profile', 'UserController@index');
@@ -66,9 +68,9 @@ Route::middleware(['auth', 'must-be-confirmed', 'admin'])->group(function () {
     Route::post('/edit-css', 'CssController@update');
     Route::get('/message/{id}', 'MessageController@show');
     Route::delete('/delete/{id}', 'MessageController@destroy');
+    Route::get('/analytics', 'AnalyticsController@analytics');
     //ADD A BUNCH OF PICS ON PRODUCT VIEW
     Route::post('/shop/{slug}/{photo}','PhotosController@store');
-    Route::get('/analytics', 'AnalyticsController@analytics');
 });
 // Route::post('/product_type', 'ProductController@getProductType'); hhhhmmmm.......
 

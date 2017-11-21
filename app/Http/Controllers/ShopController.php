@@ -16,7 +16,9 @@ class ShopController extends Controller
     */
     public function index()
     {
-        $categories = Category::with('products')->get();
+        $categories = Category::with(['products' => function ($query) {
+            $query->where('holiday_special', false);
+        }])->get();
 
         return view('layouts.shop', compact('categories'));
     }

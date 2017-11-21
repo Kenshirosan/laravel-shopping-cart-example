@@ -16,6 +16,7 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
+            $table->boolean('holiday_special')->default(false);
             $table->unsignedInteger('option_group_id')->index();
             $table->unsignedInteger('category_id')->index();
             $table->string('slug')->unique();
@@ -25,7 +26,7 @@ class CreateProductsTable extends Migration
             $table->timestamps();
 
             $table->foreign('option_group_id')->references('id')->on('option_groups');
-            $table->foreign('category_id')->references('id')->on('categories'); //NEED TO FIX THESE THINGS
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 

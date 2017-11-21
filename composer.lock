@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "640e05735f901eb646925d7373435a6d",
+    "content-hash": "ff3fde7c3cfc0301176e8460ec6fff28",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -57,27 +57,35 @@
         },
         {
             "name": "barryvdh/laravel-dompdf",
-            "version": "v0.8.0",
+            "version": "v0.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-dompdf.git",
-                "reference": "22ee9cb8e0ac0d5f11633d1194280ab40b2bba1f"
+                "reference": "3b2235e589616331d68482d61b7763789a2600fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-dompdf/zipball/22ee9cb8e0ac0d5f11633d1194280ab40b2bba1f",
-                "reference": "22ee9cb8e0ac0d5f11633d1194280ab40b2bba1f",
+                "url": "https://api.github.com/repos/barryvdh/laravel-dompdf/zipball/3b2235e589616331d68482d61b7763789a2600fe",
+                "reference": "3b2235e589616331d68482d61b7763789a2600fe",
                 "shasum": ""
             },
             "require": {
                 "dompdf/dompdf": "^0.8",
-                "illuminate/support": "5.1.x|5.2.x|5.3.x|5.4.x",
+                "illuminate/support": "5.1.x|5.2.x|5.3.x|5.4.x|5.5.x",
                 "php": ">=5.5.9"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
                     "dev-master": "0.8-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Barryvdh\\DomPDF\\ServiceProvider"
+                    ],
+                    "aliases": {
+                        "PDF": "Barryvdh\\DomPDF\\Facade"
+                    }
                 }
             },
             "autoload": {
@@ -101,7 +109,7 @@
                 "laravel",
                 "pdf"
             ],
-            "time": "2017-02-19T06:45:54+00:00"
+            "time": "2017-07-29T19:01:17+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
