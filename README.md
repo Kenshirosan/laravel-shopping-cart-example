@@ -1,7 +1,7 @@
 # laravel-shopping-cart
 # work in progress
-Inspired by drehimself/laravel-shopping-cart-example
-Laravel Shopping Cart Example
+
+Laravel E-commerce
 
 Almost ready to ship laravel e-commerce application. Uses Crinsane/LaravelShoppingcart  
 
