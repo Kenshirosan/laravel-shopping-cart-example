@@ -3,15 +3,6 @@
         <div class="col mt-5">
             <div id="calendar"></div>
         </div>
-        <div style="overflow:hidden;">
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="datetimepicker"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </template>
 
@@ -95,7 +86,7 @@
                     allDay: false,
                     backgroundColor: event.color,
                 }
-                axios.patch('/things-to-do/'+event.id, event).then(flash('Event successfully modified')).then(location.reload());
+                axios.patch('/things-to-do/'+event.id, event).then(flash('Event successfully modified')).then(location.reload())
             });
         },
       //fetch events
@@ -122,7 +113,7 @@
     },
     editable  : true,
     selectable: true,
-    droppable : true, // this allows things to be dropped onto the calendar !!!
+    droppable : true, // this allows things to be dropped onto the calendar
     drop      : function ( date, allDay) { // this function is called when something is dropped
         // retrieve the dropped element's stored Event Object
         var originalEventObject = $(this).data('eventObject')
