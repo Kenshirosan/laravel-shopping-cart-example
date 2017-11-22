@@ -18260,42 +18260,49 @@ $(function () {
             week: 'week',
             day: 'day'
         },
-
+        eventDrag: function eventDrag(event, element) {
+            // fc-event-container
+            draggable: true;
+            console.log('dragged');
+        },
         // update events on click
-        eventClick: function eventClick(event, element) {
+        eventClick: function eventClick(event, element, date) {
             // Trying to get sweetalert to update events
-            // swal({
-            //     text: 'Pick a new date and/or time.',
-            //     content: 'div',
-            //     className: 'datetimepicker',
+            swal({
+                text: 'Pick a new date and/or time.',
+                content: 'div',
+                className: 'datetimepicker',
+                button: {
+                    text: "Go!",
+                    closeModal: true
+                }
+            });
+            //     swal({
+            //     text: 'change title ?',
+            //     content: 'input',
+            //     className: 'form-control',
             //     button: {
             //         text: "Go!",
-            //         closeModal: false,
-            //   },
+            //         closeModal: true,
+            //     },
             // })
 
-            // $('.datetimepicker').datetimepicker({
-            //     inline: true,
-            //     sideBySide: true
-            // });
-            // var date = $(".datetimepicker").data("DateTimePicker").date();
-            // $(".datetimepicker").on('click', function(){
-            //     console.log($(this).html());
-            // });
-            event.title = prompt(event.title + ' change the title?');
-            if (event.title == 'delete') {
-                return axios.delete('/things-to-do/' + event.id, event).then(flash('Event successfully deleted'));
-            } else {
-                event.start = prompt('new date ? eg 2017-11-11 14:00:00');
+            $('.datetimepicker').datetimepicker({
+                inline: true,
+                sideBySide: true
+            });
+            $(".datetimepicker").on('click', function () {
+                var date = $(this).data("DateTimePicker").date();
+                date = moment(date).format("YYYY-MM-DD HH:mm:ss");
                 event = {
                     id: event.id,
                     title: event.title,
-                    start: event.start,
+                    start: date,
                     allDay: false,
                     backgroundColor: event.color
                 };
                 axios.patch('/things-to-do/' + event.id, event).then(flash('Event successfully modified'));
-            }
+            });
         },
 
         //fetch events
@@ -18335,6 +18342,7 @@ $(function () {
             copiedEventObject.backgroundColor = $(this).css('background-color');
             copiedEventObject.borderColor = $(this).css('border-color');
             // persist event
+            console.log(date);
             axios.post('/things-to-do', copiedEventObject).then(flash('event successfully added'));
 
             // render the event on the calendar
