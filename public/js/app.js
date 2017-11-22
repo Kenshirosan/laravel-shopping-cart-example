@@ -18260,14 +18260,9 @@ $(function () {
             week: 'week',
             day: 'day'
         },
-        eventDrag: function eventDrag(event, element) {
-            // fc-event-container
-            draggable: true;
-            console.log('dragged');
-        },
+
         // update events on click
         eventClick: function eventClick(event, element, date) {
-            // Trying to get sweetalert to update events
             swal({
                 text: 'Pick a new date and/or time.',
                 content: 'div',
@@ -18277,15 +18272,6 @@ $(function () {
                     closeModal: true
                 }
             });
-            //     swal({
-            //     text: 'change title ?',
-            //     content: 'input',
-            //     className: 'form-control',
-            //     button: {
-            //         text: "Go!",
-            //         closeModal: true,
-            //     },
-            // })
 
             $('.datetimepicker').datetimepicker({
                 inline: true,
@@ -18301,10 +18287,9 @@ $(function () {
                     allDay: false,
                     backgroundColor: event.color
                 };
-                axios.patch('/things-to-do/' + event.id, event).then(flash('Event successfully modified'));
+                axios.patch('/things-to-do/' + event.id, event).then(flash('Event successfully modified')).then(location.reload());
             });
         },
-
         //fetch events
         events: function events(start, end, timezone, callback) {
             $.ajax({
