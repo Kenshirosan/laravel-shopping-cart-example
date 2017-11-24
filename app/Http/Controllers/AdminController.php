@@ -2,19 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use DB;
-use Image;
-use App\User;
 use App\Order;
-use App\Photo;
 use App\Option;
-use App\Product;
-use App\Hideable;
 use App\Category;
 use App\OptionGroup;
-use App\Http\Requests;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {

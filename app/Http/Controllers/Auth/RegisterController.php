@@ -57,7 +57,7 @@ class RegisterController extends Controller
             'last_name' => 'required',
             'address' => 'required',
             'address2' => 'nullable',
-            'zipcode' => 'required',
+            'zipcode' => 'required|numeric',
             'phone_number' => 'required|numeric|min:10',
         ]);
     }
@@ -70,6 +70,8 @@ class RegisterController extends Controller
     */
     protected function create(array $data)
     {
+        $phone = formatPhoneNumber($data['phone_number']);
+
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -78,7 +80,7 @@ class RegisterController extends Controller
             'address' => $data['address'],
             'address2' => $data['address2'],
             'zipcode' => $data['zipcode'],
-            'phone_number' => $data['phone_number'],
+            'phone_number' => $phone,
             'confirmation_token' => str_limit($data['email'] . hash('sha256', $data['email'] . str_random()), 100)
         ]);
 

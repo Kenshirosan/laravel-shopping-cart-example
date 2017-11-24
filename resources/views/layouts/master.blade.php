@@ -24,10 +24,8 @@
     <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}">
 </head>
     <body>
-
         @include('includes.header')
-
-         <div class="container" id="app">
+        <div class="container" id="app">
             @include('messages.messages')
             @yield('content')
             <flash message={{ session('flash') }}></flash>

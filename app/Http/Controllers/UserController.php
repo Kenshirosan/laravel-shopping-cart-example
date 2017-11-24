@@ -27,9 +27,9 @@ class UserController extends Controller
         $this->validate($request, [
             'address' =>'required',
             'address2' => 'nullable',
-            'zipcode' => 'required',
-            'phone_number' => 'required',
-            'email' => 'required',
+            'zipcode' => 'required|numeric',
+            'phone_number' => 'required|numeric|digits:10',
+            'email' => 'required|email',
         ]);
 
         $user->address = $request->address;

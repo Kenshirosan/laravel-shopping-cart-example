@@ -25,13 +25,13 @@
                 </div>
                 <div class="form-group">
                     <label>Phone number</label>
-                    <input type="tel" name="phone" class="form-control" placeholder="0000000000" required>
+                    <input type="tel" maxlength="10" name="phone" class="form-control" placeholder="format: 1234567890" required>
                 </div>
 
             <!-- textarea -->
                 <div class="form-group">
                     <label>Your message</label>
-                    <textarea class="form-control" name="message" rows="3" placeholder="Your message..."></textarea>
+                    <textarea class="form-control" name="message" rows="3" placeholder="Your message must be 20 characters minimum"></textarea>
                 </div>
                 <div class="form-group">
                     <input type="submit" name="submit" class="btn btn-success" value="Submit">

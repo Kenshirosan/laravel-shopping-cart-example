@@ -29,16 +29,18 @@ class MessageController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'email' => 'required',
+            'email' => 'required|email',
             'name' => 'required',
-            'phone' => 'required',
-            'message' => 'required'
+            'phone' => 'required|numeric|digits:10',
+            'message' => 'required|min:20'
         ]);
+
+        $phone = formatPhoneNumber(request('phone'));
 
         $user = Message::create([
             'email' => request('email'),
             'name' => request('name'),
-            'phone' => request('phone'),
+            'phone' => $phone,
             'message' => request('message')
         ]);
 

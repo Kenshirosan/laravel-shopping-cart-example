@@ -18253,7 +18253,7 @@ $(function () {
         },
 
         // update events on click
-        eventClick: function eventClick(event, element, date) {
+        eventClick: function eventClick(event, element) {
             swal({
                 text: 'Pick a new date and/or time.',
                 content: 'div',

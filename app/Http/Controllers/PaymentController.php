@@ -84,7 +84,7 @@ class PaymentController extends Controller
             'last_name' => 'required|exists:users,last_name',
             'address' => 'required',
             'address2' => 'nullable',
-            'zipcode' => 'required',
+            'zipcode' => 'required|numeric',
             'phone_number' => 'required|exists:users,phone_number',
             'email' => 'required|exists:users,email',
             'total' => 'nullable',
@@ -133,15 +133,14 @@ class PaymentController extends Controller
             \Promocodes::disable($code);
         }
 
-        //WORK ON EVENTS
         // event(new UserOrdered($order));
         \Mail::to( auth()->user()->email )->send(new Thankyou($order));
     }
 
     /**
     * delete the specified resource
-    */
-    public function delete($order) //unused unless someone asks for it, just don't want orders to be deleted. route protection
+    */ //unused unless someone asks for it, just don't want orders to be deleted. route protection
+    public function delete($order)
     {
         if (!Auth::user()->isAdmin()) {
             return redirect()->back()->with(['error_message' => 'Page not found!']);
