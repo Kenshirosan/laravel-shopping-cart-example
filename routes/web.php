@@ -1,5 +1,8 @@
 <?php
 
+// testing server performance
+// Route::get('/', 'OrderProcessedController@index');
+
 Route::get('/', function () {
     return redirect('shop');
 })->name('shop');
