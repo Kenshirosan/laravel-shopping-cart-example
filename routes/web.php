@@ -53,6 +53,9 @@ Route::middleware(['auth', 'must-be-confirmed', 'employee'])->group(function () 
 //ADMIN ROUTES
 Route::middleware(['auth', 'must-be-confirmed', 'admin'])->group(function () {
     Route::get('/restaurantpanel', 'AdminController@index');
+    Route::get('/add-holiday-title', 'HolidaySpecialController@create');
+    Route::post('/add-holiday-title', 'HolidaySpecialController@store');
+    Route::delete('/holiday/{id}/delete', 'HolidaySpecialController@destroy');
     Route::get('/panel', 'AdminController@show');
     Route::get('/best-customers', 'BestCustomerController@index');
     Route::post('/insertproduct', 'ProductController@store');
@@ -67,8 +70,8 @@ Route::middleware(['auth', 'must-be-confirmed', 'admin'])->group(function () {
     Route::post('add-options', 'OptionsController@store');
     Route::get('add-category', 'CategoriesController@create');
     Route::post('add-category', 'CategoriesController@store');
-    Route::get('/edit-css', 'CssController@index');
-    Route::post('/edit-css', 'CssController@update');
+    // Route::get('/edit-css', 'CssController@index'); Just in case a wordpress guy comes in..
+    // Route::post('/edit-css', 'CssController@update');
     Route::get('/message/{id}', 'MessageController@show');
     Route::delete('/delete/{id}', 'MessageController@destroy');
     Route::get('/analytics', 'AnalyticsController@analytics');

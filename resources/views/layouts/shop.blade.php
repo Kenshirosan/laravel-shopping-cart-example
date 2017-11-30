@@ -13,7 +13,6 @@
         <h2>Name of your restaurant</h2>
         <p>Place your order !</p>
     </div>
-
     @foreach ($categories as $category)
 
         @if( ! $category->products->isEmpty())

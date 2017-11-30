@@ -1,5 +1,4 @@
 <header>
-
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
             <div class="navbar-header">
@@ -14,9 +13,9 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="{{ set_active('/') }}"><a href="{{ url('/shop') }}">Our Menu</a></li>
-                    @if( App\Product::where('holiday_special', true)->exists())
+                    @if( App\Product::where('holiday_special', true)->exists() && $title != null)
                         <li class="{{ set_active('/') }}">
-                            <a href="{{ url('/holidays-special') }}">Holiday Special</a>
+                            <a href="{{ url('/holidays-special') }}">{{ $title }}</a>
                         </li>
                     @endif
                 </ul>

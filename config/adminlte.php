@@ -45,7 +45,7 @@ return [
     |
     */
 
-    'skin' => 'blue',
+    'skin' => 'purple',
 
     /*
     |--------------------------------------------------------------------------
@@ -113,6 +113,12 @@ return [
         [
             'text' => 'Add a product',
             'url'  => '/restaurantpanel',
+            'icon' => 'shopping-cart',
+            'icon_color' => 'success',
+        ],
+        [
+            'text' => 'Add a title for the holiday special page',
+            'url'  => '/add-holiday-title',
             'icon' => 'shopping-cart',
             'icon_color' => 'success',
         ],
@@ -194,18 +200,18 @@ return [
             'label'       => '',
             'label_color' => 'success',
         ],
-        [
-            'text'    => 'Devs only',
-            'icon'    => 'exclamation-triangle',
-            'icon_color' => 'red',
-            'submenu' => [
-                [
-                    'text' => 'Edit css',
-                    'url'  => '/edit-css',
-                    'icon_color' => 'green',
-                ],
-            ]
-        ],
+        // [
+        //     'text'    => 'Devs only',
+        //     'icon'    => 'exclamation-triangle',
+        //     'icon_color' => 'red',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'Edit css',
+        //             'url'  => '/edit-css',
+        //             'icon_color' => 'green',
+        //         ],
+        //     ]
+        // ],
 
 
         'ACCOUNT SETTINGS',

@@ -6,6 +6,7 @@ use App\Option;
 use App\Product;
 use App\Category;
 use App\OptionGroup;
+use App\HolidayTitle;
 
 class ShopController extends Controller
 {
@@ -16,11 +17,17 @@ class ShopController extends Controller
     */
     public function index()
     {
+        $title = HolidayTitle::first();
+        if (! $title == null) {
+            $title = $title->toArray();
+            $title = $title['holiday_page_title'];
+        }
+
         $categories = Category::with(['products' => function ($query) {
             $query->where('holiday_special', false);
         }])->get();
 
-        return view('layouts.shop', compact('categories'));
+        return view('layouts.shop', compact('categories', 'title'));
     }
 
     /**

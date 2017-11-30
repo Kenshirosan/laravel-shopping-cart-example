@@ -27,7 +27,7 @@ class OrderProcessedController extends Controller
             'id' => 'required'
         ]);
 
-        $order = Hideable::where('order_id', request('id'));
+        $order = Hideable::where('order_id', request('id'))->firstOrFail();
 
         $order->delete();
         return back()->with('success_message', 'Success');

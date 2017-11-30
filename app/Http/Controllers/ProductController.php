@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use Image;
 use App\User;
-use App\Photo;
 use App\Product;
 use App\OptionGroup;
-use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,7 +20,6 @@ class ProductController extends Controller
     */
     public function store(Request $request)
     {
-        // dd(request('holiday_special'));
         try{
             $this->validateRequest($request);
         }
