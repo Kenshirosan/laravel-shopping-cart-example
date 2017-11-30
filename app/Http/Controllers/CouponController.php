@@ -13,9 +13,12 @@ class CouponController extends Controller
 {
     public function index()
     {
-        $coupons = Promocode::where('expires_at', null)->get();
+        $attr = ['expires_at' => null, 'is_disposable' => true];
+        $coupons = Promocode::where($attr)->get();
 
-        return view('layouts.createCoupon', compact('coupons'));
+        $couponsForAll = Promocode::where('is_disposable', false)->get();
+
+        return view('layouts.createCoupon', compact('coupons', 'couponsForAll'));
     }
 
 
@@ -28,8 +31,20 @@ class CouponController extends Controller
 
         $quantity = request('quantity');
         $reward = request('reward');
-
         \Promocodes::createDisposable($quantity, $reward, $data = [], $expires_in = null);
+        return back()->with('success_message', 'Coupons created');
+    }
+
+    public function storeCouponsForEveryone(Request $request)
+    {
+        $this->validate($request, [
+            'quantity' => 'required',
+            'reward' => 'required'
+        ]);
+
+        $quantity = request('quantity');
+        $reward = request('reward');
+        \Promocodes::create($quantity, $reward, $data = [], $expires_in = null);
         return back()->with('success_message', 'Coupons created');
     }
 
@@ -41,7 +56,11 @@ class CouponController extends Controller
 
         $code = request('coupon');
 
-        if( ! \Promocodes::check($code) ){
+        if (!$validCode = Promocode::where('code', $code)->first()){
+            return back()->with('warning_message', 'This coupon has expired');
+        }
+
+        if( ! \Promocodes::check($code) &&  $validCode->is_disposable){
             return back()->with('error_message', 'This code has already been used');
         }
 
@@ -57,5 +76,13 @@ class CouponController extends Controller
 
         session()->flash('success_message', 'Your coupon has been applied');
         return view('layouts.payment_form', compact('total', 'discount', 'code'));
+    }
+
+    public function destroy($id)
+    {
+        $coupon = Promocode::where('id', $id);
+
+        $coupon->delete();
+        return back()->with('success_message', 'Coupon deleted');
     }
 }

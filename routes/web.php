@@ -64,6 +64,8 @@ Route::middleware(['auth', 'must-be-confirmed', 'admin'])->group(function () {
     Route::get('/livesearch','SearchController@show');
     Route::get('create-coupon', 'CouponController@index');
     Route::post('create-coupon', 'CouponController@store');
+    Route::post('/create-disposable-coupon', 'CouponController@storeCouponsForEveryone');
+    Route::delete('coupons/{id}/delete', 'CouponController@destroy');
     Route::get('add-option-group', 'OptionGroupController@index');
     Route::post('add-option-group', 'OptionGroupController@store');
     Route::get('add-options', 'OptionsController@index');

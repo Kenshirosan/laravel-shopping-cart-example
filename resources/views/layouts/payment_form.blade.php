@@ -34,11 +34,12 @@
                                 </div>
                             </div>
                         @endforeach
-                        {{-- <h4 class="text-right text-success" style="padding-right:10px;"><span>Your total : $</span>{{ Cart::subtotal() / 100}}</h4>
-                        <h4 class="text-right text-success" style="padding-right:10px;"><span>Your total : $</span>{{ Cart::tax() / 100}}</h4> --}}
-                        <h4 class="text-right text-success" style="padding-right:10px;"><span>Your total : $</span>{{ $total / 100  }}</h4>
+                        <h4 class="text-right text-success" style="padding-right:10px;"><span>Subtotal : $</span>{{ Cart::subtotal() / 100}}</h4>
+                        <h4 class="text-right text-success" style="padding-right:10px;"><span>taxes : $</span>{{ Cart::tax() / 100}}</h4>
+                        <h4 class="text-right text-success" style="padding-right:10px;"><span>Total : $</span>{{ Cart::total() / 100}}</h4>
                         @if($discount != null)
                             <span class="text-info">Congratulations ! {{ $discount * 100 }} % discount applied with code {{ $code }}</span>
+                            <h4 class="text-right text-success" style="padding-right:10px;"><span>Total including discount : $</span>{{ $total / 100  }}</h4>
                         @endif
                     </div>
                     <!--REVIEW ORDER END-->

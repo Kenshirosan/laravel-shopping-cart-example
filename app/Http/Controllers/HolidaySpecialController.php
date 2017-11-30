@@ -10,12 +10,6 @@ class HolidaySpecialController extends Controller
 {
     public function index()
     {
-        $title = HolidayTitle::first();
-        if (! $title == null) {
-            $title = $title->toArray();
-            $title = $title['holiday_page_title'];
-        }
-
         $categories = Category::with(['products' => function ($query) {
             $query->where('holiday_special', true);
         }])->get();

@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Product;
+use App\HolidayTitle;
 use Illuminate\Support\ServiceProvider;
 
 class OptionsServiceProvider extends ServiceProvider
@@ -14,12 +14,17 @@ class OptionsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // \View::composer('*', function ($view) {
+        \View::composer('*', function ($view) {
 
-        //     $holidaySpecials = Product::where('holiday_special', true)->get();
+            $title = HolidayTitle::first();
 
-        //     $view->with('holidaySpecials', $holidaySpecials);
-        // });
+            if (! $title == null) {
+                $title = $title->toArray();
+                $title = $title['holiday_page_title'];
+            }
+
+            $view->with('title', $title);
+        });
     }
 
     /**
