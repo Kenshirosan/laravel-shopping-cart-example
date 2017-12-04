@@ -41,10 +41,9 @@
             </div>
         </div>
     </form>
-    <hr>
-    <hr>
-    <hr>
+
     <br>
+
     <div class="text-center">
         <h1 class="text-info">Create coupons for everyone</h1>
         <p><small><em> These coupons needs to be invalidated manually</em></small></p>
@@ -83,9 +82,10 @@
             </div>
         </div>
     </form>
+    <br>
 <div class="container">
     @if(!$coupons->isEmpty())
-        <h1 class="text-success">Valid Disposable Coupons :</h1>
+        <h1 class="text-success">Disposable Coupons :</h1>
         <div class="row">
             @foreach($coupons as $coupon)
                 <p class="col-md-4">{{ $coupon->code }} : <span class="text-info">{{ $coupon->reward }}% </span></p>
