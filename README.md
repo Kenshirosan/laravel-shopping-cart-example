@@ -42,6 +42,9 @@ update database info, stripe key, and mail driver
 php artisan key:generate
 ```
 ```
+php artisan config:cache
+```
+```
 php artisan migrate
 ```
 if there's any problem with migrations, try deleting the boot method in the AppServiceProvider file.
