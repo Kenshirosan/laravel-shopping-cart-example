@@ -91,18 +91,18 @@
                 <p class="col-md-4">{{ $coupon->code }} : <span class="text-info">{{ $coupon->reward }}% </span></p>
             @endforeach
         </div>
-    @if(!$couponsForAll->isEmpty())
+    @if(! $couponsForAll->isEmpty())
         <h1 class="text-success">Coupons for Everyone :</h1>
-        <div class="row">
             <p><small><em> These coupons needs to be invalidated manually</em></small></p>
+            <div class="row">
             @foreach($couponsForAll as $coupon)
                 <p class="col-md-4">{{ $coupon->code }} : <span class="text-info">{{ $coupon->reward }}% </span></p>
+                <form action="/coupons/{{ $coupon->id }}/delete" method="POST">
+                    {{ csrf_field() }}
+                    {{ method_field('DELETE') }}
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
             @endforeach
-            <form action="/coupons/{{ $coupon->id }}/delete" method="POST">
-                {{ csrf_field() }}
-                {{ method_field('DELETE') }}
-                <button type="submit" class="btn btn-danger">Delete</button>
-            </form>
         </div>
     @endif
     @else

@@ -25,8 +25,8 @@ class CouponController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'quantity' => 'required',
-            'reward' => 'required'
+            'quantity' => 'required|numeric',
+            'reward' => 'required|numeric'
         ]);
 
         $quantity = request('quantity');
@@ -38,8 +38,8 @@ class CouponController extends Controller
     public function storeCouponsForEveryone(Request $request)
     {
         $this->validate($request, [
-            'quantity' => 'required',
-            'reward' => 'required'
+            'quantity' => 'required|numeric',
+            'reward' => 'required|numeric'
         ]);
 
         $quantity = request('quantity');
@@ -83,6 +83,7 @@ class CouponController extends Controller
         $coupon = Promocode::where('id', $id);
 
         $coupon->delete();
+
         return back()->with('success_message', 'Coupon deleted');
     }
 }

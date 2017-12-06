@@ -25,8 +25,8 @@ class UserController extends Controller
         $user = Auth::user();
 
         $this->validate($request, [
-            'address' =>'required',
-            'address2' => 'nullable',
+            'address' =>'required|string',
+            'address2' => 'nullable|string',
             'zipcode' => 'required|numeric',
             'phone_number' => 'required|numeric|digits:10',
             'email' => 'required|email',

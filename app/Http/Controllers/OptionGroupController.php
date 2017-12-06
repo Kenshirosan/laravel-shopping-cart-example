@@ -18,7 +18,7 @@ class OptionGroupController extends Controller
     {
         try {
         $this->validate($request, [
-            'name' => 'required'
+            'name' => 'required|string'
         ]);
 
         } catch (\Exception $e) {

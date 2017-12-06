@@ -24,7 +24,7 @@ class OrderProcessedController extends Controller
      public function show(Request $request, $order)
     {
         $this->validate($request, [
-            'id' => 'required'
+            'id' => 'required|numeric'
         ]);
 
         $order = Hideable::where('order_id', request('id'))->firstOrFail();
@@ -43,7 +43,7 @@ class OrderProcessedController extends Controller
         }
 
         $this->validate($request, [
-            'id' => 'required'
+            'id' => 'required|numeric'
         ]);
 
         Hideable::create([

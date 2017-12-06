@@ -82,13 +82,13 @@ class PaymentController extends Controller
         return $this->validate($request, [
             'name' => 'required|exists:users,name',
             'last_name' => 'required|exists:users,last_name',
-            'address' => 'required',
-            'address2' => 'nullable',
+            'address' => 'required|string',
+            'address2' => 'nullable|string',
             'zipcode' => 'required|numeric',
             'phone_number' => 'required|exists:users,phone_number',
             'email' => 'required|exists:users,email',
-            'total' => 'nullable',
-            'code' => 'nullable',
+            'total' => 'nullable|numeric',
+            'code' => 'nullable|string',
         ]);
     }
 

@@ -40,14 +40,14 @@ class CategoriesController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'name' => 'required',
+            'name' => 'required|string',
         ]);
 
         Category::create([
             'name' => request('name')
         ]);
 
-        return back()->with('success_message', 'Categroy added');
+        return back()->with('success_message', 'Category added');
     }
 
     /**

@@ -27,7 +27,7 @@ class HolidaySpecialController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'holiday_page_title' => 'required'
+            'holiday_page_title' => 'required|string'
         ]);
 
         HolidayTitle::create([

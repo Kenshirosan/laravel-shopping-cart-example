@@ -19,10 +19,10 @@ class CalendarController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'title' => 'required',
-            'start' => 'required',
-            'allDay' => 'required',
-            'backgroundColor' => 'required'
+            'title' => 'required|string',
+            'start' => 'required|date',
+            'allDay' => 'required|boolean',
+            'backgroundColor' => 'required|string'
         ]);
         Calendar::create([
             'title' => request('title'),
@@ -37,7 +37,7 @@ class CalendarController extends Controller
     {
         $event = Calendar::where('id', $id)->firstOrFail();
 
-        $this->validate(request(), ['title' => 'nullable', 'start' => 'nullable']);
+        $this->validate(request(), ['title' => 'string|nullable', 'start' => 'date|nullable']);
 
         $title = request('title');
         $start = request('start');

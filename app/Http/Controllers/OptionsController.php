@@ -21,8 +21,8 @@ class OptionsController extends Controller
     {
         try {
             $this->validate($request, [
-                'name' => 'required',
-                'option_group_id' => 'required'
+                'name' => 'required|string',
+                'option_group_id' => 'required|numeric'
             ]);
 
         } catch (\Exception $e) {

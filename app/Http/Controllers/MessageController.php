@@ -30,7 +30,7 @@ class MessageController extends Controller
     {
         $this->validate($request, [
             'email' => 'required|email',
-            'name' => 'required',
+            'name' => 'required|string',
             'phone' => 'required|numeric|digits:10',
             'message' => 'required|min:20'
         ]);

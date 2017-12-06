@@ -40,14 +40,14 @@ class ProductController extends Controller
     private function validateRequest(Request $request)
     {
         return $this->validate($request,[
-            'name' => 'required',
+            'name' => 'required|string',
             'holiday_special' => 'required|boolean',
-            'option_group_id' => 'required',
-            'category_id' => 'required',
-            'slug' => 'required',
-            'description' => 'required',
-            'price' => 'required',
-            'image' => 'required',
+            'option_group_id' => 'required|numeric',
+            'category_id' => 'required|numeric',
+            'slug' => 'required|string',
+            'description' => 'required|string',
+            'price' => 'required|numeric',
+            'image' => 'required|image',
         ]);
     }
 
