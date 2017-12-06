@@ -47,7 +47,7 @@ class ProductController extends Controller
             'slug' => 'required|string',
             'description' => 'required|string',
             'price' => 'required|numeric',
-            'image' => 'required|image',
+            'image' => 'required|image|mimes:jpg,jpeg,png,bmp',
         ]);
     }
 

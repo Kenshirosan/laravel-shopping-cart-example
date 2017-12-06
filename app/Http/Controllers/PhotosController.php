@@ -27,7 +27,7 @@ class PhotosController extends Controller
         $product = Product::where('slug', $slug)->firstOrFail();
 
         $this->validate($request, [
-            'photos' => 'required|mimes:jpg,jpeg,png,bmp'
+            'photos' => 'required|image|mimes:jpg,jpeg,png,bmp'
         ]);
 
         $file = $request->file('photos');
