@@ -14,7 +14,7 @@ class OptionsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        \View::composer('*', function ($view) {
+        \View::composer('includes.header', function ($view) {
 
             $title = HolidayTitle::first();
 
