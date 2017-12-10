@@ -18523,18 +18523,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     methods: {
         addtocart: function addtocart() {
-            axios.post('/cart/', this.$data).then(flash(this.product.name + ' was added to cart')).then(setTimeout(function () {
+            axios.post('/cart/', this.$data).then(flash(this.product.name + ' was added to cart')).then(this.$emit('done')).then(setTimeout(function () {
                 var select = document.getElementsByClassName('options');
                 var i = 0;
                 while (i < select.length) {
                     var option = select.options.selectedIndex = 0;
-                    $(option).trigger('click');
+
+                    $('.reset').on('click', function () {
+                        this.selected = this.newData;
+                    });
+                    $('.reset').trigger('click');
                     i++;
                 }
             }, 500));
         },
         remove: function remove() {
             axios.delete('/cart/', this.$data).then(flash(this.product.name + 'removed !'));
+        },
+        done: function done() {
+            this.$data = '';
         }
     }
 });
@@ -49129,7 +49136,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "click": function($event) {
         $event.preventDefault();
         _vm.addtocart()
-      }
+      },
+      "done": _vm.done
     }
   })
 },staticRenderFns: []}

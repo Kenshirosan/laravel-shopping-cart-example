@@ -1,5 +1,5 @@
 <template>
-    <input type="submit" @click.prevent="addtocart()" class="btn btn-success" value="Add To Cart">
+    <input type="submit" @click.prevent="addtocart()"  @done="done" class="btn btn-success" value="Add To Cart">
 </template>
 
 <script>
@@ -47,12 +47,17 @@
             addtocart() {
                     axios.post('/cart/', this.$data)
                         .then(flash(this.product.name + ' was added to cart'))
+                        .then(this.$emit('done'))
                         .then( setTimeout( function() {
                             let select = document.getElementsByClassName('options');
                             let i = 0;
                             while ( i < select.length) {
                                 let option = select.options.selectedIndex = 0;
-                                $(option).trigger('click')
+
+                                $('.reset').on('click', function(){
+                                    this.selected = this.newData;
+                                });
+                                $('.reset').trigger('click')
                                 i++;
                             }
                         }, 500)
@@ -61,6 +66,10 @@
 
             remove() {
                 axios.delete('/cart/', this.$data).then(flash(this.product.name + 'removed !'));
+            },
+
+            done() {
+                this.$data = ''
             }
         }
     }
