@@ -38,4 +38,9 @@ class Product extends Model
     {
         return $this->group->options;
     }
+
+    public function price()
+    {
+        return money_format('%i', $this->price / 100);
+    }
 }

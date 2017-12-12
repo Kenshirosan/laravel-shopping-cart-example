@@ -22,7 +22,7 @@
                 <td><h4 class="text-info">{{ $order->last_name }}</h4></td>
                 <td><h4 class="text-info">{{ $order->email }}</h4></td>
                 <td><h4 class="text-info">{{ $order->phone_number }}</h4></td>
-                <td><h4 class="text-info">${{ $order->price /100 }}</h4></td>
+                <td><h4 class="text-info">${{ $order->price() }}</h4></td>
             </tr>
         </table>
 

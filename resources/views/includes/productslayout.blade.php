@@ -6,7 +6,7 @@
                 <img src="{{ asset('img/' . $product->image) }}" alt="product" class="img-responsive">
             </a>
             <a href="{{ url('shop', [$product->slug]) }}"><h3>{{ $product->name }}</h3>
-                <p>{{ $product->price /100 }}</p>
+                <p>${{ $product->price() }}</p>
             </a>
             @if( !Auth::guest() && Auth::user()->theboss )
                 <form method="POST" action="/delete/{{$product->slug}}/product">
@@ -17,7 +17,7 @@
             @endif
         </div> <!-- end caption -->
     </div> <!-- end thumbnail -->
-    <h3>${{ $product->price / 100}}</h3>
+    <h3>${{ $product->price() }}</h3>
 
     <form action="{{ url('/cart') }}" method="POST" class="side-by-side" id="form">
         {{ csrf_field() }}

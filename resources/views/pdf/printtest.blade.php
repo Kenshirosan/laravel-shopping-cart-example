@@ -26,7 +26,7 @@
                 <td><strong class="text-info">{{ $order->last_name }}</strong></td>
                 <td><strong class="text-info">{{ $order->email }}</strong></td>
                 <td><strong class="text-info">{{ $order->phone_number }}</strong></td>
-                <td><strong class="text-info">${{ $order->price /100 }}</strong></td>
+                <td><strong class="text-info">${{ $order->price() }}</strong></td>
             </tr>
         </tbody>
     </table>

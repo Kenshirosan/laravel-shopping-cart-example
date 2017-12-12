@@ -20,7 +20,7 @@
                         <a href="/order/{{ $order->id }}" class="admin-links">
                             <h4 class="admin-links">Order: {{ $order->id }}</h4>
                             <p>
-                            {{ $order->name }} {{ $order->last_name }} paid $<strong>{{ $order->price /100}}</strong> for {{ preg_replace('/[]["]/ ', '', $order->items) }} on <strong>{{ $order->created_at->toFormattedDateString() }}</strong> at {{ $order->created_at->toTimeString() }}
+                            {{ $order->name }} {{ $order->last_name }} paid $<strong>{{ $order->price() }}</strong> for {{ preg_replace('/[]["]/ ', '', $order->items) }} on <strong>{{ $order->created_at->toFormattedDateString() }}</strong> at {{ $order->created_at->toTimeString() }}
                             </p>
                         </a>
 

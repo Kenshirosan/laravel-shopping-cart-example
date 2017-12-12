@@ -12,7 +12,7 @@
 
         <h1>Thanks for ordering with us.</h1>
         <h2>Here's your invoice</h2>
-            ${{ $order->price / 100 }}
+            ${{ $order->price() }}
         <br>
             {{  preg_replace('/[]["]/ ', '', $order->items) }}
     </body>

@@ -57,4 +57,9 @@ class Order extends Model
         return $this->whereDate('created_at', date('Y-m-d'))->orderBy('id', 'desc')->count();
     }
 
+    public function price()
+    {
+        return money_format('%i', $this->price / 100);
+    }
+
 }
