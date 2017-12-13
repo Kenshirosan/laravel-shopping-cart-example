@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('title')
-    Add title to holiday special page
+    Add Holiday's title
 @endsection
 
     @section('content')
@@ -25,8 +25,9 @@
                 </div>
             </div>
         </form>
+        <hr>
+        <div class="container">
         @if(! $titles->isEmpty())
-            <div class="row">
                 <div class="col-md-6">
                     @foreach($titles as $title)
                         {{ $title->holiday_page_title }}

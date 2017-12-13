@@ -43,11 +43,11 @@
     </form>
 
     <div class="container">
-            <h2 class="text-info">Options available :</h2>
-            @foreach($options as $option)
+        <h2 class="text-info">Options available :</h2>
+        @foreach($options as $option)
             <div class="col-md-4">
                 <p> <span class="text-primary">Group {{ $option->optionGroup->name }}</span> : {{ $option->name }}</p>
             </div>
-            @endforeach
+        @endforeach
     </div>
 @endsection

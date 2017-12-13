@@ -5,11 +5,10 @@
 @endsection
 
 @section('content')
-@include('messages.messages')
+<div class="container">
     @if( Auth::user()->id == $user->id)
-        <div class="row">
+        <div class="col-md-12">
             <div class="panel-body">
-
                 <form class="form-horizontal" method="POST" action="/edit-profile/{user_id}">
                     {{ csrf_field() }}
                     {{ method_field('PATCH') }}
@@ -35,6 +34,7 @@
                                     </span>
                                 @endif
                             </div>
+
                             <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
                                 <div class="span1"></div>
                                 <div class="col-md-12">
