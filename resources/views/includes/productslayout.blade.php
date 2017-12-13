@@ -22,13 +22,15 @@
     <form action="{{ url('/cart') }}" method="POST" class="side-by-side" id="form">
         {{ csrf_field() }}
         {{-- form for my super not working with options vue component --}}
-        <input type="hidden" name="id" v-model="this.id" value="{{ $product->id }}">
-        <input type="hidden" name="name" v-model="this.name" value="{{ $product->name }}">
-        <input type="hidden" name="price" v-model="this.price" value="{{ $product->price }}">
-        {{-- noscript --}}
+        {{-- <input type="hidden" name="id" v-model="this.id" value="{{ $product->id }}"> --}}
+        {{-- <input type="hidden" name="name" v-model="this.name" value="{{ $product->name }}"> --}}
+        {{-- <input type="hidden" name="price" v-model="this.price" value="{{ $product->price }}"> --}}
+
+        {{-- <noscript> if Vue component works a day.... --}}
         <input type="hidden" name="id"  value="{{ $product->id }}">
         <input type="hidden" name="name"  value="{{ $product->name }}">
         <input type="hidden" name="price"  value="{{ $product->price }}">
+        {{-- </noscript> --}}
 
         @if( ! $product->options()->isEmpty() )
              <select name="options" class="options minimal" v-model="selected" autofocus required>
