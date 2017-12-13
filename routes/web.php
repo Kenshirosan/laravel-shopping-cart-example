@@ -72,7 +72,7 @@ Route::middleware(['auth', 'must-be-confirmed', 'admin'])->group(function () {
     Route::post('add-options', 'OptionsController@store');
     Route::get('add-category', 'CategoriesController@create');
     Route::post('add-category', 'CategoriesController@store');
-    // Route::get('/edit-css', 'CssController@index'); Just in case a wordpress guy comes in..
+    // Route::get('/edit-css', 'CssController@index'); Just in case a wordpress guy comes in :-D ..
     // Route::post('/edit-css', 'CssController@update');
     Route::get('/message/{id}', 'MessageController@show');
     Route::delete('/delete/{id}', 'MessageController@destroy');

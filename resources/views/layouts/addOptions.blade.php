@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    @include('messages.messages')
     <h1>Hello, {{ Auth::user()->name }}</h1>
     <form class="form-horizontal" method="POST" action="/add-options" enctype="multipart/form-data">
         @include('includes.error')
@@ -42,4 +41,13 @@
             </div>
         </div>
     </form>
+
+    <div class="container">
+            <h2 class="text-info">Options available :</h2>
+            @foreach($options as $option)
+            <div class="col-md-4">
+                <p> <span class="text-primary">Group {{ $option->optionGroup->name }}</span> : {{ $option->name }}</p>
+            </div>
+            @endforeach
+    </div>
 @endsection

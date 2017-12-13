@@ -14,7 +14,9 @@ class OptionsController extends Controller
     {
         $optionGroups = OptionGroup::all();
 
-        return view('layouts.addOptions', compact('optionGroups'));
+        $options = Option::all();
+
+        return view('layouts.addOptions', compact('optionGroups', 'options'));
     }
 
     public function store(Request $request)

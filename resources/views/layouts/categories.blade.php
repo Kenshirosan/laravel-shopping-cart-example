@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    @include('messages.messages')
 <h1 class="text-center text-info">Create a Category</h1>
 <hr>
     <form action="/add-category" class="form-horizontal" method="POST">

@@ -6,7 +6,6 @@
 
 @section('content')
     <section class="content">
-        @include('messages.messages')
         <div class="row">
             @if(!$messages->isEmpty())
                 @foreach($messages as $message)

@@ -1,7 +1,6 @@
 @extends('adminlte::page')
 
 @section('content')
-@include('messages.messages')
     <h1>Hello, {{ Auth::user()->name }}</h1>
     <form class="form-horizontal" method="POST" action="/insertproduct" enctype="multipart/form-data">
         {{ csrf_field() }}

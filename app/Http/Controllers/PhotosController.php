@@ -10,12 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class PhotosController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('admin');
-    }
-
      /**
     * Store a newly created resource in storage.
     *

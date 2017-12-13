@@ -8,7 +8,6 @@
 
 @section('content')
 <div class="col-md-6 col-md-offset-3">
-    @include('messages.messages')
         <h4 class="text-center">Today's Order</h4>
         <ul class=list-group>
 

@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('content')
-@include('messages.messages')
+
 <div class="text-center">
     <h1 class="text-info">Create unique coupons</h1>
     <p><small><em> These coupons are invalidated when customers use them</em></small></p>

@@ -11,7 +11,9 @@ class OptionGroupController extends Controller
 {
     public function index()
     {
-        return view('layouts.addOptionGroup');
+        $optionGroups = OptionGroup::all();
+
+        return view('layouts.addOptionGroup', compact('optionGroups'));
     }
 
     public function store(Request $request)

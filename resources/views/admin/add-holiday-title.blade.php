@@ -5,7 +5,6 @@
 @endsection
 
     @section('content')
-        @include('messages.messages')
         <form class="form-horizontal" method="POST" action="/add-holiday-title">
             {{ csrf_field() }}
             <div class="form-group{{ $errors->has('holiday_page_title') ? ' has-error' : '' }}">
