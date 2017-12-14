@@ -14,6 +14,8 @@
 </script>
 
 <script>
+    import swal from 'sweetalert';
+
     $(function () {
     /* initialize the external events
      -----------------------------------------------------------------*/

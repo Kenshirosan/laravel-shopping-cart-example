@@ -3,7 +3,7 @@
 @section('calendar-css')
     <link rel="stylesheet" type="text/css" href="/css/calendar.min.css">
     <link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css" />
-    <link rel="stylesheet" href="/css/app.css" />
+    <link rel="stylesheet" href="/css/calendarFix.css" />
 @endsection
 
 @section('title')

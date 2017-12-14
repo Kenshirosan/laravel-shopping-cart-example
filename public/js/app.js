@@ -18189,8 +18189,12 @@ module.exports = function spread(callback) {
 
 /***/ }),
 /* 153 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert__ = __webpack_require__(165);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_sweetalert__);
 //
 //
 //
@@ -18206,6 +18210,8 @@ module.exports = function spread(callback) {
 //
 //
 //
+
+
 
 $(function () {
     /* initialize the external events
@@ -18254,7 +18260,7 @@ $(function () {
 
         // update events on click
         eventClick: function eventClick(event, element) {
-            swal({
+            __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()({
                 text: 'Pick a new date and/or time.',
                 content: 'div',
                 className: 'datetimepicker',
@@ -18551,9 +18557,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert__ = __webpack_require__(165);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_sweetalert__);
 window._ = __webpack_require__(162);
 
 /**
@@ -18610,7 +18613,7 @@ if (token) {
 // });
 
 window.moment = __webpack_require__(0);
-
+// import swal from 'sweetalert';
 
 window.Vue = __webpack_require__(177);
 window.events = new Vue();

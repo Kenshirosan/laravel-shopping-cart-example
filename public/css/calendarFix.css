@@ -1,0 +1,9 @@
+.swal-modal {
+    width: 600px;
+    border: 3px solid white;
+    padding: 2em;
+}
+
+.swal-overlay {
+    font-size: 1em!important;
+}

@@ -54,7 +54,7 @@ if (token) {
 // });
 
 window.moment = require('moment');
-import swal from 'sweetalert';
+// import swal from 'sweetalert';
 
 window.Vue = require('vue');
 window.events = new Vue();
