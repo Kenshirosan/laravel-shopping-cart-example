@@ -7,7 +7,7 @@ Almost ready to ship laravel e-commerce application. Uses Crinsane/LaravelShoppi
 
 Features :
 ---
-* added user registration, reworked everything to match laravel 5.4 folder structure
+* added user registration
 * mail functionality on registration an order. (make sure you have postfix installed and properly configured)
 * order form and order table
 * admin(boss)and employee rows in users table, to be set manually directly in database
