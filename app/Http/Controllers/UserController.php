@@ -20,20 +20,10 @@ class UserController extends Controller
 
             return view('admin.employees', compact('employees'));
         }
-
-        $user = Auth::user();
-
-        return view('layouts.userprofile', compact('user'));
     }
 
     public function show($id)
     {
-        if (auth()->user()->isAdmin()) {
-            $employee = User::where('id', $id)->firstOrFail();
-
-            return view('admin.employee', compact('employee'));
-        }
-
         $user = Auth::user();
 
         if ($user->isAdmin() || $user->isEmployee()) {
@@ -79,6 +69,13 @@ class UserController extends Controller
         return back()->with('success_message', 'Employee added !');
     }
 
+    public function edit()
+    {
+        $user = Auth::user();
+
+        return view('layouts.userprofile', compact('user'));
+    }
+
     public function update(Request $request, $id)
     {
         $user = Auth::user();
@@ -122,6 +119,6 @@ class UserController extends Controller
 
         $user->delete();
 
-        return redirect('/register')->with(['success_message' => 'Your account was successfully deleted !, We\'re &#x1f622; to see you go, sign up again :-)']);
+        return redirect('/register')->with(['success_message' => 'Your account was successfully deleted !, We\'re 😢 to see you go, sign up again 😀']);
     }
 }

@@ -29,7 +29,7 @@ class RegisterController extends Controller
     *
     * @var string
     */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/shop';
 
     /**
     * Create a new controller instance.
@@ -85,7 +85,7 @@ class RegisterController extends Controller
 
         $email = $data['email'];
         $user = User::where('email', $email)->firstOrFail();
-        // $event = event(new UserRegistered($user)); working but unecessary ?
+        // $event = event(new UserRegistered($user)); working but unecessary ? maybe with a delay on email..
 
         \Mail::to($data['email'])->send(new Welcome($user));
         return $user;

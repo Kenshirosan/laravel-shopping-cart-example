@@ -3,7 +3,12 @@
 // testing server performance
 // Route::get('/', 'OrderProcessedController@index');
 
+
 Route::get('/', function () {
+    return redirect('shop');
+})->name('shop');
+
+Route::get('/home', function () {
     return redirect('shop');
 })->name('shop');
 
@@ -24,7 +29,7 @@ Route::delete('emptyCart', 'CartController@emptyCart');
 Route::get('holidays-special', 'HolidaySpecialController@index');
 
 Route::middleware(['auth', 'must-be-confirmed'])->group(function () {
-    Route::get('/edit-profile', 'UserController@index');
+    Route::get('/edit-profile', 'UserController@edit');
     Route::patch('/edit-profile/{user_id}', 'UserController@update');
     Route::get('/erase/{user_id}', 'UserController@show');
     Route::delete('/erase/{account}', 'UserController@destroy');
@@ -85,7 +90,6 @@ Route::middleware(['auth', 'must-be-confirmed', 'admin'])->group(function () {
     //ADD A BUNCH OF PICS ON PRODUCT VIEW
     Route::post('/shop/{slug}/{photo}','PhotosController@store');
 });
-// Route::post('/product_type', 'ProductController@getProductType'); hhhhmmmm.......
 
 
 // WISHLIST ROUTES(took it away from views.. commented out the html in templates)
