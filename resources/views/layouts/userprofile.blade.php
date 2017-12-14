@@ -133,9 +133,11 @@
                                 </div>
                             </div>
                         </form>
-                        <a class="btn btn-danger pull-right" href="/erase/{{ $user->id }}">
-                            Delete your account
-                        </a>
+                        @if(! auth()->user()->isAdmin())
+                            <a class="btn btn-danger pull-right" href="/erase/{{ $user->id }}">
+                                Delete your account
+                            </a>
+                        @endif
                     </div>
                 </div>
             @endif

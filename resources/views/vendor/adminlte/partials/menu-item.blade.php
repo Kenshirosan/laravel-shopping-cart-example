@@ -5,21 +5,24 @@
     {{-- this is not spaghetti code, it's a nice small block of php that eases my life :-) --}}
     {{-- display the count in the sidebar --}}
     <?php
-        $calendar = new \App\Calendar();
         if($item['href'] == 'http://127.0.0.1:8000/calendar')
         {
+            $calendar = new \App\Calendar();
+
             $calendar->getAppointmentsCount() > 0 ? $item['label'] = $calendar->getAppointmentsCount() : $item['label'];
         }
 
-        $messages = new \App\Message();
         if($item['href'] == 'http://127.0.0.1:8000/contact-us')
         {
+            $messages = new \App\Message();
+
             $messages->count() > 0 ? $item['label'] = $messages->count() : $item['label'];
         }
 
-        $orders = new \App\Order();
         if($item['href'] == 'http://127.0.0.1:8000/customer-orders')
         {
+            $orders = new \App\Order();
+
             $orders->todaysOrderscount() > 0 ? $item['label'] = $orders->todaysOrdersCount() : $item['label'];
         }
     ?>

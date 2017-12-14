@@ -10,7 +10,7 @@ class BestCustomerController extends Controller
 {
     public function index()
     {
-        $user_count = User::where('confirmed', true)->count();
+        $user_count = User::where(['confirmed' => true, 'employee' => false])->count();
 
         $bestCustomers = Order::selectRaw('year(created_at) year, sum(price) total,user_id, name, last_name, email')
                             ->whereRaw('year(created_at) = year(curdate())')

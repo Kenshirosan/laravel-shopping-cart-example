@@ -15,16 +15,20 @@ class UserController extends Controller
      */
     public function index()
     {
-        if( auth()->user()->isAdmin() ) {
-            $employees = User::where(['employee' => true, 'theboss' => false])->get();
+        $employees = User::where(['employee' => true, 'theboss' => false])->get();
 
-            return view('admin.employees', compact('employees'));
-        }
+        return view('admin.employees', compact('employees'));
     }
 
     public function show($id)
     {
-        $user = Auth::user();
+        if( auth()->user()->isAdmin()) {
+            $employee = User::where('id', $id)->firstOrFail();
+
+            return view('admin.employee', compact('employee'));
+        }
+
+        $user = User::where('id', $id)->firstOrFail();
 
         if ($user->isAdmin() || $user->isEmployee()) {
             return back()->with(['error_message' =>'This account can\'t be deleted']);
@@ -101,13 +105,13 @@ class UserController extends Controller
     public function destroy($id)
     {
         if(auth()->user()->isAdmin()) {
-            $user = User::where('id', $id)->firstOrFail();
+            $employee = User::where(['id'=> $id, 'employee' => true])->firstOrFail();
 
-            if( $user->isAdmin() ){
+            if( $employee->isAdmin() ){
                 return redirect('/delete-user')->with('error_message', 'Admin can\'t be deleted !');
             }
 
-            $user->delete();
+            $employee->delete();
             return redirect('/delete-user')->with('success_message', 'Employee fired !');
         }
 
@@ -119,6 +123,6 @@ class UserController extends Controller
 
         $user->delete();
 
-        return redirect('/register')->with(['success_message' => 'Your account was successfully deleted !, We\'re 😢 to see you go, sign up again 😀']);
+        return redirect('/register')->with(['success_message' => 'Your account was successfully deleted !, We\'re 😢 to see you go, Please sign up again 😀']);
     }
 }

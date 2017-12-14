@@ -80,6 +80,10 @@
             });
             $(".datetimepicker").on('click', function(){
             let date = $(this).data("DateTimePicker").date();
+            if (date < new Date()) {
+                return axios.delete('/things-to-do/'+event.id).then(flash('Event Deleted'))
+                            .then(location.reload());
+            }
             date =  moment(date).format("YYYY-MM-DD HH:mm:ss");
                 event = {
                     id: event.id,
