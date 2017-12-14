@@ -200,27 +200,33 @@ return [
             'label'       => '',
             'label_color' => 'success',
         ],
-        // [
-        //     'text'    => 'Devs only',
-        //     'icon'    => 'exclamation-triangle',
-        //     'icon_color' => 'red',
-        //     'submenu' => [
-        //         [
-        //             'text' => 'Edit css',
-        //             'url'  => '/edit-css',
-        //             'icon_color' => 'green',
-        //         ],
-        //     ]
-        // ],
-
 
         'ACCOUNT SETTINGS',
-            [
-                'text' => 'Profile',
-                'url'  => '/edit-profile',
-                'icon' => 'user',
+        [
+            'text' => 'Profile',
+            'url'  => '/edit-profile',
+            'icon' => 'user',
+            'icon_color' => 'success',
+        ],
+        [
+            'text'    => 'Add/Delete Employees',
+            'icon'    => 'share',
+            'icon_color' => 'aqua',
+            'submenu' => [
+                [
+                    'text' => 'Add an Employee',
+                    'url'  => '/add-user',
+                    'icon' => 'user',
+                    'icon_color' => 'primary',
+                ],
+                [
+                    'text' => 'Delete an Employee',
+                    'url'  => '/delete-user',
+                    'icon' => 'user',
+                    'icon_color' => 'danger'
+                ],
             ],
-
+        ]
     ],
 
     /*

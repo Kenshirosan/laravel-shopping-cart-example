@@ -35,7 +35,7 @@
                 <div class="checkbox">
                   <label for="drop-remove">
                     <input type="checkbox" id="drop-remove">
-                    remove after drop
+                    Remove after drop ?
                   </label>
                 </div>
               </div>
