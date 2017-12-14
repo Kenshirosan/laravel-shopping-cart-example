@@ -18277,7 +18277,9 @@ $(function () {
             $(".datetimepicker").on('click', function () {
                 var date = $(this).data("DateTimePicker").date();
                 if (date < new Date()) {
-                    return axios.delete('/things-to-do/' + event.id).then(flash('Event Deleted')).then(location.reload());
+                    return axios.delete('/things-to-do/' + event.id).then(flash('Event Deleted')).then(setTimeout(function () {
+                        location.reload();
+                    }, 3000));
                 }
                 date = moment(date).format("YYYY-MM-DD HH:mm:ss");
                 event = {
@@ -18287,7 +18289,9 @@ $(function () {
                     allDay: false,
                     backgroundColor: event.color
                 };
-                axios.patch('/things-to-do/' + event.id, event).then(flash('Event successfully modified')).then(location.reload());
+                axios.patch('/things-to-do/' + event.id, event).then(flash('Event successfully modified')).then(setTimeout(function () {
+                    location.reload();
+                }, 3000));
             });
         },
         //fetch events
@@ -18390,12 +18394,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['message'],
     data: function data() {
         return {
-            body: '',
+            body: this.message,
+            level: 'success',
             show: false
         };
     },
@@ -18403,17 +18411,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var _this = this;
 
         if (this.message) {
-            this.flash(this.message);
+            this.flash();
         }
-        window.events.$on('flash', function (message) {
-            return _this.flash(message);
+        window.events.$on('flash', function (data) {
+            return _this.flash(data);
         });
     },
 
     methods: {
-        flash: function flash(message) {
-            this.body = message;
+        flash: function flash(data) {
+            if (data) {
+                this.body = data.message;
+                this.level = data.level;
+            }
+
             this.show = true;
+
             this.hide();
         },
         hide: function hide() {
@@ -18616,13 +18629,14 @@ if (token) {
 // });
 
 window.moment = __webpack_require__(0);
-// import swal from 'sweetalert';
 
 window.Vue = __webpack_require__(177);
 window.events = new Vue();
 
 window.flash = function (message) {
-    window.events.$emit('flash', message);
+    var level = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'success';
+
+    window.events.$emit('flash', { message: message, level: level });
 };
 
 /***/ }),
@@ -49090,11 +49104,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       value: (_vm.show),
       expression: "show"
     }],
-    staticClass: "alert alert-success alert-flash",
+    staticClass: "alert alert-flash",
+    class: 'alert-' + _vm.level,
     attrs: {
       "role": "alert"
+    },
+    domProps: {
+      "textContent": _vm._s(_vm.body)
     }
-  }, [_c('strong', [_vm._v("Success!")]), _vm._v(" " + _vm._s(_vm.body) + "\n")])
+  })
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {

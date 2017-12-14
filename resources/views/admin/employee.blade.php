@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="info-box">
-                    <span class="info-box-icon bg-aqua"><i class="fa fa-envelope-o"></i></span>
+                    <span class="info-box-icon bg-aqua"><i class="fa fa-user-o"></i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">{{ $employee->email}}</span>
                         <span class="info-box-text">{{ $employee->name}}</span>

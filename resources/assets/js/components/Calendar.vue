@@ -82,7 +82,9 @@
             let date = $(this).data("DateTimePicker").date();
             if (date < new Date()) {
                 return axios.delete('/things-to-do/'+event.id).then(flash('Event Deleted'))
-                            .then(location.reload());
+                            .then(
+                                setTimeout(function(){ location.reload()}, 3000)
+                            );
             }
             date =  moment(date).format("YYYY-MM-DD HH:mm:ss");
                 event = {
@@ -92,7 +94,10 @@
                     allDay: false,
                     backgroundColor: event.color,
                 }
-                axios.patch('/things-to-do/'+event.id, event).then(flash('Event successfully modified')).then(location.reload())
+                axios.patch('/things-to-do/'+event.id, event).then(flash('Event successfully modified')).then(
+                        setTimeout(function(){ location.reload(); }
+                    , 3000)
+                )
             });
         },
       //fetch events

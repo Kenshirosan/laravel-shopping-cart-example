@@ -8,7 +8,7 @@
  <noscript>
      <h1 style="color:red">Javascript must be enabled past this point, please check how to activate javascript for your browser</h1>
  </noscript>
-
+<section class="shopping">
     <div class="jumbotron text-center clearfix">
         <h2>Name of your restaurant</h2>
         <p>Place your order !</p>
@@ -33,5 +33,6 @@
     <div class="container text-center">
         <a href="#top" class="btn btn-info">Back to top</a>
     </div>
+</section>
 
 @endsection
