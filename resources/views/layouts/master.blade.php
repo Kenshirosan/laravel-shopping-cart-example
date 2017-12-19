@@ -28,7 +28,7 @@
         <div class="container" id="app">
             @include('messages.messages')
             @yield('content')
-            <flash message={{ session('flash') }}></flash>
+            <flash message="{{ session('flash') }}"></flash>
         </div>
         @include('includes.footer')
 

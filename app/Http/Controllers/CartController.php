@@ -32,7 +32,7 @@ class CartController extends Controller
     {
         Cart::add( $request->id, $request->name, 1, $request->price, [ $request->options ] )->associate(Product::class);
 
-        return redirect('/shop')->with(['flash' => 'Item added']);
+        return redirect('/shop')->with('flash',  "$request->name added !");
     }
 
     /**

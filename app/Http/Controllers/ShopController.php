@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Option;
 use App\Product;
 use App\Category;
-use App\OptionGroup;
-use App\HolidayTitle;
 
 class ShopController extends Controller
 {
@@ -36,13 +33,4 @@ class ShopController extends Controller
 
         return view('layouts.product', compact('product'));
     }
-
-    // public function getPrices()
-    // {
-    //     $prices = Product::all();  //UNUSED, BUT WILL BE ONE DAY....
-    //     foreach($prices as $product){
-    //         // echo($product->price . ' ');
-    //         return number_format(($product->price /100), 2, '.', ' ') . ' ' ;
-    //     }
-    // }
 }
