@@ -25,7 +25,7 @@ Route::resource('shop', 'ShopController', ['only' => ['index', 'show']]);
 Route::resource('cart', 'CartController');
 Route::delete('emptyCart', 'CartController@emptyCart');
 
-// Holiday menus
+// Holiday menus or specials..
 Route::get('holidays-special', 'HolidaySpecialController@index');
 
 Route::middleware(['auth', 'must-be-confirmed'])->group(function () {
@@ -56,7 +56,7 @@ Route::middleware(['auth', 'must-be-confirmed', 'employee'])->group(function () 
 
 
 //ADMIN ROUTES
-Route::middleware(['auth', 'must-be-confirmed', 'admin'])->group(function () {
+Route::middleware(['auth', 'must-be-confirmed', 'employee', 'admin'])->group(function () {
     Route::get('/add-user', 'UserController@create');
     Route::post('/add-user', 'UserController@store');
     Route::get('/delete-user', 'UserController@index');

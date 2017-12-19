@@ -47,43 +47,6 @@
                                 @endif
                             </div>
 
-                            <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
-                                <div class="col-md-12"><strong>Address:</strong></div>
-                                <div class="col-md-12">
-                                    <input type="text" name="address" class="form-control" value="{{ old('address') }}" placeholder="Address" required/>
-                                </div>
-                                @if ($errors->has('address'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('address') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-
-                            <div class="form-group{{ $errors->has('address2') ? ' has-error' : '' }}">
-                                <div class="col-md-12"><strong>Address 2:</strong></div>
-                                <div class="col-md-12">
-                                    <input type="text" name="address2" class="form-control" value="{{ old('address2') }}" placeholder="Address 2"/>
-                                </div>
-                                @if ($errors->has('address2'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('address2') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-
-
-                            <div class="form-group{{ $errors->has('zipcode') ? ' has-error' : '' }}">
-                                <div class="col-md-12"><strong>Zipcode:</strong></div>
-                                <div class="col-md-12">
-                                    <select id="zipcode" name="zipcode" class="form-control" placeholder="Zipcode">
-
-                                        <option value="10001">10001</option>
-                                        <option value="10002">10002</option>
-                                        <option value="10003">10003</option>
-
-                                    </select>
-                                </div>
-                            </div>
 
                             <div class="form-group{{ $errors->has('phone_number') ? ' has-error' : '' }}">
                                 <div class="col-md-12"><strong>Phone Number:</strong></div>

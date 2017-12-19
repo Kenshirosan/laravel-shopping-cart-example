@@ -46,26 +46,21 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:50',
+            'phone_number' => 'required|numeric|digits:10',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
-            'last_name' => 'required|string|max:50',
-            'address' => 'required|string|max:100',
-            'address2' => 'nullable|string|max:100',
-            'zipcode' => 'required|numeric|digits:5',
-            'phone_number' => 'required|numeric|digits:10',
         ]);
-
-        $phone = formatPhoneNumber(request('phone_number'));
 
         $user = User::create([
             'name' => request('name'),
-            'email' => request('email'),
-            'password' => bcrypt(request('password')),
             'last_name' => request('last_name'),
-            'address' => request('address'),
-            'address2' => request('address2'),
-            'zipcode' => request('zipcode'),
-            'phone_number' => $phone,
+            'email' => request('email'),
+            'phone_number' => formatPhoneNumber(request('phone_number')),
+            'password' => bcrypt(request('password')),
+            'address' => 'restaurant address',
+            'address2' => 'restaurant address 2',
+            'zipcode' => 'restaurant zipcode',
             'confirmed' => true,
             'employee' => true
         ]);
@@ -84,28 +79,32 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        $this->validate($request, [
-            'address' =>'required|string',
-            'address2' => 'nullable|string',
-            'zipcode' => 'required|numeric',
-            'phone_number' => 'required|numeric|digits:10',
-            'email' => 'required|email',
-        ]);
+        if(\Hash::check(request('password'), $user->password)) {
+            $this->validate($request, [
+                'address' =>'required|string',
+                'address2' => 'nullable|string',
+                'zipcode' => 'required|numeric',
+                'phone_number' => 'required|numeric|digits:10',
+                'email' => 'required|email',
+                'password' => 'string|confirmed'
+            ]);
 
-        $user->address = $request->address;
-        $user->address2 = $request->address2;
-        $user->zipcode = $request->zipcode;
-        $user->phone_number = $request->phone_number;
-        $user->email = $request->email;
-        $user->save();
+            $user->address = $request->address;
+            $user->address2 = $request->address2;
+            $user->zipcode = $request->zipcode;
+            $user->phone_number = $request->phone_number;
+            $user->email = $request->email;
+            $user->save();
 
-        return redirect('/edit-profile')->with(['success_message' => 'Credentials successfully updated']);
+            return redirect('/edit-profile')->with(['success_message' => 'Credentials successfully updated']);
+        }
+        return back()->with('error_message', 'Something went wrong, Maybe you typed the wrong password');
     }
 
     public function destroy($id)
     {
         if(auth()->user()->isAdmin()) {
-            $employee = User::where(['id'=> $id, 'employee' => true])->firstOrFail();
+            $employee = User::where(['id'=> $id, 'employee' => true, 'theboss' => false])->firstOrFail();
 
             if( $employee->isAdmin() ){
                 return redirect('/delete-user')->with('error_message', 'Admin can\'t be deleted !');
@@ -118,7 +117,7 @@ class UserController extends Controller
         $user = Auth::user();
 
         if ($user->isAdmin() || $user->isEmployee()) {
-            return back()->with(['error_message' =>'This account can\'t be deleted']);
+            return back()->with(['error_message' =>'Naaaaaahhhhh!']);
         }
 
         $user->delete();

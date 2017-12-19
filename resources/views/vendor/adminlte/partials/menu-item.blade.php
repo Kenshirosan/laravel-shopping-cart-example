@@ -9,7 +9,7 @@
         {
             $calendar = new \App\Calendar();
 
-            $calendar->getAppointmentsCount() > 0 ? $item['label'] = $calendar->getAppointmentsCount() : $item['label'];
+            $calendar->getAppointments() > 0 ? $item['label'] = $calendar->getAppointments() : $item['label'];
         }
 
         if($item['href'] == 'http://127.0.0.1:8000/contact-us')
@@ -23,7 +23,7 @@
         {
             $orders = new \App\Order();
 
-            $orders->todaysOrderscount() > 0 ? $item['label'] = $orders->todaysOrdersCount() : $item['label'];
+            $orders->todaysOrdersCount() > 0 ? $item['label'] = $orders->todaysOrdersCount() : $item['label'];
         }
     ?>
 
