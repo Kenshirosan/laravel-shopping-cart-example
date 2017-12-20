@@ -56,7 +56,7 @@ class CartController extends Controller
         }
 
         Cart::update($id, $request->quantity);
-        session()->flash('success_message', 'Quantity was updated successfully!');
+        session()->flash('flash', 'Quantity was updated successfully!');
         response()->json(['success' => true]);
         return response()->view('layouts.cart', $request, 200);
     }
@@ -71,7 +71,7 @@ class CartController extends Controller
     {
         Cart::remove($id);
 
-        return redirect('/cart')->withSuccessMessage('Item has been removed!');
+        return redirect('/cart')->with('flash', 'Item has been removed!');
     }
 
     /**
@@ -83,7 +83,7 @@ class CartController extends Controller
     {
         Cart::destroy();
 
-        return redirect('/cart')->withSuccessMessage('Your cart has been cleared!');
+        return redirect('/cart')->with('flash', 'Your cart has been cleared!');
     }
 
     /**
@@ -103,12 +103,12 @@ class CartController extends Controller
         });
 
         if (!$duplicates->isEmpty()) {
-            return redirect('wishlist')->withSuccessMessage('Item is already in your Wishlist!');
+            return redirect('wishlist')->with('flash', 'Item is already in your Wishlist!');
         }
 
         Cart::instance('wishlist')->add($item->id, $item->name, 1, $item->price, $item->options)
             ->associate('App\Product');
 
-        return redirect('wishlist')->withSuccessMessage('Item has been moved to your Wishlist!');
+        return redirect('wishlist')->with('flash', 'Item has been moved to your Wishlist!');
     }
 }

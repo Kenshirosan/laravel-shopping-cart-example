@@ -5,13 +5,10 @@
     <title>@yield('title')</title>
 
     <meta name="description" content="Shopping Cart">
-
     <!-- Mobile Specific Meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- Store CSRF token for AJAX calls with jquery-->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <!-- Stylesheets -->
     <link rel="stylesheet" href="/css/dropzone.min.css">
     <link rel="stylesheet" href="/css/link.css">

@@ -14,7 +14,7 @@ class HolidaySpecialController extends Controller
             $query->where('holiday_special', true);
         }])->get();
 
-        return view('layouts.shop', compact('title', 'categories'));
+        return view('layouts.shop', compact('categories'));
     }
 
     public function create()
@@ -27,7 +27,7 @@ class HolidaySpecialController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'holiday_page_title' => 'required|string'
+            'holiday_page_title' => 'required|string|max:50'
         ]);
 
         HolidayTitle::create([

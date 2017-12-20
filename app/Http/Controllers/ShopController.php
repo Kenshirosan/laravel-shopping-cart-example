@@ -18,7 +18,7 @@ class ShopController extends Controller
             $query->where('holiday_special', false);
         }])->get();
 
-        return view('layouts.shop', compact('categories', 'title'));
+        return view('layouts.shop', compact('categories'));
     }
 
     /**
