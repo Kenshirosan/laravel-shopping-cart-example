@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use DB;
 use App\User;
 use App\Order;
+use App\Status;
 use Carbon\Carbon;
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -38,8 +39,10 @@ class CheckController extends Controller
 
         $items = explode(':[\']', $order->items);
         $items = preg_replace('/[]["]/ ', '', $items);
+        $statuses = Status::all();
+        $currentStatus = $order->status_id;
 
-        return view('pdf.print', compact('order', 'items'));
+        return view('pdf.print', compact('order', 'items', 'statuses', 'currentStatus'));
     }
 
     /**

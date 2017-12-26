@@ -13,12 +13,20 @@ class Order extends Model
     * @var array
     */
     protected $fillable = [
-        'user_id', 'name','last_name', 'address','address2', 'zipcode', 'phone_number', 'email', 'items', 'price'
+        'user_id', 'name','last_name', 'address','address2', 'zipcode', 'phone_number', 'email', 'items', 'price', 'status_id'
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the status of the order.
+     */
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
     }
 
     public function isHidden()

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -71,8 +72,9 @@ class UserController extends Controller
     public function edit()
     {
         $user = Auth::user();
+        $orders = Order::with(['status'])->get();
 
-        return view('layouts.userprofile', compact('user'));
+        return view('layouts.userprofile', compact('user', 'orders'));
     }
 
     public function update(Request $request, $id)

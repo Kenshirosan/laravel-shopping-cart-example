@@ -16,6 +16,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 class UserOrdered
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
+
     public $order;
     /**
      * Create a new event instance.
@@ -34,6 +35,23 @@ class UserOrdered
      */
     public function broadcastOn()
     {
-        return new SendThankYouEmail();
+        new SendThankYouEmail();
+
+        return new PrivateChannel('customer-channel.' . $this->order->id);
+    }
+
+    /**
+     * Get the data to broadcast.
+     *
+     * @return array
+     */
+    public function broadcastWith()
+    {
+        $extra = [
+            'status_name' => $this->order->status->name,
+            'status_percent' => $this->order->status->percent,
+        ];
+
+        return array_merge($this->order->toArray(), $extra);
     }
 }

@@ -24,9 +24,11 @@ class CreateOrdersTable extends Migration
             $table->string('phone_number')->required();
             $table->string('email')->required();
             $table->string('items')->required();
+            $table->unsignedInteger('status_id')->default(1);
             $table->decimal('price', 10, 2)->required();
             $table->timestamps();
 
+            $table->foreign('status_id')->references('id')->on('statuses');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
         });
     }

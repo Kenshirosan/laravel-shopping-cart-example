@@ -1,9 +1,3 @@
-/**
- * We'll load jQuery and the Bootstrap jQuery plugin which provides support
- * for JavaScript based Bootstrap features such as modals and tabs. This
- * code may be modified to fit the specific needs of your application.
- */
-
 try {
     window.$ = window.jQuery = require('jquery');
 
@@ -32,10 +26,20 @@ if (token) {
 
 
 window.moment = require('moment');
-
 window.Vue = require('vue');
+
 window.events = new Vue();
 
 window.flash = function (message, level = 'success') {
     window.events.$emit('flash', { message, level });
 };
+
+// Optionnal real time order progress
+window.Pusher = require('pusher-js');
+import Echo from 'laravel-echo'
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: '2f56755e1aa83d0d08db',
+    cluster: 'eu',
+    encrypted: true
+});

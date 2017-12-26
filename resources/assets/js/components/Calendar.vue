@@ -136,7 +136,6 @@
         copiedEventObject.backgroundColor = $(this).css('background-color')
         copiedEventObject.borderColor     = $(this).css('border-color')
         // persist event
-        console.log(date);
         axios.post('/things-to-do', copiedEventObject).then(flash('event successfully added'))
 
         // render the event on the calendar

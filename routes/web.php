@@ -1,6 +1,6 @@
 <?php
 
-// testing server performance
+// testing server performance : send email in a loop
 // Route::get('/', 'OrderProcessedController@index');
 
 
@@ -49,6 +49,7 @@ Route::middleware(['auth', 'must-be-confirmed', 'employee'])->group(function () 
     Route::get('/customer-orders', 'CheckController@index');
     Route::get('/order/{id}', 'CheckController@show');
     Route::get('/print/{id}', 'CheckController@create');
+    Route::patch('/update/order/{id}/status', 'StatusController@update');
 
     Route::delete('/show-order/{order}', 'OrderProcessedController@show');
     Route::post('/hide-orders/{order}', 'OrderProcessedController@destroy');
@@ -92,7 +93,7 @@ Route::middleware(['auth', 'must-be-confirmed', 'employee', 'admin'])->group(fun
 });
 
 
-// WISHLIST ROUTES(took it away from views.. commented out the html in templates)
+// WISHLIST ROUTES(took it away from views for now.. commented out the html in templates)
 // Route::post('switchToWishlist/{id}', 'CartController@switchToWishlist');
 // Route::resource('wishlist', 'WishlistController');
 // Route::delete('emptyWishlist', 'WishlistController@emptyWishlist');
