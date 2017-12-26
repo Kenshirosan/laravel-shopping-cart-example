@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use Illuminate\Http\Request;
+use App\Events\OrderStatusChanged;
 
 class StatusController extends Controller
 {
@@ -19,6 +20,7 @@ class StatusController extends Controller
             'status_id' => request('status_id')
         ]);
 
+        event(new OrderStatusChanged($order));
         return back()->with('success_message', 'Successully updated');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Order;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -72,7 +73,11 @@ class UserController extends Controller
     public function edit()
     {
         $user = Auth::user();
-        $orders = Order::with(['status'])->get();
+
+        $orders = Order::selectRaw('*')
+                        ->whereRaw('day(created_at) = day(curdate())')
+                        ->where('user_id', $user->id)
+                        ->get();
 
         return view('layouts.userprofile', compact('user', 'orders'));
     }

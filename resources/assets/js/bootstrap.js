@@ -34,9 +34,10 @@ window.flash = function (message, level = 'success') {
     window.events.$emit('flash', { message, level });
 };
 
-// Optionnal real time order progress
-window.Pusher = require('pusher-js');
+// Optional real time order progress
 import Echo from 'laravel-echo'
+window.Pusher = require('pusher-js');
+
 window.Echo = new Echo({
     broadcaster: 'pusher',
     key: '2f56755e1aa83d0d08db',

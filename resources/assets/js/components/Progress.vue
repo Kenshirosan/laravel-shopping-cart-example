@@ -30,10 +30,10 @@
         },
 
         mounted() {
-            Echo.channel('test.' + this.order_id)
+            Echo.private('order-tracker.' + this.order_id)
             .listen('OrderStatusChanged', (order) => {
               this.statusNew = order.status_name
-              this.progress = parseInt(order.status_percent)
+              this.progress = order.status_percent
             });
         }
     }

@@ -23,7 +23,6 @@
                 @foreach($category->products as $product)
                     @include('includes.productslayout')
                 @endforeach
-
                 @include('includes.goToCartButton')
             </div>
         @endif

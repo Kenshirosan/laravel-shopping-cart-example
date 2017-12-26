@@ -4,6 +4,7 @@
 @endsection
 
 @section('content')
+<div class="row">
     <div class="col-md-6">
         <table class="table">
             <th><strong>Name</strong></th>
@@ -28,29 +29,30 @@
         <a href="/print/{{ $order->id }}" class="btn btn-success">Print</a>
     </div>
     <div class="col-md-4">
-        <form action="/update/order/{{ $order->id }}/status" method="POST">
-            {{ csrf_field() }}
-            {{ method_field('PATCH') }}
-            <div class="form-group">
-                <label for="status_id" class="control-label col-lg-3">Status</label>
-                <div class="controls col-lg-8">
-                    <select name="status_id" id="status_id" class="dropdown-style input-field input-normal">
-                        @foreach ($statuses as $status)
-                            <option value="{{ $status->id}}" {{  $currentStatus == $status->id ? "selected":"" }}>{{ $status->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-lg-3"></div>
-                <div class="controls col-lg-8">
-                    <div class="form-actions">
-                        <button type="submit" id="update-order" class="btn btn-success">Update Status</button>
+        <div class="panel panel-info">
+            <div class="panel-body">
+                <form action="/update/order/{{ $order->id }}/status" method="POST">
+                    {{ csrf_field() }}
+                    {{ method_field('PATCH') }}
+                    <div class="form-group">
+                        <label for="status_id" class="control-label col-lg-3">Status</label>
+                        <div class="controls col-lg-4"></div>
+                        <select name="status_id" id="status_id" class="dropdown-style input-field input-normal">
+                            @foreach ($statuses as $status)
+                                <option value="{{ $status->id}}" {{  $currentStatus == $status->id ? "selected":"" }}>{{ $status->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
-                </div>
+                    <div class="form-group">
+                        <div class="controls col-lg-8">
+                            <div class="form-actions">
+                                <button type="submit" id="update-order" class="btn btn-success">Update Status</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
-
+</div>
 @endsection

@@ -13,9 +13,14 @@
                         Order progress
                     </div>
                     <div class="panel-body">
+                        @if($orders->isEmpty())
+                            No order Today !
+                        @else
                         @foreach($orders as $order)
+                            <p>{{ preg_replace('/[]["]/ ', ' ', $order->items) }}</p>
                             <order-progress status="{{ $order->status->name}}" initial=" {{ $order->status->percent }}" order_id="{{ $order->id }}"></order-progress>
                         @endforeach
+                        @endif
                     </div>
                 </div>
             </div>
