@@ -3,7 +3,7 @@
 
 Laravel E-commerce
 
-Almost ready to ship laravel e-commerce application. Uses Crinsane/LaravelShoppingcart  
+Almost ready to ship laravel e-commerce application. Uses Crinsane/LaravelShoppingcart
 
 Features :
 ---
@@ -23,6 +23,7 @@ Features :
 * user must confirm their email
 * [fullcalendar.io](https://fullcalendar.io)
 * google analytics
+* real time order tracking
 
 download or clone then
 ```
