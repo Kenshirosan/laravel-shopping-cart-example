@@ -19,6 +19,7 @@
                         @foreach($orders as $order)
                             <p>{{ preg_replace('/[]["]/ ', ' ', $order->items) }}</p>
                             <order-progress status="{{ $order->status->name}}" initial=" {{ $order->status->percent }}" order_id="{{ $order->id }}"></order-progress>
+                            <p><small class="text-info">This progress bar will update automatically as your order is processed</small></p>
                         @endforeach
                         @endif
                     </div>
@@ -29,7 +30,7 @@
                     <div class="panel-heading">Register</div>
                     <div class="panel-body">
                         @include('includes.profileForm')
-                        @if(! auth()->user()->isAdmin())
+                        @if(! auth()->user()->isEmployee())
                             <a class="btn btn-danger pull-right" href="/erase/{{ $user->id }}">
                                 Delete your account
                             </a>

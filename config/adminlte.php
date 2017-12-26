@@ -220,7 +220,7 @@ return [
                     'icon_color' => 'primary',
                 ],
                 [
-                    'text' => 'Delete an Employee',
+                    'text' => 'Fire an Employee',
                     'url'  => '/delete-user',
                     'icon' => 'user',
                     'icon_color' => 'danger'

@@ -17,6 +17,7 @@ class RegisterConfirmationController extends Controller
         }
 
         $user->confirm();
+        $user->login();
 
         return redirect('/shop')->with('success_message', 'Your account is now confirmed, you may start ordering !');
     }

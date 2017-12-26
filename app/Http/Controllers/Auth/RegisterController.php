@@ -50,12 +50,12 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:50',
+            'last_name' => 'required|string|max:50',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
-            'last_name' => 'required|string|max:50',
-            'address' => 'required|string|max:100',
-            'address2' => 'nullable|string|max:100',
+            'address' => 'required|string|max:200',
+            'address2' => 'nullable|string|max:200',
             'zipcode' => 'required|numeric|digits:5',
             'phone_number' => 'required|numeric|digits:10',
         ]);
@@ -85,7 +85,7 @@ class RegisterController extends Controller
 
         $email = $data['email'];
         $user = User::where('email', $email)->firstOrFail();
-        // $event = event(new UserRegistered($user)); working but unecessary ? maybe with a delay on email..
+        // $event = event(new UserRegistered($user)); working but unecessary ? maybe with a queue delay on email..
 
         \Mail::to($data['email'])->send(new Welcome($user));
         return $user;
