@@ -87091,7 +87091,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['labels', 'values', 'taxes', 'raw'],
+    props: ['labels', 'values', 'taxes', 'profit'],
 
     mounted: function mounted() {
         var data = {
@@ -87111,7 +87111,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 label: 'Raw Profit',
                 backgroundColor: 'rgba(0, 199, 0, 0.5)',
                 borderColor: 'rgba(0, 0, 132)',
-                data: this.raw
+                data: this.profit
             }]
         };
         var context = this.$el.getContext('2d');

@@ -75,7 +75,9 @@ class UserController extends Controller
         $user = Auth::user();
 
         $orders = Order::selectRaw('*')
-                        ->whereRaw('day(created_at) = day(curdate())')
+                        ->whereRaw('day(created_at) = day(curdate())
+                                    and year(created_at) = year(curdate())
+                                    and month(created_at) = month(curdate())')
                         ->where('user_id', $user->id)
                         ->get();
 

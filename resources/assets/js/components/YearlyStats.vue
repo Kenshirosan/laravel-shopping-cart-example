@@ -6,7 +6,7 @@
     import Chart from 'chart.js'
 
     export default {
-        props: ['labels', 'values', 'taxes', 'raw'],
+        props: ['labels', 'values', 'taxes', 'profit'],
 
         mounted() {
             var data = {
@@ -29,7 +29,7 @@
                         label: 'Raw Profit',
                         backgroundColor: 'rgba(0, 199, 0, 0.5)',
                         borderColor: 'rgba(0, 0, 132)',
-                        data: this.raw,
+                        data: this.profit,
                     },
                 ]
             };

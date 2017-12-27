@@ -34,7 +34,7 @@ class AdminController extends Controller
 
     public function show()
     {
-        $yearlyTotal = Order::selectRaw('year(created_at) year, sum(price) total')
+        $yearlyTotal = Order::selectRaw('year(created_at) year, sum(price / 100) total')
                             ->groupBy('year')
                             ->orderBy('year', 'desc')
                             ->get();
