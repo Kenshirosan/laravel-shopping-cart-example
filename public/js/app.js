@@ -87003,7 +87003,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             datasets: [{
                 label: 'Monthly Taxes',
-                backgroundColor: 'rgba(255, 0, 0, 1)',
+                backgroundColor: 'rgba(255, 0, 0, 0.5)',
                 borderColor: 'rgba(255, 100, 100)',
                 data: this.taxes
             }, {
@@ -87099,12 +87099,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             datasets: [{
                 label: 'Yearly Sales',
-                backgroundColor: 'rgba(0, 0, 255, 1)',
+                backgroundColor: 'rgba(0, 0, 255, 0.5)',
                 borderColor: 'rgba(0, 0, 132)',
                 data: this.values
             }, {
                 label: 'Yearly Taxes',
-                backgroundColor: 'rgba(255, 0, 0, 1)',
+                backgroundColor: 'rgba(255, 0, 0, .5)',
                 borderColor: 'rgba(0, 0, 132)',
                 data: this.taxes
             }, {

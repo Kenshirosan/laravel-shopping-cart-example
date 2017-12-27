@@ -15,7 +15,7 @@
                 datasets: [
                     {
                         label: 'Monthly Taxes',
-                        backgroundColor: 'rgba(255, 0, 0, 1)',
+                        backgroundColor: 'rgba(255, 0, 0, 0.5)',
                         borderColor: 'rgba(255, 100, 100)',
                         data: this.taxes
                     },
