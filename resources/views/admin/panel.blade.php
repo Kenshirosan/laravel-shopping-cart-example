@@ -5,105 +5,72 @@
 @endsection
 @section('content')
 
-<div class="well">
-    <h4>Average Orders :</h4>
-
-    <div class="row">
-        @foreach($averageOrder->chunk(4) as $order)
-
-            <div class="col-xs-2">
-                <ul class="list-group">
-                    @foreach ($order as $averageOrder)
-                        <li class="list-group-item">
-                            Average Order for {{ $averageOrder['month'] }} {{ $averageOrder['year'] }} : ${{ $averageOrder['Average'] / 100 }}
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
-
-        @endforeach
+<div class="row">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h4>Average Orders this year:</h4>
+        </div>
+        <div class="panel-body">
+            @foreach($averageOrder->chunk(4) as $order)
+                <div class="col-xs-2">
+                    <ul class="list-group">
+                        @foreach ($order as $averageOrder)
+                            <li class="list-group-item">
+                                <p class=" text-primary">Average Order for {{ $averageOrder['month'] }} {{ $averageOrder['year'] }} : ${{ $averageOrder['Average'] / 100 }}</p>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endforeach
+        </div>
     </div>
 </div>
-<a href="/restaurantpanel" class="btn btn-primary">Add a product</a>
-<a href="/best-customers" class="btn btn-primary">See your best customers</a>
-<a href="/search-orders" class="btn btn-success pull-right">Search for a specific order</a>
-<ul class=list-group>
-
-    @foreach($yearlyTotal as $total)
-        <li class="list-group-item text-center">
-            <p>Total for
-                <strong class="text text-info">
-                    {{ $total->year }}: <strong class="text text-success">${{ $total->total /100 }}</strong>
-                </strong>
-            </p>
-            <p>Sales Tax :
-                <strong class="text-danger">
-                    ${{ $total->total /100 * 0.08 }}
-                </strong>
-            </p>
-        </li>
-    @endforeach
-
+<div class="row">
     <div class="col-md-12">
-        <li class="list-group-item">
-            <div id="curve_chart" style="width: 100%; height: 500px"></div>
-        </li>
+        <ul class="list-group" style="list-style: none">
+            <li><a href="/restaurantpanel" class="btn btn-primary">Add a product</a></li>
+            <li><a href="/best-customers" class="btn btn-primary">See your best customers</a></li>
+            <li><a href="/search-orders" class="btn btn-success">Search for a specific order</a></li>
+        </ul>
     </div>
-
-    <div class="col-md-12">
-        <li class="list-group-item">
-            <div id="columnchart_material" style="width: 100%; height: 300px;"></div>
-        </li>
+</div>
+<div class="row">
+    <ul class=list-group>
+        @foreach($yearlyTotal as $total)
+            <li class="list-group-item">
+                <p><strong>Total for
+                    <span class="text text-info">
+                        {{ $total->year }}: </span><em class="text text-success">${{ $total->total /100 }}</em>
+                    </strong>
+                </p>
+            </li>
+            <li class="list-group-item">
+                <p><strong>Sales Tax :</strong>
+                    <em class="text-danger">
+                        ${{ ($total->total /100) * 0.08 }}
+                    </em>
+                </p>
+            </li>
+        @endforeach
+    </ul>
+    <div class="row">
+        <div class="col-md-6">
+            <monthly-stats
+                :labels="{{ $totalOrders->keys() }}"
+                :values="{{ $totalOrders->values() }}"
+                :taxes="{{ $taxcollection->values()}}">
+            </monthly-stats>
+        </div>
+        <div class="col-md-6">
+            <yearly-stats
+                @foreach ($yearlyTotal as $total)
+                    :labels="['{{ $total->year }}']"
+                    :values="[{{ $total->total /100 }}]"
+                    :taxes="[{{ $total->total /100 }} *0.08]"
+                    :raw="[{{ $total->total/100 }} - ({{ $total->total /100 }} * 0.08)]">
+                @endforeach
+            </yearly-stats>
+        </div>
     </div>
-</ul>
+</div>
 @endsection
-
-<script src="https://www.gstatic.com/charts/loader.js"></script>
-<script>
-    google.charts.load('current', {'packages':['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
-
-    function drawChart() {
-
-        var data = google.visualization.arrayToDataTable([
-            ['Month', 'Sales','Sales Tax'],
-            @foreach ($totalOrders as $monthlyTotal)
-            ['{{ $monthlyTotal->month}} {{ $monthlyTotal->year }}',  {{ $monthlyTotal->total /100 }}, {{ $monthlyTotal->total /100 * 0.08 }} ],
-            @endforeach
-
-        ]);
-
-        var options = {
-            title: 'Company Performance',
-            curveType: 'function',
-            legend: { position: 'bottom' }
-        };
-
-        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-
-        chart.draw(data, options);
-    }
-</script>
-
-<script>
-    google.charts.load("current", {packages:['bar']});
-    google.charts.setOnLoadCallback(drawChart);
-    function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-            ['Year', 'Sales', 'Taxes', 'Raw Profit'],
-
-            @foreach ($yearlyTotal as $total)
-            ["{{ $total->year }}", {{ $total->total /100 }}, {{ $total->total /100 }} *0.08, {{ $total->total/100 }} - ({{ $total->total /100 }} * 0.08)],
-            @endforeach
-        ]);
-
-        var options = {
-            chart: {
-                title: 'Company Performance',
-                subtitle: 'Sales, Expenses, and Profit',
-            }
-        };
-        var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_material"));
-        chart.draw(data, google.charts.Bar.convertOptions(options));
-    }
-</script>

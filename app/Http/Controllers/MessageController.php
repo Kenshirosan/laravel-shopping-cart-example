@@ -44,7 +44,7 @@ class MessageController extends Controller
             'message' => request('message')
         ]);
 
-        return back()->with('success_message', "Thank you $user->name, we'll get back to you very soon");
+        return back()->with('flash', "Thank you $user->name, we'll get back to you very soon");
     }
 
     public function destroy($id)

@@ -39,17 +39,25 @@ class AdminController extends Controller
                             ->orderBy('year', 'desc')
                             ->get();
 
-        $totalOrders = Order::selectRaw('year(created_at) year, monthname(created_at) month, sum(price) total')
-                            ->groupBy('year', 'month')
-                            ->orderBy('year', 'desc')
-                            ->get();
+        $totalOrders = Order::selectRaw('year(created_at) year, monthname(created_at) months, sum(price / 100) total')
+                            ->whereRaw('year(created_at) = year(curdate())')
+                            ->groupBy('months', 'year')
+                            ->orderBy('created_at')
+                            ->pluck('total', 'months', 'year');
+
+        $taxcollection = [];
+        foreach($totalOrders->values() as $taxes){
+            array_push($taxcollection, $taxes * 0.08);
+        };
+
+        $taxcollection = collect($taxcollection);
 
         $averageOrder = Order::selectRaw('avg(price) Average, monthname(created_at) month, year(created_at) year' )
                             ->whereRaw('year(created_at) = year(curdate())')
                             ->groupBy('month', 'year')
-                            ->orderBy('month', 'desc' )
+                            ->orderBy('created_at' )
                             ->get();
 
-        return view('admin.panel', compact('totalOrders', 'yearlyTotal', 'averageOrder'));
+        return view('admin.panel', compact('totalOrders', 'yearlyTotal', 'averageOrder', 'taxcollection'));
     }
 }
