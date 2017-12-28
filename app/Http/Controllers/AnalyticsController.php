@@ -18,6 +18,17 @@ class AnalyticsController extends Controller
             ]
         );
 
-        return view('admin.analytics', compact('analyticsData'));
+        $sessions = [];
+        $pageviews = [];
+        $dates = [];
+        foreach ($analyticsData as $values) {
+            array_push($dates, $values[0]);
+            array_push($pageviews, $values[1]);
+            array_push($sessions, $values[2]);
+        }
+        $dates = collect($dates);
+        $pageviews = collect($pageviews);
+        $sessions = collect($sessions);
+        return view('admin.analytics', compact('analyticsData', 'dates', 'pageviews', 'sessions'));
     }
 }

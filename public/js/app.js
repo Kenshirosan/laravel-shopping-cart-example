@@ -34859,7 +34859,7 @@ Vue.component('calendar', __webpack_require__(346));
 Vue.component('order-progress', __webpack_require__(350));
 Vue.component('monthly-stats', __webpack_require__(349));
 Vue.component('yearly-stats', __webpack_require__(351));
-// Vue.component('analytics', require('./components/Analytics.vue'));
+Vue.component('analytics', __webpack_require__(345));
 
 var app = new Vue({
     el: '#app',
@@ -35718,7 +35718,48 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 280 */,
+/* 280 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_chart_js__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_chart_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_chart_js__);
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['sessions', 'pageviews', 'labels'],
+
+    mounted: function mounted() {
+        var data = {
+            labels: this.labels,
+
+            datasets: [{
+                label: 'Sessions',
+                backgroundColor: 'rgba(255, 0, 0, 0.5)',
+                borderColor: 'rgba(255, 100, 100)',
+                data: this.sessions
+            }, {
+                label: 'Page Views',
+                backgroundColor: 'rgba(0, 199, 0, 0.5)',
+                borderColor: 'rgba(0, 0, 132)',
+                data: this.pageviews
+            }]
+        };
+        var context = this.$el.getContext('2d');
+        var chart = new __WEBPACK_IMPORTED_MODULE_0_chart_js___default.a(context, {
+            type: 'line',
+            data: data
+        });
+    }
+});
+
+/***/ }),
 /* 281 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -67320,7 +67361,40 @@ return /******/ (function(modules) { // webpackBootstrap
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12).setImmediate, __webpack_require__(12).clearImmediate))
 
 /***/ }),
-/* 345 */,
+/* 345 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(7)(
+  /* script */
+  __webpack_require__(280),
+  /* template */
+  __webpack_require__(357),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/home/laurent/public_html/webcreation/resources/assets/js/components/Analytics.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Analytics.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-6ca66dbb", Component.options)
+  } else {
+    hotAPI.reload("data-v-6ca66dbb", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
 /* 346 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -67742,7 +67816,26 @@ if (false) {
 }
 
 /***/ }),
-/* 357 */,
+/* 357 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('canvas', {
+    attrs: {
+      "width": "600",
+      "height": "200"
+    }
+  })
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-6ca66dbb", module.exports)
+  }
+}
+
+/***/ }),
 /* 358 */
 /***/ (function(module, exports, __webpack_require__) {
 
