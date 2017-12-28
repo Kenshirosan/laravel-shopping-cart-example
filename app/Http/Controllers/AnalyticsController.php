@@ -21,6 +21,7 @@ class AnalyticsController extends Controller
         $sessions = [];
         $pageviews = [];
         $dates = [];
+
         foreach ($analyticsData as $values) {
             array_push($dates, $values[0]);
             array_push($pageviews, $values[1]);
@@ -29,6 +30,7 @@ class AnalyticsController extends Controller
         $dates = collect($dates);
         $pageviews = collect($pageviews);
         $sessions = collect($sessions);
+
         return view('admin.analytics', compact('analyticsData', 'dates', 'pageviews', 'sessions'));
     }
 }

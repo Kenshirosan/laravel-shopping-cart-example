@@ -1,7 +1,7 @@
 <template>
     <canvas width="600" height="200"></canvas>
 </template>
-<!-- need to figure out how to parse the response I get and display it with Chartjs, so that I can get rid of google graphs crap-->
+
 <script>
     import Chart from 'chart.js';
 
