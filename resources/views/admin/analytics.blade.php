@@ -5,12 +5,13 @@
 @endsection
 
 @section('content')
-
-    <p>Visitors per month</p>
-
-    <div class="col-md-12">
-        <div id="curve_chart" style="width: 100%; height: 500px"></div>
+    <div class="row">
+        <h1 class="text-center text-info">Visitors per month</h1>
+        <div class="col-md-12">
+            <div id="curve_chart" style="width: 100%; height: 500px"></div>
+        </div>
     </div>
+
 @endsection
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">

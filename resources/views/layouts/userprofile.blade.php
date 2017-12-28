@@ -18,7 +18,7 @@
                         @else
                         @foreach($orders as $order)
                             <p>{{ preg_replace('/[]["]/ ', ' ', $order->items) }}</p>
-                            <order-progress status="{{ $order->status->name}}" initial=" {{ $order->status->percent }}" order_id="{{ $order->id }}"></order-progress>
+                            <order-progress status="{{ $order->status->name}}" initial="{{ $order->status->percent }}" order_id="{{ $order->id }}"></order-progress>
                             <p><small class="text-info">This progress bar will update automatically as your order is processed</small></p>
                         @endforeach
                         @endif

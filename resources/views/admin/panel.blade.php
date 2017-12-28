@@ -64,13 +64,4 @@
         @endforeach
     </ul>
 </div>
-<div class="row">
-    <div class="col-md-12">
-        <ul class="list-group" style="list-style: none">
-            <li><a href="/restaurantpanel" class="btn btn-primary">Add a product</a></li>
-            <li><a href="/best-customers" class="btn btn-primary">See your best customers</a></li>
-            <li><a href="/search-orders" class="btn btn-success">Search for a specific order</a></li>
-        </ul>
-    </div>
-</div>
 @endsection
