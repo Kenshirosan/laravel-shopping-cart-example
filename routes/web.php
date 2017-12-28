@@ -87,7 +87,7 @@ Route::middleware(['auth', 'must-be-confirmed', 'employee', 'admin'])->group(fun
     // Route::post('/edit-css', 'CssController@update');
     Route::get('/message/{id}', 'MessageController@show');
     Route::delete('/delete/{id}', 'MessageController@destroy');
-    Route::get('/analytics', 'AnalyticsController@analytics');
+    Route::get('/analytics', 'AnalyticsController@index');
     //ADD A BUNCH OF PICS ON PRODUCT VIEW
     Route::post('/shop/{slug}/{photo}','PhotosController@store');
 });

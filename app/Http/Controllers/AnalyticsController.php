@@ -7,7 +7,7 @@ use \Spatie\Analytics\Period;
 
 class AnalyticsController extends Controller
 {
-    public function analytics()
+    public function index()
     {
         $analyticsData = \Analytics::performQuery(
             Period::years(1),
