@@ -7,11 +7,6 @@
 @section('content')
 
     <div class="container">
-
-        <a href="/panel" class="btn btn-primary">back</a>
-        <a href="/restaurantpanel" class="btn btn-primary">Add a product</a>
-        <a href="/customer-orders" class="btn btn-primary">Today's order</a>
-
         <h1 class="text-center">
             You have <span class="text-info">{{ $user_count }}</span> registered customers.
         </h1>

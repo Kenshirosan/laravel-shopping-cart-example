@@ -46,3 +46,11 @@
         }
     };
 </script>
+
+<style>
+.alert-flash {
+    position: fixed;
+    right: 25px;
+    top: 50px;
+}
+</style>

@@ -7,7 +7,9 @@
 @section('content')
     <section class="content">
         <div class="row">
-            @if(!$employees->isEmpty())
+            @if($employees->isEmpty())
+                <h2 class="text-info text-center">No employees yet</h2>
+            @else
                 @foreach($employees as $employee)
                     <div class="col-md-3 col-sm-6 col-xs-12">
                         <div class="info-box">
@@ -22,8 +24,6 @@
                         </div>
                     </div>
                 @endforeach
-            @else
-                <h2>No employees yet</h2>
             @endif
         </div>
     </section>

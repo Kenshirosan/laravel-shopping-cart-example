@@ -72,10 +72,10 @@ class RegisterController extends Controller
         $phone = formatPhoneNumber($data['phone_number']);
 
         $user = User::create([
-            'name' => $data['name'],
+            'name' => ucfirst($data['name']),
+            'last_name' => ucfirst($data['last_name']),
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'last_name' => $data['last_name'],
             'address' => $data['address'],
             'address2' => $data['address2'],
             'zipcode' => $data['zipcode'],

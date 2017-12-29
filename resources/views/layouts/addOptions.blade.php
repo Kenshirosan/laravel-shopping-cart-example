@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    <h1>Hello, {{ Auth::user()->name }}</h1>
     <form class="form-horizontal" method="POST" action="/add-options" enctype="multipart/form-data">
         @include('includes.error')
         {{ csrf_field() }}

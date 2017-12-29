@@ -8,12 +8,27 @@
 
 @section('content')
 <div class="col-md-6 col-md-offset-3">
-        <h4 class="text-center">Today's Order</h4>
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="btn btn-lg btn-default pull-right"><a href="/calendar">Calendar</a></h2>
+            <h1 class="text-info text-center">Today's Order</h1>
+        </div>
+        <div style="margin-bottom: 100px;"></div>
+    </div>
         <ul class=list-group>
-
         @if(!$orders->isEmpty())
             @foreach( $orders as $order )
-                @if(!$order->hiddenOrder())
+                @if($order->hiddenOrder())
+                    <form action="/show-order/{{ $order->id }}" method="POST">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                        <input type="hidden" value="{{ $order->id }}" name="id">
+                        <input type="hidden" value="{{ $order->name }}" name="name">
+                        <input type="hidden" value="{{ $order->address }}" name="address">
+                        <p class="text-right"><input type="submit" class="btn btn-info btn-sm" value="show"> Order {{ $order->id }}</p>
+                    </form>
+
+                    @else
 
                     <li class="list-group-item hideable">
                         <a href="/order/{{ $order->id }}" class="admin-links">
@@ -34,16 +49,6 @@
                             <p class="text-right"><input type="submit" class="btn btn-danger btn-sm" value="Hide"></p>
                         </form>
                     </li>
-                    @else
-
-                        <form action="/show-order/{{ $order->id }}" method="POST">
-                            {{ csrf_field() }}
-                            {{ method_field('DELETE') }}
-                            <input type="hidden" value="{{ $order->id }}" name="id">
-                            <input type="hidden" value="{{ $order->name }}" name="name">
-                            <input type="hidden" value="{{ $order->address }}" name="address">
-                            <p class="text-right"><input type="submit" class="btn btn-info btn-sm" value="show"> Order {{ $order->id }}</p>
-                        </form>
                     @endif
             @endforeach
             <p class="text-info">

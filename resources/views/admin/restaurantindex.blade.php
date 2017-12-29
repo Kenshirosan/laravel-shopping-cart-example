@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('content')
-    <h1>Hello, {{ Auth::user()->name }}</h1>
+    <h1>Hello, {{ ucfirst(Auth::user()->name) }}</h1>
     <form class="form-horizontal" method="POST" action="/insertproduct" enctype="multipart/form-data">
         {{ csrf_field() }}
 

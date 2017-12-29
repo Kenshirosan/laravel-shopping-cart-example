@@ -5,9 +5,8 @@
 @endsection
 
 @section('content')
-    <a href="/panel" class="btn btn-primary text-center">Back</a>
     <div class="search">
-            <h3 class="text-center title-color"></h3>
+            <h3 class="text-center title-color">Search an Order</h3>
             <p>&nbsp;</p>
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1">

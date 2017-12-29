@@ -104,9 +104,9 @@ class PaymentController extends Controller
             $qty = $row->qty;
             $itemname = $row->model->name;
             $options = $row->options;
-            echo ($options);
-            echo($itemname);
-            echo($qty);
+            // echo ($options);
+            // echo($itemname);
+            // echo($qty);
             array_push($items, $qty, $itemname, $options);
         }
 
