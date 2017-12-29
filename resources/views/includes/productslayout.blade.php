@@ -21,30 +21,30 @@
 
     <form action="{{ url('/cart') }}" method="POST" class="side-by-side" id="form">
         {{ csrf_field() }}
-        {{-- form for my super not working with options vue component --}}
-        {{-- <input type="hidden" name="id" v-model="this.id" value="{{ $product->id }}"> --}}
-        {{-- <input type="hidden" name="name" v-model="this.name" value="{{ $product->name }}"> --}}
-        {{-- <input type="hidden" name="price" v-model="this.price" value="{{ $product->price }}"> --}}
 
-        {{-- <noscript> if Vue component works a day.... --}}
-        <input type="hidden" name="id"  value="{{ $product->id }}">
-        <input type="hidden" name="name"  value="{{ $product->name }}">
-        <input type="hidden" name="price"  value="{{ $product->price }}">
-        {{-- </noscript> --}}
+        <noscript>
+            <input type="hidden" name="id"  value="{{ $product->id }}">
+            <input type="hidden" name="name"  value="{{ $product->name }}">
+            <input type="hidden" name="price"  value="{{ $product->price }}">
 
-        @if( ! $product->options()->isEmpty() )
-             <select name="options" class="options minimal" v-model="selected" autofocus required>
-                <option value="" class="reset">Choose</option>
-            @foreach($product->options() as $option)
-                <option class="option" value="{{ $option->name }}">{{ $option->name }}</option>
-            @endforeach
-            </select>
-        @endif
-            {{-- <addToCart :product="{{ $product }}" :selected="selected"></addToCart> --}}
-
-        {{-- <noscript> --}}
+            @if( ! $product->options()->isEmpty() )
+                 <select name="option" class="options minimal" v-model="selected" autofocus required>
+                    <option value="" class="reset">Choose</option>
+                @foreach($product->options() as $option)
+                    <option class="option" value="{{ $option->name }}">{{ $option->name }}</option>
+                @endforeach
+                </select>
+            @endif
             <input type="submit"  value="Add To Cart" class="btn btn-success">
-        {{-- </noscript> --}}
+        </noscript>
+
+            <add-to-cart
+                :product="{{ $product }}"
+                @if( ! $product->options()->isEmpty() )
+                    :options="{{ $product->options() }}"
+                @endif
+                >
+            </add-to-cart>
     </form>
 
     <div class="spacer"></div>

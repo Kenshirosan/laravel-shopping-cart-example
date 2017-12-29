@@ -30,9 +30,10 @@ class CartController extends Controller
     */
     public function store(Request $request)
     {
-        Cart::add( $request->id, $request->name, 1, $request->price, [ $request->options ] )->associate(Product::class);
-
-        return redirect('/shop')->with('flash',  "$request->name added !");
+        Cart::add( $request->id, $request->name, 1, $request->price, [ $request->option ] )->associate(Product::class);
+        if( !$request->expectsJson()) {
+            return redirect('/shop')->with('success_message',  "$request->name added !");
+        }
     }
 
     /**

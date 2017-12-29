@@ -6,7 +6,11 @@
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
-
+.alert {
+    position: fixed;
+    right: 25px;
+    top: 25px;
+}
 .jumbotron{
     background-image: url('../img/hero_pdt_hamburger.png');
     background-repeat: no-repeat;
