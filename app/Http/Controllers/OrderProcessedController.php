@@ -16,7 +16,7 @@ class OrderProcessedController extends Controller
     // testing server performance
     // public function index()
     // {
-    //      \Mail::to( 'laurent.sama@gmail.com' )->send(new Thankyou($order = null));
+    //      \Mail::to( 'your-email' )->send(new Thankyou($order = null));
     //     return back();
     // }
 

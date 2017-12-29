@@ -1,7 +1,9 @@
 @extends('adminlte::page')
 
 @section('content')
-    <h1>Hello, {{ ucfirst(Auth::user()->name) }}</h1>
+<div class="row">
+    <h1 class="text-primary text-center">Hello, {{ Auth::user()->name }}</h1>
+    <hr>
     <form class="form-horizontal" method="POST" action="/insertproduct" enctype="multipart/form-data">
         {{ csrf_field() }}
 
@@ -123,34 +125,27 @@
         </div>
 
         <div class="form-group">
-            <div class="col-md-12">
-                <input type=submit value='Submit' class="btn btn-primary">
+            <label for="submit" class="col-md-4 control-label"></label>
+            <div class="col-md-6">
+                <input type=submit class="btn btn-info form-control" value='Add Product' class="btn btn-primary">
             </div>
         </div>
     </form>
-
-    <form class="form-horizontal" method="get" action="/logout">
-        @include('includes.error')
-        {{ csrf_field() }}
-        <div class="form-group">
-            <div class="col-md-12">
-                <input type=submit value='logout' class="btn btn-danger">
+</div>
+<hr>
+<div class="container">
+    <div class="row">
+        <div class="panel panel-info">
+            @foreach( $orders as $order )
+            <div class="panel-heading">
+                <h4>Latest Orders: {{ $order->id }}</h4>
             </div>
+            <div class="panel-body">
+                <p>{{ $order->name }} {{ $order->last_name }} paid $<strong>{{ $order->price /100 }}</strong> for {{ preg_replace('/[]["]/ ', '', $order->items) }} on <strong>{{ $order->created_at->toFormattedDateString() }}</strong> at {{    $order->created_at->toTimeString() }}
+                </p>
+            </div>
+            @endforeach
         </div>
-    </form>
-
-
-    <div class="container">
-
-        <ul class=list-group>
-            @if(Auth::user()->theboss)
-                <li class="list-group-item"><a href="/panel" class="btn btn-primary">View all</a></li>
-                @foreach( $orders as $order )
-                    <li class="list-group-item"><h4>Latest Orders: {{ $order->id }}</h4>{{ $order->name }} {{ $order->last_name }} paid $<strong>{{ $order->price /100 }}</strong> for {{ preg_replace('/[]["]/ ', '', $order->items) }} on <strong>{{ $order->created_at->toFormattedDateString() }}</strong> at {{    $order->created_at->toTimeString() }}</li>
-                @endforeach
-            @endif
-
-        </ul>
     </div>
-    <div class="spacer"></div>
+</div>
 @endsection
