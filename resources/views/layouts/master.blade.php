@@ -23,7 +23,7 @@
     <body>
         @include('includes.header')
         <div class="container" id="app">
-            @include('messages.messages')
+            @include('includes.messages')
             @yield('content')
             <flash message="{{ session('flash') }}"></flash>
         </div>

@@ -103,10 +103,10 @@ class PaymentController extends Controller
         foreach (Cart::content() as $row) {
             $qty = $row->qty;
             $itemname = $row->model->name;
-            $options = $row->options;
-            // echo ($options);
-            // echo($itemname);
-            // echo($qty);
+            if($row->options) {
+                $options = $row->options;
+            }
+
             array_push($items, $qty, $itemname, $options);
         }
 

@@ -114,7 +114,7 @@
 
             <!-- Main content -->
             <section class="content">
-                @include('messages.messages')
+                @include('includes.messages')
                 @yield('content')
 
             </section>

@@ -26,7 +26,7 @@
     @include('includes.header')
 
      <div class="container">
-        @include('messages.messages')
+        @include('includes.messages')
         <div id="top"></div>
         @yield('content')
     </div>
