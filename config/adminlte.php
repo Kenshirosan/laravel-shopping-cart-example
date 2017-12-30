@@ -71,7 +71,7 @@ return [
     |
     */
 
-    'collapse_sidebar' => false,
+    'collapse_sidebar' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -109,36 +109,41 @@ return [
 
 
     'menu' => [
-        'Store Administration',
+        '',
         [
             'text' => 'Add a product',
             'url'  => '/restaurantpanel',
             'icon' => 'shopping-cart',
             'icon_color' => 'success',
+            'can' => 'see-admin-menu'
         ],
         [
-            'text' => 'Add a title for the holiday special page',
+            'text' => 'Add a title for the special\'s page',
             'url'  => '/add-holiday-title',
             'icon' => 'shopping-cart',
             'icon_color' => 'success',
+            'can' => 'see-admin-menu'
         ],
         [
             'text'        => 'View sales',
             'url'         => '/panel',
             'icon'        => 'dollar',
             'icon_color' => 'success',
+            'can' => 'see-admin-menu'
         ],
         [
             'text'        => 'View analytics',
             'url'         => '/analytics',
             'icon'        => 'dollar',
             'icon_color' => 'success',
+            'can' => 'see-admin-menu'
         ],
         [
             'text'        => 'Search an order',
             'url'         => '/search-orders',
             'icon'        => 'search',
             'icon_color' => 'info',
+            'can' => 'see-employee-menu'
         ],
         [
             'text'        => 'Today\'s orders',
@@ -146,19 +151,22 @@ return [
             'icon'        => 'info-circle',
             'icon_color' => 'success',
             'label' => '',
-            'label_color' => 'info'
+            'label_color' => 'info',
+            'can' => 'see-employee-menu'
         ],
         [
             'text'       => 'Best Customers',
             'url'        => '/best-customers',
             'icon'       => 'plus',
             'icon_color' => 'success',
+            'can' => 'see-admin-menu'
         ],
 
         [
             'text'    => 'Add options/Categories',
             'icon'    => 'share',
             'icon_color' => 'aqua',
+            'can' => 'see-admin-menu',
             'submenu' => [
                 [
                     'text' => 'Add an option group',
@@ -190,7 +198,8 @@ return [
             'icon'    => 'calendar-plus-o',
             'icon_color' => 'green',
             'label' => '',
-            'label_color' => 'info'
+            'label_color' => 'info',
+            'can' => 'see-employee-menu'
         ],
         [
             'text'    => 'Messages',
@@ -199,6 +208,7 @@ return [
             'icon_color' => 'green',
             'label'       => '',
             'label_color' => 'success',
+            'can' => 'see-admin-menu'
         ],
 
         'ACCOUNT SETTINGS',
@@ -212,6 +222,7 @@ return [
             'text'    => 'Add/Delete Employees',
             'icon'    => 'share',
             'icon_color' => 'aqua',
+            'can' => 'see-admin-menu',
             'submenu' => [
                 [
                     'text' => 'Add an Employee',

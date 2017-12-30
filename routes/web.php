@@ -50,7 +50,8 @@ Route::middleware(['auth', 'must-be-confirmed', 'employee'])->group(function () 
     Route::get('/order/{id}', 'CheckController@show');
     Route::get('/print/{id}', 'CheckController@create');
     Route::patch('/update/order/{id}/status', 'StatusController@update');
-
+    Route::get('/search-orders', 'SearchController@index');
+    Route::get('/livesearch','SearchController@show');
     Route::delete('/show-order/{order}', 'OrderProcessedController@show');
     Route::post('/hide-orders/{order}', 'OrderProcessedController@destroy');
 });
@@ -71,8 +72,6 @@ Route::middleware(['auth', 'must-be-confirmed', 'employee', 'admin'])->group(fun
     Route::get('/best-customers', 'BestCustomerController@index');
     Route::post('/insertproduct', 'ProductController@store');
     Route::delete('/delete/{slug}/product', 'ProductController@destroy');
-    Route::get('/search-orders', 'SearchController@index');
-    Route::get('/livesearch','SearchController@show');
     Route::get('create-coupon', 'CouponController@index');
     Route::post('create-coupon', 'CouponController@store');
     Route::post('/create-disposable-coupon', 'CouponController@storeCouponsForEveryone');

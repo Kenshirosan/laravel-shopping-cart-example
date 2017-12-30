@@ -17,14 +17,18 @@ class SearchController extends Controller
 
     public function show(Request $request)
     {
+        $this->validate($request ,[
+            'id' => 'required|numeric'
+        ]);
+
         $search = $request->id;
 
-        if (is_null($search)) {
-            return view('layouts.search');
-        } else {
+        // if (is_null($search)) {
+        //     return view('layouts.search');
+        // } else {
             $orders = Order::where('id', 'LIKE', "%{$search}%")->get();
-
-            return view('layouts.searchresult', compact('orders'));
-        }
+            $count = 1;
+            return view('layouts.searchresult', compact('orders', 'count'));
+        // }
     }
 }

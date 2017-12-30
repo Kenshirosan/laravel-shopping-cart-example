@@ -18,7 +18,7 @@
             </div>
         </div>
         <!-- search box container ends  -->
-        <div id="txtHint" class="title-color" style="padding-top:50px; text-align:center;" ><b>Results :</b></div>
+        <div id="txtHint" class="title-color" style="padding-top:50px; text-align:center;" ><em>Results :</em></div>
 @endsection
 <script src="/js/app.js"></script>
 <script>
@@ -26,7 +26,7 @@
         $("#search").keyup(function(){
             var str=  $("#search").val();
             if(str == "") {
-                $( "#txtHint" ).html("<b>Results ..</b>");
+                $( "#txtHint" ).html("<em>Results ..</em>");
             }else {
                 $.get( "{{ url('/livesearch?id=') }}"+str, function( data ) {
                     $( "#txtHint" ).html( data );

@@ -21,6 +21,6 @@ class Calendar extends Model
 
     public function getAppointments()
     {
-        return $this->whereDate('start', '>=', date('Y-m-d'))->orderBy('id', 'desc')->count();
+        return $this->whereDate('start', '>=', date('Y-m-d'))->count();
     }
 }
