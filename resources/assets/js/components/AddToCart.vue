@@ -37,6 +37,9 @@
                     .then(setTimeout( () => {
                         this.option = ''
                     }, 100 ))
+                    .catch( e => {
+                        flash(e.response.data, 'danger')
+                    })
             }
         }
     }

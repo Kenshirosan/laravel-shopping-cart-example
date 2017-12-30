@@ -35761,7 +35761,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.post('/cart/', this.$data).then(flash(this.product.name + ' was added to cart')).then(this.$emit('done')).then(setTimeout(function () {
                 _this.option = '';
-            }, 100));
+            }, 100)).catch(function (e) {
+                flash(e.response.data, 'danger');
+            });
         }
     }
 });

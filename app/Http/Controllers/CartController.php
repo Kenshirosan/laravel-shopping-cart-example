@@ -30,6 +30,10 @@ class CartController extends Controller
     */
     public function store(Request $request)
     {
+        if(auth()->user()->isEmployee()){
+            return response('You are not allowed', 403);
+        }
+
         if($request->option != null) {
             Cart::add($request->id, $request->name, 1, $request->price, [ $request->option ] )->associate(Product::class);
         } else {
@@ -50,7 +54,10 @@ class CartController extends Controller
     */
     public function update(Request $request, $id)
     {
-        // Validation on max quantity
+        if(auth()->user()->isEmployee()){
+            return response('You are not allowed', 403);
+        }
+
         $validator = Validator::make($request->all(), [
             'quantity' => 'required|numeric|between:1,6'
         ]);
