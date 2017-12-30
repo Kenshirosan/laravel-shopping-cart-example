@@ -28,7 +28,7 @@
             if(str == "") {
                 $( "#txtHint" ).html("<em>Results ..</em>");
             }else {
-                $.get( "{{ url('/livesearch?id=') }}"+str, function( data ) {
+                $.get( "{{ url('/livesearch?term=') }}" + str, function( data ) {
                     $( "#txtHint" ).html( data );
                 });
             }

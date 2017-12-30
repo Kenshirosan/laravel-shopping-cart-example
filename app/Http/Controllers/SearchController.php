@@ -17,18 +17,26 @@ class SearchController extends Controller
 
     public function show(Request $request)
     {
+        if($term = intval($request->term)) {
+            $this->validate($request ,[
+                'term' => 'required|numeric'
+            ]);
+
+            // Dunno which query is better.. let the customer decide ?
+            // $orders = Order::where('id', 'LIKE', "%{$term}%")->get();
+            $orders = Order::where('id', $term)->get();
+            $count = 1;
+
+            return view('layouts.searchresult', compact('orders', 'count'));
+        }
+
         $this->validate($request ,[
-            'id' => 'required|numeric'
+            'term' => 'required|string'
         ]);
 
-        $search = $request->id;
+        $orders = Order::where('last_name', 'LIKE', "%{$request->term}%")->get();
+        $count = 1;
 
-        // if (is_null($search)) {
-        //     return view('layouts.search');
-        // } else {
-            $orders = Order::where('id', 'LIKE', "%{$search}%")->get();
-            $count = 1;
-            return view('layouts.searchresult', compact('orders', 'count'));
-        // }
+        return view('layouts.searchresult', compact('orders', 'count'));
     }
 }
