@@ -6,11 +6,8 @@
 
 @section('content')
     <h1>{{ $product->name }}</h1>
-
     <hr>
-
     <div class="row">
-
         <div class="col-md-4">
             <img src="{{ asset('img/' . $product->image) }}" alt="product" class="img-responsive">
             @foreach( $product->photos as $item)
@@ -20,15 +17,35 @@
 
         <div class="col-md-8">
             <h3>${{ $product->price /100 }}</h3>
-            <form action="{{ url('/cart') }}" method="POST" class="side-by-side">
+            <form action="{{ url('/cart') }}" method="POST" class="side-by-side" id="form">
                 {{ csrf_field() }}
-                <input type="hidden" name="id" value="{{ $product->id }}">
-                <input type="hidden" name="name" value="{{ $product->name }}">
-                <input type="hidden" name="price" value="{{ $product->price }}">
-                <input type="submit" class="btn btn-success btn-lg" value="Add to Cart">
+
+                <noscript>
+                    <input type="hidden" name="id"  value="{{ $product->id }}">
+                    <input type="hidden" name="name"  value="{{ $product->name }}">
+                    <input type="hidden" name="price"  value="{{ $product->price }}">
+
+                    @if( ! $product->options()->isEmpty() )
+                         <select name="option" class="options minimal" v-model="selected" autofocus required>
+                            <option value="" class="reset">Choose</option>
+                        @foreach($product->options() as $option)
+                            <option class="option" value="{{ $option->name }}">{{ $option->name }}</option>
+                        @endforeach
+                        </select>
+                    @endif
+                    <input type="submit"  value="Add To Cart" class="btn btn-success">
+                </noscript>
+
+                <add-to-cart
+                    :product="{{ $product }}"
+                    @if( ! $product->options()->isEmpty() )
+                        :options="{{ $product->options() }}"
+                    @endif
+                    >
+                </add-to-cart>
             </form>
 
-            @if( !Auth::guest() && Auth::user()->isAdmin() )
+            @if( Auth::check() && Auth::user()->isAdmin() )
                 <form id="addPhotosForm" class="dropzone" action="/shop/{{ $product->slug }}/photo" enctype="multipart/form-data" method="POST">
                     {{ csrf_field() }}
                 </form>

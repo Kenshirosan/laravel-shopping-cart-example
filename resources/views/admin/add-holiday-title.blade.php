@@ -1,10 +1,13 @@
 @extends('adminlte::page')
 
 @section('title')
-    Add Holiday's title
+    Add a Special's title
 @endsection
 
-    @section('content')
+@section('content')
+<div class="row">
+    <div class="container">
+        <h1 class="text-center text-primary">Add a special's title</h1>
         <form class="form-horizontal" method="POST" action="/add-holiday-title">
             {{ csrf_field() }}
             <div class="form-group{{ $errors->has('holiday_page_title') ? ' has-error' : '' }}">
@@ -25,25 +28,28 @@
                 </div>
             </div>
         </form>
-        <hr>
-        <div class="container">
-        @if(! $titles->isEmpty())
-                <div class="col-md-6">
-                    @foreach($titles as $title)
-                        {{ $title->holiday_page_title }}
-                        <form action="/holiday/{{ $title->id }}/delete" method="POST">
-                            {{ csrf_field() }}
-                            {{ method_field('DELETE') }}
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
-                    @endforeach
-                </div>
-            @else
-                <div class="col-md-6">
-                    <h3 class="text-info">No Holiday page</h3>
-                    <p class="text-primary">Please check you deleted your <strong><a class="text-danger" href="/holidays-special">specials</a></strong></p>
-                </div>
-            @endif
-        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="container">
+    @if(! $titles->isEmpty())
+            <div class="col-md-6">
+                @foreach($titles as $title)
+                    {{ $title->holiday_page_title }}
+                    <form action="/holiday/{{ $title->id }}/delete" method="POST">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                @endforeach
+            </div>
+        @else
+            <div class="col-md-6">
+                <h3 class="text-info">No Holiday page</h3>
+                <p class="text-primary">Please check you deleted your <strong><a class="text-danger" href="/holidays-special">specials</a></strong></p>
+            </div>
+        @endif
+    </div>
+</div>
 @endsection
 </script>

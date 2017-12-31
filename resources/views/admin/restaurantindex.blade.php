@@ -2,13 +2,15 @@
 
 @section('content')
 <div class="row">
-    <h1 class="text-primary text-center">Hello, {{ Auth::user()->name }}</h1>
-    <hr>
-    @include('includes.addProductForm')
+    <div class="container">
+        <h1 class="text-primary text-center">Hello, {{ Auth::user()->name }}</h1>
+        <hr>
+        @include('includes.addProductForm')
+    </div>
 </div>
 <hr>
-<div class="container">
-    <div class="row">
+<div class="row">
+    <div class="container">
         <div class="panel panel-info">
             @foreach( $orders as $order )
             <div class="panel-heading">

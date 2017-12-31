@@ -5,8 +5,10 @@
 @endsection
 
 @section('content')
-    <div class="search">
-            <h3 class="text-center title-color">Search an Order</h3>
+<div class="row">
+    <div class="container">
+        <div class="search">
+            <h1 class="text-center text-primary">Search an Order</h1>
             <p>&nbsp;</p>
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1">
@@ -19,6 +21,8 @@
         </div>
         <!-- search box container ends  -->
         <div id="txtHint" class="title-color" style="padding-top:50px; text-align:center;" ><em>Results :</em></div>
+    </div>
+</div>
 @endsection
 <script src="/js/app.js"></script>
 <script>
