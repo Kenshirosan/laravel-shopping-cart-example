@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterConfirmationController extends Controller
 {
@@ -17,7 +18,7 @@ class RegisterConfirmationController extends Controller
         }
 
         $user->confirm();
-        $user->login();
+        Auth::login($user);
 
         return redirect('/shop')->with('success_message', 'Your account is now confirmed, you may start ordering !');
     }

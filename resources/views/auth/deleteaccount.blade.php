@@ -19,9 +19,7 @@
                 </form>
             </div>
             <div class="col-md-6 text-center">
-                <a href="/edit-profile" class="btn btn-primary list-group-item-primary">No, bring me back to safety</a>
+                <a href="/edit/profile" class="btn btn-primary list-group-item-primary">No, bring me back to safety</a>
             </div>
         </div>
-
-    <hr>
 @endsection

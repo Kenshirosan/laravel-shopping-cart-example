@@ -1,7 +1,11 @@
 <template>
-    <div>
-
-        <ul class="list-group" >
+    <div v-if="orders">
+        <div class="panel-info">
+            <div class="panel-heading">
+                <h4>Your past orders :</h4>
+            </div>
+        </div>
+        <ul class="list-group" v-if="orders">
             <li class="list-group-item list-group-item" v-for="order in orders">
                 <p v-text="order.id"></p>
                 <p>{{ order.items | replace }}</p>
@@ -10,15 +14,21 @@
         </ul>
 
         <div class="pagination">
-            <button class="btn btn-default" @click="fetchOrders(pagination.prev_page_url)"
-                    :disabled="!pagination.prev_page_url">
-                Previous
+            <button class="btn btn-default"
+                    @click="fetchOrders(pagination.prev_page_url)"
+                    v-if="pagination.prev_page_url"
+                    > Previous
             </button>
             <span class="text-info"> Page {{pagination.current_page}} of {{pagination.last_page}} </span>
-            <button class="btn btn-default" @click="fetchOrders(pagination.next_page_url)"
-                    :disabled="!pagination.next_page_url"> Next
+            <button class="btn btn-default"
+                    @click="fetchOrders(pagination.next_page_url)"
+                    v-if="pagination.next_page_url"
+                    > Next
             </button>
         </div>
+    </div>
+    <div v-else>
+        You did not order anything with us yet.
     </div>
 </template>
 
@@ -45,7 +55,6 @@ import moment from 'moment';
 
             replace: (str) => {
                 str.replace('/[]"/g/', "")
-                console.log(str)
                 return str
             }
         },

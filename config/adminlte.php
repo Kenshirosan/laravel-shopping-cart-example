@@ -214,7 +214,7 @@ return [
         'ACCOUNT SETTINGS',
         [
             'text' => 'Profile',
-            'url'  => '/edit-profile',
+            'url'  => '/edit/profile',
             'icon' => 'user',
             'icon_color' => 'success',
         ],

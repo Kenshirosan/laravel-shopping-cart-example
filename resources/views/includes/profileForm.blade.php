@@ -1,4 +1,4 @@
-<form class="form-horizontal" method="POST" action="/edit-profile/{user_id}">
+<form class="form-horizontal" method="POST" action="/edit-profile/{{$user->id}}">
     {{ csrf_field() }}
     {{ method_field('PATCH') }}
     <div class="form-group">
@@ -72,7 +72,11 @@
 
     <div class="form-group{{ $errors->has('phone_number') ? ' has-error' : '' }}">
         <div class="col-md-12"><strong>Phone Number:</strong></div>
-        <div class="col-md-12"><input type="text" name="phone_number" class="form-control" value="{{ $user->phone_number }}" placeholder="Phone Number" required/>
+        <div class="col-md-12">
+            <input type="text" name="phone_number" class="form-control" value="{{ preg_replace('/[() -]/', '', $user->phone_number) }}" placeholder="Phone Number" required/>
+        <small class="text-info">
+            {{$user->phone_number}}
+        </small>
         </div>
         @if ($errors->has('phone_number'))
             <span class="help-block">
@@ -83,7 +87,12 @@
 
     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
         <div class="col-md-12"><strong>Email Address:</strong></div>
-        <div class="col-md-12"><input id="email" type="email" name="email" class="form-control" value="{{ $user->email }}" placeholder="Your Email" required/></div>
+        <div class="col-md-12">
+            <input id="email" type="email" name="email" class="form-control" value="{{ $user->email }}" placeholder="Your Email" required/>
+            <small class="text-info">
+                Please note you'll need to verify your email address again should you choose to update it
+            </small>
+        </div>
         @if ($errors->has('email'))
             <span class="help-block">
                 <strong>{{ $errors->first('email') }}</strong>
@@ -91,10 +100,11 @@
         @endif
     </div>
 
-
     <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
         <div class="col-md-12"><strong>Password:</strong></div>
-        <div class="col-md-12"><input type="password" name="password" class="form-control" value="{{ old('password')}}" placeholder="Your Password" required/></div>
+        <div class="col-md-12">
+            <input type="password" name="password" class="form-control" value="{{ old('password')}}" placeholder="Your Password" required/>
+        </div>
         @if ($errors->has('password'))
             <span class="help-block">
                 <strong>{{ $errors->first('password') }}</strong>
@@ -104,7 +114,6 @@
 
     <div class="form-group">
         <div class="col-md-12"><strong>Confirm Password:</strong></div>
-
         <div class="col-md-12">
             <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Password Confirmation" required>
         </div>

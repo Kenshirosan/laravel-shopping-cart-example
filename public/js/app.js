@@ -36203,6 +36203,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -36225,7 +36235,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         replace: function replace(str) {
             str.replace('/[]"/g/', "");
-            console.log(str);
             return str;
         }
     },
@@ -68093,7 +68102,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('ul', {
+  return (_vm.orders) ? _c('div', [_vm._m(0), _vm._v(" "), (_vm.orders) ? _c('ul', {
     staticClass: "list-group"
   }, _vm._l((_vm.orders), function(order) {
     return _c('li', {
@@ -68103,32 +68112,32 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "textContent": _vm._s(order.id)
       }
     }), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm._f("replace")(order.items)))]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm._f("moment")(order.created_at)))])])
-  })), _vm._v(" "), _c('div', {
+  })) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "pagination"
-  }, [_c('button', {
+  }, [(_vm.pagination.prev_page_url) ? _c('button', {
     staticClass: "btn btn-default",
-    attrs: {
-      "disabled": !_vm.pagination.prev_page_url
-    },
     on: {
       "click": function($event) {
         _vm.fetchOrders(_vm.pagination.prev_page_url)
       }
     }
-  }, [_vm._v("\n            Previous\n        ")]), _vm._v(" "), _c('span', {
+  }, [_vm._v(" Previous\n        ")]) : _vm._e(), _vm._v(" "), _c('span', {
     staticClass: "text-info"
-  }, [_vm._v(" Page " + _vm._s(_vm.pagination.current_page) + " of " + _vm._s(_vm.pagination.last_page) + " ")]), _vm._v(" "), _c('button', {
+  }, [_vm._v(" Page " + _vm._s(_vm.pagination.current_page) + " of " + _vm._s(_vm.pagination.last_page) + " ")]), _vm._v(" "), (_vm.pagination.next_page_url) ? _c('button', {
     staticClass: "btn btn-default",
-    attrs: {
-      "disabled": !_vm.pagination.next_page_url
-    },
     on: {
       "click": function($event) {
         _vm.fetchOrders(_vm.pagination.next_page_url)
       }
     }
-  }, [_vm._v(" Next\n        ")])])])
-},staticRenderFns: []}
+  }, [_vm._v(" Next\n        ")]) : _vm._e()])]) : _c('div', [_vm._v("\n    You did not order anything with us yet.\n")])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "panel-info"
+  }, [_c('div', {
+    staticClass: "panel-heading"
+  }, [_c('h4', [_vm._v("Your past orders :")])])])
+}]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()

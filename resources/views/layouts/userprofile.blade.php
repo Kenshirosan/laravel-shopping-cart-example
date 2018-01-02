@@ -40,12 +40,7 @@
             </div>
 
             <div class="col-md-4">
-                <div class="panel-info">
-                    <div class="panel-heading">
-                        <h4>Your past orders :</h4>
-                    </div>
-                    <past-orders></past-orders>
-                </div>
+                <past-orders></past-orders>
             </div>
         </div>
     @endif

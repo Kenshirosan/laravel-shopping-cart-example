@@ -29,9 +29,9 @@ Route::delete('emptyCart', 'CartController@emptyCart');
 Route::get('holidays-special', 'HolidaySpecialController@index');
 
 Route::middleware(['auth', 'must-be-confirmed'])->group(function () {
-    Route::get('/edit-profile', 'UserController@edit');
+    Route::get('/edit/profile', 'UserController@edit');
     Route::get('/user/orders', 'OrderController@index');
-    Route::patch('/edit-profile/{user_id}', 'UserController@update');
+    Route::patch('/edit-profile/{id}', 'UserController@update');
     Route::get('/erase/{user_id}', 'UserController@show');
     Route::delete('/erase/{account}', 'UserController@destroy');
     //CHECKOUT AND CART ROUTES

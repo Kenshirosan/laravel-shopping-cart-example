@@ -26,7 +26,7 @@
                         <li><a href="/register">Register</a></li>
                     @elseif ( Auth::check() )
                         @if(! auth()->user()->isEmployee())
-                            <li><a href="/edit-profile">Your profile</a></li>
+                            <li><a href="/edit/profile">Your profile</a></li>
                         @endif
                         <li>
                             <a href="{{ route('logout') }}"
