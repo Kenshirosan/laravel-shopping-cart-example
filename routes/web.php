@@ -36,7 +36,6 @@ Route::middleware(['auth', 'must-be-confirmed'])->group(function () {
     //CHECKOUT AND CART ROUTES
     Route::get('/checkout', 'PaymentController@index');
     Route::post('/order', 'PaymentController@store');
-    Route::get('/thankyou', 'PaymentController@thankyou');
     Route::post('apply-coupon', 'CouponController@update');
 });
 

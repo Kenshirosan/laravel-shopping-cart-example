@@ -21,6 +21,6 @@ class StatusController extends Controller
         ]);
 
         event(new OrderStatusChanged($order));
-        return back()->with('success_message', 'Successully updated');
+        return redirect('/customer-orders')->with('success_message', "Order $order->id Successully updated");
     }
 }

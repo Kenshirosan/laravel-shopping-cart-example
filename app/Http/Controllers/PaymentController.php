@@ -22,6 +22,11 @@ class PaymentController extends Controller
     */
     public function index()
     {
+        if(auth()->check() && auth()->user()->isEmployee()) {
+            Cart::destroy();
+            return redirect('/shop')->with('flash', "You are not allowed");
+        }
+
         $total = Cart::total();
         $discount = null;
         $code = null;
@@ -36,6 +41,11 @@ class PaymentController extends Controller
     */
     public function store(Request $request)
     {
+        if(auth()->check() && auth()->user()->isEmployee()) {
+            Cart::destroy();
+            return redirect('/shop')->with('flash', "You are not allowed");
+        }
+
         if (Cart::total() == 0) {
             return back()->with(['error_message' => 'Your cart is empty !']);
         }
@@ -65,7 +75,7 @@ class PaymentController extends Controller
 
         Cart::destroy();
 
-        return redirect('/thankyou')->with(['success_message' => 'Thank You ' . Auth::user()->name . ', Your order is complete, We sent you a detailed email, Please call us if you need to make a change.']);
+        return redirect('/edit-profile')->with("success_message", "Thank You " . Auth::user()->name . ", Your order is complete, We sent you a detailed email, Please call us if you need to make a change.");
     }
 
      private function checkCartIsValid()
@@ -145,13 +155,5 @@ class PaymentController extends Controller
         if (!Auth::user()->isAdmin()) {
             return redirect()->back()->with(['error_message' => 'Page not found!']);
         }
-    }
-
-    /**
-    * redirect after successful payment
-    */
-    public function thankyou()
-    {
-        return view('layouts.thankyou');
     }
 }
