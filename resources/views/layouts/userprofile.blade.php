@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('title')
-    Edit Your profile
+    Your profile
 @endsection
 
 @section('content')
@@ -25,8 +25,7 @@
                         @endif
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
+
                 <div class="panel panel-info">
                     <div class="panel-heading">Your informations</div>
                     <div class="panel-body">
@@ -39,18 +38,13 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
+
+            <div class="col-md-4">
                 <div class="panel-info">
                     <div class="panel-heading">
                         <h4>Your past orders :</h4>
                     </div>
-                    <div class="panel-body">
-                        <div class="col-md-12">
-                            <past-orders></past-orders>
-                        </div>
-                    </div>
+                    <past-orders></past-orders>
                 </div>
             </div>
         </div>

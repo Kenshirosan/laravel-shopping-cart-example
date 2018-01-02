@@ -36203,7 +36203,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -36218,6 +36217,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.fetchOrders();
     },
 
+
+    filters: {
+        moment: function moment(date) {
+            return __WEBPACK_IMPORTED_MODULE_0_moment___default()(date).fromNow();
+        },
+
+        replace: function replace(str) {
+            str.replace('/[]"/g/', "");
+            console.log(str);
+            return str;
+        }
+    },
 
     methods: {
         fetchOrders: function fetchOrders(page_url) {
@@ -68082,14 +68093,16 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('div', {
-    staticClass: "row"
+  return _c('div', [_c('ul', {
+    staticClass: "list-group"
   }, _vm._l((_vm.orders), function(order) {
-    return _c('ul', {
-      staticClass: "list-group col-md-3"
-    }, [_c('li', {
+    return _c('li', {
       staticClass: "list-group-item list-group-item"
-    }, [_c('p', [_vm._v(_vm._s(order.id))]), _vm._v(" "), _c('p', [_vm._v(_vm._s(order.items))]), _vm._v(" "), _c('p', [_vm._v(_vm._s(order.created_at) + " " + _vm._s(order.created_at))]), _vm._v(" "), _c('p', [_vm._v(_vm._s(order.created_at))])])])
+    }, [_c('p', {
+      domProps: {
+        "textContent": _vm._s(order.id)
+      }
+    }), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm._f("replace")(order.items)))]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm._f("moment")(order.created_at)))])])
   })), _vm._v(" "), _c('div', {
     staticClass: "pagination"
   }, [_c('button', {

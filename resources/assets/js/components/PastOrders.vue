@@ -1,15 +1,14 @@
 <template>
     <div>
-        <div class="row">
-            <ul class="list-group col-md-3" v-for="order in orders">
-                <li class="list-group-item list-group-item">
-                    <p>{{ order.id }}</p>
-                    <p>{{ order.items }}</p>
-                    <p>{{ order.created_at}} {{ order.created_at }}</p>
-                    <p>{{ order.created_at }}</p>
-                </li>
-            </ul>
-        </div>
+
+        <ul class="list-group" >
+            <li class="list-group-item list-group-item" v-for="order in orders">
+                <p v-text="order.id"></p>
+                <p>{{ order.items | replace }}</p>
+                <p>{{ order.created_at | moment }}</p>
+            </li>
+        </ul>
+
         <div class="pagination">
             <button class="btn btn-default" @click="fetchOrders(pagination.prev_page_url)"
                     :disabled="!pagination.prev_page_url">
@@ -37,6 +36,18 @@ import moment from 'moment';
 
         mounted() {
             this.fetchOrders()
+        },
+
+        filters: {
+            moment: function (date) {
+                return moment(date).fromNow()
+            },
+
+            replace: (str) => {
+                str.replace('/[]"/g/', "")
+                console.log(str)
+                return str
+            }
         },
 
         methods: {
