@@ -1,6 +1,7 @@
-require('./bootstrap');
+import './bootstrap';
 
 Vue.component('flash', require('./components/Flash.vue'));
+Vue.component('past-orders', require('./components/PastOrders.vue'));
 Vue.component('add-to-cart', require('./components/AddToCart.vue'));
 Vue.component('modal', require('./components/Modal.vue'));
 Vue.component('calendar', require('./components/Calendar.vue'));
@@ -15,5 +16,5 @@ const app = new Vue({
     data: {
         showModal: false,
         selected: '',
-    }
+    },
 });

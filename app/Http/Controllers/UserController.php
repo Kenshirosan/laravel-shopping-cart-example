@@ -79,7 +79,9 @@ class UserController extends Controller
                                     and year(created_at) = year(curdate())
                                     and month(created_at) = month(curdate())')
                         ->where('user_id', $user->id)
+                        ->orderBy('id', 'desc')
                         ->get();
+
 
         return view('layouts.userprofile', compact('user', 'orders'));
     }

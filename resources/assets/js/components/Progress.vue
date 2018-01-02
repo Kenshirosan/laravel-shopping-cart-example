@@ -4,11 +4,14 @@
             <progressbar :now="progress" type="success" striped animated></progressbar>
         </div>
 
+        <p v-if="progress < 100"><small class="text-info">This progress bar will update automatically as your order is processed</small></p>
+
         <div class="order-status">
             <strong>Order Status:</strong> {{ statusNew }}
         </div>
 
         <img src="/images/delivery.gif" alt="delivery" v-if="progress >= 100">
+        <hr>
     </div>
 </template>
 

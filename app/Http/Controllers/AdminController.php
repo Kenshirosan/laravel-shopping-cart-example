@@ -46,7 +46,6 @@ class AdminController extends Controller
                             ->orderBy('created_at')
                             ->pluck('total', 'months', 'year');
 
-        // dd($totalOrders);
         $taxcollection = [];
         foreach($totalOrders->values() as $taxes){
             array_push($taxcollection, $taxes * 0.08);
@@ -58,7 +57,7 @@ class AdminController extends Controller
                             ->groupBy('months', 'year')
                             ->orderBy('created_at')
                             ->pluck('total', 'months', 'year');
-        // dd($totalOrdersYearBefore);
+
         $taxcollectionYearBefore = [];
         foreach($totalOrdersYearBefore->values() as $taxes){
             array_push($taxcollectionYearBefore, $taxes * 0.08);
