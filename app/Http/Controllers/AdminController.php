@@ -35,22 +35,35 @@ class AdminController extends Controller
     public function show()
     {
         $yearlyTotal = Order::selectRaw('year(created_at) year, sum(price / 100) total')
+                            // ->whereRaw('year(created_at) = year(curdate())') let our customer pick
                             ->groupBy('year')
                             ->orderBy('year', 'desc')
                             ->get();
 
-        $totalOrders = Order::selectRaw('monthname(created_at) months, sum(price / 100) total')
+        $totalOrders = Order::selectRaw('monthname(created_at) months, year(created_at) year, sum(price / 100) total')
                             ->whereRaw('year(created_at) = year(curdate())')
-                            ->groupBy('months')
+                            ->groupBy('months', 'year')
                             ->orderBy('created_at')
                             ->pluck('total', 'months', 'year');
 
+        // dd($totalOrders);
         $taxcollection = [];
         foreach($totalOrders->values() as $taxes){
             array_push($taxcollection, $taxes * 0.08);
         };
-
         $taxcollection = collect($taxcollection);
+
+        $totalOrdersYearBefore = Order::selectRaw('monthname(created_at) months, year(created_at) year, sum(price / 100) total')
+                            ->whereRaw('year(created_at) = year(curdate()) - 1')
+                            ->groupBy('months', 'year')
+                            ->orderBy('created_at')
+                            ->pluck('total', 'months', 'year');
+        // dd($totalOrdersYearBefore);
+        $taxcollectionYearBefore = [];
+        foreach($totalOrdersYearBefore->values() as $taxes){
+            array_push($taxcollectionYearBefore, $taxes * 0.08);
+        };
+        $taxcollectionYearBefore = collect($taxcollectionYearBefore);
 
         $averageOrder = Order::selectRaw('avg(price) Average, monthname(created_at) month, year(created_at) year' )
                             ->whereRaw('year(created_at) = year(curdate())')
@@ -58,6 +71,6 @@ class AdminController extends Controller
                             ->orderBy('created_at' )
                             ->get();
 
-        return view('admin.panel', compact('totalOrders', 'yearlyTotal', 'averageOrder', 'taxcollection'));
+        return view('admin.panel', compact('yearlyTotal', 'totalOrders', 'taxcollection', 'totalOrdersYearBefore', 'taxcollectionYearBefore', 'averageOrder'));
     }
 }

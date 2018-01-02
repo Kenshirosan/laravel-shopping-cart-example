@@ -30,7 +30,18 @@
             let context = this.$el.getContext('2d');
             const chart = new Chart(context,{
                 type: 'line',
-                data: data
+                data: data,
+                options: {
+                    legend: {
+                        labels: {
+                            fontColor: 'blue',
+                            fontStyle: 'bold'
+                        },
+                        label: {
+                            fontColor: 'blue'
+                        }
+                    }
+                }
             });
         },
     }

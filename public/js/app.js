@@ -36151,7 +36151,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var context = this.$el.getContext('2d');
         var chart = new __WEBPACK_IMPORTED_MODULE_0_chart_js___default.a(context, {
             type: 'line',
-            data: data
+            data: data,
+            options: {
+                legend: {
+                    labels: {
+                        fontColor: 'blue',
+                        fontStyle: 'bold'
+                    },
+                    label: {
+                        fontColor: 'blue'
+                    }
+                }
+            }
         });
     }
 });
@@ -36246,7 +36257,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var context = this.$el.getContext('2d');
         var chart = new __WEBPACK_IMPORTED_MODULE_0_chart_js___default.a(context, {
             type: 'bar',
-            data: data
+            data: data,
+            options: {
+                legend: {
+                    labels: {
+                        fontColor: 'blue',
+                        fontStyle: 'bold'
+                    }
+                }
+            }
         });
     }
 });

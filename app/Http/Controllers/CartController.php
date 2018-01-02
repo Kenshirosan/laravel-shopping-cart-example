@@ -30,7 +30,7 @@ class CartController extends Controller
     */
     public function store(Request $request)
     {
-        if(auth()->user()->isEmployee()){
+        if(auth()->check() && auth()->user()->isEmployee()){
             return response('You are not allowed', 403);
         }
 
@@ -54,7 +54,7 @@ class CartController extends Controller
     */
     public function update(Request $request, $id)
     {
-        if(auth()->user()->isEmployee()){
+        if(auth()->check() && auth()->user()->isEmployee()){
             return response('You are not allowed', 403);
         }
 

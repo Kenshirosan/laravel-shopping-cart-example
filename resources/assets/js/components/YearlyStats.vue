@@ -37,6 +37,14 @@
             const chart = new Chart(context,{
                 type: 'bar',
                 data: data,
+                options: {
+                    legend: {
+                        labels: {
+                            fontColor: 'blue',
+                            fontStyle: 'bold'
+                        }
+                    }
+                }
             });
         },
     }
