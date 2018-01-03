@@ -54,8 +54,8 @@ import moment from 'moment';
             },
 
             replace: (str) => {
-                str.replace('/[]"/g/', "")
-                return str
+                return str.replace('/[[""]]/g/', '')
+                // return str
             }
         },
 

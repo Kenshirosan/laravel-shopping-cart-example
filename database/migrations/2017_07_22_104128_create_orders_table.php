@@ -23,7 +23,7 @@ class CreateOrdersTable extends Migration
             $table->string('zipcode')->required();
             $table->string('phone_number')->required();
             $table->string('email')->required();
-            $table->string('items')->required();
+            $table->longText('items')->required();
             $table->unsignedInteger('status_id')->default(1);
             $table->decimal('price', 10, 2)->required();
             $table->timestamps();

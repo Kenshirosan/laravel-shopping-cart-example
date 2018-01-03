@@ -36234,8 +36234,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
 
         replace: function replace(str) {
-            str.replace('/[]"/g/', "");
-            return str;
+            return str.replace('/[[""]]/g/', '');
+            // return str
         }
     },
 

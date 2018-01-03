@@ -35,13 +35,13 @@
                             Logout</a>
                         </li>
 
-                        @if( Auth::user()->isAdmin() )
+                        @can('see-admin-menu')
                             <li><a href="/restaurantpanel">Admin</a></li>
-                        @endif
-                        @if(  Auth::user()->isEmployee() )
+                        @endcan
+                        @can('see-employee-menu')
                             <li><a href="/customer-orders">Today's order</a></li>
                             <li><a href="/calendar">Calendar</a></li>
-                        @endif
+                        @endcan
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 {{ Auth::user()->name }}

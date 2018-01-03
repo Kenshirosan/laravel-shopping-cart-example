@@ -75,7 +75,7 @@ class PaymentController extends Controller
 
         Cart::destroy();
 
-        return redirect('/edit-profile')->with("success_message", "Thank You " . Auth::user()->name . ", Your order is complete, We sent you a detailed email, Please call us if you need to make a change.");
+        return redirect('/edit/profile')->with("success_message", "Thank You " . Auth::user()->name . ", Your order is complete, We sent you a detailed email, Please call us if you need to make a change.");
     }
 
      private function checkCartIsValid()
@@ -138,13 +138,13 @@ class PaymentController extends Controller
             'price' => $price
         ]);
 
-        if($code = request('code')){
-            \Promocodes::apply($code);
-            \Promocodes::disable($code);
-        }
+        // if($code = request('code')){
+        //     \Promocodes::apply($code);
+        //     \Promocodes::disable($code);
+        // }
 
         // event(new UserOrdered($order));
-        \Mail::to( auth()->user()->email )->send(new Thankyou($order));
+        // \Mail::to( auth()->user()->email )->send(new Thankyou($order));
     }
 
     /**

@@ -37,8 +37,8 @@ class CheckController extends Controller
     {
         $order = Order::findOrFail($id);
 
-        $items = explode(':[\']', $order->items);
-        $items = preg_replace('/[]["]/ ', '', $items);
+        $items = explode('[\']', $order->items);
+        $items = preg_replace('/[]:["]/ ', '', $items);
         $statuses = Status::all();
         $currentStatus = $order->status_id;
 

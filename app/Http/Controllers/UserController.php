@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Order;
 use App\User;
+use App\Order;
+use \Cart as Cart;
 use Carbon\Carbon;
 use App\Mail\Welcome;
 use Illuminate\Http\Request;
@@ -82,7 +83,6 @@ class UserController extends Controller
                         ->where('user_id', $user->id)
                         ->orderBy('id', 'desc')
                         ->get();
-
 
         return view('layouts.userprofile', compact('user', 'orders'));
     }

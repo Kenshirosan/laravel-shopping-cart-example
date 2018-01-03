@@ -1,8 +1,6 @@
 <?php
 
 // testing server performance : send email in a loop
-// Route::get('/', 'OrderProcessedController@index');
-
 
 Route::get('/', function () {
     return redirect('shop');
