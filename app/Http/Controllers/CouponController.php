@@ -75,7 +75,10 @@ class CouponController extends Controller
         $total = intval($subtotal + $taxes, 0);
 
         session()->flash('success_message', 'Your coupon has been applied');
+        // that shit has crached sometimes and I dunno why.. URL related, sent a response code of 1, then started working again.. hhhhhmmmmmmmm
         return view('layouts.payment_form', compact('total', 'discount', 'code'));
+        // return redirect('/checkout')->with(compact('total', 'discount', 'code'));
+                                    // ->with('success_message', 'Your coupon has been applied');
     }
 
     public function destroy($id)

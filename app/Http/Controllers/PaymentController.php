@@ -138,13 +138,13 @@ class PaymentController extends Controller
             'price' => $price
         ]);
 
-        // if($code = request('code')){
-        //     \Promocodes::apply($code);
-        //     \Promocodes::disable($code);
-        // }
+        if($code = request('code')){
+            \Promocodes::apply($code);
+            \Promocodes::disable($code);
+        }
 
         // event(new UserOrdered($order));
-        // \Mail::to( auth()->user()->email )->send(new Thankyou($order));
+        \Mail::to( auth()->user()->email )->send(new Thankyou($order));
     }
 
     /**

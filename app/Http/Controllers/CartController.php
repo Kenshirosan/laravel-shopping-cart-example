@@ -108,20 +108,22 @@ class CartController extends Controller
     public function switchToWishlist($id)
     {
         $item = Cart::get($id);
-
-        Cart::remove($id);
+        // dump($item);
+        // Cart::instance('wishlist')->remove($id);
 
         $duplicates = Cart::instance('wishlist')->search(function ($cartItem, $rowId) use ($id) {
             return $cartItem->id === $id;
         });
-
+        // dump($duplicates);
         if (!$duplicates->isEmpty()) {
             return redirect('wishlist')->with('flash', 'Item is already in your Wishlist!');
         }
 
-        Cart::instance('wishlist')->add($item->id, $item->name, 1, $item->price, $item->options)
+        // dd(request()->all());
+        Cart::instance('wishlist')->add(['id' => $item->id, 'name' => $item->name, 'qty' => 1, 'price' => $item->price, $item->options])
             ->associate('App\Product');
 
+        // Cart::destroy();
         return redirect('wishlist')->with('flash', 'Item has been moved to your Wishlist!');
     }
 }

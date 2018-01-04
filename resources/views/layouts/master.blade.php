@@ -16,9 +16,10 @@
     @yield('extra-css')
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/AdminLTE.min.css') }}">
     <link rel="stylesheet" href="/css/custom.css">
-
     <!-- Favicon and Apple Icons -->
     <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}">
+    {{-- Stripe recommends to put this script on all pages, helps ID not good behaviors --}}
+    <script src="https://js.stripe.com/v3/"></script>
 </head>
     <body>
         @include('includes.header')
@@ -33,9 +34,7 @@
         {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> ?Why did I put this already ?? hhmmmmmm--}}
         <script src="/js/app.js"></script>
         <script src="/js/smoothscroll.js" charset="utf-8"></script>
-
         @yield('extra-js')
         @yield('dropzone.script')
-
     </body>
 </html>

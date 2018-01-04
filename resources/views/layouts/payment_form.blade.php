@@ -1,20 +1,21 @@
 @extends('layouts.masterPageForPayment')
 
+@section('title')
+    Checkout
+@endsection
+
 @section('content')
 
     <div class="container wrapper">
-
         <div class="row cart-body">
-
-            <form class="form-horizontal" method="POST" action="/order">
+            <form class="form-horizontal" method="POST" action="/order" id="payment-form">
                 @include('includes.error')
                 {{ csrf_field() }}
-
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-push-6 col-sm-push-6">
                     <!--REVIEW ORDER-->
                     <div class="panel panel-info">
                         <div class="panel-heading">
-                            Review Order
+                            Review Your Order
                         </div>
 
                         @foreach (Cart::content() as $item)
@@ -25,7 +26,9 @@
                                     </div>
                                     <div class="col-sm-6 col-xs-6">
                                         <div class="col-xs-12">{{ $item->name }}</div>
-                                        <div class="col-xs-12"><small>Quantity:<span>{{ $item->qty }}</span></small></div>
+                                        <div class="col-xs-12">
+                                            <small>Quantity:<span>{{ $item->qty }}</span></small>
+                                        </div>
                                     </div>
                                     <div class="col-sm-3 col-xs-3 text-right">
                                         <h6><span>$</span>{{ $item->subtotal /100 }}</h6>
@@ -41,14 +44,20 @@
                             <span class="text-info">Congratulations ! {{ $discount * 100 }} % discount applied with code {{ $code }}</span>
                             <h4 class="text-right text-success" style="padding-right:10px;"><span>Total including discount : $</span>{{ $total / 100  }}</h4>
                         @endif
-                    </div>
+                    </div> <!--end panel-->
                     <!--REVIEW ORDER END-->
                 </div>
                 @if( Auth::user() )
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-pull-6 col-sm-pull-6">
                         <!--SHIPPING METHOD-->
                         <div class="panel panel-info">
-                            <div class="panel-heading">Address</div>
+                            <div class="panel-heading">
+                                <p>Your informations</p>
+                                <small>
+                                    <p>Your credit card number is not stored anywhere and never touches our server.</p>
+                                    <p>Our secure payment provider takes it from here.</p>
+                                </small>
+                            </div>
                             <div class="panel-body">
 
                                 <div class="form-group">
@@ -71,7 +80,7 @@
 
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                    <div class="col-md-12"><strong>Address:</strong></div><span class="text-info text-center">You may modify the address field if you wish to be delivered somewhere else</span>
+                                    <strong>Address: </strong><span class="text-info text-center">You may modify the address field if you wish to be delivered somewhere else</span>
                                         <input type="text" name="address" class="form-control" value=" {{ Auth::user()->address }} " />
                                     </div>
                                 </div>
@@ -108,34 +117,28 @@
                                         <input type="email" readonly name="email" class="form-control" value="{{ Auth::user()->email }}" />
                                     </div>
                                 </div>
-
                             <input type="hidden" name="code" value="{{ $code }}">
                             <input type="hidden" name="total" value="{{ $total }}">
                                 <!--SHIPPING METHOD END-->
                         @if(Cart::total() > 1500)
-                            <form action="/order" method="POST">
-                                <script
-                                    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                                    data-key="{{ config('services.stripe.key') }}"
-                                    @if($total != null)
-                                        data-amount="{{ $total }}"
-                                    @else
-                                    data-amount="{{ Cart::total() }}"
-                                    @endif
-                                    data-name="Demo Site"
-                                    data-description="Widget"
-                                    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-                                    data-locale="auto"
-                                    data-currency="usd"
-                                    data-zip-code="true">
-                                </script>
-                            </form>
-                            {{-- <checkoutform></checkoutform> --}}
+                            <div class="form-row">
+                                <label for="card-element">
+                                  Credit or debit card
+                                </label>
+                                <div id="card-element">
+                                  <!-- a Stripe Element will be inserted here. -->
+                                </div>
+
+                                <!-- Used to display form errors -->
+                                <div id="card-errors" role="alert"></div>
+                            </div>
+                            <checkoutform></checkoutform>
                         @else
                             <small class="text-danger">You need to order at least $15 worth to order</small>
                         @endif
                     </div>
                 </div>
+            </div>
             @endif
         </form>
         {{-- COUPON --}}

@@ -1,5 +1,6 @@
 <?php
 
+// use \Cart as Cart;
 // testing server performance : send email in a loop
 
 Route::get('/', function () {
@@ -93,3 +94,6 @@ Route::middleware(['auth', 'must-be-confirmed', 'employee', 'admin'])->group(fun
 // Route::resource('wishlist', 'WishlistController');
 // Route::delete('emptyWishlist', 'WishlistController@emptyWishlist');
 // Route::post('switchToCart/{id}', 'WishlistController@switchToCart');
+// Route::get('wishlist', function(){
+//     return dump(Cart::content());
+// });

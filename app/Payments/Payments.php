@@ -17,11 +17,11 @@ class Payments extends Model
     */
     public function validateStripePayment(Request $request)
     {
-        // dd(request('total'));
+        // dd($request->all());
         Stripe::setApiKey(config('services.stripe.secret'));
 
         $customer = Customer::create([
-            'email' => request('stripeEmail'),
+            'email' => request('email'),
             'source' => request('stripeToken')
         ]);
 

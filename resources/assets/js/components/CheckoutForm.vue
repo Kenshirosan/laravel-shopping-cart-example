@@ -1,49 +1,94 @@
 <template>
-<div>
-    <form action="/order" method="POST">
-        <input type="hidden" name="stripeToken" v-model="stripeToken">
-        <input type="hidden" name="stripeEmail" v-model="stripeEmail">
-
-        <button type="submit" @click.prevent="buy" class="btn btn-success">Pay with Card</button>
-
-    </form>
-</div>
+        <div>
+            <button>Submit Payment</button>
+        </div>
 </template>
 
 <script>
     export default {
-        props: ['product'];
+        mounted() {
+            // Create a Stripe client
+            var stripe = Stripe('pk_test_B9SEClbQcg35eUmOyH4adj7M');
 
-        data() {
-            return {
-                stripeEmail: '',
-                stripeToken: ''
+            // Create an instance of Elements
+            var elements = stripe.elements();
+
+            // Custom styling can be passed to options when creating an Element.
+            // (Note that this demo uses a wider set of styles than the guide below.)
+            var style = {
+                base: {
+                    color: '#32325d',
+                    lineHeight: '18px',
+                    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                    fontSmoothing: 'antialiased',
+                    fontSize: '16px',
+                    '::placeholder': {
+                      color: '#aab7c4'
+                    }
+                },
+                invalid: {
+                    color: '#fa755a',
+                    iconColor: '#fa755a'
+                }
             };
-        },
 
-        created() {
-            this.stripe = StripeCheckout.configure({
-                key: shop.stripeKey,
-                // image: "{{ asset('img/' . $item->model->image) }}",
-                locale: "auto",
-                token: (token) => {
-                    this.stripeToken = token.id;
-                    this.stripeEmail = token.email;
-                    axios.post('/order', this.$data)
-                        .then(console.log('done'));
+            // Create an instance of the card Element
+            var card = elements.create('card', {style: style});
+
+            // Add an instance of the card Element into the `card-element` <div>
+            card.mount('#card-element');
+
+            // Handle real-time validation errors from the card Element.
+            card.addEventListener('change', function(event) {
+                var displayError = document.getElementById('card-errors');
+                if (event.error) {
+                    displayError.textContent = event.error.message;
+                } else {
+                    displayError.textContent = '';
                 }
             });
-        },
 
-        methods: {
-            buy() {
-                this.stripe.open({
-                    name: 'Your order',
-                    description: 'Great to have you for dinner',
-                    zipCode: true,
-                    amount: price
+            // Handle form submission
+            var form = document.getElementById('payment-form');
+                form.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                stripe.createToken(card).then(function(result) {
+                    if (result.error) {
+                  // Inform the user if there was an error
+                    var errorElement = document.getElementById('card-errors');
+                    errorElement.textContent = result.error.message;
+                    } else {
+                      // Send the token to your server
+                      stripeTokenHandler(result.token);
+                    }
                 });
-            }
+            });
         }
     }
 </script>
+
+<style>
+.StripeElement {
+  background-color: white;
+  height: 40px;
+  padding: 10px 12px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus {
+  box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--invalid {
+  border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
+}
+</style>
