@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use Image;
 use App\User;
 use App\Product;
-use App\OptionGroup;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 
 class ProductController extends Controller

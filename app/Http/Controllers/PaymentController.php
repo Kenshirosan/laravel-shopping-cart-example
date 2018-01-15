@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Order;
 use \Cart as Cart;
-use App\Http\Requests;
 use App\Mail\Thankyou;
 use App\Payments\Payments;
 use App\Events\UserOrdered;

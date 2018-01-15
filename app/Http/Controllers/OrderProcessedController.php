@@ -2,14 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Hideable;
-use App\Http\Requests;
-use App\Mail\Thankyou;
 use App\Order;
-use App\User;
+use App\Hideable;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-
 
 class OrderProcessedController extends Controller
 {

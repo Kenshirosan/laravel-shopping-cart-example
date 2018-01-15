@@ -2,15 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use DB;
-use App\User;
 use App\Order;
 use App\Status;
-use Carbon\Carbon;
-use App\Http\Requests;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
-use Illuminate\Support\Facades\Auth;
 
 class CheckController extends Controller
 {

@@ -6,7 +6,6 @@ use Image;
 use App\Photo;
 use App\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class PhotosController extends Controller
 {
