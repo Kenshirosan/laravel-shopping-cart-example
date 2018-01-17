@@ -68159,8 +68159,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "options minimal",
     attrs: {
       "name": "options",
-      "autofocus": "",
-      "required": ""
+      "autofocus": ""
     },
     on: {
       "change": function($event) {

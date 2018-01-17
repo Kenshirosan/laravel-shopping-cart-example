@@ -3,7 +3,7 @@
         <input type="hidden" name="id"  v-model="this.product.id">
         <input type="hidden" name="name"  v-model="this.product.name">
         <input type="hidden" name="price"  v-model="this.product.price">
-        <select name="options" v-if="options" class="options minimal" autofocus required v-model="option">
+        <select name="options" v-if="options" class="options minimal" required autofocus v-model="option">
         <option value="" class="reset">Choose</option>
         <option class="options" name="option"
                 v-for="option in options"

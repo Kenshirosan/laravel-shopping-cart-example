@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Image;
 use App\User;
+use App\Photo;
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 
 class ProductController extends Controller
@@ -80,7 +82,16 @@ class ProductController extends Controller
     {
         $product = Product::where('slug', $product)->firstOrFail();
 
+        $file = $product->image;
+        Storage::disk('custom')->delete('img/' . $file);
+
+        $files = Photo::where('product_id', $product->id)->get();
+
         $product->delete();
+        foreach($files as $photo) {
+            Storage::disk('custom')->delete($photo->photos);
+        }
+
         return back()->with(['success_message' => 'Successfully deleted!']);
     }
 }

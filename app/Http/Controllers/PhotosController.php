@@ -25,7 +25,7 @@ class PhotosController extends Controller
 
         $file = $request->file('photos');
         $name = time() . $file->getClientOriginalName();
-        $path = 'meals/photos/' . $name;
+        $path = 'img/' . $name;
         $file = Image::make($file->getRealPath())->resize(800, 500)->save($path);
 
         $photo = new Photo();

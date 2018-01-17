@@ -4,6 +4,7 @@
 // testing server performance : send email in a loop
 
 Route::get('/', function () {
+
     return redirect('shop');
 })->name('shop');
 
