@@ -67,7 +67,7 @@ class Order extends Model
 
     public function price()
     {
-        return money_format('%i', $this->price / 100);
+        return money_format('$%i', $this->price / 100);
     }
 
 }

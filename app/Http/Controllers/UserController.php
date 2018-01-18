@@ -20,15 +20,17 @@ class UserController extends Controller
     {
         $employees = User::where(['employee' => true, 'theboss' => false])->get();
 
-        return view('admin.employees', compact('employees'));
+        $users = User::where(['employee' => false, 'theboss' => false])->get();
+
+        return view('admin.employees', compact('employees', 'users'));
     }
 
     public function show($id)
     {
         if( auth()->user()->isAdmin()) {
-            $employee = User::where('id', $id)->firstOrFail();
+            $user = User::where('id', $id)->with('orders')->firstOrFail();
 
-            return view('admin.employee', compact('employee'));
+            return view('admin.user', compact('user'));
         }
 
         $user = User::where('id', $id)->firstOrFail();

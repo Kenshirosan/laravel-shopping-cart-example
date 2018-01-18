@@ -63,6 +63,7 @@ Route::middleware(['auth', 'must-be-confirmed', 'employee', 'admin'])->group(fun
     Route::post('/add-user', 'UserController@store');
     Route::get('/delete-user', 'UserController@index');
     Route::get('/employee/{id}', 'UserController@show');
+    Route::get('/user/{id}', 'UserController@show');
     Route::delete('/delete/{id}/user', 'UserController@destroy');
     Route::get('/restaurantpanel', 'AdminController@index');
     Route::get('/add-holiday-title', 'HolidaySpecialController@create');
