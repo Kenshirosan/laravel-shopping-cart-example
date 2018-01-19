@@ -50,10 +50,9 @@ class CheckController extends Controller
     {
         $order = Order::findOrFail($id);
 
-        $items = explode(':', $order->items);
-        $items = preg_replace('/[]["]/ ', '', $items);
+        $items = collect(preg_replace('/[]:["]/', '', $order->items));
 
-        return PDF::loadView('pdf.printtest', ['order' =>$order, 'items' => $items])
+        return PDF::loadView('pdf.printtest', compact('order', 'items'))
                     ->stream('order.pdf');
     }
 }

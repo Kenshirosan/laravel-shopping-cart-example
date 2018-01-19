@@ -26,7 +26,7 @@
                 <td><strong class="text-info">{{ $order->last_name }}</strong></td>
                 <td><strong class="text-info">{{ $order->email }}</strong></td>
                 <td><strong class="text-info">{{ $order->phone_number }}</strong></td>
-                <td><strong class="text-info">${{ $order->price() }}</strong></td>
+                <td><strong class="text-info">{{ $order->price() }}</strong></td>
             </tr>
         </tbody>
     </table>
@@ -38,7 +38,7 @@
         @endforeach
     </ul>
     <hr>
-    <p><strong>Order received on : {{ $order->created_at->format('D, F d, Y') }} at : {{ $order->created_at->toTimeString() }}</strong></p>
+    <p><strong>Order received on : {{ $order->created_at->format('D, F d, Y') }} at {{ $order->created_at->toTimeString() }}</strong></p>
     @include('includes.footer')
 </body>
 </html>

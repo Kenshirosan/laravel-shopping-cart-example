@@ -23,7 +23,7 @@
                         <td>{{ $order->email }}</td>
                         <td>{{ $order->created_at->toDateString() }}</td>
                         <td>
-                            <a href="print/{{ $order->id }}" title="SHOW" >
+                            <a href="/print/{{ $order->id }}" title="SHOW" >
                                 <span class="glyphicon glyphicon-list"></span>
                             </a>
                         </td>

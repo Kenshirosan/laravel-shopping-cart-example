@@ -18,7 +18,7 @@ return [
     /*
      * List of characters, promo code generated from.
      * We have removed 1 (one) and I because with some
-     * fonts you can't find deference between them
+     * fonts you can't see the difference between them
      */
     'characters' => '23456789ABCDEFGHJKLMNPQRSTUVWXYZ',
 
@@ -30,7 +30,7 @@ return [
      * Ex: foo
      * Output: foo-1234-1234
      */
-    'prefix' => false,
+    'prefix' => 'retaurant_name',
 
     /*
      * Promo code suffix.

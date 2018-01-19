@@ -15,13 +15,15 @@
                         <span class="info-box-text">{{ $user->name }}</span>
                         <span class="info-box-text">{{ $user->phone_number }}</span>
                         <hr>
-                        @if($user->isEmployee())
-                            <form method="POST" action="/delete/{{ $user->id }}/user">
+                        <div class="form-group">
+                            <form method="POST" action="/delete/{{ $user->id }}/user" class="form-horizontal">
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE') }}
-                                <button type="submit" class="btn btn-danger">Delete</button>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </div>
                             </form>
-                        @endif
+                        </div>
                     </div>
                 </div>
             </div>
@@ -30,10 +32,12 @@
             @foreach( $user->orders as $order)
                 <div class="col-md-4">
                     <ul class="list-group active">
-                        <div class="list-group-item active">
-                            <h4 class="list-group-item-heading">
-                                <span class="info-box-text">{{ $order->id }}</span>
-                            </h4>
+                        <div class="list-group-item list-group-item-success is-active">
+                            <a href="/print/{{ $order->id }}" title="SHOW" class="text-info">
+                                <h4 class="list-group-item">
+                                    <span class="info-box-text"><strong>Click to view Order : {{ $order->id }}</strong></span>
+                                </h4>
+                            </a>
                         </div>
                         <li class="list-group-item"><span class="info-box-text">{{ preg_replace('/[]:["]/ ', ' ', $order->items) }}</span></li>
                         <li class="list-group-item"><span class="info-box-text">{{ $order->price() }}</span></li>

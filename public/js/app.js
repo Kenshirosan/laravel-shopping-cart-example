@@ -36289,6 +36289,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -36307,11 +36310,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     filters: {
         moment: function moment(date) {
             return __WEBPACK_IMPORTED_MODULE_0_moment___default()(date).fromNow();
-        },
-
-        replace: function replace(str) {
-            return str.replace('/[[""]]/g/', '');
-            // return str
         }
     },
 
@@ -68258,11 +68256,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, _vm._l((_vm.orders), function(order) {
     return _c('li', {
       staticClass: "list-group-item list-group-item"
-    }, [_c('p', {
+    }, [_c('a', {
+      attrs: {
+        "href": /user-order/ + order.id
+      }
+    }, [_c('p', [_vm._v("Print")])]), _vm._v(" "), _c('p', {
       domProps: {
         "textContent": _vm._s(order.id)
       }
-    }), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm._f("replace")(order.items)))]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm._f("moment")(order.created_at)))])])
+    }), _vm._v(" "), _c('p', [_vm._v("$" + _vm._s(order.price / 100))]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm._f("moment")(order.created_at)))])])
   })) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "pagination"
   }, [(_vm.pagination.prev_page_url) ? _c('button', {

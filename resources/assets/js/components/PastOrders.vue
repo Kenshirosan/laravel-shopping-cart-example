@@ -7,8 +7,11 @@
         </div>
         <ul class="list-group" v-if="orders">
             <li class="list-group-item list-group-item" v-for="order in orders">
+                <a :href="/user-order/+ order.id">
+                    <p>Print</p>
+                </a>
                 <p v-text="order.id"></p>
-                <p>{{ order.items | replace }}</p>
+                <p>${{ order.price / 100 }}</p>
                 <p>{{ order.created_at | moment }}</p>
             </li>
         </ul>
@@ -49,13 +52,8 @@ import moment from 'moment';
         },
 
         filters: {
-            moment: function (date) {
+            moment: date => {
                 return moment(date).fromNow()
-            },
-
-            replace: (str) => {
-                return str.replace('/[[""]]/g/', '')
-                // return str
             }
         },
 
