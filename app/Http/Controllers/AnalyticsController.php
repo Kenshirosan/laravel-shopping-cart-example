@@ -31,6 +31,6 @@ class AnalyticsController extends Controller
         $pageviews = collect($pageviews);
         $sessions = collect($sessions);
 
-        return view('admin.analytics', compact('analyticsData', 'dates', 'pageviews', 'sessions'));
+        return view('admin.analytics', compact('dates', 'pageviews', 'sessions'));
     }
 }

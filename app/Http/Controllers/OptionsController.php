@@ -41,6 +41,5 @@ class OptionsController extends Controller
         }
 
         return back()->with('success_message', 'Option added');
-
     }
 }

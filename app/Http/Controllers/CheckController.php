@@ -16,8 +16,7 @@ class CheckController extends Controller
     */
     public function index()
     {
-        $orders = new Order();
-        $orders = $orders->todaysOrders();
+        $orders = ( new Order() )->todaysOrders();
 
         return view('pdf.userorder', compact('orders'));
     }
@@ -32,10 +31,9 @@ class CheckController extends Controller
     {
         $order = Order::findOrFail($id);
 
-        $items = explode('[\']', $order->items);
-        $items = preg_replace('/[]:["]/ ', '', $items);
-        $statuses = Status::all();
         $currentStatus = $order->status_id;
+        $items = collect(preg_replace('/[]:["]/ ', '', $order->items));
+        $statuses = Status::all();
 
         return view('pdf.print', compact('order', 'items', 'statuses', 'currentStatus'));
     }
