@@ -60,7 +60,7 @@ class ProductController extends Controller
             Image::make($avatar->getRealPath())->resize(800, 500)->save($path);
 
             $product = Product::create([
-                'name' => request('name'),
+                'name' => ucfirst(request('name')),
                 'holiday_special' => request('holiday_special'),
                 'option_group_id' => request('option_group_id'),
                 'category_id' => request('category_id'),

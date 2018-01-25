@@ -5,33 +5,34 @@
 @endsection
 
 @section('content')
- <noscript>
+    <noscript>
      <h1 style="color:red">Javascript must be enabled past this point, please check how to activate javascript for your browser</h1>
- </noscript>
-<section class="shopping">
-    <div class="jumbotron text-center clearfix">
-        <h2>Name of your restaurant</h2>
-        <p>Place your order !</p>
-    </div>
-    @foreach ($categories as $category)
+    </noscript>
 
-        @if( ! $category->products->isEmpty())
-            <div class="row">
-                <div class="well text-center">
-                    <h1>{{ $category->name }}</h1>
+    <section class="shopping">
+        <div class="jumbotron text-center clearfix">
+            <h2>Name of your restaurant</h2>
+            <p>Place your order !</p>
+        </div>
+        @foreach ($categories as $category)
+
+            @if( ! $category->products->isEmpty())
+                <div class="row">
+                    <div class="well text-center">
+                        <h1>{{ $category->name }}</h1>
+                    </div>
+                    @foreach($category->products as $product)
+                        @include('includes.productslayout')
+                    @endforeach
+                    @include('includes.goToCartButton')
                 </div>
-                @foreach($category->products as $product)
-                    @include('includes.productslayout')
-                @endforeach
-                @include('includes.goToCartButton')
-            </div>
-        @endif
-    @endforeach
+            @endif
+        @endforeach
 
 
-    <div class="container text-center">
-        <a href="#top" class="btn btn-info">Back to top</a>
-    </div>
-</section>
+        <div class="container text-center">
+            <a href="#top" class="btn btn-info">Back to top</a>
+        </div>
+    </section>
 
 @endsection

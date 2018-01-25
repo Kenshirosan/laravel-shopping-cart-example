@@ -69,7 +69,7 @@
                 content: 'div',
                 className: 'datetimepicker',
                 button: {
-                    text: "Go!",
+                    text: "Update",
                     closeModal: true,
                 },
             })
@@ -78,7 +78,8 @@
                 inline: true,
                 sideBySide: true
             });
-            $(".datetimepicker").on('click', function(){
+
+            $(".datetimepicker").on('click', function() {
             let date = $(this).data("DateTimePicker").date();
             if (date < new Date()) {
                 return axios.delete('/things-to-do/'+event.id).then(flash('Event Deleted'))
@@ -86,26 +87,29 @@
                                 setTimeout(function(){ location.reload()}, 3000)
                             );
             }
+
             date =  moment(date).format("YYYY-MM-DD HH:mm:ss");
-                event = {
-                    id: event.id,
-                    title: event.title,
-                    start: date,
-                    allDay: false,
-                    backgroundColor: event.color,
-                }
-                axios.patch('/things-to-do/'+event.id, event).then(flash('Event successfully modified')).then(
-                        setTimeout(function(){ location.reload(); }
-                    , 3000)
+
+            event = {
+                id: event.id,
+                title: event.title,
+                start: date,
+                allDay: false,
+                backgroundColor: event.color,
+            }
+            axios.patch('/things-to-do/'+ event.id, event).then(flash('Event successfully modified'))
+                .then(
+                    setTimeout(function() {
+                       location.reload();
+                    }, 3000)
                 )
             });
         },
-      //fetch events
+      //fetch events and display on calendar
       events: function(start, end, timezone, callback) {
         $.ajax({
             url: '/calendar',
             dataType: 'json',
-            // display on calendar
             success: function(doc) {
                 var events = [];
                 $(doc).each(function() {
@@ -136,21 +140,24 @@
         copiedEventObject.backgroundColor = $(this).css('background-color')
         copiedEventObject.borderColor     = $(this).css('border-color')
         // persist event
-        axios.post('/things-to-do', copiedEventObject).then(flash('event successfully added'))
+        axios.post('/things-to-do', copiedEventObject)
+            .then(flash('event successfully added'))
+            .catch(flash('Something went wrong, please try again later', 'danger'))
 
         // render the event on the calendar
         // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
         $('#calendar').fullCalendar('renderEvent', copiedEventObject, true)
 
-        // is the "remove after drop" checkbox checked? the remove element
+        // is the "remove after drop" checkbox checked? then remove element
         if ($('#drop-remove').is(':checked')) {
           $(this).remove()
         }
     }
 })
 
-    /* ADDING EVENTS */
-    var currColor = '#3c8dbc' //Red by default
+    /* Create events to be dropped */
+    //Blue by default
+    var currColor = '#3c8dbc'
     //Color chooser button
     var colorChooser = $('#color-chooser-btn')
     $('#color-chooser > li > a').click(function (e) {
@@ -158,7 +165,7 @@
       //Save color
       currColor = $(this).css('color')
       //Add color effect to button
-      $('#add-new-event').css({ 'background-color': currColor, 'border-color': currColor })
+      $('#add-new-event').css({ 'background-color': currColor, 'border-color': 'white' })
     })
     $('#add-new-event').click(function (e) {
         e.preventDefault()
@@ -172,7 +179,7 @@
         var event = $('<div />')
         event.css({
         'background-color': currColor,
-        'border-color'    : currColor,
+        'border-color'    : 'rgb(0, 0, 0)',
         'color'           : '#fff'
         }).addClass('external-event')
         event.html(val)

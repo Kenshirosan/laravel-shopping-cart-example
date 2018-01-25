@@ -12,6 +12,7 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="/css/dropzone.min.css">
     <link rel="stylesheet" href="/css/link.css">
+    @yield('lity-css')
     <link rel="stylesheet" href="/css/app.css">
     @yield('extra-css')
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/AdminLTE.min.css') }}">
@@ -36,5 +37,6 @@
         <script src="/js/smoothscroll.js" charset="utf-8"></script>
         @yield('extra-js')
         @yield('dropzone.script')
+        @yield('lity-js')
     </body>
 </html>

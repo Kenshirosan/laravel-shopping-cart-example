@@ -6,6 +6,15 @@
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+.product-layout-img {
+    margin-top: 10px;
+}
+
+.lity-img {
+    cursor: zoom-in;
+}
+
 .alert {
     position: fixed;
     right: 25px;

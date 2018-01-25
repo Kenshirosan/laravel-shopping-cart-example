@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('lity-css')
+    <link rel="stylesheet" href="/css/lity.min.css">
+@endsection
+
 @section('title')
     {{ $product->name }}
 @endsection
@@ -9,9 +13,9 @@
     <hr>
     <div class="row">
         <div class="col-md-4">
-            <img src="{{ asset('img/' . $product->image) }}" alt="product" class="img-responsive">
+            <img src="{{ asset('img/' . $product->image) }}" alt="{{ $product->name }}" class="img-responsive lity-img" data-lity>
             @foreach( $product->photos as $item)
-                <img src="{{ asset($item->photos) }}" alt="{{ $product->name }}" class="img-responsive">
+                <img src="{{ asset($item->photos) }}" alt="{{ $product->name }}" class="img-responsive lity-img" data-lity>
             @endforeach
         </div>
 
@@ -73,4 +77,8 @@
         acceptedFiles: '.jpg, .jpeg, .png, .bmp'
     };
     </script>
+@endsection
+
+@section('lity-js')
+    <script src="/js/lity.min.js"></script>
 @endsection

@@ -1,9 +1,9 @@
-<div class="col-md-3">
+<div class="col-md-4">
     <div class="thumbnail">
         <div class="caption text-center">
-            {{ $product->name }}
+            <strong>{{ $product->name }}</strong>
             <a href="{{ url('shop', [$product->slug]) }}">
-                <img src="{{ asset('img/' . $product->image) }}" alt="product" class="img-responsive">
+                <img src="{{ asset('img/' . $product->image) }}" alt="product" class="img-responsive product-layout-img">
             </a>
             <a href="{{ url('shop', [$product->slug]) }}"><h3>{{ $product->name }}</h3>
                 <p>${{ $product->price() }}</p>
@@ -38,13 +38,13 @@
             <input type="submit"  value="Add To Cart" class="btn btn-success">
         </noscript>
 
-            <add-to-cart
-                :product="{{ $product }}"
-                @if( ! $product->options()->isEmpty() )
-                    :options="{{ $product->options() }}"
-                @endif
-                >
-            </add-to-cart>
+        <add-to-cart
+            :product="{{ $product }}"
+            @if( ! $product->options()->isEmpty() )
+                :options="{{ $product->options() }}"
+            @endif
+        >
+        </add-to-cart>
     </form>
 
     <div class="spacer"></div>
