@@ -83,6 +83,7 @@ class CouponController extends Controller
     {
         $coupon = Promocode::where('id', $id);
 
+        $coupon->user_id = '';
         $coupon->delete();
 
         return back()->with('success_message', 'Coupon deleted');

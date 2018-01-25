@@ -30,7 +30,7 @@ return [
      * Ex: foo
      * Output: foo-1234-1234
      */
-    'prefix' => 'retaurant_name',
+    'prefix' => 'restaurant_name',
 
     /*
      * Promo code suffix.

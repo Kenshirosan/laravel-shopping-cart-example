@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Order;
+use App\Promocode;
 use \Cart as Cart;
 use App\Mail\Thankyou;
 use App\Payments\Payments;
@@ -137,8 +138,11 @@ class PaymentController extends Controller
             'price' => $price
         ]);
 
-        if($code = request('code')){
+        $code = request('code');
+        $promocode = Promocode::where('code', $code)->firstOrFail();
+        if ($promocode && $promocode->is_disposable) {
             \Promocodes::apply($code);
+
             \Promocodes::disable($code);
         }
 
