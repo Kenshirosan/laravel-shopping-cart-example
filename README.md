@@ -7,18 +7,18 @@ Almost ready to ship laravel e-commerce application. Uses Crinsane/LaravelShoppi
 
 Features :
 ---
-* mail functionality on registration and order.
-* order form and order table.
-* admin(boss) row in users table, to be set manually directly in database, Admin may add employees
+* Mail functionality on registration and order.
+* Order form and order table.
+* Admin(boss) row in users table, to be set manually directly in database, Admin may add employees
 * Add product/Delete Products
-* dropzone.js on product page.
-* stripe payment, just add your key in .env, and update the public key in CheckoutForm.vue.
+* Dropzone.js on product page.
+* Stripe payment, just add your key in .env, and update the public key in CheckoutForm.vue.
 * User account with real-time order tracking.
 * PDF printing.
-* product options.
-* coupons / promotion codes.
-* backend with adminLTE.
-* user must confirm their email.
+* Product options/categories/specials.
+* Coupons / promotion codes.
+* Users must confirm their email.
+* backend with [adminLTE](https://adminlte.io/themes/AdminLTE/index2.html) for laravel, package by [Jeroen Noten](https://github.com/jeroennoten/Laravel-AdminLTE)
 * [fullcalendar.io](https://fullcalendar.io).
 * google analytics by [Spatie.be](https://spatie.be/en/opensource/postcards), Don't forget to send them a postcard.
 
