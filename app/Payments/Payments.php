@@ -17,7 +17,6 @@ class Payments extends Model
     */
     public function validateStripePayment(Request $request)
     {
-        // dd($request->all());
         Stripe::setApiKey(config('services.stripe.secret'));
 
         $customer = Customer::create([

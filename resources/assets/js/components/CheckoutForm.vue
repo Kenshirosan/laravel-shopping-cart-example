@@ -32,7 +32,7 @@
                     lineHeight: '18px',
                     fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
                     fontSmoothing: 'antialiased',
-                    fontSize: '18px',
+                    fontSize: '14px',
                     '::placeholder': {
                       color: '#32325d'
                     }
@@ -93,29 +93,3 @@
         }
     }
 </script>
-
-<style>
-.StripeElement {
-  background-color: #f9f9f9;
-  height: 80px;
-  padding: 28px 24px;
-  border-radius: 25px;
-  border: 1px solid #32325d;
-  box-shadow: 5px 10px 3px 0 #e6ebf1;
-  -webkit-transition: box-shadow 150ms ease;
-  transition: box-shadow 150ms ease;
-  color: white;
-}
-
-.StripeElement--focus {
-  box-shadow: 0 1px 3px 0 #cfd7df;
-}
-
-.StripeElement--invalid {
-  border-color: #fa755a;
-}
-
-.StripeElement--webkit-autofill {
-  background-color: #fefde5 !important;
-}
-</style>

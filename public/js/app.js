@@ -36082,7 +36082,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 lineHeight: '18px',
                 fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
                 fontSmoothing: 'antialiased',
-                fontSize: '18px',
+                fontSize: '14px',
                 '::placeholder': {
                     color: '#32325d'
                 }
@@ -51881,13 +51881,7 @@ exports = module.exports = __webpack_require__(12)();
 exports.push([module.i, "\n.option{\n    color: orangered;\n}\n.reset {\n    color: red;\n}\n", ""]);
 
 /***/ }),
-/* 341 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(12)();
-exports.push([module.i, "\n.StripeElement {\n  background-color: #f9f9f9;\n  height: 80px;\n  padding: 28px 24px;\n  border-radius: 25px;\n  border: 1px solid #32325d;\n  box-shadow: 5px 10px 3px 0 #e6ebf1;\n  transition: box-shadow 150ms ease;\n  color: white;\n}\n.StripeElement--focus {\n  box-shadow: 0 1px 3px 0 #cfd7df;\n}\n.StripeElement--invalid {\n  border-color: #fa755a;\n}\n.StripeElement--webkit-autofill {\n  background-color: #fefde5 !important;\n}\n", ""]);
-
-/***/ }),
+/* 341 */,
 /* 342 */
 /***/ (function(module, exports) {
 
@@ -67841,10 +67835,6 @@ module.exports = Component.exports
 /* 352 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
-/* styles */
-__webpack_require__(372)
-
 var Component = __webpack_require__(6)(
   /* script */
   __webpack_require__(283),
@@ -77032,32 +77022,7 @@ if(false) {
 }
 
 /***/ }),
-/* 372 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(341);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(14)("5c4bad19", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-b6acd5f6\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CheckoutForm.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-b6acd5f6\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CheckoutForm.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
+/* 372 */,
 /* 373 */
 /***/ (function(module, exports) {
 

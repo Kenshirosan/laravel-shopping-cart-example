@@ -8,7 +8,7 @@
     <section class="content">
         <div class="row">
             @if($messages->isEmpty())
-                <h2 class="text-info text-center">No messages yet</h2>
+                <h2 class="text-info text-center">No messages</h2>
             @else
             @foreach($messages as $message)
                     <div class="col-md-3 col-sm-6 col-xs-12">
