@@ -9,8 +9,8 @@ Features :
 ---
 * Mail functionality on registration and order.
 * Order form and order table.
-* Admin(boss) row in users table, to be set manually directly in database, Admin may add employees
-* Add product/Delete Products
+* Admin row in users table, to be set manually directly in database, Admin may add employees
+* Add product/Delete Products.
 * Dropzone.js on product page.
 * Stripe payment, just add your key in .env, and update the public key in CheckoutForm.vue.
 * User account with real-time order tracking.
@@ -18,9 +18,9 @@ Features :
 * Product options/categories/specials.
 * Coupons / promotion codes.
 * Users must confirm their email.
-* backend with [adminLTE](https://adminlte.io/themes/AdminLTE/index2.html) for laravel, package by [Jeroen Noten](https://github.com/jeroennoten/Laravel-AdminLTE)
+* Backend with [adminLTE](https://adminlte.io/themes/AdminLTE/index2.html) for laravel, package by [Jeroen Noten](https://github.com/jeroennoten/Laravel-AdminLTE).
 * [fullcalendar.io](https://fullcalendar.io).
-* google analytics by [Spatie.be](https://spatie.be/en/opensource/postcards), Don't forget to send them a postcard.
+* Google analytics package by [Spatie.be](https://spatie.be/en/opensource/postcards), Don't forget to send them a postcard.
 
 download or clone then
 ```
