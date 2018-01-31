@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use App\Hideable;
+use App\Mail\Thankyou;
 use Illuminate\Http\Request;
 
 class OrderProcessedController extends Controller
@@ -11,7 +12,9 @@ class OrderProcessedController extends Controller
     // testing server performance
     // public function index()
     // {
-    //      \Mail::to( 'your-email' )->send(new Thankyou($order = null));
+    //     $order = Order::first();
+
+    //     \Mail::to( 'YOUR EMAIL HERE' )->send(new Thankyou($order));
     //     return back();
     // }
 

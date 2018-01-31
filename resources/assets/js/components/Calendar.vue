@@ -18,13 +18,14 @@
 
     $(function () {
     /* initialize the external events
-     -----------------------------------------------------------------*/
+    --------------------------------------------*/
     function init_events(ele) {
         ele.each(function () {
             // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
             // it doesn't need to have a start or end
             var eventObject = {
-              title: $.trim($(this).text()) // use the element's text as the event title
+            // use the element's text as the event title
+              title: $.trim($(this).text())
             }
             // store the Event Object in the DOM element so we can get to it later
             $(this).data('eventObject', eventObject)
@@ -32,10 +33,10 @@
             // make the event draggable using jQuery UI
             $(this).draggable({
               zIndex        : 1070,
-              revert        : true, // will cause the event to go back to its
-              revertDuration: 0  //  original position after the drag
+              // will cause the event to go back to its original position after the drag
+              revert        : true,
+              revertDuration: 500
             })
-
         })
     }
 
@@ -51,10 +52,10 @@
         y    = date.getFullYear()
     $('#calendar').fullCalendar({
         header    : {
-            left  : 'prev,next today',
+            left  : 'prev, next, today',
             center: 'title',
-            right : 'month,agendaWeek,agendaDay'
-      },
+            right : 'month, agendaWeek, agendaDay'
+        },
         buttonText: {
             today: 'today',
             month: 'month',
@@ -62,7 +63,7 @@
             day  : 'day'
         },
 
-        // update events on click
+        // update or delete events on click, will implement a proper delete button sometimes...
         eventClick: function(event, element) {
             swal({
                 text: 'Pick a new date and/or time.',

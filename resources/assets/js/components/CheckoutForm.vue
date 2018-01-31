@@ -1,6 +1,17 @@
 <template>
         <div>
-            <button>Submit Payment</button>
+            <div class="form-row">
+                <label for="card-element">
+                  Credit or debit card
+                </label>
+                <div id="card-element">
+                  <!-- a Stripe Element will be inserted here. -->
+                </div>
+
+                <!-- Used to display form errors -->
+                <div id="card-errors" role="alert"></div>
+            </div>
+            <button class="stripe">Submit Payment</button>
         </div>
 </template>
 
@@ -17,13 +28,13 @@
             // (Note that this demo uses a wider set of styles than the guide below.)
             var style = {
                 base: {
-                    color: '#32325d',
+                    color: 'green',
                     lineHeight: '18px',
                     fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
                     fontSmoothing: 'antialiased',
-                    fontSize: '16px',
+                    fontSize: '18px',
                     '::placeholder': {
-                      color: '#aab7c4'
+                      color: '#32325d'
                     }
                 },
                 invalid: {
@@ -52,7 +63,7 @@
             var form = document.getElementById('payment-form');
                 form.addEventListener('submit', function(event) {
                 event.preventDefault();
-                // create source instead of token for 3d secure payment
+                // create source instead of token for 3d secure payment, need to figure that shit out.....
                 // stripe.createSource({
                 //     type: 'three_d_secure',
                 //     amount: 1099,
@@ -85,14 +96,15 @@
 
 <style>
 .StripeElement {
-  background-color: white;
-  height: 40px;
-  padding: 10px 12px;
-  border-radius: 4px;
-  border: 1px solid transparent;
-  box-shadow: 0 1px 3px 0 #e6ebf1;
+  background-color: #f9f9f9;
+  height: 80px;
+  padding: 28px 24px;
+  border-radius: 25px;
+  border: 1px solid #32325d;
+  box-shadow: 5px 10px 3px 0 #e6ebf1;
   -webkit-transition: box-shadow 150ms ease;
   transition: box-shadow 150ms ease;
+  color: white;
 }
 
 .StripeElement--focus {

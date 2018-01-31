@@ -54,7 +54,7 @@
                             <div class="panel-heading">
                                 <p>Your informations</p>
                                 <small>
-                                    <p>Your credit card number is not stored anywhere and never touches our server.</p>
+                                    <p><strong>Your credit card number is not stored anywhere</strong> and never touches our server.</p>
                                     <p>Our <a href="https://stripe.com/us" class="text-success"><strong>Secure </a>Payment Provider is</strong>
                                         <a href="https://www.pcisecuritystandards.org/" class="text-success">
                                             <strong>PCI compliant</strong>
@@ -84,7 +84,11 @@
 
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                    <strong>Address: </strong><span class="text-info text-center">You may modify the address field if you wish to be delivered somewhere else</span>
+                                    <p>
+                                        <strong>Address: </strong>
+                                        <span class="text-info text-center">You may modify the address field if you wish to be delivered somewhere else. However, the address must be located within one of the zipcodes listed below.
+                                        </span>
+                                    </p>
                                         <input type="text" name="address" class="form-control" value=" {{ Auth::user()->address }} " />
                                     </div>
                                 </div>
@@ -125,17 +129,7 @@
                             <input type="hidden" name="total" value="{{ $total }}">
                                 <!--SHIPPING METHOD END-->
                         @if(Cart::total() > 1500)
-                            <div class="form-row">
-                                <label for="card-element">
-                                  Credit or debit card
-                                </label>
-                                <div id="card-element">
-                                  <!-- a Stripe Element will be inserted here. -->
-                                </div>
-
-                                <!-- Used to display form errors -->
-                                <div id="card-errors" role="alert"></div>
-                            </div>
+                        <hr>
                             <checkoutform></checkoutform>
                         @else
                             <small class="text-danger">You need to order at least $15 worth to order</small>
@@ -144,7 +138,7 @@
                 </div>
             </div>
             @endif
-        </form>
+            </form>
         {{-- COUPON --}}
         <div class="container text-right">
             <h2>Do you have a coupon ?</h2>

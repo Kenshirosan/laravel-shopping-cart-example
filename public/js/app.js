@@ -35872,22 +35872,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 $(function () {
     /* initialize the external events
-     -----------------------------------------------------------------*/
+    --------------------------------------------*/
     function init_events(ele) {
         ele.each(function () {
             // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
             // it doesn't need to have a start or end
             var eventObject = {
-                title: $.trim($(this).text()) // use the element's text as the event title
-
+                // use the element's text as the event title
+                title: $.trim($(this).text())
                 // store the Event Object in the DOM element so we can get to it later
             };$(this).data('eventObject', eventObject);
 
             // make the event draggable using jQuery UI
             $(this).draggable({
                 zIndex: 1070,
-                revert: true, // will cause the event to go back to its
-                revertDuration: 0 //  original position after the drag
+                // will cause the event to go back to its original position after the drag
+                revert: true,
+                revertDuration: 500
             });
         });
     }
@@ -35904,9 +35905,9 @@ $(function () {
         y = date.getFullYear();
     $('#calendar').fullCalendar({
         header: {
-            left: 'prev,next today',
+            left: 'prev, next, today',
             center: 'title',
-            right: 'month,agendaWeek,agendaDay'
+            right: 'month, agendaWeek, agendaDay'
         },
         buttonText: {
             today: 'today',
@@ -35915,7 +35916,7 @@ $(function () {
             day: 'day'
         },
 
-        // update events on click
+        // update or delete events on click, will implement a proper delete button sometimes...
         eventClick: function eventClick(event, element) {
             __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()({
                 text: 'Pick a new date and/or time.',
@@ -36053,6 +36054,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
@@ -36066,13 +36078,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         // (Note that this demo uses a wider set of styles than the guide below.)
         var style = {
             base: {
-                color: '#32325d',
+                color: 'green',
                 lineHeight: '18px',
                 fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
                 fontSmoothing: 'antialiased',
-                fontSize: '16px',
+                fontSize: '18px',
                 '::placeholder': {
-                    color: '#aab7c4'
+                    color: '#32325d'
                 }
             },
             invalid: {
@@ -36101,7 +36113,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var form = document.getElementById('payment-form');
         form.addEventListener('submit', function (event) {
             event.preventDefault();
-            // create source instead of token for 3d secure payment
+            // create source instead of token for 3d secure payment, need to figure that shit out.....
             // stripe.createSource({
             //     type: 'three_d_secure',
             //     amount: 1099,
@@ -51873,7 +51885,7 @@ exports.push([module.i, "\n.option{\n    color: orangered;\n}\n.reset {\n    col
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(12)();
-exports.push([module.i, "\n.StripeElement {\n  background-color: white;\n  height: 40px;\n  padding: 10px 12px;\n  border-radius: 4px;\n  border: 1px solid transparent;\n  box-shadow: 0 1px 3px 0 #e6ebf1;\n  transition: box-shadow 150ms ease;\n}\n.StripeElement--focus {\n  box-shadow: 0 1px 3px 0 #cfd7df;\n}\n.StripeElement--invalid {\n  border-color: #fa755a;\n}\n.StripeElement--webkit-autofill {\n  background-color: #fefde5 !important;\n}\n", ""]);
+exports.push([module.i, "\n.StripeElement {\n  background-color: #f9f9f9;\n  height: 80px;\n  padding: 28px 24px;\n  border-radius: 25px;\n  border: 1px solid #32325d;\n  box-shadow: 5px 10px 3px 0 #e6ebf1;\n  transition: box-shadow 150ms ease;\n  color: white;\n}\n.StripeElement--focus {\n  box-shadow: 0 1px 3px 0 #cfd7df;\n}\n.StripeElement--invalid {\n  border-color: #fa755a;\n}\n.StripeElement--webkit-autofill {\n  background-color: #fefde5 !important;\n}\n", ""]);
 
 /***/ }),
 /* 342 */
@@ -68400,7 +68412,24 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _vm._m(0)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('button', [_vm._v("Submit Payment")])])
+  return _c('div', [_c('div', {
+    staticClass: "form-row"
+  }, [_c('label', {
+    attrs: {
+      "for": "card-element"
+    }
+  }, [_vm._v("\n          Credit or debit card\n        ")]), _vm._v(" "), _c('div', {
+    attrs: {
+      "id": "card-element"
+    }
+  }), _vm._v(" "), _c('div', {
+    attrs: {
+      "id": "card-errors",
+      "role": "alert"
+    }
+  })]), _vm._v(" "), _c('button', {
+    staticClass: "stripe"
+  }, [_vm._v("Submit Payment")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {

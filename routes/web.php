@@ -1,10 +1,6 @@
 <?php
 
-// use \Cart as Cart;
-// testing server performance : send email in a loop
-
 Route::get('/', function () {
-
     return redirect('shop');
 })->name('shop');
 
@@ -60,6 +56,8 @@ Route::middleware(['auth', 'must-be-confirmed', 'employee'])->group(function () 
 
 //ADMIN ROUTES
 Route::middleware(['auth', 'must-be-confirmed', 'employee', 'admin'])->group(function () {
+    // testing server performance : send email in a loop
+    // Route::get('/test-server', 'OrderProcessedController@index');
     Route::get('/add-user', 'UserController@create');
     Route::post('/add-user', 'UserController@store');
     Route::get('/delete-user', 'UserController@index');

@@ -20,6 +20,7 @@
                         @foreach($orders as $order)
                             <p class="text-info">Order number : <strong>{{ $order->id }}</strong></p>
                             <p class="text-info">Order received : <strong>{{ $order->created_at->toDateTimeString() }}</strong></p>
+                            <p class="text-info">You paid : <strong>{{ $order->price() }}</strong></p>
                             <p>{{ preg_replace('/[]{}:["]/ ', ' ', $order->items) }}</p>
                             <order-progress status="{{ $order->status->name}}" initial="{{ $order->status->percent }}" order_id="{{ $order->id }}"></order-progress>
                         @endforeach

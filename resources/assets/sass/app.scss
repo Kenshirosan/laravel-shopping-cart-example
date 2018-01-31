@@ -3,6 +3,7 @@
 
 // Variables
 @import "variables";
+@import "stripe-button";
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
@@ -35,15 +36,15 @@
     width: 100px;
 }
 
-footer {
-    background-color: #f5f5f5;
-    padding: 20px 0;
-}
-
 .table>tbody>tr>td {
     vertical-align: middle;
 }
 
 .side-by-side {
     display: inline-block;
+}
+
+footer {
+    background-color: #f5f5f5;
+    padding: 20px 0;
 }
