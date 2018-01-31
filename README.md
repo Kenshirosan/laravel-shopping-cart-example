@@ -9,7 +9,7 @@ Features :
 ---
 * Mail functionality on registration and order.
 * Order form and order table.
-* Admin row in users table, to be set manually directly in database, Admin may add employees
+* Admin row in users table, to be set manually directly in database, Admin may add employees.
 * Add product/Delete Products.
 * Dropzone.js on product page.
 * Stripe payment, just add your key in .env, and update the public key in CheckoutForm.vue.
@@ -35,7 +35,8 @@ composer install
 ```
 mv .env.example .env && vim .env
 ```
-update database info, stripe key, and mail driver
+update database info, stripe keys, pusher keys, mail driver and keys, and analytics key.
+update pusher key in bootstrap.js (Echo).
 ```
 php artisan key:generate
 ```
@@ -50,4 +51,3 @@ If you're using mariadb leave it alone tho.
 ```
 php artisan serve
 ```
-and let me know all what's wrong.
