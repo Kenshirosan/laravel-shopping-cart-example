@@ -1,4 +1,4 @@
-# laravel-shopping-cart
+# Laravel-shopping-cart
 # work in progress
 
 Laravel E-commerce
@@ -7,23 +7,20 @@ Almost ready to ship laravel e-commerce application. Uses Crinsane/LaravelShoppi
 
 Features :
 ---
-* added user registration
-* mail functionality on registration and order. (make sure you have postfix installed and properly configured)
-* order form and order table
-* admin(boss)and employee rows in users table, to be set manually directly in database
-* a form to add product(employees and admin)
-* a delete product button on the shop view when logged in as an admin(boss)
-* dropzone.js on product page(must be admin)
-* stripe payment functionnal, just add your key in .env
-* basic user account
-* pdf printing
-* product options
-* coupons / promotion codes
-* backend with adminLTE
-* user must confirm their email
-* [fullcalendar.io](https://fullcalendar.io)
-* google analytics
-* real time order tracking
+* mail functionality on registration and order.
+* order form and order table.
+* admin(boss) row in users table, to be set manually directly in database, Admin may add employees
+* Add product/Delete Products
+* dropzone.js on product page.
+* stripe payment, just add your key in .env, and update the public key in CheckoutForm.vue.
+* User account with real-time order tracking.
+* PDF printing.
+* product options.
+* coupons / promotion codes.
+* backend with adminLTE.
+* user must confirm their email.
+* [fullcalendar.io](https://fullcalendar.io).
+* google analytics by ([Spatie.be](https://spatie.be/en/opensource/postcards)), Don't forget to send them a postcard.
 
 download or clone then
 ```
