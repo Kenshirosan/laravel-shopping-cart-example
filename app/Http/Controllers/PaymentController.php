@@ -138,12 +138,13 @@ class PaymentController extends Controller
             'price' => $price
         ]);
 
-        $code = request('code');
-        $promocode = Promocode::where('code', $code)->firstOrFail();
-        if ($promocode && $promocode->is_disposable) {
-            \Promocodes::apply($code);
+        if($code = request('code')) {
+            $promocode = Promocode::where('code', $code)->firstOrFail();
+            if ($promocode && $promocode->is_disposable) {
+                \Promocodes::apply($code);
 
-            \Promocodes::disable($code);
+                \Promocodes::disable($code);
+            }
         }
 
         // event(new UserOrdered($order));

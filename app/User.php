@@ -54,12 +54,13 @@ class User extends Authenticatable
 
     public function orders()
     {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Order::class)->orderBy('created_at', 'desc');
     }
 
     public function pay(Order $order)
     {
-        $this->orders()->save($order); //unused for now (need  to figure out something for cart content..)
+        //unused for now (need  to figure out something for cart content..)
+        $this->orders()->save($order);
     }
 
 }

@@ -10,7 +10,7 @@
                 <a :href="/user-order/+ order.id">
                     <p>Print</p>
                 </a>
-                <p v-text="order.id"></p>
+                <p>Order number : {{ order.id }}</p>
                 <p>${{ order.price / 100 }}</p>
                 <p>{{ order.created_at | moment }}</p>
             </li>
@@ -59,7 +59,6 @@ import moment from 'moment';
 
         methods: {
             fetchOrders: function (page_url) {
-                let vm = this;
                 page_url = page_url || '/user/orders'
                 axios.get(page_url)
                     .then( (response) => {

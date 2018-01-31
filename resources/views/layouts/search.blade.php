@@ -14,7 +14,7 @@
                 <div class="col-lg-10 col-lg-offset-1">
                     <div class="input-group">
                         <span class="input-group-addon" style="color: white; background-color: rgb(124,77,255);">Search</span>
-                        <input type="text" autofocus autocomplete="off" id="search" class="form-control input-lg" placeholder="Search an order by its number">
+                        <input type="text" autofocus autocomplete="off" id="search" class="form-control input-lg" placeholder="Search an order by number or name">
                     </div>
                 </div>
             </div>

@@ -52,7 +52,21 @@
             var form = document.getElementById('payment-form');
                 form.addEventListener('submit', function(event) {
                 event.preventDefault();
-
+                // create source instead of token for 3d secure payment
+                // stripe.createSource({
+                //     type: 'three_d_secure',
+                //     amount: 1099,
+                //     currency: "eur",
+                //     three_d_secure: {
+                //     card: card.id
+                //     },
+                //     redirect: {
+                //         return_url: "http://127.0.0.1:8000/checkout"
+                //     }
+                // }).then(function(result) {
+                //     // handle result.error or result.source
+                //     return console.log(result);
+                //     });
                 stripe.createToken(card).then(function(result) {
                     if (result.error) {
                   // Inform the user if there was an error
@@ -60,6 +74,7 @@
                     errorElement.textContent = result.error.message;
                     } else {
                       // Send the token to your server
+                      // return console.log(result.token);
                       stripeTokenHandler(result.token);
                     }
                 });

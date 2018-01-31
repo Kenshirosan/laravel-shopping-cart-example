@@ -82,9 +82,12 @@
             $(".datetimepicker").on('click', function() {
             let date = $(this).data("DateTimePicker").date();
             if (date < new Date()) {
-                return axios.delete('/things-to-do/'+event.id).then(flash('Event Deleted'))
+                return axios.delete('/things-to-do/'+event.id)
+                            .then(flash('Event Deleted'))
                             .then(
-                                setTimeout(function(){ location.reload()}, 3000)
+                                setTimeout(function() {
+                                    location.reload()
+                                }, 3000)
                             );
             }
 
@@ -97,7 +100,8 @@
                 allDay: false,
                 backgroundColor: event.color,
             }
-            axios.patch('/things-to-do/'+ event.id, event).then(flash('Event successfully modified'))
+            axios.patch('/things-to-do/'+ event.id, event)
+                .then(flash('Event successfully modified'))
                 .then(
                     setTimeout(function() {
                        location.reload();
@@ -142,7 +146,6 @@
         // persist event
         axios.post('/things-to-do', copiedEventObject)
             .then(flash('event successfully added'))
-            .catch(flash('Something went wrong, please try again later', 'danger'))
 
         // render the event on the calendar
         // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)

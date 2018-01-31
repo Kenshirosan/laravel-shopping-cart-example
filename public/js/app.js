@@ -35990,7 +35990,7 @@ $(function () {
             copiedEventObject.backgroundColor = $(this).css('background-color');
             copiedEventObject.borderColor = $(this).css('border-color');
             // persist event
-            axios.post('/things-to-do', copiedEventObject).then(flash('event successfully added')).catch(flash('Something went wrong, please try again later', 'danger'));
+            axios.post('/things-to-do', copiedEventObject).then(flash('event successfully added'));
 
             // render the event on the calendar
             // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
@@ -36101,7 +36101,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var form = document.getElementById('payment-form');
         form.addEventListener('submit', function (event) {
             event.preventDefault();
-
+            // create source instead of token for 3d secure payment
+            // stripe.createSource({
+            //     type: 'three_d_secure',
+            //     amount: 1099,
+            //     currency: "eur",
+            //     three_d_secure: {
+            //     card: card.id
+            //     },
+            //     redirect: {
+            //         return_url: "http://127.0.0.1:8000/checkout"
+            //     }
+            // }).then(function(result) {
+            //     // handle result.error or result.source
+            //     return console.log(result);
+            //     });
             stripe.createToken(card).then(function (result) {
                 if (result.error) {
                     // Inform the user if there was an error
@@ -36109,6 +36123,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     errorElement.textContent = result.error.message;
                 } else {
                     // Send the token to your server
+                    // return console.log(result.token);
                     stripeTokenHandler(result.token);
                 }
             });
@@ -36349,7 +36364,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         fetchOrders: function fetchOrders(page_url) {
             var _this = this;
 
-            var vm = this;
             page_url = page_url || '/user/orders';
             axios.get(page_url).then(function (response) {
                 _this.orders = response.data.data;
@@ -68430,11 +68444,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       attrs: {
         "href": /user-order/ + order.id
       }
-    }, [_c('p', [_vm._v("Print")])]), _vm._v(" "), _c('p', {
-      domProps: {
-        "textContent": _vm._s(order.id)
-      }
-    }), _vm._v(" "), _c('p', [_vm._v("$" + _vm._s(order.price / 100))]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm._f("moment")(order.created_at)))])])
+    }, [_c('p', [_vm._v("Print")])]), _vm._v(" "), _c('p', [_vm._v("Order number : " + _vm._s(order.id))]), _vm._v(" "), _c('p', [_vm._v("$" + _vm._s(order.price / 100))]), _vm._v(" "), _c('p', [_vm._v(_vm._s(_vm._f("moment")(order.created_at)))])])
   })) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "pagination"
   }, [(_vm.pagination.prev_page_url) ? _c('button', {
