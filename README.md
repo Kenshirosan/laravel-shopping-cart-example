@@ -20,7 +20,7 @@ Features :
 * backend with adminLTE.
 * user must confirm their email.
 * [fullcalendar.io](https://fullcalendar.io).
-* google analytics by ([Spatie.be](https://spatie.be/en/opensource/postcards)), Don't forget to send them a postcard.
+* google analytics by [Spatie.be](https://spatie.be/en/opensource/postcards), Don't forget to send them a postcard.
 
 download or clone then
 ```
