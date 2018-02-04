@@ -32,7 +32,7 @@ class CheckController extends Controller
         $order = Order::findOrFail($id);
 
         $currentStatus = $order->status_id;
-        $items = collect(preg_replace('/[]:["]/ ', '', $order->items));
+        $items = collect(regex($order->items));
         $statuses = Status::all();
 
         return view('pdf.print', compact('order', 'items', 'statuses', 'currentStatus'));
@@ -48,7 +48,7 @@ class CheckController extends Controller
     {
         $order = Order::findOrFail($id);
 
-        $items = collect(preg_replace('/[]:["]/', '', $order->items));
+        $items = collect(regex($order->items));
 
         return PDF::loadView('pdf.printtest', compact('order', 'items'))
                     ->stream('order.pdf');

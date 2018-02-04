@@ -31,6 +31,6 @@ class Thankyou extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.order');
+        return $this->markdown('mail.order');
     }
 }

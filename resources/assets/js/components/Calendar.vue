@@ -142,11 +142,16 @@
         // assign it the date that was reported
         copiedEventObject.start           = date
         copiedEventObject.allDay          = false
-        copiedEventObject.backgroundColor = $(this).css('background-color')
+        copiedEventObject.color = $(this).css('background-color')
         copiedEventObject.borderColor     = $(this).css('border-color')
         // persist event
         axios.post('/things-to-do', copiedEventObject)
             .then(flash('event successfully added'))
+            .then(
+                setTimeout(function() {
+                   location.reload();
+                }, 3000)
+            )
 
         // render the event on the calendar
         // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)

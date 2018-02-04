@@ -1,19 +1,14 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Your order</title>
-    </head>
-    <style>
-        /*Style this however you want*/
-    </style>
-    <body>
+@component('mail::message')
 
-        <h1>Thanks for ordering with us.</h1>
-        <h2>Here's your invoice</h2>
-            ${{ $order->price() }}
-        <br>
-            {{  preg_replace('/[]["]/ ', '', $order->items) }}
-    </body>
-</html>
+# Thank you for ordering with us !
+
+You paid : {{ $order->price() }} for {{ regex($order->items) }}
+
+<br>
+
+You may review and print your invoice online on your profile page.
+
+Thanks, <br>
+
+{{ config('app.name') }}
+@endcomponent

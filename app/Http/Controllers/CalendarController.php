@@ -22,14 +22,10 @@ class CalendarController extends Controller
             'title' => 'required|string',
             'start' => 'required|date',
             'allDay' => 'required|boolean',
-            'backgroundColor' => 'required|string'
+            'color' => 'required|string'
         ]);
-        Calendar::create([
-            'title' => request('title'),
-            'start' => request('start'),
-            'full_day' => request('allDay'),
-            'color' => request('backgroundColor')
-        ]);
+        Calendar::create($request->all());
+
         return response('success', 200);
     }
 

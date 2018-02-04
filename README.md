@@ -1,4 +1,4 @@
-# Laravel-shopping-cart
+# Laravel shopping cart
 # work in progress
 
 Laravel E-commerce

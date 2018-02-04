@@ -33,3 +33,8 @@ function formatPhoneNumber($phone)
 
     return $phone;
 }
+
+function regex($items)
+{
+    return preg_replace('/[]:["]/', ' ', $items);
+}

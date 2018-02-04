@@ -35,16 +35,9 @@ class MessageController extends Controller
             'message' => 'required|min:20'
         ]);
 
-        $phone = formatPhoneNumber(request('phone'));
+        ( new Message )->send($request->all());
 
-        $user = Message::create([
-            'email' => request('email'),
-            'name' => request('name'),
-            'phone' => $phone,
-            'message' => request('message')
-        ]);
-
-        return back()->with('flash', "Thank you $user->name, we'll get back to you very soon");
+        return back()->with('flash', "Thank you " . $request['name'] . ", we'll get back to you very soon");
     }
 
     public function destroy($id)

@@ -6,7 +6,6 @@ use Validator;
 use App\Option;
 use App\Product;
 use \Cart as Cart;
-use App\Http\Requests;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -34,10 +33,10 @@ class CartController extends Controller
             return response('You are not allowed', 403);
         }
 
-        if($request->option != null) {
-            Cart::add($request->id, $request->name, 1, $request->price, [ $request->option ] )->associate(Product::class);
-        } else {
+        if($request->option === null) {
             Cart::add($request->id, $request->name, 1, $request->price )->associate(Product::class);
+        } else {
+            Cart::add($request->id, $request->name, 1, $request->price, [ $request->option ] )->associate(Product::class);
         }
 
         if( !$request->expectsJson()) {

@@ -31,9 +31,7 @@ class CategoriesController extends Controller
             'name' => 'required|string',
         ]);
 
-        Category::create([
-            'name' => request('name')
-        ]);
+        Category::create($request->all());
 
         return back()->with('success_message', 'Category added');
     }
@@ -46,6 +44,10 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+       $category = Category::where('id', $id)->firstOrFail();
+
+       $category->delete();
+
+       return back()->with('success_message', 'Category deleted');
     }
 }

@@ -57,12 +57,15 @@ class Order extends Model
 
     public function todaysOrders()
     {
-        return $this->whereDate('created_at', date('Y-m-d'))->orderBy('id', 'desc')->get();
+        $when = 'created_at';
+        $today =  date('Y-m-d');
+
+        return $this->whereDate($when, $today)->orderBy('id', 'desc')->get();
     }
 
     public function todaysOrdersCount()
     {
-        return $this->whereDate('created_at', date('Y-m-d'))->orderBy('id', 'desc')->count();
+        return $this->todaysOrders()->count();
     }
 
     public function price()
