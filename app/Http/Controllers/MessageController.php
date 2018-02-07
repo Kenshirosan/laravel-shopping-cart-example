@@ -4,13 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Message;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
     public function index()
     {
-        if(Auth::check() && Auth::user()->isAdmin()) {
+        if(auth()->check() && auth()->user()->isAdmin()) {
             $messages = Message::latest()->get();
 
             return view('admin.messages', compact('messages'));
