@@ -4,14 +4,14 @@
         <input type="hidden" name="name"  v-model="this.product.name">
         <input type="hidden" name="price"  v-model="this.product.price">
         <select name="options" v-if="options" class="options minimal" required autofocus v-model="option">
-        <option value="" class="reset">Choose</option>
-        <option class="options" name="option"
+        <option value="" class="reset" required>Choose</option>
+        <option required class="options" name="option"
                 v-for="option in options"
                 v-text="option.name"
                 v-bind:value="option.name"
                 ></option>
         </select>
-        <input type="submit" @click.prevent="addtocart()" class="btn btn-success" value="Add To Cart">
+        <input type="submit" @click.prevent="addtocart" class="btn btn-success" value="Add To Cart">
     </div>
 </template>
 
@@ -33,7 +33,8 @@
             addtocart() {
                 axios.post('/cart/', this.$data)
                     .then(flash(this.product.name + ' was added to cart'))
-                    .then(this.$emit('done'))
+                    // .then(this.$emit('productadded'))
+                    .then(productitemscountchanged())
                     .then(setTimeout( () => {
                         this.option = ''
                     }, 100 ))

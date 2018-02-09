@@ -34,6 +34,10 @@ window.flash = function (message, level = 'success') {
     window.events.$emit('flash', { message, level });
 };
 
+window.productitemscountchanged = function () {
+    window.events.$emit('productadded');
+};
+
 // Optional real time order progress
 import Echo from 'laravel-echo'
 window.Pusher = require('pusher-js');
