@@ -1,6 +1,6 @@
 <template>
-    <li class="active" v-on:productadded="change()">
-        <a href="/cart" v-text="count"></a>
+    <li class="active" v-if="count" v-on:productadded="change()">
+        <a href="/cart">Items in Cart : {{ count }}</a>
     </li>
 </template>
 

@@ -62,7 +62,9 @@
                         </ul>
                     </li>
                 @endif
-                <cart-counter :numberofitems="{{ Cart::instance()->count() }}"></cart-counter>
+
+                    <cart-counter :numberofitems="{{ Cart::instance()->count() }}"></cart-counter>
+
             </ul>
         </div><!--/.nav-collapse -->
     </div>
