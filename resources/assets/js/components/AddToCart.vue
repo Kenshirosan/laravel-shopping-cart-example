@@ -33,8 +33,7 @@
             addtocart() {
                 axios.post('/cart/', this.$data)
                     .then(flash(this.product.name + ' was added to cart'))
-                    // .then(this.$emit('productadded'))
-                    .then(productitemscountchanged())
+                    .then( productitemscountchanged() )
                     .then(setTimeout( () => {
                         this.option = ''
                     }, 100 ))

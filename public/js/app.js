@@ -35794,9 +35794,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         addtocart: function addtocart() {
             var _this = this;
 
-            axios.post('/cart/', this.$data).then(flash(this.product.name + ' was added to cart'))
-            // .then(this.$emit('productadded'))
-            .then(productitemscountchanged()).then(setTimeout(function () {
+            axios.post('/cart/', this.$data).then(flash(this.product.name + ' was added to cart')).then(productitemscountchanged()).then(setTimeout(function () {
                 _this.option = '';
             }, 100)).catch(function (e) {
                 flash(e.response.data, 'danger');

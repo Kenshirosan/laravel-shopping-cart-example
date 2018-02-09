@@ -57,20 +57,20 @@ class CartController extends Controller
             return response('You are not allowed', 403);
         }
 
-        $validator = Validator::make($request->all(), [
-            'quantity' => 'required|numeric|between:1,6'
-        ]);
+        try {
+            request()->validate([
+                'quantity' => 'required|numeric|between:1,6'
+            ]);
 
-        if ($validator->fails()) {
-            session()->flash('error_message', 'Quantity must be between 1 and 6.');
-            response()->json(['success' => false]);
-            return response()->view('layouts.cart', $request, 403);
+            Cart::update($id, $request->quantity);
+            session()->flash('flash', 'Quantity was updated successfully!');
+            response()->json(['success' => true]);
+            return response()->view('layouts.cart', $request, 200);
+
+        } catch(Exception $e) {
+            return redirect('/cart')->with('flash', 'Somtehing wrong happened.');
         }
 
-        Cart::update($id, $request->quantity);
-        session()->flash('flash', 'Quantity was updated successfully!');
-        response()->json(['success' => true]);
-        return response()->view('layouts.cart', $request, 200);
     }
 
     /**

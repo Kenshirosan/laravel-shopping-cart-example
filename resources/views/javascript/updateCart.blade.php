@@ -6,8 +6,11 @@
                 data = {'quantity': this.value};
 
             axios.patch(url, data)
-                .then(window.location.href = '{{ url('/cart') }}')
-                .catch(e => console.log(e));
+                .then(flash('Successfully updated !'))
+                .then(setTimeout( () => {
+                    location.reload()
+                }, 100))
+                .catch(e => flash('Something wrong happened, try again later', 'danger'));
         });
     })();
 </script>
