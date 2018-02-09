@@ -1,22 +1,13 @@
 <script>
-    (function(){
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+    (function() {
         $('.quantity').on('change', function() {
-            var id = $(this).attr('data-id')
-            $.ajax({
-                type: "PATCH",
-                url: '{{ url("/cart") }}' + '/' + id,
-                data: {
-                    'quantity': this.value,
-                },
-                success: function(data) {
-                    window.location.href = '{{ url('/cart') }}';
-                }
-            });
+            let id = $(this).attr('data-id');
+            let url = '{{ url("/cart") }}' + '/' + id;
+            let data = {'quantity': this.value};
+
+            axios.patch(url, data).then(flash('Successfully updated !'))
+                                    .then(location.reload())
+                                    .catch(e => console.log(e));
         });
     })();
 </script>
