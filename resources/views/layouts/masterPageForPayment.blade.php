@@ -4,18 +4,16 @@
     <meta charset="utf-8">
     <title>@yield('title')</title>
     <meta name="description" content="Shopping Cart">
-
     <!-- Mobile Specific Meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- Store CSRF token for AJAX calls -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="/css/link.css">
-    <link rel="stylesheet" href="/css/app.css">
     @yield('extra-css')
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/AdminLTE.min.css') }}">
+    <link rel="stylesheet" href="/css/app.css">
     <!-- Favicon and Apple Icons -->
     <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}">
     <script src="https://js.stripe.com/v3/"></script>

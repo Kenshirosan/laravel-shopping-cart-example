@@ -67,3 +67,11 @@ select.minimal:focus {
   border-color: green;
   outline: 0;
 }
+
+.modal {
+  color: white;
+  margin: auto;
+    .text-info {
+      color: white!important;
+    }
+}

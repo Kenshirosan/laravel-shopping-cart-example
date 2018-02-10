@@ -38,6 +38,10 @@ window.productitemscountchanged = function () {
     window.events.$emit('productadded');
 };
 
+window.cartisempty = function () {
+    window.events.$emit('cartempty');
+};
+
 // Optional real time order progress
 import Echo from 'laravel-echo'
 window.Pusher = require('pusher-js');

@@ -55,9 +55,10 @@
                                 <p>Your informations</p>
                                 <small>
                                     <p><strong>Your credit card number is not stored anywhere</strong> and never touches our server.</p>
-                                    <p>Our <a href="https://stripe.com/us" class="text-success"><strong>Secure </a>Payment Provider is</strong>
+                                    <p>Our <a href="https://stripe.com/us" class="text-success">
+                                        <strong style="text-decoration: underline;">Secure Payment </strong>Provider is
                                         <a href="https://www.pcisecuritystandards.org/" class="text-success">
-                                            <strong>PCI compliant</strong>
+                                            <strong style="text-decoration: underline;">PCI compliant</strong>
                                         </a> and takes it from here.
                                     </p>
                                 </small>

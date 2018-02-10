@@ -13,10 +13,9 @@
     <link rel="stylesheet" href="/css/dropzone.min.css">
     <link rel="stylesheet" href="/css/link.css">
     @yield('lity-css')
-    <link rel="stylesheet" href="/css/app.css">
     @yield('extra-css')
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/AdminLTE.min.css') }}">
-    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="/css/app.css">
     <!-- Favicon and Apple Icons -->
     <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}">
     {{-- Stripe recommends to put this script on all pages, helps ID not good behaviors --}}
@@ -29,6 +28,9 @@
                 @include('includes.messages')
                 @yield('content')
                 <flash message="{{ session('flash') }}"></flash>
+            </div>
+            <div class="container">
+                <modal :items="{{ Cart::content() }}" :total="{{ Cart::total() }}"></modal>
             </div>
         </div>
         @include('includes.footer')

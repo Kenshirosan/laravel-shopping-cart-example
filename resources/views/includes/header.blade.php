@@ -61,6 +61,9 @@
                             </li>
                         </ul>
                     </li>
+                    <li>
+                        <a type="button" class="btn" data-toggle="modal" data-target=".modal">View Cart</a>
+                    </li>
                 @endif
 
                     <cart-counter :numberofitems="{{ Cart::instance()->count() }}"></cart-counter>

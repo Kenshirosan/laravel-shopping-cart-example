@@ -18,6 +18,10 @@ class CartController extends Controller
     */
     public function index()
     {
+        if(request()->expectsJson()) {
+            return response([Cart::content(), Cart::total()], 200);
+        }
+
         return view('layouts.cart');
     }
 
@@ -68,7 +72,7 @@ class CartController extends Controller
             return response()->view('layouts.cart', $request, 200);
 
         } catch(Exception $e) {
-            return redirect('/cart')->with('flash', 'Somtehing wrong happened.');
+            return redirect('/cart')->with('flash', 'Something wrong happened.');
         }
 
     }
@@ -94,6 +98,10 @@ class CartController extends Controller
     public function emptyCart()
     {
         Cart::destroy();
+
+        if(request()->expectsJson()) {
+            return response([], 200);
+        }
 
         return redirect('/cart')->with('flash', 'Your cart has been cleared!');
     }

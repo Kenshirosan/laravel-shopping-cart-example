@@ -19,7 +19,8 @@ Route::post('/contact-us', 'MessageController@store');
 // ppl playing with shopping cart
 Route::resource('shop', 'ShopController', ['only' => ['index', 'show']]);
 Route::resource('cart', 'CartController');
-Route::delete('emptyCart', 'CartController@emptyCart');
+Route::get('/cartcontent', 'CartController@index');
+Route::delete('/emptyCart', 'CartController@emptyCart');
 
 // Holiday menus or specials..
 Route::get('holidays-special', 'HolidaySpecialController@index');

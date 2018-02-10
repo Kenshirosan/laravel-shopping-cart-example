@@ -16,8 +16,12 @@
 </template>
 
 <script>
+    import modal from './Modal';
+
     export default {
         props: ['product', 'options'],
+
+        components: {modal},
 
         data() {
             return {
