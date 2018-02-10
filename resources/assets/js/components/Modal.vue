@@ -1,5 +1,5 @@
 <template>
-    <div v-if="products" @productadded="add()" class="container modal fade">
+    <div @productadded="add()" class="container modal fade">
     <div class="modal-header">
         <button type="button" class="close btn-lg" data-dismiss="modal">&times;</button>
     </div>

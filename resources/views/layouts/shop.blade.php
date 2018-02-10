@@ -15,7 +15,6 @@
             <p>Place your order !</p>
         </div>
         @foreach ($categories as $category)
-
             @if( ! $category->products->isEmpty())
                 <div class="row">
                     <div class="well text-center">
@@ -28,7 +27,6 @@
                 </div>
             @endif
         @endforeach
-
 
         <div class="container text-center">
             <a href="#top" class="btn btn-info">Back to top</a>

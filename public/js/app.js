@@ -68251,7 +68251,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return (_vm.products) ? _c('div', {
+  return _c('div', {
     staticClass: "container modal fade",
     on: {
       "productadded": function($event) {
@@ -68304,7 +68304,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   })]), _vm._v(" "), _c('div', {
     staticClass: "spacer"
-  }), _vm._v(" "), _vm._m(2)]) : _vm._e()
+  }), _vm._v(" "), _vm._m(2)])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "modal-header"

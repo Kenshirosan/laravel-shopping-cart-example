@@ -19,6 +19,9 @@ Route::post('/contact-us', 'MessageController@store');
 // ppl playing with shopping cart
 Route::resource('shop', 'ShopController', ['only' => ['index', 'show']]);
 Route::resource('cart', 'CartController');
+Route::resource('cart', 'CartController@destroy', ['only' => ['delete']]);
+Route::get('/cart', 'CartController@index');
+Route::post('/cart', 'CartController@store');
 Route::get('/cartcontent', 'CartController@index');
 Route::delete('/emptyCart', 'CartController@emptyCart');
 

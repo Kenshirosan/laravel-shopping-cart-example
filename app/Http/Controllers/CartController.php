@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Validator;
 use App\Option;
 use App\Product;
 use \Cart as Cart;
@@ -39,8 +38,10 @@ class CartController extends Controller
 
         if($request->option === null) {
             Cart::add($request->id, $request->name, 1, $request->price )->associate(Product::class);
+            return response([], 200);
         } else {
             Cart::add($request->id, $request->name, 1, $request->price, [ $request->option ] )->associate(Product::class);
+            return response([], 200);
         }
 
         if( !$request->expectsJson()) {
@@ -74,7 +75,6 @@ class CartController extends Controller
         } catch(Exception $e) {
             return redirect('/cart')->with('flash', 'Something wrong happened.');
         }
-
     }
 
     /**

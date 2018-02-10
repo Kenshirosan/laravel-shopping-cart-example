@@ -1,8 +1,8 @@
 <template>
     <div>
-        <input type="hidden" name="id"  v-model="this.product.id">
-        <input type="hidden" name="name"  v-model="this.product.name">
-        <input type="hidden" name="price"  v-model="this.product.price">
+        <input type="hidden" name="id" v-model="this.product.id">
+        <input type="hidden" name="name" v-model="this.product.name">
+        <input type="hidden" name="price" v-model="this.product.price">
         <select name="options" v-if="options" class="options minimal" required autofocus v-model="option">
         <option value="" class="reset" required>Choose</option>
         <option required class="options" name="option"
@@ -35,7 +35,7 @@
 
         methods: {
             addtocart() {
-                axios.post('/cart/', this.$data)
+                axios.post('/cart', this.$data)
                     .then(flash(this.product.name + ' was added to cart'))
                     .then( productitemscountchanged() )
                     .then(setTimeout( () => {
