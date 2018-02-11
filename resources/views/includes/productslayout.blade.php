@@ -28,7 +28,7 @@
             <input type="hidden" name="price"  value="{{ $product->price }}">
 
             @if( ! $product->options()->isEmpty() )
-                 <select name="option" class="options minimal" v-model="selected" autofocus required>
+                 <select name="option" class="options minimal" autofocus required>
                     <option value="" class="reset">Choose</option>
                 @foreach($product->options() as $option)
                     <option class="option" value="{{ $option->name }}">{{ $option->name }}</option>

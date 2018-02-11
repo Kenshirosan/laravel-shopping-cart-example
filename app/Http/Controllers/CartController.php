@@ -36,7 +36,23 @@ class CartController extends Controller
             return response('You are not allowed', 403);
         }
 
-        if($request->option === null) {
+        request()->validate([
+            'id' => 'required|exists:products,id',
+            'name' => 'required|string|exists:products,name',
+            'quantity' => 'required|numeric|digits:1|max:6',
+            'price' => 'required|numeric|exists:products,price',
+            'option' => 'nullable|string|exists:options,name',
+        ]);
+
+        $duplicates = Cart::search(function ($cartItem, $rowQty) use ($request){
+            return $cartItem->id === $request->id && $cartItem->qty === 6;
+        });
+
+        if (!$duplicates->isEmpty()) {
+            return response('You\'ve reached the maximum quantity allowed', 403);
+        }
+
+        if($request->option == null) {
             Cart::add($request->id, $request->name, 1, $request->price )->associate(Product::class);
             return response([], 200);
         } else {
@@ -44,8 +60,8 @@ class CartController extends Controller
             return response([], 200);
         }
 
-        if( !$request->expectsJson()) {
-            return redirect('/shop')->with('success_message',  "$request->name added !");
+        if(!$request->expectsJson()) {
+            return redirect('/cart')->with('success_message',  "$request->name added !");
         }
     }
 
@@ -69,8 +85,11 @@ class CartController extends Controller
 
             Cart::update($id, $request->quantity);
             session()->flash('flash', 'Quantity was updated successfully!');
-            response()->json(['success' => true]);
-            return response()->view('layouts.cart', $request, 200);
+
+            if($request->expectsJson()) {
+                return response([], 200);
+            }
+            return redirect('/cart');
 
         } catch(Exception $e) {
             return redirect('/cart')->with('flash', 'Something wrong happened.');

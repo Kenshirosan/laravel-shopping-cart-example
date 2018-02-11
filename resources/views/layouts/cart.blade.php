@@ -32,10 +32,10 @@
                     <a href="{{ url('shop', [$item->model->slug]) }}">{{ $item->name }} {{ preg_replace('/[]["]/ ', '', $item->options) }}</a>
                 </td>
                 <td>
-                    <form action="{{ url('/cart', [$item->rowId]) }}" method="POST" class="side-by-side">
+                    <form action="/cart/{{ $item->rowId}}" method="POST" class="side-by-side">
                         {{ csrf_field() }}
                         {{ method_field('PATCH') }}
-                        <select class="quantity" data-id="{{ $item->rowId }}">
+                        <select class="quantity minimal" data-id="{{ $item->rowId }}">
                             <option {{ $item->qty == 1 ? 'selected' : '' }}>1</option>
                             <option {{ $item->qty == 2 ? 'selected' : '' }}>2</option>
                             <option {{ $item->qty == 3 ? 'selected' : '' }}>3</option>
@@ -46,7 +46,7 @@
                         <input type="hidden" name="quantity" value="{{$item->qty + 1}}">
                         <input type="submit" name="submit" value="Add 1" class="btn btn-info btn-sm">
                     </form>
-                    <form action="{{ url('/cart', [$item->rowId]) }}" method="POST" class="side-by-side">
+                    <form action="/cart/{{ $item->rowId}}" method="POST" class="side-by-side">
                         {{ csrf_field() }}
                         {{ method_field('PATCH') }}
                         <input type="hidden" name="quantity" value="{{$item->qty - 1}}">
@@ -56,9 +56,9 @@
                 <td>${{ $item->subtotal /100 }}</td>
                 <td class=""></td>
                 <td>
-                    <form action="{{ url('cart', [$item->rowId]) }}" method="POST" class="side-by-side">
+                    <form action="/cart/{{ $item->rowId}}" method="POST" class="side-by-side">
                         {{ csrf_field() }}
-                        <input type="hidden" name="_method" value="DELETE">
+                        {{ method_field('DELETE')}}
                         <input type="submit" class="btn btn-danger btn-sm" value="Remove">
                     </form>
                     {{-- <form action="{{ url('switchToWishlist', [$item->rowId]) }}" method="POST" class="side-by-side">
@@ -95,7 +95,7 @@
         <div style="float:right">
             <form action="{{ url('/emptyCart') }}" method="POST">
                 {{ csrf_field() }}
-                <input type="hidden" name="_method" value="DELETE">
+                {{ method_field('DELETE') }}
                 <input type="submit" class="btn btn-danger btn-lg" value="Empty Cart">
             </form>
         </div>

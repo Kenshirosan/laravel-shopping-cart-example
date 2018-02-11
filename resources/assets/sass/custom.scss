@@ -1,7 +1,5 @@
 select {
-
   /* make arrow and background */
-
   background:
     linear-gradient(45deg, transparent 50%, blue 50%),
     linear-gradient(135deg, blue 50%, transparent 50%),
@@ -70,8 +68,4 @@ select.minimal:focus {
 
 .modal {
   color: white;
-  margin: auto;
-    .text-info {
-      color: white!important;
-    }
 }
