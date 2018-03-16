@@ -22,7 +22,7 @@
             var stripe = Stripe('pk_test_B9SEClbQcg35eUmOyH4adj7M');
 
             // Create an instance of Elements
-            var elements = stripe.elements();
+            var elements = stripe.elements( { "locale" : "en" } );
 
             // Custom styling can be passed to options when creating an Element.
             // (Note that this demo uses a wider set of styles than the guide below.)
@@ -34,7 +34,7 @@
                     fontSmoothing: 'antialiased',
                     fontSize: '14px',
                     '::placeholder': {
-                      color: '#32325d'
+                      color: '#32325d',
                     }
                 },
                 invalid: {

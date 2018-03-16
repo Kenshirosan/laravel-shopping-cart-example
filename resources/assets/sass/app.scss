@@ -28,7 +28,7 @@ body {
 }
 
 .jumbotron{
-    background-image: url('../img/hero_pdt_hamburger.png');
+    background-image: url('/img/hero_pdt_hamburger.png');
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -52,4 +52,12 @@ body {
 footer {
     background-color: #f5f5f5;
     padding: 20px 0;
+}
+
+.pr-10 {
+    padding-right:10px;
+}
+
+.secure-payment-info {
+    text-decoration: underline;
 }

@@ -98,6 +98,7 @@ class PaymentController extends Controller
             'phone_number' => 'required|exists:users,phone_number',
             'email' => 'required|exists:users,email',
             'total' => 'nullable|numeric',
+            'taxes' => 'nullable|numeric',
             'code' => 'nullable|string',
         ]);
     }
@@ -122,8 +123,12 @@ class PaymentController extends Controller
 
         if(request('total')){
             $price = request('total');
+            $taxes = request('total') * 0.08;
         }
-        else $price = Cart::total();
+        else {
+            $price = Cart::total();
+            $taxes = Cart::tax();
+        }
 
         $order = Order::create([
             'user_id' => auth()->id(),
@@ -135,7 +140,8 @@ class PaymentController extends Controller
             'zipcode' => request('zipcode'),
             'phone_number' => request('phone_number'),
             'items' => implode(': ', $items),
-            'price' => $price
+            'price' => $price,
+            'taxes' => $taxes
         ]);
 
         if($code = request('code')) {
@@ -147,13 +153,14 @@ class PaymentController extends Controller
             }
         }
 
-        // event(new UserOrdered($order));
+        // event(new UserOrdered($order)); // event for queues?? Maybe if this thing scale..
         \Mail::to( auth()->user()->email )->send(new Thankyou($order));
     }
 
     /**
     * delete the specified resource
-    */ //unused unless someone asks for it, just don't want orders to be deleted. route protection
+    * unused unless someone asks for it, just don't want orders to be deleted. route protection
+    */
     public function delete($order)
     {
         if (!Auth::user()->isAdmin()) {

@@ -13,7 +13,7 @@ class Order extends Model
     * @var array
     */
     protected $fillable = [
-        'user_id', 'name','last_name', 'address','address2', 'zipcode', 'phone_number', 'email', 'items', 'price', 'status_id'
+        'user_id', 'name','last_name', 'address','address2', 'zipcode', 'phone_number', 'email', 'items', 'price', 'status_id', 'taxes'
     ];
 
     public function user()
@@ -70,7 +70,16 @@ class Order extends Model
 
     public function price()
     {
-        return money_format('$%i', $this->price / 100);
+        return money_format('$%i', ($this->price / 100));
     }
 
+    public function tax()
+    {
+        return $this->taxes / 100;
+    }
+
+    public function subtotal()
+    {
+        return money_format('$%i', ($this->price - $this->taxes ) / 100);
+    }
 }

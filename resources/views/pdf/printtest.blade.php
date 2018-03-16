@@ -14,18 +14,30 @@
         <thead>
             <tr>
                 <th><strong>Name</strong></th>
-                <th><strong>Last Name</strong></th>
                 <th><strong>Email</strong></th>
                 <th><strong>Phone</strong></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong class="text-info">{{ $order->name }} {{ $order->last_name }}</strong></td>
+                <td><strong class="text-info">{{ $order->email }}</strong></td>
+                <td><strong class="text-info">{{ $order->phone_number }}</strong></td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table">
+        <thead>
+            <tr>
+                <th><strong>Subtotal</strong></th>
+                <th><strong>Taxes</strong></th>
                 <th><strong>Total</strong></th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td><strong class="text-info">{{ $order->name }}</strong></td>
-                <td><strong class="text-info">{{ $order->last_name }}</strong></td>
-                <td><strong class="text-info">{{ $order->email }}</strong></td>
-                <td><strong class="text-info">{{ $order->phone_number }}</strong></td>
+                <td><strong class="text-info">{{ $order->subtotal() }}</strong></td>
+                <td><strong class="text-info">${{ $order->tax() }}</strong></td>
                 <td><strong class="text-info">{{ $order->price() }}</strong></td>
             </tr>
         </tbody>

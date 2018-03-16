@@ -170,11 +170,11 @@ return [
          */
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        Barryvdh\Debugbar\ServiceProvider::class,
         JeroenNoten\LaravelAdminLte\ServiceProvider::class,
         Laravel\Tinker\TinkerServiceProvider::class,
         Gabievi\Promocodes\PromocodesServiceProvider::class,
         Spatie\Analytics\AnalyticsServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -185,7 +185,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\OptionsServiceProvider::class,
-        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 

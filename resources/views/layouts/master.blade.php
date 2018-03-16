@@ -30,7 +30,7 @@
                 <flash message="{{ session('flash') }}"></flash>
             </div>
             <div class="container">
-                <modal :items="{{ Cart::content() }}" :total="{{ Cart::total() }}"></modal>
+                <view-cart :items="{{ Cart::content() }}" :total="{{ Cart::total() }}"></view-cart>
             </div>
         </div>
         @include('includes.footer')

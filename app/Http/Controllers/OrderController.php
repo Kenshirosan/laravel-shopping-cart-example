@@ -21,7 +21,7 @@ class OrderController extends Controller
     {
         $order = Order::where('id', $id)->firstOrFail();
 
-        $items = collect(preg_replace('/[]:["]/', '', $order->items));
+        $items = collect(regex($order->items));
 
         return PDF::loadView('pdf.printtest', compact('order', 'items'))
                     ->stream('order.pdf');

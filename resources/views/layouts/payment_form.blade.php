@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-
     <div class="container wrapper">
         <div class="row cart-body">
             <form class="form-horizontal" method="POST" action="/order" id="payment-form">
@@ -37,12 +36,26 @@
                                 </div>
                             </div>
                         @endforeach
-                        <h4 class="text-right text-success" style="padding-right:10px;"><span>Subtotal : $</span>{{ Cart::subtotal() / 100}}</h4>
-                        <h4 class="text-right text-success" style="padding-right:10px;"><span>taxes : $</span>{{ Cart::tax() / 100}}</h4>
-                        <h4 class="text-right text-success" style="padding-right:10px;"><span>Total : $</span>{{ Cart::total() / 100}}</h4>
+                        <h4 class="text-right text-success pr-10">
+                            <span>Subtotal : $</span>
+                            {{ Cart::subtotal() / 100}}
+                        </h4>
+                        <h4 class="text-right text-success pr-10">
+                            <span>Taxes : $</span>
+                            {{ Cart::tax() / 100}}
+                        </h4>
+                        <h4 class="text-right text-success pr-10">
+                            <span>Total : $</span>
+                            {{ Cart::total() / 100}}
+                        </h4>
                         @if($discount != null)
-                            <span class="text-info">Congratulations ! {{ $discount * 100 }} % discount applied with code {{ $code }}</span>
-                            <h4 class="text-right text-success" style="padding-right:10px;"><span>Total including discount : $</span>{{ $total / 100  }}</h4>
+                            <span class="text-info">
+                                Congratulations ! {{ $discount * 100 }} % discount applied with code {{ $code }}
+                            </span>
+                            <h4 class="text-right text-success pr-10">
+                                <span>Total including discount : $</span>
+                                {{ $total / 100  }}
+                            </h4>
                         @endif
                     </div> <!--end panel-->
                     <!--REVIEW ORDER END-->
@@ -56,9 +69,9 @@
                                 <small>
                                     <p><strong>Your credit card number is not stored anywhere</strong> and never touches our server.</p>
                                     <p>Our <a href="https://stripe.com/us" class="text-success">
-                                        <strong style="text-decoration: underline;">Secure Payment </strong>Provider is
+                                        <strong class="secure-payment-info">Secure Payment </strong>Provider is
                                         <a href="https://www.pcisecuritystandards.org/" class="text-success">
-                                            <strong style="text-decoration: underline;">PCI compliant</strong>
+                                            <strong class="secure-payment-info">PCI compliant</strong>
                                         </a> and takes it from here.
                                     </p>
                                 </small>
