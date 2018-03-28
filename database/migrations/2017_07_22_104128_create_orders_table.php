@@ -15,6 +15,8 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('order_type')->default('Delivery');
+            $table->string('pickup_time')->nullable();
             $table->unsignedInteger('user_id')->nullable()->index();
             $table->string('name')->required();
             $table->string('last_name')->required();

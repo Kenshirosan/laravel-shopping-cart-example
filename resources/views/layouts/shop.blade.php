@@ -10,7 +10,7 @@
     </noscript>
 
     <section class="shopping">
-        <div class="jumbotron text-center clearfix">
+        <div class="jumbotron text-center clearfix text-white">
             <h2>Name of your restaurant</h2>
             <p>Place your order !</p>
         </div>

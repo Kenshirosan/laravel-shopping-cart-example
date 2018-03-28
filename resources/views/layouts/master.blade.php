@@ -22,8 +22,16 @@
     <script src="https://js.stripe.com/v3/"></script>
 </head>
     <body>
+        {{-- @if( $_SERVER['HTTP_HOST'] != 'https://webcreation.rocks')
+            {{ die(new Exception()) }}
+        @endif --}}
         <div id="app">
             @include('includes.header')
+            {{-- <div class="container">
+                @foreach($_SERVER as $key => $server)
+                <p>{{ $key }} {{ $server }}</p>
+                @endforeach
+            </div> --}}
             <div class="container">
                 @include('includes.messages')
                 @yield('content')

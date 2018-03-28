@@ -6,6 +6,7 @@ use App\User;
 use App\Order;
 use App\Promocode;
 use \Cart as Cart;
+use \Carbon\Carbon;
 use App\Mail\Thankyou;
 use App\Payments\Payments;
 use App\Events\UserOrdered;
@@ -41,7 +42,7 @@ class PaymentController extends Controller
     */
     public function store(Request $request)
     {
-        if(auth()->check() && auth()->user()->isEmployee()) {
+        if (auth()->check() && auth()->user()->isEmployee()) {
             Cart::destroy();
             return redirect('/shop')->with('flash', "You are not allowed");
         }
@@ -52,6 +53,21 @@ class PaymentController extends Controller
 
         if (Cart::total() < 1500) {
             return back()->with(['warning_message' => 'You need to order at least $15 worth of food, Your total is $' . Cart::total() /100 ]);
+        }
+
+        if (request('order_type') === 'Pick-up') {
+            $pickup_time = request('pickup_time');
+            $pickup_time = Carbon::createFromFormat('H:i', $pickup_time);
+            $minTime = Carbon::createFromFormat('H:i', "11:00");
+            $maxTime = Carbon::createFromFormat('H:i', "22:00");
+
+            if ($pickup_time < $minTime ) {
+                return redirect('/checkout')->with('error_message', 'Sorry, this is too early');
+            }
+
+            if ($pickup_time >= $maxTime ) {
+                return redirect('/checkout')->with('error_message', 'Sorry, this is too late');
+            }
         }
 
         try {
@@ -90,6 +106,8 @@ class PaymentController extends Controller
     private function validateOrder(Request $request)
     {
         return $this->validate($request, [
+            'order_type' => 'required|string',
+            'pickup_time' => 'nullable|string',
             'name' => 'required|exists:users,name',
             'last_name' => 'required|exists:users,last_name',
             'address' => 'required|string',
@@ -130,7 +148,16 @@ class PaymentController extends Controller
             $taxes = Cart::tax();
         }
 
+        if (request('order_type') === 'Pick-up') {
+            $pickup_time = request('pickup_time');
+            $pickup_time = Carbon::createFromFormat('H:i', $pickup_time);
+        } else {
+            $pickup_time = '';
+        }
+
         $order = Order::create([
+            'order_type' => request('order_type'),
+            'pickup_time' => $pickup_time->toTimeString(),
             'user_id' => auth()->id(),
             'name' => request('name'),
             'last_name' => request('last_name'),

@@ -8447,6 +8447,18 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+.text-white {
+  color: white;
+}
+
+.pl-10 {
+  padding-left: 10px;
+}
+
+.pr-10 {
+  padding-right: 10px;
+}
+
 .product-layout-img {
   margin-top: 10px;
 }
@@ -8463,7 +8475,7 @@ body {
 }
 
 .jumbotron {
-  background-image: url("/img/hero_pdt_hamburger.png");
+  background-image: url("/img/rib_eye.jpg");
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -8487,6 +8499,30 @@ body {
 footer {
   background-color: #f5f5f5;
   padding: 20px 0;
+}
+
+input[type="number"] {
+  width: 100px;
+}
+
+input + span {
+  padding-right: 30px;
+}
+
+input:invalid + span:after {
+  position: absolute;
+  content: '\2716';
+  font-size: 1.5em;
+  color: red;
+  padding-left: 5px;
+}
+
+input:valid + span:after {
+  position: absolute;
+  content: '\2713';
+  font-size: 1.5em;
+  color: green;
+  padding-left: 5px;
 }
 
 .pr-10 {

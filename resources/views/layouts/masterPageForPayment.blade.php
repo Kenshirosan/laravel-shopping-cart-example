@@ -43,5 +43,6 @@
         }
     </script>
     <script src="/js/app.js"></script>
+    @yield('pickup-script')
 </body>
 </html>

@@ -13,7 +13,20 @@ class Order extends Model
     * @var array
     */
     protected $fillable = [
-        'user_id', 'name','last_name', 'address','address2', 'zipcode', 'phone_number', 'email', 'items', 'price', 'status_id', 'taxes'
+        'order_type',
+        'pickup_time',
+        'user_id',
+        'name',
+        'last_name',
+        'address',
+        'address2',
+        'zipcode',
+        'phone_number',
+        'email',
+        'items',
+        'price',
+        'status_id',
+        'taxes'
     ];
 
     public function user()

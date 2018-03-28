@@ -21,11 +21,18 @@
                             <a href="/user-order/{{$order->id}}" class="btn btn-xs btn-primary pull-right">
                                 <p><strong>Print</strong></p>
                             </a>
+                            <h4>{{ $order->order_type }}</h4>
+                            @if($order->order_type === 'Pick-up')
+                                <h4>Pickup time : {{ $order->pickup_time }}</h4>
+                            @endif
                             <p class="text-info">Order number : <strong>{{ $order->id }}</strong></p>
                             <p class="text-info">Order received : <strong>{{ $order->created_at->toDateTimeString() }}</strong></p>
                             <p class="text-info">You paid : <strong>{{ $order->price() }}</strong></p>
                             <p>{{ regex($order->items) }}</p>
-                            <order-progress status="{{ $order->status->name}}" initial="{{ $order->status->percent }}" order_id="{{ $order->id }}"></order-progress>
+                            @if($order->order_type === 'Delivery')
+                                <order-progress status="{{ $order->status->name}}" initial="{{ $order->status->percent }}" order_id="{{ $order->id }}"></order-progress>
+                            @endif
+                            <hr>
                         @endforeach
                         @endif
                     </div>
