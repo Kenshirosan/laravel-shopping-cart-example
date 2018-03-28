@@ -56,17 +56,26 @@ class PaymentController extends Controller
         }
 
         if (request('order_type') === 'Pick-up') {
-            $pickup_time = request('pickup_time');
-            $pickup_time = Carbon::createFromFormat('H:i', $pickup_time);
+            $now =  Carbon::createFromFormat('H:i:s', Carbon::now()->toTimeString());
+            $pickup_time = Carbon::createFromFormat('H:i', request('pickup_time'));
             $minTime = Carbon::createFromFormat('H:i', "11:00");
             $maxTime = Carbon::createFromFormat('H:i', "22:00");
 
-            if ($pickup_time < $minTime ) {
-                return redirect('/checkout')->with('error_message', 'Sorry, this is too early');
-            }
+            switch ($pickup_time) {
+                case $pickup_time < $minTime:
+                    return redirect('/checkout')->with('error_message', 'Sorry, this is too early');
+                    break;
 
-            if ($pickup_time >= $maxTime ) {
-                return redirect('/checkout')->with('error_message', 'Sorry, this is too late');
+                case $pickup_time < $now:
+                    return redirect('/checkout')->with('error_message', 'You can\'t pick up earlier than ' . $now->toTimeString());
+                    break;
+
+                case $pickup_time >= $maxTime:
+                    return redirect('/checkout')->with('error_message', 'Sorry, this is too late');
+                    break;
+                default:
+                    continue;
+                    break;
             }
         }
 
@@ -149,15 +158,14 @@ class PaymentController extends Controller
         }
 
         if (request('order_type') === 'Pick-up') {
-            $pickup_time = request('pickup_time');
-            $pickup_time = Carbon::createFromFormat('H:i', $pickup_time);
+            $pickup_time = Carbon::createFromFormat('H:i', request('pickup_time'))->toTimeString();
         } else {
             $pickup_time = '';
         }
 
         $order = Order::create([
             'order_type' => request('order_type'),
-            'pickup_time' => $pickup_time->toTimeString(),
+            'pickup_time' => $pickup_time,
             'user_id' => auth()->id(),
             'name' => request('name'),
             'last_name' => request('last_name'),
