@@ -10,7 +10,7 @@
         <h1>Your restaurant Name</h1>
         <h4>{{ $order->order_type }}</h4>
         @if($order->order_type === 'Pick-up')
-            <h4>Pickup time : {{ $order->pickup_time->toTimeString() }}</h4>
+            <h4>Pickup time : {{ $order->pickup_time }}</h4>
         @endif
         <h3>Order number: 00{{ $order->created_at->format('Ym') . $order->id }}</h3>
     </header>

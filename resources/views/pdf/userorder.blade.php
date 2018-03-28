@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col-md-12">
             <h2 class="btn btn-lg btn-default pull-right"><a href="/calendar">Calendar</a></h2>
-            <h1 class="text-info text-center">Today's Order</h1>
+            <h1 class="text-info text-center">Today's Orders</h1>
         </div>
         <div style="margin-bottom: 100px;"></div>
     </div>
@@ -33,8 +33,9 @@
                     <li class="list-group-item hideable">
                         <a href="/order/{{ $order->id }}" class="admin-links">
                             <h4 class="admin-links">Order: {{ $order->id }}</h4>
+                            <p><strong>{{ $order->order_type }}</strong></p>
                             <p>
-                            {{ $order->name }} {{ $order->last_name }} paid $<strong>{{ $order->price() }}</strong> for {{ preg_replace('/[][:"]/ ', '', $order->items) }} on <strong>{{ $order->created_at->toFormattedDateString() }}</strong> at {{ $order->created_at->toTimeString() }}
+                            {{ $order->name }} {{ $order->last_name }} paid <strong>{{ $order->price() }}</strong> for {{ regex($order->items) }} on <strong>{{ $order->created_at->toFormattedDateString() }}</strong> at {{ $order->created_at->toTimeString() }}
                             </p>
                         </a>
 

@@ -1,6 +1,12 @@
 <?php
 
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
+
+// Route::get('/testing', function(Request $request){
+//     $ip = "";
+//     dump(geoip_country_name_by_name ($ip));
+//     return;
+// });
 
 Route::get('/', function () {
     return redirect('shop');
@@ -23,11 +29,6 @@ Route::get('/count', function(){
     return Cart::count();
 });
 
-Route::get('/testing', function(Request $request){
-    $ip = "";
-    dump(geoip_country_name_by_name ($ip));
-    return;
-});
 
 // ppl playing with shopping cart
 Route::resource('shop', 'ShopController', ['only' => ['index', 'show']]);
