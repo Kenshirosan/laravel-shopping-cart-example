@@ -4,6 +4,9 @@
 
 You paid : {{ $order->price() }} for {{ regex($order->items) }}
 
+@if($order->order_type === 'Pick-up')
+	Pick up at: {{ $order->pickup_time }}
+@endif
 <br>
 
 You may review and print your invoice online on your profile page.
