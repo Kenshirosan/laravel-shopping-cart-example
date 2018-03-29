@@ -13,6 +13,10 @@ body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+#logout-form {
+    display: none;
+}
+
 .security-infos {
     text-decoration: underline;
 }

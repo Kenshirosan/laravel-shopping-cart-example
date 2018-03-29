@@ -51987,7 +51987,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -60494,9 +60493,7 @@ var render = function() {
     _vm._v(" "),
     _vm.progress >= 100
       ? _c("img", { attrs: { src: "/images/delivery.gif", alt: "delivery" } })
-      : _vm._e(),
-    _vm._v(" "),
-    _c("hr")
+      : _vm._e()
   ])
 }
 var staticRenderFns = []
