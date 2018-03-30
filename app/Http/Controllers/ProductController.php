@@ -31,7 +31,7 @@ class ProductController extends Controller
         }
 
         try{
-        $this->createNewProduct($request);
+            $this->createNewProduct($request);
         }
          catch (\Exception $e) {
             return back()->with(['error_message' => $e->getMessage() ]);
