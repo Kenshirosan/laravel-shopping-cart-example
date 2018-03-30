@@ -1,7 +1,6 @@
 <script>
     (function() {
-        let deleteProductButton = document.querySelectorAll('.deleteForm');
-        deleteProductButton = Array.from(deleteProductButton);
+        let deleteProductButton = Array.from(document.querySelectorAll('.deleteForm'));
 
         deleteProductButton.forEach( button => {
             button.addEventListener('submit', confirmDeletion);
@@ -10,8 +9,8 @@
         function confirmDeletion(e) {
             e.preventDefault();
 
-            let target = e.target;
-            let attr = target.getAttribute('action');
+            let form = e.target;
+            let url = form.getAttribute('action');
 
             swal({
                 title: "Are you sure?",
@@ -34,9 +33,9 @@
             confirm.addEventListener('click', deleteProduct);
 
             function deleteProduct() {
-                axios.delete(attr)
-                    .then(flash("Successfully deleted !"))
-                    .then(location.reload());
+                axios.delete(url)
+                    .then(location.reload())
+                    .catch(flash("Something Went wrong, please try again later", "danger"));
             }
         }
     })();

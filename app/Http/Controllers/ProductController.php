@@ -134,7 +134,6 @@ class ProductController extends Controller
     */
     public function destroy($product)
     {
-        // dd(request()->all());
         $product = Product::where('slug', $product)->firstOrFail();
 
         $file = $product->image;
