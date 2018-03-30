@@ -5,21 +5,21 @@
  it's a nice small block of php that eases my life :-),
 it displays the count in the sidebar --}}
 @php
-    if($item['href'] == 'http://127.0.0.1:8000/calendar')
+    if($item['href'] == 'https://webcreation.rocks/calendar')
     {
         $calendar = new \App\Calendar();
 
         $item['label'] = $calendar->getAppointments() ? : $item['label'];
     }
 
-    if($item['href'] == 'http://127.0.0.1:8000/contact-us')
+    if($item['href'] == 'https://webcreation.rocks/contact-us')
     {
         $messages = new \App\Message();
 
         $item['label'] = $messages->count() ? : $item['label'];
     }
 
-    if($item['href'] == 'http://127.0.0.1:8000/customer-orders')
+    if($item['href'] == 'https://webcreation.rocks/customer-orders')
     {
         $orders = new \App\Order();
 
