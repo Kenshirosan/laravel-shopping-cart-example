@@ -9,11 +9,12 @@
                 <p>${{ $product->price() }}</p>
             </a>
             @if( !Auth::guest() && Auth::user()->theboss )
-                <form method="POST" action="/delete/{{$product->slug}}/product">
+                <form method="POST" action="/delete/{{$product->slug}}/product" class="deleteForm">
                     {{ csrf_field() }}
                     {{ method_field('DELETE') }}
-                    <button type="submit" name="submit" class="btn btn-danger">Delete</button>
+                    <button type="submit" name="submit" class="btn btn-danger deleteButton">Delete</button>
                 </form>
+                <a href="/update/{{ $product->slug }}" class="btn btn-info product-layout-img">Update</a>
             @endif
         </div> <!-- end caption -->
     </div> <!-- end thumbnail -->

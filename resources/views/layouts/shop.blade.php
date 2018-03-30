@@ -34,3 +34,7 @@
     </section>
 
 @endsection
+
+@section('delete-product-script')
+    @include('javascript.confirmProductDeletion')
+@endsection

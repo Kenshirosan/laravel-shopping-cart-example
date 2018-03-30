@@ -45,5 +45,6 @@
         @yield('extra-js')
         @yield('dropzone.script')
         @yield('lity-js')
+        @yield('delete-product-script')
     </body>
 </html>

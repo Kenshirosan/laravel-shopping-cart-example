@@ -90,6 +90,8 @@ Route::middleware(['auth', 'must-be-confirmed', 'employee', 'admin'])->group(fun
     Route::get('/panel', 'AdminController@show');
     Route::get('/best-customers', 'BestCustomerController@index');
     Route::post('/insertproduct', 'ProductController@store');
+    Route::get('/update/{slug}', 'ProductController@edit');
+    Route::patch('/update/{slug}', 'ProductController@update');
     Route::delete('/delete/{slug}/product', 'ProductController@destroy');
     Route::get('create-coupon', 'CouponController@index');
     Route::post('create-coupon', 'CouponController@store');
