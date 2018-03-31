@@ -20,11 +20,17 @@
 </head>
 <body>
 
-    @include('includes.header')
 
-     <div class="container" id="app">
-        @include('includes.messages')
-        @yield('content')
+     <div id="app">
+        @include('includes.header')
+        <div class="container">
+            @include('includes.messages')
+            @yield('content')
+            <flash message="{{ session('flash') }}"></flash>
+        </div>
+        <div class="container">
+            <view-cart :items="{{ Cart::content() }}" :total="{{ Cart::total() }}"></view-cart>
+        </div>
     </div>
 
 
