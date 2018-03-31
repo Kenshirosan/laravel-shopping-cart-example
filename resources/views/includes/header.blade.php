@@ -54,6 +54,9 @@
                                     document.getElementById('logout-form').submit();">
                                     Logout
                                 </a>
+                                <li>
+                                    <a href="/edit/profile">Profile</a>
+                                </li>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                     {{ csrf_field() }}
