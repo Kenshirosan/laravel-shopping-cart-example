@@ -32,15 +32,23 @@
         methods: {
             addtocart() {
                 // axios.post('http://webcreation.rocks/cart', this.$data)
-                axios.post('/cart', this.$data)
-                    .then(flash(this.product.name + ' was added to cart'))
-                    .then( productitemscountchanged() )
-                    .then(setTimeout( () => {
-                        this.option = ''
-                    }, 100 ))
-                    .catch( e => {
-                        flash(e.response.data, 'danger')
-                    })
+                let options = this.product.group.options;
+
+                if (options.length > 0 && this.option == '') {
+                    return swal("Wait!",
+                        `Please pick an option for ${this.product.name}`,
+                        "warning");
+                } else {
+                    axios.post('/cart', this.$data)
+                        .then(flash(this.product.name + ' was added to cart'))
+                        .then( productitemscountchanged() )
+                        .then(setTimeout( () => {
+                            this.option = ''
+                        }, 100 ))
+                        .catch( e => {
+                            flash(e.response.data, 'danger')
+                        })
+                }
             }
         }
     }
