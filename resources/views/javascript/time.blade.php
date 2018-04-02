@@ -25,8 +25,8 @@
         timeElement.textContent = e.target.value;
 
         let parent = document.querySelector('.pickup-time');
-
         let child = parent.querySelector('.timer-helper');
+
         if (child) {
             $(child).remove();
         }

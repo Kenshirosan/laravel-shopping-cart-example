@@ -1,5 +1,12 @@
 <div class="col-md-4">
     <div class="thumbnail">
+        @if($product->is_on_sale)
+            <div class="sales">
+                <h2>{{ $product->sales->percentage  * 100 }}% Off!
+                    <span><small>was ${{ $product->regularPrice() }}</small></span>
+                </h2>
+            </div>
+        @endif
         <div class="caption text-center">
             <strong>{{ $product->name }}</strong>
             <a href="{{ url('shop', [$product->slug]) }}">
@@ -8,7 +15,7 @@
             <a href="{{ url('shop', [$product->slug]) }}"><h3>{{ $product->name }}</h3>
                 <p>${{ $product->price() }}</p>
             </a>
-            @if( !Auth::guest() && Auth::user()->theboss )
+            @if( Auth::check() && Auth::user()->theboss )
                 <form method="POST" action="/delete/{{$product->slug}}/product" class="deleteForm">
                     {{ csrf_field() }}
                     {{ method_field('DELETE') }}
@@ -18,26 +25,11 @@
             @endif
         </div> <!-- end caption -->
     </div> <!-- end thumbnail -->
+
     <h3>${{ $product->price() }}</h3>
 
-    <form action="{{ url('/cart') }}" method="POST" class="side-by-side" id="form">
-        {{ csrf_field() }}
-
-        <noscript>
-            <input type="hidden" name="id"  value="{{ $product->id }}">
-            <input type="hidden" name="name"  value="{{ $product->name }}">
-            <input type="hidden" name="price"  value="{{ $product->price }}">
-
-            @if( ! $product->options()->isEmpty() )
-                 <select name="option" class="options minimal" autofocus required>
-                    <option value="" class="reset">Choose</option>
-                @foreach($product->options() as $option)
-                    <option class="option" value="{{ $option->name }}">{{ $option->name }}</option>
-                @endforeach
-                </select>
-            @endif
-            <input type="submit"  value="Add To Cart" class="btn btn-success">
-        </noscript>
+    {{-- <form action="{{ url('/cart') }}" method="POST" class="side-by-side" id="form">
+        {{ csrf_field() }} --}}
 
         <add-to-cart
             :product="{{ $product }}"
@@ -46,7 +38,7 @@
             @endif
         >
         </add-to-cart>
-    </form>
+    {{-- </form> --}}
 
     <div class="spacer"></div>
 </div> <!-- end col-md-3 -->

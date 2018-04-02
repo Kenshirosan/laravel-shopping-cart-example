@@ -40,7 +40,7 @@ class CartController extends Controller
             'id' => 'required|exists:products,id',
             'name' => 'required|string|exists:products,name',
             'quantity' => 'required|numeric|digits:1|max:6',
-            'price' => 'required|numeric|exists:products,price',
+            'price' => 'required|numeric',
             'option' => 'nullable|string|exists:options,name',
         ]);
 

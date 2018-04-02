@@ -146,8 +146,8 @@ class ProductController extends Controller
             Storage::disk('custom')->delete($photo->photos);
         }
 
-        if (request()->wantsJson()) {
-            return response('success', 200);
+        if (request()->expectsJson()) {
+            return response([], 200);
         }
         return back()->with(['success_message' => 'Successfully deleted!']);
     }

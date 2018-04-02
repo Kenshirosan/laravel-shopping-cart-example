@@ -21,24 +21,9 @@
 
         <div class="col-md-8">
             <h3>${{ $product->price /100 }}</h3>
-            <form action="{{ url('/cart') }}" method="POST" class="side-by-side" id="form">
-                {{ csrf_field() }}
+            {{-- <form action="{{ url('/cart') }}" method="POST" class="side-by-side" id="form">
+                {{ csrf_field() }} --}}
 
-                <noscript>
-                    <input type="hidden" name="id"  value="{{ $product->id }}">
-                    <input type="hidden" name="name"  value="{{ $product->name }}">
-                    <input type="hidden" name="price"  value="{{ $product->price }}">
-
-                    @if( ! $product->options()->isEmpty() )
-                         <select name="option" class="options minimal" v-model="selected" autofocus required>
-                            <option value="" class="reset">Choose</option>
-                        @foreach($product->options() as $option)
-                            <option class="option" value="{{ $option->name }}">{{ $option->name }}</option>
-                        @endforeach
-                        </select>
-                    @endif
-                    <input type="submit"  value="Add To Cart" class="btn btn-success">
-                </noscript>
 
                 <add-to-cart
                     :product="{{ $product }}"
@@ -47,7 +32,7 @@
                     @endif
                     >
                 </add-to-cart>
-            </form>
+            {{-- </form> --}}
 
             @if( Auth::check() && Auth::user()->isAdmin() )
                 <form id="addPhotosForm" class="dropzone" action="/shop/{{ $product->slug }}/photo" enctype="multipart/form-data" method="POST">

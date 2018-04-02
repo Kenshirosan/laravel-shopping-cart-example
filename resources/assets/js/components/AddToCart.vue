@@ -1,8 +1,5 @@
 <template>
     <div>
-        <input type="hidden" name="id" v-model="this.product.id">
-        <input type="hidden" name="name" v-model="this.product.name">
-        <input type="hidden" name="price" v-model="this.product.price">
         <select name="options" v-if="options" v-model="option" class="options minimal" required autofocus>
         <option value="" class="reset">Choose</option>
         <option class="options" name="option"
@@ -24,15 +21,19 @@
                 id: this.product.id,
                 quantity: 1,
                 name: this.product.name,
-                price: this.product.price,
+                price: this.product.sales ?
+                                            this.product.price - (this.product.price * this.product.sales.percentage)
+                                          :
+                                            this.product.price,
                 option: ''
             }
         },
 
+
         methods: {
             addtocart() {
                 // axios.post('http://webcreation.rocks/cart', this.$data)
-                let options = this.product.group.options;
+                let options = this.options;
 
                 if (options.length > 0 && this.option == '') {
                     return swal("Wait!",

@@ -50943,9 +50943,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['product', 'options'],
@@ -50955,7 +50952,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             id: this.product.id,
             quantity: 1,
             name: this.product.name,
-            price: this.product.price,
+            price: this.product.sales ? this.product.price - this.product.price * this.product.sales.percentage : this.product.price,
             option: ''
         };
     },
@@ -50966,7 +50963,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             // axios.post('http://webcreation.rocks/cart', this.$data)
-            var options = this.product.group.options;
+            var options = this.options;
 
             if (options.length > 0 && this.option == '') {
                 return swal("Wait!", 'Please pick an option for ' + this.product.name, "warning");
@@ -50990,69 +50987,6 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("input", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: this.product.id,
-          expression: "this.product.id"
-        }
-      ],
-      attrs: { type: "hidden", name: "id" },
-      domProps: { value: this.product.id },
-      on: {
-        input: function($event) {
-          if ($event.target.composing) {
-            return
-          }
-          _vm.$set(this.product, "id", $event.target.value)
-        }
-      }
-    }),
-    _vm._v(" "),
-    _c("input", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: this.product.name,
-          expression: "this.product.name"
-        }
-      ],
-      attrs: { type: "hidden", name: "name" },
-      domProps: { value: this.product.name },
-      on: {
-        input: function($event) {
-          if ($event.target.composing) {
-            return
-          }
-          _vm.$set(this.product, "name", $event.target.value)
-        }
-      }
-    }),
-    _vm._v(" "),
-    _c("input", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: this.product.price,
-          expression: "this.product.price"
-        }
-      ],
-      attrs: { type: "hidden", name: "price" },
-      domProps: { value: this.product.price },
-      on: {
-        input: function($event) {
-          if ($event.target.composing) {
-            return
-          }
-          _vm.$set(this.product, "price", $event.target.value)
-        }
-      }
-    }),
-    _vm._v(" "),
     _vm.options
       ? _c(
           "select",

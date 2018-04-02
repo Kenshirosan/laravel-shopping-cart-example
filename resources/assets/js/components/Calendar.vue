@@ -72,7 +72,7 @@
                 button: {
                     text: "Update",
                     closeModal: true,
-                },
+                }
             })
 
             $('.datetimepicker').datetimepicker({

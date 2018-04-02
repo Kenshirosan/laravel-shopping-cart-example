@@ -16,12 +16,33 @@ class Product extends Model
      */
 
     protected $fillable = [
-        'name', 'holiday_special',  'option_group_id', 'category_id', 'category', 'slug', 'description', 'price', 'image'
+        'name', 'holiday_special',
+        'option_group_id', 'category_id',
+        'category', 'slug',
+        'description', 'price',
+        'image'
     ];
+
+    protected $appends = ['is_on_sale'];
 
     public function photos()
     {
         return $this->hasMany(Photo::class);
+    }
+
+    public function sales()
+    {
+        return $this->hasOne(Sales::class, 'product_id');
+    }
+
+    public function is_on_sale()
+    {
+        return !! $this->sales()->count();
+    }
+
+    public function getIsOnSaleAttribute()
+    {
+        return $this->is_on_sale();
     }
 
     public function category()
@@ -39,8 +60,17 @@ class Product extends Model
         return $this->group->options;
     }
 
-    public function price()
+    public function regularPrice()
     {
         return money_format('%i', $this->price / 100);
+    }
+
+    public function price()
+    {
+        return $this->is_on_sale
+            ?
+                money_format('%i', ($this->price / 100) - (($this->price / 100) * $this->sales->percentage) )
+            :
+                money_format('%i', $this->price / 100);
     }
 }

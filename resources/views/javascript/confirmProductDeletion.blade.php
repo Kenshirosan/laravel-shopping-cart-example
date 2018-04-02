@@ -1,8 +1,8 @@
 <script>
     (function() {
-        let deleteProductButton = Array.from(document.querySelectorAll('.deleteForm'));
+        let deleteProductButtons = Array.from(document.querySelectorAll('.deleteForm'));
 
-        deleteProductButton.forEach( button => {
+        deleteProductButtons.forEach( button => {
             button.addEventListener('submit', confirmDeletion);
         });
 
@@ -34,8 +34,12 @@
 
             function deleteProduct() {
                 axios.delete(url)
-                    .then(location.reload())
-                    .catch(flash("Something Went wrong, please try again later", "danger"));
+                    .then(flash("Product deleted !"))
+                    .then(
+                        setTimeout( () => {
+                            location.reload()
+                        }, 500)
+                    )
             }
         }
     })();

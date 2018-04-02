@@ -105,3 +105,49 @@ input:valid+span:after {
 .secure-payment-info {
     text-decoration: underline;
 }
+
+.sales {
+    width: 100%;
+}
+
+.sales span {
+    font-size: 0.5em;
+}
+
+.sales small {
+    color: white;
+}
+
+.sales h2 {
+    background: #29A6CF;
+    line-height: 2em;
+    font-size: 2.5em;
+    font-weight: normal;
+    text-align: center;
+    position: relative;
+    width: 100%;
+    margin-top: -.3em;
+    box-shadow: 0 0 .3em 1px #333;
+    color: #dedede;
+}
+
+// .sales h2:before{
+//     content: "";
+//     width: 0;
+//     height: 0;
+//     border-top: .35em solid #2081A1;
+//     border-left: .35em solid transparent;
+//     position: absolute;
+//     bottom: -.35em;
+//     left: 0;
+// }
+// .sales h2:after{
+//     content: "";
+//     width: 0;
+//     height: 0;
+//     border-top: .35em solid #2081A1;
+//     border-right: .35em solid transparent;
+//     position: absolute;
+//     bottom: -.35em;
+//     right: 0;
+// }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use App\Category;
+use App\OptionGroup;
 
 class ShopController extends Controller
 {
@@ -15,9 +16,8 @@ class ShopController extends Controller
     public function index()
     {
         $categories = Category::with(['products' => function ($query) {
-            $query->where('holiday_special', false)->with('group');
+            $query->where('holiday_special', false)->with('sales')->with('group');
         }])->get();
-
         return view('layouts.shop', compact('categories'));
     }
 
@@ -29,7 +29,7 @@ class ShopController extends Controller
     */
     public function show($slug)
     {
-        $product = Product::where('slug', $slug)->firstOrFail();
+        $product = Product::where('slug', $slug)->with('sales')->with('group')->firstOrFail();
 
         return view('layouts.product', compact('product'));
     }
