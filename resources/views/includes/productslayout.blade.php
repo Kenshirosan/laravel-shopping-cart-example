@@ -15,6 +15,7 @@
             <a href="{{ url('shop', [$product->slug]) }}"><h3>{{ $product->name }}</h3>
                 <p>${{ $product->price() }}</p>
             </a>
+            <favorite :product="{{ $product }}"></favorite>
             @if( Auth::check() && Auth::user()->theboss )
                 <form method="POST" action="/delete/{{$product->slug}}/product" class="deleteForm">
                     {{ csrf_field() }}

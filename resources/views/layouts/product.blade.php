@@ -27,6 +27,7 @@
         </div>
 
         <div class="col-md-8">
+            <favorite :product="{{ $product }}"></favorite>
             <h3>${{ $product->price() }}</h3>
             <form action="{{ url('/cart') }}" method="POST" class="side-by-side" id="form">
                 {{ csrf_field() }}

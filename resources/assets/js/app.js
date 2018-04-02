@@ -2,6 +2,7 @@ import './bootstrap';
 
 Vue.component('flash', require('./components/Flash.vue'));
 Vue.component('cart-counter', require('./components/CartCounter.vue'));
+Vue.component('favorite', require('./components/Favorite.vue'));
 Vue.component('past-orders', require('./components/PastOrders.vue'));
 Vue.component('add-to-cart', require('./components/AddToCart.vue'));
 Vue.component('checkoutform', require('./components/CheckoutForm.vue'));

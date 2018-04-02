@@ -23,7 +23,36 @@ class Product extends Model
         'image'
     ];
 
-    protected $appends = ['is_on_sale'];
+    protected $appends = ['is_on_sale', 'favoritesCount', 'isFavorited'];
+
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+    /**
+     * Get the number of favorites for the restaurant.
+     *
+     * @return integer
+     */
+    public function getFavoritesCountAttribute()
+    {
+        return $this->favorites->count();
+    }
+
+    /**
+     * Determine if the current restaurant has been favorited.
+     *
+     * @return boolean
+     */
+    public function isFavorited()
+    {
+        return !! $this->favorites->where('user_id', auth()->id())->count();
+    }
+
+    public function getIsFavoritedAttribute()
+    {
+        return $this->isFavorited();
+    }
 
     public function photos()
     {

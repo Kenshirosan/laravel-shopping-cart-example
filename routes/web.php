@@ -54,6 +54,8 @@ Route::middleware(['auth', 'must-be-confirmed'])->group(function () {
     Route::get('/checkout', 'PaymentController@index');
     Route::post('/order', 'PaymentController@store');
     Route::post('apply-coupon', 'CouponController@update');
+    Route::post('/product/{id}/favorites', 'FavoritesController@store');
+    Route::delete('/product/{id}/favorites', 'FavoritesController@destroy');
 });
 
 Route::middleware(['auth', 'must-be-confirmed', 'employee'])->group(function () {
