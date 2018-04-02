@@ -35,7 +35,7 @@
                 // axios.post('http://webcreation.rocks/cart', this.$data)
                 let options = this.options;
 
-                if (options.length > 0 && this.option == '') {
+                if (options != undefined && options.length > 0 && this.option == '') {
                     return swal("Wait!",
                         `Please pick an option for ${this.product.name}`,
                         "warning");

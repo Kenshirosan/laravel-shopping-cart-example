@@ -13,6 +13,13 @@
     <hr>
     <div class="row">
         <div class="col-md-4">
+            @if($product->is_on_sale)
+                <div class="sales">
+                    <h2>{{ $product->sales->percentage  * 100 }}% Off!
+                        <span><small>was ${{ $product->regularPrice() }}</small></span>
+                    </h2>
+                </div>
+            @endif
             <img src="{{ asset('img/' . $product->image) }}" alt="{{ $product->name }}" class="img-responsive lity-img" data-lity>
             @foreach( $product->photos as $item)
                 <img src="{{ asset($item->photos) }}" alt="{{ $product->name }}" class="img-responsive lity-img" data-lity>
@@ -20,9 +27,9 @@
         </div>
 
         <div class="col-md-8">
-            <h3>${{ $product->price /100 }}</h3>
-            {{-- <form action="{{ url('/cart') }}" method="POST" class="side-by-side" id="form">
-                {{ csrf_field() }} --}}
+            <h3>${{ $product->price() }}</h3>
+            <form action="{{ url('/cart') }}" method="POST" class="side-by-side" id="form">
+                {{ csrf_field() }}
 
 
                 <add-to-cart
@@ -32,7 +39,7 @@
                     @endif
                     >
                 </add-to-cart>
-            {{-- </form> --}}
+            </form>
 
             @if( Auth::check() && Auth::user()->isAdmin() )
                 <form id="addPhotosForm" class="dropzone" action="/shop/{{ $product->slug }}/photo" enctype="multipart/form-data" method="POST">

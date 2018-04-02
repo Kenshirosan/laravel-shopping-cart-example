@@ -28,8 +28,8 @@
 
     <h3>${{ $product->price() }}</h3>
 
-    {{-- <form action="{{ url('/cart') }}" method="POST" class="side-by-side" id="form">
-        {{ csrf_field() }} --}}
+    <form action="{{ url('/cart') }}" method="POST" class="side-by-side" id="form">
+        {{ csrf_field() }}
 
         <add-to-cart
             :product="{{ $product }}"
@@ -38,7 +38,7 @@
             @endif
         >
         </add-to-cart>
-    {{-- </form> --}}
+    </form>
 
     <div class="spacer"></div>
 </div> <!-- end col-md-3 -->

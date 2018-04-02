@@ -50965,7 +50965,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             // axios.post('http://webcreation.rocks/cart', this.$data)
             var options = this.options;
 
-            if (options.length > 0 && this.option == '') {
+            if (options != undefined && options.length > 0 && this.option == '') {
                 return swal("Wait!", 'Please pick an option for ' + this.product.name, "warning");
             } else {
                 axios.post('/cart', this.$data).then(flash(this.product.name + ' was added to cart')).then(productitemscountchanged()).then(setTimeout(function () {
