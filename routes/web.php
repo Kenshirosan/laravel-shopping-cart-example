@@ -108,6 +108,9 @@ Route::middleware(['auth', 'must-be-confirmed', 'employee', 'admin'])->group(fun
     Route::get('/analytics', 'AnalyticsController@index');
     //ADD A BUNCH OF PICS ON PRODUCT VIEW
     Route::post('/shop/{slug}/{photo}','PhotosController@store');
+    Route::get('/sales', 'SalesController@index');
+    Route::post('/sales', 'SalesController@store');
+    Route::delete('/delete-sales/{saleId}', 'SalesController@destroy');
 });
 
 

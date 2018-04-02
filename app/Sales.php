@@ -16,6 +16,11 @@ class Sales extends Model
 
     public function products()
     {
-    	return $this->hasMany(Product::class);
+    	return $this->belongsTo(Product::class);
+    }
+
+    public function product()
+    {
+        return Product::where('id', $this->product_id)->firstOrFail();
     }
 }

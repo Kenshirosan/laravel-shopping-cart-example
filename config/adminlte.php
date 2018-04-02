@@ -118,6 +118,13 @@ return [
             'can' => 'see-admin-menu'
         ],
         [
+            'text' => 'Create a Sale',
+            'url'  => '/sales',
+            'icon' => 'dollar',
+            'icon_color' => 'success',
+            'can' => 'see-admin-menu'
+        ],
+        [
             'text' => 'Add a title for the special\'s page',
             'url'  => '/add-holiday-title',
             'icon' => 'shopping-cart',

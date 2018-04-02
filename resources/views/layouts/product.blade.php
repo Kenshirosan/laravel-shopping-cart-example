@@ -37,7 +37,7 @@
                     @if( ! $product->options()->isEmpty() )
                         :options="{{ $product->options() }}"
                     @endif
-                    >
+                >
                 </add-to-cart>
             </form>
 
