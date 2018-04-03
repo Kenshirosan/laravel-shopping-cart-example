@@ -35,8 +35,11 @@
 
                 <add-to-cart
                     :product="{{ $product }}"
-                    @if( ! $product->options()->isEmpty() )
+                    @if( $product->group )
                         :options="{{ $product->options() }}"
+                    @endif
+                    @if( $product->secondGroup )
+                        :secondoptions="{{ $product->secondOptions() }}"
                     @endif
                 >
                 </add-to-cart>
