@@ -28,12 +28,25 @@
 
     {{-- DB row option_group_id --}}
     <div class="form-group{{ $errors->has('option_group_id') ? ' has-error' : '' }}">
-        <label for="option" class="col-md-4 control-label">Customers choose how they want it cooked ?</label>
+        <label for="option" class="col-md-4 control-label">Options 1</label>
         <div class="col-md-6">
             <select id="option_group_id" class="form-control" name="option_group_id">
                 <option value="3">Please pick one</option>
                 @foreach($optionGroups as $optionGroup)
                     <option value="{{ $optionGroup->id }}">{{ $optionGroup->name }}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+
+    {{-- DB row second_option_group_id --}}
+    <div class="form-group{{ $errors->has('option_group_id') ? ' has-error' : '' }}">
+        <label for="option" class="col-md-4 control-label">Options 2</label>
+        <div class="col-md-6">
+            <select id="option_group_id" class="form-control" name="option_group_id">
+                <option value="3">Please pick one</option>
+                @foreach($secondOptionGroups as $secondOptionGroup)
+                    <option value="{{ $secondOptionGroup->id }}">{{ $secondOptionGroup->name }}</option>
                 @endforeach
             </select>
         </div>

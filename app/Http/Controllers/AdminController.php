@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Order;
-use App\Option;
+// use App\Option;
 use App\Category;
 use App\OptionGroup;
+use App\SecondOptionGroup;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -19,11 +20,13 @@ class AdminController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $options = Option::all();
+        // $options = Option::all();
         $optionGroups = OptionGroup::all();
+        // $secondOptions = SecondOption::all();
+        $secondOptionGroups = SecondOptionGroup::all();
         $orders = Order::limit(5)->orderBy('created_at', 'desc')->get();
 
-        return view('admin.restaurantindex', compact('orders', 'options', 'optionGroups', 'categories'));
+        return view('admin.restaurantindex', compact('orders', 'optionGroups', 'secondOptionGroups', 'categories'));
     }
 
     /**

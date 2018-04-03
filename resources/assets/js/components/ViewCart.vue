@@ -26,7 +26,8 @@
                         <p>{{ item.name }}</p>
                     </td>
                     <td v-if="item.options">
-                        <p class="text-primary"><strong>{{ item.options[0] }}</strong></p>
+                        <p class="text-primary" v-if="item.options[1]"><strong>{{ item.options[0] }} , {{ item.options[1] }}</strong></p>
+                        <p class="text-primary" v-else><strong>{{ item.options[0] }}</strong></p>
                     </td>
                     <td>
                         <p>{{ item.qty }}</p>

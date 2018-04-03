@@ -42,6 +42,7 @@ class CartController extends Controller
             'quantity' => 'required|numeric|digits:1|max:6',
             'price' => 'required|numeric',
             'option' => 'nullable|string|exists:options,name',
+            'secondoption' => 'nullable|string|exists:second_options,name',
         ]);
 
         $duplicates = Cart::search(function ($cartItem, $rowQty) use ($request){
@@ -52,11 +53,20 @@ class CartController extends Controller
             return response('You\'ve reached the maximum quantity allowed', 403);
         }
 
-        if($request->option == null) {
+        if($request->option == null && $request->secondoption == null) {
             Cart::add($request->id, $request->name, 1, $request->price )->associate(Product::class);
             return response([], 200);
-        } else {
+
+        } elseif ( $request->option != null && $request->secondoption == null) {
             Cart::add($request->id, $request->name, 1, $request->price, [ $request->option ] )->associate(Product::class);
+            return response([], 200);
+
+        } elseif ($request->option == null && $request->secondoption != null) {
+            Cart::add($request->id, $request->name, 1, $request->price, [ $request->secondoption ] )->associate(Product::class);
+            return response([], 200);
+
+        } else {
+            Cart::add($request->id, $request->name, 1, $request->price, [ $request->option, $request->secondoption ] )->associate(Product::class);
             return response([], 200);
         }
 

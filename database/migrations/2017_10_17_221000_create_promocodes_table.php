@@ -26,7 +26,7 @@ class CreatePromocodesTable extends Migration
             $table->unsignedInteger('promocode_id');
             $table->timestamp('used_at');
             $table->primary(['user_id', 'promocode_id']);
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('promocode_id')->references('id')->on(config('promocodes.table', 'promocodes'));
         });
     }

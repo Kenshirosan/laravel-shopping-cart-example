@@ -1,5 +1,6 @@
 <div class="col-md-4">
     <div class="thumbnail">
+        {{-- {{ dd($product) }} --}}
         @if($product->is_on_sale)
             <div class="sales">
                 <h2>{{ $product->sales->percentage  * 100 }}% Off!
@@ -34,8 +35,11 @@
 
         <add-to-cart
             :product="{{ $product }}"
-            @if( ! $product->options()->isEmpty() )
+            @if( $product->group )
                 :options="{{ $product->options() }}"
+            @endif
+            @if( $product->secondGroup )
+                :secondoptions="{{ $product->secondOptions() }}"
             @endif
         >
         </add-to-cart>

@@ -10,6 +10,7 @@
     </p>
     <h1>Your Cart</h1>
     <hr>
+    {{-- {{ dd(Cart::content()) }} --}}
     @if (sizeof(Cart::content()) > 0)
     <table class="table">
         <thead>
@@ -29,7 +30,7 @@
                     <a href="{{ url('shop', [$item->model->slug]) }}"><img src="{{ asset('img/' . $item->model->image) }}" alt="product" class="img-responsive cart-image"></a>
                 </td>
                 <td>
-                    <a href="{{ url('shop', [$item->model->slug]) }}">{{ $item->name }} {{ preg_replace('/[]["]/ ', '', $item->options) }}</a>
+                    <a href="{{ url('shop', [$item->model->slug]) }}">{{ $item->name }} {{ regex($item->options) }}</a>
                 </td>
                 <td>
                     <form action="/cart/{{ $item->rowId}}" method="POST" class="side-by-side">

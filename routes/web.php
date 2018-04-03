@@ -103,6 +103,10 @@ Route::middleware(['auth', 'must-be-confirmed', 'employee', 'admin'])->group(fun
     Route::post('add-option-group', 'OptionGroupController@store');
     Route::get('add-options', 'OptionsController@index');
     Route::post('add-options', 'OptionsController@store');
+    Route::get('add-second-option-group', 'SecondOptionGroupController@index');
+    Route::post('add-second-option-group', 'SecondOptionGroupController@store');
+    Route::get('add-second-options', 'SecondOptionsController@index');
+    Route::post('add-second-options', 'SecondOptionsController@store');
     Route::get('add-category', 'CategoriesController@create');
     Route::post('add-category', 'CategoriesController@store');
     Route::get('/message/{id}', 'MessageController@show');

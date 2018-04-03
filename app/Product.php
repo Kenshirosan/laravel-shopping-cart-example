@@ -5,6 +5,7 @@ namespace App;
 use DB;
 use App\Photo;
 use App\OptionGroup;
+use App\SecondOptionGroup;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -17,10 +18,9 @@ class Product extends Model
 
     protected $fillable = [
         'name', 'holiday_special',
-        'option_group_id', 'category_id',
-        'category', 'slug',
-        'description', 'price',
-        'image'
+        'option_group_id', 'second_option_group_id',
+        'category_id', 'category', 'slug',
+        'description', 'price', 'image'
     ];
 
     protected $appends = ['is_on_sale', 'favoritesCount', 'isFavorited'];
@@ -87,6 +87,16 @@ class Product extends Model
     public function options()
     {
         return $this->group->options;
+    }
+
+    public function secondGroup()
+    {
+        return $this->belongsTo(SecondOptionGroup::class, 'second_option_group_id');
+    }
+
+    public function secondOptions()
+    {
+        return $this->secondGroup->options;
     }
 
     public function regularPrice()

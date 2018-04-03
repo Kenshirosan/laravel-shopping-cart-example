@@ -5,11 +5,10 @@
 @endsection
 
 @section('content')
-    <form class="form-horizontal" method="POST" action="/add-option-group" enctype="multipart/form-data">
+
+    <form class="form-horizontal" method="POST" action="{{ $method }}" enctype="multipart/form-data">
         @include('includes.error')
         {{ csrf_field() }}
-
-
         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
             <label for="name" class="col-md-4 control-label">Option Group Name</label>
             <div class="col-md-6">

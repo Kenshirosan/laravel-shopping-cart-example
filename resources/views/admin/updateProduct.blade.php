@@ -36,8 +36,9 @@
     </div>
 
     {{-- DB row option_group_id --}}
+    @if( $product->group )
     <div class="form-group{{ $errors->has('option_group_id') ? ' has-error' : '' }}">
-        <label for="option" class="col-md-4 control-label">Customers choose how they want it cooked ?</label>
+        <label for="option" class="col-md-4 control-label">Option 1</label>
         <div class="col-md-6">
             <select id="option_group_id" class="form-control" name="option_group_id">
                 <option value="{{ $product->group->id }}">{{ $product->group->name }}</option>
@@ -47,6 +48,21 @@
             </select>
         </div>
     </div>
+    @endif
+
+    @if( $product->secondGroup )
+    <div class="form-group{{ $errors->has('second_option_group_id') ? ' has-error' : '' }}">
+        <label for="option" class="col-md-4 control-label">Option 2</label>
+        <div class="col-md-6">
+            <select id="option_group_id" class="form-control" name="option_group_id">
+                <option value="{{ $product->secondGroup->id }}">{{ $product->secondGroup->name }}</option>
+                @foreach($secondOptionGroups as $secondOptionGroup)
+                    <option value="{{ $secondOptionGroup->id }}">{{ $secondOptionGroup->name }}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+    @endif
 
 
     {{--  CATEGORY --}}

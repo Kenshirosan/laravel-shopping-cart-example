@@ -188,6 +188,18 @@ return [
 
                 ],
                 [
+                    'text' => 'Add a second option group',
+                    'url'  => '/add-second-option-group',
+                    'icon' => 'glyphicon glyphicon-option-horizontal',
+                    'icon_color' => 'green',
+                ],
+                [
+                    'text'       => 'Add second options',
+                    'url'        => '/add-second-options',
+                    'icon_color' => 'aqua',
+
+                ],
+                [
                     'text'       => 'Add a category',
                     'url'        => '/add-category',
                     'icon_color' => 'success',

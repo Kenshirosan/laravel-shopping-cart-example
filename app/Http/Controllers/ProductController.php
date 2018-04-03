@@ -7,8 +7,8 @@ use App\User;
 use App\Photo;
 use App\Product;
 use App\Category;
-use App\Option;
 use App\OptionGroup;
+use App\SecondOptionGroup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -44,24 +44,20 @@ class ProductController extends Controller
     {
         $product = Product::where('slug', $slug)->firstOrFail();
         $categories = Category::all();
-        $options = Option::all();
         $optionGroups = OptionGroup::all();
+        $secondOptionGroups = SecondOptionGroup::all();
 
-        return view('admin.updateProduct', compact('product', 'categories', 'options', 'optionGroups'));
+        return view('admin.updateProduct', compact('product', 'categories', 'optionGroups', 'secondOptionGroups'));
     }
 
     public function update(Request $request, $slug)
     {
-        $this->validate($request,[
-            'name' => 'required|string',
-            'holiday_special' => 'required|boolean',
-            'option_group_id' => 'required|numeric',
-            'category_id' => 'required|numeric',
-            'slug' => 'required|string',
-            'description' => 'required|string',
-            'price' => 'required|numeric',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,bmp',
-        ]);
+        try{
+            $this->validateRequest($request);
+        }
+         catch (\Exception $e) {
+            return back()->with(['error_message' => $e->getMessage() ]);
+        }
 
         $product = Product::where('slug', $slug)->firstOrFail();
 
@@ -81,6 +77,7 @@ class ProductController extends Controller
             'name' => ucfirst(request('name')),
             'holiday_special' => request('holiday_special'),
             'option_group_id' => request('option_group_id'),
+            'second_option_group_id' => request('option_group_id'),
             'category_id' => request('category_id'),
             'slug' => request('slug'),
             'description' => request('description'),
@@ -96,12 +93,13 @@ class ProductController extends Controller
         return $this->validate($request,[
             'name' => 'required|string',
             'holiday_special' => 'required|boolean',
-            'option_group_id' => 'required|numeric',
+            'option_group_id' => 'nullable|numeric',
+            'second_option_group_id' => 'nullable|numeric',
             'category_id' => 'required|numeric',
             'slug' => 'required|string',
             'description' => 'required|string',
             'price' => 'required|numeric',
-            'image' => 'required|image|mimes:jpg,jpeg,png,bmp',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,bmp',
         ]);
     }
 

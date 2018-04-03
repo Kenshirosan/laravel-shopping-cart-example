@@ -51124,17 +51124,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['product', 'options'],
+    props: ['product', 'options', 'secondoptions'],
 
     data: function data() {
         return {
             id: this.product.id,
             quantity: 1,
             name: this.product.name,
-            price: this.product.sales ? this.product.price - this.product.price * this.product.sales.percentage : this.product.price,
-            option: ''
+            option: '',
+            secondoption: '',
+            price: this.product.sales ? this.product.price - this.product.price * this.product.sales.percentage : this.product.price
         };
     },
 
@@ -51145,12 +51158,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             // axios.post('http://webcreation.rocks/cart', this.$data)
             var options = this.options;
+            var secondoptions = this.secondoptions;
 
-            if (options != undefined && options.length > 0 && this.option == '') {
+            if (options != undefined && options.length > 0 && this.option == '' || secondoptions != undefined && secondoptions.length > 0 && this.secondoption == '') {
                 return swal("Wait!", 'Please pick an option for ' + this.product.name, "warning");
             } else {
                 axios.post('/cart', this.$data).then(flash(this.product.name + ' was added to cart')).then(productitemscountchanged()).then(setTimeout(function () {
-                    _this.option = '';
+                    _this.option = '', _this.secondoption = '';
                 }, 100)).catch(function (e) {
                     flash(e.response.data, 'danger');
                 });
@@ -51168,55 +51182,109 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.options
-      ? _c(
-          "select",
-          {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.option,
-                expression: "option"
-              }
-            ],
-            staticClass: "options minimal",
-            attrs: { name: "options", required: "", autofocus: "" },
-            on: {
-              change: function($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function(o) {
-                    return o.selected
-                  })
-                  .map(function(o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.option = $event.target.multiple
-                  ? $$selectedVal
-                  : $$selectedVal[0]
-              }
-            }
-          },
-          [
-            _c("option", { staticClass: "reset", attrs: { value: "" } }, [
-              _vm._v("Choose")
-            ]),
-            _vm._v(" "),
-            _vm._l(_vm.options, function(option) {
-              return _c("option", {
-                staticClass: "options",
-                attrs: { name: "option" },
-                domProps: {
-                  value: option.name,
-                  textContent: _vm._s(option.name)
+    _c("div", { staticClass: "row" }, [
+      _vm.options
+        ? _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.option,
+                  expression: "option"
                 }
+              ],
+              staticClass: "options minimal",
+              attrs: { name: "options", required: "", autofocus: "" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.option = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
+            [
+              _c("option", { staticClass: "reset", attrs: { value: "" } }, [
+                _vm._v("Choose")
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.options, function(option) {
+                return _c("option", {
+                  staticClass: "options",
+                  attrs: { name: "option" },
+                  domProps: {
+                    value: option.name,
+                    textContent: _vm._s(option.name)
+                  }
+                })
               })
-            })
-          ],
-          2
-        )
-      : _vm._e(),
+            ],
+            2
+          )
+        : _vm._e()
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _vm.secondoptions
+        ? _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.secondoption,
+                  expression: "secondoption"
+                }
+              ],
+              staticClass: "options minimal product-layout-img",
+              attrs: { name: "secondoptions", required: "", autofocus: "" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.secondoption = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
+            [
+              _c("option", { staticClass: "reset", attrs: { value: "" } }, [
+                _vm._v("Choose")
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.secondoptions, function(secondoption) {
+                return _c("option", {
+                  staticClass: "options",
+                  attrs: { name: "secondoption" },
+                  domProps: {
+                    value: secondoption.name,
+                    textContent: _vm._s(secondoption.name)
+                  }
+                })
+              })
+            ],
+            2
+          )
+        : _vm._e()
+    ]),
     _vm._v(" "),
     _c("input", {
       staticClass: "btn btn-success",
@@ -51536,6 +51604,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['items', 'total'],
@@ -51616,9 +51685,19 @@ var render = function() {
                   _vm._v(" "),
                   item.options
                     ? _c("td", [
-                        _c("p", { staticClass: "text-primary" }, [
-                          _c("strong", [_vm._v(_vm._s(item.options[0]))])
-                        ])
+                        item.options[1]
+                          ? _c("p", { staticClass: "text-primary" }, [
+                              _c("strong", [
+                                _vm._v(
+                                  _vm._s(item.options[0]) +
+                                    " , " +
+                                    _vm._s(item.options[1])
+                                )
+                              ])
+                            ])
+                          : _c("p", { staticClass: "text-primary" }, [
+                              _c("strong", [_vm._v(_vm._s(item.options[0]))])
+                            ])
                       ])
                     : _vm._e(),
                   _vm._v(" "),

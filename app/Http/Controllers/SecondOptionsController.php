@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Option;
-use App\OptionGroup;
+use App\SecondOption;
+use App\SecondOptionGroup;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class OptionsController extends Controller
+class SecondOptionsController extends Controller
 {
     public function index()
     {
-        $optionGroups = OptionGroup::all();
-        $options = Option::all();
-        $method = 'add-options';
+        $optionGroups = SecondOptionGroup::all();
+        $options = SecondOption::all();
+        $method = 'add-second-options';
 
         return view('layouts.addOptions', compact('optionGroups', 'options', 'method'));
     }
@@ -31,9 +30,9 @@ class OptionsController extends Controller
         }
 
         try {
-            Option::create([
+            SecondOption::create([
                 'name' => request('name'),
-                'option_group_id' => request('option_group_id')
+                'second_option_group_id' => request('option_group_id')
             ]);
 
         } catch (\Exception $e) {

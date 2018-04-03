@@ -4,15 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Option extends Model
+class SecondOption extends Model
 {
     protected $fillable = [
-        'option_group_id', 'name'
+        'second_option_group_id', 'name'
     ];
 
     public function optionGroup()
     {
-        return $this->belongsTo(OptionGroup::class, 'option_group_id');
+        return $this->belongsTo(SecondOptionGroup::class, 'second_option_group_id');
     }
 
     public function products()

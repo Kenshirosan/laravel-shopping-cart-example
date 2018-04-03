@@ -5,11 +5,9 @@
 @endsection
 
 @section('content')
-    <form class="form-horizontal" method="POST" action="/add-options" enctype="multipart/form-data">
+    <form class="form-horizontal" method="POST" action="{{ $method }}">
         @include('includes.error')
         {{ csrf_field() }}
-
-
         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
             <label for="name" class="col-md-4 control-label">Option Name</label>
             <div class="col-md-6">
@@ -45,6 +43,7 @@
         <h2 class="text-info">Options available :</h2>
         @foreach($options as $option)
             <div class="col-md-4">
+                {{-- {{dd($option)}} --}}
                 <p> <span class="text-primary">Group {{ $option->optionGroup->name }}</span> : {{ $option->name }}</p>
             </div>
         @endforeach
