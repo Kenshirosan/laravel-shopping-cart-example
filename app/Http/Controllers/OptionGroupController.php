@@ -12,8 +12,9 @@ class OptionGroupController extends Controller
     {
         $optionGroups = OptionGroup::all();
         $method = '/add-option-group';
+        $deleteMethod = '/delete-option-group/';
 
-        return view('layouts.addOptionGroup', compact('optionGroups', 'method'));
+        return view('layouts.addOptionGroup', compact('optionGroups', 'method', 'deleteMethod'));
     }
 
     public function store(Request $request)
@@ -38,5 +39,14 @@ class OptionGroupController extends Controller
 
         return back()->with('success_message', 'Option Group added');
 
+    }
+
+    public function destroy($id)
+    {
+        $optionGroup = OptionGroup::where('id', $id)->firstOrFail();
+
+        $optionGroup->delete();
+
+        return back()->with('success_message', 'Option Group Deleted.');
     }
 }

@@ -12,6 +12,8 @@ Route::get('/', function () {
     return redirect('shop');
 })->name('shop');
 
+Route::get('/page-infos', 'FrontPageController@index');
+
 Route::get('/home', function () {
     return redirect('shop');
 })->name('shop');
@@ -39,7 +41,6 @@ Route::get('/cart', 'CartController@index');
 Route::post('/cart', 'CartController@store');
 Route::get('/cartcontent', 'CartController@index');
 Route::delete('/emptyCart', 'CartController@emptyCart');
-
 // Holiday menus or specials..
 Route::get('holidays-special', 'HolidaySpecialController@index');
 
@@ -101,10 +102,12 @@ Route::middleware(['auth', 'must-be-confirmed', 'employee', 'admin'])->group(fun
     Route::delete('coupons/{id}/delete', 'CouponController@destroy');
     Route::get('add-option-group', 'OptionGroupController@index');
     Route::post('add-option-group', 'OptionGroupController@store');
+    Route::delete('delete-option-group/{option}', 'OptionGroupController@destroy');
     Route::get('add-options', 'OptionsController@index');
     Route::post('add-options', 'OptionsController@store');
     Route::get('add-second-option-group', 'SecondOptionGroupController@index');
     Route::post('add-second-option-group', 'SecondOptionGroupController@store');
+    Route::delete('delete-second-option-group/{option}', 'SecondOptionGroupController@destroy');
     Route::get('add-second-options', 'SecondOptionsController@index');
     Route::post('add-second-options', 'SecondOptionsController@store');
     Route::get('add-category', 'CategoriesController@create');
@@ -117,6 +120,8 @@ Route::middleware(['auth', 'must-be-confirmed', 'employee', 'admin'])->group(fun
     Route::get('/sales', 'SalesController@index');
     Route::post('/sales', 'SalesController@store');
     Route::delete('/delete-sales/{saleId}', 'SalesController@destroy');
+    Route::get('/front-page-title', 'FrontPageController@index');
+    Route::post('/front-page-title', 'FrontPageController@store');
 });
 
 

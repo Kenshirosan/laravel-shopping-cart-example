@@ -118,6 +118,13 @@ return [
             'can' => 'see-admin-menu'
         ],
         [
+            'text' => 'Add custom title and image',
+            'url'  => '/front-page-title',
+            'icon' => 'info-circle',
+            'icon_color' => 'primary',
+            'can' => 'see-admin-menu'
+        ],
+        [
             'text' => 'Create a Sale',
             'url'  => '/sales',
             'icon' => 'dollar',

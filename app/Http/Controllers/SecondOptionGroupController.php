@@ -11,8 +11,9 @@ class SecondOptionGroupController extends Controller
     {
         $optionGroups = SecondOptionGroup::all();
         $method = '/add-second-option-group';
+        $deleteMethod = '/delete-second-option-group/';
 
-        return view('layouts.addOptionGroup', compact('optionGroups', 'method'));
+        return view('layouts.addOptionGroup', compact('optionGroups', 'method', 'deleteMethod'));
     }
 
     public function store(Request $request)
@@ -36,6 +37,14 @@ class SecondOptionGroupController extends Controller
         }
 
         return back()->with('success_message', 'Option Group added');
+    }
 
+    public function destroy($id)
+    {
+        $optionGroup = SecondOptionGroup::where('id', $id)->firstOrFail();
+
+        $optionGroup->delete();
+
+        return back()->with('success_message', 'Option Group Deleted.');
     }
 }

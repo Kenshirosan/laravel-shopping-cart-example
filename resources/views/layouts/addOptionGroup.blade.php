@@ -34,6 +34,11 @@
             <h2 class="text-info">Groups available :</h2>
             @foreach($optionGroups as $optionGroup)
                 <p>{{ $optionGroup->name }}</p>
+                <form action="{{ $deleteMethod . $optionGroup->id }}" method="POST">
+                    {{ csrf_field() }}
+                    {{ method_field('DELETE') }}
+                    <button type="submit" class="btn btn-xs btn-danger">Delete</button>
+                </form>
             @endforeach
         </div>
     </div>

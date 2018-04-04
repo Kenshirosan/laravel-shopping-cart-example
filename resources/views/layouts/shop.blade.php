@@ -11,8 +11,8 @@
 
     <section class="shopping">
         <div class="jumbotron text-center clearfix text-white">
-            <h2>{{ config('app.name') }}</h2>
-            <p>Place your order !</p>
+            <h2 class="custom-title">{{ config('app.name') }}</h2>
+            <p class="custom-subtitle">Place your order !</p>
         </div>
         @foreach ($categories as $category)
             @if( ! $category->products->isEmpty())
@@ -37,4 +37,8 @@
 
 @section('delete-product-script')
     @include('javascript.confirmProductDeletion')
+@endsection
+
+@section('title-script')
+    @include('javascript.title-script')
 @endsection

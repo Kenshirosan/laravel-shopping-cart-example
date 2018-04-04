@@ -52,3 +52,7 @@ window.Echo = new Echo({
     cluster: 'eu',
     encrypted: true
 });
+
+// window.ucfirst = function (string) {
+//     return string.charAt(0).toUpperCase() + name.substring(1);
+// }
