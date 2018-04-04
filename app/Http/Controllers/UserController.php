@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Order;
 use \Cart as Cart;
+use App\Promocode;
 use App\Mail\Welcome;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

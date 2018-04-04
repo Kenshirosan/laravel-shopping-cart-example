@@ -185,6 +185,7 @@ class PaymentController extends Controller
                 \Promocodes::apply($code);
 
                 \Promocodes::disable($code);
+                \Promocodes::clearRedundant();
             }
         }
 
