@@ -6,6 +6,7 @@
 
 @section('content')
     <div class="container">
+        {{-- {{ dd($frontPageInfos) }} --}}
         <div class="row">
             <div class="panel-body">
                 <form class="form-horizontal" method="POST" action="/front-page-title" enctype="multipart/form-data">
@@ -26,8 +27,8 @@
                                 <div class="col-md-12">
                                     <strong>Title:</strong>
                                     <input type="text" name="title" class="form-control"
-                                        value="{{ $frontPageInfos->title }}"
-                                        placeholder="{{ $frontPageInfos->title }}"
+                                        value="{{ $frontPageInfos ? $frontPageInfos->title : '' }}"
+                                        placeholder="{{ $frontPageInfos ? $frontPageInfos->title  : 'Enter a title'}}"
                                         required/>
                                 </div>
                                 @if ($errors->has('title'))
@@ -41,8 +42,8 @@
                                 <div class="col-md-12">
                                     <strong>Subtitle</strong>
                                     <input type="text" name="subtitle" class="form-control"
-                                        value="{{ $frontPageInfos->subtitle }}"
-                                        placeholder="{{ $frontPageInfos->subtitle }}"
+                                        value="{{ $frontPageInfos ? $frontPageInfos->subtitle : '' }}"
+                                        placeholder="{{ $frontPageInfos ? $frontPageInfos->subtitle : 'Enter a subtitle'}}"
                                         required/>
                                 </div>
                                 @if ($errors->has('subtitle'))
@@ -54,13 +55,11 @@
 
 
                            {{--  IMAGE --}}
-                            <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
+                             <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
                                 <label for="image" class="col-md-4 control-label">Image</label>
                                 <div class="col-md-6">
                                     <input id="image" type="file" accept="image/png, image/jpg"  class="form-control"
                                         name="image"
-                                        value="{{ $frontPageInfos->image }}"
-                                        placeholder="{{ $frontPageInfos->image }}"
                                         required>
                                     @if ($errors->has('image'))
                                         <span class="help-block">
@@ -74,8 +73,8 @@
                                 <label for="color" class="col-md-4 control-label">Text Color</label>
                                 <div class="col-md-6">
                                     <input id="color" type="color" class="form-control" name="color"
-                                        value="{{ $frontPageInfos->color }}"
-                                        placeholder="{{ $frontPageInfos->color}}"
+                                        value="{{ $frontPageInfos ?  $frontPageInfos->color : '' }}"
+                                        placeholder="{{ $frontPageInfos ?  $frontPageInfos->color : 'Pick a color'}}"
                                         required>
                                     @if ($errors->has('color'))
                                         <span class="help-block">
@@ -90,8 +89,8 @@
                                 <div class="col-md-6">
                                     <input id="background_color" type="color" class="form-control"
                                         name="background_color"
-                                        value="{{ $frontPageInfos->background_color }}"
-                                        placeholder="{{ $frontPageInfos->background_color }}"
+                                        value="{{ $frontPageInfos ? $frontPageInfos->background_color : ''}}"
+                                        placeholder="{{ $frontPageInfos ?  $frontPageInfos->background_color : 'Pick a color' }}"
                                         required>
                                     @if ($errors->has('background_color'))
                                         <span class="help-block">
@@ -105,8 +104,8 @@
                                 <label for="well_color" class="col-md-4 control-label">Categories Background Color</label>
                                 <div class="col-md-6">
                                     <input id="well_color" type="color" class="form-control" name="well_color"
-                                        value="{{ $frontPageInfos->well_color }}"
-                                        placeholder="{{ $frontPageInfos->well_color }}"
+                                        value="{{ $frontPageInfos ?  $frontPageInfos->well_color : ''}}"
+                                        placeholder="{{ $frontPageInfos ?  $frontPageInfos->well_color : 'Pick a color' }}"
                                         required>
                                     @if ($errors->has('well_color'))
                                         <span class="help-block">
@@ -122,8 +121,8 @@
                                 <div class="col-md-6">
                                     <input id="categories_title_color" type="color" class="form-control"
                                         name="categories_title_color"
-                                        value="{{ $frontPageInfos->categories_title_color }}"
-                                        placeholder="{{ $frontPageInfos->categories_title_color }}"
+                                        value="{{ $frontPageInfos ? $frontPageInfos->categories_title_color : ''}}"
+                                        placeholder="{{ $frontPageInfos ? $frontPageInfos->categories_title_color : 'Pick a color'}}"
                                         required>
                                     @if ($errors->has('categories_title_color'))
                                         <span class="help-block">

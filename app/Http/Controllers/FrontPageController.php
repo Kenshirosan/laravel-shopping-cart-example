@@ -28,8 +28,7 @@ class FrontPageController extends Controller
     		$this->validateRequest();
 
     		try {
-	    		$file = $frontPageInfo['image'];
-	        	Storage::disk('custom')->delete($file);
+	        	Storage::disk('custom')->delete($frontPageInfo['image']);
     		} catch (\Exception $e) {
     			$e->getMessage();
     		}
@@ -54,7 +53,7 @@ class FrontPageController extends Controller
     	return request()->validate([
     		'title' => 'required|string',
     		'subtitle' => 'required|string',
-    		'image' => 'required|image|mimes:jpg,jpeg,png,bmp',
+    		'image' => 'nullable|image|mimes:jpg,jpeg,png,bmp',
             'color' => 'required|string',
             'background_color' => 'required|string',
             'well_color' => 'required|string',

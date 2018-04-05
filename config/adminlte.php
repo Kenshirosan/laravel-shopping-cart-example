@@ -118,7 +118,7 @@ return [
             'can' => 'see-admin-menu'
         ],
         [
-            'text' => 'Add custom title and image',
+            'text' => 'Add custom title/colors/image',
             'url'  => '/front-page-title',
             'icon' => 'info-circle',
             'icon_color' => 'primary',
