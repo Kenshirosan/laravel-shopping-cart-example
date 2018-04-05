@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class FrontPage extends Model
 {
     protected $fillable = [
-    	'title', 'subtitle', 'image'
+    	'title', 'subtitle',
+    	'image', 'color',
+    	'background_color', 'well_color',
+    	'categories_title_color'
     ];
 }

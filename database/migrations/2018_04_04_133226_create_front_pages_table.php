@@ -18,6 +18,8 @@ class CreateFrontPagesTable extends Migration
             $table->string('title');
             $table->string('subtitle');
             $table->string('image');
+            $table->string('color');
+            $table->string('background_color');
             $table->timestamps();
         });
     }

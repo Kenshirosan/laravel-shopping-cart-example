@@ -54,7 +54,11 @@ class FrontPageController extends Controller
     	return request()->validate([
     		'title' => 'required|string',
     		'subtitle' => 'required|string',
-    		'image' => 'required|image|mimes:jpg,jpeg,png,bmp'
+    		'image' => 'required|image|mimes:jpg,jpeg,png,bmp',
+            'color' => 'required|string',
+            'background_color' => 'required|string',
+            'well_color' => 'required|string',
+            'categories_title_color' => 'required|string'
     	]);
     }
 
@@ -70,6 +74,10 @@ class FrontPageController extends Controller
         $infos->title = $request['title'];
         $infos->subtitle = $request['subtitle'];
         $infos->image = $path;
+        $infos->color = $request['color'];
+        $infos->background_color = $request['background_color'];
+        $infos->well_color = $request['well_color'];
+        $infos->categories_title_color = $request['categories_title_color'];
         return $infos->save();
     }
 }
