@@ -67,7 +67,3 @@
     </ul>
 </div>
 @endsection
-
-@section('listenToServer')
-    @include('javascript.listen')
-@endsection

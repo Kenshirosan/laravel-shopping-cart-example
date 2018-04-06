@@ -47,6 +47,5 @@
 @endif
 
 @yield('adminlte_js')
-@yield('listenToServer')
 </body>
 </html>
