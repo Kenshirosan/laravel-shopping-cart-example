@@ -8447,6 +8447,14 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+.custom-title {
+  font-size: 4em;
+}
+
+.custom-subtitle {
+  font-size: 3em;
+}
+
 #logout-form {
   display: none;
 }
@@ -8469,6 +8477,10 @@ body {
 
 .product-layout-img {
   margin-top: 10px;
+}
+
+.mb-100 {
+  margin-bottom: 100px;
 }
 
 .lity-img {

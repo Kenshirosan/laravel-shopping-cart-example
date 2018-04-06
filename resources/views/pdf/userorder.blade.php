@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-<meta http-equiv="refresh" content="30" >
+{{-- <meta http-equiv="refresh" content="30" > --}}
 
 @section('title')
     Customer's order
@@ -13,7 +13,7 @@
             <h2 class="btn btn-lg btn-default pull-right"><a href="/calendar">Calendar</a></h2>
             <h1 class="text-info text-center">Today's Orders</h1>
         </div>
-        <div style="margin-bottom: 100px;"></div>
+        <div class="mb-100"></div>
     </div>
         <ul class=list-group>
         @if(!$orders->isEmpty())
@@ -66,4 +66,8 @@
             @endif
     </ul>
 </div>
+@endsection
+
+@section('listenToServer')
+    @include('javascript.listen')
 @endsection

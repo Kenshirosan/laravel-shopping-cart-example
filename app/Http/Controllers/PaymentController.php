@@ -190,6 +190,8 @@ class PaymentController extends Controller
         }
 
         // event(new UserOrdered($order)); // event for queues?? Maybe if this thing scale..
+        $this->tellJavascriptSomethingHappened();
+
         \Mail::to( auth()->user()->email )->send(new Thankyou($order));
     }
 
@@ -203,4 +205,26 @@ class PaymentController extends Controller
             return redirect()->back()->with(['error_message' => 'Page not found!']);
         }
     }
+
+    /**
+    * Server sent event
+    *
+    * Gives an alert on the admin side
+    */
+    public function tellJavascriptSomethingHappened()
+    {
+        $response = new \Symfony\Component\HttpFoundation\StreamedResponse(function() {
+
+            echo "data: A new order was sent\n\n";
+            flush();
+            ob_flush();
+            $response->headers->set('Content-Type', 'text/event-stream');
+            $response->headers->set('Cache-Control', 'no-cache');
+
+            return $response;
+        });
+    }
+        // header('Content-Type: text/event-stream');
+
+        // return flush();
 }

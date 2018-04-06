@@ -1,13 +1,5 @@
 <?php
 
-// use Illuminate\Http\Request;
-
-// Route::get('/testing', function(Request $request){
-//     $ip = "";
-//     dump(geoip_country_name_by_name ($ip));
-//     return;
-// });
-
 Route::get('/', function () {
     return redirect('shop');
 })->name('shop');
@@ -122,7 +114,9 @@ Route::middleware(['auth', 'must-be-confirmed', 'employee', 'admin'])->group(fun
     Route::delete('/delete-sales/{saleId}', 'SalesController@destroy');
     Route::get('/front-page-title', 'FrontPageController@index');
     Route::post('/front-page-title', 'FrontPageController@store');
+
 });
+Route::get('/test-server-events', 'PaymentController@tellJavascriptSomethingHappened');
 
 
 // WISHLIST ROUTES(took it away from views for now.. commented out the html in templates)

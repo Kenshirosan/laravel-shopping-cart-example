@@ -20174,10 +20174,6 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
     encrypted: true
 });
 
-// window.ucfirst = function (string) {
-//     return string.charAt(0).toUpperCase() + name.substring(1);
-// }
-
 /***/ }),
 /* 151 */
 /***/ (function(module, exports, __webpack_require__) {
