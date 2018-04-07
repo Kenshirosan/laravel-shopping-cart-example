@@ -14,3 +14,11 @@
 body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+
+.thumbnail {
+	transition: transform 0.4s;
+}
+
+.thumbnail:hover {
+	transform: scale(1.1, 1.1);
+}

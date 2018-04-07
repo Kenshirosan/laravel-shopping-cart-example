@@ -51666,7 +51666,7 @@ var render = function() {
     [
       _vm._m(0),
       _vm._v(" "),
-      _c("div", { staticClass: "spacer" }),
+      _c("div", { staticClass: "mb-100" }),
       _vm._v(" "),
       _c("h1", [_vm._v("Your Cart")]),
       _vm._v(" "),
@@ -51731,7 +51731,7 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "spacer" }),
+      _c("div", { staticClass: "mb-100" }),
       _vm._v(" "),
       _c(
         "button",
@@ -51765,7 +51765,7 @@ var render = function() {
         })
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "spacer" }),
+      _c("div", { staticClass: "mb-100" }),
       _vm._v(" "),
       _vm._m(2)
     ]
