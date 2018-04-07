@@ -1,4 +1,5 @@
 <header>
+    <a href="#" id="back-to-top" title="Back to top"><span></span>&uarr;</a>
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
             <div class="navbar-header">

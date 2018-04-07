@@ -94,11 +94,12 @@ class CartController extends Controller
             ]);
 
             Cart::update($id, $request->quantity);
-            session()->flash('flash', 'Quantity was updated successfully!');
 
             if($request->expectsJson()) {
                 return response([], 200);
             }
+
+            session()->flash('flash', 'Quantity was updated successfully!');
             return redirect('/cart');
 
         } catch(Exception $e) {

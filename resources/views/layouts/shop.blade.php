@@ -27,10 +27,6 @@
                 </div>
             @endif
         @endforeach
-
-        <div class="container text-center">
-            <a href="#top" class="btn btn-info">Back to top</a>
-        </div>
     </section>
 
 @endsection

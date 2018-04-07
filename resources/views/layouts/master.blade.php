@@ -42,6 +42,7 @@
         {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> ?Why did I put this already ?? hhmmmmmm--}}
         <script src="/js/app.js"></script>
         <script src="/js/smoothscroll.js" charset="utf-8"></script>
+        <script src="/js/back-to-top.js"></script>
         @yield('extra-js')
         @yield('dropzone.script')
         @yield('lity-js')
