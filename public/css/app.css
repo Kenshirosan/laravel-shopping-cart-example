@@ -8480,8 +8480,8 @@ body {
 }
 
 .thumbnail {
-  -webkit-box-shadow: 5px 5px 5px black;
-          box-shadow: 5px 5px 5px black;
+  -webkit-box-shadow: 5px 5px 5px #ccf2fc;
+          box-shadow: 5px 5px 5px #ccf2fc;
 }
 
 .custom-title {
