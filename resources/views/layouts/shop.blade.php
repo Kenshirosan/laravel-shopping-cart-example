@@ -19,9 +19,7 @@
             <p class="custom-subtitle">Place your order !</p>
         </div>
         @foreach ($categories as $category)
-            @if($category->products->isEmpty())
-                <h1 class="text-info">Construction Site, Please check back later.</h1>
-            @else
+            @if(! $category->products->isEmpty())
                 <div class="row">
                     <div class="well text-center">
                         <h1>{{ $category->name }}</h1>

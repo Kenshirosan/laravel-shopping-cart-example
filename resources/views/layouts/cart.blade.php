@@ -90,7 +90,7 @@
             </tr>
         </tbody>
     </table>
-    <div class="spacer"></div>
+    <div class="mb-100"></div>
         <a href="{{ url('/shop') }}" class="btn btn-primary btn-lg">Continue Shopping</a> &nbsp;
         <a href="/checkout" class="btn btn-success btn-lg">Proceed to Checkout</a>
         <div style="float:right">
@@ -104,7 +104,7 @@
         <h3>You have no items in your shopping cart</h3>
         <a href="{{ url('/shop') }}" class="btn btn-primary btn-lg">Continue Shopping</a>
     @endif
-    <div class="spacer"></div>
+    <div class="mb-100"></div>
 @endsection
 
 @section('extra-js')

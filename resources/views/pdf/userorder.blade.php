@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-{{-- <meta http-equiv="refresh" content="30" > --}}
+<meta http-equiv="refresh" content="30" >
 
 @section('title')
     Customer's order

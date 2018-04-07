@@ -1,6 +1,5 @@
 <div class="col-md-4">
     <div class="thumbnail">
-        {{-- {{ dd($product) }} --}}
         @if($product->is_on_sale)
             <div class="sales">
                 <h2>{{ $product->sales->percentage  * 100 }}% Off!

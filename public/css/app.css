@@ -8444,10 +8444,6 @@ select.minimal:focus {
   color: white;
 }
 
-body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
 #back-to-top {
   position: fixed;
   bottom: 40px;
@@ -8496,35 +8492,6 @@ body {
   display: none;
 }
 
-.security-infos {
-  text-decoration: underline;
-}
-
-.text-white {
-  color: white;
-}
-
-.pl-10 {
-  padding-left: 10px;
-}
-
-.pr-10 {
-  padding-right: 10px;
-}
-
-.product-layout-img {
-  margin-top: 10px;
-}
-
-.mb-100 {
-  margin-bottom: 100px;
-}
-
-.lity-img {
-  cursor: -webkit-zoom-in;
-  cursor: zoom-in;
-}
-
 .alert {
   position: fixed;
   right: 25px;
@@ -8535,10 +8502,6 @@ body {
   background-image: url("/img/rib_eye.jpg");
   background-repeat: no-repeat;
   background-position: center;
-}
-
-.spacer {
-  margin-bottom: 100px;
 }
 
 .cart-image {
@@ -8582,14 +8545,6 @@ input:valid + span:after {
   padding-left: 5px;
 }
 
-.pr-10 {
-  padding-right: 10px;
-}
-
-.secure-payment-info {
-  text-decoration: underline;
-}
-
 .sales {
   width: 100%;
 }
@@ -8614,5 +8569,46 @@ input:valid + span:after {
   -webkit-box-shadow: 0 0 .3em 1px #333;
           box-shadow: 0 0 .3em 1px #333;
   color: #dedede;
+}
+
+.security-infos {
+  text-decoration: underline;
+}
+
+.text-white {
+  color: white;
+}
+
+.pl-10 {
+  padding-left: 10px;
+}
+
+.pr-10 {
+  padding-right: 10px;
+}
+
+.mb-100 {
+  margin-bottom: 100px;
+}
+
+.product-layout-img {
+  margin-top: 10px;
+}
+
+.lity-img {
+  cursor: -webkit-zoom-in;
+  cursor: zoom-in;
+}
+
+.spacer {
+  margin-bottom: 100px;
+}
+
+.secure-payment-info {
+  text-decoration: underline;
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 

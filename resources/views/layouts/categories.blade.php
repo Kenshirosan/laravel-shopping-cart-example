@@ -36,6 +36,13 @@
         <h1>Categories Available :</h1>
         @foreach($categories as $category)
             <p class="col-md-4">{{ $category->name }} : <span class="text-info">{{ $category->name }}</span></p>
+            <form action="/delete-category/{{ $category->id }}" class="form-horizontal" method="POST">
+                {{ csrf_field() }}
+                {{ method_field('DELETE') }}
+                <div class="form-group">
+                    <input type=submit value='Delete' class="btn btn-danger btn-xs">
+                </div>
+            </form>
         @endforeach
     @else
         <h1>No Categories created</h1>

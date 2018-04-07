@@ -1,0 +1,214 @@
+select {
+  /* make arrow and background */
+    background:
+        linear-gradient(45deg, transparent 50%, blue 50%),
+        linear-gradient(135deg, blue 50%, transparent 50%),
+        linear-gradient(to right, skyblue, skyblue);
+
+    background-position:
+        calc(100% - 21px) calc(1em + 2px),
+        calc(100% - 16px) calc(1em + 2px),
+        100% 0;
+    background-size:
+        5px 5px,
+        5px 5px,
+        2.5em 2.5em;
+        background-repeat: no-repeat;
+        background-color: white;
+  /* styling and reset */
+
+    border: thin solid blue;
+    font: 300 1em/100% "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.5em;
+    padding: 0.5em 1.5em 0.5em 1em;
+
+  /* reset */
+
+    border-radius: 0;
+    margin: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+}
+select.minimal {
+    background-image:
+        linear-gradient(45deg, transparent 50%, gray 50%),
+        linear-gradient(135deg, gray 50%, transparent 50%),
+        linear-gradient(to right, #ccc, #ccc);
+    background-position:
+        calc(100% - 20px) calc(1em + 2px),
+        calc(100% - 15px) calc(1em + 2px),
+        calc(100% - 2.5em) 0.5em;
+    background-size:
+        5px 5px,
+        5px 5px,
+        1px 1.5em;
+    background-repeat: no-repeat;
+}
+
+select.minimal:focus {
+    background-image:
+        linear-gradient(45deg, green 50%, transparent 50%),
+        linear-gradient(135deg, transparent 50%, green 50%),
+        linear-gradient(to right, #ccc, #ccc);
+    background-position:
+        calc(100% - 15px) 1em,
+        calc(100% - 20px) 1em,
+        calc(100% - 2.5em) 0.5em;
+    background-size:
+        5px 5px,
+        5px 5px,
+        1px 1.5em;
+    background-repeat: no-repeat;
+    border-color: green;
+    outline: 0;
+}
+
+.modal {
+    color: white;
+}
+
+
+#back-to-top {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 9999;
+    width: 32px;
+    height: 32px;
+    text-align: center;
+    line-height: 30px;
+    background: orange;
+    color: blue;
+    cursor: pointer;
+    border: 0;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: opacity 0.2s ease-out;
+    opacity: 0;
+}
+#back-to-top:hover {
+    transition: 0.3s;
+    background: black;
+    color: white;
+}
+#back-to-top.show {
+    opacity: 1;
+}
+
+.thumbnail {
+    box-shadow: 5px 5px 5px #ccf2fc;
+}
+
+.custom-title {
+    font-size: 4em;
+}
+
+.custom-subtitle {
+    font-size: 3em;
+}
+
+#logout-form {
+    display: none;
+}
+
+.alert {
+    position: fixed;
+    right: 25px;
+    top: 50px;
+}
+
+.jumbotron{
+    background-image: url('/img/rib_eye.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.cart-image {
+    width: 100px;
+}
+
+.table>tbody>tr>td {
+    vertical-align: middle;
+}
+
+.side-by-side {
+    display: inline-block;
+}
+
+footer {
+    background-color: #f5f5f5;
+    padding: 20px 0;
+}
+
+input[type="number"] {
+    width: 100px;
+}
+
+input + span {
+    padding-right: 30px;
+}
+
+input:invalid+span:after {
+    position: absolute;
+    content: '✖';
+    font-size: 1.5em;
+    color: red;
+    padding-left: 5px;
+}
+
+input:valid+span:after {
+    position: absolute;
+    content: '✓';
+    font-size: 1.5em;
+    color: green;
+    padding-left: 5px;
+}
+
+.sales {
+    width: 100%;
+}
+
+.sales span {
+    font-size: 0.5em;
+}
+
+.sales small {
+    color: white;
+}
+
+.sales h2 {
+    background: #29A6CF;
+    line-height: 2em;
+    font-size: 2.5em;
+    font-weight: normal;
+    text-align: center;
+    position: relative;
+    width: 100%;
+    margin-top: -.3em;
+    box-shadow: 0 0 .3em 1px #333;
+    color: #dedede;
+}
+
+// .sales h2:before{
+//     content: "";
+//     width: 0;
+//     height: 0;
+//     border-top: .35em solid #2081A1;
+//     border-left: .35em solid transparent;
+//     position: absolute;
+//     bottom: -.35em;
+//     left: 0;
+// }
+// .sales h2:after{
+//     content: "";
+//     width: 0;
+//     height: 0;
+//     border-top: .35em solid #2081A1;
+//     border-right: .35em solid transparent;
+//     position: absolute;
+//     bottom: -.35em;
+//     right: 0;
+// }

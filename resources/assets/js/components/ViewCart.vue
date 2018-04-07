@@ -3,7 +3,7 @@
     <div class="modal-header">
         <button type="button" class="close btn-lg" data-dismiss="modal">&times;</button>
     </div>
-    <div class="spacer"></div>
+    <div class="mb-100"></div>
     <h1>Your Cart</h1>
     <hr>
 
@@ -41,13 +41,13 @@
             </tbody>
         </table>
     </div>
-    <div class="spacer"></div>
+    <div class="mb-100"></div>
         <button type="button" class="btn btn-primary btn-lg" data-dismiss="modal">Continue Shopping</button>
         <a href="/cart" class="btn btn-success btn-lg">Go to Cart</a>
         <div style="float:right">
             <input type="submit" @click.prevent="emptycart" data-dismiss="modal" class="btn btn-danger btn-lg" value="Empty Cart">
         </div>
-    <div class="spacer"></div>
+    <div class="mb-100"></div>
 
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
