@@ -8498,12 +8498,6 @@ select.minimal:focus {
   top: 50px;
 }
 
-.jumbotron {
-  background-image: url("/img/rib_eye.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
 .cart-image {
   width: 100px;
 }
@@ -8612,14 +8606,24 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-.thumbnail {
+.jumbotron {
+  background: black;
+  background: -webkit-gradient(left top, right top, color-stop(0%, black), color-stop(100%, white));
+  background: -webkit-gradient(linear, left top, right top, from(black), to(white));
+  background: linear-gradient(to right, black 0%, white 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#ffffff', GradientType=1 );
+}
+
+.thumbnail,
+.jumbotron {
   -webkit-transition: -webkit-transform 0.4s;
   transition: -webkit-transform 0.4s;
   transition: transform 0.4s;
   transition: transform 0.4s, -webkit-transform 0.4s;
 }
 
-.thumbnail:hover {
+.thumbnail:hover,
+.jumbotron:hover {
   -webkit-transform: scale(1.1, 1.1);
           transform: scale(1.1, 1.1);
 }

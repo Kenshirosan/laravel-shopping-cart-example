@@ -6,7 +6,7 @@
         let wells = Array.from(document.querySelectorAll('.well'));
 
         axios.get('/page-infos').then(response => {
-            jumbotron.style.backgroundImage = `url(${response.data.image})`;
+            jumbotron.style.background = `url(${response.data.image})`;
             title.textContent = response.data.title;
             title.style.color = response.data.color;
             subtitle.textContent = response.data.subtitle;
