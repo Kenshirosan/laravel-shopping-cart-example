@@ -88,6 +88,8 @@ Route::middleware(['auth', 'must-be-confirmed', 'employee', 'admin'])->group(fun
     Route::get('/update/{slug}', 'ProductController@edit');
     Route::patch('/update/{slug}', 'ProductController@update');
     Route::delete('/delete/{slug}/product', 'ProductController@destroy');
+    Route::post('/eighty_six/{id}', 'EightySixController@store');
+    Route::delete('/delete/eighty_six/{id}', 'EightySixController@destroy');
     Route::get('create-coupon', 'CouponController@index');
     Route::post('create-coupon', 'CouponController@store');
     Route::post('/create-disposable-coupon', 'CouponController@storeCouponsForEveryone');

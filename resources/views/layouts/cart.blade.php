@@ -91,13 +91,13 @@
         </tbody>
     </table>
     <div class="mb-100"></div>
-        <a href="{{ url('/shop') }}" class="btn btn-primary btn-lg">Continue Shopping</a> &nbsp;
-        <a href="/checkout" class="btn btn-success btn-lg">Proceed to Checkout</a>
+        <a href="{{ url('/shop') }}" class="btn btn-primary btn-lg scale_when_hover">Continue Shopping</a> &nbsp;
+        <a href="/checkout" class="btn btn-success btn-lg scale_when_hover">Proceed to Checkout</a>
         <div style="float:right">
             <form action="{{ url('/emptyCart') }}" method="POST">
                 {{ csrf_field() }}
                 {{ method_field('DELETE') }}
-                <input type="submit" class="btn btn-danger btn-lg" value="Empty Cart">
+                <input type="submit" class="btn btn-danger btn-lg scale_when_hover" value="Empty Cart">
             </form>
         </div>
     @else

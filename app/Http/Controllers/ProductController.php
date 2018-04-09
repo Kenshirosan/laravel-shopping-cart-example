@@ -46,8 +46,12 @@ class ProductController extends Controller
         $categories = Category::all();
         $optionGroups = OptionGroup::all();
         $secondOptionGroups = SecondOptionGroup::all();
+        $action = $product->is_eighty_six() ? "/delete/eighty_six/$product->id" : "/eighty_six/$product->id";
+        $method = $product->is_eighty_six() ? 'DELETE' : 'POST';
 
-        return view('admin.updateProduct', compact('product', 'categories', 'optionGroups', 'secondOptionGroups'));
+        return view('admin.updateProduct', compact('product', 'categories',
+                                                    'optionGroups', 'secondOptionGroups',
+                                                    'method', 'action'));
     }
 
     public function update(Request $request, $slug)

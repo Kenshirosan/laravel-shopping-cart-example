@@ -6,6 +6,9 @@
 
 @section('content')
     <h3 class="text-center text-info product-layout-img">Update {{ $product->name }}</h3>
+    @if($product->is_eighty_six())
+         <h3 class="text-center text-info product-layout-img"><i class="fa fa-info-circle text-danger"></i> {{ $product->name }} is 86</h3>
+    @endif
     <form class="form-horizontal" method="POST" action="/update/{{ $product->slug }}" enctype="multipart/form-data">
     {{ csrf_field() }}
     {{ method_field('PATCH') }}
@@ -185,7 +188,34 @@
     <div class="form-group">
         <label for="submit" class="col-md-4 control-label"></label>
         <div class="col-md-6">
-            <input type=submit class="btn btn-info form-control" value='Update Product' class="btn btn-primary">
+            <input type=submit class="btn btn-info form-control" value="Update Product">
+        </div>
+    </div>
+</form>
+
+<div class="mb-100"></div>
+
+<form action="{{ $action }}" method="POST" class="form-horizontal">
+    {{ csrf_field() }}
+    @if($method == 'DELETE')
+        {{ method_field('DELETE') }}
+    @endif
+    <div class="form-group{{ $errors->has('eighty_six') ? ' has-error' : '' }}">
+        <label for="eighty_six" class="col-md-4 control-label"><strong class="text-danger">86 Product ?</strong></label>
+        <div class="col-md-6">
+            <input type="radio" name="eighty_six" value="0" checked> No<br>
+            <input type="radio" name="eighty_six" value="1"> Yes<br>
+            @if ($errors->has('name'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('eighty_six') }}</strong>
+                </span>
+            @endif
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="submit" class="col-md-4 control-label"></label>
+        <div class="col-md-6">
+            <input type=submit class="btn btn-danger form-control" value="86 Product">
         </div>
     </div>
 </form>

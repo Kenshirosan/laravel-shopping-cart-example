@@ -74,6 +74,18 @@ class Product extends Model
         return $this->is_on_sale();
     }
 
+    public function isHiddenProduct()
+    {
+        return $this->hasMany(Hideable::class);
+    }
+
+    public function is_eighty_six()
+    {
+        $attributes = ['product_id' => $this->id];
+
+        return $this->isHiddenProduct()->where($attributes)->exists();
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');

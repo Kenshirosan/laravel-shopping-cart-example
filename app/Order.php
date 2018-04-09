@@ -44,9 +44,8 @@ class Order extends Model
 
     public function isHidden()
     {
-        return Hideable::where('order_id', request('id'))->count();
+        return !! Hideable::where('order_id', request('id'))->count();
     }
-
 
     public function isHiddenOrder()
     {

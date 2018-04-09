@@ -41,7 +41,7 @@ class OrderProcessedController extends Controller
         }
 
         $this->validate($request, [
-            'id' => 'required|numeric'
+            'id' => 'required|numeric|exists:orders, id'
         ]);
 
         Hideable::create([

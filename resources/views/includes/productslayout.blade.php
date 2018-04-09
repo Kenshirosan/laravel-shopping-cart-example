@@ -28,21 +28,23 @@
     </div> <!-- end thumbnail -->
 
     <h3>${{ $product->price() }}</h3>
+    @if( $product->is_eighty_six() )
+        <p class="text-info">{{ $product->name }} is unavalaible at the moment.</p>
+    @else
+        <form action="{{ url('/cart') }}" method="POST" class="side-by-side" id="form">
+            {{ csrf_field() }}
 
-    <form action="{{ url('/cart') }}" method="POST" class="side-by-side" id="form">
-        {{ csrf_field() }}
-
-        <add-to-cart
-            :product="{{ $product }}"
-            @if( $product->group )
-                :options="{{ $product->options() }}"
-            @endif
-            @if( $product->secondGroup )
-                :secondoptions="{{ $product->secondOptions() }}"
-            @endif
-        >
-        </add-to-cart>
-    </form>
-
-    <div class="spacer"></div>
+            <add-to-cart
+                :product="{{ $product }}"
+                @if( $product->group )
+                    :options="{{ $product->options() }}"
+                @endif
+                @if( $product->secondGroup )
+                    :secondoptions="{{ $product->secondOptions() }}"
+                @endif
+            >
+            </add-to-cart>
+        </form>
+    @endif
+    <div class="mb-100"></div>
 </div> <!-- end col-md-3 -->
