@@ -20,7 +20,7 @@
                     ></option>
             </select>
         </div>
-        <input type="submit" @click.prevent="addtocart" class="btn btn-success" value="Add To Cart">
+        <input type="submit" @click.prevent="addtocart" class="btn btn-success scale_when_hover" value="Add To Cart">
     </div>
 </template>
 

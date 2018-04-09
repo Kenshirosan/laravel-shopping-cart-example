@@ -14,12 +14,17 @@
             </small>
         </div>
         <div class="panel-body">
-            <div class="container wrapper">
+             <div class="container wrapper">
+                {{-- <label class="radio-inline">
+                    <toggle v-model="checked" class="ml-30"></toggle>
+                </label> --}}
             <label class="radio-inline">
                 <input type="radio" name="order_type" value="Delivery" checked>Delivery
             </label>
             <label class="radio-inline">
                 <input type="radio" name="order_type" value="Pick-up">Pick-up
+            </label>
+            <label class="radio-inline">
             </label>
             </div>
             <div class="col-md-12">
@@ -101,3 +106,7 @@
     </div>
     </div>
 </div>
+
+@section('pickup-script')
+    @include('javascript.time')
+@endsection

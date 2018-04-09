@@ -7,9 +7,9 @@
 
         axios.get('/page-infos').then(response => {
             jumbotron.style.background = `url(${response.data.image})`;
-            title.textContent = response.data.title;
+            title.textContent = ucfirst(response.data.title);
             title.style.color = response.data.color;
-            subtitle.textContent = response.data.subtitle;
+            subtitle.textContent = ucfirst(response.data.subtitle);
             subtitle.style.color = response.data.color;
             document.body.style.backgroundColor = response.data.background_color;
             wells.forEach(well => {

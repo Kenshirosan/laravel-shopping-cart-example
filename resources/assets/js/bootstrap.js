@@ -42,6 +42,10 @@ window.cartisempty = function () {
     window.events.$emit('cartempty');
 };
 
+window.ucfirst = function(string) {
+    return string.charAt(0).toUpperCase() + string.substring(1);
+}
+
 // Optional real time order progress
 import Echo from 'laravel-echo'
 window.Pusher = require('pusher-js');

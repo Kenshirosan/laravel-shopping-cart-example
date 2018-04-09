@@ -30,6 +30,19 @@ body {
 	transition: transform 0.4s;
 }
 
-.thumbnail:hover, .jumbotron:hover {
+.jumbotron:hover {
 	transform: scale(1.1, 1.1);
+}
+
+.thumbnail, .scale_when_hover {
+	text-transform: uppercase;
+	box-shadow: 0px 17px 10px -10px rgba(0,0,0,0.4);
+	cursor: pointer;
+	transition: all ease-in-out 300ms;
+  }
+
+.thumbnail:hover, .scale_when_hover:hover {
+	box-shadow: 0px 37px 20px -20px rgba(0,0,0,0.2);
+	padding: 10px 20px;
+	transform: translate(0px, -10px) scale(1.2);
 }

@@ -80,8 +80,3 @@
     </div>
 </div>
 @endsection
-
-
-@section('pickup-script')
-    @include('javascript.time')
-@endsection

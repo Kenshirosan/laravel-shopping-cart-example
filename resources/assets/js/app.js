@@ -12,12 +12,13 @@ Vue.component('order-progress', require('./components/Progress.vue'));
 Vue.component('monthly-stats', require('./components/MonthlyStats.vue'));
 Vue.component('yearly-stats', require('./components/YearlyStats.vue'));
 Vue.component('analytics', require('./components/Analytics.vue'));
+Vue.component('toggle', require('./components/Toggle.vue'));
 
 
 const app = new Vue({
     el: '#app',
 
-    // data: {
-    //     selected: '',
-    // }
+    data: {
+        checked: true
+    }
 });
