@@ -15,7 +15,7 @@
         "pusher/pusher-php-server": "^3.0",
         "spatie/laravel-analytics": "^3.3",
         "stripe/stripe-php": "^5.1",
-        "zgabievi/promocodes": "1.1.*"
+        "zgabievi/promocodes": "1.0.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
