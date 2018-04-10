@@ -29,11 +29,10 @@
 
     <h3>${{ $product->price() }}</h3>
     @if( $product->is_eighty_six() )
-        <p class="text-info">{{ $product->name }} is unavalaible at the moment.</p>
+        <img src="/images/sold_out_stamp_cropped.jpg" alt="Product sold out !" class="img-responsive">
     @else
         <form action="{{ url('/cart') }}" method="POST" class="side-by-side" id="form">
             {{ csrf_field() }}
-
             <add-to-cart
                 :product="{{ $product }}"
                 @if( $product->group )

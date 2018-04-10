@@ -110,6 +110,8 @@ Route::middleware(['auth', 'must-be-confirmed', 'employee', 'admin'])->group(fun
     Route::get('/message/{id}', 'MessageController@show');
     Route::delete('/delete/{id}', 'MessageController@destroy');
     Route::get('/analytics', 'AnalyticsController@index');
+    Route::get('/create-invoice', 'InvoiceController@index');
+    Route::post('/create-invoice', 'InvoiceController@store');
     //ADD A BUNCH OF PICS ON PRODUCT VIEW
     Route::post('/shop/{slug}/{photo}','PhotosController@store');
     Route::get('/sales', 'SalesController@index');

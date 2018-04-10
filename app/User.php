@@ -57,6 +57,11 @@ class User extends Authenticatable
         return $this->hasMany(Order::class)->orderBy('created_at', 'desc');
     }
 
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
+    }
+
     public function pay(Order $order)
     {
         //unused for now (need  to figure out something for cart content..)

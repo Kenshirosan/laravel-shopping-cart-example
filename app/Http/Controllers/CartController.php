@@ -32,10 +32,6 @@ class CartController extends Controller
     */
     public function store(Request $request)
     {
-        if(auth()->check() && auth()->user()->isEmployee()){
-            return response('You are not allowed', 403);
-        }
-
         request()->validate([
             'id' => 'required|exists:products,id',
             'name' => 'required|string|exists:products,name',
@@ -57,7 +53,7 @@ class CartController extends Controller
             Cart::add($request->id, $request->name, 1, $request->price )->associate(Product::class);
             return response([], 200);
 
-        } elseif ( $request->option != null && $request->secondoption == null) {
+        } elseif ($request->option != null && $request->secondoption == null) {
             Cart::add($request->id, $request->name, 1, $request->price, [ $request->option ] )->associate(Product::class);
             return response([], 200);
 

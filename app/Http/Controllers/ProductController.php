@@ -11,6 +11,7 @@ use App\OptionGroup;
 use App\SecondOptionGroup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\StoreProductRequest;
 
 
 class ProductController extends Controller
@@ -21,15 +22,8 @@ class ProductController extends Controller
     * @param  \Illuminate\Http\Request  $request
     * @return \Illuminate\Http\Response
     */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
-        try{
-            $this->validateRequest($request);
-        }
-         catch (\Exception $e) {
-            return back()->with(['error_message' => $e->getMessage() ]);
-        }
-
         try{
             $this->createNewProduct($request);
         }
@@ -54,15 +48,8 @@ class ProductController extends Controller
                                                     'method', 'action'));
     }
 
-    public function update(Request $request, $slug)
+    public function update(StoreProductRequest $request, $slug)
     {
-        try{
-            $this->validateRequest($request);
-        }
-         catch (\Exception $e) {
-            return back()->with(['error_message' => $e->getMessage() ]);
-        }
-
         $product = Product::where('slug', $slug)->firstOrFail();
 
         if (! request('file')) {
@@ -90,21 +77,6 @@ class ProductController extends Controller
         ]);
 
         return back()->with("success_message", "Successfully Updated $product->name");
-    }
-
-    private function validateRequest(Request $request)
-    {
-        return $this->validate($request,[
-            'name' => 'required|string',
-            'holiday_special' => 'required|boolean',
-            'option_group_id' => 'nullable|numeric',
-            'second_option_group_id' => 'nullable|numeric',
-            'category_id' => 'required|numeric',
-            'slug' => 'required|string',
-            'description' => 'required|string',
-            'price' => 'required|numeric',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,bmp',
-        ]);
     }
 
     private function createNewProduct(Request $request)

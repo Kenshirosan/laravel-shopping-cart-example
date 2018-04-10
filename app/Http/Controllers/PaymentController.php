@@ -23,14 +23,11 @@ class PaymentController extends Controller
     */
     public function index()
     {
-        if(auth()->check() && auth()->user()->isEmployee()) {
-            Cart::destroy();
-            return redirect('/shop')->with('flash', "You are not allowed");
-        }
-
         $total = Cart::total();
         $discount = null;
         $code = null;
+        // $action = auth()->user()->isAdmin() ? '/create-invoice' : '';
+
         return view('layouts.payment_form', compact('total', 'discount', 'code'));
     }
 
@@ -52,7 +49,7 @@ class PaymentController extends Controller
         }
 
         if (Cart::total() < 1500) {
-            return back()->with(['warning_message' => 'You need to order at least $15 worth of food, Your total is $' . Cart::total() /100 ]);
+            return back()->with(['warning_message' => 'You need to order at least $15 worth in your cart, Your total is $' . Cart::total() /100 ]);
         }
 
         if (request('order_type') === 'Pick-up') {
@@ -190,7 +187,6 @@ class PaymentController extends Controller
         }
 
         // event(new UserOrdered($order)); // event for queues?? Maybe if this thing scale..
-        $this->tellJavascriptSomethingHappened($order);
 
         \Mail::to( auth()->user()->email )->send(new Thankyou($order));
     }

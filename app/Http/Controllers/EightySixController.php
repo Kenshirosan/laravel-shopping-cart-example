@@ -17,7 +17,7 @@ class EightySixController extends Controller
     	$product = Product::where('id', $id)->firstOrFail();
 
     	Hideable::create([
-    		'product_id' => request('id')
+    		'product_id' => $product->id
     	]);
 
 		return back()->with('success_message', "$product->name is 86");
