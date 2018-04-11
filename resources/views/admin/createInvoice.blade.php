@@ -1,79 +1,103 @@
-@extends('adminlte::page')
-
-@section('title')
-    Create An Invoice
-@endsection
-
-@section('content')
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Print Order</title>
+    <link rel="stylesheet" href="css/invoice.css">
+</head>
+<body>
     <div class="container">
-        <form action="/create-invoice" method="POST" class="form-horizontal">
-            {{ csrf_field() }}
-         <div class="form-group">
-                <div class="col-md-12">
-                    <h4>Shipping Address</h4>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-6 col-xs-12">
-                    <strong>First Name:</strong>
-                    <input type="text" name="name" class="form-control" value="{{ old('name') }}" />
-                </div>
-                <div class="span1"></div>
-                <div class="col-md-6 col-xs-12">
-                    <strong>Last Name:</strong>
-                    <input type="text" name="last_name" class="form-control" value="{{ old('last_name') }}" />
-                </div>
-            </div>
 
-            <div class="form-group">
-                <div class="col-md-12">
-                <p>
-                    <strong>Address: </strong>
-                </p>
-                    <input type="text" name="address" class="form-control" value=" {{ old('address') }} " />
-                </div>
-            </div>
+    <header class="invoice-header">
+        <h1>Invoice</h1>
+        <address contenteditable>
+            <p>Name</p>
+            <p>Addresse<br>Manhattan, NY 10031</p>
+            <p>(800) 555-1234</p>
+        </address>
+        <span>
+            <img alt="" src="/images/restopro.png"><input type="file" accept="image/*">
+        </span>
+    </header>
+    <article>
+        <h1>Recipient</h1>
+            <address contenteditable>
+                <p>Some Company<br>c/o Some Guy</p>
+            </address>
+        <table class="meta">
+            <tr>
+                <th><span contenteditable>Invoice #</span></th>
+                <td><span contenteditable>101138</span></td>
+            </tr>
+            <tr>
+                <th><span contenteditable>Date</span></th>
+                <td class="date"><span contenteditable></span></td>
+            </tr>
+            <tr>
+                <th><span contenteditable>Amount Due</span></th>
+                <td><span id="prefix" contenteditable>$</span><span>600.00</span></td>
+            </tr>
+        </table>
+        <table class="inventory">
+            <thead>
+                <tr>
+                    <th><span contenteditable>Item</span></th>
+                    <th><span contenteditable>Description</span></th>
+                    <th><span contenteditable>Rate</span></th>
+                    <th><span contenteditable>Quantity</span></th>
+                    <th><span contenteditable>Price</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a class="cut"></a><span contenteditable>Front End Consultation</span></td>
+                    <td><span contenteditable>Experience Review</span></td>
+                    <td><span data-prefix>$</span><span contenteditable>150.00</span></td>
+                    <td><span contenteditable>4</span></td>
+                    <td><span data-prefix>$</span><span>600.00</span></td>
+                </tr>
+            </tbody>
+        </table>
+        <a class="add">+</a>
+        <table class="balance">
+            <tr>
+                <th><span contenteditable>Total</span></th>
+                <td><span data-prefix>$</span><span>600.00</span></td>
+            </tr>
+            <tr>
+                <th><span contenteditable>Amount Paid</span></th>
+                <td><span data-prefix>$</span><span contenteditable>0.00</span></td>
+            </tr>
+            <tr>
+                <th><span contenteditable>Balance Due</span></th>
+                <td><span data-prefix>$</span><span>600.00</span></td>
+            </tr>
+        </table>
+    </article>
+    <aside>
+        <h1><span contenteditable>Additional Notes</span></h1>
+        <div contenteditable>
+            <p>A finance charge of 1.5% will be made on unpaid balances after 30 days.</p>
+        </div>
+    </aside>
+    <a href="#" class="btn btn-link">Pay</a>
+</div>
+<button class="btn btn-success">Print</button>
+<script src="/js/invoice.js"></script>
+<script>
+    (function() {
+        let date = new Date().toDateString();
+        let html = document.querySelector('.date');
 
-            <div class="form-group">
-                <div class="col-md-12"><strong>Address 2:</strong></div>
-                <div class="col-md-12">
-                    <input type="text" name="address2" class="form-control" value="{{  old('address2') }}" />
-                </div>
-            </div>
+        html.textContent = date;
 
-            <div class="form-group">
-                <div class="col-md-12"><strong>Zipcode:</strong></div>
-                <div class="col-md-12">
-                    <input type="number" class="form-control" name="zipcode">
-                </div>
-            </div>
+        document.querySelector('button').addEventListener('click', print);
 
-            <div class="form-group">
-                <div class="col-md-12"><strong>Phone Number:</strong></div>
-                <div class="col-md-12">
-                    <input type="tel" name="phone_number" class="form-control" value="{{ old('phone_number') }}" />
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-12"><strong>Email Address:</strong></div>
-                <div class="col-md-12">
-                    <input type="email" name="email" class="form-control" value="{{ old('email') }}" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="panel-body">
-                    <select name="products[]" multiple style="color:white">
-                                <option value="">Choose</option>
-                        @foreach($products as $product)
-                            <div class="col-md-2">
-                                <option value="{{ $product->id }}">{{ $product->name }}</option>
-                            </div>
-                        @endforeach
-                    </select>
-                </div>
-                <input type="submit" class="btn btn-success" value="Submit">
-            </div>
-        </form>
-    </div>
-@endsection
+        function print() {
+            window.print();
+        }
+    })();
+</script>
+</body>
+</html>

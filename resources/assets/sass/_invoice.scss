@@ -1,0 +1,333 @@
+//colors
+$color_pattens_blue_approx: #def;
+$color_gallery_approx: #eee;
+$color_pink_swan_approx: #bbb;
+$color_alto_approx: #ddd;
+$color_mountain_mist_approx: #999;
+$white: #fff;
+$black_50: rgba(0, 0, 0, 0.5);
+$black: #000;
+$color_portage_approx: #9af;
+$black_20: rgba(0,0,0,0.2);
+$color_cerulean_approx: #00adee;
+$color_allports_approx: #0078a5;
+$allports: #0076a3;
+$black_33: rgba(0,0,0,0.33);
+
+//@extend-elements
+//original selectors
+//th, td
+%extend_1 {
+  border-width: 1px;
+  padding: 0.5em;
+  position: relative;
+  text-align: left;
+  //Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
+  border-radius: 0.25em;
+  border-style: solid;
+}
+
+//original selectors
+//table.meta:after, table.balance:after
+%extend_2 {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+//original selectors
+//.add, .cut
+%extend_3 {
+  border-width: 1px;
+  display: block;
+  font-size: .8rem;
+  padding: 0.25em 0.5em;
+  float: left;
+  text-align: center;
+  width: 0.6em;
+  background: $color_portage_approx;
+  //Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+  box-shadow: 0 1px 2px $black_20;
+  background-image: -moz-linear-gradient($color_cerulean_approx 5%, $color_allports_approx 100%);
+  background-image: -webkit-linear-gradient($color_cerulean_approx 5%, $color_allports_approx 100%);
+  //Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
+  border-radius: 0.5em;
+  border-color: $allports;
+  color: $white;
+  cursor: pointer;
+  font-weight: bold;
+  //Instead of the line below you could use @includetext-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+  text-shadow: 0 -1px 2px $black_33;
+}
+
+
+* {
+  border: 0;
+  //Instead of the line below you could use @includebox-sizing($bs)
+  box-sizing: content-box;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-style: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  vertical-align: top;
+}
+*[contenteditable] {
+  //Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
+  border-radius: 0.25em;
+  min-width: 1em;
+  outline: 0;
+  cursor: pointer;
+  &:hover {
+    background: $color_pattens_blue_approx;
+    //Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+    box-shadow: 0 0 1em 0.5em $color_pattens_blue_approx;
+  }
+  &:focus {
+    background: $color_pattens_blue_approx;
+    //Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+    box-shadow: 0 0 1em 0.5em $color_pattens_blue_approx;
+  }
+}
+td {
+  @extend %extend_1;
+  border-color: $color_alto_approx;
+  &:hover *[contenteditable] {
+    background: $color_pattens_blue_approx;
+    //Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+    box-shadow: 0 0 1em 0.5em $color_pattens_blue_approx;
+  }
+  &:focus *[contenteditable] {
+    background: $color_pattens_blue_approx;
+    //Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+    box-shadow: 0 0 1em 0.5em $color_pattens_blue_approx;
+  }
+}
+span[contenteditable] {
+  display: inline-block;
+}
+h1 {
+  font: bold 100% sans-serif;
+  letter-spacing: 0.5em;
+  text-align: center;
+  text-transform: uppercase;
+}
+table {
+  font-size: 75%;
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 2px;
+  &.meta {
+    margin: 0 0 3em;
+    float: right;
+    width: 36%;
+    &:after {
+      @extend %extend_2;
+    }
+    th {
+      width: 40%;
+    }
+    td {
+      width: 60%;
+    }
+  }
+  &.inventory {
+    margin: 0 0 3em;
+    clear: both;
+    width: 100%;
+    th {
+      font-weight: bold;
+      text-align: center;
+    }
+    td {
+      &:nth-child(1) {
+        width: 26%;
+      }
+      &:nth-child(2) {
+        width: 38%;
+      }
+      &:nth-child(3) {
+        text-align: right;
+        width: 12%;
+      }
+      &:nth-child(4) {
+        text-align: right;
+        width: 12%;
+      }
+      &:nth-child(5) {
+        text-align: right;
+        width: 12%;
+      }
+    }
+  }
+  &.balance {
+    float: right;
+    width: 36%;
+    &:after {
+      @extend %extend_2;
+    }
+    th {
+      width: 50%;
+    }
+    td {
+      width: 50%;
+      text-align: right;
+    }
+  }
+}
+th {
+  @extend %extend_1;
+  background: $color_gallery_approx;
+  border-color: $color_pink_swan_approx;
+}
+html {
+  font: 16px/1 'Open Sans', sans-serif;
+  overflow: auto;
+  padding: 0.5in;
+  background: $color_mountain_mist_approx;
+  cursor: default;
+}
+body {
+  //Instead of the line below you could use @includebox-sizing($bs)
+  box-sizing: border-box;
+  height: 11in;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 0.5in;
+  width: 8.5in;
+  background: $white;
+  //Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
+  border-radius: 1px;
+  //Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+  box-shadow: 0 0 1in -0.25in $black_50;
+}
+header {
+  margin: 0 0 3em;
+  &:after {
+    clear: both;
+    content: "";
+    display: table;
+  }
+  h1 {
+    background: $black;
+    //Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
+    border-radius: 0.25em;
+    color: $white;
+    margin: 0 0 1em;
+    padding: 0.5em 0;
+  }
+  address {
+    float: left;
+    font-size: 75%;
+    font-style: normal;
+    line-height: 1.25;
+    margin: 0 1em 1em 0;
+    p {
+      margin: 0 0 0.25em;
+    }
+  }
+  span {
+    display: block;
+    float: right;
+    margin: 0 0 1em 1em;
+    max-height: 25%;
+    max-width: 60%;
+    position: relative;
+  }
+  img {
+    display: block;
+    float: right;
+    max-height: 100%;
+    max-width: 100%;
+  }
+  input {
+    cursor: pointer;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    height: 100%;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+}
+article {
+  margin: 0 0 3em;
+  address {
+    margin: 0 0 3em;
+    float: left;
+    font-size: 125%;
+    font-weight: bold;
+  }
+  &:after {
+    clear: both;
+    content: "";
+    display: table;
+  }
+  h1 {
+    clip: rect(0 0 0 0);
+    position: absolute;
+  }
+}
+.add {
+  @extend %extend_3;
+  margin: -2.5em 0 0;
+  &:hover {
+    background: $color_cerulean_approx;
+  }
+}
+.cut {
+  @extend %extend_3;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: -1.5em;
+  -webkit-transition: opacity 100ms ease-in;
+}
+@media print {
+  * {
+    -webkit-print-color-adjust: exact;
+  }
+  html {
+    background: none;
+    padding: 0;
+  }
+  body {
+    //Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+    box-shadow: none;
+    margin: 0;
+  }
+  .add {
+    display: none;
+  }
+  .cut {
+    display: none;
+  }
+  span:empty {
+    display: none;
+  }
+}
+@page {
+  margin: 0;
+}
+img.hover {
+  background: $color_pattens_blue_approx;
+  //Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+  box-shadow: 0 0 1em 0.5em $color_pattens_blue_approx;
+}
+aside h1 {
+  border: none;
+  border-width: 0 0 1px;
+  margin: 0 0 1em;
+  border-color: $color_mountain_mist_approx;
+  border-bottom-style: solid;
+}
+tr:hover .cut {
+  opacity: 1;
+}
