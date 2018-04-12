@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Print Order</title>
     <link rel="stylesheet" href="css/pdf.css">
 </head>
@@ -49,9 +50,9 @@
     <div class="spacer"></div>
     <ul>
     Ordered :
-        @foreach ($items as $item)
+        {{-- @foreach ($items as $item)
             <li>{{ $item }}</li>
-        @endforeach
+        @endforeach --}}
     </ul>
     <hr>
     <p><strong>Order received on : {{ $order->created_at->format('D, F d, Y') }} at {{ $order->created_at->toTimeString() }}</strong></p>

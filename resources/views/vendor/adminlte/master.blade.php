@@ -24,6 +24,7 @@
     @endif
 
     @yield('adminlte_css')
+    @yield('css')
     @yield('calendar-css')
 
     <!--[if lt IE 9]>
