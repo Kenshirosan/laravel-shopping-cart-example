@@ -13,7 +13,6 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="{{ set_active('/') }}"><a href="{{ url('/shop') }}">Our Menu</a></li>
                     @if( App\Product::where('holiday_special', true)->exists() && $title != null)
                         <li class="{{ set_active('/') }}">
                             <a href="{{ url('/holidays-special') }}">{{ $title }}</a>
