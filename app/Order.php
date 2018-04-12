@@ -64,7 +64,7 @@ class Order extends Model
         $when = 'created_at';
         $today =  date('Y-m-d');
 
-        return Hideable::whereDate($when, $today)->count();
+        return Hideable::whereDate($when, $today)->where('product_id', null)->count();
     }
 
     public function todaysOrders()

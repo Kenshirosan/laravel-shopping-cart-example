@@ -43,8 +43,6 @@ class OrderProcessedController extends Controller
         if($order->isHidden()){
             return back()->with(['error_message' => 'This order is already hidden']);
         }
-        // dd($order);
-
 
         Hideable::create([
             'order_id' => request('id')
