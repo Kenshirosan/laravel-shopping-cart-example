@@ -110,7 +110,7 @@ select.minimal:focus {
     display: none;
 }
 
-.alert {
+.alert, .alert-flash {
     position: fixed;
     right: 25px;
     bottom: 50px;
