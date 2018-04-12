@@ -81,7 +81,6 @@
             <p>A finance charge of 1.5% will be made on unpaid balances after 30 days.</p>
         </div>
     </aside>
-    <a href="#" class="btn btn-link">Pay</a>
 </div>
 <button class="btn btn-success">Print</button>
 <script src="/js/invoice.js"></script>

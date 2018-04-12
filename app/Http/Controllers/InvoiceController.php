@@ -55,7 +55,7 @@ class InvoiceController extends Controller
                     ->stream('order.pdf');
     }
 
-    public function show(Request $request)
+    public function show($id)
     {
 
     }

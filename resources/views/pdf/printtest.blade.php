@@ -18,7 +18,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th><strong contenteditable>Name</strong></th>
+                <th><strong>Name</strong></th>
                 <th><strong>Email</strong></th>
                 <th><strong>Phone</strong></th>
             </tr>
