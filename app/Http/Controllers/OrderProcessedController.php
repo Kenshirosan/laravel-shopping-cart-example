@@ -34,15 +34,17 @@ class OrderProcessedController extends Controller
     // we show a resource but we hide a previously visible item in the view
     public function destroy(Request $request, $order)
     {
+        $this->validate($request, [
+            'id' => 'required|numeric'
+        ]);
+
         $order = Order::where('id', $request->id)->firstOrFail();
 
         if($order->isHidden()){
             return back()->with(['error_message' => 'This order is already hidden']);
         }
+        // dd($order);
 
-        $this->validate($request, [
-            'id' => 'required|numeric|exists:orders, id'
-        ]);
 
         Hideable::create([
             'order_id' => request('id')
