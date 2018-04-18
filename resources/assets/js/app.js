@@ -19,6 +19,6 @@ const app = new Vue({
     el: '#app',
 
     data: {
-        checked: true
+        checked: false
     }
 });

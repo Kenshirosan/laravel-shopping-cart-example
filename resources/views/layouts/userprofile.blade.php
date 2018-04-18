@@ -27,6 +27,9 @@
                             @endif
                             <p class="text-info">Order number : <strong>{{ $order->id }}</strong></p>
                             <p class="text-info">Order received : <strong>{{ $order->created_at->toDateTimeString() }}</strong></p>
+                            @if($order->comments != null)
+                                <p class="text-info">Order Comments : <strong>{{ $order->comments }}</strong></p>
+                            @endif
                             <p class="text-info">You paid : <strong>{{ $order->price() }}</strong></p>
                             <p>{{ regex($order->items) }}</p>
                             @if($order->order_type === 'Delivery')

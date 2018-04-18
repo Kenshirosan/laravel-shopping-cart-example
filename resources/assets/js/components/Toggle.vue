@@ -5,19 +5,20 @@
 		      :aria-checked="value.toString()"
 		      tabindex="0"
 		      @keydown.space.prevent="toggle">
-	        <span class="toggle-background" :style="backgroundStyles"></span>
-	        <span class="toggle-indicator" :style="indicatorStyles"></span>
+	        <span class="toggle-background testing" :style="backgroundStyles" value="Pick-up"></span>
+	        <span class="toggle-indicator testing" :style="indicatorStyles" value="Delivery"></span>
 	    </span>
 	    <div class="col-md-6">
             <div class="pickup-time form-group">
                 <label for="pickup-time">Pick-up hour (11am to 10pm, 24hr format)</label>
                 <input type="time"
                         class="form-control"
-                        min="12:00"
-                        max="22:00"
+                        min="1200"
+                        max="2200"
                         v-bind:value="1700"
                         required
-                        name="pickup_time">
+                        name="pickup_time"
+                        v-if="checked">
                 <span class="validity"></span>
             </div>
         </div>
@@ -35,7 +36,7 @@
 		},
 
 	    methods: {
-	        toggle() {
+	        toggle(e) {
 	            this.$emit('input', !this.value, this.checked = !this.checked);
 	        }
 	    },

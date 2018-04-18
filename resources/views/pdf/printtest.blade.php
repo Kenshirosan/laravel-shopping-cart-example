@@ -50,10 +50,14 @@
     <div class="spacer"></div>
     <ul>
     Ordered :
-        {{-- @foreach ($items as $item)
+        @foreach ($items as $item)
             <li>{{ $item }}</li>
-        @endforeach --}}
+        @endforeach
     </ul>
+    @if($order->comments != null)
+        <p>Extra Comments:</p>
+        <p><strong>{{ $order->comments }}</strong></p>
+    @endif
     <hr>
     <p><strong>Order received on : {{ $order->created_at->format('D, F d, Y') }} at {{ $order->created_at->toTimeString() }}</strong></p>
     @include('includes.footer')

@@ -26,7 +26,8 @@ class Order extends Model
         'items',
         'price',
         'status_id',
-        'taxes'
+        'taxes',
+        'comments'
     ];
 
     public function user()

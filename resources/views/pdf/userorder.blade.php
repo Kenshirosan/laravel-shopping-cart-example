@@ -34,6 +34,9 @@
                         <a href="/order/{{ $order->id }}" class="admin-links">
                             <h4 class="admin-links">Order: {{ $order->id }}</h4>
                             <p><strong>{{ $order->order_type }}</strong></p>
+                            @if($order->comments != null)
+                                <p><strong>{{ $order->comments }}</strong></p>
+                            @endif
                             <p>
                             {{ $order->name }} {{ $order->last_name }} paid <strong>{{ $order->price() }}</strong> for {{ regex($order->items) }} on <strong>{{ $order->created_at->toFormattedDateString() }}</strong> at {{ $order->created_at->toTimeString() }}
                             </p>

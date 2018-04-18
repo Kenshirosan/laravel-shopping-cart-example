@@ -29,6 +29,7 @@ class CreateOrdersTable extends Migration
             $table->unsignedInteger('status_id')->default(1);
             $table->decimal('price', 10, 2)->required();
             $table->integer('taxes');
+            $table->text('comments')->nullable();
             $table->timestamps();
 
             $table->foreign('status_id')->references('id')->on('statuses');

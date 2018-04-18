@@ -20108,7 +20108,7 @@ var app = new Vue({
     el: '#app',
 
     data: {
-        checked: true
+        checked: false
     }
 });
 
@@ -73348,6 +73348,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	props: ['value'],
@@ -73360,7 +73361,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 	methods: {
-		toggle: function toggle() {
+		toggle: function toggle(e) {
 			this.$emit('input', !this.value, this.checked = !this.checked);
 		}
 	},
@@ -73413,13 +73414,15 @@ var render = function() {
       },
       [
         _c("span", {
-          staticClass: "toggle-background",
-          style: _vm.backgroundStyles
+          staticClass: "toggle-background testing",
+          style: _vm.backgroundStyles,
+          attrs: { value: "Pick-up" }
         }),
         _vm._v(" "),
         _c("span", {
-          staticClass: "toggle-indicator",
-          style: _vm.indicatorStyles
+          staticClass: "toggle-indicator testing",
+          style: _vm.indicatorStyles,
+          attrs: { value: "Delivery" }
         })
       ]
     ),
@@ -73430,17 +73433,19 @@ var render = function() {
           _vm._v("Pick-up hour (11am to 10pm, 24hr format)")
         ]),
         _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            type: "time",
-            min: "12:00",
-            max: "22:00",
-            required: "",
-            name: "pickup_time"
-          },
-          domProps: { value: 1700 }
-        }),
+        _vm.checked
+          ? _c("input", {
+              staticClass: "form-control",
+              attrs: {
+                type: "time",
+                min: "1200",
+                max: "2200",
+                required: "",
+                name: "pickup_time"
+              },
+              domProps: { value: 1700 }
+            })
+          : _vm._e(),
         _vm._v(" "),
         _c("span", { staticClass: "validity" })
       ])

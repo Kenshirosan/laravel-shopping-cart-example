@@ -24,6 +24,14 @@
                 <td><h4 class="text-info">{{ $order->price() }}</h4></td>
             </tr>
         </table>
+        @if($order->comments != null)
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Comments :</h4>
+                    <p class="text-info">{{ $order->comments }}</p>
+                </div>
+            </div>
+        @endif
         <div class="spacer"></div>
         <hr>
         <a href="/print/{{ $order->id }}" class="btn btn-success">Print</a>

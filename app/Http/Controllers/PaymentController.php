@@ -12,6 +12,7 @@ use App\Payments\Payments;
 use App\Events\UserOrdered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\PaymentRequest;
 
 
 class PaymentController extends Controller
@@ -37,7 +38,7 @@ class PaymentController extends Controller
     * @param  \Illuminate\Http\Request  $request
     * @return \Illuminate\Http\Response
     */
-    public function store(Request $request)
+    public function store(PaymentRequest $request)
     {
         if (auth()->check() && auth()->user()->isEmployee()) {
             Cart::destroy();
@@ -77,14 +78,7 @@ class PaymentController extends Controller
         }
 
         try {
-            $this->validateOrder($request);
-        } catch (\Exception $e) {
-            return back()->with(['error_message' => $e->getMessage() ]);
-        }
-
-        $payment = new Payments();
-        try {
-            $payment->validateStripePayment($request);
+            ( new Payments() )->validateStripePayment($request);
         } catch (\Exception $e) {
             return back()->with(['error_message' => $e->getMessage() ]);
         }
@@ -98,33 +92,6 @@ class PaymentController extends Controller
         Cart::destroy();
 
         return redirect('/edit/profile')->with("success_message", "Thank You " . Auth::user()->name . ", Your order is complete, We sent you a detailed email, Please call us if you need to make a change.");
-    }
-
-     private function checkCartIsValid()
-    {
-
-    }
-
-    /**
-    * @param  \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\Response
-    */
-    private function validateOrder(Request $request)
-    {
-        return $this->validate($request, [
-            'order_type' => 'required|string',
-            'pickup_time' => 'nullable|string',
-            'name' => 'required|exists:users,name',
-            'last_name' => 'required|exists:users,last_name',
-            'address' => 'required|string',
-            'address2' => 'nullable|string',
-            'zipcode' => 'required|numeric',
-            'phone_number' => 'required|exists:users,phone_number',
-            'email' => 'required|exists:users,email',
-            'total' => 'nullable|numeric',
-            'taxes' => 'nullable|numeric',
-            'code' => 'nullable|string',
-        ]);
     }
 
     /**
@@ -173,7 +140,8 @@ class PaymentController extends Controller
             'phone_number' => request('phone_number'),
             'items' => implode(': ', $items),
             'price' => $price,
-            'taxes' => $taxes
+            'taxes' => $taxes,
+            'comments' => request('comments')
         ]);
 
         if($code = request('code')) {

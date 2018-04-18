@@ -14,18 +14,18 @@
             </small>
         </div>
         <div class="panel-body">
-             <div class="container wrapper">
+             <div class="row">
                 {{-- <label class="radio-inline">
                     <toggle v-model="checked" class="ml-30"></toggle>
                 </label> --}}
-            <label class="radio-inline">
-                <input type="radio" name="order_type" value="Delivery" checked>Delivery
-            </label>
-            <label class="radio-inline">
-                <input type="radio" name="order_type" value="Pick-up">Pick-up
-            </label>
-            <label class="radio-inline">
-            </label>
+            <div class="container">
+                <label class="radio-inline">
+                    <input type="radio" name="order_type" value="Delivery" checked>Delivery
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="order_type" value="Pick-up">Pick-up
+                </label>
+            </div>
             </div>
             <div class="col-md-12">
                 <div class="pickup-time form-group{{ $errors->has('pickup_time') ? ' has-error' : '' }}">
@@ -33,7 +33,7 @@
                     <input type="time"
                             class="form-control"
                             min="12:00"
-                            max="22:00"
+                            max="21:59"
                             value="17:00"
                             required
                             name="pickup_time">
@@ -98,6 +98,13 @@
                 <div class="col-md-12"><strong>Email Address:</strong></div>
                 <div class="col-md-12">
                     <input type="email" readonly name="email" class="form-control" value="{{ Auth::user()->email }}" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-12"><strong>Additional Comments:</strong></div>
+                <div class="col-md-12">
+                    <textarea maxlength="400" name="comments" class="form-control" placeholder="Additional Comments 400 characters max"></textarea>
                 </div>
             </div>
         <input type="hidden" name="code" value="{{ $code }}">
