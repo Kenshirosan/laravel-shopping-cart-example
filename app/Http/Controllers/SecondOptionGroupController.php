@@ -10,10 +10,10 @@ class SecondOptionGroupController extends Controller
     public function index()
     {
         $optionGroups = SecondOptionGroup::all();
-        $method = '/add-second-option-group';
+        $action = '/add-second-option-group';
         $deleteMethod = '/delete-second-option-group/';
 
-        return view('layouts.addOptionGroup', compact('optionGroups', 'method', 'deleteMethod'));
+        return view('layouts.addOptionGroup', compact('optionGroups', 'action', 'deleteMethod'));
     }
 
     public function store(Request $request)

@@ -26,7 +26,7 @@
                         <li><a href="/register">Register</a></li>
                     @elseif ( Auth::check() )
                         @if(! auth()->user()->isEmployee())
-                            <li><a href="/edit/profile">Your profile</a></li>
+                            <li><a href="/user/{{ Auth::user()->name }}/profile">Your profile</a></li>
                         @endif
                         <li>
                             <a href="{{ route('logout') }}"
@@ -55,7 +55,7 @@
                                     Logout
                                 </a>
                                 <li>
-                                    <a href="/edit/profile">Profile</a>
+                                    <a href="/user/{{ Auth::user()->name }}/profile">Profile</a>
                                 </li>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST">

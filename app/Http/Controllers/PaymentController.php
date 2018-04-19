@@ -56,7 +56,7 @@ class PaymentController extends Controller
         if (request('order_type') === 'Pick-up') {
             $now =  Carbon::createFromFormat('H:i:s', Carbon::now()->toTimeString());
             $pickup_time = Carbon::createFromFormat('H:i', request('pickup_time'));
-            $minTime = Carbon::createFromFormat('H:i', "11:00");
+            $minTime = Carbon::createFromFormat('H:i', "11:00"); // add 30 minutes here
             $maxTime = Carbon::createFromFormat('H:i', "22:00");
 
             switch ($pickup_time) {
@@ -91,7 +91,7 @@ class PaymentController extends Controller
 
         Cart::destroy();
 
-        return redirect('/edit/profile')->with("success_message", "Thank You " . Auth::user()->name . ", Your order is complete, We sent you a detailed email, Please call us if you need to make a change.");
+        return redirect("/user/" . Auth::user()->name . "/profile")->with("success_message", "Thank You " . Auth::user()->name . ", Your order is complete, We sent you a detailed email, Please call us if you need to make a change.");
     }
 
     /**
@@ -123,7 +123,8 @@ class PaymentController extends Controller
 
         if (request('order_type') === 'Pick-up') {
             $pickup_time = Carbon::createFromFormat('H:i', request('pickup_time'))->toTimeString();
-        } else {
+        }
+        else {
             $pickup_time = '';
         }
 

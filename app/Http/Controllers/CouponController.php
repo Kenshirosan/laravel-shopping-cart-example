@@ -6,6 +6,7 @@ use App\Promocode;
 use \Cart as Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\CouponRequest;
 
 class CouponController extends Controller
 {
@@ -20,29 +21,21 @@ class CouponController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(CouponRequest $request)
     {
-        $this->validate($request, [
-            'quantity' => 'required|numeric',
-            'reward' => 'required|numeric'
-        ]);
-
         $quantity = request('quantity');
         $reward = request('reward');
         \Promocodes::createDisposable($quantity, $reward, $data = [], $expires_in = null);
+
         return back()->with('success_message', 'Coupons created');
     }
 
-    public function storeCouponsForEveryone(Request $request)
+    public function storeCouponsForEveryone(CouponRequest $request)
     {
-        $this->validate($request, [
-            'quantity' => 'required|numeric',
-            'reward' => 'required|numeric'
-        ]);
-
         $quantity = request('quantity');
         $reward = request('reward');
         \Promocodes::create($quantity, $reward, $data = [], $expires_in = null);
+
         return back()->with('success_message', 'Coupons created');
     }
 

@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <form class="form-horizontal" method="POST" action="{{ $method }}" enctype="multipart/form-data">
+    <form class="form-horizontal" method="POST" action="{{ $action }}" enctype="multipart/form-data">
         @include('includes.error')
         {{ csrf_field() }}
         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">

@@ -11,10 +11,10 @@ class OptionGroupController extends Controller
     public function index()
     {
         $optionGroups = OptionGroup::all();
-        $method = '/add-option-group';
+        $action = '/add-option-group';
         $deleteMethod = '/delete-option-group/';
 
-        return view('layouts.addOptionGroup', compact('optionGroups', 'method', 'deleteMethod'));
+        return view('layouts.addOptionGroup', compact('optionGroups', 'action', 'deleteMethod'));
     }
 
     public function store(Request $request)

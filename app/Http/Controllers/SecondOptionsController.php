@@ -12,9 +12,9 @@ class SecondOptionsController extends Controller
     {
         $optionGroups = SecondOptionGroup::all();
         $options = SecondOption::all();
-        $method = 'add-second-options';
+        $action = 'add-second-options';
 
-        return view('layouts.addOptions', compact('optionGroups', 'options', 'method'));
+        return view('layouts.addOptions', compact('optionGroups', 'options', 'action'));
     }
 
     public function store(Request $request)
