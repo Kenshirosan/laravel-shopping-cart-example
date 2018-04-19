@@ -76,7 +76,7 @@ class ProductController extends Controller
             'image' => $image
         ]);
 
-        return back()->with("success_message", "Successfully Updated $product->name");
+        return redirect('/update/' . $product->slug)->with("success_message", "Successfully Updated $product->name");
     }
 
     private function createNewProduct(Request $request)
