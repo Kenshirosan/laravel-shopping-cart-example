@@ -1,4 +1,4 @@
-    @if (is_string($item))
+@if (is_string($item))
     <li class="header">{{ $item }}</li>
 @else
 {{-- this is not spaghetti code,
