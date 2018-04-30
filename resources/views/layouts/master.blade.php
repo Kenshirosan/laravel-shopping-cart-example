@@ -19,9 +19,8 @@
     <title>@yield('title')</title>
 
     <meta name="description" content="Shopping Cart">
-    <!-- Mobile Specific Meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Store CSRF token for AJAX calls with jquery-->
+    <!-- Store CSRF token for AJAX calls-->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Stylesheets -->
     <link rel="stylesheet" href="/css/dropzone.min.css">
@@ -36,17 +35,12 @@
     <script src="https://js.stripe.com/v3/"></script>
 </head>
     <body>
-        {{-- @if( $_SERVER['HTTP_HOST'] != 'https://webcreation.rocks')
-            {{ die(new Exception()) }}
-        @endif --}}
         <div id="app">
             @include('includes.header')
             <div class="container">
                 @include('includes.messages')
                 @yield('content')
                 <flash message="{{ session('flash') }}"></flash>
-            </div>
-            <div class="container">
                 <view-cart :items="{{ Cart::content() }}" :total="{{ Cart::total() }}"></view-cart>
             </div>
         </div>
@@ -55,12 +49,23 @@
         <!-- JavaScript -->
         {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> ?Why did I put this already ?? hhmmmmmm--}}
         <script src="/js/app.js"></script>
-        <script src="/js/smoothscroll.js" charset="utf-8"></script>
+        <script src="/js/smoothscroll.js"></script>
         <script src="/js/back-to-top.js"></script>
         @yield('extra-js')
         @yield('dropzone.script')
         @yield('lity-js')
         @yield('delete-product-script')
         @yield('title-script')
+        <script>
+            // added this cause the page loads in the middle, dunno why... So auto scroll to top...
+            (function() {
+                document.addEventListener('DOMContentLoaded', function() {
+                    let scrollTop = $(window).scrollTop();
+                    $('html,body').animate({
+                        scrollTop: 0
+                    }, 100);
+                });
+            })();
+        </script>
     </body>
 </html>

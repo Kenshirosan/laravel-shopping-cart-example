@@ -4,11 +4,11 @@ Route::get('/', function () {
     return redirect('shop');
 })->name('shop');
 
-Route::get('/page-infos', 'FrontPageController@index');
-
 Route::get('/home', function () {
     return redirect('shop');
 })->name('shop');
+
+Route::get('/page-infos', 'FrontPageController@indexJson');
 
 Auth::routes();
 

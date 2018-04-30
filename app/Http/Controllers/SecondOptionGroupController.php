@@ -19,18 +19,13 @@ class SecondOptionGroupController extends Controller
     public function store(Request $request)
     {
         try {
-        $this->validate($request, [
-            'name' => 'required|string'
-        ]);
+            $this->validate($request, [
+                'name' => 'required|string'
+            ]);
 
-        } catch (\Exception $e) {
-            return back()->with(['error_message' => $e->getMessage() ]);
-        }
-
-        try {
-        SecondOptionGroup::create([
-            'name' => request('name')
-        ]);
+            SecondOptionGroup::create([
+                'name' => request('name')
+            ]);
 
         } catch (\Exception $e) {
             return back()->with(['error_message' => $e->getMessage() ]);

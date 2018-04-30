@@ -37,6 +37,7 @@ mv .env.example .env && vim .env
 ```
 update database info, stripe keys, pusher keys, mail driver and keys, and analytics key.
 update pusher key in bootstrap.js (Echo).
+update stripe key in CheckoutForm.vue
 ```
 php artisan key:generate
 ```
@@ -46,7 +47,7 @@ php artisan config:cache
 ```
 php artisan migrate
 ```
-if there's any problem with migrations, try deleting the boot method in the AppServiceProvider file.
+if there's any problem with migrations, try deleting the boot method in AppServiceProvider or change the dates or migration files, To match what the errors say :-°
 If you're using mariadb leave it alone tho.
 ```
 php artisan serve

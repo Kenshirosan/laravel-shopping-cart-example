@@ -104,7 +104,7 @@
             <div class="form-group">
                 <div class="col-md-12"><strong>Additional Comments:</strong></div>
                 <div class="col-md-12">
-                    <textarea maxlength="400" name="comments" class="form-control" placeholder="Additional Comments 400 characters max"></textarea>
+                    <textarea maxlength="500" name="comments" class="form-control" placeholder="Anything we need ton know? Allergies? A name on the order ? 500 characters max"></textarea>
                 </div>
             </div>
         <input type="hidden" name="code" value="{{ $code }}">

@@ -11,13 +11,20 @@ class FrontPageController extends Controller
 {
     public function index()
     {
-    	$frontPageInfos = FrontPage::first();
+        $frontPageInfos = FrontPage::first();
 
-    	if (request()->expectsJson()) {
-    		return response($frontPageInfos, 200);
-    	}
+        return view('admin.frontPage', compact('frontPageInfos'));
+    }
 
-    	return view('admin.frontPage', compact('frontPageInfos'));
+    public function indexJson()
+    {
+        $frontPageInfos = FrontPage::first();
+
+        if (request()->expectsJson()) {
+            return response($frontPageInfos, 200);
+        }
+
+        return back()->with('error_message', 'Page Not Found');
     }
 
     public function store(Request $request)
@@ -29,15 +36,16 @@ class FrontPageController extends Controller
 
     		try {
 	        	Storage::disk('custom')->delete($frontPageInfo['image']);
-    		} catch (\Exception $e) {
-    			$e->getMessage();
-    		}
 
-        	$frontPageInfo->delete();
+            	$frontPageInfo->delete();
 
-    		$this->createInfos($request);
+        		$this->createInfos($request);
 
-    		return back()->with('success_message', 'Successfully updated.');
+        		return back()->with('success_message', 'Successfully updated.');
+
+            } catch (\Exception $e) {
+                $e->getMessage();
+            }
 
     	} else {
 			$this->validateRequest();
@@ -63,6 +71,7 @@ class FrontPageController extends Controller
 
     protected function createInfos(Request $request)
     {
+        // test without resizing images
     	$file = $request->file('image');
 
         $name = time() . $file->getClientOriginalName();

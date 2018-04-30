@@ -103,6 +103,7 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
+            <flash message={{ session('flash') }}></flash>
             @if(config('adminlte.layout') == 'top-nav')
             <div class="container">
             @endif

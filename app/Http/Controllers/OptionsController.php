@@ -26,20 +26,15 @@ class OptionsController extends Controller
                 'option_group_id' => 'required|numeric'
             ]);
 
-        } catch (\Exception $e) {
-            return back()->with(['error_message' => $e->getMessage() ]);
-        }
-
-        try {
             Option::create([
                 'name' => request('name'),
                 'option_group_id' => request('option_group_id')
             ]);
 
+            return back()->with('success_message', 'Option added');
+
         } catch (\Exception $e) {
             return back()->with(['error_message' => $e->getMessage() ]);
         }
-
-        return back()->with('success_message', 'Option added');
     }
 }

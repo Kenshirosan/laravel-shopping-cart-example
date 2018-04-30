@@ -20,25 +20,19 @@ class OptionGroupController extends Controller
     public function store(Request $request)
     {
         try {
-        $this->validate($request, [
-            'name' => 'required|string'
-        ]);
+            $this->validate($request, [
+                'name' => 'required|string'
+            ]);
+
+            OptionGroup::create([
+                'name' => request('name')
+            ]);
+
+            return back()->with('success_message', 'Option Group added');
 
         } catch (\Exception $e) {
             return back()->with(['error_message' => $e->getMessage() ]);
         }
-
-        try {
-        OptionGroup::create([
-            'name' => request('name')
-        ]);
-
-        } catch (\Exception $e) {
-            return back()->with(['error_message' => $e->getMessage() ]);
-        }
-
-        return back()->with('success_message', 'Option Group added');
-
     }
 
     public function destroy($id)

@@ -102,7 +102,7 @@
                 backgroundColor: event.color,
             }
             axios.patch('/things-to-do/'+ event.id, event)
-                .then(flash('Event successfully modified'))
+                .then(flash("Event successfully modified"))
                 .then(
                     setTimeout(function() {
                        location.reload();
@@ -146,7 +146,7 @@
         copiedEventObject.borderColor     = $(this).css('border-color')
         // persist event
         axios.post('/things-to-do', copiedEventObject)
-            .then(flash('event successfully added'))
+            .then(flash("event successfully added"))
             .then(
                 setTimeout(function() {
                    location.reload();
