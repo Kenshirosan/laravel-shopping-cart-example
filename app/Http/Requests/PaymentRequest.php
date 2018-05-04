@@ -14,7 +14,7 @@ class PaymentRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return auth()->check() && ! auth()->user()->isEmployee() && Cart::total() >= 1500;
     }
 
     /**

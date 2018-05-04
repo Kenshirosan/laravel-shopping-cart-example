@@ -40,23 +40,10 @@ class PaymentController extends Controller
     */
     public function store(PaymentRequest $request)
     {
-        if (auth()->check() && auth()->user()->isEmployee()) {
-            Cart::destroy();
-            return redirect('/shop')->with('flash', "You are not allowed");
-        }
-
-        if (Cart::total() == 0) {
-            return back()->with(['error_message' => 'Your cart is empty !']);
-        }
-
-        if (Cart::total() < 1500) {
-            return back()->with(['warning_message' => 'You need to order at least $15 worth in your cart, Your total is $' . Cart::total() /100 ]);
-        }
-
         if (request('order_type') === 'Pick-up') {
-            $now =  Carbon::createFromFormat('H:i:s', Carbon::now()->toTimeString());
+            $now =  Carbon::createFromFormat('H:i:s', Carbon::now()->toTimeString())->addMinutes(30);
             $pickup_time = Carbon::createFromFormat('H:i', request('pickup_time'));
-            $minTime = Carbon::createFromFormat('H:i', "11:00"); // add 30 minutes here
+            $minTime = Carbon::createFromFormat('H:i', "11:00");
             $maxTime = Carbon::createFromFormat('H:i', "22:00");
 
             switch ($pickup_time) {
@@ -65,7 +52,7 @@ class PaymentController extends Controller
                     break;
 
                 case $pickup_time < $now:
-                    return redirect('/checkout')->with('error_message', 'You can\'t pick up earlier than ' . $now->toTimeString());
+                    return redirect('/checkout')->with('error_message', 'Sorry but You can\'t pick up earlier than ' . $now->toTimeString());
                     break;
 
                 case $pickup_time >= $maxTime:

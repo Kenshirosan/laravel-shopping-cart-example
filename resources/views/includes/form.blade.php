@@ -29,12 +29,12 @@
             </div>
             <div class="col-md-12">
                 <div class="pickup-time form-group{{ $errors->has('pickup_time') ? ' has-error' : '' }}">
-                    <label for="pickup-time">Pick-up hour (11am to 10pm, 24hr format)</label>
+                    <label for="pickup-time" class="text-warning">Pick-up hour (11am to 10pm, 24hr format), minimum 30 minutes from now</label>
                     <input type="time"
                             class="form-control"
                             min="12:00"
                             max="21:59"
-                            value="17:00"
+                            value="{{ Carbon\Carbon::now()->addMinutes(30)->format('H:i') }}"
                             required
                             name="pickup_time">
                     <span class="validity"></span>
