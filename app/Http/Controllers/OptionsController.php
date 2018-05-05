@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Option;
 use App\OptionGroup;
 use Illuminate\Http\Request;
+use App\Http\Requests\OptionRequest;
 use Illuminate\Support\Facades\Auth;
 
 class OptionsController extends Controller
@@ -18,14 +19,9 @@ class OptionsController extends Controller
         return view('layouts.addOptions', compact('optionGroups', 'options', 'action'));
     }
 
-    public function store(Request $request)
+    public function store(OptionRequest $request)
     {
         try {
-            $this->validate($request, [
-                'name' => 'required|string',
-                'option_group_id' => 'required|numeric'
-            ]);
-
             Option::create([
                 'name' => request('name'),
                 'option_group_id' => request('option_group_id')

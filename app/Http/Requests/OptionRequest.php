@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CouponRequest extends FormRequest
+class OptionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,8 @@ class CouponRequest extends FormRequest
     public function rules()
     {
         return [
-            'quantity' => 'required|numeric',
-            'reward' => 'required|numeric'
+            'name' => 'required|string',
+            'option_group_id' => 'required|numeric'
         ];
     }
 }

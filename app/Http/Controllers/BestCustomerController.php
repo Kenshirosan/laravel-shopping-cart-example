@@ -12,9 +12,9 @@ class BestCustomerController extends Controller
     {
         $user_count = User::where(['confirmed' => true, 'employee' => false])->count();
 
-        $bestCustomers = Order::selectRaw('year(created_at) year, sum(price) total,user_id, name, last_name, email')
+        $bestCustomers = Order::selectRaw('year(created_at) year, sum(price) total, user_id, name, last_name, email')
                             ->whereRaw('year(created_at) = year(curdate())')
-                            ->groupBy('user_id','email', 'last_name','name', 'year')
+                            ->groupBy('user_id','email', 'last_name', 'name', 'year')
                             ->orderBy('total', 'desc')
                             ->get();
 

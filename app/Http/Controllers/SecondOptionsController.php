@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\SecondOption;
 use App\SecondOptionGroup;
 use Illuminate\Http\Request;
+use App\Http\Requests\OptionRequest;
 
 class SecondOptionsController extends Controller
 {
@@ -17,14 +18,9 @@ class SecondOptionsController extends Controller
         return view('layouts.addOptions', compact('optionGroups', 'options', 'action'));
     }
 
-    public function store(Request $request)
+    public function store(OptionRequest $request)
     {
         try {
-            $this->validate($request, [
-                'name' => 'required|string',
-                'option_group_id' => 'required|numeric'
-            ]);
-
             SecondOption::create([
                 'name' => request('name'),
                 'second_option_group_id' => request('option_group_id')

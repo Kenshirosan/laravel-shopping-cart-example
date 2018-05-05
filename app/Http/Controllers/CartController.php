@@ -98,7 +98,7 @@ class CartController extends Controller
             session()->flash('flash', 'Quantity was updated successfully!');
             return redirect('/cart');
 
-        } catch(Exception $e) {
+        } catch(\Exception $e) {
             return redirect('/cart')->with('flash', 'Something wrong happened.');
         }
     }
@@ -140,6 +140,7 @@ class CartController extends Controller
     */
     public function switchToWishlist($id)
     {
+        // Maybe i'll finish a day..
         $item = Cart::get($id);
         // dump($item);
         // Cart::instance('wishlist')->remove($id);

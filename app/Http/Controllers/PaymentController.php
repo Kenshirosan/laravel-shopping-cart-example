@@ -112,7 +112,7 @@ class PaymentController extends Controller
             $pickup_time = Carbon::createFromFormat('H:i', request('pickup_time'))->toTimeString();
         }
         else {
-            $pickup_time = '';
+            $pickup_time = null;
         }
 
         $order = Order::create([

@@ -27,7 +27,7 @@ class FavoritesController extends Controller
             'product_id' => $id,
         ]);
 
-        return response('success');
+        return response('success', 200);
     }
 
     /**
@@ -52,6 +52,6 @@ class FavoritesController extends Controller
 
         $favorite->delete();
 
-        return response('success');
+        return response('success', 200);
     }
 }

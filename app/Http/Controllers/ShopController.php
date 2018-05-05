@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Sales;
 use App\Product;
 use App\Category;
-use App\Sales;
 use App\OptionGroup;
 
 class ShopController extends Controller
@@ -19,6 +19,7 @@ class ShopController extends Controller
         $categories = Category::with(['products' => function ($query) {
             $query->where('holiday_special', false)->with('sales')->with('group')->with('secondGroup');
         }])->get();
+
         return view('layouts.shop', compact('categories'));
     }
 

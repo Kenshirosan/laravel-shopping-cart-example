@@ -31,9 +31,9 @@ class CalendarController extends Controller
 
     public function update($id)
     {
-        $event = Calendar::where('id', $id)->firstOrFail();
-
         $this->validate(request(), ['title' => 'string|nullable', 'start' => 'date|nullable']);
+
+        $event = Calendar::where('id', $id)->firstOrFail();
 
         $title = request('title');
         $start = request('start');
