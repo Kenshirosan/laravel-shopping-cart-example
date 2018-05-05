@@ -95,4 +95,61 @@ class Order extends Model
     {
         return money_format('$%i', ($this->price - $this->taxes ) / 100);
     }
+
+    public function yearlyTotal()
+    {
+        return $this->selectRaw('year(created_at) year, sum(price / 100) total')
+                            // ->whereRaw('year(created_at) = year(curdate())') let our customer pick
+                            ->groupBy('year')
+                            ->orderBy('year', 'desc')
+                            ->get();
+    }
+
+    public function totalOrders()
+    {
+        return $this->selectRaw('monthname(created_at) months, year(created_at) year, sum(price / 100) total')
+                            ->whereRaw('year(created_at) = year(curdate())')
+                            ->groupBy('months', 'year')
+                            ->orderBy('created_at')
+                            ->pluck('total', 'months', 'year');
+    }
+
+    public function taxCollection()
+    {
+        $taxcollection = [];
+        foreach ($this->totalOrders()->values() as $taxes) {
+            array_push($taxcollection, $taxes * 0.08);
+        }
+        $taxcollection = collect($taxcollection);
+        return $taxcollection;
+    }
+
+    public function totalOrdersYearBefore()
+    {
+        return $this->selectRaw('monthname(created_at) months, year(created_at) year, sum(price / 100) total')
+                            ->whereRaw('year(created_at) = year(curdate()) - 1')
+                            ->groupBy('months', 'year')
+                            ->orderBy('created_at')
+                            ->pluck('total', 'months', 'year');
+    }
+
+    public function taxCollectionYearBefore()
+    {
+        $taxcollectionYearBefore = [];
+        foreach($this->totalOrdersYearBefore()->values() as $taxes){
+            array_push($taxcollectionYearBefore, $taxes * 0.08);
+        };
+
+        $taxcollectionYearBefore = collect($taxcollectionYearBefore);
+        return $taxcollectionYearBefore;
+    }
+
+    public function averageOrder()
+    {
+        return $this->selectRaw('avg(price) Average, monthname(created_at) month, year(created_at) year' )
+                            ->whereRaw('year(created_at) = year(curdate())')
+                            ->groupBy('month', 'year')
+                            ->orderBy('created_at' )
+                            ->get();
+    }
 }

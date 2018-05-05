@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Order;
-// use App\Option;
 use App\Category;
 use App\OptionGroup;
 use App\SecondOptionGroup;
@@ -20,9 +19,7 @@ class AdminController extends Controller
     public function index()
     {
         $categories = Category::all();
-        // $options = Option::all();
         $optionGroups = OptionGroup::all();
-        // $secondOptions = SecondOption::all();
         $secondOptionGroups = SecondOptionGroup::all();
         $orders = Order::limit(5)->orderBy('created_at', 'desc')->get();
 
@@ -37,41 +34,17 @@ class AdminController extends Controller
 
     public function show()
     {
-        $yearlyTotal = Order::selectRaw('year(created_at) year, sum(price / 100) total')
-                            // ->whereRaw('year(created_at) = year(curdate())') let our customer pick
-                            ->groupBy('year')
-                            ->orderBy('year', 'desc')
-                            ->get();
+        $yearlyTotal = ( new Order )->yearlyTotal();
 
-        $totalOrders = Order::selectRaw('monthname(created_at) months, year(created_at) year, sum(price / 100) total')
-                            ->whereRaw('year(created_at) = year(curdate())')
-                            ->groupBy('months', 'year')
-                            ->orderBy('created_at')
-                            ->pluck('total', 'months', 'year');
+        $totalOrders = ( new Order )->totalOrders();
 
-        $taxcollection = [];
-        foreach($totalOrders->values() as $taxes){
-            array_push($taxcollection, $taxes * 0.08);
-        };
-        $taxcollection = collect($taxcollection);
+        $taxcollection = ( new Order )->taxCollection();
 
-        $totalOrdersYearBefore = Order::selectRaw('monthname(created_at) months, year(created_at) year, sum(price / 100) total')
-                            ->whereRaw('year(created_at) = year(curdate()) - 1')
-                            ->groupBy('months', 'year')
-                            ->orderBy('created_at')
-                            ->pluck('total', 'months', 'year');
+        $totalOrdersYearBefore = ( new Order )->totalOrdersYearBefore();
 
-        $taxcollectionYearBefore = [];
-        foreach($totalOrdersYearBefore->values() as $taxes){
-            array_push($taxcollectionYearBefore, $taxes * 0.08);
-        };
-        $taxcollectionYearBefore = collect($taxcollectionYearBefore);
+        $taxcollectionYearBefore = ( new Order )->taxCollectionYearBefore();
 
-        $averageOrder = Order::selectRaw('avg(price) Average, monthname(created_at) month, year(created_at) year' )
-                            ->whereRaw('year(created_at) = year(curdate())')
-                            ->groupBy('month', 'year')
-                            ->orderBy('created_at' )
-                            ->get();
+        $averageOrder = ( new Order )->averageOrder();
 
         return view('admin.panel', compact('yearlyTotal', 'totalOrders', 'taxcollection', 'totalOrdersYearBefore', 'taxcollectionYearBefore', 'averageOrder'));
     }
