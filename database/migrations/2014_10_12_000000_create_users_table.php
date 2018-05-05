@@ -25,8 +25,8 @@ class CreateUsersTable extends Migration
             $table->string('phone_number');
             $table->boolean('confirmed')->default(false);
             $table->string('confirmation_token', 100)->nullable()->unique();
-            $table->boolean('employee')->default(0);
-            $table->boolean('theboss')->default(0);
+            $table->boolean('employee')->default(false);
+            $table->boolean('theboss')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

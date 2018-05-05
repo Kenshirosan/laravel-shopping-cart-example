@@ -3,20 +3,18 @@
 
 Laravel E-commerce
 
-Almost ready to ship laravel e-commerce application. Uses Crinsane/LaravelShoppingcart
+Laravel e-commerce example application. Uses Crinsane/LaravelShoppingcart
 
 Features :
 ---
 * Mail functionality on registration and order.
-* Order form and order table.
+* Almost 'Real time' tracking with pusher, will move to socket.io soon tho.
 * Admin row in users table, to be set manually directly in database, Admin may add employees.
-* Add product/Delete Products.
-* Dropzone.js on product page.
+* Create/Update/Delete Products, Categories, Options, Sales, Coupons, Specials.
+* Dropzone.js on to add more pictures on the product page.
 * Stripe payment, just add your key in .env, and update the public key in CheckoutForm.vue.
 * User account with real-time order tracking.
 * PDF printing.
-* Product options/categories/specials.
-* Coupons / promotion codes.
 * Users must confirm their email.
 * Backend with [adminLTE](https://adminlte.io/themes/AdminLTE/index2.html) for laravel, package by [Jeroen Noten](https://github.com/jeroennoten/Laravel-AdminLTE).
 * [fullcalendar.io](https://fullcalendar.io).
@@ -27,7 +25,7 @@ download or clone then
 cd path/to/app
 ```
 ```
-npm install
+npm install && npm run dev
 ```
 ```
 composer install
@@ -44,11 +42,10 @@ php artisan key:generate
 ```
 php artisan config:cache
 ```
+You will face problems with migrations, just change the dates on migration files to match the error message, Didn't do it yet... :/
 ```
 php artisan migrate
 ```
-if there's any problem with migrations, try deleting the boot method in AppServiceProvider or change the dates or migration files, To match what the errors say :-°
-If you're using mariadb leave it alone tho.
 ```
 php artisan serve
 ```
