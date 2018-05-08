@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    About AntaWeaves.com
+    About Our Place
 @endsection
 
 @section('content')
