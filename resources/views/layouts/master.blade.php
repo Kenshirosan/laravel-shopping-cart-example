@@ -65,6 +65,10 @@
                         scrollTop: 0
                     }, 100);
                 });
+
+                const div = document.querySelector('.about');
+                    axios.get('/about')
+                .then(res => div.innerHTML = res.data.about);
             })();
         </script>
     </body>

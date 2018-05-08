@@ -1,0 +1,13 @@
+@extends('layouts.master')
+
+@section('title')
+    About AntaWeaves.com
+@endsection
+
+@section('content')
+    <h1 class="text-warning text-center">About our restaurant</h1>
+    <div class="about-picture" style="text-align: center; margin: 0 auto">
+        <img src="/images/delivery.gif" alt="Anta" class="img-responsive" style="max-width:50%;">
+    </div>
+        <div class="about"></div>
+@endsection

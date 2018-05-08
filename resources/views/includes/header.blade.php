@@ -18,6 +18,7 @@
                             <a href="{{ url('/holidays-special') }}">{{ $title }}</a>
                         </li>
                     @endif
+                    <li><a href="/about">About us</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/contact-us">Contact</a></li>

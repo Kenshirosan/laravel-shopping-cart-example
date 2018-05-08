@@ -9,6 +9,7 @@ Route::get('/home', function () {
 })->name('shop');
 
 Route::get('/page-infos', 'FrontPageController@indexJson');
+Route::get('/about', 'SiteController@index');
 
 Auth::routes();
 
@@ -72,6 +73,8 @@ Route::middleware(['auth', 'must-be-confirmed', 'employee'])->group(function () 
 Route::middleware(['auth', 'must-be-confirmed', 'employee', 'admin'])->group(function () {
     // testing server performance : send email in a loop
     // Route::get('/test-server', 'OrderProcessedController@index');
+    Route::get('add-about-page', 'AboutController@index');
+    Route::put('add-about-page', 'AboutController@store');
     Route::get('/add-user', 'UserController@create');
     Route::post('/add-user', 'UserController@store');
     Route::get('/delete-user', 'UserController@index');

@@ -125,6 +125,13 @@ return [
             'can' => 'see-admin-menu'
         ],
         [
+            'text' => 'Add About infos',
+            'url'  => '/add-about-page',
+            'icon' => 'info-circle',
+            'icon_color' => 'primary',
+            'can' => 'see-admin-menu'
+        ],
+        [
             'text' => 'Create an Invoice',
             'url'  => '/create-invoice',
             'icon' => 'dollar',
