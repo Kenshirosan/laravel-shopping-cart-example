@@ -11,3 +11,11 @@
     </div>
         <div class="about"></div>
 @endsection
+
+@section('about-script')
+    <script>
+        const div = document.querySelector('.about');
+        axios.get('/about')
+            .then(res => div.innerHTML = res.data.about);
+    </script>
+@endsection

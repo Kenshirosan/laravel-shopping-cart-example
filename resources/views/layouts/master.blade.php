@@ -56,6 +56,7 @@
         @yield('lity-js')
         @yield('delete-product-script')
         @yield('title-script')
+        @yield('about-script')
         <script>
             // added this cause the page loads in the middle, dunno why... So auto scroll to top...
             (function() {
@@ -65,10 +66,6 @@
                         scrollTop: 0
                     }, 100);
                 });
-
-                const div = document.querySelector('.about');
-                    axios.get('/about')
-                .then(res => div.innerHTML = res.data.about);
             })();
         </script>
     </body>

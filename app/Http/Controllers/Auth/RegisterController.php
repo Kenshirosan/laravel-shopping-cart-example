@@ -88,6 +88,8 @@ class RegisterController extends Controller
         // $event = event(new UserRegistered($user)); working but unecessary ? maybe with a queue delay on email..
 
         \Mail::to($data['email'])->send(new Welcome($user));
+        session()->flash('warning_message', 'We now need you to confirm your account, please check your email.');
+
         return $user;
     }
 }
