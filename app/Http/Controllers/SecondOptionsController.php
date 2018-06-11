@@ -9,11 +9,11 @@ use App\Http\Requests\OptionRequest;
 
 class SecondOptionsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $optionGroups = SecondOptionGroup::all();
         $options = SecondOption::all();
-        $action = 'add-second-options';
+        $action = $request->path();
 
         return view('layouts.addOptions', compact('optionGroups', 'options', 'action'));
     }

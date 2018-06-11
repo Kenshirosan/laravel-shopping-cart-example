@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\Auth;
 
 class OptionGroupController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $optionGroups = OptionGroup::all();
-        $action = '/add-option-group';
+        $action = $request->path();
         $deleteMethod = '/delete-option-group/';
 
         return view('layouts.addOptionGroup', compact('optionGroups', 'action', 'deleteMethod'));

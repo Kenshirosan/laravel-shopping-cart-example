@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 
 class SecondOptionGroupController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $optionGroups = SecondOptionGroup::all();
-        $action = '/add-second-option-group';
+        $action = $request->path();
         $deleteMethod = '/delete-second-option-group/';
 
         return view('layouts.addOptionGroup', compact('optionGroups', 'action', 'deleteMethod'));

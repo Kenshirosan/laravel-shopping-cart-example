@@ -10,11 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class OptionsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $optionGroups = OptionGroup::all();
         $options = Option::all();
-        $action = 'add-options';
+        $action = $request->path();
 
         return view('layouts.addOptions', compact('optionGroups', 'options', 'action'));
     }
