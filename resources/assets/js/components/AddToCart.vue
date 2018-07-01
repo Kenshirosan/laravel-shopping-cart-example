@@ -44,27 +44,25 @@
 
 
         methods: {
-            addtocart() {
-                // axios.post('http://webcreation.rocks/cart', this.$data)
-                let options = this.options;
-                let secondoptions = this.secondoptions;
+            async addtocart() {
+                const options = this.options;
+                const secondoptions = this.secondoptions;
 
                 if ( (options != undefined && options.length > 0 && this.option == '') || (secondoptions != undefined && secondoptions.length > 0 && this.secondoption == ''))  {
                     return swal("Wait!",
                         `Please pick an option for ${this.product.name}`,
                         "warning");
                 } else {
-                    axios.post('/cart', this.$data)
-                        .then(flash(this.product.name + ' was added to cart'))
-                        .then( productitemscountchanged() )
-                        .then(setTimeout( () => {
-                            this.option = '',
-                            this.secondoption = ''
-                        }, 100 ))
-                        .catch( e => {
-                            flash(e.response.data, 'danger')
-                        })
+                    await axios.post('/cart', this.$data)
+                    await flash(`${this.product.name} was added to cart`)
+                    await productitemscountchanged()
+                    await this.resetOptions()
                 }
+            },
+
+            resetOptions() {
+                this.option = '',
+                this.secondoption = ''
             }
         }
     }

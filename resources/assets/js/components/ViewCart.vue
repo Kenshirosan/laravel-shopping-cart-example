@@ -69,9 +69,7 @@
         created() {
             window.events.$on(
                 'productadded', () => {
-                    setTimeout( () => {
-                        this.add(this.products)
-                    }, 100);
+                    this.add(this.products)
                 }
             );
         },
@@ -84,8 +82,8 @@
                                         .then(cartisempty())
                                         .catch(e => { console.log(e)})
             },
-            add() {
-                axios.get('/cartcontent').then( response => {
+            async add() {
+                await axios.get('/cartcontent').then( response => {
                     if(response.data) {
                         this.products = response.data[0]
                         this.price = response.data[1]
