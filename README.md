@@ -22,7 +22,7 @@ Features :
 * Coupon feature package by [Zura Gabievi](https://github.com/zgabievi/laravel-promocodes)
 
 # Helpers.teachers
-* Best screencasts ever by **[Jeffrey Way]**(https://laracasts.com)
+* Best screencasts ever by [**Jeffrey Way**](https://laracasts.com)
 
 * Very helpful screencasts by [Wes Bos](https://wesbos.com)
 * Very helpful screencasts by [Brad Traversy](https://www.traversymedia.com/)
