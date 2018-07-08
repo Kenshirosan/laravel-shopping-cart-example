@@ -1,5 +1,5 @@
 # Laravel shopping cart
-# work in progress
+# Work in progress
 
 Laravel E-commerce
 
@@ -21,9 +21,11 @@ Features :
 * Google analytics package by [Spatie.be](https://spatie.be/en/opensource/postcards), Don't forget to send them a postcard. Follow instructions on their github repo for setting up this feature. [repo](https://github.com/spatie/analytics-statistics)
 * Coupon feature package by [Zura Gabievi](https://github.com/zgabievi/laravel-promocodes)
 
-* Very helpful screecasts by [Jeffrey Way](https://laracasts.com)
-* Very helpful screecasts by [Wes Bos](https://wesbos.com)
-* Very helpful screecasts by [Brad Traversy](https://www.traversymedia.com/)
+# Helpers.teachers
+* Best screencasts ever by **[Jeffrey Way]**(https://laracasts.com)
+
+* Very helpful screencasts by [Wes Bos](https://wesbos.com)
+* Very helpful screencasts by [Brad Traversy](https://www.traversymedia.com/)
 
 
 download or clone then
