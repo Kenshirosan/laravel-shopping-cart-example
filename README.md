@@ -3,7 +3,7 @@
 
 Laravel E-commerce
 
-Laravel e-commerce example application. Uses Crinsane/LaravelShoppingcart
+Laravel e-commerce example application. Uses [Crinsane/LaravelShoppingcart](https://github.com/Crinsane/LaravelShoppingcart)
 
 Features :
 ---
@@ -18,7 +18,13 @@ Features :
 * Users must confirm their email.
 * Backend with [adminLTE](https://adminlte.io/themes/AdminLTE/index2.html) for laravel, package by [Jeroen Noten](https://github.com/jeroennoten/Laravel-AdminLTE).
 * [fullcalendar.io](https://fullcalendar.io).
-* Google analytics package by [Spatie.be](https://spatie.be/en/opensource/postcards), Don't forget to send them a postcard.
+* Google analytics package by [Spatie.be](https://spatie.be/en/opensource/postcards), Don't forget to send them a postcard. Follow instructions on their github repo for setting up this feature. [repo](https://github.com/spatie/analytics-statistics)
+* Coupon feature package by [Zura Gabievi](https://github.com/zgabievi/laravel-promocodes)
+
+* Very helpful screecasts by [Jeffrey Way](https://laracasts.com)
+* Very helpful screecasts by [Wes Bos](https://wesbos.com)
+* Very helpful screecasts by [Brad Traversy](https://www.traversymedia.com/)
+
 
 download or clone then
 ```
@@ -33,7 +39,7 @@ composer install
 ```
 mv .env.example .env && vim .env
 ```
-update database info, stripe keys, pusher keys, mail driver and keys, and analytics key.
+update database info, stripe keys, pusher keys, mail driver, keys, username, and analytics key.
 update pusher key in bootstrap.js (Echo).
 update stripe key in CheckoutForm.vue
 ```
@@ -42,7 +48,6 @@ php artisan key:generate
 ```
 php artisan config:cache
 ```
-You will face problems with migrations, just change the dates on migration files to match the error message, Didn't do it yet... :/
 ```
 php artisan migrate
 ```
