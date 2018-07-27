@@ -34,8 +34,8 @@
                 this.active ? this.destroy() : this.create();
             },
 
-            create() {
-                axios.post(this.endpoint, this.product)
+            async create() {
+                await axios.post(this.endpoint, this.product)
                     .then(flash(`You liked ${this.product.name}`))
                     .catch(err => flash(`You need to be authenticated to rate this product`, "danger"));
 
@@ -43,8 +43,8 @@
                 this.count++;
             },
 
-            destroy() {
-                axios.delete(this.endpoint, this.product)
+            async destroy() {
+                await axios.delete(this.endpoint, this.product)
                     .then(flash(`You unliked ${this.product.name}`))
                     .catch(err => flash(`Something went wrong, please try again later.`, "danger"));
                 this.active = false;

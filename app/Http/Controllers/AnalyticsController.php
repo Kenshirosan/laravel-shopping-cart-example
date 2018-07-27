@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use \Spatie\Analytics\Period;
+use Spatie\Analytics\Period;
+use Facades\Spatie\Analytics\Analytics;
 
 class AnalyticsController extends Controller
 {
     public function index()
     {
-        $analyticsData = \Analytics::performQuery(
+        $analyticsData = Analytics::performQuery(
             Period::years(1),
             'ga:sessions',
             [

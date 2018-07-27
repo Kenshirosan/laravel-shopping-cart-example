@@ -75,8 +75,8 @@
         },
 
         methods: {
-            emptycart() {
-                axios.delete('/emptyCart').then(flash('Cart empty !'))
+            async emptycart() {
+                await axios.delete('/emptyCart').then(flash('Cart empty !'))
                                         .then(this.products = '')
                                         .then(this.price = '')
                                         .then(cartisempty())

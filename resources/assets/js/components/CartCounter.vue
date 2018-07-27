@@ -29,12 +29,10 @@
         },
 
         methods: {
-            change(count) {
-                setTimeout( () => {
-                    axios.get('/count').then( response => {
-                        this.count = response.data
-                    });
-                }, 500)
+            async change(count) {
+                await axios.get('/count').then( response => {
+                    this.count = response.data
+                });
             },
 
             reset(count) {

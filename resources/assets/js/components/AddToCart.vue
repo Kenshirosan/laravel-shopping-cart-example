@@ -48,16 +48,18 @@
                 const options = this.options;
                 const secondoptions = this.secondoptions;
 
-                if ( (options != undefined && options.length > 0 && this.option == '') || (secondoptions != undefined && secondoptions.length > 0 && this.secondoption == ''))  {
-                    return swal("Wait!",
-                        `Please pick an option for ${this.product.name}`,
-                        "warning");
-                } else {
-                    await axios.post('/cart', this.$data)
-                    await flash(`${this.product.name} was added to cart`)
-                    await productitemscountchanged()
-                    await this.resetOptions()
+                if (options != undefined && options.length > 0 && this.option == '') {
+                    return swal("Wait!", `Please pick an option for ${this.product.name}`, "warning");
                 }
+
+                if (secondoptions != undefined && secondoptions.length > 0 && this.secondoption == '') {
+                    return swal("Wait!", `Please pick a second option for ${this.product.name}`, "warning");
+                }
+
+                await axios.post('/cart', this.$data);
+                await flash(`${this.product.name} was added to cart`);
+                await productitemscountchanged();
+                await this.resetOptions();
             },
 
             resetOptions() {

@@ -22,6 +22,7 @@
 
 <script>
     import Trix from 'trix';
+
     export default {
         props: ['name','placeholder'],
 
@@ -32,8 +33,8 @@
             }
         },
 
-        mounted() {
-            axios.get('/about')
+        async mounted() {
+            await axios.get('/about')
                 .then(res => this.$refs.trix.value = res.data.about);
             },
 
@@ -49,8 +50,8 @@
                 this.value = this.$refs.trix.value
             },
 
-            send() {
-                axios.put('/add-about-page', this.$data)
+            async send() {
+                await axios.put('/add-about-page', this.$data)
                     .then(flash('Success'))
                     .catch(e => console.log(e));
             }

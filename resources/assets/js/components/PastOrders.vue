@@ -58,9 +58,9 @@ import moment from 'moment';
         },
 
         methods: {
-            fetchOrders: function (page_url) {
+            async fetchOrders(page_url) {
                 page_url = page_url || '/user/orders'
-                axios.get(page_url)
+                await axios.get(page_url)
                     .then( (response) => {
                         this.orders = response.data.data
                         this.pagination = response.data
