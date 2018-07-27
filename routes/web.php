@@ -26,8 +26,8 @@ Route::get('/count', function(){
 
 
 // ppl playing with shopping cart
-Route::resource('shop', 'ShopController', ['only' => ['index', 'show']]);
-Route::resource('cart', 'CartController');
+Route::resource('/shop', 'ShopController', ['only' => ['index', 'show']]);
+Route::resource('/cart', 'CartController');
 Route::resource('/cart/{rowId}', 'CartController@destroy', ['only' => ['delete']]);
 Route::patch('/cart/{rowId}', 'CartController@update');
 Route::get('/cart', 'CartController@index');
@@ -35,7 +35,7 @@ Route::post('/cart', 'CartController@store');
 Route::get('/cartcontent', 'CartController@index');
 Route::delete('/emptyCart', 'CartController@emptyCart');
 // Holiday menus or specials..
-Route::get('holidays-special', 'HolidaySpecialController@index');
+Route::get('/holidays-special', 'HolidaySpecialController@index');
 
 Route::middleware(['auth', 'must-be-confirmed'])->group(function () {
     Route::get('/user/profile', 'UserController@edit');
@@ -48,7 +48,7 @@ Route::middleware(['auth', 'must-be-confirmed'])->group(function () {
     //CHECKOUT AND CART ROUTES
     Route::get('/checkout', 'PaymentController@index');
     Route::post('/order', 'PaymentController@store');
-    Route::post('apply-coupon', 'CouponController@update');
+    Route::post('/apply-coupon', 'CouponController@update');
     Route::post('/product/{id}/favorites', 'FavoritesController@store');
     Route::delete('/product/{id}/favorites', 'FavoritesController@destroy');
 });
@@ -74,8 +74,8 @@ Route::middleware(['auth', 'must-be-confirmed', 'employee'])->group(function () 
 Route::middleware(['auth', 'must-be-confirmed', 'employee', 'admin'])->group(function () {
     // testing server performance : send email in a loop
     // Route::get('/test-server', 'OrderProcessedController@index');
-    Route::get('add-about-page', 'AboutController@index');
-    Route::put('add-about-page', 'AboutController@store');
+    Route::get('/add-about-page', 'AboutController@index');
+    Route::put('/add-about-page', 'AboutController@store');
     Route::get('/add-user', 'UserController@create');
     Route::post('/add-user', 'UserController@store');
     Route::get('/delete-user', 'UserController@index');
@@ -94,22 +94,22 @@ Route::middleware(['auth', 'must-be-confirmed', 'employee', 'admin'])->group(fun
     Route::delete('/delete/{slug}/product', 'ProductController@destroy');
     Route::post('/eighty_six/{id}', 'EightySixController@store');
     Route::delete('/delete/eighty_six/{id}', 'EightySixController@destroy');
-    Route::get('create-coupon', 'CouponController@index');
-    Route::post('create-coupon', 'CouponController@store');
+    Route::get('/create-coupon', 'CouponController@index');
+    Route::post('/create-coupon', 'CouponController@store');
     Route::post('/create-disposable-coupon', 'CouponController@storeCouponsForEveryone');
-    Route::delete('coupons/{id}/delete', 'CouponController@destroy');
-    Route::get('add-option-group', 'OptionGroupController@index');
-    Route::post('add-option-group', 'OptionGroupController@store');
-    Route::delete('delete-option-group/{option}', 'OptionGroupController@destroy');
-    Route::get('add-options', 'OptionsController@index');
-    Route::post('add-options', 'OptionsController@store');
-    Route::get('add-second-option-group', 'SecondOptionGroupController@index');
-    Route::post('add-second-option-group', 'SecondOptionGroupController@store');
-    Route::delete('delete-second-option-group/{option}', 'SecondOptionGroupController@destroy');
-    Route::get('add-second-options', 'SecondOptionsController@index');
-    Route::post('add-second-options', 'SecondOptionsController@store');
-    Route::get('add-category', 'CategoriesController@create');
-    Route::post('add-category', 'CategoriesController@store');
+    Route::delete('/coupons/{id}/delete', 'CouponController@destroy');
+    Route::get('/add-option-group', 'OptionGroupController@index');
+    Route::post('/add-option-group', 'OptionGroupController@store');
+    Route::delete('/delete-option-group/{option}', 'OptionGroupController@destroy');
+    Route::get('/add-options', 'OptionsController@index');
+    Route::post('/add-options', 'OptionsController@store');
+    Route::get('/add-second-option-group', 'SecondOptionGroupController@index');
+    Route::post('/add-second-option-group', 'SecondOptionGroupController@store');
+    Route::delete('/delete-second-option-group/{option}', 'SecondOptionGroupController@destroy');
+    Route::get('/add-second-options', 'SecondOptionsController@index');
+    Route::post('/add-second-options', 'SecondOptionsController@store');
+    Route::get('/add-category', 'CategoriesController@create');
+    Route::post('/add-category', 'CategoriesController@store');
     Route::delete('/delete-category/{id}', 'CategoriesController@destroy');
     Route::get('/message/{id}', 'MessageController@show');
     Route::delete('/delete/{id}', 'MessageController@destroy');

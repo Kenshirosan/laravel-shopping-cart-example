@@ -21,6 +21,10 @@ class HolidaySpecialController extends Controller
     {
         $titles = HolidayTitle::all();
 
+        if (request()->wantsJson()) {
+            return $titles;
+        }
+
         return view('admin.add-holiday-title', compact('titles'));
     }
 
@@ -34,7 +38,7 @@ class HolidaySpecialController extends Controller
             'holiday_page_title' => request('holiday_page_title')
         ]);
 
-        return back()->with('success_message', 'Title added !');
+        return response(['Status: ok'], 200);
     }
 
     public function destroy($id)

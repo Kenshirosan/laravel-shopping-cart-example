@@ -5,32 +5,10 @@
 @endsection
 
 @section('content')
-<div class="row">
-    <div class="container">
-        <h1 class="text-center text-primary">Add a special's title</h1>
-        <form class="form-horizontal" method="POST" action="/add-holiday-title">
-            {{ csrf_field() }}
-            <div class="form-group{{ $errors->has('holiday_page_title') ? ' has-error' : '' }}">
-                <label for="holiday_page_title" class="col-md-4 control-label">Enter a title</label>
-                <div class="col-md-6">
-                    <input id="holiday_page_title" type="text" class="form-control" name="holiday_page_title" value="{{ old('holiday_page_title') }}" autofocus required>
-                    @if ($errors->has('holiday_page_title'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('holiday_page_title') }}</strong>
-                        </span>
-                    @endif
-                    <br>
-                    <div class="form-group">
-                        <div class="col-md-12">
-                            <input type=submit value='Submit' class="btn btn-info">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-<div class="row">
+
+<add-holiday-title></add-holiday-title>
+
+{{-- <div class="row">
     <div class="container">
     @if(! $titles->isEmpty())
             <div class="col-md-6">
@@ -50,5 +28,5 @@
             </div>
         @endif
     </div>
-</div>
+</div> --}}
 @endsection

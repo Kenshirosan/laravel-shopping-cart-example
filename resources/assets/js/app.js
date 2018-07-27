@@ -14,6 +14,7 @@ Vue.component('yearly-stats', require('./components/YearlyStats.vue'));
 Vue.component('analytics', require('./components/Analytics.vue'));
 Vue.component('toggle', require('./components/Toggle.vue'));
 Vue.component("Wysiwig", require("./components/Wysiwig.vue"));
+Vue.component('add-holiday-title', require('./components/AddHolidayTitle'))
 
 const app = new Vue({
     el: '#app',
