@@ -47,5 +47,6 @@
 @endif
 
 @yield('adminlte_js')
+@yield('search-script')
 </body>
 </html>

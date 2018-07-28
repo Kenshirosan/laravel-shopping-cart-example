@@ -9,7 +9,7 @@ class SearchController extends Controller
 {
     public function index()
     {
-        return view('layouts.search');
+        return view('admin.search');
     }
 
 
@@ -25,7 +25,7 @@ class SearchController extends Controller
             $orders = Order::where('id', $term)->get();
             $count = 1;
 
-            return view('layouts.searchresult', compact('orders', 'count'));
+            return view('admin.searchresult', compact('orders', 'count'));
         }
 
         $this->validate($request ,[
@@ -35,6 +35,6 @@ class SearchController extends Controller
         $orders = Order::where('last_name', 'LIKE', "%{$request->term}%")->get();
         $count = 1;
 
-        return view('layouts.searchresult', compact('orders', 'count'));
+        return view('admin.searchresult', compact('orders', 'count'));
     }
 }

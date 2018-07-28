@@ -62,7 +62,7 @@
         methods: {
 
             async addTitle() {
-            const title = { holiday_page_title: this.holiday_page_title };
+                const title = { holiday_page_title: this.holiday_page_title };
 
                 await axios.post('/add-holiday-title', title)
                     .then(res => {

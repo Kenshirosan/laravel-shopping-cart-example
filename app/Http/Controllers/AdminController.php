@@ -23,7 +23,8 @@ class AdminController extends Controller
         $secondOptionGroups = SecondOptionGroup::all();
         $orders = Order::limit(5)->orderBy('created_at', 'desc')->get();
 
-        return view('admin.restaurantindex', compact('orders', 'optionGroups', 'secondOptionGroups', 'categories'));
+        return view('admin.restaurantindex',
+            compact('orders', 'optionGroups', 'secondOptionGroups', 'categories'));
     }
 
     /**
@@ -34,18 +35,22 @@ class AdminController extends Controller
 
     public function show()
     {
-        $yearlyTotal = ( new Order )->yearlyTotal();
+        $orders = new Order();
 
-        $totalOrders = ( new Order )->totalOrders();
+        $yearlyTotal = $orders->yearlyTotal();
 
-        $taxcollection = ( new Order )->taxCollection();
+        $totalOrders = $orders->totalOrders();
 
-        $totalOrdersYearBefore = ( new Order )->totalOrdersYearBefore();
+        $taxcollection = $orders->taxCollection();
 
-        $taxcollectionYearBefore = ( new Order )->taxCollectionYearBefore();
+        $totalOrdersYearBefore = $orders->totalOrdersYearBefore();
 
-        $averageOrder = ( new Order )->averageOrder();
+        $taxcollectionYearBefore = $orders->taxCollectionYearBefore();
 
-        return view('admin.panel', compact('yearlyTotal', 'totalOrders', 'taxcollection', 'totalOrdersYearBefore', 'taxcollectionYearBefore', 'averageOrder'));
+        $averageOrder = $orders->averageOrder();
+
+        return view('admin.panel',
+            compact('yearlyTotal', 'totalOrders', 'taxcollection', 'totalOrdersYearBefore',
+            'taxcollectionYearBefore', 'averageOrder'));
     }
 }

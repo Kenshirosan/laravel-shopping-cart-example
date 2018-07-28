@@ -16,7 +16,7 @@ class OptionsController extends Controller
         $options = Option::all();
         $action = $request->path();
 
-        return view('layouts.addOptions', compact('optionGroups', 'options', 'action'));
+        return view('admin.addOptions', compact('optionGroups', 'options', 'action'));
     }
 
     public function store(OptionRequest $request)

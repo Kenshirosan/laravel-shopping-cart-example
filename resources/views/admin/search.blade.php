@@ -24,18 +24,7 @@
     </div>
 </div>
 @endsection
-<script src="/js/app.js"></script>
-<script>
-    $(document).ready(function(){
-        $("#search").keyup(function(){
-            var str=  $("#search").val();
-            if(str == "") {
-                $( "#txtHint" ).html("<em>Results ..</em>");
-            }else {
-                $.get( "{{ url('/livesearch?term=') }}" + str, function( data ) {
-                    $( "#txtHint" ).html( data );
-                });
-            }
-        });
-    });
-</script>
+
+@section('search-script')
+    @include('javascript.research')
+@endsection

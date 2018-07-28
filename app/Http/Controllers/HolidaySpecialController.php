@@ -42,7 +42,7 @@ class HolidaySpecialController extends Controller
             return response(['ok'], 200);
         }
 
-        return response(['error' => 'Something went wrong'], 402);
+        return response(['error' => 'Something went wrong'], 400);
 
     }
 

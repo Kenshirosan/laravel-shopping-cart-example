@@ -86,7 +86,7 @@ class UserController extends Controller
                         ->orderBy('id', 'desc')
                         ->get();
 
-        return view('layouts.userprofile', compact('user', 'orders'));
+        return view('users.userprofile', compact('user', 'orders'));
     }
 
     public function update(Request $request, $id)
@@ -126,7 +126,9 @@ class UserController extends Controller
                 $user->phone_number = formatPhoneNumber($request->phone_number);
                 $user->save();
 
-                return redirect('/user/' . Auth::user()->name .'/profile')->with(['success_message' => 'Credentials successfully updated']);
+                return redirect('/edit/profile')->with([
+                    'success_message' => 'Credentials successfully updated'
+                ]);
             }
 
         }

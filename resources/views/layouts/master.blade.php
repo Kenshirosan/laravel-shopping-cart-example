@@ -51,7 +51,7 @@
         <script src="/js/app.js"></script>
         <script src="/js/smoothscroll.js"></script>
         <script src="/js/back-to-top.js"></script>
-        @yield('extra-js')
+        @yield('update-cart')
         @yield('dropzone.script')
         @yield('lity-js')
         @yield('delete-product-script')

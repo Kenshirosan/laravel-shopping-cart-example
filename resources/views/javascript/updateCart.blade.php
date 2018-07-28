@@ -2,7 +2,7 @@
     (function() {
         $('.quantity').on('change', function() {
             let id = $(this).attr('data-id'),
-                url = '/cart/' + id,
+                url = `/cart/${id}`,
                 data = {'quantity': this.value};
 
             axios.patch(url, data)

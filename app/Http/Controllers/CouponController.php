@@ -17,7 +17,7 @@ class CouponController extends Controller
 
         $couponsForAll = Promocode::where('is_disposable', false)->get();
 
-        return view('layouts.createCoupon', compact('coupons', 'couponsForAll'));
+        return view('admin.createCoupon', compact('coupons', 'couponsForAll'));
     }
 
 

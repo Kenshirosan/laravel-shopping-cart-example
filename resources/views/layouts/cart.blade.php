@@ -107,6 +107,6 @@
     <div class="mb-100"></div>
 @endsection
 
-@section('extra-js')
+@section('update-cart')
     @include('javascript.updateCart')
 @endsection
