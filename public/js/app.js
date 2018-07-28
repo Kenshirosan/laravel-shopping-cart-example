@@ -20088,7 +20088,7 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(150);
-module.exports = __webpack_require__(282);
+module.exports = __webpack_require__(285);
 
 
 /***/ }),
@@ -20114,7 +20114,7 @@ Vue.component('yearly-stats', __webpack_require__(263));
 Vue.component('analytics', __webpack_require__(266));
 Vue.component('toggle', __webpack_require__(269));
 Vue.component("Wysiwig", __webpack_require__(274));
-Vue.component('add-holiday-title', __webpack_require__(292));
+Vue.component('add-holiday-title', __webpack_require__(282));
 
 var app = new Vue({
     el: '#app',
@@ -74899,29 +74899,14 @@ if (false) {
 
 /***/ }),
 /* 282 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 283 */,
-/* 284 */,
-/* 285 */,
-/* 286 */,
-/* 287 */,
-/* 288 */,
-/* 289 */,
-/* 290 */,
-/* 291 */,
-/* 292 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(295)
+var __vue_script__ = __webpack_require__(283)
 /* template */
-var __vue_template__ = __webpack_require__(296)
+var __vue_template__ = __webpack_require__(284)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -74960,9 +74945,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 293 */,
-/* 294 */,
-/* 295 */
+/* 283 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -75018,23 +75001,26 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             holiday_page_title: this.value,
-            title: '',
-            id: ''
+            titles: '',
+            error: ''
         };
     },
     mounted: function mounted() {
-        this.getTitle();
+        this.getTitles();
     },
 
 
     methods: {
         addTitle: function () {
             var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+                var _this = this;
+
                 var title;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
                     while (1) {
@@ -75044,8 +75030,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 _context.next = 3;
                                 return axios.post('/add-holiday-title', title).then(function (res) {
                                     return flash('Success');
-                                }).then(this.getTitle()).then(this.holiday_page_title = '').catch(function (err) {
-                                    return console.log(err);
+                                }).then(this.getTitles()).then(this.holiday_page_title = '').catch(function (err) {
+                                    _this.error = err.response.data.message;
                                 });
 
                             case 3:
@@ -75062,9 +75048,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
             return addTitle;
         }(),
-        getTitle: function () {
+        getTitles: function () {
             var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
-                var _this = this;
+                var _this2 = this;
 
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
                     while (1) {
@@ -75072,9 +75058,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                             case 0:
                                 _context2.next = 2;
                                 return axios.get('/add-holiday-title').then(function (res) {
-                                    _this.title = res.data;
+                                    if (res != []) _this2.titles = res.data;
                                 }).catch(function (err) {
-                                    return console.log(err);
+                                    _this2.error = err.response.data;
                                 });
 
                             case 2:
@@ -75085,30 +75071,28 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 }, _callee2, this);
             }));
 
-            function getTitle() {
+            function getTitles() {
                 return _ref2.apply(this, arguments);
             }
 
-            return getTitle;
+            return getTitles;
         }(),
         deleteTitle: function () {
-            var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
-                var id;
+            var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(id) {
+                var _this3 = this;
+
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
                     while (1) {
                         switch (_context3.prev = _context3.next) {
                             case 0:
-                                id = this.id;
-
-                                console.log(id);
-                                _context3.next = 4;
+                                _context3.next = 2;
                                 return axios.delete('/holiday/' + id + '/delete').then(function (res) {
-                                    return console.log(res.data);
-                                }).catch(function (err) {
-                                    return console.log(err);
+                                    return flash('success');
+                                }).then(this.getTitles()).catch(function (err) {
+                                    _this3.error = err.message;
                                 });
 
-                            case 4:
+                            case 2:
                             case 'end':
                                 return _context3.stop();
                         }
@@ -75116,7 +75100,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 }, _callee3, this);
             }));
 
-            function deleteTitle() {
+            function deleteTitle(_x) {
                 return _ref3.apply(this, arguments);
             }
 
@@ -75126,7 +75110,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 });
 
 /***/ }),
-/* 296 */
+/* 284 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -75191,11 +75175,18 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _vm._m(0),
+                _vm.error
+                  ? _c("span", { staticClass: "help-block" }, [
+                      _c("strong", {
+                        staticClass: "text-danger",
+                        domProps: { innerHTML: _vm._s(_vm.error) }
+                      })
+                    ])
+                  : _vm._e(),
                 _vm._v(" "),
                 _c("br"),
                 _vm._v(" "),
-                _vm._m(1)
+                _vm._m(0)
               ])
             ])
           ]
@@ -75204,12 +75195,12 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
-      _c(
-        "div",
-        { staticClass: "container" },
-        _vm._l(_vm.title, function(item) {
-          return _vm.title
-            ? _c("div", { staticClass: "col-md-6" }, [
+      _vm.titles.length > 0
+        ? _c(
+            "div",
+            { staticClass: "container" },
+            _vm._l(_vm.titles, function(item) {
+              return _c("div", { staticClass: "col-md-6" }, [
                 _c("p", {
                   domProps: { innerHTML: _vm._s(item.holiday_page_title) }
                 }),
@@ -75220,7 +75211,7 @@ var render = function() {
                     on: {
                       submit: function($event) {
                         $event.preventDefault()
-                        _vm.deleteTitle()
+                        _vm.deleteTitle(item.id)
                       }
                     }
                   },
@@ -75230,23 +75221,23 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.id,
-                          expression: "id"
+                          value: item.id,
+                          expression: "item.id"
                         }
                       ],
                       attrs: {
                         type: "hidden",
-                        name: "item",
-                        id: "id",
+                        name: "itemid",
+                        id: "itemid",
                         value: "item.id"
                       },
-                      domProps: { value: _vm.id },
+                      domProps: { value: item.id },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.id = $event.target.value
+                          _vm.$set(item, "id", $event.target.value)
                         }
                       }
                     }),
@@ -75262,27 +75253,13 @@ var render = function() {
                   ]
                 )
               ])
-            : _c("div", { staticClass: "col-md-6" }, [
-                _c("h3", { staticClass: "text-info" }, [
-                  _vm._v("No Holiday page")
-                ]),
-                _vm._v(" "),
-                _vm._m(2)
-              ])
-        })
-      )
+            })
+          )
+        : _c("div", { staticClass: "container" }, [_vm._m(1)])
     ])
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "help-block" }, [
-      _c("strong", [_vm._v("error span")])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -75300,14 +75277,21 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "text-primary" }, [
-      _vm._v("Please check you deleted your "),
-      _c("strong", [
-        _c(
-          "a",
-          { staticClass: "text-danger", attrs: { href: "/holidays-special" } },
-          [_vm._v("specials")]
-        )
+    return _c("div", { staticClass: "col-md-6" }, [
+      _c("h3", { staticClass: "text-info" }, [_vm._v("No Holiday page")]),
+      _vm._v(" "),
+      _c("p", { staticClass: "text-primary" }, [
+        _vm._v("Please check you deleted your "),
+        _c("strong", [
+          _c(
+            "a",
+            {
+              staticClass: "text-danger",
+              attrs: { href: "/holidays-special" }
+            },
+            [_vm._v("specials")]
+          )
+        ])
       ])
     ])
   }
@@ -75320,6 +75304,12 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-5a8f76ba", module.exports)
   }
 }
+
+/***/ }),
+/* 285 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

@@ -43,10 +43,16 @@ class HolidaySpecialController extends Controller
 
     public function destroy($id)
     {
-        $title = HolidayTitle::where('id', $id);
+        $title = HolidayTitle::where('id', $id)->firstOrFail();
 
-        $title->delete();
+        if ($title) {
 
-        return back()->with('success_message', 'Successfully deleted');
+            $title->delete();
+
+            return response(['ok'], 200);
+        }
+
+        return response('something went wrong', 500);
+
     }
 }
