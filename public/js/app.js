@@ -75029,9 +75029,13 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 title = { holiday_page_title: this.holiday_page_title };
                                 _context.next = 3;
                                 return axios.post('/add-holiday-title', title).then(function (res) {
-                                    return flash('Success');
-                                }).then(this.getTitles()).then(this.holiday_page_title = '').catch(function (err) {
-                                    _this.error = err.response.data.message;
+                                    if (res.status === 200) {
+                                        flash('Success');
+                                        _this.getTitles();
+                                        return _this.holiday_page_title = '';
+                                    }
+                                }).catch(function (err) {
+                                    return _this.error = err.response.data.error || err.response.data.message;
                                 });
 
                             case 3:
@@ -75058,9 +75062,11 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                             case 0:
                                 _context2.next = 2;
                                 return axios.get('/add-holiday-title').then(function (res) {
-                                    if (res != []) _this2.titles = res.data;
+                                    if (res.status === 200) {
+                                        return _this2.titles = res.data;
+                                    }
                                 }).catch(function (err) {
-                                    _this2.error = err.response.data;
+                                    _this2.error = 'Something went wrong with your request, please contact your webmaster or try again later';
                                 });
 
                             case 2:
@@ -75087,9 +75093,12 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                             case 0:
                                 _context3.next = 2;
                                 return axios.delete('/holiday/' + id + '/delete').then(function (res) {
-                                    return flash('success');
-                                }).then(this.getTitles()).catch(function (err) {
-                                    _this3.error = err.message;
+                                    if (res.status === 200) {
+                                        flash('success');
+                                        _this3.getTitles();
+                                    }
+                                }).catch(function (err) {
+                                    _this3.error = err.message + ', Please try again later or contact your webmaster';
                                 });
 
                             case 2:

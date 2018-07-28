@@ -22,10 +22,10 @@ class HolidaySpecialController extends Controller
         $titles = HolidayTitle::all();
 
         if (request()->wantsJson()) {
-            return $titles;
+            return response($titles, 200);
         }
 
-        return view('admin.add-holiday-title', compact('titles'));
+        return view('admin.add-holiday-title');
     }
 
     public function store(Request $request)
@@ -34,11 +34,16 @@ class HolidaySpecialController extends Controller
             'holiday_page_title' => 'required|string|max:50'
         ]);
 
-        HolidayTitle::create([
+        $title = HolidayTitle::create([
             'holiday_page_title' => request('holiday_page_title')
         ]);
 
-        return response(['Status: ok'], 200);
+        if ($title) {
+            return response(['ok'], 200);
+        }
+
+        return response(['error' => 'Something went wrong'], 402);
+
     }
 
     public function destroy($id)

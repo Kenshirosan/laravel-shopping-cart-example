@@ -65,30 +65,40 @@
             const title = { holiday_page_title: this.holiday_page_title };
 
                 await axios.post('/add-holiday-title', title)
-                    .then(res => flash('Success'))
-                    .then(this.getTitles())
-                    .then(this.holiday_page_title = '')
+                    .then(res => {
+                        if(res.status === 200) {
+                            flash('Success');
+                            this.getTitles();
+                            return this.holiday_page_title = '';
+                        }
+                    })
                     .catch(err => {
-                        this.error = err.response.data.message
+                        return this.error = err.response.data.error || err.response.data.message
                     });
             },
 
             async getTitles() {
                 await axios.get('/add-holiday-title')
                     .then(res => {
-                        if(res != []) this.titles = res.data
+                        if(res.status === 200) {
+                            return this.titles = res.data
+                        }
                     })
-                    .catch(err => {
-                        this.error = err.response.data;
+                    .catch((err) => {
+                        this.error = 'Something went wrong with your request, please contact your webmaster or try again later';
                     });
             },
 
             async deleteTitle(id) {
                 await axios.delete(`/holiday/${id}/delete`)
-                    .then(res => flash('success'))
-                    .then(this.getTitles())
+                    .then(res => {
+                        if(res.status === 200) {
+                            flash('success');
+                            this.getTitles();
+                        }
+                    })
                     .catch(err => {
-                        this.error = err.message
+                        this.error = `${err.message}, Please try again later or contact your webmaster`;
                     });
             }
         }
