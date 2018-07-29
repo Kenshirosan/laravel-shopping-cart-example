@@ -20115,6 +20115,7 @@ Vue.component('analytics', __webpack_require__(266));
 Vue.component('toggle', __webpack_require__(269));
 Vue.component("Wysiwig", __webpack_require__(274));
 Vue.component('add-holiday-title', __webpack_require__(282));
+Vue.component('add-options', __webpack_require__(295));
 
 var app = new Vue({
     el: '#app',
@@ -75319,6 +75320,492 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 286 */,
+/* 287 */,
+/* 288 */,
+/* 289 */,
+/* 290 */,
+/* 291 */,
+/* 292 */,
+/* 293 */,
+/* 294 */,
+/* 295 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(3)
+/* script */
+var __vue_script__ = __webpack_require__(296)
+/* template */
+var __vue_template__ = __webpack_require__(297)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/AddOptions.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-283cf498", Component.options)
+  } else {
+    hotAPI.reload("data-v-283cf498", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 296 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            option_group_id: '',
+            name: '',
+            items: [],
+            error: ''
+        };
+    },
+    created: function created() {
+        this.fetchItems();
+    },
+
+
+    methods: {
+        addOptions: function () {
+            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+                var _this = this;
+
+                var option;
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+                    while (1) {
+                        switch (_context.prev = _context.next) {
+                            case 0:
+                                option = {
+                                    name: this.$data.name,
+                                    option_group_id: this.$data.option_group_id
+                                };
+                                _context.next = 3;
+                                return axios.post('/add-options', option).then(function (res) {
+                                    _this.fetchItems();
+                                    _this.resetForm();
+                                    flash('Success');
+                                }).catch(function (err) {
+                                    flash('Something went wrong', 'danger');
+                                    _this.error = err.response.data.message;
+                                });
+
+                            case 3:
+                            case 'end':
+                                return _context.stop();
+                        }
+                    }
+                }, _callee, this);
+            }));
+
+            function addOptions() {
+                return _ref.apply(this, arguments);
+            }
+
+            return addOptions;
+        }(),
+        fetchItems: function () {
+            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+                var _this2 = this;
+
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+                    while (1) {
+                        switch (_context2.prev = _context2.next) {
+                            case 0:
+                                _context2.next = 2;
+                                return axios.get('/add-options').then(function (response) {
+                                    _this2.items = response.data;
+                                }).catch(function (err) {
+                                    return flash('Something went wrong');
+                                });
+
+                            case 2:
+                            case 'end':
+                                return _context2.stop();
+                        }
+                    }
+                }, _callee2, this);
+            }));
+
+            function fetchItems() {
+                return _ref2.apply(this, arguments);
+            }
+
+            return fetchItems;
+        }(),
+        deleteItem: function () {
+            var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(id) {
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+                    while (1) {
+                        switch (_context3.prev = _context3.next) {
+                            case 0:
+                                _context3.next = 2;
+                                return axios.delete('/delete/option/' + id).then(function (res) {
+                                    return flash('success');
+                                }).catch(function (err) {
+                                    return flash('Something went wrong', 'danger');
+                                });
+
+                            case 2:
+                                _context3.next = 4;
+                                return this.fetchItems();
+
+                            case 4:
+                            case 'end':
+                                return _context3.stop();
+                        }
+                    }
+                }, _callee3, this);
+            }));
+
+            function deleteItem(_x) {
+                return _ref3.apply(this, arguments);
+            }
+
+            return deleteItem;
+        }(),
+        resetForm: function resetForm() {
+            this.option_group_id = '', this.name = '';
+        },
+        clearError: function clearError() {
+            this.error = '';
+        }
+    }
+});
+
+/***/ }),
+/* 297 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "text-center" }, [
+        _c("h1", [_vm._v("Items")]),
+        _vm._v(" "),
+        _vm.error
+          ? _c("span", { staticClass: "help-block" }, [
+              _c("strong", { staticClass: "text-danger" }, [
+                _vm._v(_vm._s(_vm.error))
+              ]),
+              _vm._v(" "),
+              _c("strong", { staticClass: "text-danger" }, [
+                _vm._v(_vm._s(_vm.errorMessage))
+              ])
+            ])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "form",
+          {
+            staticClass: "form-horizontal",
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                _vm.addOptions()
+              }
+            }
+          },
+          [
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-4 control-label",
+                  attrs: { for: "name" }
+                },
+                [_vm._v("Option Name")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.name,
+                      expression: "name"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    id: "name",
+                    placeholder: "ex: Long sleeve, Short sleeve...",
+                    type: "text",
+                    name: "name",
+                    autofocus: "",
+                    required: ""
+                  },
+                  domProps: { value: _vm.name },
+                  on: {
+                    focus: _vm.clearError,
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.name = $event.target.value
+                    }
+                  }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-md-4 control-label",
+                  attrs: { for: "option" }
+                },
+                [_vm._v("Option Group")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6" }, [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.option_group_id,
+                        expression: "option_group_id"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { id: "option_group_id", required: "" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.option_group_id = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "option",
+                      { staticClass: "reset", attrs: { value: "" } },
+                      [_vm._v("Choose")]
+                    ),
+                    _vm._v(" "),
+                    _vm._l(_vm.items[0], function(optiongroup) {
+                      return _c(
+                        "option",
+                        {
+                          attrs: { name: "option_group_id" },
+                          domProps: { value: optiongroup.id }
+                        },
+                        [
+                          _vm._v(
+                            _vm._s(optiongroup.name) +
+                              "\n                        "
+                          )
+                        ]
+                      )
+                    })
+                  ],
+                  2
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._m(0)
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _vm._l(_vm.items[0], function(optiongroup) {
+        return _c("div", { staticClass: "col-md-4" }, [
+          _c(
+            "ul",
+            { staticClass: "list-group" },
+            [
+              _c(
+                "li",
+                { staticClass: "list-group-item list-group-item-heading" },
+                [
+                  _c("h3", { staticClass: "text-primary" }, [
+                    _vm._v("Group: " + _vm._s(optiongroup.name))
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _vm._l(optiongroup.options, function(option) {
+                return _c("li", { staticClass: "list-group-item" }, [
+                  _vm._v(_vm._s(option.name) + "\n                "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger btn-xs pull-right",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.deleteItem(option.id)
+                        }
+                      }
+                    },
+                    [_vm._v("Delete")]
+                  )
+                ])
+              })
+            ],
+            2
+          )
+        ])
+      })
+    ],
+    2
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", {
+        staticClass: "col-md-4 control-label",
+        attrs: { for: "name" }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-6" }, [
+        _c("input", {
+          staticClass: "btn btn-primary",
+          attrs: { type: "submit", value: "Submit" }
+        })
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-283cf498", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

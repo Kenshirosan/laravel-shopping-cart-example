@@ -12,11 +12,13 @@ class OptionsController extends Controller
 {
     public function index(Request $request)
     {
-        $optionGroups = OptionGroup::all();
-        $options = Option::all();
-        $action = $request->path();
+        $optionGroups = OptionGroup::with('options')->get();
 
-        return view('admin.addOptions', compact('optionGroups', 'options', 'action'));
+        if ($request->wantsJson()) {
+            return response([$optionGroups], 200);
+        }
+
+        return view('admin.addOptions');
     }
 
     public function store(OptionRequest $request)
@@ -32,5 +34,14 @@ class OptionsController extends Controller
         } catch (\Exception $e) {
             return back()->with(['error_message' => $e->getMessage() ]);
         }
+    }
+
+    public function destroy($id)
+    {
+        $option = Option::where('id', $id)->firstOrFail();
+
+        $option->delete();
+
+        return response(['ok'], 200);
     }
 }

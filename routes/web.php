@@ -103,6 +103,7 @@ Route::middleware(['auth', 'must-be-confirmed', 'employee', 'admin'])->group(fun
     Route::delete('/delete-option-group/{option}', 'OptionGroupController@destroy');
     Route::get('/add-options', 'OptionsController@index');
     Route::post('/add-options', 'OptionsController@store');
+    Route::delete('/delete/option/{id}', 'OptionsController@destroy');
     Route::get('/add-second-option-group', 'SecondOptionGroupController@index');
     Route::post('/add-second-option-group', 'SecondOptionGroupController@store');
     Route::delete('/delete-second-option-group/{option}', 'SecondOptionGroupController@destroy');
