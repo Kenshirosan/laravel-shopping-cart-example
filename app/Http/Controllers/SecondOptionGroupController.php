@@ -13,7 +13,11 @@ class SecondOptionGroupController extends Controller
         $action = $request->path();
         $deleteMethod = '/delete-second-option-group/';
 
-        return view('admin.addOptionGroup', compact('optionGroups', 'action', 'deleteMethod'));
+        if ($request->wantsJson()) {
+            return response([$optionGroups, $deleteMethod], 200);
+        }
+
+        return view('admin.addOptionGroup', compact('action'));
     }
 
     public function store(Request $request)
@@ -27,8 +31,10 @@ class SecondOptionGroupController extends Controller
                 'name' => request('name')
             ]);
 
+            return response(['success_message', 'Option Group added'], 200);
+
         } catch (\Exception $e) {
-            return back()->with(['error_message' => $e->getMessage() ]);
+            return response(['error_message' => $e->getMessage() ], 400);
         }
 
         return back()->with('success_message', 'Option Group added');
@@ -40,6 +46,6 @@ class SecondOptionGroupController extends Controller
 
         $optionGroup->delete();
 
-        return back()->with('success_message', 'Option Group Deleted.');
+        return response(['success_message', 'Option Group Deleted.'], 200);
     }
 }

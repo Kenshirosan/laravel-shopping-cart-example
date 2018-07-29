@@ -20116,6 +20116,7 @@ Vue.component('toggle', __webpack_require__(269));
 Vue.component("Wysiwig", __webpack_require__(274));
 Vue.component('add-holiday-title', __webpack_require__(282));
 Vue.component('add-options', __webpack_require__(295));
+Vue.component('add-option-group', __webpack_require__(298));
 
 var app = new Vue({
     el: '#app',
@@ -75806,6 +75807,373 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-283cf498", module.exports)
+  }
+}
+
+/***/ }),
+/* 298 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(3)
+/* script */
+var __vue_script__ = __webpack_require__(299)
+/* template */
+var __vue_template__ = __webpack_require__(300)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/AddOptionGroup.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-19f27920", Component.options)
+  } else {
+    hotAPI.reload("data-v-19f27920", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 299 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['action'],
+
+    data: function data() {
+        return {
+            error: '',
+            optiongroups: '',
+            name: '',
+            deletepath: ''
+        };
+    },
+    created: function created() {
+        this.fetchItems();
+    },
+
+
+    methods: {
+        fetchItems: function () {
+            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+                var _this = this;
+
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+                    while (1) {
+                        switch (_context.prev = _context.next) {
+                            case 0:
+                                _context.next = 2;
+                                return axios.get(this.$props.action).then(function (response) {
+                                    _this.optiongroups = response.data[0];
+                                    _this.deletepath = response.data[1];
+                                }).catch(function (err) {
+                                    _this.error = err.message;
+                                    flash('Something went wrong', 'danger');
+                                });
+
+                            case 2:
+                            case 'end':
+                                return _context.stop();
+                        }
+                    }
+                }, _callee, this);
+            }));
+
+            function fetchItems() {
+                return _ref.apply(this, arguments);
+            }
+
+            return fetchItems;
+        }(),
+        addOptionGroup: function () {
+            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+                var _this2 = this;
+
+                var group;
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+                    while (1) {
+                        switch (_context2.prev = _context2.next) {
+                            case 0:
+                                group = { name: this.$data.name };
+                                _context2.next = 3;
+                                return axios.post(this.$props.action, group).then(function (res) {
+                                    _this2.fetchItems();
+                                    _this2.resetForm();
+                                    return flash(group.name + ' successfully added');
+                                }).catch(function (err) {
+                                    _this2.error = err.message;
+
+                                    setTimeout(function (err) {
+                                        _this2.error = '';
+                                    }, 2000);
+
+                                    flash(err.message + ' an option with the same name probably exists', 'danger');
+                                });
+
+                            case 3:
+                            case 'end':
+                                return _context2.stop();
+                        }
+                    }
+                }, _callee2, this);
+            }));
+
+            function addOptionGroup() {
+                return _ref2.apply(this, arguments);
+            }
+
+            return addOptionGroup;
+        }(),
+        deleteGroup: function () {
+            var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(id) {
+                var _this3 = this;
+
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+                    while (1) {
+                        switch (_context3.prev = _context3.next) {
+                            case 0:
+                                _context3.next = 2;
+                                return axios.delete('' + this.deletepath + id).then(function (res) {
+                                    flash('' + res.data[1]);
+                                    _this3.fetchItems();
+                                    _this3.resetForm();
+                                }).catch(function (err) {
+                                    return console.log(err);
+                                });
+
+                            case 2:
+                            case 'end':
+                                return _context3.stop();
+                        }
+                    }
+                }, _callee3, this);
+            }));
+
+            function deleteGroup(_x) {
+                return _ref3.apply(this, arguments);
+            }
+
+            return deleteGroup;
+        }(),
+        resetForm: function resetForm() {
+            this.name = '';
+        }
+    }
+});
+
+/***/ }),
+/* 300 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "form",
+      {
+        staticClass: "form-horizontal",
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            _vm.addOptionGroup()
+          }
+        }
+      },
+      [
+        _c("div", { staticClass: "form-group" }, [
+          _c(
+            "label",
+            { staticClass: "col-md-4 control-label", attrs: { for: "name" } },
+            [_vm._v("Option Group Name")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-6" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.name,
+                  expression: "name"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                id: "name",
+                placeholder:
+                  "Steak, Eggs,something that have many ways of serving..",
+                type: "text",
+                name: "name",
+                autofocus: "",
+                required: ""
+              },
+              domProps: { value: _vm.name },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.name = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _vm.error
+              ? _c("span", { staticClass: "help-block" }, [
+                  _c("strong", {
+                    staticClass: "text-danger",
+                    domProps: { innerHTML: _vm._s(_vm.error) }
+                  })
+                ])
+              : _vm._e()
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(0)
+      ]
+    ),
+    _vm._v(" "),
+    _vm.optiongroups
+      ? _c(
+          "div",
+          { staticClass: "container" },
+          [
+            _c("h2", { staticClass: "text-info" }, [
+              _vm._v("Groups available :")
+            ]),
+            _vm._v(" "),
+            _vm._l(_vm.optiongroups, function(group) {
+              return _c("div", { staticClass: "col-md-2" }, [
+                _c("p", { domProps: { textContent: _vm._s(group.name) } }),
+                _vm._v(" "),
+                _c(
+                  "form",
+                  {
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        _vm.deleteGroup(group.id)
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-xs btn-danger",
+                        attrs: { type: "submit" }
+                      },
+                      [_vm._v("Delete")]
+                    )
+                  ]
+                )
+              ])
+            })
+          ],
+          2
+        )
+      : _vm._e()
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { staticClass: "col-md-4 control-label" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-6" }, [
+        _c("input", {
+          staticClass: "btn btn-primary",
+          attrs: { type: "submit", value: "Submit" }
+        })
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-19f27920", module.exports)
   }
 }
 

@@ -17,7 +17,7 @@ class OptionsController extends Controller
         $action = $request->path();
 
         if ($request->wantsJson()) {
-            return response([$optionGroups, $action], 200);
+            return response([$optionGroups], 200);
         }
 
         return view('admin.addOptions', compact('action'));

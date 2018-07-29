@@ -11,10 +11,14 @@ class OptionGroupController extends Controller
     public function index(Request $request)
     {
         $optionGroups = OptionGroup::all();
-        $action = $request->path();
         $deleteMethod = '/delete-option-group/';
+        $action = $request->path();
 
-        return view('admin.addOptionGroup', compact('optionGroups', 'action', 'deleteMethod'));
+        if ($request->wantsJson()) {
+            return response([$optionGroups, $deleteMethod], 200);
+        }
+
+        return view('admin.addOptionGroup', compact('action'));
     }
 
     public function store(Request $request)
@@ -28,10 +32,10 @@ class OptionGroupController extends Controller
                 'name' => request('name')
             ]);
 
-            return back()->with('success_message', 'Option Group added');
+            return response(['success_message', 'Option Group added'], 200);
 
         } catch (\Exception $e) {
-            return back()->with(['error_message' => $e->getMessage() ]);
+            return response(['error_message' => $e->getMessage() ], 400);
         }
     }
 
@@ -41,6 +45,6 @@ class OptionGroupController extends Controller
 
         $optionGroup->delete();
 
-        return back()->with('success_message', 'Option Group Deleted.');
+        return response(['success_message', 'Option Group Deleted.'], 200);
     }
 }

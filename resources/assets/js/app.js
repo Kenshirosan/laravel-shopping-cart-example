@@ -16,6 +16,7 @@ Vue.component('toggle', require('./components/Toggle.vue'));
 Vue.component("Wysiwig", require("./components/Wysiwig.vue"));
 Vue.component('add-holiday-title', require('./components/AddHolidayTitle'))
 Vue.component('add-options', require('./components/AddOptions'));
+Vue.component('add-option-group', require('./components/AddOptionGroup'));
 
 const app = new Vue({
     el: '#app',
