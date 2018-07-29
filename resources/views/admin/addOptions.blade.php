@@ -5,5 +5,5 @@
 @endsection
 
 @section('content')
-    <add-options></add-options>
+    <add-options action={{ $action }}></add-options>
 @endsection

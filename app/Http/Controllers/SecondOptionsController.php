@@ -11,25 +11,38 @@ class SecondOptionsController extends Controller
 {
     public function index(Request $request)
     {
-        $optionGroups = SecondOptionGroup::all();
-        $options = SecondOption::all();
+        $optionGroups = SecondOptionGroup::with('options')->get();
+
         $action = $request->path();
 
-        return view('layouts.addOptions', compact('optionGroups', 'options', 'action'));
+        if ($request->wantsJson()) {
+            return response([$optionGroups], 200);
+        }
+
+        return view('admin.addOptions', compact('action'));
     }
 
     public function store(OptionRequest $request)
     {
         try {
-            SecondOption::create([
+            $option = SecondOption::create([
                 'name' => request('name'),
                 'second_option_group_id' => request('option_group_id')
             ]);
 
-            return back()->with('success_message', 'Option added');
+            return response($option, 200);
 
         } catch (\Exception $e) {
             return back()->with(['error_message' => $e->getMessage() ]);
         }
+    }
+
+    public function destroy($id)
+    {
+        $option = SecondOption::where('id', $id)->firstOrFail();
+
+        $option->delete();
+
+        return response(['ok'], 200);
     }
 }

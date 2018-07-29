@@ -75456,6 +75456,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['action'],
+
     data: function data() {
         return {
             option_group_id: '',
@@ -75484,10 +75486,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                     option_group_id: this.$data.option_group_id
                                 };
                                 _context.next = 3;
-                                return axios.post('/add-options', option).then(function (res) {
+                                return axios.post(this.$props.action, option).then(function (res) {
                                     _this.fetchItems();
                                     _this.resetForm();
-                                    flash('Success');
+                                    flash(res.data.name + ' succesfully added');
                                 }).catch(function (err) {
                                     flash('Something went wrong', 'danger');
                                     _this.error = err.response.data.message;
@@ -75516,7 +75518,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                         switch (_context2.prev = _context2.next) {
                             case 0:
                                 _context2.next = 2;
-                                return axios.get('/add-options').then(function (response) {
+                                return axios.get(this.$props.action).then(function (response) {
                                     _this2.items = response.data;
                                 }).catch(function (err) {
                                     return flash('Something went wrong');
@@ -75543,7 +75545,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                         switch (_context3.prev = _context3.next) {
                             case 0:
                                 _context3.next = 2;
-                                return axios.delete('/delete/option/' + id).then(function (res) {
+                                return axios.delete(this.$props.action + '/' + id).then(function (res) {
                                     return flash('success');
                                 }).catch(function (err) {
                                     return flash('Something went wrong', 'danger');

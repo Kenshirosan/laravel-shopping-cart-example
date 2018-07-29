@@ -13,7 +13,7 @@ class SecondOptionGroupController extends Controller
         $action = $request->path();
         $deleteMethod = '/delete-second-option-group/';
 
-        return view('layouts.addOptionGroup', compact('optionGroups', 'action', 'deleteMethod'));
+        return view('admin.addOptionGroup', compact('optionGroups', 'action', 'deleteMethod'));
     }
 
     public function store(Request $request)
