@@ -65,6 +65,7 @@
 <script>
 
     export default {
+        props: ['action'],
 
         data() {
             return {
@@ -86,10 +87,10 @@
                     name: this.$data.name,
                     option_group_id: this.$data.option_group_id
                 }
-                await axios.post('/add-options', option).then(res => {
+                await axios.post(this.$props.action, option).then(res => {
                     this.fetchItems();
                     this.resetForm();
-                    flash('Success');
+                    flash(`${res.data.name} succesfully added`);
                 })
                 .catch(err => {
                     flash('Something went wrong', 'danger');
@@ -98,14 +99,14 @@
             },
 
             async fetchItems() {
-                await axios.get('/add-options').then(response => {
+                await axios.get(this.$props.action).then(response => {
                     this.items = response.data;
                 })
                 .catch(err => flash('Something went wrong'));
             },
 
             async deleteItem(id) {
-                await axios.delete(`/delete/option/${id}`)
+                await axios.delete(`${this.$props.action}/${id}`)
                             .then(res => flash('success'))
                             .catch(err => flash('Something went wrong', 'danger'));
 

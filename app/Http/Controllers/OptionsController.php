@@ -14,22 +14,24 @@ class OptionsController extends Controller
     {
         $optionGroups = OptionGroup::with('options')->get();
 
+        $action = $request->path();
+
         if ($request->wantsJson()) {
-            return response([$optionGroups], 200);
+            return response([$optionGroups, $action], 200);
         }
 
-        return view('admin.addOptions');
+        return view('admin.addOptions', compact('action'));
     }
 
     public function store(OptionRequest $request)
     {
         try {
-            Option::create([
+            $option = Option::create([
                 'name' => request('name'),
                 'option_group_id' => request('option_group_id')
             ]);
 
-            return back()->with('success_message', 'Option added');
+            return response($option, 200);
 
         } catch (\Exception $e) {
             return back()->with(['error_message' => $e->getMessage() ]);
