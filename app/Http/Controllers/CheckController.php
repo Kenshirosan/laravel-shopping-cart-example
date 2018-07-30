@@ -18,6 +18,10 @@ class CheckController extends Controller
     {
         $orders = ( new Order() )->todaysOrders();
 
+        if (request()->wantsJson()) {
+            return response($orders, 200);
+        }
+
         return view('pdf.userorder', compact('orders'));
     }
 

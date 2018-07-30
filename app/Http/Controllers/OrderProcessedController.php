@@ -19,26 +19,19 @@ class OrderProcessedController extends Controller
     // }
 
     // we delete a resource but we show a previously hidden item in the view
-     public function show(Request $request, $order)
+     public function show($id)
     {
-        $this->validate($request, [
-            'id' => 'required|numeric'
-        ]);
-
-        $order = Hideable::where('order_id', request('id'))->firstOrFail();
+        $order = Hideable::where('order_id', $id)->firstOrFail();
 
         $order->delete();
-        return back()->with('success_message', 'Success');
+
+        return response(['success_message', 'Success'], 200);
     }
 
     // we show a resource but we hide a previously visible item in the view
-    public function destroy(Request $request, $order)
+    public function destroy($id)
     {
-        $this->validate($request, [
-            'id' => 'required|numeric'
-        ]);
-
-        $order = Order::where('id', $request->id)->firstOrFail();
+        $order = Order::where('id', $id)->firstOrFail();
 
         if($order->isHidden()){
             return back()->with(['error_message' => 'This order is already hidden']);
@@ -48,6 +41,6 @@ class OrderProcessedController extends Controller
             'order_id' => request('id')
         ]);
 
-        return back()->with('success_message', 'Order processed');
+        return response(['success_message', 'Order processed'], 200);
     }
 }

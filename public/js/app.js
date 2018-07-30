@@ -20118,6 +20118,7 @@ Vue.component('add-holiday-title', __webpack_require__(284));
 Vue.component('add-options', __webpack_require__(287));
 Vue.component('add-option-group', __webpack_require__(290));
 Vue.component('latest-orders', __webpack_require__(293));
+Vue.component('user-orders', __webpack_require__(309));
 
 var app = new Vue({
     el: '#app',
@@ -76439,6 +76440,422 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-6fd91d18", module.exports)
+  }
+}
+
+/***/ }),
+/* 309 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(3)
+/* script */
+var __vue_script__ = __webpack_require__(310)
+/* template */
+var __vue_template__ = __webpack_require__(311)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/UserOrders.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-36477c07", Component.options)
+  } else {
+    hotAPI.reload("data-v-36477c07", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 310 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            orders: ''
+        };
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        Echo.private('user_ordered').listen('UserOrdered', function (order) {
+            _this.fetchTodaysOrders();
+        });
+    },
+    created: function created() {
+        this.fetchTodaysOrders();
+    },
+
+
+    methods: {
+        showOrder: function () {
+            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(id) {
+                var _this2 = this;
+
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+                    while (1) {
+                        switch (_context.prev = _context.next) {
+                            case 0:
+                                console.log(id);
+                                _context.next = 3;
+                                return axios.delete('/show-order/' + id).then(function (res) {
+                                    flash('Success');
+                                    _this2.fetchTodaysOrders();
+                                }).catch(function (err) {
+                                    return flash(err, 'danger');
+                                });
+
+                            case 3:
+                            case 'end':
+                                return _context.stop();
+                        }
+                    }
+                }, _callee, this);
+            }));
+
+            function showOrder(_x) {
+                return _ref.apply(this, arguments);
+            }
+
+            return showOrder;
+        }(),
+        hideOrder: function () {
+            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(id) {
+                var _this3 = this;
+
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+                    while (1) {
+                        switch (_context2.prev = _context2.next) {
+                            case 0:
+                                _context2.next = 2;
+                                return axios.post('/hide-order/' + id).then(function (res) {
+                                    flash('Success');
+                                    _this3.fetchTodaysOrders();
+                                }).catch(function (err) {
+                                    return flash(err, 'danger');
+                                });
+
+                            case 2:
+                            case 'end':
+                                return _context2.stop();
+                        }
+                    }
+                }, _callee2, this);
+            }));
+
+            function hideOrder(_x2) {
+                return _ref2.apply(this, arguments);
+            }
+
+            return hideOrder;
+        }(),
+        fetchTodaysOrders: function () {
+            var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
+                var _this4 = this;
+
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+                    while (1) {
+                        switch (_context3.prev = _context3.next) {
+                            case 0:
+                                _context3.next = 2;
+                                return axios.get('/customer-orders').then(function (res) {
+                                    return _this4.orders = res.data;
+                                }).catch(function (err) {
+                                    return console.log(err.message);
+                                });
+
+                            case 2:
+                            case 'end':
+                                return _context3.stop();
+                        }
+                    }
+                }, _callee3, this);
+            }));
+
+            function fetchTodaysOrders() {
+                return _ref3.apply(this, arguments);
+            }
+
+            return fetchTodaysOrders;
+        }()
+    },
+
+    filters: {
+        moment: function (_moment) {
+            function moment(_x3) {
+                return _moment.apply(this, arguments);
+            }
+
+            moment.toString = function () {
+                return _moment.toString();
+            };
+
+            return moment;
+        }(function (date) {
+            return moment(date).format('Y, ddd, MMM Mo');
+        }),
+
+        time: function time(date) {
+            return moment(date).format('H:mm:ss');
+        },
+
+        regex: function regex(string) {
+            return string.replace(/[\[\]\:"]/g, ' ');
+        },
+
+        formatted: function formatted(price) {
+            return price / 100;
+        }
+    }
+});
+
+/***/ }),
+/* 311 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.orders
+    ? _c("div", { staticClass: "col-md-6 col-md-offset-3" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "ul",
+          { staticClass: "list-group" },
+          _vm._l(_vm.orders, function(order) {
+            return _c("li", { staticClass: "list-group-item" }, [
+              order.hiddenOrder
+                ? _c("div", [
+                    _c(
+                      "form",
+                      {
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            _vm.showOrder(order.id)
+                          }
+                        }
+                      },
+                      [
+                        _c("p", { staticClass: "text-right" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-info btn-sm",
+                              attrs: { type: "submit" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                            Show Order " +
+                                  _vm._s(order.id) +
+                                  "\n                        "
+                              )
+                            ]
+                          )
+                        ])
+                      ]
+                    )
+                  ])
+                : _c("div", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "admin-links",
+                        attrs: { href: "/order/" + order.id }
+                      },
+                      [
+                        _c("h4", { staticClass: "admin-links" }, [
+                          _vm._v("Order: " + _vm._s(order.id))
+                        ]),
+                        _vm._v(" "),
+                        _c("p", [
+                          _c("strong", [_vm._v(_vm._s(order.order_type))])
+                        ]),
+                        _vm._v(" "),
+                        _c("p", [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(order.name) +
+                              " " +
+                              _vm._s(order.last_name) +
+                              " paid "
+                          ),
+                          _c("strong", [
+                            _vm._v(_vm._s(_vm._f("formatted")(order.price)))
+                          ]),
+                          _vm._v(
+                            " for " +
+                              _vm._s(_vm._f("regex")(order.items)) +
+                              " on "
+                          ),
+                          _c("strong", [
+                            _vm._v(_vm._s(_vm._f("moment")(order.created_at)))
+                          ]),
+                          _vm._v(
+                            " at " +
+                              _vm._s(_vm._f("time")(order.created_at)) +
+                              "\n                    "
+                          )
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    order.comments
+                      ? _c("p", [_vm._v(_vm._s(order.comments))])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-primary btn-sm pull-right",
+                        attrs: { href: "/order/" + order.id }
+                      },
+                      [_vm._v("View order")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "form",
+                      {
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            _vm.hideOrder(order.id)
+                          }
+                        }
+                      },
+                      [
+                        _c("input", {
+                          staticClass: "btn btn-danger btn-sm",
+                          attrs: { type: "submit", value: "Hide" }
+                        })
+                      ]
+                    )
+                  ])
+            ])
+          })
+        )
+      ])
+    : _c("div", { staticClass: "col-md-6 col-md-offset-3" }, [_vm._m(1)])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("h2", { staticClass: "btn btn-lg btn-default pull-right" }, [
+          _c("a", { attrs: { href: "/calendar" } }, [_vm._v("Calendar")])
+        ]),
+        _vm._v(" "),
+        _c("h1", { staticClass: "text-info text-center" }, [
+          _vm._v("Today's Orders")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "mb-100" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("h2", { staticClass: "text-info text-center" }, [
+        _c("strong", [_vm._v("No orders yet")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-36477c07", module.exports)
   }
 }
 

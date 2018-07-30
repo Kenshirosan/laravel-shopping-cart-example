@@ -65,8 +65,8 @@ Route::middleware(['auth', 'must-be-confirmed', 'employee'])->group(function () 
     Route::patch('/update/order/{id}/status', 'StatusController@update');
     Route::get('/search-orders', 'SearchController@index');
     Route::get('/livesearch','SearchController@show');
-    Route::delete('/show-order/{order}', 'OrderProcessedController@show');
-    Route::post('/hide-orders/{order}', 'OrderProcessedController@destroy');
+    Route::delete('/show-order/{id}', 'OrderProcessedController@show');
+    Route::post('/hide-order/{id}', 'OrderProcessedController@destroy');
 });
 
 

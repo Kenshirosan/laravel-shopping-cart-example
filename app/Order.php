@@ -30,6 +30,8 @@ class Order extends Model
         'comments'
     ];
 
+    protected $appends = ['hiddenOrder'];
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -48,9 +50,19 @@ class Order extends Model
         return !! Hideable::where('order_id', request('id'))->count();
     }
 
+    public function getIsHiddenOrderAttribute()
+    {
+        return $this->isHiddenOrder();
+    }
+
     public function isHiddenOrder()
     {
         return $this->hasMany(Hideable::class);
+    }
+
+    public function getHiddenOrderAttribute()
+    {
+        return $this->hiddenOrder();
     }
 
     public function hiddenOrder()

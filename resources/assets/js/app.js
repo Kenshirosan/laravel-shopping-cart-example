@@ -18,6 +18,7 @@ Vue.component('add-holiday-title', require('./components/AddHolidayTitle'))
 Vue.component('add-options', require('./components/AddOptions'));
 Vue.component('add-option-group', require('./components/AddOptionGroup'));
 Vue.component('latest-orders', require('./components/LatestOrders'));
+Vue.component('user-orders', require('./components/UserOrders'));
 
 const app = new Vue({
     el: '#app',
