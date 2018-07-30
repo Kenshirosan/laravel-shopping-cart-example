@@ -23,8 +23,12 @@ class AdminController extends Controller
         $secondOptionGroups = SecondOptionGroup::all();
         $orders = Order::limit(5)->orderBy('created_at', 'desc')->get();
 
+        if (request()->wantsJson()) {
+            return response($orders, 200);
+        }
+
         return view('admin.restaurantindex',
-            compact('orders', 'optionGroups', 'secondOptionGroups', 'categories'));
+            compact('optionGroups', 'secondOptionGroups', 'categories'));
     }
 
     /**

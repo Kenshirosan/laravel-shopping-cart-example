@@ -35,14 +35,12 @@
     <script src="https://js.stripe.com/v3/"></script>
 </head>
     <body>
-        <div id="app">
+        <div class="container" id="app">
             @include('includes.header')
-            <div class="container">
-                @include('includes.messages')
-                @yield('content')
-                <flash message="{{ session('flash') }}"></flash>
-                <view-cart :items="{{ Cart::content() }}" :total="{{ Cart::total() }}"></view-cart>
-            </div>
+            @include('includes.messages')
+            @yield('content')
+            <flash message="{{ session('flash') }}"></flash>
+            <view-cart :items="{{ Cart::content() }}" :total="{{ Cart::total() }}"></view-cart>
         </div>
         @include('includes.footer')
 

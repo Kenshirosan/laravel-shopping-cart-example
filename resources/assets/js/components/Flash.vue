@@ -1,6 +1,6 @@
 <template>
     <div class="alert alert-flash"
-        :class="'alert-'+level"
+        :class="`alert-${level}`"
         role="alert"
         v-show="show"
         v-text="body">
@@ -46,3 +46,11 @@
         }
     };
 </script>
+
+<style scoped>
+    .alert, .alert-flash {
+        position: fixed;
+        right: 25px;
+        top: 50px;
+    }
+</style>
