@@ -7,7 +7,7 @@ use App\Order;
 use App\Promocode;
 use \Cart as Cart;
 use \Carbon\Carbon;
-use App\Mail\Thankyou;
+use App\Mail\ThankYou;
 use App\Payments\Payments;
 use App\Events\UserOrdered;
 use Illuminate\Http\Request;
@@ -73,12 +73,12 @@ class PaymentController extends Controller
         try {
             $this->processOrder($request);
         } catch (\Exception $e) {
-            return back()->with(['error_message' => $e->getMessage() ]);
+            return back()->with(['error_message' => $e->getMessage()]);
         }
 
         Cart::destroy();
 
-        return redirect("/user/" . Auth::user()->name . "/profile")->with("success_message", "Thank You " . Auth::user()->name . ", Your order is complete, We sent you a detailed email, Please call us if you need to make a change.");
+        return redirect("/edit/profile")->with("success_message", "Thank You " . Auth::user()->name . ", Your order is complete, We sent you a detailed email, Please call us if you need to make a change.");
     }
 
     /**
@@ -142,9 +142,9 @@ class PaymentController extends Controller
             }
         }
 
-        // event(new UserOrdered($order)); // event for queues?? Maybe if this thing scale..
+        event(new UserOrdered($order)); // ready for real-time :) fully working !!
 
-        \Mail::to( auth()->user()->email )->send(new Thankyou($order));
+        return \Mail::to( auth()->user()->email )->send(new ThankYou($order));
     }
 
     /**

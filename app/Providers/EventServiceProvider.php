@@ -17,7 +17,7 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\SendWelcomeEmail',
         ],
         'App\Events\UserOrdered' => [
-            'App\Listeners\SendThankYouEmail',
+            'App\Listeners\UserOrderedListener',
         ],
         'App\Events\OrderStatusChanged' => [
             'App\Listeners\OrderStatusChangedListener',

@@ -3,7 +3,7 @@
 namespace App\Events;
 
 use App\Order;
-use App\Mail\SendThankYouEmail;
+use App\Listeners\UserOrderedListener;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -13,16 +13,16 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 
-class UserOrdered
+class UserOrdered implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $order;
-    /**
-     * Create a new event instance.
-     *
-     * @return void
-     */
+    // *
+    //  * Create a new event instance.
+    //  *
+    // * @return void
+
     public function __construct(Order $order)
     {
         return $this->order = $order;
@@ -35,6 +35,6 @@ class UserOrdered
      */
     public function broadcastOn()
     {
-        new SendThankYouEmail();
+        return new PrivateChannel('user_ordered');
     }
 }

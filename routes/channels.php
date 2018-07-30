@@ -16,3 +16,7 @@ use App\Order;
 Broadcast::channel('order-tracker.{id}', function ($user, $id) {
     return (int) $user->id === (int) Order::where(['id' => $id, 'user_id' => $user->id])->firstOrFail()->user_id;
 });
+
+Broadcast::channel('user_ordered', function ($user) {
+    return $user->isAdmin() || $user->isEmployee();
+});

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>@yield('title')</title>
-    <meta name="description" content="Shopping Cart">
+
     <!-- Mobile Specific Meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Store CSRF token for AJAX calls -->

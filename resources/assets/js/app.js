@@ -8,7 +8,7 @@ Vue.component('add-to-cart', require('./components/AddToCart.vue'));
 Vue.component('checkoutform', require('./components/CheckoutForm.vue'));
 Vue.component('view-cart', require('./components/ViewCart.vue'));
 Vue.component('calendar', require('./components/Calendar.vue'));
-Vue.component('order-progress', require('./components/Progress.vue'));
+Vue.component('order-progress', require('./components/OrderProgress.vue'));
 Vue.component('monthly-stats', require('./components/MonthlyStats.vue'));
 Vue.component('yearly-stats', require('./components/YearlyStats.vue'));
 Vue.component('analytics', require('./components/Analytics.vue'));

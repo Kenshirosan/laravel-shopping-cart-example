@@ -3,12 +3,14 @@
 namespace App\Listeners;
 
 use App\User;
+use App\Order;
+use App\Mail\ThankYou;
 use App\Events\UserOrdered;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class SendThankYouEmail implements ShouldQueue
+class UserOrderedListener implements ShouldQueue
 {
     public $order;
     /**
@@ -16,9 +18,9 @@ class SendThankYouEmail implements ShouldQueue
     *
     * @return void
     */
-    public function __construct()
+    public function __construct(Order $order)
     {
-
+        $this->order = $order;
     }
 
     /**
@@ -27,10 +29,8 @@ class SendThankYouEmail implements ShouldQueue
     * @param  UserOrdered  $event
     * @return void
     */
-    public function handle(UserOrdered $order)
+    public function handle()
     {
-        $order = Auth::user()->order;
-        $user = Auth::user();
-        \Mail::to($user)->send(new Thankyou($order));
+
     }
 }

@@ -7,7 +7,7 @@
                     <h4 class="list-group-item-heading">Latest Orders: {{ order.id }}</h4>
                 </li>
                 <li class="list-group-item">
-                    <p>{{ order.name }} {{ order.last_name }} paid <strong>{{ order.price }}</strong> for {{ order.items.replace(/[\[\]\:"]/g,' ') }} on <strong>{{ order.created_at | moment  }}</strong> at {{ order.created_at | time }}
+                    <p>{{ order.name }} {{ order.last_name }} paid <strong>{{ order.price | formatted }}</strong> for {{ order.items | regex }} on <strong>{{ order.created_at | moment  }}</strong> at {{ order.created_at | time }}
                     </p>
                 </li>
             </ul>
@@ -16,7 +16,6 @@
 </template>
 
 <script>
-    import moment from 'moment';
 
     export default {
 
@@ -26,12 +25,25 @@
             }
         },
 
+        mounted() {
+            Echo.private('user_ordered')
+            .listen('UserOrdered', (order) => {
+              this.fetchOrders();
+            });
+        },
+
         created() {
-            axios.get('/restaurantpanel')
+            this.fetchOrders();
+        },
+
+        methods: {
+            async fetchOrders() {
+                axios.get('/restaurantpanel')
                 .then(res => {
                     this.items = res.data
                 })
                 .catch(err => flash('Something wrong happened', 'danger'))
+            }
         },
 
         filters: {
@@ -41,6 +53,14 @@
 
             time: date => {
                 return moment(date).format('H:mm:ss')
+            },
+
+            regex: string => {
+                return string.replace( /[\[\]\:"]/g, ' ')
+            },
+
+            formatted: price => {
+                return price / 100;
             }
         },
     }
