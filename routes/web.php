@@ -95,6 +95,7 @@ Route::middleware(['auth', 'must-be-confirmed', 'employee', 'admin'])->group(fun
     Route::post('/eighty_six/{id}', 'EightySixController@store');
     Route::delete('/delete/eighty_six/{id}', 'EightySixController@destroy');
     Route::get('/create-coupon', 'CouponController@index');
+    Route::get('/create-disposable-coupon', 'CouponController@index');
     Route::post('/create-coupon', 'CouponController@store');
     Route::post('/create-disposable-coupon', 'CouponController@storeCouponsForEveryone');
     Route::delete('/coupons/{id}/delete', 'CouponController@destroy');

@@ -17,7 +17,15 @@ class CouponController extends Controller
 
         $couponsForAll = Promocode::where('is_disposable', false)->get();
 
-        return view('admin.createCoupon', compact('coupons', 'couponsForAll'));
+        if (request()->wantsJson() && request()->path() === 'create-coupon') {
+            return response($coupons, 200);
+        }
+
+        if (request()->wantsJson() && request()->path() === 'create-disposable-coupon') {
+            return response($couponsForAll, 200);
+        }
+
+        return view('admin.createCoupon');
     }
 
 
@@ -27,7 +35,8 @@ class CouponController extends Controller
         $reward = request('reward');
         \Promocodes::createDisposable($quantity, $reward, $data = [], $expires_in = null);
 
-        return back()->with('success_message', 'Coupons created');
+
+        return response(['success_message' => 'Coupons created'], 200);
     }
 
     public function storeCouponsForEveryone(CouponRequest $request)
@@ -36,7 +45,7 @@ class CouponController extends Controller
         $reward = request('reward');
         \Promocodes::create($quantity, $reward, $data = [], $expires_in = null);
 
-        return back()->with('success_message', 'Coupons created');
+        return response(['success_message' => 'Coupons created'], 200);
     }
 
     public function update(Request $request)
@@ -79,6 +88,6 @@ class CouponController extends Controller
         $coupon->user_id = '';
         $coupon->delete();
 
-        return back()->with('success_message', 'Coupon deleted');
+        return response(['success_message', 'Coupon deleted'], 200);
     }
 }

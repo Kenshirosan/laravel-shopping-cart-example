@@ -20120,6 +20120,10 @@ Vue.component('add-option-group', __webpack_require__(290));
 Vue.component('latest-orders', __webpack_require__(293));
 Vue.component('user-orders', __webpack_require__(296));
 Vue.component('add-categories', __webpack_require__(316));
+Vue.component('add-unique-coupons', __webpack_require__(322));
+Vue.component('add-coupons-for-everyone', __webpack_require__(325));
+Vue.component('coupon-layout', __webpack_require__(334));
+Vue.component('coupons', __webpack_require__(321));
 
 var app = new Vue({
     el: '#app',
@@ -76638,7 +76642,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                     flash('Success');
                                     _this3.fetchTodaysOrders();
                                 }).catch(function (err) {
-                                    return flash(err, 'danger');
+                                    flash('Something wrong happenened', 'danger');
+                                    _this3.showErrors(err);
                                 });
 
                             case 2:
@@ -76667,7 +76672,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 return axios.get('/customer-orders').then(function (res) {
                                     return _this4.orders = res.data;
                                 }).catch(function (err) {
-                                    return console.log(err.message);
+                                    flash('Something wrong happenened', 'danger');
+                                    _this4.showErrors(err);
                                 });
 
                             case 2:
@@ -76685,6 +76691,11 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             return fetchTodaysOrders;
         }()
     },
+
+    showError: function showError(err) {
+        return this.error = err.response.data.message;
+    },
+
 
     filters: {
         moment: function (_moment) {
@@ -77417,6 +77428,801 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-73922676", module.exports)
+  }
+}
+
+/***/ }),
+/* 321 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(3)
+/* script */
+var __vue_script__ = __webpack_require__(328)
+/* template */
+var __vue_template__ = __webpack_require__(329)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/Coupons.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-ad420ab4", Component.options)
+  } else {
+    hotAPI.reload("data-v-ad420ab4", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 322 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(3)
+/* script */
+var __vue_script__ = __webpack_require__(323)
+/* template */
+var __vue_template__ = __webpack_require__(324)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/subcomponents/UniqueCoupons.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2bf0431c", Component.options)
+  } else {
+    hotAPI.reload("data-v-2bf0431c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 323 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CouponLayout__ = __webpack_require__(334);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CouponLayout___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__CouponLayout__);
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    components: { CouponLayout: __WEBPACK_IMPORTED_MODULE_0__CouponLayout___default.a }
+});
+
+/***/ }),
+/* 324 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("coupon-layout", {
+    attrs: {
+      info: "These coupons are invalidated when customers use them",
+      url: "/create-coupon"
+    }
+  })
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-2bf0431c", module.exports)
+  }
+}
+
+/***/ }),
+/* 325 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(3)
+/* script */
+var __vue_script__ = __webpack_require__(326)
+/* template */
+var __vue_template__ = __webpack_require__(327)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/subcomponents/CouponsForEveryone.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-20a6b397", Component.options)
+  } else {
+    hotAPI.reload("data-v-20a6b397", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 326 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CouponLayout__ = __webpack_require__(334);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CouponLayout___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__CouponLayout__);
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    components: { CouponLayout: __WEBPACK_IMPORTED_MODULE_0__CouponLayout___default.a }
+});
+
+/***/ }),
+/* 327 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("coupon-layout", {
+    attrs: { info: "Create unique coupons", url: "/create-disposable-coupon" }
+  })
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-20a6b397", module.exports)
+  }
+}
+
+/***/ }),
+/* 328 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__subcomponents_UniqueCoupons__ = __webpack_require__(322);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__subcomponents_UniqueCoupons___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__subcomponents_UniqueCoupons__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__subcomponents_CouponsForEveryone__ = __webpack_require__(325);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__subcomponents_CouponsForEveryone___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__subcomponents_CouponsForEveryone__);
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    components: { UniqueCoupons: __WEBPACK_IMPORTED_MODULE_0__subcomponents_UniqueCoupons___default.a, CouponsForEveryone: __WEBPACK_IMPORTED_MODULE_1__subcomponents_CouponsForEveryone___default.a }
+});
+
+/***/ }),
+/* 329 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [_c("add-unique-coupons"), _vm._v(" "), _c("add-coupons-for-everyone")],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-ad420ab4", module.exports)
+  }
+}
+
+/***/ }),
+/* 330 */,
+/* 331 */,
+/* 332 */,
+/* 333 */,
+/* 334 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(335)
+}
+var normalizeComponent = __webpack_require__(3)
+/* script */
+var __vue_script__ = __webpack_require__(337)
+/* template */
+var __vue_template__ = __webpack_require__(338)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/subcomponents/CouponLayout.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3d766200", Component.options)
+  } else {
+    hotAPI.reload("data-v-3d766200", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 335 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(336);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(9)("a8f6749a", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3d766200\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CouponLayout.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3d766200\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CouponLayout.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 336 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(8)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.text-white {\n    color: white;\n}\nthead {\n    background-color: #605CA8;\n}\ntbody > tr:nth-child(odd) {\n    background-color: white;\n}\n.mb-100 {\n    margin-bottom: 100px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 337 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    props: ['info', 'url'],
+
+    data: function data() {
+        return {
+            message: this.info,
+            endpoint: this.url,
+            coupons: '',
+            reward: '',
+            quantity: '',
+            error: ''
+        };
+    },
+    created: function created() {
+        this.getCoupons();
+    },
+
+
+    methods: {
+        getCoupons: function () {
+            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+                var _this = this;
+
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+                    while (1) {
+                        switch (_context.prev = _context.next) {
+                            case 0:
+                                _context.next = 2;
+                                return axios.get(this.endpoint).then(function (res) {
+                                    _this.coupons = res.data;
+                                }).catch(function (err) {
+                                    _this.showError(err);
+                                });
+
+                            case 2:
+                            case 'end':
+                                return _context.stop();
+                        }
+                    }
+                }, _callee, this);
+            }));
+
+            function getCoupons() {
+                return _ref.apply(this, arguments);
+            }
+
+            return getCoupons;
+        }(),
+        addCoupons: function () {
+            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+                var _this2 = this;
+
+                var data;
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+                    while (1) {
+                        switch (_context2.prev = _context2.next) {
+                            case 0:
+                                data = { quantity: this.quantity, reward: this.reward };
+                                _context2.next = 3;
+                                return axios.post(this.endpoint, data).then(function (res) {
+                                    _this2.coupons = res.data;
+                                    flash('Coupon added');
+                                    _this2.resetForm();
+                                    _this2.getCoupons();
+                                }).catch(function (err) {
+                                    _this2.showError(err);
+                                });
+
+                            case 3:
+                            case 'end':
+                                return _context2.stop();
+                        }
+                    }
+                }, _callee2, this);
+            }));
+
+            function addCoupons() {
+                return _ref2.apply(this, arguments);
+            }
+
+            return addCoupons;
+        }(),
+        deleteCoupon: function () {
+            var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(id) {
+                var _this3 = this;
+
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+                    while (1) {
+                        switch (_context3.prev = _context3.next) {
+                            case 0:
+                                _context3.next = 2;
+                                return axios.delete('/coupons/' + id + '/delete').then(function (res) {
+                                    _this3.getCoupons();
+                                    flash('Coupon deleted');
+                                });
+
+                            case 2:
+                            case 'end':
+                                return _context3.stop();
+                        }
+                    }
+                }, _callee3, this);
+            }));
+
+            function deleteCoupon(_x) {
+                return _ref3.apply(this, arguments);
+            }
+
+            return deleteCoupon;
+        }(),
+        resetForm: function resetForm() {
+            this.quantity = '';
+            this.reward = '';
+        },
+        showError: function showError(err) {
+            return this.error = err.response.data.message;
+        }
+    }
+});
+
+/***/ }),
+/* 338 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "text-center" }, [
+      _c("h1", { staticClass: "text-info" }, [_vm._v("Create unique coupons")]),
+      _vm._v(" "),
+      _c("p", [_c("small", [_c("em", [_vm._v(" " + _vm._s(_vm.message))])])])
+    ]),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _c(
+      "form",
+      {
+        staticClass: "form-horizontal",
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            _vm.addCoupons()
+          }
+        }
+      },
+      [
+        _c("div", { staticClass: "form-group" }, [
+          _c(
+            "label",
+            {
+              staticClass: "col-md-4 control-label",
+              attrs: { for: "quantity" }
+            },
+            [_vm._v("How many coupons ?")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-6" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.quantity,
+                  expression: "quantity"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                id: "quantity",
+                type: "number",
+                min: "0",
+                step: "1",
+                placeholder: "number of coupons to create",
+                name: "quantity",
+                autofocus: "",
+                required: ""
+              },
+              domProps: { value: _vm.quantity },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.quantity = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _vm.error
+            ? _c("span", { staticClass: "help-block" }, [
+                _c("strong", { staticClass: "alert alert-danger" }, [
+                  _vm._v(_vm._s(_vm.error))
+                ])
+              ])
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c(
+            "label",
+            { staticClass: "col-md-4 control-label", attrs: { for: "reward" } },
+            [_vm._v("Coupons percentage")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-6" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.reward,
+                  expression: "reward"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                id: "reward",
+                type: "number",
+                min: "0",
+                step: "1",
+                placeholder: "reward percentage",
+                name: "reward",
+                autofocus: "",
+                required: ""
+              },
+              domProps: { value: _vm.reward },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.reward = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _vm.error
+            ? _c("span", { staticClass: "help-block" }, [
+                _c("strong", { staticClass: "alert alert-danger" }, [
+                  _vm._v(_vm._s(_vm.error))
+                ])
+              ])
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _vm._m(0)
+      ]
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "mb-100" }),
+    _vm._v(" "),
+    _vm.coupons.length > 0
+      ? _c("div", { staticClass: "container" }, [
+          _c(
+            "table",
+            { staticClass: "table table-hover even" },
+            [
+              _vm._m(1),
+              _vm._v(" "),
+              _vm._l(_vm.coupons, function(item) {
+                return _c("tbody", [
+                  _c("tr", { staticClass: "text-info" }, [
+                    _c("td", [_vm._v(_vm._s(item.id))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(item.reward) + "%")]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger btn-sm",
+                          on: {
+                            click: function($event) {
+                              _vm.deleteCoupon(item.id)
+                            }
+                          }
+                        },
+                        [_vm._v("Delete")]
+                      )
+                    ])
+                  ])
+                ])
+              })
+            ],
+            2
+          )
+        ])
+      : _c("div", { staticClass: "text-center" }, [
+          _c("h1", { staticClass: "text-info" }, [
+            _vm._v("No Global coupons created")
+          ])
+        ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", {
+        staticClass: "col-md-4 control-label",
+        attrs: { for: "submit" }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-6" }, [
+        _c("input", {
+          staticClass: "btn btn-primary",
+          attrs: { type: "submit", value: "Submit" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", { staticClass: "text-white" }, [
+        _c("td", [_c("h4", [_vm._v("ID")])]),
+        _vm._v(" "),
+        _c("td", [_c("h4", [_vm._v("Reward")])]),
+        _vm._v(" "),
+        _c("td", [_c("h4", [_vm._v("Action")])])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-3d766200", module.exports)
   }
 }
 

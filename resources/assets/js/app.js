@@ -20,6 +20,10 @@ Vue.component('add-option-group', require('./components/AddOptionGroup'));
 Vue.component('latest-orders', require('./components/LatestOrders'));
 Vue.component('user-orders', require('./components/UserOrders'));
 Vue.component('add-categories', require('./components/AddCategories'));
+Vue.component('add-unique-coupons', require('./components/subcomponents/UniqueCoupons'));
+Vue.component('add-coupons-for-everyone', require('./components/subcomponents/CouponsForEveryone'));
+Vue.component('coupon-layout', require('./components/subcomponents/CouponLayout'));
+Vue.component('coupons', require('./components/Coupons'));
 
 const app = new Vue({
     el: '#app',

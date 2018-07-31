@@ -80,17 +80,27 @@
             async hideOrder(id) {
                 await axios.post(`/hide-order/${id}`)
                     .then(res => {
-                        flash('Success')
-                        this.fetchTodaysOrders()
+                        flash('Success');
+                        this.fetchTodaysOrders();
                     })
-                    .catch(err => flash(err, 'danger'))
+                    .catch(err => {
+                        flash('Something wrong happenened', 'danger');
+                        this.showErrors(err);
+                    });
             },
 
             async fetchTodaysOrders() {
                 await axios.get('/customer-orders')
                     .then(res => this.orders = res.data)
-                    .catch(err => console.log(err.message));
+                    .catch(err => {
+                        flash('Something wrong happenened', 'danger');
+                        this.showErrors(err);
+                    });
             }
+        },
+
+        showError(err) {
+            return this.error = err.response.data.message;
         },
 
         filters: {
