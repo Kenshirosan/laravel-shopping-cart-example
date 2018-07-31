@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <form class="form-horizontal" @submit.prevent="addOptionGroup()">
             <div class="form-group">
                 <label for="name" class="col-md-4 control-label">Option Group Name</label>
@@ -18,7 +18,6 @@
 
                 </div>
             </div>
-
             <div class="form-group">
                 <label class="col-md-4 control-label"></label>
                 <div class="col-md-6">
@@ -27,14 +26,26 @@
             </div>
         </form>
 
-        <div class="container" v-if="optiongroups">
-            <h2 class="text-info">Groups available :</h2>
-            <div class="col-md-2" v-for="group in optiongroups">
-                <p v-text="group.name"></p>
-                <form @submit.prevent="deleteGroup(group.id)">
-                    <button type="submit" class="btn btn-xs btn-danger">Delete</button>
-                </form>
-            </div>
+        <div class="mb-100"></div>
+
+        <div class="container" >
+            <table class="table table-hover even" v-if="optiongroups">
+                <thead>
+                <tr class="text-white">
+                    <td><h4>ID</h4></td>
+                    <td><h4>Group Name</h4></td>
+                    <td><h4>Action</h4></td>
+                </tr>
+                </thead>
+
+                <tbody>
+                    <tr v-for="group in optiongroups" class="text-info">
+                        <td>{{ group.id }}</td>
+                        <td>{{ group.name }}</td>
+                        <td><button class="btn btn-danger btn-sm" v-on:click="deleteGroup(group.id)">Delete</button></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </template>
@@ -103,3 +114,18 @@
         }
     }
 </script>
+
+<style>
+    .mb-100 {
+        margin-bottom: 100px;
+    }
+    .text-white {
+        color: white;
+    }
+    thead {
+        background-color: #605CA8;
+    }
+    tbody > tr:nth-child(odd) {
+        background-color: white;
+    }
+</style>

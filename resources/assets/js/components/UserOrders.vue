@@ -1,6 +1,6 @@
 <template>
 
-    <div class="col-md-6 col-md-offset-3" v-if="orders">
+    <div class="col-md-6 col-md-offset-3" v-if="orders.length > 0">
         <div class="row">
             <div class="col-md-12">
                 <h2 class="btn btn-lg btn-default pull-right"><a href="/calendar">Calendar</a></h2>
@@ -57,7 +57,8 @@
         mounted() {
             Echo.private('user_ordered')
             .listen('UserOrdered', (order) => {
-              this.fetchTodaysOrders();
+                this.fetchTodaysOrders();
+                flash('New Order');
             });
         },
 

@@ -19,6 +19,7 @@ Vue.component('add-options', require('./components/AddOptions'));
 Vue.component('add-option-group', require('./components/AddOptionGroup'));
 Vue.component('latest-orders', require('./components/LatestOrders'));
 Vue.component('user-orders', require('./components/UserOrders'));
+Vue.component('add-categories', require('./components/AddCategories'));
 
 const app = new Vue({
     el: '#app',

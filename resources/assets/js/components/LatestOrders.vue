@@ -29,6 +29,7 @@
             Echo.private('user_ordered')
             .listen('UserOrdered', (order) => {
               this.fetchOrders();
+              flash('New Order');
             });
         },
 
@@ -48,7 +49,7 @@
 
         filters: {
             moment: date => {
-                return moment(date).format('Y, ddd, MMM Mo')
+                return moment(date).format('Y, ddd, MMM Do')
             },
 
             time: date => {

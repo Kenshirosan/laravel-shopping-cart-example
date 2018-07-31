@@ -90,7 +90,7 @@
 
                             <div class="form-group">
                                 <div class="col-md-12">
-                                    <input type="submit" value ="Add Employee" class="btn btn-primary">
+                                    <input type="submit" value="Add Employee" class="btn btn-primary">
                                 </div>
                             </div>
                         </div>

@@ -48,16 +48,26 @@
                 </div>
             </form>
         </div>
-        <br>
-        <div class="col-md-4" v-for="optiongroup in items[0]">
-            <ul class="list-group">
-                <li class="list-group-item list-group-item-heading">
-                    <h3 class="text-primary">Group: {{ optiongroup.name }}</h3>
-                </li>
-                <li class="list-group-item" v-for="option in optiongroup.options">{{ option.name }}
-                    <button @click.prevent="deleteItem(option.id)" type="button" class="btn btn-danger btn-xs pull-right">Delete</button>
-                </li>
-            </ul>
+        <!-- spacer -->
+        <div class="mb-100"></div>
+
+        <div class="container" v-if="items[0]">
+            <table class="table table-hover even" v-for="optiongroup in items[0]">
+                <thead>
+                <tr class="text-white">
+                    <td><h4>ID</h4></td>
+                    <td><h4>Group Name</h4></td>
+                    <td><h4>Action</h4></td>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="option in optiongroup.options" class="text-info">
+                        <td>{{ option.id }}</td>
+                        <td>{{ option.name }}</td>
+                        <td><button class="btn btn-danger btn-sm" v-on:click="deleteItem(option.id)">Delete</button></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </template>
@@ -124,3 +134,18 @@
         }
     }
 </script>
+
+<style>
+    .text-white {
+        color: white;
+    }
+    thead {
+        background-color: #605CA8;
+    }
+    tbody > tr:nth-child(odd) {
+        background-color: white;
+    }
+    .mb-100 {
+        margin-bottom: 100px;
+    }
+</style>

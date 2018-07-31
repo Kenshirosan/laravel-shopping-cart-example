@@ -12,7 +12,8 @@
                 :labels="{{ preg_replace("/(\d{4})/", "$1-", $dates->values()) }}"
                 :sessions="{{ $sessions->values() }}"
                 :pageviews="{{  $pageviews->values() }}"
-                ></analytics>
+                >
+            </analytics>
         </div>
     </div>
 @endsection

@@ -159,9 +159,9 @@ class Order extends Model
     public function averageOrder()
     {
         return $this->selectRaw('avg(price) Average, monthname(created_at) month, year(created_at) year' )
-                            ->whereRaw('year(created_at) = year(curdate())')
-                            ->groupBy('month', 'year')
-                            ->orderBy('created_at' )
-                            ->get();
+                    ->whereRaw('year(created_at) = year(curdate())')
+                    ->groupBy('month', 'year')
+                    ->orderBy('created_at' )
+                    ->get();
     }
 }

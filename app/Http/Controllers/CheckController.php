@@ -22,7 +22,7 @@ class CheckController extends Controller
             return response($orders, 200);
         }
 
-        return view('pdf.userorder', compact('orders'));
+        return view('pdf.userorder');
     }
 
     /**

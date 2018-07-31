@@ -11,7 +11,6 @@
             <div class="panel-body">
                 <form class="form-horizontal" method="POST" action="/front-page-title" enctype="multipart/form-data">
                     {{ csrf_field() }}
-                    <!--SHIPPING METHOD-->
                     <div class="panel panel-info">
                         <div class="panel-heading">
                             Add or change title, subtitle and image to the front page

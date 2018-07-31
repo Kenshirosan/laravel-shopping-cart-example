@@ -16,7 +16,11 @@ class CategoriesController extends Controller
     {
         $categories = Category::all();
 
-        return view('admin.categories', compact('categories'));
+        if (request()->wantsJson()) {
+            return response($categories, 200);
+        }
+
+        return view('admin.categories');
     }
 
     /**
@@ -48,6 +52,6 @@ class CategoriesController extends Controller
 
        $category->delete();
 
-       return back()->with('success_message', 'Category deleted');
+       return response(['success_message' => 'Category deleted'], 200);
     }
 }

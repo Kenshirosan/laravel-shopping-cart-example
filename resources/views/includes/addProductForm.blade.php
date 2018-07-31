@@ -31,7 +31,7 @@
         <label for="option" class="col-md-4 control-label">Options 1</label>
         <div class="col-md-6">
             <select id="option_group_id" class="form-control" name="option_group_id">
-                <option value="3">Please pick one</option>
+                <option value="">Please pick one</option>
                 @foreach($optionGroups as $optionGroup)
                     <option value="{{ $optionGroup->id }}">{{ $optionGroup->name }}</option>
                 @endforeach
@@ -44,7 +44,7 @@
         <label for="option" class="col-md-4 control-label">Options 2</label>
         <div class="col-md-6">
             <select id="second_option_group_id" class="form-control" name="second_option_group_id">
-                <option value="3">Please pick one</option>
+                <option value="">Please pick one</option>
                 @foreach($secondOptionGroups as $secondOptionGroup)
                     <option value="{{ $secondOptionGroup->id }}">{{ $secondOptionGroup->name }}</option>
                 @endforeach
@@ -58,7 +58,7 @@
         <label for="category_id" class="col-md-4 control-label">Category</label>
         <div class="col-md-6">
             <select id="category_id" class="form-control" name="category_id" value="{{ old('category_id') }}" autofocus required>
-                <option value="8">Please pick one</option>
+                <option value="">Please pick one</option>
                 @foreach($categories as $category)
                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                 @endforeach

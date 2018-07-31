@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use App\Hideable;
-use App\Mail\Thankyou;
+// use App\Mail\ThankYou;
 use Illuminate\Http\Request;
 
 class OrderProcessedController extends Controller
@@ -14,7 +14,7 @@ class OrderProcessedController extends Controller
     // {
     //     $order = Order::first();
 
-    //     \Mail::to( 'YOUR EMAIL HERE' )->send(new Thankyou($order));
+    //     \Mail::to( 'YOUR EMAIL HERE' )->send(new ThankYou($order)); // please uncomment the use statement :)
     //     return back();
     // }
 
