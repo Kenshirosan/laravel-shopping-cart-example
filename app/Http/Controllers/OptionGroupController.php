@@ -13,30 +13,26 @@ class OptionGroupController extends Controller
         $optionGroups = OptionGroup::all();
         $deleteMethod = '/delete-option-group/';
         $action = $request->path();
+        $message = "Add an Option Group";
 
         if ($request->wantsJson()) {
             return response([$optionGroups, $deleteMethod], 200);
         }
 
-        return view('admin.addOptionGroup', compact('action'));
+        return view('admin.addOptionGroup', compact('action', 'message'));
     }
 
     public function store(Request $request)
     {
-        try {
-            $this->validate($request, [
-                'name' => 'required|string'
-            ]);
+        $this->validate($request, [
+            'name' => 'required|string'
+        ]);
 
-            OptionGroup::create([
-                'name' => request('name')
-            ]);
+        OptionGroup::create([
+            'name' => request('name')
+        ]);
 
-            return response(['success_message', 'Option Group added'], 200);
-
-        } catch (\Exception $e) {
-            return response(['error_message' => $e->getMessage() ], 400);
-        }
+        return response(['success_message', 'Option Group added'], 200);
     }
 
     public function destroy($id)

@@ -56,10 +56,13 @@
                     return swal("Wait!", `Please pick a second option for ${this.product.name}`, "warning");
                 }
 
-                await axios.post('/cart', this.$data);
-                await flash(`${this.product.name} was added to cart`);
-                await productitemscountchanged();
-                await this.resetOptions();
+                await axios.post('/cart', this.$data).then(res => {
+                    flash(`${this.product.name} was added to cart`);
+                    productitemscountchanged();
+                    this.resetOptions();
+                })
+                .catch(err => console.log(err));
+
             },
 
             resetOptions() {

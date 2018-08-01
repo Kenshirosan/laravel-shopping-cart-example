@@ -12,12 +12,13 @@ class SecondOptionGroupController extends Controller
         $optionGroups = SecondOptionGroup::all();
         $action = $request->path();
         $deleteMethod = '/delete-second-option-group/';
+        $message = 'Add a Second Option Group';
 
         if ($request->wantsJson()) {
             return response([$optionGroups, $deleteMethod], 200);
         }
 
-        return view('admin.addOptionGroup', compact('action'));
+        return view('admin.addOptionGroup', compact('action', 'message'));
     }
 
     public function store(Request $request)

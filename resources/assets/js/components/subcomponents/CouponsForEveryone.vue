@@ -1,14 +1,7 @@
 <template>
     <coupon-layout
-        info="Create unique coupons"
+        title="Create Coupons For Everyone"
+        info="These coupons must be deleted manually"
         url="/create-disposable-coupon">
     </coupon-layout>
 </template>
-
-<script>
-    import CouponLayout from './CouponLayout';
-
-    export default {
-        components: { CouponLayout },
-    }
-</script>

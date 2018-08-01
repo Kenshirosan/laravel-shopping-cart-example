@@ -6,11 +6,16 @@
         <div class="form-group">
             <label for="name" class="col-md-4 control-label">Category name</label>
             <div class="col-md-6">
-                <input id="name" type="text" min="0" step="5" class="form-control" placeholder="category name" name="name" v-model="category" autofocus required>
+                <input
+                    @focus="clearError"
+                    id="name"
+                    type="text"
+                    class="form-control"
+                    placeholder="category name"
+                    name="name"
+                    v-model="category" autofocus required>
 
-                    <span class="help-block alert alert-danger" v-if="error">
-                        <strong>{{ error }}</strong>
-                    </span>
+                <error :message="`${this.$data.error}`"></error>
 
             </div>
         </div>
@@ -27,23 +32,17 @@
     <div class="mb-100"></div>
 
     <div class="container" v-if="categories.length > 0">
-            <table class="table table-hover even" >
-                <thead>
-                <tr class="text-white">
-                    <td><h4>ID</h4></td>
-                    <td><h4>Category Name</h4></td>
-                    <td><h4>Action</h4></td>
-                </tr>
-                </thead>
-                <tbody v-for="item in categories">
-                    <tr class="text-info">
-                        <td>{{ item.id }}</td>
-                        <td>{{ item.name }}</td>
-                        <td><button class="btn btn-danger btn-sm" v-on:click="deleteCategory(item.id)">Delete</button></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <data-table
+            @deleted="getItems()"
+            @erase="deleteItems($event)"
+            id="ID"
+            findaname="Category"
+            action="Action"
+            :url="this.endpoint"
+            :data="this.categories"
+        >
+        </data-table>
+    </div>
 
     <div v-else class="text-center">
         <h1 class="text-info">No Categories created</h1>
@@ -53,28 +52,33 @@
 </template>
 
 <script>
-
     export default {
+
+        props: ['message', 'url'],
+
         data() {
             return {
                 category: '',
                 categories: [],
+                endpoint: this.url,
                 error: ''
             }
         },
 
         created() {
-            this.fetchCategories();
+            this.getItems();
         },
 
         methods: {
-            async fetchCategories() {
+            async getItems() {
                 await axios.get('/add-category')
                     .then(res => {
                         this.categories = res.data;
                     })
                     .catch(err => {
                         this.showError(err);
+
+                        setTimeout(()=> this.clearError(), 3000);
                     });
             },
 
@@ -83,19 +87,21 @@
 
                 await axios.post('/add-category', data)
                     .then(res => {
-                        this.fetchCategories();
+                        this.getItems();
                         flash('Category added');
                         this.category = '';
                     })
                     .catch(err => {
                         this.showError(err);
+
+                        setTimeout(()=> this.clearError(), 3000);
                     });
             },
 
-            async deleteCategory(id) {
+            async deleteItems(id) {
                 await axios.delete(`/delete-category/${id}`)
                     .then(res => {
-                        this.fetchCategories();
+                        this.getItems();
                         flash('Category deleted');
                     })
                     .catch(err => {
@@ -105,22 +111,11 @@
 
             showError(err) {
                 return this.error = err.response.data.message
+            },
+
+            clearError() {
+                this.error = ''
             }
         }
     }
 </script>
-
-<style>
-    .text-white {
-        color: white;
-    }
-    thead {
-        background-color: #605CA8;
-    }
-    tbody > tr:nth-child(odd) {
-        background-color: white;
-    }
-    .mb-100 {
-        margin-bottom: 100px;
-    }
-</style>

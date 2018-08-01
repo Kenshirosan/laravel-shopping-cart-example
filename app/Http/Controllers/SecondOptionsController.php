@@ -12,7 +12,6 @@ class SecondOptionsController extends Controller
     public function index(Request $request)
     {
         $optionGroups = SecondOptionGroup::with('options')->get();
-
         $action = $request->path();
 
         if ($request->wantsJson()) {
@@ -30,7 +29,7 @@ class SecondOptionsController extends Controller
                 'second_option_group_id' => request('option_group_id')
             ]);
 
-            return response($option, 200);
+            return response(['ok'], 200);
 
         } catch (\Exception $e) {
             return back()->with(['error_message' => $e->getMessage() ]);

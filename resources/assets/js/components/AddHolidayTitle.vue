@@ -7,11 +7,15 @@
                     <div class="form-group">
                         <label for="holiday_page_title" class="col-md-4 control-label">Enter a title</label>
                         <div class="col-md-6">
-                            <input id="holiday_page_title" type="text" class="form-control" name="holiday_page_title" v-model="holiday_page_title" autofocus required>
+                            <input
+                                @focus="clearError()"
+                                id="holiday_page_title"
+                                type="text"
+                                class="form-control"
+                                name="holiday_page_title"
+                                v-model="holiday_page_title" autofocus required>
 
-                                <span class="help-block" v-if="error">
-                                    <strong class="text-danger" v-html="error"></strong>
-                                </span>
+                                <error :message="`${this.$data.error}`"></error>
 
                             <br>
                             <div class="form-group">
@@ -24,15 +28,18 @@
                 </form>
             </div>
         </div>
-        <div class="row">
+        <div class="mb-100"></div>
+        <div class="row text-center">
             <div class="container" v-if="titles.length > 0">
-                <div class="col-md-6" v-for="item in titles">
-                    <p v-html="item.holiday_page_title"></p>
-                    <form @submit.prevent="deleteTitle(item.id)">
-                        <input type="hidden" name="itemid" id="itemid" v-model="item.id" value="item.id">
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                </div>
+                <data-table
+                    @deleted="getItems()"
+                    @erase="deleteItems($event)"
+                    id="ID"
+                    findaname="Title"
+                    action="Action"
+                    :data="this.titles"
+                >
+                </data-table>
             </div>
             <div class="container" v-else>
                 <div class="col-md-6">
@@ -46,12 +53,14 @@
 
 <script>
     export default {
+        props: ['message'],
 
         data() {
             return {
                 holiday_page_title: this.value,
                 titles: '',
-                error: ''
+                error: '',
+                endpoint: ''
             }
         },
 
@@ -73,7 +82,8 @@
                         }
                     })
                     .catch(err => {
-                        return this.error = err.response.data.error || err.response.data.message
+                        return
+                        this.showError(err);
                     });
             },
 
@@ -85,22 +95,52 @@
                         }
                     })
                     .catch((err) => {
-                        this.error = 'Something went wrong with your request, please contact your webmaster or try again later';
+                        return this.showError(err);
                     });
             },
 
-            async deleteTitle(id) {
+            async deleteItems(id) {
                 await axios.delete(`/holiday/${id}/delete`)
                     .then(res => {
                         if(res.status === 200) {
                             flash('success');
-                            this.getTitles();
+                            return this.getTitles();
                         }
                     })
                     .catch(err => {
-                        this.error = `${err.message}, Please try again later or contact your webmaster`;
+                        return this.showError(err);
                     });
+            },
+
+            showError(err) {
+                return this.error = err.response.data.error || err.response.data.message
+            },
+
+            clearError() {
+                this.error = ''
             }
         }
     }
 </script>
+
+<style>
+    .text-white {
+        color: white;
+    }
+    table {
+        width: 100%;
+    }
+    .table > thead > tr > td {
+        padding: 1em;
+    }
+    .table > tbody > tr > td {
+        padding: 0.5em;
+    }
+    thead {
+        background-color: #605CA8;
+    }
+
+    .mb-100 {
+        margin-bottom: 100px;
+    }
+</style>

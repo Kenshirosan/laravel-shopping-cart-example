@@ -13,7 +13,11 @@ class SalesController extends Controller
     	$products = Product::all();
     	$sales = Sales::with('products')->get();
 
-    	return view('admin.sales', compact('products', 'sales'));
+        if (request()->wantsJson()) {
+            return response([$products, $sales], 200);
+        }
+
+    	return view('admin.sales');
     }
 
     public function store(Request $request)
@@ -25,16 +29,16 @@ class SalesController extends Controller
 	    	]);
 
 	    	$percentage = request('percentage') / 100;
+
 	    	Sales::create([
 	    		'product_id' => request('product_id'),
 	    		'percentage' => $percentage
 	    	]);
 
-	    	return back()->with("flash", "Success");
+	    	return response(['ok'], 200);
 
-    	} catch (\Exception $e) {
-    		$e->getMessage();
-    	}
+    	} catch (\Exception $e) { $e->getMessage(); }
+
     }
 
     public function destroy($id)
@@ -43,6 +47,6 @@ class SalesController extends Controller
 
     	$sale->delete();
 
-    	return redirect('/sales')->with("flash", "Success");
+    	return response(["success_message", "Success"], 200);
     }
 }

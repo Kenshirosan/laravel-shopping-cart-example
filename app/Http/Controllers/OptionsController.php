@@ -12,6 +12,7 @@ class OptionsController extends Controller
 {
     public function index(Request $request)
     {
+
         $optionGroups = OptionGroup::with('options')->get();
 
         $action = $request->path();
@@ -28,7 +29,7 @@ class OptionsController extends Controller
         try {
             $option = Option::create([
                 'name' => request('name'),
-                'option_group_id' => request('option_group_id')
+                'option_group_id' => request('option_group_id'),
             ]);
 
             return response($option, 200);
@@ -42,8 +43,14 @@ class OptionsController extends Controller
     {
         $option = Option::where('id', $id)->firstOrFail();
 
-        $option->delete();
+        try {
+            $option->delete();
 
-        return response(['ok'], 200);
+            return response(['ok'], 200);
+
+        } catch (Exception $e) {
+            return response(['error_message' => $e->getMessage() ], 400);
+        }
+
     }
 }

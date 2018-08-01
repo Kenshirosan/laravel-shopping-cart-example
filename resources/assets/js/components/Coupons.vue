@@ -1,15 +1,14 @@
 <template>
-    <div>
-        <add-unique-coupons></add-unique-coupons>
-        <add-coupons-for-everyone></add-coupons-for-everyone>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <add-unique-coupons></add-unique-coupons>
+                </div>
+                <div class="col-md-6">
+                    <add-coupons-for-everyone></add-coupons-for-everyone>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
-
-<script>
-    import UniqueCoupons from './subcomponents/UniqueCoupons'
-    import CouponsForEveryone from './subcomponents/CouponsForEveryone'
-
-    export default {
-        components: { UniqueCoupons, CouponsForEveryone }
-    }
-</script>

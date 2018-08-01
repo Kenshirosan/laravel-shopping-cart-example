@@ -2,10 +2,7 @@
     <div>
         <div class="text-center">
             <h1>Items</h1>
-            <span class="help-block" v-if="error">
-                <strong class="text-danger">{{ error }}</strong>
-                <strong class="text-danger">{{ errorMessage }}</strong>
-            </span>
+            <error :message="`${this.$data.error}`"></error>
         </div>
 
         <div class="row">
@@ -55,8 +52,8 @@
             <table class="table table-hover even" v-for="optiongroup in items[0]">
                 <thead>
                 <tr class="text-white">
-                    <td><h4>ID</h4></td>
-                    <td><h4>Group Name</h4></td>
+                    <td><h4>{{ optiongroup.id }}</h4></td>
+                    <td><h4>{{ optiongroup.name }}</h4></td>
                     <td><h4>Action</h4></td>
                 </tr>
                 </thead>
@@ -73,9 +70,8 @@
 </template>
 
 <script>
-
     export default {
-        props: ['action'],
+        props: ['action', 'message'],
 
         data() {
             return {
@@ -97,6 +93,7 @@
                     name: this.$data.name,
                     option_group_id: this.$data.option_group_id
                 }
+
                 await axios.post(this.$props.action, option).then(res => {
                     this.fetchItems();
                     this.resetForm();
@@ -104,7 +101,7 @@
                 })
                 .catch(err => {
                     flash('Something went wrong', 'danger');
-                    this.error = err.response.data.message;
+                    this.showError(err);
                 })
             },
 
@@ -112,20 +109,33 @@
                 await axios.get(this.$props.action).then(response => {
                     this.items = response.data;
                 })
-                .catch(err => flash('Something went wrong'));
+                .catch(err => {
+                    flash('Something went wrong', 'danger');
+                    this.showError(err);
+                    setTimeout(()=> this.clearError(), 3000);
+                });
             },
 
             async deleteItem(id) {
                 await axios.delete(`${this.$props.action}/${id}`)
-                            .then(res => flash('success'))
-                            .catch(err => flash('Something went wrong', 'danger'));
-
-                await this.fetchItems();
+                            .then(res => {
+                                flash('success');
+                                this.fetchItems();
+                            })
+                            .catch(err => {
+                                flash('Something went wrong', 'danger');
+                                this.showError(err);
+                                setTimeout(()=> this.clearError(), 3000);
+                            });
             },
 
             resetForm() {
                 this.option_group_id = '',
                 this.name = ''
+            },
+
+            showError(err) {
+                return this.error = err.response.data.message
             },
 
             clearError() {

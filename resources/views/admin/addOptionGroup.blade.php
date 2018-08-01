@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
 @section('title')
-    add an option
+    Add an option
 @endsection
 
 @section('content')
-    <add-option-group action="{{ $action }}"></add-option-group>
+    <add-option-group action="{{ $action }}" message="{{ $message }}"></add-option-group>
 @endsection

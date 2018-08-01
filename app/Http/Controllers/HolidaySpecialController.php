@@ -22,6 +22,7 @@ class HolidaySpecialController extends Controller
         $titles = HolidayTitle::all();
 
         if (request()->wantsJson()) {
+
             return response($titles, 200);
         }
 

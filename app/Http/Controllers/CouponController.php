@@ -12,6 +12,7 @@ class CouponController extends Controller
 {
     public function index()
     {
+
         $attr = ['expires_at' => null, 'is_disposable' => true];
         $coupons = Promocode::where($attr)->get();
 
@@ -86,6 +87,7 @@ class CouponController extends Controller
         $coupon = Promocode::where('id', $id);
 
         $coupon->user_id = '';
+
         $coupon->delete();
 
         return response(['success_message', 'Coupon deleted'], 200);

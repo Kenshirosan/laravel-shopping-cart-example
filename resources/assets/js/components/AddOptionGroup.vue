@@ -1,10 +1,12 @@
 <template>
-    <div class="container">
+    <div>
+        <h1 class="text-center text-primary">{{ this.$props.message }}</h1>
         <form class="form-horizontal" @submit.prevent="addOptionGroup()">
             <div class="form-group">
                 <label for="name" class="col-md-4 control-label">Option Group Name</label>
                 <div class="col-md-6">
                     <input
+                        @focus="clearError()"
                         id="name"
                         placeholder="Steak, Eggs,something that have many ways of serving.."
                         type="text"
@@ -12,10 +14,7 @@
                         name="name"
                         v-model="name" autofocus required
                     >
-                        <span class="help-block" v-if="error">
-                            <strong class="text-danger" v-html="error"></strong>
-                        </span>
-
+                   <error :message="`${this.$data.error}`"></error>
                 </div>
             </div>
             <div class="form-group">
@@ -28,31 +27,25 @@
 
         <div class="mb-100"></div>
 
-        <div class="container" >
-            <table class="table table-hover even" v-if="optiongroups">
-                <thead>
-                <tr class="text-white">
-                    <td><h4>ID</h4></td>
-                    <td><h4>Group Name</h4></td>
-                    <td><h4>Action</h4></td>
-                </tr>
-                </thead>
-
-                <tbody>
-                    <tr v-for="group in optiongroups" class="text-info">
-                        <td>{{ group.id }}</td>
-                        <td>{{ group.name }}</td>
-                        <td><button class="btn btn-danger btn-sm" v-on:click="deleteGroup(group.id)">Delete</button></td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="container" v-if="optiongroups">
+            <data-table
+                @erase="deleteItem($event)"
+                id="ID"
+                findaname="Option Group"
+                :data="this.optiongroups"
+            >
+            </data-table>
         </div>
     </div>
 </template>
 
 <script>
+    import Error from './subcomponents/Error';
+
     export default {
-        props: ['action'],
+        components: { Error },
+
+        props: ['action', 'message'],
 
         data() {
             return {
@@ -75,6 +68,9 @@
                 })
                 .catch(err => {
                     this.error = err.message;
+
+                    this.showError(err);
+                    setTimeout(()=> this.clearError(), 3000);
                     flash('Something went wrong', 'danger')
                 });
             },
@@ -84,33 +80,35 @@
                 await axios.post(this.$props.action, group)
                     .then(res => {
                         this.fetchItems();
-                        this.resetForm();
+                        this.name = '';
                         return flash(`${group.name} successfully added`);
                     })
                     .catch(err => {
-                        this.error = err.message;
-
-                        setTimeout(err => {
-                            this.error = '';
-                        }, 2000)
+                        this.showError(err);
 
                         flash(`${err.message} an option with the same name probably exists`, 'danger')
                     });
             },
 
-            async deleteGroup(id) {
+            async deleteItem(id) {
                 await axios.delete(`${this.deletepath}${id}`)
                             .then(res => {
                                 flash(`${res.data[1]}`);
                                 this.fetchItems();
-                                this.resetForm();
                             })
-                            .catch(err => console.log(err))
+                            .catch(err => {
+                                this.showError(err);
+                                setTimeout(()=> this.clearError(), 3000);
+                            });
             },
 
-            resetForm() {
-                this.name = ''
+            showError(err) {
+                return this.error = err.response.data.message
             },
+
+            clearError() {
+                this.error = ''
+            }
         }
     }
 </script>
@@ -124,8 +122,5 @@
     }
     thead {
         background-color: #605CA8;
-    }
-    tbody > tr:nth-child(odd) {
-        background-color: white;
     }
 </style>
