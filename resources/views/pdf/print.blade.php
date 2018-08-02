@@ -5,7 +5,10 @@
 
 @section('content')
 <div class="row">
-    <div class="col-md-6">
+    <div class="text-center">
+        <a href="/customer-orders" class="btn btn-success btn-lg"><h1>Go Back</h1></a>
+    </div>
+    <div class="col-md-12">
         <table class="table">
             <th><strong>Name</strong></th>
             <th><strong>Last Name</strong></th>

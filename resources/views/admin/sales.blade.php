@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('title')
-        Create a sale
+    Create a sale
 @endsection
 
 @section('content')

@@ -37,4 +37,14 @@ class UserOrdered implements ShouldBroadcast
     {
         return new PrivateChannel('user_ordered');
     }
+
+    /**
+     * Get the data to broadcast.
+     *
+     * @return array
+     */
+    public function broadcastWith()
+    {
+        return array_merge($this->order->toArray());
+    }
 }

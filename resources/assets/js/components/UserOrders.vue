@@ -1,6 +1,6 @@
 <template>
 
-    <div class="col-md-6 col-md-offset-3" v-if="orders.length > 0">
+    <!-- <div class="col-md-6 col-md-offset-3" v-if="orders.length > 0">
         <div class="row">
             <div class="col-md-12">
                 <h2 class="btn btn-lg btn-default pull-right"><a href="/calendar">Calendar</a></h2>
@@ -35,7 +35,19 @@
                 </div>
             </li>
         </ul>
-    </div>
+    </div> -->
+                <div v-if="orders.length > 0">
+                    <data-table
+                        @deleted="fetchTodaysOrders()"
+                        @erase="hideOrder($event)"
+                        @show="showOrder($event)"
+                        id="ID"
+                        findaname="Order name"
+                        action="Action"
+                        :data="orders"
+                    >
+                    </data-table>
+                </div>
     <div class="col-md-6 col-md-offset-3" v-else>
         <div class="row">
             <h2 class="text-info text-center">

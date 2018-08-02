@@ -42,7 +42,7 @@ class Order extends Model
      */
     public function status()
     {
-        return $this->belongsTo(Status::class);
+        return $this->belongsTo(Status::class, 'status_id');
     }
 
     public function isHidden()
@@ -85,7 +85,7 @@ class Order extends Model
         $when = 'created_at';
         $today =  date('Y-m-d');
 
-        return $this->whereDate($when, $today)->orderBy('id', 'desc')->get();
+        return $this->whereDate($when, $today)->with('status')->orderBy('id', 'desc')->get();
     }
 
     public function todaysOrdersCount()

@@ -42,6 +42,7 @@
                         @can('see-employee-menu')
                             <li><a href="/customer-orders">Today's order</a></li>
                             <li><a href="/calendar">Calendar</a></li>
+                            <li><a href="#!"><order-notification></order-notification></a></li>
                         @endcan
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

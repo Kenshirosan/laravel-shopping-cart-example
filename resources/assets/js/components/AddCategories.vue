@@ -2,7 +2,7 @@
     <div>
         <h1 class="text-center text-info">Create a Category</h1>
     <hr>
-    <form @submit.prevent="addCategory()" class="form-horizontal" method="POST">
+    <form @submit.prevent="addCategory()" class="form-horizontal">
         <div class="form-group">
             <label for="name" class="col-md-4 control-label">Category name</label>
             <div class="col-md-6">
