@@ -20170,6 +20170,7 @@ Vue.component('add-categories', __webpack_require__(308));
 Vue.component('coupons', __webpack_require__(311));
 Vue.component('sales', __webpack_require__(313));
 Vue.component('order-notification', __webpack_require__(338));
+Vue.component('global-order-notification', __webpack_require__(341));
 
 Vue.component('add-unique-coupons', __webpack_require__(316));
 Vue.component('add-coupons-for-everyone', __webpack_require__(318));
@@ -78748,7 +78749,7 @@ var render = function() {
       : _vm._e(),
     _vm._v(" "),
     this.URI == "/customer-orders"
-      ? _c("div", { staticClass: "alert alert-success text-center" }, [
+      ? _c("div", { staticClass: "alert alert-warning text-center" }, [
           _vm._m(1)
         ])
       : _vm._e(),
@@ -79096,6 +79097,91 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-2f0c79b2", module.exports)
+  }
+}
+
+/***/ }),
+/* 341 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(342)
+/* template */
+var __vue_template__ = __webpack_require__(343)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/GlobalOrderNotification.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-ec5af5e2", Component.options)
+  } else {
+    hotAPI.reload("data-v-ec5af5e2", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 342 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mounted: function mounted() {
+        Echo.private('user_ordered').listen('UserOrdered', function (order) {
+            flash('New Order');
+        });
+    }
+});
+
+/***/ }),
+/* 343 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div")
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-ec5af5e2", module.exports)
   }
 }
 

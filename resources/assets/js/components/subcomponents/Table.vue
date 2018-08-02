@@ -3,7 +3,7 @@
         <div class="text-center mb-100" v-if="this.URI != '/customer-orders'">
             <a href="/customer-orders" class="btn btn-success btn-lg"><h1>Go to Orders Page</h1></a>
         </div>
-        <div class="alert alert-success text-center" v-if="this.URI == '/customer-orders'">
+        <div class="alert alert-warning text-center" v-if="this.URI == '/customer-orders'">
             <span><h1>Your Customers Ordered</h1></span>
         </div>
         <table class="table table-hover table-striped table-bordered even">

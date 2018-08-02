@@ -23,6 +23,7 @@ Vue.component('add-categories', require('./components/AddCategories'));
 Vue.component('coupons', require('./components/Coupons'));
 Vue.component('sales', require('./components/Sales'));
 Vue.component('order-notification', require('./components/OrderNotification'));
+Vue.component('global-order-notification', require('./components/GlobalOrderNotification'));
 
 Vue.component('add-unique-coupons', require('./components/subcomponents/UniqueCoupons'));
 Vue.component('add-coupons-for-everyone', require('./components/subcomponents/CouponsForEveryone'));
