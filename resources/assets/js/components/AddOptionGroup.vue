@@ -14,7 +14,7 @@
                         name="name"
                         v-model="name" autofocus required
                     >
-                   <error :message="`${this.$data.error}`"></error>
+                   <error :message="`${this.error}`"></error>
                 </div>
             </div>
             <div class="form-group">
@@ -40,10 +40,7 @@
 </template>
 
 <script>
-    import Error from './subcomponents/Error';
-
     export default {
-        components: { Error },
 
         props: ['action', 'message'],
 
@@ -70,8 +67,6 @@
                     this.error = err.message;
 
                     this.showError(err);
-                    setTimeout(()=> this.clearError(), 3000);
-                    flash('Something went wrong', 'danger')
                 });
             },
 
@@ -85,8 +80,6 @@
                     })
                     .catch(err => {
                         this.showError(err);
-
-                        flash(`${err.message} an option with the same name probably exists`, 'danger')
                     });
             },
 
@@ -112,15 +105,3 @@
         }
     }
 </script>
-
-<style>
-    .mb-100 {
-        margin-bottom: 100px;
-    }
-    .text-white {
-        color: white;
-    }
-    thead {
-        background-color: #605CA8;
-    }
-</style>

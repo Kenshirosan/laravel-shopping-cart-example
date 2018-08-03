@@ -10,8 +10,8 @@ class SalesController extends Controller
 {
     public function index()
     {
-    	$products = Product::all();
-    	$sales = Sales::with('products')->get();
+        $products = Product::with('sales')->get();
+        $sales = Sales::with('products')->get();
 
         if (request()->wantsJson()) {
             return response([$products, $sales], 200);
@@ -22,19 +22,18 @@ class SalesController extends Controller
 
     public function store(Request $request)
     {
-    	try {
-	    	request()->validate([
-	            'percentage' => 'required|digits:2|numeric',
-	    		'product_id' => 'required|exists:products,id',
-	    	]);
+        try {
+            request()->validate([
+                'percentage' => 'required|digits:2|numeric',
+                'product_id' => 'required|exists:products,id',
+            ]);
 
-	    	$percentage = request('percentage') / 100;
+            $percentage = request('percentage') / 100;
 
-	    	Sales::create([
-	    		'product_id' => request('product_id'),
-	    		'percentage' => $percentage
-	    	]);
-
+            Sales::create([
+                'product_id' => request('product_id'),
+                'percentage' => $percentage
+            ]);
 	    	return response(['ok'], 200);
 
     	} catch (\Exception $e) { $e->getMessage(); }

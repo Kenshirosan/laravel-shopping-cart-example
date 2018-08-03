@@ -36,7 +36,6 @@
                     @erase="deleteItems($event)"
                     id="ID"
                     findaname="Title"
-                    action="Action"
                     :data="this.titles"
                 >
                 </data-table>

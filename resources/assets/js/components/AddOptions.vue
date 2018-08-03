@@ -57,6 +57,7 @@
                     <td><h4>Action</h4></td>
                 </tr>
                 </thead>
+
                 <tbody>
                     <tr v-for="option in optiongroup.options" class="text-info">
                         <td>{{ option.id }}</td>
@@ -118,15 +119,15 @@
 
             async deleteItem(id) {
                 await axios.delete(`${this.$props.action}/${id}`)
-                            .then(res => {
-                                flash('success');
-                                this.fetchItems();
-                            })
-                            .catch(err => {
-                                flash('Something went wrong', 'danger');
-                                this.showError(err);
-                                setTimeout(()=> this.clearError(), 3000);
-                            });
+                    .then(res => {
+                        flash('success');
+                        this.fetchItems();
+                    })
+                    .catch(err => {
+                        flash('Something went wrong', 'danger');
+                        this.showError(err);
+                        setTimeout(()=> this.clearError(), 3000);
+                    });
             },
 
             resetForm() {
@@ -145,7 +146,7 @@
     }
 </script>
 
-<style>
+<style scoped>
     .text-white {
         color: white;
     }

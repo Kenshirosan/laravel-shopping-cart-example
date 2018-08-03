@@ -1,9 +1,10 @@
 <template>
     <div class="container">
         <div class="row">
+            <error :message="this.error"></error>
             <div class="panel-body">
 
-                <form @submit.prevent="addProductSale"class="form-horizontal">
+                <form @submit.prevent="addItems"class="form-horizontal">
                     <div class="panel panel-info">
                         <div class="panel-heading">
                             Add sale
@@ -19,31 +20,27 @@
                                 <div class="col-md-12">
                                     <strong>Percentage</strong>
                                     <input
+                                        @focus="clearError"
                                         type="number"
                                         name="percentage"
                                         class="form-control"
                                         v-model="percentage"
                                         placeholder="Percentage" required/>
                                 </div>
-
-                                    <span class="help-block">
-                                        <strong class="text-dager">{{ error }}</strong>
-                                    </span>
-
                             </div>
 
                             <div class="form-group">
                                 <div class="col-md-12">
                                     <select v-model="id" class="options" required autofocus>
                                         <option value="" class="reset">Choose</option>
-                                            <option
-                                                v-for="product in products"
-                                                v-if="! product.is_on_sale"
-                                                class="options"
-                                                name="product_id"
-                                                v-text="product.name"
-                                                v-bind:value="product.id">
-                                            </option>
+                                        <option
+                                            v-for="product in products"
+                                            v-if="! product.is_on_sale"
+                                            class="options"
+                                            name="product_id"
+                                            v-text="product.name"
+                                            v-bind:value="product.id">
+                                        </option>
                                     </select>
                                 </div>
                             </div>
@@ -71,8 +68,7 @@
                         @erase="deleteItems($event)"
                         id="ID"
                         findaname="Product on Sale"
-                        action="Action"
-                        :data="this.sales"
+                        :data="this.items"
                     >
                     </data-table>
                 </div>
@@ -82,7 +78,10 @@
 </template>
 
 <script>
+    import requests from '../mixins/requests';
+
     export default {
+        mixins: [requests],
 
         data() {
             return {
@@ -90,7 +89,7 @@
                 id: '',
                 error: '',
                 products: [],
-                sales: []
+                items: [],
             }
         },
 
@@ -99,36 +98,6 @@
         },
 
         methods: {
-            async getItems() {
-                await axios.get('/sales')
-                    .then(res => {
-                        this.products = res.data[0];
-                        this.sales = res.data[1];
-                    })
-                    .catch(err => console.log(err));
-            },
-
-            async addProductSale() {
-                const data = { percentage: this.percentage, product_id: this.id};
-
-                await axios.post('/sales', data)
-                    .then(res => {
-                        flash('Success');
-                        this.getItems();
-                        this.resetForm();
-                    })
-                    .catch(err => console.log(err));
-            },
-
-            async deleteItems(id) {
-                await axios.delete(`/delete-sales/${id}`)
-                    .then(res => {
-                        flash('Sucess');
-                        this.getItems();
-                    })
-                    .catch(err => console.log(err));
-            },
-
             resetForm() {
                 this.percentage = '';
                 this.id = '';

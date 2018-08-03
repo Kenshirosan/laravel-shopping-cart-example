@@ -37,7 +37,6 @@
             @erase="deleteItems($event)"
             id="ID"
             findaname="Category"
-            action="Action"
             :url="this.endpoint"
             :data="this.categories"
         >

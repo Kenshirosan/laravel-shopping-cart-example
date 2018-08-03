@@ -144,6 +144,10 @@ class UserController extends Controller
                 return redirect('/delete-user')->with('error_message', 'Admin can\'t be deleted !');
             }
 
+            if(!$employee->isAdmin() || !$employee->isEmployee()){
+                return redirect('/delete-user')->with('error_message', 'You can\'t delete your customers !');
+            }
+
             $employee->delete();
             return redirect('/delete-user')->with('success_message', 'Employee fired !');
         }

@@ -3,7 +3,7 @@
         <div class="text-center mb-100" v-if="this.URI != '/customer-orders'">
             <a href="/customer-orders" class="btn btn-success btn-lg"><h1>Go to Orders Page</h1></a>
         </div>
-        <div class="alert alert-warning text-center" v-if="this.URI == '/customer-orders'">
+        <div class="alert alert-warning text-center mb-100" v-if="this.URI == '/customer-orders'">
             <span><h1>Your Customers Ordered</h1></span>
         </div>
         <table class="table table-hover table-striped table-bordered even">
@@ -16,11 +16,13 @@
                     <td v-if="this.$props.findaname == 'Order name'"><h4>See Order</h4></td>
                 </tr>
             </thead>
-            <tbody >
+            <tbody>
                 <tr class="text-info" v-for="item in this.$props.data">
                     <td>{{ item.id }}</td>
-                    <td>{{ item.reward || item.name || item.holiday_page_title || item.products.name}}</td>
-                    <td v-if="item.status"  :class="classes(item.status.name)"><strong >{{ item.status.name }}</strong></td>
+                    <td>{{ item.reward || item.name || item.holiday_page_title || item.products.name}}
+                        <p v-if="item.percentage">{{ item.percentage * 100 }}% Off</p>
+                    </td>
+                    <td v-if="item.status" :class="classes(item.status.name)"><strong >{{ item.status.name }}</strong></td>
                     <td>
                         <button
                             v-if="item.hiddenOrder"
@@ -54,7 +56,6 @@
             return {
                 identifier: this.id,
                 title: this.findaname,
-                method: this.action,
                 items: this.$props.data,
                 endpoint: this.url
             }
