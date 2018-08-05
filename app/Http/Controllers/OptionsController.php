@@ -12,45 +12,31 @@ class OptionsController extends Controller
 {
     public function index(Request $request)
     {
-
         $optionGroups = OptionGroup::with('options')->get();
 
-        $action = $request->path();
-
         if ($request->wantsJson()) {
-            return response([$optionGroups], 200);
+            return response($optionGroups, 200);
         }
 
-        return view('admin.addOptions', compact('action'));
+        return view('admin.addOptions');
     }
 
     public function store(OptionRequest $request)
     {
-        try {
-            $option = Option::create([
-                'name' => request('name'),
-                'option_group_id' => request('option_group_id'),
-            ]);
+        $option = Option::create([
+            'name' => request('name'),
+            'option_group_id' => request('option_group_id'),
+        ]);
 
-            return response($option, 200);
-
-        } catch (\Exception $e) {
-            return back()->with(['error_message' => $e->getMessage() ]);
-        }
+        return response($option, 200);
     }
 
     public function destroy($id)
     {
         $option = Option::where('id', $id)->firstOrFail();
 
-        try {
-            $option->delete();
+        $option->delete();
 
-            return response(['ok'], 200);
-
-        } catch (Exception $e) {
-            return response(['error_message' => $e->getMessage() ], 400);
-        }
-
+        return response(['ok'], 200);
     }
 }

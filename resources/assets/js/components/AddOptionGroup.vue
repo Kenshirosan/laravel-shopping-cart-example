@@ -1,7 +1,13 @@
 <template>
     <div>
-        <h1 class="text-center text-primary">{{ this.$props.message }}</h1>
-        <form class="form-horizontal" @submit.prevent="addOptionGroup()">
+        <h1
+            v-if="this.URI === '/second-option-group'"
+            class="text-center text-primary"
+            >Add a Second Option Group
+        </h1>
+        <h1 class="text-center text-primary" v-else>Add an Option Group</h1>
+
+        <form class="form-horizontal" @submit.prevent="addItems()">
             <div class="form-group">
                 <label for="name" class="col-md-4 control-label">Option Group Name</label>
                 <div class="col-md-6">
@@ -27,12 +33,12 @@
 
         <div class="mb-100"></div>
 
-        <div class="container" v-if="optiongroups">
+        <div class="container" v-if="items">
             <data-table
-                @erase="deleteItem($event)"
+                @erase="deleteItems($event)"
                 id="ID"
                 findaname="Option Group"
-                :data="this.optiongroups"
+                :data="this.items"
             >
             </data-table>
         </div>
@@ -40,67 +46,17 @@
 </template>
 
 <script>
-    export default {
+    import requests from '../mixins/requests';
 
-        props: ['action', 'message'],
+    export default {
+        mixins: [requests],
 
         data() {
             return {
                 error: '',
-                optiongroups: '',
                 name: '',
-                deletepath: ''
-            }
-        },
-
-        created() {
-            this.fetchItems();
-        },
-
-        methods: {
-            async fetchItems() {
-                await axios.get(this.$props.action).then(response => {
-                    this.optiongroups = response.data[0];
-                    this.deletepath = response.data[1];
-                })
-                .catch(err => {
-                    this.error = err.message;
-
-                    this.showError(err);
-                });
-            },
-
-            async addOptionGroup() {
-                const group = { name: this.$data.name }
-                await axios.post(this.$props.action, group)
-                    .then(res => {
-                        this.fetchItems();
-                        this.name = '';
-                        return flash(`${group.name} successfully added`);
-                    })
-                    .catch(err => {
-                        this.showError(err);
-                    });
-            },
-
-            async deleteItem(id) {
-                await axios.delete(`${this.deletepath}${id}`)
-                            .then(res => {
-                                flash(`${res.data[1]}`);
-                                this.fetchItems();
-                            })
-                            .catch(err => {
-                                this.showError(err);
-                                setTimeout(()=> this.clearError(), 3000);
-                            });
-            },
-
-            showError(err) {
-                return this.error = err.response.data.message
-            },
-
-            clearError() {
-                this.error = ''
+                items: '',
+                optionalItems: '',
             }
         }
     }

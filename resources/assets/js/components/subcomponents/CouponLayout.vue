@@ -3,10 +3,10 @@
         <div class="text-center">
             <h1 class="text-info">{{ this.$props.title }}</h1>
             <p><small><em> {{ message }}</em></small></p>
-            <error :message="`${this.$data.error}`"> Some coupons did not load correctly, please contact your webmaster</error>
+            <error :message="error"> Some coupons did not load correctly, please contact your webmaster</error>
         </div>
         <hr>
-        <form @submit.prevent="addCoupons()" class="form-horizontal">
+        <form @submit.prevent="addItems()" class="form-horizontal">
             <div class="form-group">
                 <label for="quantity" class="col-md-4 control-label">How many coupons ?</label>
                 <div class="col-md-6">
@@ -48,13 +48,13 @@
         </form>
         <div class="mb-100"></div>
 
-        <div v-if="coupons.length > 0">
+        <div v-if="items.length > 0">
             <data-table
-                @erase="deleteItem($event)"
+                @erase="deleteItems($event)"
                 id="ID"
                 findaname="Reward"
                 :url="this.endpoint"
-                :data="this.coupons"
+                :data="this.items"
             >
             </data-table>
         </div>
@@ -66,8 +66,10 @@
 </template>
 
 <script>
+    import requests from '../../mixins/requests';
 
     export default {
+        mixins: [requests],
 
         props: ['info', 'url', 'title'],
 
@@ -78,66 +80,9 @@
                 coupons: '',
                 reward: '',
                 quantity: '',
-                error: ''
+                error: '',
+                items: ''
             }
-        },
-
-        created() {
-            this.getItems();
-        },
-
-        methods: {
-            async getItems() {
-                await axios.get(this.endpoint)
-                    .then(res => {
-                        this.coupons = res.data;
-                    })
-                    .catch(err => {
-                        this.showError(err);
-                    })
-            },
-
-            async addCoupons() {
-                const data = { quantity: this.quantity, reward: this.reward };
-
-                await axios.post(this.endpoint, data)
-                .then(res => {
-                    this.coupons = res.data;
-                    flash('Coupon added')
-                    this.resetForm();
-                    this.getItems();
-                })
-                .catch(err => {
-                    this.showError(err);
-                });
-            },
-
-            async deleteItem(id) {
-                await axios.delete(`/coupons/${id}/delete`)
-                    .then(res => {
-                        this.getItems();
-                        flash('Coupon deleted');
-                    })
-                    .catch(err => this.showError(err))
-            },
-
-            resetForm() {
-                this.quantity = '';
-                this.reward = '';
-            },
-
-            showError(err) {
-                return this.error = err.response.data.message;
-            },
-
-            clearError() {
-                this.error = ''
-            },
-
-            resetForm() {
-                this.quantity = '';
-                this.reward = '';
-            },
         }
     }
 </script>

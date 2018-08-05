@@ -9,36 +9,26 @@ class SecondOptionGroupController extends Controller
 {
     public function index(Request $request)
     {
-        $optionGroups = SecondOptionGroup::all();
-        $action = $request->path();
-        $deleteMethod = '/delete-second-option-group/';
-        $message = 'Add a Second Option Group';
+        $optionGroups = SecondOptionGroup::with('options')->get();
 
         if ($request->wantsJson()) {
-            return response([$optionGroups, $deleteMethod], 200);
+            return response($optionGroups, 200);
         }
 
-        return view('admin.addOptionGroup', compact('action', 'message'));
+        return view('admin.addOptionGroup');
     }
 
     public function store(Request $request)
     {
-        try {
-            $this->validate($request, [
-                'name' => 'required|string'
-            ]);
+        $this->validate($request, [
+            'name' => 'required|string'
+        ]);
 
-            SecondOptionGroup::create([
-                'name' => request('name')
-            ]);
+        SecondOptionGroup::create([
+            'name' => request('name')
+        ]);
 
-            return response(['success_message', 'Option Group added'], 200);
-
-        } catch (\Exception $e) {
-            return response(['error_message' => $e->getMessage() ], 400);
-        }
-
-        return back()->with('success_message', 'Option Group added');
+        return response(['success_message', 'Option Group added'], 200);
     }
 
     public function destroy($id)

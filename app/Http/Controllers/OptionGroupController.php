@@ -10,16 +10,13 @@ class OptionGroupController extends Controller
 {
     public function index(Request $request)
     {
-        $optionGroups = OptionGroup::all();
-        $deleteMethod = '/delete-option-group/';
-        $action = $request->path();
-        $message = "Add an Option Group";
+        $optionGroups = OptionGroup::with('options')->get();
 
         if ($request->wantsJson()) {
-            return response([$optionGroups, $deleteMethod], 200);
+            return response($optionGroups, 200);
         }
 
-        return view('admin.addOptionGroup', compact('action', 'message'));
+        return view('admin.addOptionGroup');
     }
 
     public function store(Request $request)

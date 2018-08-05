@@ -34,12 +34,13 @@
                                 <select v-model="id" class="options" required autofocus>
                                     <option value="" class="reset">Choose</option>
                                     <option
-                                        v-for="product in products"
-                                        v-if="! product.is_on_sale"
+                                        v-for="product in prods"
+                                        v-if="!product.is_on_sale"
                                         class="options"
                                         name="product_id"
                                         v-text="product.name"
-                                        v-bind:value="product.id">
+                                        v-bind:value="product.id"
+                                        >
                                     </option>
                                 </select>
                             </div>
@@ -55,7 +56,7 @@
             </form>
         </div>
 
-            <div class="row" v-if="!sales">
+            <div class="row" v-if="!items">
                 <div class="container">
                     No product on sale.
                 </div>
@@ -67,7 +68,7 @@
                         @erase="deleteItems($event)"
                         id="ID"
                         findaname="Product on Sale"
-                        :data="this.sales"
+                        :data="this.items"
                     >
                     </data-table>
                 </div>
@@ -82,40 +83,17 @@
     export default {
         mixins: [requests],
 
+        props: ['products'],
+
         data() {
             return {
                 percentage: '',
                 id: '',
                 error: '',
-                products: [],
-                sales: [],
-            }
-        },
-
-        created() {
-            this.getItems();
-        },
-
-        methods: {
-            resetForm() {
-                this.percentage = '';
-                this.id = '';
+                items: [],
+                optionalItems: [],
+                prods: JSON.parse(this.products)
             }
         }
-
     }
 </script>
-
-<style scoped>
-    .fade-enter-active, .fade-leave-active {
-      transition: opacity 0.2s ease-out;
-    }
-
-    .fade-enter, .fade-leave-to {
-      opacity: 0;
-    }
-
-    .panel {
-      transition: all 1s ease-out;
-    }
-</style>

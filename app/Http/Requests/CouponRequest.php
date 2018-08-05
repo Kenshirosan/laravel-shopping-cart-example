@@ -25,7 +25,7 @@ class CouponRequest extends FormRequest
     {
         return [
             'quantity' => 'required|numeric',
-            'reward' => 'required|numeric'
+            'reward' => 'required|numeric',
         ];
     }
 }

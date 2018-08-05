@@ -198,7 +198,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'Add an option group',
-                    'url'  => '/add-option-group',
+                    'url'  => '/option-group',
                     'icon' => 'glyphicon glyphicon-option-horizontal',
                     'icon_color' => 'green',
                 ],
@@ -210,7 +210,7 @@ return [
                 ],
                 [
                     'text' => 'Add a second option group',
-                    'url'  => '/add-second-option-group',
+                    'url'  => '/second-option-group',
                     'icon' => 'glyphicon glyphicon-option-horizontal',
                     'icon_color' => 'green',
                 ],

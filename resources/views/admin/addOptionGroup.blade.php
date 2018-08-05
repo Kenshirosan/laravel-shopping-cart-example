@@ -5,5 +5,5 @@
 @endsection
 
 @section('content')
-    <add-option-group action="{{ $action }}" message="{{ $message }}"></add-option-group>
+    <add-option-group></add-option-group>
 @endsection

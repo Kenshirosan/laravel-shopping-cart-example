@@ -5,5 +5,5 @@
 @endsection
 
 @section('content')
-    <sales></sales>
+    <sales products="{{ $products }}"></sales>
 @endsection

@@ -10,14 +10,14 @@ class SalesController extends Controller
 {
     public function index()
     {
-        $products = Product::with('sales')->get();
+        $products = Product::all();
         $sales = Sales::with('products')->get();
 
         if (request()->wantsJson()) {
-            return response([$products, $sales], 200);
+            return response($sales, 200);
         }
 
-    	return view('admin.sales');
+    	return view('admin.sales', compact('products'));
     }
 
     public function store(Request $request)
