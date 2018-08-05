@@ -1,59 +1,58 @@
 <template>
     <div class="container">
         <div class="row">
+
             <error :message="this.error"></error>
-            <div class="panel-body">
 
-                <form @submit.prevent="addItems"class="form-horizontal">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            Add sale
+            <form @submit.prevent="addItems"class="form-horizontal">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        Add sale
+                    </div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <h4>All fields are mandatory</h4>
+                            </div>
                         </div>
-                        <div class="panel-body">
-
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <h4>All fields are mandatory</h4>
-                                </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <strong>Percentage</strong>
+                                <input
+                                    @focus="clearError"
+                                    type="number"
+                                    name="percentage"
+                                    class="form-control"
+                                    v-model="percentage"
+                                    placeholder="Percentage" required/>
                             </div>
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <strong>Percentage</strong>
-                                    <input
-                                        @focus="clearError"
-                                        type="number"
-                                        name="percentage"
-                                        class="form-control"
-                                        v-model="percentage"
-                                        placeholder="Percentage" required/>
-                                </div>
-                            </div>
+                        </div>
 
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <select v-model="id" class="options" required autofocus>
-                                        <option value="" class="reset">Choose</option>
-                                        <option
-                                            v-for="product in products"
-                                            v-if="! product.is_on_sale"
-                                            class="options"
-                                            name="product_id"
-                                            v-text="product.name"
-                                            v-bind:value="product.id">
-                                        </option>
-                                    </select>
-                                </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <select v-model="id" class="options" required autofocus>
+                                    <option value="" class="reset">Choose</option>
+                                    <option
+                                        v-for="product in products"
+                                        v-if="! product.is_on_sale"
+                                        class="options"
+                                        name="product_id"
+                                        v-text="product.name"
+                                        v-bind:value="product.id">
+                                    </option>
+                                </select>
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <input type="submit" value="Add Sale" class="btn btn-primary">
-                                </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <input type="submit" value="Add Sale" class="btn btn-primary">
                             </div>
                         </div>
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
 
             <div class="row" v-if="!sales">
@@ -68,7 +67,7 @@
                         @erase="deleteItems($event)"
                         id="ID"
                         findaname="Product on Sale"
-                        :data="this.items"
+                        :data="this.sales"
                     >
                     </data-table>
                 </div>
@@ -89,7 +88,7 @@
                 id: '',
                 error: '',
                 products: [],
-                items: [],
+                sales: [],
             }
         },
 
@@ -106,3 +105,17 @@
 
     }
 </script>
+
+<style scoped>
+    .fade-enter-active, .fade-leave-active {
+      transition: opacity 0.2s ease-out;
+    }
+
+    .fade-enter, .fade-leave-to {
+      opacity: 0;
+    }
+
+    .panel {
+      transition: all 1s ease-out;
+    }
+</style>
