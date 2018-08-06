@@ -14,11 +14,6 @@ export default {
         async getItems() {
             await axios.get(this.URI)
                 .then(res => {
-                    if (res.data[1]) {
-                        this.items = res.data[0];
-                        this.optionalItems = res.data[1];
-                    }
-
                     this.items = res.data;
                 })
                 .catch(err => this.showError(err));

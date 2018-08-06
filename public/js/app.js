@@ -6434,11 +6434,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                             case 0:
                                 _context.next = 2;
                                 return axios.get(this.URI).then(function (res) {
-                                    if (res.data[1]) {
-                                        _this.items = res.data[0];
-                                        _this.optionalItems = res.data[1];
-                                    }
-
                                     _this.items = res.data;
                                 }).catch(function (err) {
                                     return _this.showError(err);
