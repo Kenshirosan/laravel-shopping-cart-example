@@ -103,7 +103,6 @@
                 identifier: this.id,
                 title: this.findaname,
                 items: this.$props.data,
-                optionalItems: this.$props.options || [],
                 endpoint: this.url,
             }
         },

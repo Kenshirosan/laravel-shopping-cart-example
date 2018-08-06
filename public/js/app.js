@@ -75980,8 +75980,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             error: '',
             name: '',
-            items: '',
-            optionalItems: ''
+            items: ''
         };
     }
 });
@@ -76730,6 +76729,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             error: '',
+            name: '',
             items: ''
         };
     },
@@ -76806,7 +76806,7 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _c("error", { attrs: { message: this.error } })
+              _c("error", { attrs: { message: _vm.error } })
             ],
             1
           )
@@ -77087,7 +77087,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -77100,7 +77099,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             id: '',
             error: '',
             items: []
-            // optionalItems: []
         };
     }
 });
@@ -77253,11 +77251,7 @@ var render = function() {
             { staticClass: "container" },
             [
               _c("data-table", {
-                attrs: {
-                  id: "ID",
-                  findaname: "Product on Sale",
-                  data: this.items
-                },
+                attrs: { findaname: "Product on Sale", data: this.items },
                 on: {
                   erase: function($event) {
                     _vm.deleteItems($event)
@@ -78380,7 +78374,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             identifier: this.id,
             title: this.findaname,
             items: this.$props.data,
-            optionalItems: this.$props.options || [],
             endpoint: this.url
         };
     },

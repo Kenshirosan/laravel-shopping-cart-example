@@ -68,7 +68,6 @@
                 <div class="container">
                     <data-table
                         @erase="deleteItems($event)"
-                        id="ID"
                         findaname="Product on Sale"
                         :data="this.items"
                     >
@@ -91,7 +90,6 @@
                 id: '',
                 error: '',
                 items: [],
-                // optionalItems: []
             }
         }
     }

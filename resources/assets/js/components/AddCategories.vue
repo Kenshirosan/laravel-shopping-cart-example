@@ -15,7 +15,7 @@
                     name="name"
                     v-model="name" autofocus required>
 
-                <error :message="this.error"></error>
+                <error :message="error"></error>
 
             </div>
         </div>
@@ -58,6 +58,7 @@
         data() {
             return {
                 error: '',
+                name: '',
                 items: ''
             }
         },

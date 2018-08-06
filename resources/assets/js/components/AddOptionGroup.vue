@@ -56,7 +56,6 @@
                 error: '',
                 name: '',
                 items: '',
-                optionalItems: '',
             }
         }
     }

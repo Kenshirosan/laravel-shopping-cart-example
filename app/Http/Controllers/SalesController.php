@@ -35,7 +35,6 @@ class SalesController extends Controller
             ]);
 
 	    	return response(['ok'], 200);
-
     }
 
     public function destroy($id)
