@@ -2,7 +2,7 @@
     <div>
         <h1 class="text-center text-info">Create a Category</h1>
     <hr>
-    <form @submit.prevent="addCategory()" class="form-horizontal">
+    <form @submit.prevent="addItems()" class="form-horizontal">
         <div class="form-group">
             <label for="name" class="col-md-4 control-label">Category name</label>
             <div class="col-md-6">
@@ -13,9 +13,9 @@
                     class="form-control"
                     placeholder="category name"
                     name="name"
-                    v-model="category" autofocus required>
+                    v-model="name" autofocus required>
 
-                <error :message="`${this.$data.error}`"></error>
+                <error :message="this.error"></error>
 
             </div>
         </div>
@@ -31,14 +31,13 @@
     <!-- spacer -->
     <div class="mb-100"></div>
 
-    <div class="container" v-if="categories.length > 0">
+    <div class="container" v-if="items.length > 0">
         <data-table
             @deleted="getItems()"
             @erase="deleteItems($event)"
             id="ID"
             findaname="Category"
-            :url="this.endpoint"
-            :data="this.categories"
+            :data="this.items"
         >
         </data-table>
     </div>
@@ -51,70 +50,20 @@
 </template>
 
 <script>
-    export default {
+    import requests from '../mixins/requests';
 
-        props: ['message', 'url'],
+    export default {
+        mixins: [requests],
 
         data() {
             return {
-                category: '',
-                categories: [],
-                endpoint: this.url,
-                error: ''
+                error: '',
+                items: ''
             }
         },
 
         created() {
             this.getItems();
-        },
-
-        methods: {
-            async getItems() {
-                await axios.get('/add-category')
-                    .then(res => {
-                        this.categories = res.data;
-                    })
-                    .catch(err => {
-                        this.showError(err);
-
-                        setTimeout(()=> this.clearError(), 3000);
-                    });
-            },
-
-            async addCategory() {
-                const data = { name : this.category };
-
-                await axios.post('/add-category', data)
-                    .then(res => {
-                        this.getItems();
-                        flash('Category added');
-                        this.category = '';
-                    })
-                    .catch(err => {
-                        this.showError(err);
-
-                        setTimeout(()=> this.clearError(), 3000);
-                    });
-            },
-
-            async deleteItems(id) {
-                await axios.delete(`/delete-category/${id}`)
-                    .then(res => {
-                        this.getItems();
-                        flash('Category deleted');
-                    })
-                    .catch(err => {
-                        this.showError(err);
-                    });
-            },
-
-            showError(err) {
-                return this.error = err.response.data.message
-            },
-
-            clearError() {
-                this.error = ''
-            }
         }
     }
 </script>

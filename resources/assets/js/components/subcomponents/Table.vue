@@ -7,6 +7,7 @@
             <span><h1>Your Customers Ordered</h1></span>
         </div>
 
+        <!-- Option components -->
         <div v-if="this.URI == '/add-options' || this.URI == '/add-second-options'">
             <table class="table table-hover even" v-for="optiongroup in this.$props.data">
                 <thead>
@@ -21,6 +22,30 @@
                         <td>{{ option.id }}</td>
                         <td>{{ option.name }}</td>
                         <td><button class="btn btn-danger btn-sm" @click.prevent="deleteResource(option.id)">Delete</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Sales Component -->
+
+        <div v-else-if="this.URI == '/sales'">
+            <table class="table table-hover even">
+                <thead>
+                <tr class="text-white">
+                    <td><h4>ID</h4></td>
+                    <td><h4>Sales</h4></td>
+                    <td><h4>Action</h4></td>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-info" v-for="product in this.$props.data" v-if="product.is_on_sale">
+                        <td>{{ product.id }}</td>
+                        <td>
+                            <p>{{ product.name }}</p>
+                            <p>{{ product.sales.percentage * 100 }}% Off</p>
+                        </td>
+                        <td><button class="btn btn-danger btn-sm" @click.prevent="deleteResource(product.sales.id)">Delete</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -41,7 +66,6 @@
                     <tr class="text-info" v-for="item in this.$props.data">
                         <td>{{ item.id }}</td>
                         <td>{{ item.reward || item.name || item.holiday_page_title || item.products.name}}
-                            <p v-if="item.percentage">{{ item.percentage * 100 }}% Off</p>
                         </td>
                         <td v-if="item.status" :class="classes(item.status.name)"><strong >{{ item.status.name }}</strong></td>
                         <td>

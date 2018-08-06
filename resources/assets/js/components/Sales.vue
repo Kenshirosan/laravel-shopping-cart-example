@@ -1,7 +1,9 @@
 <template>
     <div class="container">
         <div class="row">
-
+            <div class="text-center">
+                <h1 class="text-info">Create a Sale</h1>
+            </div>
             <error :message="this.error"></error>
 
             <form @submit.prevent="addItems"class="form-horizontal">
@@ -34,7 +36,7 @@
                                 <select v-model="id" class="options" required autofocus>
                                     <option value="" class="reset">Choose</option>
                                     <option
-                                        v-for="product in prods"
+                                        v-for="product in items"
                                         v-if="!product.is_on_sale"
                                         class="options"
                                         name="product_id"
@@ -83,16 +85,13 @@
     export default {
         mixins: [requests],
 
-        props: ['products'],
-
         data() {
             return {
                 percentage: '',
                 id: '',
                 error: '',
                 items: [],
-                optionalItems: [],
-                prods: JSON.parse(this.products)
+                // optionalItems: []
             }
         }
     }

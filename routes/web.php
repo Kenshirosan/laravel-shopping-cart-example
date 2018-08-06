@@ -114,7 +114,7 @@ Route::middleware(['auth', 'must-be-confirmed', 'employee', 'admin'])->group(fun
     Route::delete('/add-second-options/{id}', 'SecondOptionsController@destroy');
     Route::get('/add-category', 'CategoriesController@create');
     Route::post('/add-category', 'CategoriesController@store');
-    Route::delete('/delete-category/{id}', 'CategoriesController@destroy');
+    Route::delete('/add-category/{id}', 'CategoriesController@destroy');
     Route::get('/message/{id}', 'MessageController@show');
     Route::delete('/delete/{id}', 'MessageController@destroy');
     Route::get('/analytics', 'AnalyticsController@index');
