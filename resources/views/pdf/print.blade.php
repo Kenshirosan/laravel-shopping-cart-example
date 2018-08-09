@@ -9,6 +9,11 @@
         <a href="/customer-orders" class="btn btn-success btn-lg"><h1>Go Back</h1></a>
     </div>
     <div class="col-md-12">
+        @if($order->order_type === 'Pick-up')
+            <h1 class="text-danger text-center">
+                <strong>{{ $order->order_type }} at {{ $order->pickup_time }}</strong>
+            </h1>
+        @endif
         <table class="table">
             <th><strong>Name</strong></th>
             <th><strong>Last Name</strong></th>

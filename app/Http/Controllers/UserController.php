@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use App\Order;
-use \Cart as Cart;
-use App\Promocode;
 use App\Mail\Welcome;
+use App\Order;
+use App\Promocode;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use \Cart as Cart;
 
 class UserController extends Controller
 {
@@ -100,7 +101,7 @@ class UserController extends Controller
                 'zipcode' => 'required|numeric',
                 'phone_number' => 'required|numeric|digits:10',
                 'email' => 'required|email',
-                'password' => 'string|confirmed'
+                'password' => 'required|string|confirmed'
             ]);
 
             if ($user->email !== request('email')) {
@@ -114,23 +115,24 @@ class UserController extends Controller
                     'confirmation_token' => str_limit($request->email . hash('sha256', $request->email . str_random()), 100)
                 ]);
 
-                \Mail::to($user->email)->send(new Welcome($user));
+                Mail::to($user->email)->send(new Welcome($user));
                 auth()->logout();
 
                 return redirect('/shop')->with(['success_message' => 'Credentials successfully updated, You now need to confirm your new email address']);
             } else {
-
-                $user->address = $request->address;
-                $user->address2 = $request->address2;
-                $user->zipcode = $request->zipcode;
-                $user->phone_number = formatPhoneNumber($request->phone_number);
-                $user->save();
+                $user->update([
+                    'name' => $request->name,
+                    'last_name' => $request->last_name,
+                    'address' => $request->address,
+                    'address2' => $request->address2,
+                    'zipcode' => $request->zipcode,
+                    'phone_number' => formatPhoneNumber($request->phone_number)
+                ]);
 
                 return redirect('/edit/profile')->with([
                     'success_message' => 'Credentials successfully updated'
                 ]);
             }
-
         }
         return back()->with('error_message', 'Something went wrong, Maybe you typed the wrong password');
     }

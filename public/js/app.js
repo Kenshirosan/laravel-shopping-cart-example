@@ -5482,6 +5482,146 @@ function applyToTag (styleElement, obj) {
 
 /***/ }),
 /* 10 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+
+    computed: {
+        URI: function URI() {
+            return this.endpoint || window.location.pathname;
+        }
+    },
+
+    created: function created() {
+        this.getItems();
+    },
+
+
+    methods: {
+        getItems: function () {
+            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+                var _this = this;
+
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+                    while (1) {
+                        switch (_context.prev = _context.next) {
+                            case 0:
+                                _context.next = 2;
+                                return axios.get(this.URI).then(function (res) {
+                                    _this.items = res.data;
+                                }).catch(function (err) {
+                                    return _this.showError(err);
+                                });
+
+                            case 2:
+                            case 'end':
+                                return _context.stop();
+                        }
+                    }
+                }, _callee, this);
+            }));
+
+            function getItems() {
+                return _ref.apply(this, arguments);
+            }
+
+            return getItems;
+        }(),
+        addItems: function () {
+            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+                var _this2 = this;
+
+                var data;
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+                    while (1) {
+                        switch (_context2.prev = _context2.next) {
+                            case 0:
+                                data = {
+                                    option_group_id: this.option_group_id,
+                                    name: this.name,
+                                    percentage: this.percentage,
+                                    product_id: this.id,
+                                    quantity: this.quantity,
+                                    reward: this.reward
+                                };
+                                _context2.next = 3;
+                                return axios.post(this.URI, data).then(function (res) {
+                                    flash('Success');
+                                    _this2.getItems();
+                                    _this2.resetForm();
+                                }).catch(function (err) {
+                                    return _this2.showError(err);
+                                });
+
+                            case 3:
+                            case 'end':
+                                return _context2.stop();
+                        }
+                    }
+                }, _callee2, this);
+            }));
+
+            function addItems() {
+                return _ref2.apply(this, arguments);
+            }
+
+            return addItems;
+        }(),
+        deleteItems: function () {
+            var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(id) {
+                var _this3 = this;
+
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+                    while (1) {
+                        switch (_context3.prev = _context3.next) {
+                            case 0:
+                                _context3.next = 2;
+                                return axios.delete(this.URI + '/' + id).then(function (res) {
+                                    flash('Success');
+                                    _this3.getItems();
+                                }).catch(function (err) {
+                                    return _this3.showError(err);
+                                });
+
+                            case 2:
+                            case 'end':
+                                return _context3.stop();
+                        }
+                    }
+                }, _callee3, this);
+            }));
+
+            function deleteItems(_x) {
+                return _ref3.apply(this, arguments);
+            }
+
+            return deleteItems;
+        }(),
+        clearError: function clearError() {
+            this.error = '';
+        },
+        showError: function showError(err) {
+            return this.error = err.response.data.message;
+        },
+        resetForm: function resetForm() {
+            this.option_group_id = '', this.name = '';
+            this.percentage = '';
+            this.id = '';
+            this.quantity = '';
+            this.reward = '';
+        }
+    }
+});
+
+/***/ }),
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5907,7 +6047,7 @@ module.exports = {
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5982,146 +6122,6 @@ module.exports = {
 	}
 };
 
-
-/***/ }),
-/* 12 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-
-    computed: {
-        URI: function URI() {
-            return this.endpoint || window.location.pathname;
-        }
-    },
-
-    created: function created() {
-        this.getItems();
-    },
-
-
-    methods: {
-        getItems: function () {
-            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
-                var _this = this;
-
-                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
-                    while (1) {
-                        switch (_context.prev = _context.next) {
-                            case 0:
-                                _context.next = 2;
-                                return axios.get(this.URI).then(function (res) {
-                                    _this.items = res.data;
-                                }).catch(function (err) {
-                                    return _this.showError(err);
-                                });
-
-                            case 2:
-                            case 'end':
-                                return _context.stop();
-                        }
-                    }
-                }, _callee, this);
-            }));
-
-            function getItems() {
-                return _ref.apply(this, arguments);
-            }
-
-            return getItems;
-        }(),
-        addItems: function () {
-            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
-                var _this2 = this;
-
-                var data;
-                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
-                    while (1) {
-                        switch (_context2.prev = _context2.next) {
-                            case 0:
-                                data = {
-                                    option_group_id: this.option_group_id,
-                                    name: this.name,
-                                    percentage: this.percentage,
-                                    product_id: this.id,
-                                    quantity: this.quantity,
-                                    reward: this.reward
-                                };
-                                _context2.next = 3;
-                                return axios.post(this.URI, data).then(function (res) {
-                                    flash('Success');
-                                    _this2.getItems();
-                                    _this2.resetForm();
-                                }).catch(function (err) {
-                                    return _this2.showError(err);
-                                });
-
-                            case 3:
-                            case 'end':
-                                return _context2.stop();
-                        }
-                    }
-                }, _callee2, this);
-            }));
-
-            function addItems() {
-                return _ref2.apply(this, arguments);
-            }
-
-            return addItems;
-        }(),
-        deleteItems: function () {
-            var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(id) {
-                var _this3 = this;
-
-                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
-                    while (1) {
-                        switch (_context3.prev = _context3.next) {
-                            case 0:
-                                _context3.next = 2;
-                                return axios.delete(this.URI + '/' + id).then(function (res) {
-                                    flash('Success');
-                                    _this3.getItems();
-                                }).catch(function (err) {
-                                    return _this3.showError(err);
-                                });
-
-                            case 2:
-                            case 'end':
-                                return _context3.stop();
-                        }
-                    }
-                }, _callee3, this);
-            }));
-
-            function deleteItems(_x) {
-                return _ref3.apply(this, arguments);
-            }
-
-            return deleteItems;
-        }(),
-        clearError: function clearError() {
-            this.error = '';
-        },
-        showError: function showError(err) {
-            return this.error = err.response.data.message;
-        },
-        resetForm: function resetForm() {
-            this.option_group_id = '', this.name = '';
-            this.percentage = '';
-            this.id = '';
-            this.quantity = '';
-            this.reward = '';
-        }
-    }
-});
 
 /***/ }),
 /* 13 */
@@ -6684,10 +6684,10 @@ Chart.defaults = __webpack_require__(3);
 Chart.Element = __webpack_require__(6);
 Chart.elements = __webpack_require__(8);
 Chart.Interaction = __webpack_require__(147);
-Chart.layouts = __webpack_require__(10);
+Chart.layouts = __webpack_require__(11);
 Chart.platform = __webpack_require__(148);
 Chart.plugins = __webpack_require__(149);
-Chart.Ticks = __webpack_require__(11);
+Chart.Ticks = __webpack_require__(12);
 
 __webpack_require__(235)(Chart);
 __webpack_require__(236)(Chart);
@@ -20228,7 +20228,7 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(151);
-module.exports = __webpack_require__(331);
+module.exports = __webpack_require__(334);
 
 
 /***/ }),
@@ -20264,13 +20264,13 @@ Vue.component('coupons', __webpack_require__(305));
 Vue.component('sales', __webpack_require__(307));
 Vue.component('order-notification', __webpack_require__(310));
 Vue.component('global-order-notification', __webpack_require__(313));
-Vue.component('best-customers', __webpack_require__(341));
+Vue.component('best-customers', __webpack_require__(316));
 
-Vue.component('add-unique-coupons', __webpack_require__(316));
-Vue.component('add-coupons-for-everyone', __webpack_require__(318));
-Vue.component('coupon-layout', __webpack_require__(320));
-Vue.component('error', __webpack_require__(323));
-Vue.component('data-table', __webpack_require__(326));
+Vue.component('add-unique-coupons', __webpack_require__(319));
+Vue.component('add-coupons-for-everyone', __webpack_require__(321));
+Vue.component('coupon-layout', __webpack_require__(323));
+Vue.component('error', __webpack_require__(326));
+Vue.component('data-table', __webpack_require__(329));
 
 var app = new Vue({
     el: '#app',
@@ -65745,7 +65745,7 @@ module.exports = function(Chart) {
 var defaults = __webpack_require__(3);
 var helpers = __webpack_require__(1);
 var Interaction = __webpack_require__(147);
-var layouts = __webpack_require__(10);
+var layouts = __webpack_require__(11);
 var platform = __webpack_require__(148);
 var plugins = __webpack_require__(149);
 
@@ -67035,7 +67035,7 @@ module.exports = function(Chart) {
 
 var defaults = __webpack_require__(3);
 var helpers = __webpack_require__(1);
-var layouts = __webpack_require__(10);
+var layouts = __webpack_require__(11);
 
 module.exports = function(Chart) {
 
@@ -67089,7 +67089,7 @@ module.exports = function(Chart) {
 var defaults = __webpack_require__(3);
 var Element = __webpack_require__(6);
 var helpers = __webpack_require__(1);
-var Ticks = __webpack_require__(11);
+var Ticks = __webpack_require__(12);
 
 defaults._set('scale', {
 	display: true,
@@ -69319,7 +69319,7 @@ module.exports = function(Chart) {
 
 var defaults = __webpack_require__(3);
 var helpers = __webpack_require__(1);
-var Ticks = __webpack_require__(11);
+var Ticks = __webpack_require__(12);
 
 module.exports = function(Chart) {
 
@@ -69516,7 +69516,7 @@ module.exports = function(Chart) {
 
 
 var helpers = __webpack_require__(1);
-var Ticks = __webpack_require__(11);
+var Ticks = __webpack_require__(12);
 
 /**
  * Generate a set of logarithmic ticks
@@ -69871,7 +69871,7 @@ module.exports = function(Chart) {
 
 var defaults = __webpack_require__(3);
 var helpers = __webpack_require__(1);
-var Ticks = __webpack_require__(11);
+var Ticks = __webpack_require__(12);
 
 module.exports = function(Chart) {
 
@@ -73455,7 +73455,7 @@ module.exports = {
 var defaults = __webpack_require__(3);
 var Element = __webpack_require__(6);
 var helpers = __webpack_require__(1);
-var layouts = __webpack_require__(10);
+var layouts = __webpack_require__(11);
 
 var noop = helpers.noop;
 
@@ -74038,7 +74038,7 @@ module.exports = {
 var defaults = __webpack_require__(3);
 var Element = __webpack_require__(6);
 var helpers = __webpack_require__(1);
-var layouts = __webpack_require__(10);
+var layouts = __webpack_require__(11);
 
 var noop = helpers.noop;
 
@@ -75585,7 +75585,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_requests__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_requests__ = __webpack_require__(10);
 //
 //
 //
@@ -75918,7 +75918,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_requests__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_requests__ = __webpack_require__(10);
 //
 //
 //
@@ -76664,7 +76664,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_requests__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_requests__ = __webpack_require__(10);
 //
 //
 //
@@ -77002,7 +77002,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_requests__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_requests__ = __webpack_require__(10);
 //
 //
 //
@@ -77589,9 +77589,115 @@ if (false) {
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
+var __vue_script__ = __webpack_require__(317)
+/* template */
+var __vue_template__ = __webpack_require__(318)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/BestCustomers.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-00e04daa", Component.options)
+  } else {
+    hotAPI.reload("data-v-00e04daa", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 317 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_requests__ = __webpack_require__(10);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_requests__["a" /* default */]],
+
+    data: function data() {
+        return {
+            items: ''
+        };
+    }
+});
+
+/***/ }),
+/* 318 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("data-table", {
+        attrs: { id: "ID", findaname: "Best Customers", data: this.items }
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-00e04daa", module.exports)
+  }
+}
+
+/***/ }),
+/* 319 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
 var __vue_script__ = null
 /* template */
-var __vue_template__ = __webpack_require__(317)
+var __vue_template__ = __webpack_require__(320)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -77630,7 +77736,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 317 */
+/* 320 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -77656,7 +77762,7 @@ if (false) {
 }
 
 /***/ }),
-/* 318 */
+/* 321 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
@@ -77664,7 +77770,7 @@ var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = null
 /* template */
-var __vue_template__ = __webpack_require__(319)
+var __vue_template__ = __webpack_require__(322)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -77703,7 +77809,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 319 */
+/* 322 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -77729,15 +77835,15 @@ if (false) {
 }
 
 /***/ }),
-/* 320 */
+/* 323 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(321)
+var __vue_script__ = __webpack_require__(324)
 /* template */
-var __vue_template__ = __webpack_require__(322)
+var __vue_template__ = __webpack_require__(325)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -77776,12 +77882,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 321 */
+/* 324 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_requests__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_requests__ = __webpack_require__(10);
 //
 //
 //
@@ -77871,7 +77977,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 322 */
+/* 325 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -78066,15 +78172,15 @@ if (false) {
 }
 
 /***/ }),
-/* 323 */
+/* 326 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(324)
+var __vue_script__ = __webpack_require__(327)
 /* template */
-var __vue_template__ = __webpack_require__(325)
+var __vue_template__ = __webpack_require__(328)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -78113,7 +78219,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 324 */
+/* 327 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -78132,7 +78238,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 325 */
+/* 328 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -78163,19 +78269,19 @@ if (false) {
 }
 
 /***/ }),
-/* 326 */
+/* 329 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(327)
+  __webpack_require__(330)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(329)
+var __vue_script__ = __webpack_require__(332)
 /* template */
-var __vue_template__ = __webpack_require__(330)
+var __vue_template__ = __webpack_require__(333)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -78214,13 +78320,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 327 */
+/* 330 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(328);
+var content = __webpack_require__(331);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -78240,7 +78346,7 @@ if(false) {
 }
 
 /***/ }),
-/* 328 */
+/* 331 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(7)(false);
@@ -78254,7 +78360,7 @@ exports.push([module.i, "\n.text-white {\n    color: white;\n}\ntable {\n    wid
 
 
 /***/ }),
-/* 329 */
+/* 332 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -78265,6 +78371,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -78393,13 +78505,17 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             return window.location.pathname == '/customer-orders' ? 'Mark As Processed' : 'Delete';
         },
         class: function _class() {
-            return this.classes(name);
+            return this.classes();
         }
     },
 
     methods: {
         classes: function classes(name) {
-            return name == 'Out for Delivery' ? 'alert-success' : 'text-primary';
+            if (name === true) {
+                return 'alert-success';
+            }
+
+            return name === 'Out for Delivery' ? 'alert-success' : 'alert-warning';
         },
         email: function email(_email) {
             return window.location.href = 'mailto:' + _email;
@@ -78454,7 +78570,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 });
 
 /***/ }),
-/* 330 */
+/* 333 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -78581,13 +78697,17 @@ var render = function() {
                       ? _c("td", [_c("h4", [_vm._v("Amount this Year")])])
                       : _vm._e(),
                     _vm._v(" "),
-                    _vm.title == "Order name"
+                    _vm.URI == "/customer-orders"
                       ? _c("td", [_c("h4", [_vm._v("Order Status")])])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.URI == "/customer-orders"
+                      ? _c("td", [_c("h4", [_vm._v("Order Type")])])
                       : _vm._e(),
                     _vm._v(" "),
                     _vm._m(4),
                     _vm._v(" "),
-                    _vm.title == "Order name"
+                    _vm.URI == "/customer-orders"
                       ? _c("td", [_c("h4", [_vm._v("See Order")])])
                       : _vm._e()
                   ])
@@ -78618,15 +78738,33 @@ var render = function() {
                         ? _c("td", [_c("strong", [_vm._v(_vm._s(item.email))])])
                         : _vm._e(),
                       _vm._v(" "),
-                      item.total
+                      _vm.URI == "/best-customers"
                         ? _c("td", { staticClass: "text-success" }, [
                             _vm._v("$" + _vm._s(item.total / 100))
                           ])
                         : _vm._e(),
                       _vm._v(" "),
-                      item.status
-                        ? _c("td", { class: _vm.classes(item.status.name) }, [
-                            _c("strong", [_vm._v(_vm._s(item.status.name))])
+                      _vm.URI == "/customer-orders"
+                        ? _c(
+                            "td",
+                            {
+                              class: _vm.classes(
+                                item.hiddenOrder || item.status.name
+                              )
+                            },
+                            [_c("strong", [_vm._v(_vm._s(item.status.name))])]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.URI == "/customer-orders"
+                        ? _c("td", [
+                            _c("h4", [_vm._v(_vm._s(item.order_type))]),
+                            _vm._v(" "),
+                            item.order_type == "Pick-up"
+                              ? _c("p", [
+                                  _vm._v("at " + _vm._s(item.pickup_time))
+                                ])
+                              : _vm._e()
                           ])
                         : _vm._e(),
                       _vm._v(" "),
@@ -78762,125 +78900,10 @@ if (false) {
 }
 
 /***/ }),
-/* 331 */
+/* 334 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 332 */,
-/* 333 */,
-/* 334 */,
-/* 335 */,
-/* 336 */,
-/* 337 */,
-/* 338 */,
-/* 339 */,
-/* 340 */,
-/* 341 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(2)
-/* script */
-var __vue_script__ = __webpack_require__(342)
-/* template */
-var __vue_template__ = __webpack_require__(343)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/BestCustomers.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-00e04daa", Component.options)
-  } else {
-    hotAPI.reload("data-v-00e04daa", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 342 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_requests__ = __webpack_require__(12);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_requests__["a" /* default */]],
-
-    data: function data() {
-        return {
-            items: ''
-        };
-    }
-});
-
-/***/ }),
-/* 343 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("data-table", {
-        attrs: { id: "ID", findaname: "Best Customers", data: this.items }
-      })
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-00e04daa", module.exports)
-  }
-}
 
 /***/ })
 /******/ ]);

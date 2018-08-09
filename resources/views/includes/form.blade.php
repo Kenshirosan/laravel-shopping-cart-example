@@ -32,7 +32,7 @@
                     <label for="pickup-time" class="text-warning">Pick-up hour (11am to 10pm, 24hr format), minimum 30 minutes from now</label>
                     <input type="time"
                             class="form-control"
-                            min="12:00"
+                            min="11:00"
                             max="21:59"
                             value="{{ Carbon\Carbon::now()->addMinutes(30)->format('H:i') }}"
                             required

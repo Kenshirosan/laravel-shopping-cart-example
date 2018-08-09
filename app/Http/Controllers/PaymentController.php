@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use App\Order;
-use App\Promocode;
-use \Cart as Cart;
-use \Carbon\Carbon;
-use App\Mail\ThankYou;
-use App\Payments\Payments;
 use App\Events\UserOrdered;
+use App\Http\Requests\PaymentRequest;
+use App\Mail\ThankYou;
+use App\Order;
+use App\Payments\Payments;
+use App\Promocode;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\PaymentRequest;
+use Illuminate\Support\Facades\Mail;
+use \Carbon\Carbon;
+use \Cart as Cart;
 
 
 class PaymentController extends Controller
@@ -144,7 +145,7 @@ class PaymentController extends Controller
 
         event(new UserOrdered($order)); // ready for real-time :) fully working !!
 
-        return \Mail::to( auth()->user()->email )->send(new ThankYou($order));
+        return Mail::to( auth()->user()->email )->send(new ThankYou($order));
     }
 
     /**

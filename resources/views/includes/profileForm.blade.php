@@ -10,7 +10,7 @@
     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
         <div class="col-md-12">
             <strong>First Name:</strong>
-            <input type="text" name="name" readonly class="form-control" value="{{ $user->name }}" placeholder="First Name" required/>
+            <input type="text" name="name" class="form-control" value="{{ $user->name }}" placeholder="First Name" required/>
         </div>
         @if ($errors->has('name'))
             <span class="help-block">
@@ -23,7 +23,7 @@
         <div class="span1"></div>
         <div class="col-md-12">
             <strong>Last Name:</strong>
-            <input type="text" name="last_name" readonly class="form-control" value="{{ $user->last_name }}" placeholder="Last Name" required/>
+            <input type="text" name="last_name" class="form-control" value="{{ $user->last_name }}" placeholder="Last Name" required/>
         </div>
         @if ($errors->has('last_name'))
             <span class="help-block">

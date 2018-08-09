@@ -20,6 +20,6 @@ class RegisterConfirmationController extends Controller
         $user->confirm();
         Auth::login($user);
 
-        return redirect('/shop')->with('success_message', 'Your account is now confirmed, you may start ordering !');
+        return redirect('/edit/profile')->with('warning_message', 'Your account is now confirmed, We now need you to complete your profile if you wish to order with us');
     }
 }

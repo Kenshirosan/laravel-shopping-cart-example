@@ -14,9 +14,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    @include('includes.header')
 
     <div class="container">
+        @include('includes.header')
         @include('includes.messages')
         @yield('content')
     </div>

@@ -7,7 +7,7 @@
             <span><h1>Your Customers Ordered</h1></span>
         </div>
 
-        <!-- Option components -->
+        <!-- AddOptions components -->
         <div v-if="URI == '/add-options' || URI == '/add-second-options'">
             <table class="table table-hover even" v-for="optiongroup in data">
                 <thead>
@@ -51,6 +51,7 @@
             </table>
         </div>
 
+        <!-- AddOptionGroup, BestCustomers, AddCategories, CouponLayout, UserOrders -->
         <div v-else>
             <table class="table table-hover table-striped table-bordered even">
                 <thead>
@@ -59,9 +60,10 @@
                         <td><h4>{{ this.title}}</h4></td>
                         <td v-if="URI == '/best-customers'"><h4>Email</h4></td>
                         <td v-if="URI == '/best-customers'"><h4>Amount this Year</h4></td>
-                        <td v-if="title == 'Order name'"><h4>Order Status</h4></td>
+                        <td v-if="URI == '/customer-orders'"><h4>Order Status</h4></td>
+                        <td v-if="URI == '/customer-orders'"><h4>Order Type</h4></td>
                         <td><h4>Action</h4></td>
-                        <td v-if="title == 'Order name'"><h4>See Order</h4></td>
+                        <td v-if="URI == '/customer-orders'"><h4>See Order</h4></td>
                     </tr>
                 </thead>
                 <tbody>
@@ -71,8 +73,12 @@
                         <td v-else>{{ item.reward || item.name || item.holiday_page_title || item.products.name}}
                         </td>
                         <td v-if="URI == '/best-customers'"><strong>{{ item.email }}</strong></td>
-                        <td v-if="item.total" class="text-success">${{ item.total/100 }}</td>
-                        <td v-if="item.status" :class="classes(item.status.name)"><strong >{{ item.status.name }}</strong></td>
+                        <td v-if="URI == '/best-customers'" class="text-success">${{ item.total/100 }}</td>
+                        <td v-if="URI == '/customer-orders'" :class="classes(item.hiddenOrder || item.status.name)"><strong >{{ item.status.name }}</strong></td>
+                        <td v-if="URI == '/customer-orders'">
+                            <h4>{{ item.order_type }}</h4>
+                            <p v-if="item.order_type == 'Pick-up'">at {{ item.pickup_time }}</p>
+                        </td>
                         <td>
                             <button
                                 v-if="item.hiddenOrder"
@@ -127,13 +133,17 @@
             },
 
             class() {
-                return this.classes(name)
+                return this.classes()
             }
         },
 
         methods: {
             classes(name) {
-                return name == 'Out for Delivery' ? 'alert-success' : 'text-primary'
+                if (name === true) {
+                    return 'alert-success';
+                }
+
+                return name === 'Out for Delivery' ? 'alert-success' : 'alert-warning';
             },
 
             email(email) {
