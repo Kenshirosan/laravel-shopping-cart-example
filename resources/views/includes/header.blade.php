@@ -1,7 +1,7 @@
 <header>
     <a href="#" id="back-to-top" title="Back to top"><span></span>&uarr;</a>
     <nav class="navbar navbar-default navbar-static-top">
-        {{-- <div class="container"> --}}
+        <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                     <span class="sr-only">Toggle navigation</span>
@@ -72,8 +72,8 @@
                     </li>
                     <cart-counter :numberofitems="{{ Cart::instance()->count() }}"></cart-counter>
             </ul>
-        </div><!--/.nav-collapse -->
-    {{-- </div> --}}
+        </div>
+    </div>
 </nav>
 
 </header>

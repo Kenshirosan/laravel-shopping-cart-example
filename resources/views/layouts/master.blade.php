@@ -35,17 +35,17 @@
     <script src="https://js.stripe.com/v3/"></script>
 </head>
     <body>
-        <div class="container" id="app">
+        <div id="app">
             @include('includes.header')
-            @include('includes.messages')
-            @yield('content')
-            <flash message="{{ session('flash') }}"></flash>
-            <view-cart :items="{{ Cart::content() }}" :total="{{ Cart::total() }}"></view-cart>
+            <div class="container">
+                @include('includes.messages')
+                @yield('content')
+                <flash message="{{ session('flash') }}"></flash>
+                <view-cart :items="{{ Cart::content() }}" :total="{{ Cart::total() }}"></view-cart>
+            </div>
         </div>
         @include('includes.footer')
 
-        <!-- JavaScript -->
-        {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> ?Why did I put this already ?? hhmmmmmm--}}
         <script src="/js/app.js"></script>
         <script src="/js/smoothscroll.js"></script>
         <script src="/js/back-to-top.js"></script>

@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="/css/app.css">
     <!-- Favicon and Apple Icons -->
     <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}">
+    {{-- Stripe recommends to put this script on all pages, helps ID not good behaviors --}}
     <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>

@@ -6,7 +6,6 @@
 
 @section('content')
     <div class="container">
-        {{-- {{ dd($frontPageInfos) }} --}}
         <div class="row">
             <div class="panel-body">
                 <form class="form-horizontal" method="POST" action="/front-page-title" enctype="multipart/form-data">

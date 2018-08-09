@@ -13,18 +13,12 @@ class FrontPageController extends Controller
     {
         $frontPageInfos = FrontPage::first();
 
-        return view('admin.frontPage', compact('frontPageInfos'));
-    }
-
-    public function indexJson()
-    {
-        $frontPageInfos = FrontPage::first();
-
         if (request()->expectsJson()) {
+            // ajax request in layouts/shop for displaying users customized infos and colors
             return response($frontPageInfos, 200);
         }
 
-        return back()->with('error_message', 'Page Not Found');
+        return view('admin.frontPage', compact('frontPageInfos'));
     }
 
     public function store(Request $request)

@@ -5,7 +5,7 @@
         let subtitle = document.querySelector('.custom-subtitle');
         let wells = Array.from(document.querySelectorAll('.well'));
 
-        axios.get('/page-infos').then(response => {
+        axios.get('/customized-page-infos').then(response => {
             jumbotron.style.background = `url(${response.data.image})`;
             title.textContent = ucfirst(response.data.title);
             title.style.color = response.data.color;
