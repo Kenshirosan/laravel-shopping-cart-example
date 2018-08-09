@@ -20264,6 +20264,7 @@ Vue.component('coupons', __webpack_require__(305));
 Vue.component('sales', __webpack_require__(307));
 Vue.component('order-notification', __webpack_require__(310));
 Vue.component('global-order-notification', __webpack_require__(313));
+Vue.component('best-customers', __webpack_require__(341));
 
 Vue.component('add-unique-coupons', __webpack_require__(316));
 Vue.component('add-coupons-for-everyone', __webpack_require__(318));
@@ -75989,7 +75990,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    this.URI === "/second-option-group"
+    _vm.URI === "/second-option-group"
       ? _c("h1", { staticClass: "text-center text-primary" }, [
           _vm._v("Add a Second Option Group\n    ")
         ])
@@ -76053,7 +76054,7 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _c("error", { attrs: { message: "" + this.error } })
+              _c("error", { attrs: { message: _vm.error } })
             ],
             1
           )
@@ -78360,6 +78361,16 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['id', 'findaname', 'url', 'data'],
@@ -78368,7 +78379,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         return {
             identifier: this.id,
             title: this.findaname,
-            items: this.$props.data,
+            items: this.data,
             endpoint: this.url
         };
     },
@@ -78389,6 +78400,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     methods: {
         classes: function classes(name) {
             return name == 'Out for Delivery' ? 'alert-success' : 'text-primary';
+        },
+        email: function email(_email) {
+            return window.location.href = 'mailto:' + _email;
         },
         deleteResource: function () {
             var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(id) {
@@ -78448,20 +78462,20 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    this.URI != "/customer-orders"
+    _vm.URI != "/customer-orders"
       ? _c("div", { staticClass: "text-center mb-100" }, [_vm._m(0)])
       : _vm._e(),
     _vm._v(" "),
-    this.URI == "/customer-orders"
+    _vm.URI == "/customer-orders"
       ? _c("div", { staticClass: "alert alert-warning text-center mb-100" }, [
           _vm._m(1)
         ])
       : _vm._e(),
     _vm._v(" "),
-    this.URI == "/add-options" || this.URI == "/add-second-options"
+    _vm.URI == "/add-options" || _vm.URI == "/add-second-options"
       ? _c(
           "div",
-          _vm._l(this.$props.data, function(optiongroup) {
+          _vm._l(_vm.data, function(optiongroup) {
             return _c("table", { staticClass: "table table-hover even" }, [
               _c("thead", [
                 _c("tr", { staticClass: "text-white" }, [
@@ -78502,14 +78516,14 @@ var render = function() {
             ])
           })
         )
-      : this.URI == "/sales"
+      : _vm.URI == "/sales"
         ? _c("div", [
             _c("table", { staticClass: "table table-hover even" }, [
               _vm._m(3),
               _vm._v(" "),
               _c(
                 "tbody",
-                _vm._l(this.$props.data, function(product) {
+                _vm._l(_vm.data, function(product) {
                   return product.is_on_sale
                     ? _c("tr", { staticClass: "text-info" }, [
                         _c("td", [_vm._v(_vm._s(product.id))]),
@@ -78559,13 +78573,21 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", [_c("h4", [_vm._v(_vm._s(this.title))])]),
                     _vm._v(" "),
-                    this.title == "Order name"
+                    _vm.URI == "/best-customers"
+                      ? _c("td", [_c("h4", [_vm._v("Email")])])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.URI == "/best-customers"
+                      ? _c("td", [_c("h4", [_vm._v("Amount this Year")])])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.title == "Order name"
                       ? _c("td", [_c("h4", [_vm._v("Order Status")])])
                       : _vm._e(),
                     _vm._v(" "),
                     _vm._m(4),
                     _vm._v(" "),
-                    this.title == "Order name"
+                    _vm.title == "Order name"
                       ? _c("td", [_c("h4", [_vm._v("See Order")])])
                       : _vm._e()
                   ])
@@ -78573,20 +78595,34 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "tbody",
-                  _vm._l(this.$props.data, function(item) {
+                  _vm._l(_vm.data, function(item) {
                     return _c("tr", { staticClass: "text-info" }, [
-                      _c("td", [_vm._v(_vm._s(item.id))]),
+                      _c("td", [_vm._v(_vm._s(item.id || item.user_id))]),
                       _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          _vm._s(
-                            item.reward ||
-                              item.name ||
-                              item.holiday_page_title ||
-                              item.products.name
-                          ) + "\n                    "
-                        )
-                      ]),
+                      _vm.URI == "/best-customers"
+                        ? _c("td", [
+                            _vm._v(_vm._s(item.name + " " + item.last_name))
+                          ])
+                        : _c("td", [
+                            _vm._v(
+                              _vm._s(
+                                item.reward ||
+                                  item.name ||
+                                  item.holiday_page_title ||
+                                  item.products.name
+                              ) + "\n                    "
+                            )
+                          ]),
+                      _vm._v(" "),
+                      _vm.URI == "/best-customers"
+                        ? _c("td", [_c("strong", [_vm._v(_vm._s(item.email))])])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      item.total
+                        ? _c("td", { staticClass: "text-success" }, [
+                            _vm._v("$" + _vm._s(item.total / 100))
+                          ])
+                        : _vm._e(),
                       _vm._v(" "),
                       item.status
                         ? _c("td", { class: _vm.classes(item.status.name) }, [
@@ -78609,24 +78645,38 @@ var render = function() {
                               },
                               [_vm._v("Show\n                        ")]
                             )
-                          : _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-danger btn-sm",
-                                on: {
-                                  click: function($event) {
-                                    $event.preventDefault()
-                                    _vm.deleteResource(item.id)
+                          : _vm.URI == "/best-customers"
+                            ? _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-primary btn-sm",
+                                  on: {
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                      _vm.email(item.email)
+                                    }
                                   }
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  _vm._s(_vm.deleteBtnMethod) +
-                                    "\n                        "
-                                )
-                              ]
-                            )
+                                },
+                                [_vm._v("Email\n                        ")]
+                              )
+                            : _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-danger btn-sm",
+                                  on: {
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                      _vm.deleteResource(item.id)
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    _vm._s(_vm.deleteBtnMethod) +
+                                      "\n                        "
+                                  )
+                                ]
+                              )
                       ]),
                       _vm._v(" "),
                       !item.hiddenOrder && item.order_type
@@ -78716,6 +78766,121 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 332 */,
+/* 333 */,
+/* 334 */,
+/* 335 */,
+/* 336 */,
+/* 337 */,
+/* 338 */,
+/* 339 */,
+/* 340 */,
+/* 341 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(342)
+/* template */
+var __vue_template__ = __webpack_require__(343)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/BestCustomers.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-00e04daa", Component.options)
+  } else {
+    hotAPI.reload("data-v-00e04daa", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 342 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_requests__ = __webpack_require__(12);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_requests__["a" /* default */]],
+
+    data: function data() {
+        return {
+            items: ''
+        };
+    }
+});
+
+/***/ }),
+/* 343 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("data-table", {
+        attrs: { id: "ID", findaname: "Best Customers", data: this.items }
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-00e04daa", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

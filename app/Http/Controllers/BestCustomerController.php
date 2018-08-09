@@ -18,6 +18,10 @@ class BestCustomerController extends Controller
                             ->orderBy('total', 'desc')
                             ->get();
 
-        return view('admin.bestcustomers', compact('user_count', 'bestCustomers'));
+        if (request()->wantsJson()) {
+            return response($bestCustomers, 200);
+        }
+
+        return view('admin.bestcustomers', compact('user_count'));
     }
 }

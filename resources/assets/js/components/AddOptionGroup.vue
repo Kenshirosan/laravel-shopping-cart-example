@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1
-            v-if="this.URI === '/second-option-group'"
+            v-if="URI === '/second-option-group'"
             class="text-center text-primary"
             >Add a Second Option Group
         </h1>
@@ -20,7 +20,7 @@
                         name="name"
                         v-model="name" autofocus required
                     >
-                   <error :message="`${this.error}`"></error>
+                   <error :message="error"></error>
                 </div>
             </div>
             <div class="form-group">

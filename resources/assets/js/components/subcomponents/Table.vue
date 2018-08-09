@@ -1,15 +1,15 @@
 <template>
     <div>
-        <div class="text-center mb-100" v-if="this.URI != '/customer-orders'">
+        <div class="text-center mb-100" v-if="URI != '/customer-orders'">
             <a href="/customer-orders" class="btn btn-success btn-lg"><h1>Go to Orders Page</h1></a>
         </div>
-        <div class="alert alert-warning text-center mb-100" v-if="this.URI == '/customer-orders'">
+        <div class="alert alert-warning text-center mb-100" v-if="URI == '/customer-orders'">
             <span><h1>Your Customers Ordered</h1></span>
         </div>
 
         <!-- Option components -->
-        <div v-if="this.URI == '/add-options' || this.URI == '/add-second-options'">
-            <table class="table table-hover even" v-for="optiongroup in this.$props.data">
+        <div v-if="URI == '/add-options' || URI == '/add-second-options'">
+            <table class="table table-hover even" v-for="optiongroup in data">
                 <thead>
                 <tr class="text-white">
                     <td><h4>{{ optiongroup.id }}</h4></td>
@@ -29,7 +29,7 @@
 
         <!-- Sales Component -->
 
-        <div v-else-if="this.URI == '/sales'">
+        <div v-else-if="URI == '/sales'">
             <table class="table table-hover even">
                 <thead>
                 <tr class="text-white">
@@ -39,7 +39,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <tr class="text-info" v-for="product in this.$props.data" v-if="product.is_on_sale">
+                    <tr class="text-info" v-for="product in data" v-if="product.is_on_sale">
                         <td>{{ product.id }}</td>
                         <td>
                             <p>{{ product.name }}</p>
@@ -57,22 +57,32 @@
                     <tr class="text-white">
                         <td><h4>{{ this.identifier }}</h4></td>
                         <td><h4>{{ this.title}}</h4></td>
-                        <td v-if="this.title == 'Order name'"><h4>Order Status</h4></td>
+                        <td v-if="URI == '/best-customers'"><h4>Email</h4></td>
+                        <td v-if="URI == '/best-customers'"><h4>Amount this Year</h4></td>
+                        <td v-if="title == 'Order name'"><h4>Order Status</h4></td>
                         <td><h4>Action</h4></td>
-                        <td v-if="this.title == 'Order name'"><h4>See Order</h4></td>
+                        <td v-if="title == 'Order name'"><h4>See Order</h4></td>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="text-info" v-for="item in this.$props.data">
-                        <td>{{ item.id }}</td>
-                        <td>{{ item.reward || item.name || item.holiday_page_title || item.products.name}}
+                    <tr class="text-info" v-for="item in data">
+                        <td>{{ item.id || item.user_id }}</td>
+                        <td v-if="URI == '/best-customers'">{{ item.name + ' ' + item.last_name }}</td>
+                        <td v-else>{{ item.reward || item.name || item.holiday_page_title || item.products.name}}
                         </td>
+                        <td v-if="URI == '/best-customers'"><strong>{{ item.email }}</strong></td>
+                        <td v-if="item.total" class="text-success">${{ item.total/100 }}</td>
                         <td v-if="item.status" :class="classes(item.status.name)"><strong >{{ item.status.name }}</strong></td>
                         <td>
                             <button
                                 v-if="item.hiddenOrder"
                                 class="btn btn-info btn-sm"
                                 @click.prevent="showResource(item.id)">Show
+                            </button>
+                            <button
+                                v-else-if="URI == '/best-customers'"
+                                class="btn btn-primary btn-sm"
+                                @click.prevent="email(item.email)">Email
                             </button>
                             <button
                                 v-else
@@ -102,7 +112,7 @@
             return {
                 identifier: this.id,
                 title: this.findaname,
-                items: this.$props.data,
+                items: this.data,
                 endpoint: this.url,
             }
         },
@@ -124,6 +134,10 @@
         methods: {
             classes(name) {
                 return name == 'Out for Delivery' ? 'alert-success' : 'text-primary'
+            },
+
+            email(email) {
+                return window.location.href = `mailto:${email}`;
             },
 
             async deleteResource(id) {
