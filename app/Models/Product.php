@@ -1,11 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use DB;
-use App\Photo;
-use App\OptionGroup;
-use App\SecondOptionGroup;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model

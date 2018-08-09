@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Order;
-use App\Product;
-use App\Invoice;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\Invoice;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 

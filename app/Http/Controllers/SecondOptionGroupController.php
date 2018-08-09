@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-Use App\SecondOptionGroup;
+Use App\Models\SecondOptionGroup;
 use Illuminate\Http\Request;
 
 class SecondOptionGroupController extends Controller

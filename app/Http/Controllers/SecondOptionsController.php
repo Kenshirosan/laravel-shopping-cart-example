@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\SecondOption;
-use App\SecondOptionGroup;
+use App\Models\SecondOption;
+use App\Models\SecondOptionGroup;
 use Illuminate\Http\Request;
 use App\Http\Requests\OptionRequest;
 

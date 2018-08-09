@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Image;
 use App\User;
-use App\Photo;
-use App\Product;
-use App\Category;
-use App\OptionGroup;
-use App\SecondOptionGroup;
+use App\Models\Photo;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\OptionGroup;
+use App\Models\SecondOptionGroup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreProductRequest;

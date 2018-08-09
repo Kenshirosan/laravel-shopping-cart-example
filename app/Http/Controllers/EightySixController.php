@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Product;
-use App\Hideable;
+use App\Models\Product;
+use App\Models\Hideable;
 use Illuminate\Http\Request;
 
 class EightySixController extends Controller

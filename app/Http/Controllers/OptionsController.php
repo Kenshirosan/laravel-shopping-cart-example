@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Option;
-use App\OptionGroup;
+use App\Models\Option;
+use App\Models\OptionGroup;
 use Illuminate\Http\Request;
 use App\Http\Requests\OptionRequest;
 use Illuminate\Support\Facades\Auth;

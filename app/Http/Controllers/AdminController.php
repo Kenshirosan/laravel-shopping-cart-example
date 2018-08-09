@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Order;
-use App\Category;
-use App\OptionGroup;
-use App\SecondOptionGroup;
+use App\Models\Order;
+use App\Models\Category;
+use App\Models\OptionGroup;
+use App\Models\SecondOptionGroup;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller

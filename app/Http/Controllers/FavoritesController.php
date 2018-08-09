@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use App\Product;
-use App\Favorite;
+use App\Models\Product;
+use App\Models\Favorite;
 use Illuminate\Http\Request;
 
 class FavoritesController extends Controller

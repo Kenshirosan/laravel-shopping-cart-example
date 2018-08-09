@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Image;
-use App\FrontPage;
+use App\Models\FrontPage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 

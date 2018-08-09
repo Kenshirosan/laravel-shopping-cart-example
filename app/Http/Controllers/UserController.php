@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Mail\Welcome;
-use App\Order;
-use App\Promocode;
+use App\Models\Order;
+use App\Models\Promocode;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

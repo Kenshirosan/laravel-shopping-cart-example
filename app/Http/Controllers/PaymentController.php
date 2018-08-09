@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\UserOrdered;
-use App\Http\Requests\PaymentRequest;
-use App\Mail\ThankYou;
-use App\Order;
-use App\Payments\Payments;
-use App\Promocode;
+use \Cart as Cart;
+use \Carbon\Carbon;
 use App\User;
+use App\Models\Order;
+use App\Mail\ThankYou;
+use App\Models\Promocode;
+use App\Payments\Payments;
+use App\Events\UserOrdered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-use \Carbon\Carbon;
-use \Cart as Cart;
+use App\Http\Requests\PaymentRequest;
 
 
 class PaymentController extends Controller

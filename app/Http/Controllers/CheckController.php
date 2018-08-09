@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Order;
-use App\Status;
+use App\Models\Order;
+use App\Models\Status;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 

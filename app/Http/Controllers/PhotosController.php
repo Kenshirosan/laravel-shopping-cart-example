@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Image;
-use App\Photo;
-use App\Product;
+use App\Models\Photo;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class PhotosController extends Controller

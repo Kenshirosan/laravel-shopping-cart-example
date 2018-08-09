@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -48,7 +48,7 @@ class Favorite extends Model
         return Restaurant::where('id', $this->favorited->id);
     }
 
-    public function FavoritesCount()
+    public function favoritesCount()
     {
         return $this->where('id', $id)->get();
     }

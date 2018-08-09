@@ -3,7 +3,7 @@
 namespace App\Listeners;
 
 use App\User;
-use App\Order;
+use App\Models\Order;
 use App\Mail\ThankYou;
 use App\Events\UserOrdered;
 use Illuminate\Support\Facades\Auth;

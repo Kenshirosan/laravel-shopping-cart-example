@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
-use App\HolidayTitle;
+use App\Models\Category;
+use App\Models\HolidayTitle;
 use Illuminate\Http\Request;
 
 class HolidaySpecialController extends Controller

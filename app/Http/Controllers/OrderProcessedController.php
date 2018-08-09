@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Order;
-use App\Hideable;
+use App\Models\Order;
+use App\Models\Hideable;
 // use App\Mail\ThankYou;
 use Illuminate\Http\Request;
 

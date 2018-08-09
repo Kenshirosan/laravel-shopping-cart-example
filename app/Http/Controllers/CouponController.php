@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Promocode;
+use App\Models\Promocode;
 use \Cart as Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

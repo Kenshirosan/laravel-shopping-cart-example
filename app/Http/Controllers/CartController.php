@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Option;
-use App\Product;
+use App\Models\Option;
+use App\Models\Product;
 use \Cart as Cart;
 use Illuminate\Http\Request;
 

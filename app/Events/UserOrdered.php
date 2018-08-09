@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Order;
+use App\Models\Order;
 use App\Listeners\UserOrderedListener;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;

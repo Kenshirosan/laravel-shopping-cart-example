@@ -25,7 +25,8 @@
                 <a href="/update/{{ $product->slug }}" class="btn btn-info product-layout-img">Update</a>
             @endcan
         </div> <!-- end caption -->
-    </div> <!-- end thumbnail -->
+     <!-- end thumbnail -->
+    </div>
 
     <h3>${{ $product->price() }}</h3>
     @if( $product->is_eighty_six() )

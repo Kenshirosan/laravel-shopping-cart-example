@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use \Cart as Cart;
+use App\Models\Product;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 
@@ -35,7 +36,7 @@ class WishlistController extends Controller
         }
 
         Cart::instance('wishlist')->add($request->id, $request->name, 1, $request->price)
-                                  ->associate('App\Product');
+                                  ->associate(Product::class);
 
         return redirect('/shop')->withSuccessMessage('Item was added to your wishlist!');
     }
@@ -96,7 +97,7 @@ class WishlistController extends Controller
         }
 
         Cart::instance('default')->add($item->id, $item->name, 1, $item->price)
-                                 ->associate('App\Product');
+                                 ->associate(Product::class);
 
         return redirect('wishlist')->withSuccessMessage('Item has been moved to your shopping cart!');
     }

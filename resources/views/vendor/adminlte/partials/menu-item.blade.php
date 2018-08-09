@@ -7,21 +7,21 @@ it displays the count in the sidebar --}}
 @php
     if($item['href'] == url('/calendar'))
     {
-        $calendar = new \App\Calendar();
+        $calendar = new \App\Models\Calendar();
 
         $item['label'] = $calendar->getAppointments() ? : $item['label'];
     }
 
     if($item['href'] == url('/contact-us'))
     {
-        $messages = new \App\Message();
+        $messages = new \App\Models\Message();
 
         $item['label'] = $messages->count() ? : $item['label'];
     }
 
     if($item['href'] == url('/customer-orders'))
     {
-        $orders = new \App\Order();
+        $orders = new \App\Models\Order();
 
         $item['label'] = $orders->todaysOrdersCount() ? : $item['label'];
     }

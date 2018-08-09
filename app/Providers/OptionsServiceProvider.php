@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\HolidayTitle;
+use App\Models\HolidayTitle;
 use Illuminate\Support\ServiceProvider;
 
 class OptionsServiceProvider extends ServiceProvider
