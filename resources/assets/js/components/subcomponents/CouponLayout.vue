@@ -20,6 +20,7 @@
                         placeholder="number of coupons to create"
                         name="quantity"
                         v-model="quantity" autofocus required>
+                        <error :error="errors.get('quantity')"></error>
                 </div>
             </div>
 
@@ -36,6 +37,7 @@
                         placeholder="reward percentage"
                         name="reward"
                         v-model="reward" autofocus required>
+                        <error :error="errors.get('reward')"></error>
                 </div>
             </div>
 

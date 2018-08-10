@@ -20,7 +20,7 @@
                         name="name"
                         v-model="name" autofocus required
                     >
-                   <error :message="error"></error>
+                   <error :error="errors.get('name')"></error>
                 </div>
             </div>
             <div class="form-group">

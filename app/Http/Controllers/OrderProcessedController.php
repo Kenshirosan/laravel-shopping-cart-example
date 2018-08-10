@@ -18,8 +18,8 @@ class OrderProcessedController extends Controller
     //     return back();
     // }
 
-    // we delete a resource but we show a previously hidden item in the view
-     public function show($id)
+    // we show a resource but we hide a previously visible item in the view
+    public function create($id)
     {
         $order = Hideable::where('order_id', $id)->firstOrFail();
 
@@ -28,8 +28,8 @@ class OrderProcessedController extends Controller
         return response(['success_message', 'Success'], 200);
     }
 
-    // we show a resource but we hide a previously visible item in the view
-    public function destroy($id)
+    // we delete a resource but we show a previously hidden item in the view
+     public function destroy($id)
     {
         $order = Order::where('id', $id)->firstOrFail();
 

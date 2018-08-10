@@ -74,7 +74,14 @@
                         </td>
                         <td v-if="URI == '/best-customers'"><strong>{{ item.email }}</strong></td>
                         <td v-if="URI == '/best-customers'" class="text-success">${{ item.total/100 }}</td>
-                        <td v-if="URI == '/customer-orders'" :class="classes(item.hiddenOrder || item.status.name)"><strong >{{ item.status.name }}</strong></td>
+                        <td v-if="URI == '/customer-orders'" :class="classes(item.hiddenOrder || item.status.name)">
+                            <p class="text-primary"><strong >{{ item.status.name }}</strong></p>
+                            <p class="text-primary"><strong >{{ item.items | regex }}</strong></p>
+                            <p class="text-primary">
+                                <strong >{{ item.created_at | moment }} at {{ item.created_at | time }} </strong>
+                            </p>
+                            <p class="text-primary"><strong >${{ item.price | formatted }}</strong></p>
+                        </td>
                         <td v-if="URI == '/customer-orders'">
                             <h4>{{ item.order_type }}</h4>
                             <p v-if="item.order_type == 'Pick-up'">at {{ item.pickup_time }}</p>
@@ -156,8 +163,26 @@
 
             async showResource(id) {
                 await this.$emit('show', id);
+            }
+        },
+
+        filters: {
+            moment: date => {
+                return moment(date).format('Y, ddd, MMM Mo');
             },
-        }
+
+            time: date => {
+                return moment(date).format('H:mm:ss');
+            },
+
+            regex: string => {
+                return string.replace( /[\[\]\:"]/g, ' ');
+            },
+
+            formatted: price => {
+                return price / 100;
+            }
+        },
     }
 </script>
 

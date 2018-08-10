@@ -2,7 +2,6 @@
     <div>
         <div class="text-center">
             <h1>Items</h1>
-            <error :message="`${this.$data.error}`"></error>
         </div>
 
         <div class="row">
@@ -19,6 +18,7 @@
                             name="name"
                             v-model="name" autofocus required
                         >
+                        <error :error="errors.get('name')"></error>
                     </div>
                 </div>
 
@@ -32,8 +32,8 @@
                                     v-bind:value="optiongroup.id"
                             >{{ optiongroup.name }}
                             </option>
-
                         </select>
+                        <error :error="errors.get('option_group_id')"></error>
                     </div>
                 </div>
 

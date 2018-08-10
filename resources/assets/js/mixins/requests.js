@@ -1,4 +1,12 @@
+import Error from '../models/Error';
+
 export default {
+
+    data() {
+        return {
+            errors: new Error()
+        }
+    },
 
     computed: {
         URI() {
@@ -16,7 +24,7 @@ export default {
                 .then(res => {
                     this.items = res.data;
                 })
-                .catch(err => this.showError(err));
+                .catch(err => this.showError());
         },
 
         async addItems() {
@@ -47,12 +55,22 @@ export default {
                 .catch(err => this.showError(err));
         },
 
+        async addItem(id) {
+            await axios.post(this.URI + '/' + id)
+                .then(res => {
+                    flash('Success');
+                    this.getItems();
+                })
+                .catch(err => this.showError(err));
+        },
+
         clearError() {
-            this.error = '';
+            this.errors = new Error();
         },
 
         showError(err) {
-            return this.error = err.response.data.message;
+            console.log('toto');
+            return this.errors.record(err.response.data.errors);
         },
 
         resetForm() {

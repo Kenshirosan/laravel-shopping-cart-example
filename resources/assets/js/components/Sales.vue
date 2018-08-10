@@ -4,7 +4,6 @@
             <div class="text-center">
                 <h1 class="text-info">Create a Sale</h1>
             </div>
-            <error :message="this.error"></error>
 
             <form @submit.prevent="addItems"class="form-horizontal">
                 <div class="panel panel-info">
@@ -30,6 +29,7 @@
                                     placeholder="Percentage" required/>
                             </div>
                         </div>
+                        <error :error="errors.get('percentage')"></error>
 
                         <div class="form-group">
                             <div class="col-md-12">
@@ -45,8 +45,10 @@
                                         >
                                     </option>
                                 </select>
+                                <error :error="errors.get('product_id')"></error>
                             </div>
                         </div>
+                        <error></error>
 
                         <div class="form-group">
                             <div class="col-md-12">
@@ -88,7 +90,6 @@
             return {
                 percentage: '',
                 id: '',
-                error: '',
                 items: [],
             }
         }

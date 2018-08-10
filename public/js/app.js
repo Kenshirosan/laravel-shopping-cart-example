@@ -5487,11 +5487,20 @@ function applyToTag (styleElement, obj) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_Error__ = __webpack_require__(344);
 
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
+
+
 /* harmony default export */ __webpack_exports__["a"] = ({
+    data: function data() {
+        return {
+            errors: new __WEBPACK_IMPORTED_MODULE_1__models_Error__["a" /* default */]()
+        };
+    },
+
 
     computed: {
         URI: function URI() {
@@ -5517,7 +5526,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 return axios.get(this.URI).then(function (res) {
                                     _this.items = res.data;
                                 }).catch(function (err) {
-                                    return _this.showError(err);
+                                    return _this.showError();
                                 });
 
                             case 2:
@@ -5604,11 +5613,42 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
             return deleteItems;
         }(),
+        addItem: function () {
+            var _ref4 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4(id) {
+                var _this4 = this;
+
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
+                    while (1) {
+                        switch (_context4.prev = _context4.next) {
+                            case 0:
+                                _context4.next = 2;
+                                return axios.post(this.URI + '/' + id).then(function (res) {
+                                    flash('Success');
+                                    _this4.getItems();
+                                }).catch(function (err) {
+                                    return _this4.showError(err);
+                                });
+
+                            case 2:
+                            case 'end':
+                                return _context4.stop();
+                        }
+                    }
+                }, _callee4, this);
+            }));
+
+            function addItem(_x2) {
+                return _ref4.apply(this, arguments);
+            }
+
+            return addItem;
+        }(),
         clearError: function clearError() {
-            this.error = '';
+            this.errors = new __WEBPACK_IMPORTED_MODULE_1__models_Error__["a" /* default */]();
         },
         showError: function showError(err) {
-            return this.error = err.response.data.message;
+            console.log('toto');
+            return this.errors.record(err.response.data.errors);
         },
         resetForm: function resetForm() {
             this.option_group_id = '', this.name = '';
@@ -75675,16 +75715,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c(
-      "div",
-      { staticClass: "text-center" },
-      [
-        _c("h1", [_vm._v("Items")]),
-        _vm._v(" "),
-        _c("error", { attrs: { message: "" + this.$data.error } })
-      ],
-      1
-    ),
+    _vm._m(0),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c(
@@ -75706,37 +75737,44 @@ var render = function() {
               [_vm._v("Option Name")]
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "col-md-6" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.name,
-                    expression: "name"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  id: "name",
-                  placeholder: "ex: Long sleeve, Short sleeve...",
-                  type: "text",
-                  name: "name",
-                  autofocus: "",
-                  required: ""
-                },
-                domProps: { value: _vm.name },
-                on: {
-                  focus: _vm.clearError,
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+            _c(
+              "div",
+              { staticClass: "col-md-6" },
+              [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.name,
+                      expression: "name"
                     }
-                    _vm.name = $event.target.value
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    id: "name",
+                    placeholder: "ex: Long sleeve, Short sleeve...",
+                    type: "text",
+                    name: "name",
+                    autofocus: "",
+                    required: ""
+                  },
+                  domProps: { value: _vm.name },
+                  on: {
+                    focus: _vm.clearError,
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.name = $event.target.value
+                    }
                   }
-                }
-              })
-            ])
+                }),
+                _vm._v(" "),
+                _c("error", { attrs: { error: _vm.errors.get("name") } })
+              ],
+              1
+            )
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
@@ -75749,63 +75787,74 @@ var render = function() {
               [_vm._v("Option Group")]
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "col-md-6" }, [
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.option_group_id,
-                      expression: "option_group_id"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "option_group_id", required: "" },
-                  on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.option_group_id = $event.target.multiple
-                        ? $$selectedVal
-                        : $$selectedVal[0]
-                    }
-                  }
-                },
-                [
-                  _c("option", { staticClass: "reset", attrs: { value: "" } }, [
-                    _vm._v("Choose")
-                  ]),
-                  _vm._v(" "),
-                  _vm._l(_vm.items, function(optiongroup) {
-                    return _c(
-                      "option",
+            _c(
+              "div",
+              { staticClass: "col-md-6" },
+              [
+                _c(
+                  "select",
+                  {
+                    directives: [
                       {
-                        attrs: { name: "option_group_id" },
-                        domProps: { value: optiongroup.id }
-                      },
-                      [
-                        _vm._v(
-                          _vm._s(optiongroup.name) +
-                            "\n                        "
-                        )
-                      ]
-                    )
-                  })
-                ],
-                2
-              )
-            ])
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.option_group_id,
+                        expression: "option_group_id"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { id: "option_group_id", required: "" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.option_group_id = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "option",
+                      { staticClass: "reset", attrs: { value: "" } },
+                      [_vm._v("Choose")]
+                    ),
+                    _vm._v(" "),
+                    _vm._l(_vm.items, function(optiongroup) {
+                      return _c(
+                        "option",
+                        {
+                          attrs: { name: "option_group_id" },
+                          domProps: { value: optiongroup.id }
+                        },
+                        [
+                          _vm._v(
+                            _vm._s(optiongroup.name) +
+                              "\n                        "
+                          )
+                        ]
+                      )
+                    })
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _c("error", {
+                  attrs: { error: _vm.errors.get("option_group_id") }
+                })
+              ],
+              1
+            )
           ]),
           _vm._v(" "),
-          _vm._m(0)
+          _vm._m(1)
         ]
       )
     ]),
@@ -75837,6 +75886,14 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "text-center" }, [
+      _c("h1", [_vm._v("Items")])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -76054,7 +76111,7 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _c("error", { attrs: { message: _vm.error } })
+              _c("error", { attrs: { error: _vm.errors.get("name") } })
             ],
             1
           )
@@ -76382,180 +76439,47 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_requests__ = __webpack_require__(10);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_requests__["a" /* default */]],
+
     data: function data() {
         return {
-            orders: ''
+            items: ''
         };
     },
     mounted: function mounted() {
         var _this = this;
 
         Echo.private('user_ordered').listen('UserOrdered', function (order) {
-            _this.fetchTodaysOrders();
+            _this.getItems();
             flash('New Order');
         });
-    },
-    created: function created() {
-        this.fetchTodaysOrders();
-    },
-
-
-    methods: {
-        showOrder: function () {
-            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(id) {
-                var _this2 = this;
-
-                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
-                    while (1) {
-                        switch (_context.prev = _context.next) {
-                            case 0:
-                                console.log(id);
-                                _context.next = 3;
-                                return axios.delete('/show-order/' + id).then(function (res) {
-                                    flash('Success');
-                                    _this2.fetchTodaysOrders();
-                                }).catch(function (err) {
-                                    return flash(err, 'danger');
-                                });
-
-                            case 3:
-                            case 'end':
-                                return _context.stop();
-                        }
-                    }
-                }, _callee, this);
-            }));
-
-            function showOrder(_x) {
-                return _ref.apply(this, arguments);
-            }
-
-            return showOrder;
-        }(),
-        hideOrder: function () {
-            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(id) {
-                var _this3 = this;
-
-                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
-                    while (1) {
-                        switch (_context2.prev = _context2.next) {
-                            case 0:
-                                _context2.next = 2;
-                                return axios.post('/hide-order/' + id).then(function (res) {
-                                    flash('Success');
-                                    _this3.fetchTodaysOrders();
-                                }).catch(function (err) {
-                                    flash('Something wrong happenened', 'danger');
-                                    _this3.showErrors(err);
-                                });
-
-                            case 2:
-                            case 'end':
-                                return _context2.stop();
-                        }
-                    }
-                }, _callee2, this);
-            }));
-
-            function hideOrder(_x2) {
-                return _ref2.apply(this, arguments);
-            }
-
-            return hideOrder;
-        }(),
-        fetchTodaysOrders: function () {
-            var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
-                var _this4 = this;
-
-                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
-                    while (1) {
-                        switch (_context3.prev = _context3.next) {
-                            case 0:
-                                _context3.next = 2;
-                                return axios.get('/customer-orders').then(function (res) {
-                                    return _this4.orders = res.data;
-                                }).catch(function (err) {
-                                    flash('Something wrong happenened', 'danger');
-                                    _this4.showErrors(err);
-                                });
-
-                            case 2:
-                            case 'end':
-                                return _context3.stop();
-                        }
-                    }
-                }, _callee3, this);
-            }));
-
-            function fetchTodaysOrders() {
-                return _ref3.apply(this, arguments);
-            }
-
-            return fetchTodaysOrders;
-        }()
-    },
-
-    showError: function showError(err) {
-        return this.error = err.response.data.message;
-    },
-
-
-    filters: {
-        moment: function (_moment) {
-            function moment(_x3) {
-                return _moment.apply(this, arguments);
-            }
-
-            moment.toString = function () {
-                return _moment.toString();
-            };
-
-            return moment;
-        }(function (date) {
-            return moment(date).format('Y, ddd, MMM Mo');
-        }),
-
-        time: function time(date) {
-            return moment(date).format('H:mm:ss');
-        },
-
-        regex: function regex(string) {
-            return string.replace(/[\[\]\:"]/g, ' ');
-        },
-
-        formatted: function formatted(price) {
-            return price / 100;
-        }
     }
 });
 
@@ -76567,21 +76491,21 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.orders.length > 0
+  return _vm.items.length > 0
     ? _c(
         "div",
         [
           _c("data-table", {
-            attrs: { id: "ID", findaname: "Order name", data: _vm.orders },
+            attrs: { id: "ID", findaname: "Order name", data: _vm.items },
             on: {
               deleted: function($event) {
-                _vm.fetchTodaysOrders()
+                _vm.getItems()
               },
               erase: function($event) {
-                _vm.hideOrder($event)
+                _vm.deleteItems($event)
               },
               show: function($event) {
-                _vm.showOrder($event)
+                _vm.addItem($event)
               }
             }
           })
@@ -76665,7 +76589,6 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_requests__ = __webpack_require__(10);
-//
 //
 //
 //
@@ -76802,7 +76725,7 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _c("error", { attrs: { message: _vm.error } })
+              _c("error", { attrs: { error: _vm.errors.get("name") } })
             ],
             1
           )
@@ -77083,6 +77006,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -77093,7 +77018,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             percentage: '',
             id: '',
-            error: '',
             items: []
         };
     }
@@ -77108,32 +77032,30 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _c(
-      "div",
-      { staticClass: "row" },
-      [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("error", { attrs: { message: this.error } }),
-        _vm._v(" "),
-        _c(
-          "form",
-          {
-            staticClass: "form-horizontal",
-            on: {
-              submit: function($event) {
-                $event.preventDefault()
-                return _vm.addItems($event)
-              }
+    _c("div", { staticClass: "row" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "form",
+        {
+          staticClass: "form-horizontal",
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.addItems($event)
             }
-          },
-          [
-            _c("div", { staticClass: "panel panel-info" }, [
-              _c("div", { staticClass: "panel-heading" }, [
-                _vm._v("\n                    Add sale\n                ")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "panel-body" }, [
+          }
+        },
+        [
+          _c("div", { staticClass: "panel panel-info" }, [
+            _c("div", { staticClass: "panel-heading" }, [
+              _vm._v("\n                    Add sale\n                ")
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "panel-body" },
+              [
                 _vm._m(1),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
@@ -77170,70 +77092,83 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
+                _c("error", { attrs: { error: _vm.errors.get("percentage") } }),
+                _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
-                  _c("div", { staticClass: "col-md-12" }, [
-                    _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.id,
-                            expression: "id"
+                  _c(
+                    "div",
+                    { staticClass: "col-md-12" },
+                    [
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.id,
+                              expression: "id"
+                            }
+                          ],
+                          staticClass: "options",
+                          attrs: { required: "", autofocus: "" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.id = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            }
                           }
+                        },
+                        [
+                          _c(
+                            "option",
+                            { staticClass: "reset", attrs: { value: "" } },
+                            [_vm._v("Choose")]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.items, function(product) {
+                            return !product.is_on_sale
+                              ? _c("option", {
+                                  staticClass: "options",
+                                  attrs: { name: "product_id" },
+                                  domProps: {
+                                    value: product.id,
+                                    textContent: _vm._s(product.name)
+                                  }
+                                })
+                              : _vm._e()
+                          })
                         ],
-                        staticClass: "options",
-                        attrs: { required: "", autofocus: "" },
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.id = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          }
-                        }
-                      },
-                      [
-                        _c(
-                          "option",
-                          { staticClass: "reset", attrs: { value: "" } },
-                          [_vm._v("Choose")]
-                        ),
-                        _vm._v(" "),
-                        _vm._l(_vm.items, function(product) {
-                          return !product.is_on_sale
-                            ? _c("option", {
-                                staticClass: "options",
-                                attrs: { name: "product_id" },
-                                domProps: {
-                                  value: product.id,
-                                  textContent: _vm._s(product.name)
-                                }
-                              })
-                            : _vm._e()
-                        })
-                      ],
-                      2
-                    )
-                  ])
+                        2
+                      ),
+                      _vm._v(" "),
+                      _c("error", {
+                        attrs: { error: _vm.errors.get("product_id") }
+                      })
+                    ],
+                    1
+                  )
                 ]),
                 _vm._v(" "),
+                _c("error"),
+                _vm._v(" "),
                 _vm._m(2)
-              ])
-            ])
-          ]
-        )
-      ],
-      1
-    ),
+              ],
+              1
+            )
+          ])
+        ]
+      )
+    ]),
     _vm._v(" "),
     !_vm.items
       ? _c("div", { staticClass: "row" }, [
@@ -77955,6 +77890,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -78028,41 +77965,48 @@ var render = function() {
             [_vm._v("How many coupons ?")]
           ),
           _vm._v(" "),
-          _c("div", { staticClass: "col-md-6" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.quantity,
-                  expression: "quantity"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: {
-                id: "quantity",
-                type: "number",
-                min: "0",
-                step: "1",
-                placeholder: "number of coupons to create",
-                name: "quantity",
-                autofocus: "",
-                required: ""
-              },
-              domProps: { value: _vm.quantity },
-              on: {
-                focus: function($event) {
-                  _vm.clearError()
-                },
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+          _c(
+            "div",
+            { staticClass: "col-md-6" },
+            [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.quantity,
+                    expression: "quantity"
                   }
-                  _vm.quantity = $event.target.value
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  id: "quantity",
+                  type: "number",
+                  min: "0",
+                  step: "1",
+                  placeholder: "number of coupons to create",
+                  name: "quantity",
+                  autofocus: "",
+                  required: ""
+                },
+                domProps: { value: _vm.quantity },
+                on: {
+                  focus: function($event) {
+                    _vm.clearError()
+                  },
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.quantity = $event.target.value
+                  }
                 }
-              }
-            })
-          ])
+              }),
+              _vm._v(" "),
+              _c("error", { attrs: { error: _vm.errors.get("quantity") } })
+            ],
+            1
+          )
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group" }, [
@@ -78072,41 +78016,48 @@ var render = function() {
             [_vm._v("Coupons percentage")]
           ),
           _vm._v(" "),
-          _c("div", { staticClass: "col-md-6" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.reward,
-                  expression: "reward"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: {
-                id: "reward",
-                type: "number",
-                min: "0",
-                step: "1",
-                placeholder: "reward percentage",
-                name: "reward",
-                autofocus: "",
-                required: ""
-              },
-              domProps: { value: _vm.reward },
-              on: {
-                focus: function($event) {
-                  _vm.clearError()
-                },
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+          _c(
+            "div",
+            { staticClass: "col-md-6" },
+            [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.reward,
+                    expression: "reward"
                   }
-                  _vm.reward = $event.target.value
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  id: "reward",
+                  type: "number",
+                  min: "0",
+                  step: "1",
+                  placeholder: "reward percentage",
+                  name: "reward",
+                  autofocus: "",
+                  required: ""
+                },
+                domProps: { value: _vm.reward },
+                on: {
+                  focus: function($event) {
+                    _vm.clearError()
+                  },
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.reward = $event.target.value
+                  }
                 }
-              }
-            })
-          ])
+              }),
+              _vm._v(" "),
+              _c("error", { attrs: { error: _vm.errors.get("reward") } })
+            ],
+            1
+          )
         ]),
         _vm._v(" "),
         _vm._m(0)
@@ -78232,9 +78183,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['message']
+    props: ['error']
 });
 
 /***/ }),
@@ -78245,12 +78195,12 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.message
+  return _vm.error
     ? _c(
         "span",
         { staticClass: "help-block alert alert-danger" },
         [
-          _c("strong", [_vm._v(_vm._s(_vm.message))]),
+          _c("strong", [_vm._v(_vm._s(_vm.error))]),
           _vm._v(" "),
           _vm._t("default")
         ],
@@ -78483,6 +78433,13 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['id', 'findaname', 'url', 'data'],
@@ -78566,6 +78523,34 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
             return showResource;
         }()
+    },
+
+    filters: {
+        moment: function (_moment) {
+            function moment(_x3) {
+                return _moment.apply(this, arguments);
+            }
+
+            moment.toString = function () {
+                return _moment.toString();
+            };
+
+            return moment;
+        }(function (date) {
+            return moment(date).format('Y, ddd, MMM Mo');
+        }),
+
+        time: function time(date) {
+            return moment(date).format('H:mm:ss');
+        },
+
+        regex: function regex(string) {
+            return string.replace(/[\[\]\:"]/g, ' ');
+        },
+
+        formatted: function formatted(price) {
+            return price / 100;
+        }
     }
 });
 
@@ -78752,7 +78737,37 @@ var render = function() {
                                 item.hiddenOrder || item.status.name
                               )
                             },
-                            [_c("strong", [_vm._v(_vm._s(item.status.name))])]
+                            [
+                              _c("p", { staticClass: "text-primary" }, [
+                                _c("strong", [_vm._v(_vm._s(item.status.name))])
+                              ]),
+                              _vm._v(" "),
+                              _c("p", { staticClass: "text-primary" }, [
+                                _c("strong", [
+                                  _vm._v(_vm._s(_vm._f("regex")(item.items)))
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("p", { staticClass: "text-primary" }, [
+                                _c("strong", [
+                                  _vm._v(
+                                    _vm._s(_vm._f("moment")(item.created_at)) +
+                                      " at " +
+                                      _vm._s(_vm._f("time")(item.created_at)) +
+                                      " "
+                                  )
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("p", { staticClass: "text-primary" }, [
+                                _c("strong", [
+                                  _vm._v(
+                                    "$" +
+                                      _vm._s(_vm._f("formatted")(item.price))
+                                  )
+                                ])
+                              ])
+                            ]
                           )
                         : _vm._e(),
                       _vm._v(" "),
@@ -78904,6 +78919,50 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 335 */,
+/* 336 */,
+/* 337 */,
+/* 338 */,
+/* 339 */,
+/* 340 */,
+/* 341 */,
+/* 342 */,
+/* 343 */,
+/* 344 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Error = function () {
+    function Error() {
+        _classCallCheck(this, Error);
+
+        this.errors = {};
+    }
+
+    _createClass(Error, [{
+        key: "get",
+        value: function get(field) {
+            if (this.errors[field]) {
+                return this.errors[field][0];
+            }
+        }
+    }, {
+        key: "record",
+        value: function record(errors) {
+            this.errors = errors;
+        }
+    }]);
+
+    return Error;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (Error);
 
 /***/ })
 /******/ ]);

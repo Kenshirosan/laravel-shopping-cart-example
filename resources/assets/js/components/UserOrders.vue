@@ -1,12 +1,12 @@
 <template>
-    <div v-if="orders.length > 0">
+    <div v-if="items.length > 0">
         <data-table
-            @deleted="fetchTodaysOrders()"
-            @erase="hideOrder($event)"
-            @show="showOrder($event)"
+            @deleted="getItems()"
+            @erase="deleteItems($event)"
+            @show="addItem($event)"
             id="ID"
             findaname="Order name"
-            :data="orders"
+            :data="items"
         >
         </data-table>
     </div>
@@ -21,79 +21,23 @@
 </template>
 
 <script>
+    import requests from '../mixins/requests';
+
     export default {
+        mixins: [requests],
 
         data() {
             return {
-                orders: '',
+                items: '',
             }
         },
 
         mounted() {
             Echo.private('user_ordered')
             .listen('UserOrdered', (order) => {
-                this.fetchTodaysOrders();
+                this.getItems();
                 flash('New Order');
             });
-        },
-
-        created() {
-            this.fetchTodaysOrders()
-        },
-
-        methods: {
-            async showOrder(id) {
-                console.log(id)
-                await axios.delete(`/show-order/${id}`)
-                    .then(res => {
-                        flash('Success')
-                        this.fetchTodaysOrders()
-                    })
-                    .catch(err => flash(err, 'danger'))
-            },
-
-            async hideOrder(id) {
-                await axios.post(`/hide-order/${id}`)
-                    .then(res => {
-                        flash('Success');
-                        this.fetchTodaysOrders();
-                    })
-                    .catch(err => {
-                        flash('Something wrong happenened', 'danger');
-                        this.showErrors(err);
-                    });
-            },
-
-            async fetchTodaysOrders() {
-                await axios.get('/customer-orders')
-                    .then(res => this.orders = res.data)
-                    .catch(err => {
-                        flash('Something wrong happenened', 'danger');
-                        this.showErrors(err);
-                    });
-            }
-        },
-
-        showError(err) {
-            return this.error = err.response.data.message;
-        },
-
-        filters: {
-            moment: date => {
-                return moment(date).format('Y, ddd, MMM Mo')
-            },
-
-            time: date => {
-                return moment(date).format('H:mm:ss')
-            },
-
-            regex: string => {
-                return string.replace( /[\[\]\:"]/g, ' ')
-            },
-
-            formatted: price => {
-                return price / 100;
-            }
-        },
+        }
     }
 </script>
