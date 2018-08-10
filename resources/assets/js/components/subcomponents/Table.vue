@@ -75,12 +75,12 @@
                         <td v-if="URI == '/best-customers'"><strong>{{ item.email }}</strong></td>
                         <td v-if="URI == '/best-customers'" class="text-success">${{ item.total/100 }}</td>
                         <td v-if="URI == '/customer-orders'" :class="classes(item.hiddenOrder || item.status.name)">
-                            <p class="text-primary"><strong >{{ item.status.name }}</strong></p>
-                            <p class="text-primary"><strong >{{ item.items | regex }}</strong></p>
+                            <h4 class="text-info"><strong>{{ item.status.name }}</strong></h4>
+                            <h4 class="text-white"><strong>{{ item.items | regex }}</strong></h4>
                             <p class="text-primary">
-                                <strong >{{ item.created_at | moment }} at {{ item.created_at | time }} </strong>
+                                <small>{{ item.created_at | moment }} at {{ item.created_at | time }} </small>
                             </p>
-                            <p class="text-primary"><strong >${{ item.price | formatted }}</strong></p>
+                            <p class="text-danger"><small>${{ item.price | formatted }}</small></p>
                         </td>
                         <td v-if="URI == '/customer-orders'">
                             <h4>{{ item.order_type }}</h4>
@@ -186,7 +186,10 @@
     }
 </script>
 
-<style>
+<style scoped>
+    body {
+        overflow: scroll;
+    }
     .text-white {
         color: white;
     }

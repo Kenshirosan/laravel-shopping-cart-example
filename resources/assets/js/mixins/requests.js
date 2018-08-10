@@ -69,7 +69,6 @@ export default {
         },
 
         showError(err) {
-            console.log('toto');
             return this.errors.record(err.response.data.errors);
         },
 

@@ -5647,7 +5647,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             this.errors = new __WEBPACK_IMPORTED_MODULE_1__models_Error__["a" /* default */]();
         },
         showError: function showError(err) {
-            console.log('toto');
             return this.errors.record(err.response.data.errors);
         },
         resetForm: function resetForm() {
@@ -78225,19 +78224,19 @@ if (false) {
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(330)
+  __webpack_require__(345)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(332)
 /* template */
-var __vue_template__ = __webpack_require__(333)
+var __vue_template__ = __webpack_require__(347)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = null
+var __vue_scopeId__ = "data-v-730c5c24"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -78270,46 +78269,8 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 330 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(331);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(9)("412b77f8", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-730c5c24\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Table.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-730c5c24\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Table.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 331 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(7)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.text-white {\n    color: white;\n}\ntable {\n    width: 100%;\n}\n.table > thead > tr > td {\n    padding: 1em;\n}\n.table > tbody > tr > td {\n    padding: 0.5em;\n}\nthead {\n    background-color: #605CA8;\n}\n.mb-100 {\n    margin-bottom: 100px;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
+/* 330 */,
+/* 331 */,
 /* 332 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -78555,7 +78516,98 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 });
 
 /***/ }),
-/* 333 */
+/* 333 */,
+/* 334 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 335 */,
+/* 336 */,
+/* 337 */,
+/* 338 */,
+/* 339 */,
+/* 340 */,
+/* 341 */,
+/* 342 */,
+/* 343 */,
+/* 344 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Error = function () {
+    function Error() {
+        _classCallCheck(this, Error);
+
+        this.errors = {};
+    }
+
+    _createClass(Error, [{
+        key: "get",
+        value: function get(field) {
+            if (this.errors[field]) {
+                return this.errors[field][0];
+            }
+        }
+    }, {
+        key: "record",
+        value: function record(errors) {
+            this.errors = errors;
+        }
+    }]);
+
+    return Error;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (Error);
+
+/***/ }),
+/* 345 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(346);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(9)("47ae2e12", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-730c5c24\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Table.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-730c5c24\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Table.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 346 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(7)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\nbody[data-v-730c5c24] {\n    overflow: scroll;\n}\n.text-white[data-v-730c5c24] {\n    color: white;\n}\ntable[data-v-730c5c24] {\n    width: 100%;\n}\n.table > thead > tr > td[data-v-730c5c24] {\n    padding: 1em;\n}\n.table > tbody > tr > td[data-v-730c5c24] {\n    padding: 0.5em;\n}\nthead[data-v-730c5c24] {\n    background-color: #605CA8;\n}\n.mb-100[data-v-730c5c24] {\n    margin-bottom: 100px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 347 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -78738,18 +78790,18 @@ var render = function() {
                               )
                             },
                             [
-                              _c("p", { staticClass: "text-primary" }, [
+                              _c("h4", { staticClass: "text-info" }, [
                                 _c("strong", [_vm._v(_vm._s(item.status.name))])
                               ]),
                               _vm._v(" "),
-                              _c("p", { staticClass: "text-primary" }, [
+                              _c("h4", { staticClass: "text-white" }, [
                                 _c("strong", [
                                   _vm._v(_vm._s(_vm._f("regex")(item.items)))
                                 ])
                               ]),
                               _vm._v(" "),
                               _c("p", { staticClass: "text-primary" }, [
-                                _c("strong", [
+                                _c("small", [
                                   _vm._v(
                                     _vm._s(_vm._f("moment")(item.created_at)) +
                                       " at " +
@@ -78759,8 +78811,8 @@ var render = function() {
                                 ])
                               ]),
                               _vm._v(" "),
-                              _c("p", { staticClass: "text-primary" }, [
-                                _c("strong", [
+                              _c("p", { staticClass: "text-danger" }, [
+                                _c("small", [
                                   _vm._v(
                                     "$" +
                                       _vm._s(_vm._f("formatted")(item.price))
@@ -78913,56 +78965,6 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-730c5c24", module.exports)
   }
 }
-
-/***/ }),
-/* 334 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 335 */,
-/* 336 */,
-/* 337 */,
-/* 338 */,
-/* 339 */,
-/* 340 */,
-/* 341 */,
-/* 342 */,
-/* 343 */,
-/* 344 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Error = function () {
-    function Error() {
-        _classCallCheck(this, Error);
-
-        this.errors = {};
-    }
-
-    _createClass(Error, [{
-        key: "get",
-        value: function get(field) {
-            if (this.errors[field]) {
-                return this.errors[field][0];
-            }
-        }
-    }, {
-        key: "record",
-        value: function record(errors) {
-            this.errors = errors;
-        }
-    }]);
-
-    return Error;
-}();
-
-/* harmony default export */ __webpack_exports__["a"] = (Error);
 
 /***/ })
 /******/ ]);
