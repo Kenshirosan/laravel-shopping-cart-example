@@ -7,7 +7,7 @@
             <span><h1>Your Customers Ordered</h1></span>
         </div>
 
-        <!-- AddOptions components -->
+        <!-- AddOptions.vue Component -->
         <div v-if="URI == '/add-options' || URI == '/add-second-options'">
             <table class="table table-hover even" v-for="optiongroup in data">
                 <thead>
@@ -27,7 +27,7 @@
             </table>
         </div>
 
-        <!-- Sales Component -->
+        <!-- Sales.vue Component -->
 
         <div v-else-if="URI == '/sales'">
             <table class="table table-hover even">
@@ -51,7 +51,8 @@
             </table>
         </div>
 
-        <!-- AddOptionGroup, BestCustomers, AddCategories, CouponLayout, UserOrders -->
+        <!-- Table used in the folowing components -->
+        <!-- AddOptionGroup.vue, BestCustomers.vue, AddCategories.vue, CouponLayout.vue, UserOrders.vue -->
         <div v-else>
             <table class="table table-hover table-striped table-bordered even">
                 <thead>
@@ -153,7 +154,7 @@
                 return name === 'Out for Delivery' ? 'alert-success' : 'alert-warning';
             },
 
-            email(email) {
+            email(emailAddress) {
                 return window.location.href = `mailto:${email}`;
             },
 

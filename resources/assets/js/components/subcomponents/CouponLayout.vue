@@ -3,7 +3,6 @@
         <div class="text-center">
             <h1 class="text-info">{{ this.$props.title }}</h1>
             <p><small><em> {{ message }}</em></small></p>
-            <error :message="error"> Some coupons did not load correctly, please contact your webmaster</error>
         </div>
         <hr>
         <form @submit.prevent="addItems()" class="form-horizontal">
@@ -79,10 +78,8 @@
             return {
                 message: this.info,
                 endpoint: this.url,
-                coupons: '',
                 reward: '',
                 quantity: '',
-                error: '',
                 items: ''
             }
         }

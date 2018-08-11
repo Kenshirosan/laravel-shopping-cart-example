@@ -5547,21 +5547,12 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
                 var _this2 = this;
 
-                var data;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
                     while (1) {
                         switch (_context2.prev = _context2.next) {
                             case 0:
-                                data = {
-                                    option_group_id: this.option_group_id,
-                                    name: this.name,
-                                    percentage: this.percentage,
-                                    product_id: this.id,
-                                    quantity: this.quantity,
-                                    reward: this.reward
-                                };
-                                _context2.next = 3;
-                                return axios.post(this.URI, data).then(function (res) {
+                                _context2.next = 2;
+                                return axios.post(this.URI, this.$data).then(function (res) {
                                     flash('Success');
                                     _this2.getItems();
                                     _this2.resetForm();
@@ -5569,7 +5560,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                     return _this2.showError(err);
                                 });
 
-                            case 3:
+                            case 2:
                             case 'end':
                                 return _context2.stop();
                         }
@@ -75699,8 +75690,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             option_group_id: '',
             name: '',
             items: [],
-            optionalItems: [],
-            error: ''
+            optionalItems: []
         };
     }
 });
@@ -76030,7 +76020,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     data: function data() {
         return {
-            error: '',
             name: '',
             items: ''
         };
@@ -77016,7 +77005,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             percentage: '',
-            id: '',
+            product_id: '',
             items: []
         };
     }
@@ -77105,8 +77094,8 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.id,
-                              expression: "id"
+                              value: _vm.product_id,
+                              expression: "product_id"
                             }
                           ],
                           staticClass: "options",
@@ -77121,7 +77110,7 @@ var render = function() {
                                   var val = "_value" in o ? o._value : o.value
                                   return val
                                 })
-                              _vm.id = $event.target.multiple
+                              _vm.product_id = $event.target.multiple
                                 ? $$selectedVal
                                 : $$selectedVal[0]
                             }
@@ -77890,7 +77879,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -77903,10 +77891,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             message: this.info,
             endpoint: this.url,
-            coupons: '',
             reward: '',
             quantity: '',
-            error: '',
             items: ''
         };
     }
@@ -77921,24 +77907,13 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c(
-      "div",
-      { staticClass: "text-center" },
-      [
-        _c("h1", { staticClass: "text-info" }, [
-          _vm._v(_vm._s(this.$props.title))
-        ]),
-        _vm._v(" "),
-        _c("p", [_c("small", [_c("em", [_vm._v(" " + _vm._s(_vm.message))])])]),
-        _vm._v(" "),
-        _c("error", { attrs: { message: _vm.error } }, [
-          _vm._v(
-            " Some coupons did not load correctly, please contact your webmaster"
-          )
-        ])
-      ],
-      1
-    ),
+    _c("div", { staticClass: "text-center" }, [
+      _c("h1", { staticClass: "text-info" }, [
+        _vm._v(_vm._s(this.$props.title))
+      ]),
+      _vm._v(" "),
+      _c("p", [_c("small", [_c("em", [_vm._v(" " + _vm._s(_vm.message))])])])
+    ]),
     _vm._v(" "),
     _c("hr"),
     _vm._v(" "),
@@ -78401,6 +78376,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['id', 'findaname', 'url', 'data'],
@@ -78435,9 +78411,19 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
             return name === 'Out for Delivery' ? 'alert-success' : 'alert-warning';
         },
-        email: function email(_email) {
-            return window.location.href = 'mailto:' + _email;
-        },
+        email: function (_email) {
+            function email(_x) {
+                return _email.apply(this, arguments);
+            }
+
+            email.toString = function () {
+                return _email.toString();
+            };
+
+            return email;
+        }(function (emailAddress) {
+            return window.location.href = 'mailto:' + email;
+        }),
         deleteResource: function () {
             var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(id) {
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
@@ -78455,7 +78441,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 }, _callee, this);
             }));
 
-            function deleteResource(_x) {
+            function deleteResource(_x2) {
                 return _ref.apply(this, arguments);
             }
 
@@ -78478,7 +78464,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 }, _callee2, this);
             }));
 
-            function showResource(_x2) {
+            function showResource(_x3) {
                 return _ref2.apply(this, arguments);
             }
 
@@ -78488,7 +78474,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
     filters: {
         moment: function (_moment) {
-            function moment(_x3) {
+            function moment(_x4) {
                 return _moment.apply(this, arguments);
             }
 

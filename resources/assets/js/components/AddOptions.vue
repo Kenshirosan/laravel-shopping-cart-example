@@ -73,7 +73,6 @@
                 name: '',
                 items: [],
                 optionalItems: [],
-                error: '',
             }
         }
     }

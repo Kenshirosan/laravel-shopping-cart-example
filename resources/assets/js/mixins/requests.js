@@ -28,16 +28,7 @@ export default {
         },
 
         async addItems() {
-            const data = {
-                option_group_id: this.option_group_id,
-                name:this.name,
-                percentage: this.percentage,
-                product_id: this.id,
-                quantity: this.quantity,
-                reward: this.reward
-            };
-
-            await axios.post(this.URI, data)
+            await axios.post(this.URI, this.$data)
                 .then(res => {
                     flash('Success');
                     this.getItems();

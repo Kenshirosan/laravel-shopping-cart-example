@@ -33,7 +33,7 @@
 
                         <div class="form-group">
                             <div class="col-md-12">
-                                <select v-model="id" class="options" required autofocus>
+                                <select v-model="product_id" class="options" required autofocus>
                                     <option value="" class="reset">Choose</option>
                                     <option
                                         v-for="product in items"
@@ -89,7 +89,7 @@
         data() {
             return {
                 percentage: '',
-                id: '',
+                product_id: '',
                 items: [],
             }
         }

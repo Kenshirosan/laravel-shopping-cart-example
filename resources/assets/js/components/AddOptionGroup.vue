@@ -53,7 +53,6 @@
 
         data() {
             return {
-                error: '',
                 name: '',
                 items: '',
             }
