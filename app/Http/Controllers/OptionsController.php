@@ -57,13 +57,18 @@ class OptionsController extends Controller
 
             $option->delete();
 
-            return response(['ok'], 200);
+            $optionGroups = SecondOptionGroup::with('options')->get();
+
+            return response($optionGroups, 200);
         }
 
         $option = Option::where('id', $id)->firstOrFail();
 
         $option->delete();
 
-        return response(['ok'], 200);
+        $optionGroups = OptionGroup::with('options')->get();
+
+        return response($optionGroups, 200);
+
     }
 }

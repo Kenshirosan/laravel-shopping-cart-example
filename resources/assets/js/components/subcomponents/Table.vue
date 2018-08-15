@@ -40,7 +40,7 @@
                 </thead>
                 <tbody>
                     <tr class="text-info" v-for="product in data" v-if="product.is_on_sale">
-                        <td>{{ product.id }}</td>
+                        <td>{{ product.sales.id }}</td>
                         <td>
                             <p>{{ product.name }}</p>
                             <p>{{ product.sales.percentage * 100 }}% Off</p>
@@ -74,7 +74,7 @@
                         <td v-else>{{ item.reward || item.name || item.holiday_page_title || item.products.name}}
                         </td>
                         <td v-if="URI == '/best-customers'"><strong>{{ item.email }}</strong></td>
-                        <td v-if="URI == '/best-customers'" class="text-success">${{ item.total/100 }}</td>
+                        <td v-if="URI == '/best-customers'" class="text-success">${{ item.total | formatted }}</td>
                         <td v-if="URI == '/customer-orders'" :class="classes(item.hiddenOrder || item.status.name)">
                             <h4 class="text-info"><strong>{{ item.status.name }}</strong></h4>
                             <h4 class="text-white"><strong>{{ item.items | regex }}</strong></h4>
@@ -106,7 +106,6 @@
                         </td>
                         <td v-if="!item.hiddenOrder && item.order_type">
                             <a :href="`/order/${item.id}`"
-                                v-if="!item.hiddenOrder && item.order_type"
                                 class="btn btn-info btn-sm"
                                 >Go to order page
                             </a>
@@ -138,10 +137,6 @@
 
             deleteBtnMethod() {
                 return window.location.pathname == '/customer-orders' ? 'Mark As Processed' : 'Delete'
-            },
-
-            class() {
-                return this.classes()
             }
         },
 
@@ -155,7 +150,7 @@
             },
 
             email(emailAddress) {
-                return window.location.href = `mailto:${email}`;
+                return window.location.href = `mailto:${emailAddress}`;
             },
 
             async deleteResource(id) {

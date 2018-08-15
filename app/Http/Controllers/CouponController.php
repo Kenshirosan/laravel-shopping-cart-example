@@ -94,6 +94,15 @@ class CouponController extends Controller
 
         $coupon->delete();
 
-        return response(['success_message', 'Coupon deleted'], 200);
+        if(request()->server('REQUEST_URI') === "/create-coupon/$id") {
+            $attr = ['expires_at' => null, 'is_disposable' => true];
+            $coupons = Promocode::where($attr)->get();
+
+            return response($coupons, 200);
+        }
+
+        $couponsForAll = Promocode::where('is_disposable', false)->get();
+
+        return response($couponsForAll, 200);
     }
 }

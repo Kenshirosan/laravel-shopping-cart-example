@@ -53,12 +53,20 @@ class OptionGroupController extends Controller
     {
         if (request()->server('REQUEST_URI') === "/second-option-group/$id") {
             $optionGroup = SecondOptionGroup::where('id', $id)->firstOrFail();
-        } else {
-            $optionGroup = OptionGroup::where('id', $id)->firstOrFail();
+
+            $optionGroup->delete();
+
+            $optionGroups = SecondOptionGroup::all();
+
+            return response($optionGroups, 200);
         }
+
+        $optionGroup = OptionGroup::where('id', $id)->firstOrFail();
 
         $optionGroup->delete();
 
-        return response(['success_message', 'Option Group Deleted.'], 200);
+        $optionGroups = OptionGroup::all();
+
+        return response($optionGroups, 200);
     }
 }

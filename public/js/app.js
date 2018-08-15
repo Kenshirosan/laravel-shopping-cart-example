@@ -5555,7 +5555,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 return axios.post(this.URI, this.$data).then(function (res) {
                                     _this2.items = res.data;
                                     flash('Success');
-                                    // this.getItems();
                                     _this2.resetForm();
                                 }).catch(function (err) {
                                     return _this2.showError(err);
@@ -5586,7 +5585,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 _context3.next = 2;
                                 return axios.delete(this.URI + '/' + id).then(function (res) {
                                     flash('Success');
-                                    _this3.getItems();
+                                    _this3.items = res.data;
                                 }).catch(function (err) {
                                     return _this3.showError(err);
                                 });
@@ -5616,7 +5615,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 _context4.next = 2;
                                 return axios.post(this.URI + '/' + id).then(function (res) {
                                     flash('Success');
-                                    _this4.getItems();
+                                    _this4.items = res.data;
                                 }).catch(function (err) {
                                     return _this4.showError(err);
                                 });
@@ -20351,8 +20350,9 @@ window.events = new Vue();
 
 window.flash = function (message) {
     var level = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'success';
+    var duration = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 3000;
 
-    window.events.$emit('flash', { message: message, level: level });
+    window.events.$emit('flash', { message: message, level: level, duration: duration });
 };
 
 window.productitemscountchanged = function () {
@@ -78450,7 +78450,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['id', 'findaname', 'url', 'data'],
@@ -78471,9 +78470,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         },
         deleteBtnMethod: function deleteBtnMethod() {
             return window.location.pathname == '/customer-orders' ? 'Mark As Processed' : 'Delete';
-        },
-        class: function _class() {
-            return this.classes();
         }
     },
 
@@ -78485,19 +78481,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
             return name === 'Out for Delivery' ? 'alert-success' : 'alert-warning';
         },
-        email: function (_email) {
-            function email(_x) {
-                return _email.apply(this, arguments);
-            }
-
-            email.toString = function () {
-                return _email.toString();
-            };
-
-            return email;
-        }(function (emailAddress) {
-            return window.location.href = 'mailto:' + email;
-        }),
+        email: function email(emailAddress) {
+            return window.location.href = 'mailto:' + emailAddress;
+        },
         deleteResource: function () {
             var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(id) {
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
@@ -78515,7 +78501,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 }, _callee, this);
             }));
 
-            function deleteResource(_x2) {
+            function deleteResource(_x) {
                 return _ref.apply(this, arguments);
             }
 
@@ -78538,7 +78524,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 }, _callee2, this);
             }));
 
-            function showResource(_x3) {
+            function showResource(_x2) {
                 return _ref2.apply(this, arguments);
             }
 
@@ -78548,7 +78534,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
     filters: {
         moment: function (_moment) {
-            function moment(_x4) {
+            function moment(_x3) {
                 return _moment.apply(this, arguments);
             }
 
@@ -78648,7 +78634,7 @@ var render = function() {
                 _vm._l(_vm.data, function(product) {
                   return product.is_on_sale
                     ? _c("tr", { staticClass: "text-info" }, [
-                        _c("td", [_vm._v(_vm._s(product.id))]),
+                        _c("td", [_vm._v(_vm._s(product.sales.id))]),
                         _vm._v(" "),
                         _c("td", [
                           _c("p", [_vm._v(_vm._s(product.name))]),
@@ -78746,7 +78732,9 @@ var render = function() {
                       _vm._v(" "),
                       _vm.URI == "/best-customers"
                         ? _c("td", { staticClass: "text-success" }, [
-                            _vm._v("$" + _vm._s(item.total / 100))
+                            _vm._v(
+                              "$" + _vm._s(_vm._f("formatted")(item.total))
+                            )
                           ])
                         : _vm._e(),
                       _vm._v(" "),
@@ -78855,20 +78843,18 @@ var render = function() {
                       _vm._v(" "),
                       !item.hiddenOrder && item.order_type
                         ? _c("td", [
-                            !item.hiddenOrder && item.order_type
-                              ? _c(
-                                  "a",
-                                  {
-                                    staticClass: "btn btn-info btn-sm",
-                                    attrs: { href: "/order/" + item.id }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "Go to order page\n                        "
-                                    )
-                                  ]
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn btn-info btn-sm",
+                                attrs: { href: "/order/" + item.id }
+                              },
+                              [
+                                _vm._v(
+                                  "Go to order page\n                        "
                                 )
-                              : _vm._e()
+                              ]
+                            )
                           ])
                         : _vm._e()
                     ])

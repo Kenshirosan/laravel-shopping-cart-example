@@ -54,6 +54,8 @@ class CategoriesController extends Controller
 
        $category->delete();
 
-       return response(['success_message' => 'Category deleted'], 200);
+       $categories = Category::all();
+
+       return response($categories, 200);
     }
 }

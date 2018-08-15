@@ -44,6 +44,8 @@ class SalesController extends Controller
 
     	$sale->delete();
 
-    	return response(["success_message", "Success"], 200);
+        $products = Product::with('sales')->get();
+
+    	return response($products, 200);
     }
 }

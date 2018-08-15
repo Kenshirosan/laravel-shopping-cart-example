@@ -25,7 +25,9 @@ class OrderProcessedController extends Controller
 
         $order->delete();
 
-        return response(['success_message', 'Success'], 200);
+        $orders = ( new Order() )->todaysOrders();
+
+        return response($orders, 200);
     }
 
     // we delete a resource but we show a previously hidden item in the view
@@ -41,6 +43,8 @@ class OrderProcessedController extends Controller
             'order_id' => request('id')
         ]);
 
-        return response(['success_message', 'Order processed'], 200);
+        $orders = ( new Order() )->todaysOrders();
+
+        return response($orders, 200);
     }
 }
