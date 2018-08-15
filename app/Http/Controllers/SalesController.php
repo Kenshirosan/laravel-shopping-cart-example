@@ -11,7 +11,6 @@ class SalesController extends Controller
     public function index()
     {
         $products = Product::with('sales')->get();
-        $sales = Sales::with('products')->get();
 
         if (request()->wantsJson()) {
             return response($products, 200);
@@ -34,7 +33,9 @@ class SalesController extends Controller
                 'percentage' => $percentage
             ]);
 
-	    	return response(['ok'], 200);
+            $products = Product::with('sales')->get();
+
+	    	return response($products, 200);
     }
 
     public function destroy($id)

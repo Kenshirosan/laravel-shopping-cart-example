@@ -30,8 +30,9 @@ export default {
         async addItems() {
             await axios.post(this.URI, this.$data)
                 .then(res => {
+                    this.items = res.data;
                     flash('Success');
-                    this.getItems();
+                    // this.getItems();
                     this.resetForm();
                 })
                 .catch(err => this.showError(err));

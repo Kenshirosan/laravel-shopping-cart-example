@@ -37,7 +37,9 @@ class CategoriesController extends Controller
 
         Category::create($request->all());
 
-        return back()->with('success_message', 'Category added');
+        $categories = Category::all();
+
+        return response($categories, 200);
     }
 
     /**

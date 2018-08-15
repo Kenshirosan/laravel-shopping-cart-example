@@ -35,12 +35,12 @@ Route::middleware(['auth', 'must-be-confirmed', 'employee', 'admin'])->group(fun
     Route::get('/add-options', 'OptionsController@index');
     Route::post('/add-options', 'OptionsController@store');
     Route::delete('/add-options/{id}', 'OptionsController@destroy');
-    Route::get('/second-option-group', 'SecondOptionGroupController@index');
-    Route::post('/second-option-group', 'SecondOptionGroupController@store');
-    Route::delete('/second-option-group/{option}', 'SecondOptionGroupController@destroy');
-    Route::get('/add-second-options', 'SecondOptionsController@index');
-    Route::post('/add-second-options', 'SecondOptionsController@store');
-    Route::delete('/add-second-options/{id}', 'SecondOptionsController@destroy');
+    Route::get('/second-option-group', 'OptionGroupController@index');
+    Route::post('/second-option-group', 'OptionGroupController@store');
+    Route::delete('/second-option-group/{option}', 'OptionGroupController@destroy');
+    Route::get('/add-second-options', 'OptionsController@index');
+    Route::post('/add-second-options', 'OptionsController@store');
+    Route::delete('/add-second-options/{id}', 'OptionsController@destroy');
     Route::get('/add-category', 'CategoriesController@create');
     Route::post('/add-category', 'CategoriesController@store');
     Route::delete('/add-category/{id}', 'CategoriesController@destroy');

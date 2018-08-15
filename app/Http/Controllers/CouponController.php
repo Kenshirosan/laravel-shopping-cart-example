@@ -36,8 +36,10 @@ class CouponController extends Controller
         $reward = request('reward');
         \Promocodes::createDisposable($quantity, $reward, $data = [], $expires_in = null);
 
+        $attr = ['expires_at' => null, 'is_disposable' => true];
+        $coupons = Promocode::where($attr)->get();
 
-        return response(['success_message' => 'Coupons created'], 200);
+        return response($coupons, 200);
     }
 
     public function storeCouponsForEveryone(CouponRequest $request)
@@ -46,7 +48,9 @@ class CouponController extends Controller
         $reward = request('reward');
         \Promocodes::create($quantity, $reward, $data = [], $expires_in = null);
 
-        return response(['success_message' => 'Coupons created'], 200);
+        $couponsForAll = Promocode::where('is_disposable', false)->get();
+
+        return response($couponsForAll, 200);
     }
 
     public function update(Request $request)
