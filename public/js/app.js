@@ -50687,7 +50687,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n.alert[data-v-03030049], .alert-flash[data-v-03030049] {\n    position: fixed;\n    right: 25px;\n    top: 50px;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*.alert, .alert-flash {\n    position: fixed;\n    right: 25px;\n    top: 50px;\n}*/\n.alert-section .alert-element[data-v-03030049] {\n    position: fixed;\n    top: 50px;\n    right: 25px;\n    color: rgba(255, 255, 255, 0.7);\n    border-radius: 4px;\n    font-weight: 400;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: stretch;\n        -ms-flex-align: stretch;\n            align-items: stretch;\n    padding-right: 20px;\n    -webkit-perspective: 1000px;\n            perspective: 1000px;\n    opacity: 0;\n    -webkit-transform-origin: bottom left;\n            transform-origin: bottom left;\n    -webkit-transform: rotate(90deg) scale(0.5) translate(100px, -300px) rotateX(90deg);\n            transform: rotate(90deg) scale(0.5) translate(100px, -300px) rotateX(90deg);\n    -webkit-transition: all 450ms cubic-bezier(0, 0.6, 0.35, 1.4);\n    transition: all 450ms cubic-bezier(0, 0.6, 0.35, 1.4);\n}\n.alert-section .alert-element .icon[data-v-03030049] {\n    padding: 20px;\n    background: #0097A7;\n    color: white;\n    border-radius: 4px 0px 0px 4px;\n    overflow: hidden;\n}\n.alert-section  .alert-element .icon span[data-v-03030049] {\n    -webkit-transform: scale(0.2) translateY(50px);\n            transform: scale(0.2) translateY(50px);\n    opacity: 0;\n    -webkit-transition: all 400ms cubic-bezier(0, 0.6, 0.35, 1.4) 600ms;\n    transition: all 400ms cubic-bezier(0, 0.6, 0.35, 1.4) 600ms;\n}\n.alert-section  .alert-element .text[data-v-03030049] {\n    background: rgba(0, 0, 0, 0.8);\n    padding: 0 20px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    border-radius: 0px 4px 4px 0px;\n    -webkit-transform: rotateY(90deg);\n            transform: rotateY(90deg);\n    -webkit-transition: all 500ms ease-in-out 1000ms;\n    transition: all 500ms ease-in-out 1000ms;\n    -webkit-transform-origin: center left;\n            transform-origin: center left;\n    opacity: 0;\n}\n.alert-section .alert-element.is-active[data-v-03030049] {\n    opacity: 1;\n    -webkit-transform: rotate(0deg) scale(1);\n            transform: rotate(0deg) scale(1);\n}\n.alert-section .alert-element.is-active .glyphicon[data-v-03030049] {\n    -webkit-transform: scale(1) translateY(0px);\n            transform: scale(1) translateY(0px);\n    opacity: 1;\n}\n.alert-section .alert-element.is-active  .text[data-v-03030049] {\n    -webkit-transform: rotateY(0deg);\n            transform: rotateY(0deg);\n    opacity: 1;\n}\n\n", ""]);
 
 // exports
 
@@ -50740,6 +50740,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['message'],
@@ -50748,7 +50756,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             body: this.message,
             level: 'success',
-            show: false
+            duration: 5000,
+            show: true
         };
     },
     created: function created() {
@@ -50769,16 +50778,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.level = data.level;
             }
 
-            this.show = true;
+            this.animate();
 
-            this.hide();
+            this.hide(parseInt(data.duration));
         },
-        hide: function hide() {
-            var _this2 = this;
-
+        animate: function animate() {
+            $('.alert-element').addClass('is-active');
+        },
+        hide: function hide(duration) {
             setTimeout(function () {
-                _this2.show = false;
-            }, 3000);
+                $('.alert-element').removeClass('is-active');
+            }, duration);
         }
     }
 });
@@ -50791,17 +50801,43 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", {
-    directives: [
-      { name: "show", rawName: "v-show", value: _vm.show, expression: "show" }
-    ],
-    staticClass: "alert alert-flash",
-    class: "alert-" + _vm.level,
-    attrs: { role: "alert" },
-    domProps: { textContent: _vm._s(_vm.body) }
-  })
+  return _c("div", [
+    _c("div", { staticClass: "alert-section" }, [
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.show,
+              expression: "show"
+            }
+          ],
+          staticClass: "alert-element",
+          class: "alert-" + _vm.level
+        },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "text" }, [
+            _c("span", [_vm._v(_vm._s(_vm.body))])
+          ])
+        ]
+      )
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("span", { staticClass: "glyphicon glyphicon-bell" })
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -76502,7 +76538,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         Echo.private('user_ordered').listen('UserOrdered', function (order) {
             _this.getItems();
-            flash('New Order');
+            flash('New Order', 'success', 7000);
         });
     }
 });

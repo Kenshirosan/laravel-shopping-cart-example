@@ -1,6 +1,6 @@
 export default class Error {
     constructor() {
-      this.errors = {};
+        this.errors = {};
     }
 
     get(field) {
