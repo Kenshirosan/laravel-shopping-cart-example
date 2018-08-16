@@ -41,6 +41,7 @@
                 @include('includes.messages')
                 @yield('content')
                 <flash message="{{ session('flash') }}"></flash>
+                <global-order-notification></global-order-notification>
                 <view-cart :items="{{ Cart::content() }}" :total="{{ Cart::total() }}"></view-cart>
             </div>
         </div>

@@ -1,16 +1,8 @@
 <template>
-    <div>
-        <!-- <div class="alert alert-flash"
-            :class="`alert-${level}`"
-            role="alert"
-            v-show="show"
-            v-text="body">
-        </div> -->
-        <div class="alert-section">
-            <div class="alert-element" :class="`alert-${level}`" v-show="show">
-                <div class="icon"><span class="glyphicon glyphicon-bell"></span></div>
-                <div class="text"><span>{{ body }}</span></div>
-            </div>
+    <div class="alert-section">
+        <div class="alert-element" :class="`alert-${level}`" v-show="show">
+            <div class="icon"><span class="glyphicon glyphicon-bell"></span></div>
+            <div class="text"><span>{{ body }}</span></div>
         </div>
     </div>
 </template>

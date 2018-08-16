@@ -36,7 +36,6 @@
             Echo.private('user_ordered')
             .listen('UserOrdered', (order) => {
                 this.getItems();
-                flash('New Order', 'success', 7000);
             });
         }
     }

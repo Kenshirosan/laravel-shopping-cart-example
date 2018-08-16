@@ -6,7 +6,7 @@
         mounted() {
             Echo.private('user_ordered')
                 .listen('UserOrdered', (order) => {
-                  flash('New Order');
+                    flash('New Order', 'success', 7000);
                 });
         }
     }
