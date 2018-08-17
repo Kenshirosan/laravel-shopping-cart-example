@@ -50687,7 +50687,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*.alert, .alert-flash {\n    position: fixed;\n    right: 25px;\n    top: 50px;\n}*/\n.alert-section .alert-element[data-v-03030049] {\n    position: fixed;\n    top: 50px;\n    right: 25px;\n    color: rgba(255, 255, 255, 0.7);\n    border-radius: 4px;\n    font-weight: 400;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: stretch;\n        -ms-flex-align: stretch;\n            align-items: stretch;\n    padding-right: 20px;\n    -webkit-perspective: 1000px;\n            perspective: 1000px;\n    opacity: 0;\n    -webkit-transform-origin: bottom left;\n            transform-origin: bottom left;\n    -webkit-transform: rotate(90deg) scale(0.5) translate(100px, -300px) rotateX(90deg);\n            transform: rotate(90deg) scale(0.5) translate(100px, -300px) rotateX(90deg);\n    -webkit-transition: all 450ms cubic-bezier(0, 0.6, 0.35, 1.4);\n    transition: all 450ms cubic-bezier(0, 0.6, 0.35, 1.4);\n}\n.alert-section .alert-element .icon[data-v-03030049] {\n    padding: 20px;\n    background: #0097A7;\n    color: white;\n    border-radius: 4px 0px 0px 4px;\n    overflow: hidden;\n}\n.alert-section  .alert-element .icon span[data-v-03030049] {\n    -webkit-transform: scale(0.2) translateY(50px);\n            transform: scale(0.2) translateY(50px);\n    opacity: 0;\n    -webkit-transition: all 400ms cubic-bezier(0, 0.6, 0.35, 1.4) 600ms;\n    transition: all 400ms cubic-bezier(0, 0.6, 0.35, 1.4) 600ms;\n}\n.alert-section  .alert-element .text[data-v-03030049] {\n    background: rgba(0, 0, 0, 0.8);\n    padding: 0 20px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    border-radius: 0px 4px 4px 0px;\n    -webkit-transform: rotateY(90deg);\n            transform: rotateY(90deg);\n    -webkit-transition: all 500ms ease-in-out 1000ms;\n    transition: all 500ms ease-in-out 1000ms;\n    -webkit-transform-origin: center left;\n            transform-origin: center left;\n    opacity: 0;\n}\n.alert-section .alert-element.is-active[data-v-03030049] {\n    opacity: 1;\n    -webkit-transform: rotate(0deg) scale(1);\n            transform: rotate(0deg) scale(1);\n}\n.alert-section .alert-element.is-active .glyphicon[data-v-03030049] {\n    -webkit-transform: scale(1) translateY(0px);\n            transform: scale(1) translateY(0px);\n    opacity: 1;\n}\n.alert-section .alert-element.is-active  .text[data-v-03030049] {\n    -webkit-transform: rotateY(0deg);\n            transform: rotateY(0deg);\n    opacity: 1;\n}\n\n", ""]);
+exports.push([module.i, "\n.alert-section .alert-element[data-v-03030049] {\n    position: fixed;\n    top: 50px;\n    right: 25px;\n    color: rgba(255, 255, 255, 0.7);\n    border-radius: 4px;\n    font-weight: 800;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: stretch;\n        -ms-flex-align: stretch;\n            align-items: stretch;\n    padding-right: 20px;\n    -webkit-perspective: 1000px;\n            perspective: 1000px;\n    opacity: 0;\n    -webkit-transform-origin: bottom left;\n            transform-origin: bottom left;\n    -webkit-transform: rotate(90deg) scale(0.5) translate(100px, -300px) rotateX(90deg);\n            transform: rotate(90deg) scale(0.5) translate(100px, -300px) rotateX(90deg);\n    -webkit-transition: all 250ms cubic-bezier(0, 0.6, 0.35, 1.4);\n    transition: all 250ms cubic-bezier(0, 0.6, 0.35, 1.4);\n}\n.alert-section .alert-element .icon[data-v-03030049] {\n    padding: 20px;\n    background: #0097A7;\n    color: white;\n    border-radius: 4px 0px 0px 4px;\n    overflow: hidden;\n}\n.alert-section  .alert-element .icon span[data-v-03030049] {\n    -webkit-transform: scale(0.2) translateY(50px);\n            transform: scale(0.2) translateY(50px);\n    opacity: 0;\n    -webkit-transition: all 250ms cubic-bezier(0, 0.6, 0.35, 1.4) 400ms;\n    transition: all 250ms cubic-bezier(0, 0.6, 0.35, 1.4) 400ms;\n}\n.alert-section  .alert-element .text[data-v-03030049] {\n    background: transparent;\n    padding: 0 20px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    border-radius: 0px 4px 4px 0px;\n    -webkit-transform: rotateY(90deg);\n            transform: rotateY(90deg);\n    -webkit-transition: all 500ms ease-in-out 600ms;\n    transition: all 500ms ease-in-out 600ms;\n    -webkit-transform-origin: center left;\n            transform-origin: center left;\n    opacity: 0;\n}\n.alert-section .alert-element.is-active[data-v-03030049] {\n    opacity: 1;\n    -webkit-transform: rotate(0deg) scale(1);\n            transform: rotate(0deg) scale(1);\n}\n.alert-section .alert-element.is-active .glyphicon[data-v-03030049] {\n    -webkit-transform: scale(1) translateY(0px);\n            transform: scale(1) translateY(0px);\n    opacity: 1;\n}\n.alert-section .alert-element.is-active .text[data-v-03030049] {\n    -webkit-transform: rotateY(0deg);\n            transform: rotateY(0deg);\n    opacity: 1;\n}\n\n", ""]);
 
 // exports
 
@@ -50748,8 +50748,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             body: this.message,
             level: 'success',
-            duration: 5000,
-            show: true
+            duration: 3000,
+            show: false
         };
     },
     created: function created() {
@@ -50770,16 +50770,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.level = data.level;
             }
 
+            this.show = true;
             this.animate();
 
-            this.hide(parseInt(data.duration));
+            this.hide(data.duration);
         },
         animate: function animate() {
             $('.alert-element').addClass('is-active');
         },
         hide: function hide(duration) {
+            var _this2 = this;
+
             setTimeout(function () {
-                $('.alert-element').removeClass('is-active');
+                // $('.alert-element').removeClass('is-active');
+                _this2.show = false;
             }, duration);
         }
     }
@@ -50793,30 +50797,28 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "alert-section" }, [
-    _c(
-      "div",
-      {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.show,
-            expression: "show"
-          }
-        ],
-        staticClass: "alert-element",
-        class: "alert-" + _vm.level
-      },
-      [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("div", { staticClass: "text" }, [
-          _c("span", [_vm._v(_vm._s(_vm.body))])
-        ])
-      ]
-    )
-  ])
+  return _c(
+    "div",
+    {
+      directives: [
+        { name: "show", rawName: "v-show", value: _vm.show, expression: "show" }
+      ],
+      staticClass: "alert-section"
+    },
+    [
+      _c(
+        "div",
+        { staticClass: "alert-element is-active", class: "alert-" + _vm.level },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "text" }, [
+            _c("span", [_c("strong", [_vm._v(_vm._s(_vm.body))])])
+          ])
+        ]
+      )
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
@@ -51858,7 +51860,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n.fav-button {\n    padding: 1em;\n}\n", ""]);
+exports.push([module.i, "\n.fav-button {\n    padding: 1em;\n    border-radius: 50%;\n}\n", ""]);
 
 // exports
 
@@ -51909,12 +51911,16 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         },
         create: function () {
             var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+                var _this = this;
+
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
                                 _context.next = 2;
-                                return axios.post(this.endpoint, this.product).then(flash('You liked ' + this.product.name)).catch(function (err) {
+                                return axios.post(this.endpoint, this.product).then(function (res) {
+                                    return flash('You liked ' + _this.product.name);
+                                }).catch(function (err) {
                                     return flash('You need to be authenticated to rate this product', "danger");
                                 });
 
@@ -51939,12 +51945,16 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         }(),
         destroy: function () {
             var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+                var _this2 = this;
+
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
                     while (1) {
                         switch (_context2.prev = _context2.next) {
                             case 0:
                                 _context2.next = 2;
-                                return axios.delete(this.endpoint, this.product).then(flash('You unliked ' + this.product.name)).catch(function (err) {
+                                return axios.delete(this.endpoint, this.product).then(function (res) {
+                                    return flash('You unliked ' + _this2.product.name);
+                                }).catch(function (err) {
                                     return flash('Something went wrong, please try again later.', "danger");
                                 });
 

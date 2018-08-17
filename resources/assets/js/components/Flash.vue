@@ -1,8 +1,8 @@
 <template>
-    <div class="alert-section">
-        <div class="alert-element" :class="`alert-${level}`" v-show="show">
+    <div class="alert-section" v-show="show">
+        <div class="alert-element is-active" :class="`alert-${level}`">
             <div class="icon"><span class="glyphicon glyphicon-bell"></span></div>
-            <div class="text"><span>{{ body }}</span></div>
+            <div class="text"><span><strong>{{ body }}</strong></span></div>
         </div>
     </div>
 </template>
@@ -15,8 +15,8 @@
             return {
                 body: this.message,
                 level: 'success',
-                duration: 5000,
-                show: true
+                duration: 3000,
+                show: false
             }
         },
         created() {
@@ -34,9 +34,10 @@
                     this.level = data.level;
                 }
 
+                this.show = true;
                 this.animate();
 
-                this.hide(parseInt(data.duration));
+                this.hide(data.duration);
             },
 
             animate() {
@@ -45,7 +46,8 @@
 
             hide(duration) {
                 setTimeout(() => {
-                    $('.alert-element').removeClass('is-active');
+                    // $('.alert-element').removeClass('is-active');
+                    this.show = false;
                 }, duration);
             }
         }
@@ -53,20 +55,13 @@
 </script>
 
 <style scoped>
-    /*.alert, .alert-flash {
-        position: fixed;
-        right: 25px;
-        top: 50px;
-    }*/
-
-
     .alert-section .alert-element {
         position: fixed;
         top: 50px;
         right: 25px;
         color: rgba(255, 255, 255, 0.7);
         border-radius: 4px;
-        font-weight: 400;
+        font-weight: 800;
         display: flex;
         align-items: stretch;
         padding-right: 20px;
@@ -74,7 +69,7 @@
         opacity: 0;
         transform-origin: bottom left;
         transform: rotate(90deg) scale(0.5) translate(100px, -300px) rotateX(90deg);
-        transition: all 450ms cubic-bezier(0, 0.6, 0.35, 1.4);
+        transition: all 250ms cubic-bezier(0, 0.6, 0.35, 1.4);
     }
     .alert-section .alert-element .icon {
         padding: 20px;
@@ -86,17 +81,17 @@
     .alert-section  .alert-element .icon span {
         transform: scale(0.2) translateY(50px);
         opacity: 0;
-        transition: all 400ms cubic-bezier(0, 0.6, 0.35, 1.4) 600ms;
+        transition: all 250ms cubic-bezier(0, 0.6, 0.35, 1.4) 400ms;
     }
 
     .alert-section  .alert-element .text {
-        background: rgba(0, 0, 0, 0.8);
+        background: transparent;
         padding: 0 20px;
         display: flex;
         align-items: center;
         border-radius: 0px 4px 4px 0px;
         transform: rotateY(90deg);
-        transition: all 500ms ease-in-out 1000ms;
+        transition: all 500ms ease-in-out 600ms;
         transform-origin: center left;
         opacity: 0;
     }
@@ -108,7 +103,7 @@
         transform: scale(1) translateY(0px);
         opacity: 1;
     }
-    .alert-section .alert-element.is-active  .text {
+    .alert-section .alert-element.is-active .text {
         transform: rotateY(0deg);
         opacity: 1;
     }
