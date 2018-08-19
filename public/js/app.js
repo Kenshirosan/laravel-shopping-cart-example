@@ -5487,7 +5487,7 @@ function applyToTag (styleElement, obj) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_Error__ = __webpack_require__(292);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utilities_Error__ = __webpack_require__(292);
 
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
@@ -5497,7 +5497,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 /* harmony default export */ __webpack_exports__["a"] = ({
     data: function data() {
         return {
-            errors: new __WEBPACK_IMPORTED_MODULE_1__models_Error__["a" /* default */]()
+            errors: new __WEBPACK_IMPORTED_MODULE_1__utilities_Error__["a" /* default */]()
         };
     },
 
@@ -5635,7 +5635,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             return addItem;
         }(),
         clearError: function clearError() {
-            this.errors = new __WEBPACK_IMPORTED_MODULE_1__models_Error__["a" /* default */]();
+            this.errors = new __WEBPACK_IMPORTED_MODULE_1__utilities_Error__["a" /* default */]();
         },
         showError: function showError(err) {
             return this.errors.record(err.response.data.errors);

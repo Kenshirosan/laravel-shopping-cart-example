@@ -70,7 +70,7 @@
                     <li>
                         <a type="button" class="btn" data-toggle="modal" data-target=".modal">Preview Cart</a>
                     </li>
-                    <cart-counter :numberofitems="{{ Cart::instance()->count() }}"></cart-counter>
+                    <cart-counter numberofitems="{{ Cart::instance()->count() }}"></cart-counter>
             </ul>
         </div>
     </div>

@@ -1,4 +1,4 @@
-import Error from '../models/Error';
+import Error from '../utilities/Error';
 
 export default {
 

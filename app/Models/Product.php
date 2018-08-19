@@ -14,10 +14,16 @@ class Product extends Model
      */
 
     protected $fillable = [
-        'name', 'holiday_special',
-        'option_group_id', 'second_option_group_id',
-        'category_id', 'category', 'slug',
-        'description', 'price', 'image'
+        'name',
+        'holiday_special',
+        'option_group_id',
+        'second_option_group_id',
+        'category_id',
+        'category',
+        'slug',
+        'description',
+        'price',
+        'image'
     ];
 
     protected $appends = ['is_on_sale', 'favoritesCount', 'isFavorited'];
