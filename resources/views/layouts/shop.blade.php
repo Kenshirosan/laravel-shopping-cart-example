@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('landing-css')
+    <link rel="stylesheet" href="/css/landing.css">
+@endsection
+
 @section('title')
     Shop with us
 @endsection
@@ -14,15 +18,27 @@
     </noscript>
 
     <section class="shopping">
-        <div class="jumbotron text-center clearfix text-white">
-            <h2 class="custom-title">{{ config('app.name') }}</h2>
-            <p class="custom-subtitle">Place your order !</p>
+        <div id="index-banner" class="parallax-container jumbotron">
+            <div class="section no-pad-bot">
+                <div class="container">
+                <br><br>
+                    <h1 class="header center teal-text text-lighten-2 custom-title"></h1>
+                        <div class="row center">
+                            <h5 class="custom-subtitle header col s12 light"></h5>
+                        </div>
+                        <div class="row center">
+                            <a href="#cat" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Start Ordering</a>
+                        </div>
+                <br><br>
+                </div>
+            </div>
+            <div class="parallax"><img src="/img/caviar.jpg" alt="Unsplashed background img 1"></div>
         </div>
         @foreach ($categories as $category)
             @if(! $category->products->isEmpty())
-                <div class="row">
-                    <div class="well text-center">
-                        <h1>{{ $category->name }}</h1>
+                <div class="row" id="cat">
+                    <div class="well center container">
+                        <h1 class="category-title cyan-text">{{ $category->name }}</h1>
                     </div>
                     @foreach($category->products as $product)
                         @include('includes.productslayout')

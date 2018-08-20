@@ -1,8 +1,8 @@
 <template>
     <div class="alert-section" v-show="show">
-        <div class="alert-element is-active" :class="`alert-${level}`">
-            <div class="icon"><span class="glyphicon glyphicon-bell"></span></div>
-            <div class="text"><span><strong>{{ body }}</strong></span></div>
+        <div class="alert-element is-active" :class="`${level}`">
+            <div class="icon"><i class="material-icons green-text">notifications</i></div>
+            <div class="text"><span class="white-text"><strong>{{ body }}</strong></span></div>
         </div>
     </div>
 </template>
@@ -14,7 +14,7 @@
         data() {
             return {
                 body: this.message,
-                level: 'success',
+                level: 'green',
                 duration: 3000,
                 show: false
             }
@@ -35,7 +35,7 @@
                 }
 
                 this.show = true;
-                this.animate();
+                // this.animate();
 
                 this.hide(data.duration);
             },
@@ -56,6 +56,7 @@
 
 <style scoped>
     .alert-section .alert-element {
+        z-index: 1000;
         position: fixed;
         top: 50px;
         right: 25px;
@@ -73,12 +74,12 @@
     }
     .alert-section .alert-element .icon {
         padding: 20px;
-        background: #0097A7;
+        background: blue;
         color: white;
         border-radius: 4px 0px 0px 4px;
         overflow: hidden;
     }
-    .alert-section  .alert-element .icon span {
+    .alert-section  .alert-element .icon i {
         transform: scale(0.2) translateY(50px);
         opacity: 0;
         transition: all 250ms cubic-bezier(0, 0.6, 0.35, 1.4) 400ms;
@@ -99,7 +100,7 @@
         opacity: 1;
         transform: rotate(0deg) scale(1);
     }
-    .alert-section .alert-element.is-active .glyphicon {
+    .alert-section .alert-element.is-active .material-icons {
         transform: scale(1) translateY(0px);
         opacity: 1;
     }

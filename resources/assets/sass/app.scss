@@ -1,36 +1,21 @@
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
-
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 // Variables
 @import "variables";
 @import "stripe-form-style";
-
 // Bootstrap
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "node_modules/materialize-css/dist/css/materialize";
 @import "custom";
 @import "utilities";
 
-body {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
 .jumbotron {
 	background: rgba(0,0,0,1);
-	background: -moz-linear-gradient(left, rgba(0,0,0,1) 0%, rgba(255,255,255,1) 100%);
-	background: -webkit-gradient(left top, right top, color-stop(0%, rgba(0,0,0,1)), color-stop(100%, rgba(255,255,255,1)));
-	background: -webkit-linear-gradient(left, rgba(0,0,0,1) 0%, rgba(255,255,255,1) 100%);
-	background: -o-linear-gradient(left, rgba(0,0,0,1) 0%, rgba(255,255,255,1) 100%);
-	background: -ms-linear-gradient(left, rgba(0,0,0,1) 0%, rgba(255,255,255,1) 100%);
-	background: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(255,255,255,1) 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#ffffff', GradientType=1 );
 }
 
-.thumbnail, .jumbotron {
+.thumbnail{
 	transition: transform 0.2s;
-}
-
-.jumbotron:hover {
-	transform: scale(1.1, 1.1);
 }
 
 img.product-layout-img, .scale_when_hover {

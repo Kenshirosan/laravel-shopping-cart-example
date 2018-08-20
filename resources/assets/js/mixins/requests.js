@@ -70,6 +70,9 @@ export default {
             this.id = '';
             this.quantity = '';
             this.reward = '';
+            this.phone = '';
+            this.email = '';
+            this.message = '';
         }
     }
 }

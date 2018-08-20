@@ -1,76 +1,3 @@
-select {
-  /* make arrow and background */
-    background:
-        linear-gradient(45deg, transparent 50%, blue 50%),
-        linear-gradient(135deg, blue 50%, transparent 50%),
-        linear-gradient(to right, skyblue, skyblue);
-
-    background-position:
-        calc(100% - 21px) calc(1em + 2px),
-        calc(100% - 16px) calc(1em + 2px),
-        100% 0;
-    background-size:
-        5px 5px,
-        5px 5px,
-        2.5em 2.5em;
-        background-repeat: no-repeat;
-        background-color: white;
-  /* styling and reset */
-
-    border: thin solid blue;
-    font: 300 1em/100% "Helvetica Neue", Arial, sans-serif;
-    line-height: 1.5em;
-    padding: 0.5em 1.5em 0.5em 1em;
-
-  /* reset */
-
-    border-radius: 0;
-    margin-left: 15px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    -webkit-appearance:none;
-    -moz-appearance:none;
-}
-select.minimal {
-    background-image:
-        linear-gradient(45deg, transparent 50%, gray 50%),
-        linear-gradient(135deg, gray 50%, transparent 50%),
-        linear-gradient(to right, #ccc, #ccc);
-    background-position:
-        calc(100% - 20px) calc(1em + 2px),
-        calc(100% - 15px) calc(1em + 2px),
-        calc(100% - 2.5em) 0.5em;
-    background-size:
-        5px 5px,
-        5px 5px,
-        1px 1.5em;
-    background-repeat: no-repeat;
-}
-
-select.minimal:focus {
-    background-image:
-        linear-gradient(45deg, green 50%, transparent 50%),
-        linear-gradient(135deg, transparent 50%, green 50%),
-        linear-gradient(to right, #ccc, #ccc);
-    background-position:
-        calc(100% - 15px) 1em,
-        calc(100% - 20px) 1em,
-        calc(100% - 2.5em) 0.5em;
-    background-size:
-        5px 5px,
-        5px 5px,
-        1px 1.5em;
-    background-repeat: no-repeat;
-    border-color: green;
-    outline: 0;
-}
-
-.modal {
-    color: white;
-}
-
-
 #back-to-top {
     position: fixed;
     bottom: 40px;
@@ -114,28 +41,13 @@ select.minimal:focus {
     width: 100px;
 }
 
-.table>tbody>tr>td {
-    vertical-align: middle;
-}
-
-.side-by-side {
-    display: inline-block;
-}
 
 footer {
     background-color: #f5f5f5;
     padding: 20px 0;
 }
 
-input[type="number"] {
-    width: 100px;
-}
-
-input + span {
-    padding-right: 30px;
-}
-
-input:invalid+span:after {
+input:invalid+span:before {
     position: absolute;
     content: '✖';
     font-size: 1.5em;
@@ -143,7 +55,7 @@ input:invalid+span:after {
     padding-left: 5px;
 }
 
-input:valid+span:after {
+input:valid+span:before {
     position: absolute;
     content: '✓';
     font-size: 1.5em;

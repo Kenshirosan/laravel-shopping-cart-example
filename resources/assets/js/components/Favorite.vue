@@ -1,6 +1,6 @@
 <template>
-    <button type="submit" :class="classes" class="fav-button" @click="toggle">
-        <span class="glyphicon glyphicon-heart"></span>
+    <button type="submit" :class="classes" @click="toggle">
+        <span class="material-icons blue-text" style="padding: 0.2em">favorite</span>
         <span v-text="count"></span>
     </button>
 </template>
@@ -53,10 +53,3 @@
         }
     }
 </script>
-
-<style>
-.fav-button {
-    padding: 1em;
-    border-radius: 50%;
-}
-</style>

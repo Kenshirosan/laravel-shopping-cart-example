@@ -5,17 +5,20 @@
 @endsection
 
 @section('content')
-    <h1 class="text-warning text-center">About our restaurant</h1>
-    <div class="about-picture" style="text-align: center; margin: 0 auto">
-        <img src="/images/delivery.gif" alt="Anta" class="img-responsive" style="max-width:50%;">
+<div class="container">
+    <h1 class="orange-text center">About our restaurant</h1>
+    <div class="about-picture center">
+        <img src="/images/delivery.gif" alt="Delivery Illustration" class="responsive-img">
     </div>
-        <div class="about"></div>
+    <div class="about"></div>
+</div>
+<div class="spacer"></div>
 @endsection
 
 @section('about-script')
     <script>
         const div = document.querySelector('.about');
         axios.get('/about')
-            .then(res => div.innerHTML = res.data.about || '');
+            .then(res => div.innerHTML = res.data.about || '{{ config('app.name') }}');
     </script>
 @endsection

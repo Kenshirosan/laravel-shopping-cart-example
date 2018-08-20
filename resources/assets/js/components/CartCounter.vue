@@ -1,5 +1,5 @@
 <template>
-    <li class="active" v-if="count" @productadded="change()" @cartempty="reset()">
+    <li class="active" v-if="count > 0" @productadded="change()" @cartempty="reset()">
         <a href="/cart">Cart : {{ count }} items</a>
     </li>
 </template>

@@ -99,7 +99,7 @@ class CartController extends Controller
             return redirect('/cart');
 
         } catch(\Exception $e) {
-            return redirect('/cart')->with('flash', 'Something wrong happened.');
+            return response(['flash' => 'Something wrong happened.'], 400);
         }
     }
 

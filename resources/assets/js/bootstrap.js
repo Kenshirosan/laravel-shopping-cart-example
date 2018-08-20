@@ -1,7 +1,7 @@
 try {
     window.$ = window.jQuery = require('jquery');
 
-    require('bootstrap-sass');
+    require('materialize-css');
 } catch (e) {
     // console.log(e);
 }
@@ -30,7 +30,7 @@ window.Vue = require('vue');
 
 window.events = new Vue();
 
-window.flash = function (message, level = 'success', duration = 3000) {
+window.flash = function (message, level = 'green', duration = 3000) {
     window.events.$emit('flash', { message, level, duration });
 };
 

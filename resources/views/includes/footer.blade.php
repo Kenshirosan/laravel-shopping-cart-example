@@ -1,8 +1,8 @@
-<footer>
-    <div class="container">
-        <div class="row">
-	        <p class="text-muted">{{ config('app.name') }} <a href="/">Homepage</a></p>
-	        <p class="text-muted"><a href="https://restopro.nyc">Restopro.nyc</a></p>
-    	</div>
+<footer class="page-footer blue">
+    <div class="footer-copyright blue">
+        <div class="container">
+            ©{{ Date('Y')}} <a class="white-text" href="https://restopro.nyc">Restopro.nyc</a>
+            <a class="white-text right" href="https://store1.fireworksprods.fr">FireworkdsProds</a>
+        </div>
     </div>
 </footer>

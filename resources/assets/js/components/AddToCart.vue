@@ -1,26 +1,28 @@
 <template>
     <div>
-        <div class="row">
-            <select name="options" v-if="options" v-model="option" class="options minimal" required autofocus>
-            <option value="" class="reset">Choose</option>
-            <option class="options" name="option"
+        <div class="input-field col s12">
+            <select id="options" name="options" v-if="options" v-model="option" required>
+            <option value="" class="reset" disabled>Choose</option>
+            <option name="option"
                     v-for="option in options"
                     v-text="option.name"
                     v-bind:value="option.name"
                     ></option>
             </select>
+             <label for="options">Choose</label>
         </div>
-        <div class="row">
-            <select name="secondoptions" v-if="secondoptions" v-model="secondoption" class="options minimal product-layout-img" required autofocus>
-            <option value="" class="reset">Choose</option>
-            <option class="options" name="secondoption"
+        <div class="input-field col s12">
+            <select id="secondoptions" name="secondoptions" v-if="secondoptions" v-model="secondoption" required>
+            <option value="" class="reset" disabled>Choose</option>
+            <option name="secondoption"
                     v-for="secondoption in secondoptions"
                     v-text="secondoption.name"
                     v-bind:value="secondoption.name"
                     ></option>
             </select>
+            <label for="secondoptions">Choose</label>
         </div>
-        <input type="submit" @click.prevent="addtocart" class="btn btn-success scale_when_hover" value="Add To Cart">
+        <a type="submit" @click.prevent="addtocart" class="btn scale_when_hover waves-effect waves-light waves-green"><i class="material-icons left">shopping_cart </i>Add To Cart</a>
     </div>
 </template>
 

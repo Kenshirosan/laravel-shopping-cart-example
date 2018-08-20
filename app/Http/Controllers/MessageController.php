@@ -34,9 +34,9 @@ class MessageController extends Controller
             'message' => 'required|min:20'
         ]);
 
-        ( new Message )->send($request->all());
+        $message = ( new Message )->send($request->all());
 
-        return back()->with('flash', "Thank you " . $request['name'] . ", we'll get back to you very soon");
+        return response('Your message has been sent', 200);
     }
 
     public function destroy($id)

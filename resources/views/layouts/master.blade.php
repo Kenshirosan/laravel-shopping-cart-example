@@ -24,11 +24,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Stylesheets -->
     <link rel="stylesheet" href="/css/dropzone.min.css">
-    <link rel="stylesheet" href="/css/link.css">
     @yield('lity-css')
-    @yield('extra-css')
-    <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/AdminLTE.min.css') }}">
     <link rel="stylesheet" href="/css/app.css">
+    @yield('landing-css')
+
     <!-- Favicon and Apple Icons -->
     <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}">
     {{-- Stripe recommends to put this script on all pages, helps ID not good behaviors --}}
@@ -37,13 +36,11 @@
     <body>
         <div id="app">
             @include('includes.header')
-            <div class="container">
-                @include('includes.messages')
-                @yield('content')
-                <flash message="{{ session('flash') }}"></flash>
-                <global-order-notification></global-order-notification>
-                <view-cart :items="{{ Cart::content() }}" :total="{{ Cart::total() }}"></view-cart>
-            </div>
+            @include('includes.messages')
+            @yield('content')
+            <flash message="{{ session('flash') }}"></flash>
+            <global-order-notification></global-order-notification>
+            <view-cart :items="{{ Cart::content() }}" :total="{{ Cart::total() }}"></view-cart>
         </div>
         @include('includes.footer')
 
@@ -56,6 +53,7 @@
         @yield('delete-product-script')
         @yield('title-script')
         @yield('about-script')
+        @yield('dropdown')
         <script>
             // added this cause the page loads in the middle, dunno why... So auto scroll to top...
             (function() {

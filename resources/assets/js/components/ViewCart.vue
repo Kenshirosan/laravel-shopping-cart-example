@@ -1,58 +1,48 @@
 <template>
-    <div @productadded="add()" class="container modal fade">
-    <div class="modal-header">
-        <button type="button" class="close btn-lg" data-dismiss="modal">&times;</button>
-    </div>
-    <div class="mb-100"></div>
-    <h1>Your Cart</h1>
-    <hr>
+    <div @productadded="add()" class="modal" id="modal">
+        <div class="modal-content">
+            <h1 class="blue center">Your Cart</h1>
+            <hr>
+            <table class="striped highlight responsive-table">
+                <thead class="blue-text">
+                    <tr>
+                        <th>Product</th>
+                        <th>Options</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th class="text-center">Taxes Included</th>
+                        <th class="column-spacer"></th>
+                        <th></th>
+                    </tr>
+                </thead>
+            <tbody class="indigo-text">
+                    <tr v-for="item in products">
+                        <td>
+                            <p>{{ item.name }}</p>
+                        </td>
+                        <td v-if="item.options">
+                            <p  v-if="item.options[1]"><strong>{{ item.options[0] }} , {{ item.options[1] }}</strong></p>
+                            <p  v-else><strong>{{ item.options[0] }}</strong></p>
+                        </td>
+                        <td>
+                            <p>{{ item.qty }}</p>
+                        </td>
+                        <td>${{ item.subtotal / 100 }}</td>
+                        <td class="center">${{ (item.subtotal / 100 + item.tax / 100).toFixed(2) }}</td>
+                    </tr>
+                    <tr>
+                        <td><h3 class="text-primary text-center">Total: ${{ price /100 }} </h3></td>
+                    </tr>
+                </tbody>
+            </table>
 
-    <div class="modal-body">
-        <table class="table">
-            <thead class="text-info">
-                <tr>
-                    <th>Product</th>
-                    <th>Options</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th class="text-center">Taxes Included</th>
-                    <th class="column-spacer"></th>
-                    <th></th>
-                </tr>
-            </thead>
-        <tbody>
-                <tr v-for="item in products">
-                    <td>
-                        <p>{{ item.name }}</p>
-                    </td>
-                    <td v-if="item.options">
-                        <p class="text-primary" v-if="item.options[1]"><strong>{{ item.options[0] }} , {{ item.options[1] }}</strong></p>
-                        <p class="text-primary" v-else><strong>{{ item.options[0] }}</strong></p>
-                    </td>
-                    <td>
-                        <p>{{ item.qty }}</p>
-                    </td>
-                    <td class="text-primary">${{ item.subtotal / 100 }}</td>
-                    <td class="text-primary text-center">${{ (item.subtotal / 100 + item.tax / 100).toFixed(2) }}</td>
-                </tr>
-                <tr>
-                    <td><h3 class="text-primary text-center">Total: ${{ price /100 }} </h3></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="mb-100"></div>
-        <button type="button" class="btn btn-primary btn-lg" data-dismiss="modal">Continue Shopping</button>
-        <a href="/cart" class="btn btn-success btn-lg">Go to Cart</a>
-        <div style="float:right">
-            <input type="submit" @click.prevent="emptycart" data-dismiss="modal" class="btn btn-danger btn-lg" value="Empty Cart">
+            <div class="modal-footer">
+                <a href="/cart" class="btn blue">Go to Cart</a>
+                <input type="submit" @click.prevent="emptycart" class="btn cyan close-modal" value="Empty Cart">
+                <button type="button" class="btn indigo close-modal">Close</button>
+            </div>
         </div>
-    <div class="mb-100"></div>
-
-    <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
     </div>
-</div>
 </template>
 
 <script>

@@ -1,80 +1,48 @@
 @extends('layouts.master')
 
-@section('lity-css')
-    <link rel="stylesheet" href="/css/lity.min.css">
-@endsection
-
 @section('title')
     {{ $product->name }}
 @endsection
 
 @section('content')
-    <h1>{{ $product->name }}</h1>
-    <hr>
-    <div class="row">
-        <div class="col-md-4">
-            @if($product->is_on_sale)
-                <div class="sales">
-                    <h2>{{ $product->sales->percentage  * 100 }}% Off!
-                        <span><small>was ${{ $product->regularPrice() }}</small></span>
-                    </h2>
-                </div>
-            @endif
-            <img src="{{ asset('img/' . $product->image) }}" alt="{{ $product->name }}" class="img-responsive lity-img" data-lity>
-            @foreach( $product->photos as $item)
-                <img src="{{ asset($item->photos) }}" alt="{{ $product->name }}" class="img-responsive lity-img" data-lity>
-            @endforeach
+    <div class="container">
+        <div class="row">
+            <h1 class="blue-text center">{{ $product->name }}</h1>
+            <div class="col s4">
+                <img
+                    src="/img/{{ $product->image }}"
+                    alt="{{ $product->name }}"
+                    width="50%"
+                    class="materialboxed">
+                @foreach( $product->photos as $item)
+                    <img
+                        src="{{ asset($item->photos) }}"
+                        alt="{{ $product->name }}"
+                        width="50%"
+                        class="lity-img materialboxed">
+                @endforeach
+            </div>
+            <div class="col s8">
+                @include('includes.card')
+            </div>
         </div>
-
-        <div class="col-md-8">
-            <favorite :product="{{ $product }}"></favorite>
-            <h3>${{ $product->price() }}</h3>
-            <form action="{{ url('/cart') }}" method="POST" class="side-by-side" id="form">
+        @if( Auth::check() && Auth::user()->isAdmin() )
+            <form id="addPhotosForm" class="dropzone" action="/shop/{{ $product->slug }}/photo" enctype="multipart/form-data" method="POST">
                 {{ csrf_field() }}
-
-
-                <add-to-cart
-                    :product="{{ $product }}"
-                    @if( $product->group )
-                        :options="{{ $product->options() }}"
-                    @endif
-                    @if( $product->secondGroup )
-                        :secondoptions="{{ $product->secondOptions() }}"
-                    @endif
-                >
-                </add-to-cart>
             </form>
-
-            @if( Auth::check() && Auth::user()->isAdmin() )
-                <form id="addPhotosForm" class="dropzone" action="/shop/{{ $product->slug }}/photo" enctype="multipart/form-data" method="POST">
-                    {{ csrf_field() }}
-                </form>
-            @endif
-            <br><br>
-
-            {{ $product->description }}
-        </div> <!-- end col-md-8 -->
-
-    </div> <!-- end row -->
-
-    <div class="spacer"></div>
-
-    <p><a class="btn btn-primary" href="{{ url('/shop') }}">Back to menu</a></p>
-    <div class="spacer"></div>
+        @endif
+        <p><a class="btn waves-effect waves-green indigo" href="{{ url('/shop') }}">Back to menu</a></p>
+    </div>
 
 @endsection
 
 @section('dropzone.script')
     <script src="/js/dropzone.min.js" charset="utf-8"></script>
     <script>
-    Dropzone.options.addPhotosForm = {
-        paramName: 'photos',
-        maxFilesize: 4,
-        acceptedFiles: '.jpg, .jpeg, .png, .bmp'
-    };
+        Dropzone.options.addPhotosForm = {
+            paramName: 'photos',
+            maxFilesize: 4,
+            acceptedFiles: '.jpg, .jpeg, .png, .bmp'
+        };
     </script>
-@endsection
-
-@section('lity-js')
-    <script src="/js/lity.min.js"></script>
 @endsection

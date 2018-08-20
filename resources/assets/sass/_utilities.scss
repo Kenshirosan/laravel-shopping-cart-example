@@ -2,6 +2,14 @@
     text-decoration: underline;
 }
 
+.category-title {
+    padding: 0.5em;
+}
+
+.sold-out {
+    max-width: 30%;
+}
+
 .text-white {
     color: white;
 }
@@ -18,10 +26,6 @@
     padding-right: 10px;
 }
 
-.mb-100 {
-    margin-bottom: 100px;
-}
-
 .product-layout-img {
     margin-top: 10px;
 }
@@ -30,7 +34,7 @@
     cursor: zoom-in;
 }
 
-.spacer {
+.spacer, .mb-100 {
     margin-bottom: 100px;
 }
 
