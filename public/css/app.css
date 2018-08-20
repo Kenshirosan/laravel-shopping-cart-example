@@ -9617,7 +9617,7 @@ footer {
   padding: 20px 0;
 }
 
-input:invalid + span:before {
+input:invalid + span.validity:before {
   position: absolute;
   content: '\2716';
   font-size: 1.5em;
@@ -9625,7 +9625,7 @@ input:invalid + span:before {
   padding-left: 5px;
 }
 
-input:valid + span:before {
+input:valid + span.validity:before {
   position: absolute;
   content: '\2713';
   font-size: 1.5em;

@@ -9,7 +9,7 @@
         @include('includes.error')
         <form class="form-horizontal" method="POST" action="/order" id="payment-form">
             {{ csrf_field() }}
-            <div class="col s4">
+            <div class="col m4 s12">
                 <!--REVIEW ORDER-->
                 <div class="card">
                     <div class="card-title">
@@ -32,12 +32,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col s6">
+            <div class="col m6 s12">
                 @if( Auth::check() )
                     @include('includes.form')
                 @endif
                 @if(Cart::total() > 1500)
-                <hr>
                     <checkoutform></checkoutform>
                 @else
                     <small class="text-danger">You need to order at least $15 worth to order</small>
@@ -45,7 +44,7 @@
             </div>
         </form>
     {{-- COUPON --}}
-    <div class="col s2">
+    <div class="col m2 s12">
         <p class="blue-text">Do you have a coupon ?</p>
         <div class="form-group">
             <form action="/apply-coupon" method="POST" class="side-by-side">
