@@ -31,7 +31,7 @@
                         <td class="center">${{ (item.subtotal / 100 + item.tax / 100).toFixed(2) }}</td>
                     </tr>
                     <tr>
-                        <td><h3 class="text-primary text-center">Total: ${{ price /100 }} </h3></td>
+                        <td><h3>Total: ${{ price /100 }} </h3></td>
                     </tr>
                 </tbody>
             </table>

@@ -63022,9 +63022,7 @@ var render = function() {
               _vm._v(" "),
               _c("tr", [
                 _c("td", [
-                  _c("h3", { staticClass: "text-primary text-center" }, [
-                    _vm._v("Total: $" + _vm._s(_vm.price / 100) + " ")
-                  ])
+                  _c("h3", [_vm._v("Total: $" + _vm._s(_vm.price / 100) + " ")])
                 ])
               ])
             ],
