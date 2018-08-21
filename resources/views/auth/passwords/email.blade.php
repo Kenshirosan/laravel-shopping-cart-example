@@ -16,6 +16,7 @@
                     {{ csrf_field() }}
                     <div class="{{ $errors->has('email') ? ' has-error' : '' }}">
                         <div class="input-field col s12">
+                            <i class="material-icons prefix">email</i>
                             <input id="email" type="email" class="black-text" name="email" value="{{ old('email') }}" required>
                             <label for="email">E-Mail Address</label>
 
