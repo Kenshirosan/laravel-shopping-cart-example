@@ -61772,6 +61772,10 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(342)
+}
 var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(192)
@@ -61780,7 +61784,7 @@ var __vue_template__ = __webpack_require__(193)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -61847,7 +61851,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
     computed: {
         classes: function classes() {
-            return ['btn', this.active ? 'btn-primary' : 'btn-default'];
+            return this.active ? 'deep-green' : 'white-text';
         },
         endpoint: function endpoint() {
             return '/product/' + this.product.id + '/favorites';
@@ -61939,7 +61943,7 @@ var render = function() {
   return _c(
     "button",
     {
-      class: _vm.classes,
+      staticClass: "btn purple lighten-2",
       attrs: { type: "submit" },
       on: { click: _vm.toggle }
     },
@@ -61947,13 +61951,19 @@ var render = function() {
       _c(
         "span",
         {
-          staticClass: "material-icons blue-text",
+          staticClass: "material-icons",
+          class: _vm.classes,
           staticStyle: { padding: "0.2em" }
         },
         [_vm._v("favorite")]
       ),
       _vm._v(" "),
-      _c("span", { domProps: { textContent: _vm._s(_vm.count) } })
+      _vm.count > 0
+        ? _c("span", {
+            staticClass: "white-text",
+            domProps: { textContent: _vm._s(_vm.count) }
+          })
+        : _vm._e()
     ]
   )
 }
@@ -89211,6 +89221,49 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 339 */,
+/* 340 */,
+/* 341 */,
+/* 342 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(343);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(10)("b667f2da", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-08d814d3\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Favorite.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-08d814d3\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Favorite.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 343 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(7)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.deep-green {\n    color: #89FF00;\n}\n", ""]);
+
+// exports
+
 
 /***/ })
 /******/ ]);

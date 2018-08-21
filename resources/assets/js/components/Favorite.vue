@@ -1,7 +1,7 @@
 <template>
-    <button type="submit" :class="classes" @click="toggle">
-        <span class="material-icons blue-text" style="padding: 0.2em">favorite</span>
-        <span v-text="count"></span>
+    <button type="submit" class="btn purple lighten-2" @click="toggle">
+        <span :class="classes" class="material-icons" style="padding: 0.2em">favorite</span>
+        <span class="white-text" v-if="count > 0" v-text="count"></span>
     </button>
 </template>
 
@@ -18,10 +18,7 @@
 
         computed: {
             classes() {
-                return [
-                    'btn',
-                    this.active ? 'btn-primary' : 'btn-default'
-                ];
+                return this.active ? 'deep-green' : 'white-text'
             },
 
             endpoint() {
@@ -53,3 +50,9 @@
         }
     }
 </script>
+
+<style>
+    .deep-green {
+        color: #89FF00;
+    }
+</style>

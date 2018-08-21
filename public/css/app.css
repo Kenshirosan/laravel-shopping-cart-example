@@ -9679,6 +9679,10 @@ input:valid + span.validity:before {
   margin-left: 30px;
 }
 
+.ml-20 {
+  margin-left: 20px;
+}
+
 .pl-10 {
   padding-left: 10px;
 }

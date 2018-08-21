@@ -15,7 +15,7 @@
 
     <div class="card-action">
         <a class="activator" href="#!">Read More</a>
-        <favorite :product="{{ $product }}"></favorite>
+        <favorite class="ml-20" :product="{{ $product }}"></favorite>
         @if($_SERVER['REQUEST_URI'] != "/shop/$product->slug")
             <a class="btn cyan right" href="/shop/{{ $product->slug }}">View Product</a>
         @endif

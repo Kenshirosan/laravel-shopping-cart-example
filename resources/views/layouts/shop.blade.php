@@ -11,7 +11,7 @@
 @section('content')
     <noscript>
         <div class="row">
-            <div class="alert alert-danger">
+            <div class="alert red">
                 <h1>Javascript must be enabled to shop on this website, please check how to activate javascript for your browser</h1>
             </div>
         </div>
@@ -22,7 +22,7 @@
             <div class="section no-pad-bot">
                 <div class="container">
                 <br><br>
-                    <h1 class="header center teal-text text-lighten-2 custom-title"></h1>
+                    <h1 class="header center text-lighten-2 custom-title"></h1>
                         <div class="row center">
                             <h5 class="custom-subtitle header col s12 light"></h5>
                         </div>
@@ -32,13 +32,13 @@
                 <br><br>
                 </div>
             </div>
-            <div class="parallax"><img src="/img/caviar.jpg" alt="Unsplashed background img 1"></div>
+            {{-- <div class="parallax"><img src="/img/caviar.jpg" alt="Unsplashed background img 1"></div> --}}
         </div>
         @foreach ($categories as $category)
             @if(! $category->products->isEmpty())
                 <div class="row" id="cat">
-                    <div class="well center container">
-                        <h1 class="category-title cyan-text">{{ $category->name }}</h1>
+                    <div class="well center">
+                        <h1 class="category-title">{{ $category->name }}</h1>
                     </div>
                     @foreach($category->products as $product)
                         @include('includes.productslayout')
