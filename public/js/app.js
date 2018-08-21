@@ -61870,7 +61870,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 return axios.post(this.endpoint, this.product).then(function (res) {
                                     return flash('You liked ' + _this.product.name);
                                 }).catch(function (err) {
-                                    return flash('You need to be authenticated to rate this product', "danger");
+                                    return flash('You need to be authenticated to rate this product', "red");
                                 });
 
                             case 2:
@@ -61904,7 +61904,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 return axios.delete(this.endpoint, this.product).then(function (res) {
                                     return flash('You unliked ' + _this2.product.name);
                                 }).catch(function (err) {
-                                    return flash('Something went wrong, please try again later.', "danger");
+                                    return flash('Something went wrong, please try again later.', "red");
                                 });
 
                             case 2:
