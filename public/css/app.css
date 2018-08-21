@@ -9659,6 +9659,10 @@ input:valid + span.validity:before {
   color: #dedede;
 }
 
+.card .card-image .card-title {
+  padding: 10px;
+}
+
 .security-infos {
   text-decoration: underline;
 }

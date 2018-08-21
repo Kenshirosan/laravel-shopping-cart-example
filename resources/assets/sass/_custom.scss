@@ -87,7 +87,9 @@ input:valid+span.validity:before {
     box-shadow: 0 0 .3em 1px #333;
     color: #dedede;
 }
-
+.card .card-image .card-title {
+    padding: 10px;
+}
 // .sales h2:before{
 //     content: "";
 //     width: 0;
