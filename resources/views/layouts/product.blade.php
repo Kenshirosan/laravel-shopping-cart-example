@@ -8,7 +8,10 @@
     <div class="container">
         <div class="row">
             <h1 class="blue-text center">{{ $product->name }}</h1>
-            <div class="col s4">
+            <div class="col">
+                @include('includes.card')
+            </div>
+            <div class="col s12 m4">
                 <img
                     src="/img/{{ $product->image }}"
                     alt="{{ $product->name }}"
@@ -21,9 +24,6 @@
                         width="50%"
                         class="lity-img materialboxed">
                 @endforeach
-            </div>
-            <div class="col s8">
-                @include('includes.card')
             </div>
         </div>
         @if( Auth::check() && Auth::user()->isAdmin() )
