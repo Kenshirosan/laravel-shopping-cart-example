@@ -23,9 +23,9 @@
 
     <div class="card-action">
         <a class="activator" href="#!">Read More</a>
-        <favorite class="ml-20" :product="{{ $product }}"></favorite>
+        <favorite class="ml-20 mr-30" :product="{{ $product }}"></favorite>
         @if($_SERVER['REQUEST_URI'] != "/shop/$product->slug")
-            <a class="btn cyan right" href="/shop/{{ $product->slug }}">View Product</a>
+            <a class="btn cyan" href="/shop/{{ $product->slug }}">View Product</a>
         @endif
     </div>
       <!-- inside of reveal -->
