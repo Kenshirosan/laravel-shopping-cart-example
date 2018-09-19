@@ -52,7 +52,7 @@
 
             async send() {
                 await axios.put('/add-about-page', this.$data)
-                    .then(flash('Success'))
+                    .then(adminflash('Success'))
                     .catch(e => console.log(e));
             }
         }

@@ -31,7 +31,7 @@ export default {
             await axios.post(this.URI, this.$data)
                 .then(res => {
                     this.items = res.data;
-                    flash('Success');
+                    adminflash('Success');
                     this.resetForm();
                 })
                 .catch(err => this.showError(err));
@@ -40,7 +40,7 @@ export default {
         async deleteItems(id) {
             await axios.delete(this.URI + '/' + id)
                 .then(res => {
-                    flash('Success');
+                    adminflash('Success');
                     this.items = res.data;
                 })
                 .catch(err => this.showError(err));
@@ -49,7 +49,7 @@ export default {
         async addItem(id) {
             await axios.post(this.URI + '/' + id)
                 .then(res => {
-                    flash('Success');
+                    adminflash('Success');
                     this.items = res.data;
                 })
                 .catch(err => this.showError(err));

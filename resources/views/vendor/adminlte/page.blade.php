@@ -114,7 +114,7 @@
 
             <!-- Main content -->
             <section class="content">
-                <flash message={{ session('flash') }}></flash>
+                <adminflash message={{ session('adminflash') }}></adminflash>
                 <global-order-notification></global-order-notification>
                 @include('includes.messages')
                 @yield('content')

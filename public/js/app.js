@@ -5554,7 +5554,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 _context2.next = 2;
                                 return axios.post(this.URI, this.$data).then(function (res) {
                                     _this2.items = res.data;
-                                    flash('Success');
+                                    adminflash('Success');
                                     _this2.resetForm();
                                 }).catch(function (err) {
                                     return _this2.showError(err);
@@ -5584,7 +5584,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                             case 0:
                                 _context3.next = 2;
                                 return axios.delete(this.URI + '/' + id).then(function (res) {
-                                    flash('Success');
+                                    adminflash('Success');
                                     _this3.items = res.data;
                                 }).catch(function (err) {
                                     return _this3.showError(err);
@@ -5614,7 +5614,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                             case 0:
                                 _context4.next = 2;
                                 return axios.post(this.URI + '/' + id).then(function (res) {
-                                    flash('Success');
+                                    adminflash('Success');
                                     _this4.items = res.data;
                                 }).catch(function (err) {
                                     return _this4.showError(err);
@@ -20273,6 +20273,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bootstrap__ = __webpack_require__(152);
 
 
+Vue.component('adminflash', __webpack_require__(344));
 Vue.component('flash', __webpack_require__(180));
 Vue.component('cart-counter', __webpack_require__(186));
 Vue.component('favorite', __webpack_require__(191));
@@ -20357,6 +20358,12 @@ window.flash = function (message) {
     var duration = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 3000;
 
     window.events.$emit('flash', { message: message, level: level, duration: duration });
+};
+
+window.adminflash = function (message) {
+    var level = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'success';
+
+    window.events.$emit('adminflash', { message: message, level: level });
 };
 
 window.productitemscountchanged = function () {
@@ -85011,7 +85018,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                         switch (_context2.prev = _context2.next) {
                             case 0:
                                 _context2.next = 2;
-                                return axios.put('/add-about-page', this.$data).then(flash('Success')).catch(function (e) {
+                                return axios.put('/add-about-page', this.$data).then(adminflash('Success')).catch(function (e) {
                                     return console.log(e);
                                 });
 
@@ -85313,7 +85320,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 _context.next = 3;
                                 return axios.post('/add-holiday-title', title).then(function (res) {
                                     if (res.status === 200) {
-                                        flash('Success');
+                                        adminflash('Success');
                                         _this.getTitles();
                                         return _this.holiday_page_title = '';
                                     }
@@ -85378,7 +85385,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 _context3.next = 2;
                                 return axios.delete('/holiday/' + id + '/delete').then(function (res) {
                                     if (res.status === 200) {
-                                        flash('success');
+                                        adminflash('success');
                                         return _this3.getTitles();
                                     }
                                 }).catch(function (err) {
@@ -89261,6 +89268,188 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 341 */,
+/* 342 */,
+/* 343 */,
+/* 344 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(347)
+}
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(345)
+/* template */
+var __vue_template__ = __webpack_require__(346)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/AdminFlash.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1e752ad8", Component.options)
+  } else {
+    hotAPI.reload("data-v-1e752ad8", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 345 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['message'],
+
+    data: function data() {
+        return {
+            body: this.message,
+            level: 'success',
+            show: false
+        };
+    },
+    created: function created() {
+        var _this = this;
+
+        if (this.message) {
+            this.flash();
+        }
+
+        window.events.$on('adminflash', function (data) {
+            return _this.adminflash(data);
+        });
+    },
+
+
+    methods: {
+        adminflash: function adminflash(data) {
+            if (data) {
+                this.body = data.message;
+                this.level = data.level;
+            }
+
+            this.show = true;
+
+            this.hide();
+        },
+        hide: function hide() {
+            var _this2 = this;
+
+            setTimeout(function () {
+                _this2.show = false;
+            }, 3000);
+        }
+    }
+});
+
+/***/ }),
+/* 346 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", {
+    directives: [
+      { name: "show", rawName: "v-show", value: _vm.show, expression: "show" }
+    ],
+    staticClass: "alert alert-flash",
+    class: "alert-" + _vm.level,
+    attrs: { role: "alert" },
+    domProps: { textContent: _vm._s(_vm.body) }
+  })
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-1e752ad8", module.exports)
+  }
+}
+
+/***/ }),
+/* 347 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(348);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(8)("f8092978", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1e752ad8\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AdminFlash.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1e752ad8\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AdminFlash.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 348 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(7)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.alert-flash {\n    position: fixed;\n    right: 25px;\n    bottom: 25px;\n}\n", ""]);
+
+// exports
+
 
 /***/ })
 /******/ ]);

@@ -75,7 +75,7 @@
                 await axios.post('/add-holiday-title', title)
                     .then(res => {
                         if(res.status === 200) {
-                            flash('Success');
+                            adminflash('Success');
                             this.getTitles();
                             return this.holiday_page_title = '';
                         }
@@ -102,7 +102,7 @@
                 await axios.delete(`/holiday/${id}/delete`)
                     .then(res => {
                         if(res.status === 200) {
-                            flash('success');
+                            adminflash('success');
                             return this.getTitles();
                         }
                     })

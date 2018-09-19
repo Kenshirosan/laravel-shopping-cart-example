@@ -34,6 +34,10 @@ window.flash = function (message, level = 'green', duration = 3000) {
     window.events.$emit('flash', { message, level, duration });
 };
 
+window.adminflash = function (message, level = 'success') {
+    window.events.$emit('adminflash', { message, level });
+};
+
 window.productitemscountchanged = function () {
     window.events.$emit('productadded');
 };
