@@ -14,7 +14,7 @@ class FrontPageController extends Controller
         $frontPageInfos = FrontPage::first();
 
         if (request()->expectsJson()) {
-            // ajax request in layouts/shop for displaying users customized infos and colors
+            // ajax request in layouts.shop for displaying users customized infos and colors
             return response($frontPageInfos, 200);
         }
 

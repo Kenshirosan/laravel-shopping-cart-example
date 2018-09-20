@@ -44,7 +44,6 @@ class HolidaySpecialController extends Controller
         }
 
         return response(['error' => 'Something went wrong'], 400);
-
     }
 
     public function destroy($id)
@@ -59,6 +58,5 @@ class HolidaySpecialController extends Controller
         }
 
         return response('something went wrong', 500);
-
     }
 }

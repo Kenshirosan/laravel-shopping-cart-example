@@ -81,8 +81,7 @@
                         }
                     })
                     .catch(err => {
-                        return
-                        this.showError(err);
+                        return this.showError(err);
                     });
             },
 

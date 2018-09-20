@@ -8,6 +8,7 @@ use App\Models\Invoice;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 
+// !! WIP !!
 class InvoiceController extends Controller
 {
     public function index()

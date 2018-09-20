@@ -31,7 +31,13 @@ export default {
             await axios.post(this.URI, this.$data)
                 .then(res => {
                     this.items = res.data;
-                    adminflash('Success');
+
+                    if (this.URI == '/contact-us') {
+                        flash('Thank you! Your message was received, we will contact you ASAP.', 'green', '5000');
+                    } else {
+                        adminflash('Success');
+                    }
+
                     this.resetForm();
                 })
                 .catch(err => this.showError(err));

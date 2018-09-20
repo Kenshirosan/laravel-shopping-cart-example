@@ -16,10 +16,11 @@
                             <span class="info-box-icon bg-aqua"><i class="fa fa-envelope-o"></i></span>
                             <div class="info-box-content">
                                 <a href="/message/{{ $message->id }}">
-                                    <span class="info-box-number">{{ $message->id }}</span>
-                                    <span class="info-box-text">{{ $message->email}}</span>
-                                    <span class="info-box-text">{{ $message->name}}</span>
+                                    <p><span class="info-box-number">Click to read message: {{ $message->id }}</span></p>
+                                    <p><span class="info-box-text">{{ $message->email}}</span></p>
                                 </a>
+                                <p><span class="info-box-text">{{ $message->name}}</span></p>
+                                <p><span class="info-box-text">Message received on: {{ $message->created_at->toDateString() }}</span></p>
                             </div>
                         </div>
                     </div>

@@ -37,6 +37,15 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function bestCustomers()
+    {
+        return $this->selectRaw('year(created_at) year, sum(price) total, user_id, name, last_name, email')
+                    ->whereRaw('year(created_at) = year(curdate())')
+                    ->groupBy('user_id','email', 'last_name', 'name', 'year')
+                    ->orderBy('total', 'desc')
+                    ->get();
+    }
+
     /**
      * Get the status of the order.
      */

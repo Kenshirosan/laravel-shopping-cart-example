@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Promocode;
 use \Cart as Cart;
+use App\Models\Promocode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CouponRequest;
+use Gabievi\Promocodes\Facades\Promocodes;
 
 class CouponController extends Controller
 {
     public function index()
     {
-
         $attr = ['expires_at' => null, 'is_disposable' => true];
         $coupons = Promocode::where($attr)->get();
 
@@ -34,7 +34,7 @@ class CouponController extends Controller
     {
         $quantity = request('quantity');
         $reward = request('reward');
-        \Promocodes::createDisposable($quantity, $reward, $data = [], $expires_in = null);
+        Promocodes::createDisposable($quantity, $reward, $data = [], $expires_in = null);
 
         $attr = ['expires_at' => null, 'is_disposable' => true];
         $coupons = Promocode::where($attr)->get();
@@ -46,7 +46,7 @@ class CouponController extends Controller
     {
         $quantity = request('quantity');
         $reward = request('reward');
-        \Promocodes::create($quantity, $reward, $data = [], $expires_in = null);
+        Promocodes::create($quantity, $reward, $data = [], $expires_in = null);
 
         $couponsForAll = Promocode::where('is_disposable', false)->get();
 
