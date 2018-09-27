@@ -7,7 +7,9 @@
 @section('content')
     <h3 class="text-center text-info product-layout-img">Update {{ $product->name }}</h3>
     @if($product->is_eighty_six())
-         <h3 class="text-center text-info product-layout-img"><i class="fa fa-info-circle text-danger"></i> {{ $product->name }} is 86</h3>
+        <div class="alert alert-danger">
+            <h3 class="text-center product-layout-img"><i class="fa fa-info-circle"></i> {{ $product->name }} is 86</h3>
+        </div>
     @endif
     <form class="form-horizontal" method="POST" action="/update/{{ $product->slug }}" enctype="multipart/form-data">
     {{ csrf_field() }}
@@ -203,8 +205,8 @@
     <div class="form-group{{ $errors->has('eighty_six') ? ' has-error' : '' }}">
         <label for="eighty_six" class="col-md-4 control-label"><strong class="text-danger">86 Product ?</strong></label>
         <div class="col-md-6">
-            <input type="radio" name="eighty_six" value="0" checked> No<br>
-            <input type="radio" name="eighty_six" value="1"> Yes<br>
+            <input type="radio" name="eighty_six" value="0" {{ $product->is_eighty_six() ? 'checked' : '' }}> No<br>
+            <input type="radio" name="eighty_six" value="1" {{ $product->is_eighty_six() ? '' : 'checked' }}> Yes<br>
             @if ($errors->has('name'))
                 <span class="help-block">
                     <strong>{{ $errors->first('eighty_six') }}</strong>
@@ -215,7 +217,7 @@
     <div class="form-group">
         <label for="submit" class="col-md-4 control-label"></label>
         <div class="col-md-6">
-            <input type=submit class="btn btn-danger form-control" value="86 Product">
+            <input type=submit class="btn {{ $product->is_eighty_six() ? 'btn-primary' : 'btn-danger' }} form-control" value="{{ $product->is_eighty_six() ? 'Click to add Product' : '86 product' }}">
         </div>
     </div>
 </form>

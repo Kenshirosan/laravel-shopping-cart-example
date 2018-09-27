@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="input-field col s12">
-            <select id="options" name="options" v-if="options" v-model="option" required>
+            <select id="option" name="option" v-if="options" v-model="option" required>
             <option value="" class="reset" disabled>Choose</option>
             <option name="option"
                     v-for="option in options"
@@ -12,7 +12,7 @@
              <label for="options">Choose</label>
         </div>
         <div class="input-field col s12">
-            <select id="secondoptions" name="secondoptions" v-if="secondoptions" v-model="secondoption" required>
+            <select id="secondoption" name="secondoption" v-if="secondoptions" v-model="secondoption" required>
             <option value="" class="reset" disabled>Choose</option>
             <option name="secondoption"
                     v-for="secondoption in secondoptions"
@@ -20,7 +20,7 @@
                     v-bind:value="secondoption.name"
                     ></option>
             </select>
-            <label for="secondoptions">Choose</label>
+            <label for="secondoption">Choose</label>
         </div>
         <a type="submit" @click.prevent="addtocart" class="btn scale_when_hover waves-effect waves-light waves-green"><i class="material-icons left">shopping_cart </i>Add To Cart</a>
     </div>
@@ -74,12 +74,3 @@
         }
     }
 </script>
-
-<style>
-    .option{
-        color: orangered;
-    }
-    .reset {
-        color: red;
-    }
-</style>
