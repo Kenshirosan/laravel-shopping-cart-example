@@ -11,7 +11,7 @@
             <div class="col">
                 @include('includes.card')
             </div>
-            <div class="col s12 m4">
+            <div class="col s12 m3">
                 <img
                     src="/img/{{ $product->image }}"
                     alt="{{ $product->name }}"

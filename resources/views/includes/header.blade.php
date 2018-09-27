@@ -62,7 +62,11 @@
                             data-target="modal">Preview Cart
                         </button>
                     </li>
-                    <li><a href=""><cart-counter numberofitems="{{ Cart::instance()->count() }}"></cart-counter></a></li>
+                    <li>
+                        <a href="#!">
+                            <cart-counter numberofitems="{{ Cart::instance()->count() }}"></cart-counter>
+                        </a>
+                    </li>
                 </ul>
                 <ul class="sidenav" id="mobile-nav">
                     @if( App\Models\Product::where('holiday_special', true)->exists() && $title != null)
@@ -122,7 +126,11 @@
                             </ul>
                         </li>
                     @endif
-                    <li><a href=""><cart-counter numberofitems="{{ Cart::instance()->count() }}"></cart-counter></a></li>
+                    <li>
+                        <a href="">
+                            <cart-counter numberofitems="{{ Cart::instance()->count() }}"></cart-counter>
+                        </a>
+                    </li>
                     <li>
                         <a
                             type="button"
@@ -146,10 +154,10 @@
         });
 
         $('.modal').modal();
+
         $('.modal-trigger').on('click', () => {
-            const instance = M.Modal.getInstance($('#modal'));
             $('.close-modal').on('click', () => {
-                instance.close();
+                M.Modal.getInstance($('#modal')).close();
             })
         });
 

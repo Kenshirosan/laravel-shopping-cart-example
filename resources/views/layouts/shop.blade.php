@@ -21,12 +21,12 @@
         <div id="index-banner" class="parallax-container jumbotron">
             <div class="section no-pad-bot">
                 <div class="container">
-                <br><br>
-                    <h1 class="header center text-lighten-2 custom-title"></h1>
-                        <div class="row center">
-                            <h5 class="custom-subtitle header col s12 light"></h5>
+                {{-- <br><br> --}}
+                    <h1 class="header center-align text-lighten-2 custom-title"></h1>
+                        <div class="row">
+                            <h5 class="custom-subtitle center-align header light"></h5>
                         </div>
-                        <div class="row center">
+                        <div class="center-align">
                             <a href="#cat" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Start Ordering</a>
                         </div>
                 <br><br>

@@ -1,3 +1,3 @@
-<div class="col s12 m3">
+<div class="col s12 l3 m4">
     @include('includes.card')
 </div>
