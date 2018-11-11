@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGroupablesTable extends Migration
+class CreateGroupProduct extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateGroupablesTable extends Migration
      */
     public function up()
     {
-        Schema::create('groupables', function (Blueprint $table) {
-            $table->primary(['option_group_id', 'groupable_id', 'groupable_type']);
-
+        Schema::create('group_product', function (Blueprint $table) {
+            $table->primary(['option_group_id', 'product_id']);
             $table->unsignedInteger('option_group_id');
-            $table->unsignedInteger('groupable_id');
-            $table->string('groupable_type');
+            $table->unsignedInteger('product_id');
             $table->timestamps();
+
+            $table->primary(['option_group_id', 'product_id']);
+            $table->foreign(['option_group_id', 'product_id']);
         });
     }
 
@@ -30,6 +31,6 @@ class CreateGroupablesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('groupables');
+        //
     }
 }

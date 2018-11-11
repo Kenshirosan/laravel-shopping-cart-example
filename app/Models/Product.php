@@ -94,9 +94,14 @@ class Product extends Model
         return $this->belongsTo(Category::class, 'category_id');
     }
 
+    public function groups()
+    {
+        return $this->belongsToMany(OptionGroup::class, 'group_product', 'product_id', 'option_group_id');
+    }
+
     public function group()
     {
-        return $this->belongsTo(OptionGroup::class, 'option_group_id');
+        return $this->belongsTo(OptionGroup::class, 'product_id');
     }
 
     public function options()
