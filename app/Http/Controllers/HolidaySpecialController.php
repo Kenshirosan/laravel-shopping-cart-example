@@ -22,7 +22,6 @@ class HolidaySpecialController extends Controller
         $titles = HolidayTitle::all();
 
         if (request()->wantsJson()) {
-
             return response($titles, 200);
         }
 
@@ -35,12 +34,10 @@ class HolidaySpecialController extends Controller
             'holiday_page_title' => 'required|string|max:50'
         ]);
 
-        $title = HolidayTitle::create([
+        if ($title = HolidayTitle::create([
             'holiday_page_title' => request('holiday_page_title')
-        ]);
-
-        if ($title) {
-            return response(['ok'], 200);
+        ])) {
+            return response($title, 200);
         }
 
         return response(['error' => 'Something went wrong'], 400);
@@ -50,13 +47,9 @@ class HolidaySpecialController extends Controller
     {
         $title = HolidayTitle::where('id', $id)->firstOrFail();
 
-        if ($title) {
+        $title->delete();
 
-            $title->delete();
-
-            return response(['ok'], 200);
-        }
-
-        return response('something went wrong', 500);
+        return response(['ok'], 200);
     }
+
 }

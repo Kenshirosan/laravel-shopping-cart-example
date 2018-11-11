@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class SecondOption extends Model
 {
+    use Groupable;
+
     protected $fillable = [
         'second_option_group_id', 'name'
     ];
@@ -19,4 +21,5 @@ class SecondOption extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
 }
