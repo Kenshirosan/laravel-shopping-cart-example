@@ -17,8 +17,6 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->string('name')->unique();
             $table->boolean('holiday_special')->default(false);
-            $table->unsignedInteger('option_group_id')->nullable()->default(null)->index();
-            $table->unsignedInteger('second_option_group_id')->nullable()->default(null)->index();
             $table->unsignedInteger('category_id')->index();
             $table->string('slug')->unique();
             $table->text('description');
@@ -26,8 +24,6 @@ class CreateProductsTable extends Migration
             $table->string('image');
             $table->timestamps();
 
-            $table->foreign('option_group_id')->references('id')->on('option_groups')->onDelete('cascade');
-            $table->foreign('second_option_group_id')->references('id')->on('second_option_groups')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }

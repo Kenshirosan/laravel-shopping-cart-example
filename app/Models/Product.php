@@ -96,27 +96,12 @@ class Product extends Model
 
     public function groups()
     {
-        return $this->belongsToMany(OptionGroup::class, 'group_product', 'product_id', 'option_group_id');
-    }
-
-    public function group()
-    {
-        return $this->belongsTo(OptionGroup::class, 'product_id');
+        return $this->belongsToMany(OptionGroup::class, 'group_product');
     }
 
     public function options()
     {
-        return $this->group->options;
-    }
-
-    public function secondGroup()
-    {
-        return $this->belongsTo(SecondOptionGroup::class, 'second_option_group_id');
-    }
-
-    public function secondOptions()
-    {
-        return $this->secondGroup->options;
+        return $this->groups()->with('options')->get();
     }
 
     public function regularPrice()

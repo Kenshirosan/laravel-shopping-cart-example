@@ -31,8 +31,7 @@ class OptionsController extends Controller
     {
         if ($request->server('REQUEST_URI') === '/add-second-options') {
             SecondOption::create([
-                'name' => request('name'),
-                'second_option_group_id' => request('option_group_id'),
+                'name' => request('name')
             ]);
 
             $optionGroups = SecondOptionGroup::with('options')->get();
@@ -41,8 +40,7 @@ class OptionsController extends Controller
         }
 
         Option::create([
-            'name' => request('name'),
-            'option_group_id' => request('option_group_id'),
+            'name' => request('name')
         ]);
 
         $optionGroups = OptionGroup::with('options')->get();

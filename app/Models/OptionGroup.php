@@ -8,19 +8,28 @@ class OptionGroup extends Model
 {
     use Groupable;
 
-    protected $fillable = [
-        'name'
-    ];
+    protected $fillable = ['name'];
 
-    // public function options()
+    protected $appends = ['options'];
+    /*public function options()
+    {
+        return $this->hasMany(Option::class);
+    }*/
+
+    // public function option($option)
     // {
-    //     return $this->hasMany(Option::class);
+    //     return $this->options()->attach($option);
     // }
 
     // public function options()
     // {
     //     return $this->morphedByMany(Option::class, 'groupable')->withTimestamps();
     // }
+
+    public function getOptionsAttribute()
+    {
+        return $this->options()->pluck('name');
+    }
 
     public function products()
     {

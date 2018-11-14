@@ -9,13 +9,8 @@ class Option extends Model
     use Groupable;
 
     protected $fillable = [
-        'option_group_id', 'name'
+        'name'
     ];
-
-    // public function optionGroup()
-    // {
-    //     return $this->belongsTo(OptionGroup::class, 'option_group_id');
-    // }
 
     public function products()
     {

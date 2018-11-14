@@ -17,7 +17,7 @@ class ShopController extends Controller
     public function index()
     {
         $categories = Category::with(['products' => function ($query) {
-            $query->where('holiday_special', false)->with('sales')->with('group')->with('secondGroup');
+            $query->where('holiday_special', false)->with('sales')->with('groups');
         }])->get();
 
         if (request()->wantsJson()) {

@@ -24,8 +24,7 @@ class OptionRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string',
-            'option_group_id' => 'required|numeric'
+            'name' => 'required|string'
         ];
     }
 }

@@ -37,7 +37,7 @@ class CartController extends Controller
             'name' => 'required|string|exists:products,name',
             'quantity' => 'required|numeric|digits:1|max:6',
             'price' => 'required|numeric',
-            'option' => 'nullable|string|exists:options,name',
+            'option' => 'nullable|array|exists:options,name',
             'secondoption' => 'nullable|string|exists:second_options,name',
         ]);
 
@@ -62,7 +62,7 @@ class CartController extends Controller
             return response([], 200);
 
         } else {
-            Cart::add($request->id, $request->name, 1, $request->price, [ $request->option, $request->secondoption ] )->associate(Product::class);
+            Cart::add($request->id, $request->name, 1, $request->price, [ regex($request->option) ] )->associate(Product::class);
             return response([], 200);
         }
 

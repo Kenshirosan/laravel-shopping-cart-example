@@ -90,15 +90,20 @@ class ProductController extends Controller
             $product = Product::create([
                 'name' => ucfirst(request('name')),
                 'holiday_special' => request('holiday_special'),
-                'option_group_id' => request('option_group_id'),
-                'second_option_group_id' => request('second_option_group_id'),
                 'category_id' => request('category_id'),
                 'slug' => request('slug'),
                 'description' => request('description'),
                 'price' => request('price'),
                 'image' => $image
             ]);
+
+            foreach ($request['option_group_id'] as $id) {
+                $group = OptionGroup::where('id', $id)->get();
+
+                $product->groups()->attach($group);
+            }
         }
+
     }
 
     /**

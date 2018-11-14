@@ -1,26 +1,16 @@
 <template>
     <div>
-        <div class="input-field col s12">
-            <select id="option" name="option" v-if="options" v-model="option" required>
-            <option value="" class="reset" disabled>Choose</option>
+        <div class="input-field col s12" v-if="options">
+            <select id="option" name="option" v-if="optiongroups" v-model="option" required multiple>
+            <option value="" class="black-text reset" disabled>Choose</option>
             <option name="option"
-                    v-for="option in options"
-                    v-text="option.name"
-                    v-bind:value="option.name"
+                    v-for="option in optiongroups"
+                    v-text="option"
+                    v-bind:value="option"
+                    class="black-text"
                     ></option>
             </select>
              <label for="options">Choose</label>
-        </div>
-        <div class="input-field col s12">
-            <select id="secondoption" name="secondoption" v-if="secondoptions" v-model="secondoption" required>
-            <option value="" class="reset" disabled>Choose</option>
-            <option name="secondoption"
-                    v-for="secondoption in secondoptions"
-                    v-text="secondoption.name"
-                    v-bind:value="secondoption.name"
-                    ></option>
-            </select>
-            <label for="secondoption">Choose</label>
         </div>
         <a type="submit" @click.prevent="addtocart" class="btn scale_when_hover waves-effect waves-light waves-green"><i class="material-icons left">shopping_cart </i>Add To Cart</a>
     </div>
@@ -28,15 +18,15 @@
 
 <script>
     export default {
-        props: ['product', 'options', 'secondoptions'],
+        props: ['product', 'groups', 'options'],
 
         data() {
             return {
                 id: this.product.id,
                 quantity: 1,
                 name: this.product.name,
-                option: '',
-                secondoption: '',
+                optiongroups: [],
+                option: [],
                 price: this.product.sales ?
                                             this.product.price - (this.product.price * this.product.sales.percentage)
                                           :
@@ -44,33 +34,43 @@
             }
         },
 
-
         methods: {
             async addtocart() {
-                const options = this.options;
-                const secondoptions = this.secondoptions;
+                const options = this.optiongroups;
 
                 if (options != undefined && options.length > 0 && this.option == '') {
                     return swal("Wait!", `Please pick an option for ${this.product.name}`, "warning");
                 }
-
-                if (secondoptions != undefined && secondoptions.length > 0 && this.secondoption == '') {
-                    return swal("Wait!", `Please pick a second option for ${this.product.name}`, "warning");
-                }
-
-                await axios.post('/cart', this.$data).then(res => {
+                const data = {id: this.id, name:this.name, quantity: this.quantity, option: this.option, price: this.price};
+                console.log(data);
+                await axios.post('/cart', data).then(res => {
                     flash(`${this.product.name} was added to cart`);
                     productitemscountchanged();
                     this.resetOptions();
+                    // data = {};
                 })
                 .catch(err => console.log(err));
 
             },
 
             resetOptions() {
-                this.option = '',
-                this.secondoption = ''
+                this.option = ''
+            },
+
+            getOptionsArray() {
+                let array = [];
+                this.options.map(group => {
+                    group.options.forEach(option => {
+                        array.push(option)
+                        return this.optiongroups = array
+                    });
+                })
             }
+        },
+
+        mounted() {
+            this.getOptionsArray()
         }
+
     }
 </script>

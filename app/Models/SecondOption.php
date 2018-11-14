@@ -6,10 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class SecondOption extends Model
 {
-    use Groupable;
-
     protected $fillable = [
-        'second_option_group_id', 'name'
+        'name'
     ];
 
     public function optionGroup()

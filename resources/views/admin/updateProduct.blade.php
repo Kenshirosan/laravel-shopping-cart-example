@@ -59,7 +59,7 @@
     <div class="form-group{{ $errors->has('option_group_id') ? ' has-error' : '' }}">
         <label for="option" class="col-md-4 control-label">Option 1</label>
         <div class="col-md-6">
-            <select id="option_group_id" class="form-control" name="option_group_id">
+            <select multiple id="option_group_id" class="form-control" name="option_group_id">
                 <option value="{{ $product->group->id }}">{{ $product->group->name }}</option>
                 <option value="">No option</option>
                 @foreach($optionGroups as $optionGroup)

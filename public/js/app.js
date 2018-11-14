@@ -62541,27 +62541,17 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['product', 'options', 'secondoptions'],
+    props: ['product', 'groups', 'options'],
 
     data: function data() {
         return {
             id: this.product.id,
             quantity: 1,
             name: this.product.name,
-            option: '',
-            secondoption: '',
+            optiongroups: [],
+            option: [],
             price: this.product.sales ? this.product.price - this.product.price * this.product.sales.percentage : this.product.price
         };
     },
@@ -62572,40 +62562,35 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
                 var _this = this;
 
-                var options, secondoptions;
+                var options, data;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
-                                options = this.options;
-                                secondoptions = this.secondoptions;
+                                options = this.optiongroups;
 
                                 if (!(options != undefined && options.length > 0 && this.option == '')) {
-                                    _context.next = 4;
+                                    _context.next = 3;
                                     break;
                                 }
 
                                 return _context.abrupt('return', swal("Wait!", 'Please pick an option for ' + this.product.name, "warning"));
 
-                            case 4:
-                                if (!(secondoptions != undefined && secondoptions.length > 0 && this.secondoption == '')) {
-                                    _context.next = 6;
-                                    break;
-                                }
+                            case 3:
+                                data = { id: this.id, name: this.name, quantity: this.quantity, option: this.option, price: this.price };
 
-                                return _context.abrupt('return', swal("Wait!", 'Please pick a second option for ' + this.product.name, "warning"));
-
-                            case 6:
-                                _context.next = 8;
-                                return axios.post('/cart', this.$data).then(function (res) {
+                                console.log(data);
+                                _context.next = 7;
+                                return axios.post('/cart', data).then(function (res) {
                                     flash(_this.product.name + ' was added to cart');
                                     productitemscountchanged();
                                     _this.resetOptions();
+                                    // data = {};
                                 }).catch(function (err) {
                                     return console.log(err);
                                 });
 
-                            case 8:
+                            case 7:
                             case 'end':
                                 return _context.stop();
                         }
@@ -62620,8 +62605,23 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             return addtocart;
         }(),
         resetOptions: function resetOptions() {
-            this.option = '', this.secondoption = '';
+            this.option = '';
+        },
+        getOptionsArray: function getOptionsArray() {
+            var _this2 = this;
+
+            var array = [];
+            this.options.map(function (group) {
+                group.options.forEach(function (option) {
+                    array.push(option);
+                    return _this2.optiongroups = array;
+                });
+            });
         }
+    },
+
+    mounted: function mounted() {
+        this.getOptionsArray();
     }
 });
 
@@ -62634,113 +62634,67 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "input-field col s12" }, [
-      _vm.options
-        ? _c(
-            "select",
-            {
-              directives: [
+    _vm.options
+      ? _c("div", { staticClass: "input-field col s12" }, [
+          _vm.optiongroups
+            ? _c(
+                "select",
                 {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.option,
-                  expression: "option"
-                }
-              ],
-              attrs: { id: "option", name: "option", required: "" },
-              on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.option = $event.target.multiple
-                    ? $$selectedVal
-                    : $$selectedVal[0]
-                }
-              }
-            },
-            [
-              _c(
-                "option",
-                { staticClass: "reset", attrs: { value: "", disabled: "" } },
-                [_vm._v("Choose")]
-              ),
-              _vm._v(" "),
-              _vm._l(_vm.options, function(option) {
-                return _c("option", {
-                  attrs: { name: "option" },
-                  domProps: {
-                    value: option.name,
-                    textContent: _vm._s(option.name)
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.option,
+                      expression: "option"
+                    }
+                  ],
+                  attrs: {
+                    id: "option",
+                    name: "option",
+                    required: "",
+                    multiple: ""
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.option = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
                   }
-                })
-              })
-            ],
-            2
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _c("label", { attrs: { for: "options" } }, [_vm._v("Choose")])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "input-field col s12" }, [
-      _vm.secondoptions
-        ? _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.secondoption,
-                  expression: "secondoption"
-                }
-              ],
-              attrs: { id: "secondoption", name: "secondoption", required: "" },
-              on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
+                },
+                [
+                  _c(
+                    "option",
+                    {
+                      staticClass: "black-text reset",
+                      attrs: { value: "", disabled: "" }
+                    },
+                    [_vm._v("Choose")]
+                  ),
+                  _vm._v(" "),
+                  _vm._l(_vm.optiongroups, function(option) {
+                    return _c("option", {
+                      staticClass: "black-text",
+                      attrs: { name: "option" },
+                      domProps: { value: option, textContent: _vm._s(option) }
                     })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.secondoption = $event.target.multiple
-                    ? $$selectedVal
-                    : $$selectedVal[0]
-                }
-              }
-            },
-            [
-              _c(
-                "option",
-                { staticClass: "reset", attrs: { value: "", disabled: "" } },
-                [_vm._v("Choose")]
-              ),
-              _vm._v(" "),
-              _vm._l(_vm.secondoptions, function(secondoption) {
-                return _c("option", {
-                  attrs: { name: "secondoption" },
-                  domProps: {
-                    value: secondoption.name,
-                    textContent: _vm._s(secondoption.name)
-                  }
-                })
-              })
-            ],
-            2
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _c("label", { attrs: { for: "secondoption" } }, [_vm._v("Choose")])
-    ]),
+                  })
+                ],
+                2
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _c("label", { attrs: { for: "options" } }, [_vm._v("Choose")])
+        ])
+      : _vm._e(),
     _vm._v(" "),
     _c(
       "a",
@@ -63066,7 +63020,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['items', 'total'],
@@ -63183,19 +63136,9 @@ var render = function() {
                   _vm._v(" "),
                   item.options
                     ? _c("td", [
-                        item.options[1]
-                          ? _c("p", [
-                              _c("strong", [
-                                _vm._v(
-                                  _vm._s(item.options[0]) +
-                                    " , " +
-                                    _vm._s(item.options[1])
-                                )
-                              ])
-                            ])
-                          : _c("p", [
-                              _c("strong", [_vm._v(_vm._s(item.options[0]))])
-                            ])
+                        _c("p", [
+                          _c("strong", [_vm._v(_vm._s(item.options[0]))])
+                        ])
                       ])
                     : _vm._e(),
                   _vm._v(" "),

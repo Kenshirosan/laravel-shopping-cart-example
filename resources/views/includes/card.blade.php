@@ -40,11 +40,8 @@
         @else
             <add-to-cart
                 :product="{{ $product }}"
-                @if( $product->group )
-                    :options="{{ $product->options() }}"
-                @endif
-                @if( $product->secondGroup )
-                    :secondoptions="{{ $product->secondOptions() }}"
+                @if( $product->groups )
+                    :options="{{ $product->groups }}"
                 @endif
             >
             </add-to-cart>
