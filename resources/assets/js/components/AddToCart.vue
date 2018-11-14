@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="input-field col s12" v-if="options">
-            <select id="option" name="option" v-if="optiongroups" v-model="option" required multiple>
+            <select id="option" name="option" v-if="optiongroups.length" v-model="option" required multiple>
             <option value="" class="black-text reset" disabled>Choose</option>
             <option name="option"
                     v-for="option in optiongroups"
@@ -41,35 +41,44 @@
                 if (options != undefined && options.length > 0 && this.option == '') {
                     return swal("Wait!", `Please pick an option for ${this.product.name}`, "warning");
                 }
-                const data = {id: this.id, name:this.name, quantity: this.quantity, option: this.option, price: this.price};
-                console.log(data);
-                await axios.post('/cart', data).then(res => {
+
+                const data = {
+                                id: this.id,
+                                name:this.name,
+                                quantity: this.quantity,
+                                option: this.option,
+                                price: this.price
+                            };
+
+                await axios.post('/cart', this.$data).then(res => {
                     flash(`${this.product.name} was added to cart`);
                     productitemscountchanged();
                     this.resetOptions();
-                    // data = {};
                 })
                 .catch(err => console.log(err));
 
             },
 
             resetOptions() {
-                this.option = ''
+                this.option = [];
             },
 
             getOptionsArray() {
-                let array = [];
+                let optiongroup = [];
+
                 this.options.map(group => {
                     group.options.forEach(option => {
-                        array.push(option)
-                        return this.optiongroups = array
+
+                        optiongroup.push(option);
+
+                        return this.optiongroups = optiongroup;
                     });
-                })
+                });
             }
         },
 
         mounted() {
-            this.getOptionsArray()
+            this.getOptionsArray();
         }
 
     }

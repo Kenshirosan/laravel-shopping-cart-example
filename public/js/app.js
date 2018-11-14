@@ -62577,20 +62577,23 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 return _context.abrupt('return', swal("Wait!", 'Please pick an option for ' + this.product.name, "warning"));
 
                             case 3:
-                                data = { id: this.id, name: this.name, quantity: this.quantity, option: this.option, price: this.price };
-
-                                console.log(data);
-                                _context.next = 7;
-                                return axios.post('/cart', data).then(function (res) {
+                                data = {
+                                    id: this.id,
+                                    name: this.name,
+                                    quantity: this.quantity,
+                                    option: this.option,
+                                    price: this.price
+                                };
+                                _context.next = 6;
+                                return axios.post('/cart', this.$data).then(function (res) {
                                     flash(_this.product.name + ' was added to cart');
                                     productitemscountchanged();
                                     _this.resetOptions();
-                                    // data = {};
                                 }).catch(function (err) {
                                     return console.log(err);
                                 });
 
-                            case 7:
+                            case 6:
                             case 'end':
                                 return _context.stop();
                         }
@@ -62605,16 +62608,19 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             return addtocart;
         }(),
         resetOptions: function resetOptions() {
-            this.option = '';
+            this.option = [];
         },
         getOptionsArray: function getOptionsArray() {
             var _this2 = this;
 
-            var array = [];
+            var optiongroup = [];
+
             this.options.map(function (group) {
                 group.options.forEach(function (option) {
-                    array.push(option);
-                    return _this2.optiongroups = array;
+
+                    optiongroup.push(option);
+
+                    return _this2.optiongroups = optiongroup;
                 });
             });
         }
@@ -62636,7 +62642,7 @@ var render = function() {
   return _c("div", [
     _vm.options
       ? _c("div", { staticClass: "input-field col s12" }, [
-          _vm.optiongroups
+          _vm.optiongroups.length
             ? _c(
                 "select",
                 {
@@ -63136,9 +63142,12 @@ var render = function() {
                   _vm._v(" "),
                   item.options
                     ? _c("td", [
-                        _c("p", [
-                          _c("strong", [_vm._v(_vm._s(item.options[0]))])
-                        ])
+                        _c(
+                          "p",
+                          _vm._l(item.options[0], function(option) {
+                            return _c("strong", [_vm._v(_vm._s(option) + ", ")])
+                          })
+                        )
                       ])
                     : _vm._e(),
                   _vm._v(" "),

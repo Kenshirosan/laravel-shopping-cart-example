@@ -35,7 +35,7 @@ class ShopController extends Controller
     */
     public function show($slug)
     {
-        $product = Product::where('slug', $slug)->with('sales')->with('group')->firstOrFail();
+        $product = Product::where('slug', $slug)->with('sales')->with('groups')->firstOrFail();
 
         return view('layouts.product', compact('product'));
     }

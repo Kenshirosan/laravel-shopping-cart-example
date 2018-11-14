@@ -21,7 +21,7 @@
                             <p>{{ item.name }}</p>
                         </td>
                         <td v-if="item.options">
-                            <p><strong>{{ item.options[0] }}</strong></p>
+                            <p><strong v-for="option in item.options[0]">{{ option }}, </strong></p>
                         </td>
                         <td>
                             <p>{{ item.qty }}</p>

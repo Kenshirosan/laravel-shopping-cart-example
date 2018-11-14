@@ -99,11 +99,6 @@ class Product extends Model
         return $this->belongsToMany(OptionGroup::class, 'group_product');
     }
 
-    public function options()
-    {
-        return $this->groups()->with('options')->get();
-    }
-
     public function regularPrice()
     {
         return money_format('%i', $this->price / 100);

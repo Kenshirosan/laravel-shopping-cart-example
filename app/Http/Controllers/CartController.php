@@ -49,22 +49,15 @@ class CartController extends Controller
             return response('You\'ve reached the maximum quantity allowed', 403);
         }
 
-        if($request->option == null && $request->secondoption == null) {
+        if($request->option == null) {
             Cart::add($request->id, $request->name, 1, $request->price )->associate(Product::class);
             return response([], 200);
 
-        } elseif ($request->option != null && $request->secondoption == null) {
-            Cart::add($request->id, $request->name, 1, $request->price, [ $request->option ] )->associate(Product::class);
-            return response([], 200);
-
-        } elseif ($request->option == null && $request->secondoption != null) {
-            Cart::add($request->id, $request->name, 1, $request->price, [ $request->secondoption ] )->associate(Product::class);
-            return response([], 200);
-
-        } else {
-            Cart::add($request->id, $request->name, 1, $request->price, [ regex($request->option) ] )->associate(Product::class);
-            return response([], 200);
         }
+
+        Cart::add($request->id, $request->name, 1, $request->price, [ $request->option ] )->associate(Product::class);
+        return response([], 200);
+
 
         if(!$request->expectsJson()) {
             return redirect('/cart')->with('success_message',  "$request->name added !");
