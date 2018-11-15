@@ -38,7 +38,6 @@ class CartController extends Controller
             'quantity' => 'required|numeric|digits:1|max:6',
             'price' => 'required|numeric',
             'option' => 'nullable|array|exists:options,name',
-            'secondoption' => 'nullable|string|exists:second_options,name',
         ]);
 
         $duplicates = Cart::search(function ($cartItem, $rowQty) use ($request){

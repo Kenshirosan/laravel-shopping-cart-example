@@ -5,8 +5,8 @@
             <option value="" class="black-text reset" disabled>Choose</option>
             <option name="option"
                     v-for="option in optiongroups"
-                    v-text="option"
-                    v-bind:value="option"
+                    v-text="option.name"
+                    v-bind:value="option.name"
                     class="black-text"
                     ></option>
             </select>

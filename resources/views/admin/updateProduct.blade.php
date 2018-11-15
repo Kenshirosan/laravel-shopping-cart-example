@@ -40,11 +40,11 @@
         </div>
     </div>
 
-    @if( !$product->group )
+    @if( !$product->groups )
     <div class="form-group{{ $errors->has('option_group_id') ? ' has-error' : '' }}">
         <label for="option" class="col-md-4 control-label">Option 1</label>
         <div class="col-md-6">
-            <select id="option_group_id" class="form-control" name="option_group_id">
+            <select id="option_group_id" class="form-control" name="option_group_id[]">
                 <option value="">Choose option group</option>
                 @foreach($optionGroups as $optionGroup)
                     <option value="{{ $optionGroup->id }}">{{ $optionGroup->name }}</option>
@@ -55,50 +55,24 @@
     @endif
 
     {{-- DB row option_group_id --}}
-    @if( $product->group )
+    @if( $product->groups )
     <div class="form-group{{ $errors->has('option_group_id') ? ' has-error' : '' }}">
         <label for="option" class="col-md-4 control-label">Option 1</label>
         <div class="col-md-6">
-            <select multiple id="option_group_id" class="form-control" name="option_group_id">
-                <option value="{{ $product->group->id }}">{{ $product->group->name }}</option>
-                <option value="">No option</option>
-                @foreach($optionGroups as $optionGroup)
-                    <option value="{{ $optionGroup->id }}">{{ $optionGroup->name }}</option>
+            <select multiple id="option_group_id" class="form-control" name="option_group_id[]">
+                @if($product->groups)
+                    @foreach($product->groups as $group)
+                        <option value="{{ $group->id }}" selected>{{ $group->name }}</option>
+                    @endforeach
+                @endif
+                <option value="" class="text-danger">No option, Select all options you need</option>>
+                @foreach($optionGroups as $group)
+                    <option value="{{ $group->id }}">{{ $group->name }}</option>
                 @endforeach
             </select>
         </div>
     </div>
     @endif
-
-    @if( !$product->secondGroup )
-    <div class="form-group{{ $errors->has('second_option_group_id') ? ' has-error' : '' }}">
-        <label for="option" class="col-md-4 control-label">Option 2</label>
-        <div class="col-md-6">
-            <select id="option_group_id" class="form-control" name="second_option_group_id">
-                <option value="">Choose second option group</option>
-                @foreach($secondOptionGroups as $secondOptionGroup)
-                    <option value="{{ $secondOptionGroup->id }}">{{ $secondOptionGroup->name }}</option>
-                @endforeach
-            </select>
-        </div>
-    </div>
-    @endif
-
-    @if( $product->secondGroup )
-    <div class="form-group{{ $errors->has('second_option_group_id') ? ' has-error' : '' }}">
-        <label for="option" class="col-md-4 control-label">Option 2</label>
-        <div class="col-md-6">
-            <select id="option_group_id" class="form-control" name="second_option_group_id">
-                <option value="{{ $product->secondGroup->id }}">{{ $product->secondGroup->name }}</option>
-                <option value="">No option</option>
-                @foreach($secondOptionGroups as $secondOptionGroup)
-                    <option value="{{ $secondOptionGroup->id }}">{{ $secondOptionGroup->name }}</option>
-                @endforeach
-            </select>
-        </div>
-    </div>
-    @endif
-
 
     {{--  CATEGORY --}}
     <div class="form-group{{ $errors->has('category_id') ? ' has-error' : '' }}">

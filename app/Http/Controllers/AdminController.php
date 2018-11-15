@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Category;
 use App\Models\OptionGroup;
-use App\Models\SecondOptionGroup;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -20,7 +19,7 @@ class AdminController extends Controller
     {
         $categories = Category::all();
         $optionGroups = OptionGroup::all();
-        $secondOptionGroups = SecondOptionGroup::all();
+
         $orders = Order::limit(15)->orderBy('created_at', 'desc')->get();
 
         if (request()->wantsJson()) {
@@ -28,7 +27,7 @@ class AdminController extends Controller
         }
 
         return view('admin.restaurantindex',
-            compact('optionGroups', 'secondOptionGroups', 'categories'));
+            compact('optionGroups', 'categories'));
     }
 
     /**

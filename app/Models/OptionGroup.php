@@ -15,7 +15,7 @@ class OptionGroup extends Model
 
     public function getOptionsAttribute()
     {
-        return $this->options()->pluck('name');
+        return $this->options()->get();
     }
 
     public function products()

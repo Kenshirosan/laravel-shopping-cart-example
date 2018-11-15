@@ -8,7 +8,7 @@
         </div>
 
         <!-- AddOptions.vue Component -->
-        <div v-if="URI == '/add-options' || URI == '/add-second-options'">
+        <div v-if="URI == '/add-options'">
             <table class="table table-hover even" v-for="optiongroup in data">
                 <thead>
                 <tr class="text-white">
@@ -21,6 +21,7 @@
                     <tr v-for="option in optiongroup.options" class="text-info">
                         <td>{{ option.id }}</td>
                         <td>{{ option.name }}</td>
+                        <!-- <td>{{ option.name }}</td> -->
                         <td><button class="btn btn-danger btn-sm" @click.prevent="deleteResource(option.id)">Delete</button></td>
                     </tr>
                 </tbody>

@@ -8,7 +8,6 @@ use App\Models\Photo;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\OptionGroup;
-use App\Models\SecondOptionGroup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreProductRequest;
@@ -36,16 +35,14 @@ class ProductController extends Controller
 
     public function edit($slug)
     {
-        $product = Product::where('slug', $slug)->firstOrFail();
+        $product = Product::where('slug', $slug)->with('groups')->firstOrFail();
         $categories = Category::all();
         $optionGroups = OptionGroup::all();
-        $secondOptionGroups = SecondOptionGroup::all();
+
         $action = $product->is_eighty_six() ? "/delete/eighty_six/$product->id" : "/eighty_six/$product->id";
         $method = $product->is_eighty_six() ? 'DELETE' : 'POST';
 
-        return view('admin.updateProduct', compact('product', 'categories',
-                                                    'optionGroups', 'secondOptionGroups',
-                                                    'method', 'action'));
+        return view('admin.updateProduct', compact('product', 'categories','optionGroups','method', 'action'));
     }
 
     public function update(StoreProductRequest $request, $slug)
@@ -67,14 +64,23 @@ class ProductController extends Controller
         $product->update([
             'name' => ucfirst(request('name')),
             'holiday_special' => request('holiday_special'),
-            'option_group_id' => request('option_group_id'),
-            'second_option_group_id' => request('second_option_group_id'),
             'category_id' => request('category_id'),
             'slug' => request('slug'),
             'description' => request('description'),
             'price' => request('price'),
             'image' => $image
         ]);
+
+        foreach ($request['option_group_id'] as $group) {
+            if(!$group) {
+                foreach ($product->groups as $groups) {
+                    $product->groups()->detach($groups);
+                }
+            }
+            if($group !== null) {
+                $product->groups()->sync($request['option_group_id']);
+            }
+        }
 
         return redirect('/update/' . $product->slug)->with("success_message", "Successfully Updated $product->name");
     }
@@ -115,6 +121,12 @@ class ProductController extends Controller
     public function destroy($product)
     {
         $product = Product::where('slug', $product)->firstOrFail();
+
+        if ($product->groups) {
+            foreach ($product->groups as $group) {
+                $product->groups()->detach($group);
+            }
+        }
 
         $file = $product->image;
         Storage::disk('custom')->delete('img/' . $file);

@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\OptionRequest;
 use App\Models\Option;
 use App\Models\OptionGroup;
-use App\Models\SecondOption;
-use App\Models\SecondOptionGroup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,11 +12,7 @@ class OptionsController extends Controller
 {
     public function index(Request $request)
     {
-        $optionGroups = OptionGroup::with('options')->get();
-
-        if ($request->server('REQUEST_URI') === '/add-second-options') {
-            $optionGroups = SecondOptionGroup::with('options')->get();
-        }
+        $optionGroups = OptionGroup::all();
 
         if ($request->wantsJson()) {
             return response($optionGroups, 200);
@@ -29,20 +23,13 @@ class OptionsController extends Controller
 
     public function store(OptionRequest $request)
     {
-        if ($request->server('REQUEST_URI') === '/add-second-options') {
-            SecondOption::create([
-                'name' => request('name')
-            ]);
-
-            $optionGroups = SecondOptionGroup::with('options')->get();
-
-            return response($optionGroups, 200);
-        }
-
-        Option::create([
+        $option = Option::create([
             'name' => request('name')
         ]);
 
+        $group = OptionGroup::where('id', $request['option_group_id'])->firstOrFail();
+
+        $group->option($option);
         $optionGroups = OptionGroup::with('options')->get();
 
         return response($optionGroups, 200);
@@ -50,17 +37,10 @@ class OptionsController extends Controller
 
     public function destroy($id)
     {
-        if (request()->server('REQUEST_URI') === "/add-second-options/$id") {
-            $option = SecondOption::where('id', $id)->firstOrFail();
-
-            $option->delete();
-
-            $optionGroups = SecondOptionGroup::with('options')->get();
-
-            return response($optionGroups, 200);
+        $option = Option::where('id', $id)->with('groups')->firstOrFail();
+        foreach ($option->groups as $group) {
+            $group->options()->detach($option);
         }
-
-        $option = Option::where('id', $id)->firstOrFail();
 
         $option->delete();
 

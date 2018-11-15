@@ -26,7 +26,7 @@ class StoreProductRequest extends FormRequest
         return [
             'name' => 'required|string',
             'holiday_special' => 'required|boolean',
-            'option_group_id' => 'required|array',
+            'option_group_id' => 'nullable|array',
             'category_id' => 'required|numeric',
             'slug' => 'required|string',
             'description' => 'required|string',

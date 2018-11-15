@@ -62690,7 +62690,10 @@ var render = function() {
                     return _c("option", {
                       staticClass: "black-text",
                       attrs: { name: "option" },
-                      domProps: { value: option, textContent: _vm._s(option) }
+                      domProps: {
+                        value: option.name,
+                        textContent: _vm._s(option.name)
+                      }
                     })
                   })
                 ],
@@ -88880,6 +88883,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['id', 'findaname', 'url', 'data'],
@@ -89010,7 +89014,7 @@ var render = function() {
         ])
       : _vm._e(),
     _vm._v(" "),
-    _vm.URI == "/add-options" || _vm.URI == "/add-second-options"
+    _vm.URI == "/add-options"
       ? _c(
           "div",
           _vm._l(_vm.data, function(optiongroup) {

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 Use App\Models\OptionGroup;
-use App\Models\SecondOptionGroup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,10 +11,6 @@ class OptionGroupController extends Controller
     public function index(Request $request)
     {
         $optionGroups = OptionGroup::with('options')->get();
-
-        if($request->server('REQUEST_URI') === '/second-option-group') {
-            $optionGroups = SecondOptionGroup::with('options')->get();
-        }
 
         if ($request->wantsJson()) {
             return response($optionGroups, 200);
@@ -30,16 +25,6 @@ class OptionGroupController extends Controller
             'name' => 'required|string'
         ]);
 
-        if($request->server('REQUEST_URI') === '/second-option-group') {
-            SecondOptionGroup::create([
-                'name' => request('name')
-            ]);
-
-            $optionGroups = SecondOptionGroup::with('options')->get();
-
-            return response($optionGroups, 200);
-        }
-
         OptionGroup::create([
             'name' => request('name')
         ]);
@@ -51,17 +36,12 @@ class OptionGroupController extends Controller
 
     public function destroy($id)
     {
-        if (request()->server('REQUEST_URI') === "/second-option-group/$id") {
-            $optionGroup = SecondOptionGroup::where('id', $id)->firstOrFail();
-
-            $optionGroup->delete();
-
-            $optionGroups = SecondOptionGroup::all();
-
-            return response($optionGroups, 200);
-        }
-
         $optionGroup = OptionGroup::where('id', $id)->firstOrFail();
+
+        foreach ($optionGroup->options as $option) {
+            $optionGroup->options()->detach($option);
+            $option->delete();
+        }
 
         $optionGroup->delete();
 
