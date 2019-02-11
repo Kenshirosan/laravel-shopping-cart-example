@@ -1,5 +1,16 @@
 <?php
 
+Route::get('/config', function () {
+    try {
+        Artisan::call('config:cache');
+        Artisan::call('route:cache');
+        Artisan::call('view:cache');
+        return 'ok';
+    } catch (\Exception $e) {
+        dd($e->getMessage());
+    }
+});
+
 Route::get('/register/confirm', 'Auth\RegisterConfirmationController@index')->name('register.confirm');
 
 Route::get('/', function () {

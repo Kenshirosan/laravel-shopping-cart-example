@@ -155,7 +155,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         JeroenNoten\LaravelAdminLte\ServiceProvider::class,
         Laravel\Tinker\TinkerServiceProvider::class,
-        Gabievi\Promocodes\PromocodesServiceProvider::class,
+        // Gabievi\Promocodes\PromocodesServiceProvider::class,
         Spatie\Analytics\AnalyticsServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
 

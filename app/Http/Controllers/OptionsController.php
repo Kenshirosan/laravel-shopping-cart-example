@@ -38,6 +38,7 @@ class OptionsController extends Controller
     public function destroy($id)
     {
         $option = Option::where('id', $id)->with('groups')->firstOrFail();
+
         foreach ($option->groups as $group) {
             $group->options()->detach($option);
         }

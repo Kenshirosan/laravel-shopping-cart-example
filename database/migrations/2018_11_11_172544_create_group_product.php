@@ -14,7 +14,6 @@ class CreateGroupProduct extends Migration
     public function up()
     {
         Schema::create('group_product', function (Blueprint $table) {
-            $table->primary(['option_group_id', 'product_id']);
             $table->unsignedInteger('option_group_id');
             $table->unsignedInteger('product_id');
             $table->timestamps();
