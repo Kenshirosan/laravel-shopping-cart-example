@@ -19,7 +19,8 @@ class CreateGroupProduct extends Migration
             $table->timestamps();
 
             $table->primary(['option_group_id', 'product_id']);
-            $table->foreign(['option_group_id', 'product_id']);
+            $table->foreign('option_group_id')->references('id')->on('option_groups')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
 
