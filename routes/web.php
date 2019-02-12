@@ -14,11 +14,11 @@ Route::get('/config', function () {
 Route::get('/register/confirm', 'Auth\RegisterConfirmationController@index')->name('register.confirm');
 
 Route::get('/', function () {
-    return redirect('shop');
+    return redirect('/shop');
 })->name('shop');
 
 Route::get('/home', function () {
-    return redirect('shop');
+    return redirect('/shop');
 })->name('shop');
 
 Route::get('/customized-page-infos', 'FrontPageController@index');

@@ -41,7 +41,16 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Product::class, function (Faker\Generator $faker) {
+$factory->state(App\User::class, 'administrator', function() {
+    return [
+        'employee' => true,
+        'theboss' => true
+    ];
+});
+
+
+
+$factory->define(App\Models\Product::class, function (Faker\Generator $faker) {
     $price = $faker->numberBetween($min = 2500, $max = 35000);
     return [
         'name' => $faker->name,
@@ -56,7 +65,7 @@ $factory->define(App\Product::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Order::class, function ($faker) {
+$factory->define(App\Models\Order::class, function ($faker) {
     $address = $faker->address;
     $address2 = null;
     $zipcode = 10001;
@@ -76,6 +85,7 @@ $factory->define(App\Order::class, function ($faker) {
         'email' => $email,
         'items' => 'toto',
         'price' => $price,
-        'phone_number' => $phone
+        'phone_number' => $phone,
+        'taxes' => 1
     ];
 });

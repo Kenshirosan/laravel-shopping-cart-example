@@ -3,10 +3,11 @@
 namespace Tests\Feature;
 
 use App\User;
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Support\Facades\Auth;
+use Tests\TestCase;
 
 class RoutesTest extends TestCase
 {
@@ -18,91 +19,96 @@ class RoutesTest extends TestCase
         $response = $this->get('/');
         $response->assertRedirect('/shop');
 
+        $response = $this->get('/home');
+        $response->assertRedirect('/shop');
+
         $this->withExceptionHandling();
 
         $this->get('/restaurantpanel')
-            ->assertRedirect('/shop');
+            ->assertRedirect('/login');
 
         $this->get('/panel')
-            ->assertRedirect('/shop');
+            ->assertRedirect('/login');
 
         $this->get('/search-orders')
-            ->assertRedirect('/shop');
+            ->assertRedirect('/login');
 
         $this->get('/livesearch')
-            ->assertRedirect('/shop');
+            ->assertRedirect('/login');
 
         $this->get('/customer-orders')
-            ->assertRedirect('/shop');
+            ->assertRedirect('/login');
 
         $this->get('/order/{id}')
-            ->assertRedirect('/shop');
+            ->assertRedirect('/login');
 
         $this->get('/print/{id}')
-            ->assertRedirect('/shop');
+            ->assertRedirect('/login');
 
         $this->get('/create-coupon')
-            ->assertRedirect('/shop');
+            ->assertRedirect('/login');
 
         $this->get('/add-category')
-            ->assertRedirect('/shop');
+            ->assertRedirect('/login');
 
-        $this->get('/add-option-group')
-            ->assertRedirect('/shop');
+        $this->get('/option-group')
+            ->assertRedirect('/login');
 
         $this->get('/add-options')
-            ->assertRedirect('/shop');
+            ->assertRedirect('/login');
+
 
         $this->get('/edit-css')
-            ->assertRedirect('/shop');
+            ->assertStatus(404);
     }
 
     /** @test */
     function auth_users_may_not_navigate_admin_pages()
     {
         $this->signIn();
+        $this->withExceptionHandling();
 
         $this->get('/restaurantpanel')
-            ->assertRedirect('/shop');
+            // ->assertRedirect('/shop');
+            ->assertStatus(404);
 
         $this->get('/panel')
-            ->assertRedirect('/shop');
+            ->assertStatus(404);
 
-        $this->get('/search-orders')
-            ->assertRedirect('/shop')
-            ->assertSessionHas('error_message');
+            // BELONGD TO SEARCH FEATURE TEST
+        // $this->get('/search-orders')
+        //     ->assertStatus(404)
+        //     ->assertSessionHas('error_message');
 
-        $this->get('/livesearch')
-            ->assertRedirect('/shop')
-            ->assertSessionHas('error_message');
+        // $this->get('/livesearch')
+        //     ->assertRedirect('/shop')
+        //     ->assertSessionHas('error_message');
 
         $this->get('/customer-orders')
-            ->assertRedirect('/shop');
+            ->assertStatus(404);
 
-        $order = create('App\Order');
+        $order = create('App\Models\Order');
 
         $this->get('/order/'.$order->id)
-            ->assertRedirect('/shop')
-            ->assertSessionHas('error_message');
+            ->assertStatus(404);
 
         $this->get('/print/{id}')
-            ->assertRedirect('/shop')
-            ->assertSessionHas('error_message');
+            ->assertStatus(404);
 
         $this->get('/create-coupon')
-            ->assertRedirect('/shop');
+            ->assertStatus(404);
 
         $this->get('/add-category')
-            ->assertRedirect('/shop');
+            ->assertStatus(404);
 
-        $this->get('/add-option-group')
-            ->assertRedirect('/shop');
+        $this->get('/option-group')
+            ->assertStatus(404);
 
         $this->get('/add-options')
-            ->assertRedirect('/shop');
+            ->assertStatus(404);
 
         $this->get('/edit-css')
-            ->assertRedirect('/shop');
+            ->assertStatus(404);
     }
 
     /** @test */
@@ -112,61 +118,55 @@ class RoutesTest extends TestCase
             'theboss' => 0,
             'employee' => 1
         ]);
+        $this->withExceptionHandling();
 
         $this->be($user);
 
         $this->get('/restaurantpanel')
-            ->assertRedirect('/shop')
-            ->assertSessionHas('error_message');
+            ->assertStatus(404);
 
         $this->get('/panel')
-            ->assertRedirect('/shop');
+            ->assertStatus(404);
 
-        $this->get('/search-orders')
-            ->assertRedirect('/shop')
-            ->assertSessionHas('error_message');
 
-        $this->get('/livesearch')
-            ->assertRedirect('/shop')
-            ->assertSessionHas('error_message');
+            // DOES NOT BELONG HERE CAUSE EMPLOYEES MAY SEARCH:
+            // TODO Search Feature test
+        // $this->get('/search-orders')
+        //     ->assertRedirect('/shop')
+        //     ->assertSessionHas('error_message');
+            //TODO GIVE VALID DATA HERE
+        // $this->get('/livesearch')
+        //     ->assertRedirect('/shop')
+        //     ->assertSessionHas('error_message');
 
         $this->get('/create-coupon')
-            ->assertRedirect('/shop');
+            ->assertStatus(404);
 
         $this->get('/add-category')
-            ->assertRedirect('/shop');
+            ->assertStatus(404);
 
-        $this->get('/add-option-group')
-            ->assertRedirect('/shop');
+        $this->get('/option-group')
+            ->assertStatus(404);
 
         $this->get('/add-options')
-            ->assertRedirect('/shop');
+            ->assertStatus(404);
+
 
         $this->get('/edit-css')
-            ->assertRedirect('/shop');
+            ->assertStatus(404);
     }
 
     /** @test */
     function admin_may_act_like_a_god()
     {
-        $user = factory('App\User')->make([
-            'theboss' => 1,
-            'employee' => 1
-        ]);
+        $this->withExceptionHandling();
 
-        $this->be($user);
+        $this->signIn(factory('App\User')->states('administrator')->create());
 
-        $this->get('/restaurantpanel')
-            ->assertStatus(200);
+        $this->get('/restaurantpanel')->assertStatus(200);
 
         // $this->get('/panel') //query not working in tests ... hhhmhmmm
         //     ->assertStatus(200);
-
-        $this->get('/search-orders')
-            ->assertStatus(200);
-
-        $this->get('/livesearch')
-            ->assertStatus(200);
 
         $this->get('/create-coupon')
             ->assertStatus(200);
@@ -174,13 +174,14 @@ class RoutesTest extends TestCase
         $this->get('/add-category')
             ->assertStatus(200);
 
-        $this->get('/add-option-group')
+        $this->get('/option-group')
             ->assertStatus(200);
 
         $this->get('/add-options')
             ->assertStatus(200);
 
+
         $this->get('/edit-css')
-            ->assertStatus(200);
+            ->assertStatus(404);
     }
 }
