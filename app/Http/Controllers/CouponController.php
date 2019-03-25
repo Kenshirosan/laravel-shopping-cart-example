@@ -29,7 +29,12 @@ class CouponController extends Controller
         return view('admin.createCoupon');
     }
 
-
+    /**
+     * Store new coupons
+     * 
+     * @param CouponRequest $request
+     * @return json response
+     */
     public function store(CouponRequest $request)
     {
         $quantity = request('quantity');

@@ -32,8 +32,8 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'address' => $address,
         'address2' => null,
         'zipcode' => 13001,
-        'employee' => 0,
-        'theboss' => 0,
+        'employee' => false,
+        'theboss' => false,
         'remember_token' => str_random(10),
         'phone_number' => $faker->phoneNumber,
         'confirmed' => true,
@@ -45,6 +45,12 @@ $factory->state(App\User::class, 'administrator', function() {
     return [
         'employee' => true,
         'theboss' => true
+    ];
+});
+
+$factory->state(App\User::class, 'employee', function() {
+    return [
+        'employee' => true
     ];
 });
 
