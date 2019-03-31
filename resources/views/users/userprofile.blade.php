@@ -31,7 +31,7 @@
                                 <p class="text-info">Order Comments : <strong>{{ $order->comments }}</strong></p>
                             @endif
                             <p class="text-info">You paid : <strong>{{ $order->price() }}</strong></p>
-                            @foreach($order->getProducts($order->id) as $order_detail)
+                            @foreach($order->products as $order_detail)
                             <p>
                                 <strong class="text-primary">{{ $order_detail['qty'] }}</strong>
                                 {{ $order_detail['product_name'] }}

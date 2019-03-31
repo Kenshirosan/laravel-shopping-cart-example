@@ -78,7 +78,10 @@
                         <td v-if="URI == '/best-customers'" class="text-success">${{ item.total | formatted }}</td>
                         <td v-if="URI == '/customer-orders'" :class="classes(item.hiddenOrder || item.status.name)">
                             <h4 class="text-info"><strong>{{ item.status.name }}</strong></h4>
-                            <h4 class="text-white"><strong>{{ item.items | regex }}</strong></h4>
+                            <div v-for="product in item.products">
+                                <h4 class="text-white"><strong>{{ product.qty}} {{ product.product_name }}</strong></h4>
+                                <small v-if="product.options">{{ product.options }}</small>
+                            </div>
                             <p class="text-primary">
                                 <small>{{ item.created_at | moment }} at {{ item.created_at | time }} </small>
                             </p>
@@ -170,10 +173,6 @@
 
             time: date => {
                 return moment(date).format('H:mm:ss');
-            },
-
-            regex: string => {
-                return string.replace( /[\[\]\:"]/g, ' ');
             },
 
             formatted: price => {

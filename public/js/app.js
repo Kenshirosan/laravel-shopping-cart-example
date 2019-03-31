@@ -88884,6 +88884,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['id', 'findaname', 'url', 'data'],
@@ -88983,10 +88986,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
         time: function time(date) {
             return moment(date).format('H:mm:ss');
-        },
-
-        regex: function regex(string) {
-            return string.replace(/[\[\]\:"]/g, ' ');
         },
 
         formatted: function formatted(price) {
@@ -89185,11 +89184,25 @@ var render = function() {
                                 _c("strong", [_vm._v(_vm._s(item.status.name))])
                               ]),
                               _vm._v(" "),
-                              _c("h4", { staticClass: "text-white" }, [
-                                _c("strong", [
-                                  _vm._v(_vm._s(_vm._f("regex")(item.items)))
+                              _vm._l(item.products, function(product) {
+                                return _c("div", [
+                                  _c("h4", { staticClass: "text-white" }, [
+                                    _c("strong", [
+                                      _vm._v(
+                                        _vm._s(product.qty) +
+                                          " " +
+                                          _vm._s(product.product_name)
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  product.options
+                                    ? _c("small", [
+                                        _vm._v(_vm._s(product.options))
+                                      ])
+                                    : _vm._e()
                                 ])
-                              ]),
+                              }),
                               _vm._v(" "),
                               _c("p", { staticClass: "text-primary" }, [
                                 _c("small", [
@@ -89210,7 +89223,8 @@ var render = function() {
                                   )
                                 ])
                               ])
-                            ]
+                            ],
+                            2
                           )
                         : _vm._e(),
                       _vm._v(" "),

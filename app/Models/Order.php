@@ -30,7 +30,7 @@ class Order extends Model {
         'taxes',
         'comments'
     ];
-    protected $appends = ['hiddenOrder'];
+    protected $appends = ['hiddenOrder', 'products'];
 
     public function user() {
         return $this->belongsTo(User::class);
@@ -46,7 +46,7 @@ class Order extends Model {
         return $this->orderDetails;
     }
     
-    public function getProducts($order_id) {
+    public function getProducts() {
         $sql_results =  DB::select('
                     SELECT
                         od.qty, od.cart_row_id, p.name product, op.name option
@@ -59,7 +59,7 @@ class Order extends Model {
                     LEFT JOIN products p ON
                             od.product_id = p.id
                     WHERE
-                            o.id = ' . $order_id
+                            o.id = ' . $this->id
         );
 
         $products = array();
@@ -91,6 +91,11 @@ class Order extends Model {
         
     }
 
+    public function getproductsAttribute()
+    {
+        return $this->getProducts();
+    }
+    
     public function bestCustomers() {
         return $this->selectRaw('year(created_at) year, sum(price) total, user_id, name, last_name, email')
                         ->whereRaw('year(created_at) = year(curdate())')
