@@ -24,9 +24,14 @@
             <tr>
                 <td><h4 class="text-info">{{ $order->name }}</h4></td>
                 <td><h4 class="text-info">{{ $order->last_name }}</h4></td>
-                @foreach ($items as $item)
-                    <td><h4><strong class="text-primary">{{ $item }}</strong></h4></td>
-                @endforeach
+                <td>
+                    @foreach($order->products as $order_detail)
+                        <h4 class="text-info"><strong class="text-primary">{{ $order_detail['qty'] }}</strong>
+                            {{ $order_detail['product_name'] }}
+                            @if($order_detail['options']): {{ $order_detail['options'] }} @endif
+                        </h4>
+                    @endforeach
+                </td>
                 <td><h4 class="text-info">{{ $order->email }}</h4></td>
                 <td><h4 class="text-info">{{ $order->phone_number }}</h4></td>
                 <td><h4 class="text-info">{{ $order->price() }}</h4></td>
