@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="text-center mb-100" v-if="URI != '/customer-orders'">
+        <div class="link text-center mb-100" v-if="URI != '/customer-orders'">
             <a href="/customer-orders" class="btn btn-success btn-lg"><h1>Go to Orders Page</h1></a>
         </div>
         <div class="alert alert-warning text-center mb-100" v-if="URI == '/customer-orders'">
@@ -78,14 +78,15 @@
                         <td v-if="URI == '/best-customers'" class="text-success">${{ item.total | formatted }}</td>
                         <td v-if="URI == '/customer-orders'" :class="classes(item.hiddenOrder || item.status.name)">
                             <h4 class="text-info"><strong>{{ item.status.name }}</strong></h4>
-                            <div v-for="product in item.products">
-                                <h4 class="text-white"><strong>{{ product.qty}} {{ product.product_name }}</strong></h4>
-                                <small v-if="product.options">{{ product.options }}</small>
+                            <div class="text-white" v-for="product in item.products">
+                                <h4><strong>{{ product.qty}} {{ product.product_name }}</strong>
+                                    <small class="text-white" v-if="product.options"><strong>{{ product.options }}</strong></small>
+                                </h4>
                             </div>
-                            <p class="text-primary">
-                                <small>{{ item.created_at | moment }} at {{ item.created_at | time }} </small>
-                            </p>
-                            <p class="text-danger"><small>${{ item.price | formatted }}</small></p>
+                            <h4 class="text-primary">
+                                {{ item.created_at | moment }} at {{ item.created_at | time }}
+                            </h4>
+                            <h4 class="text-danger text-right">${{ item.price | formatted }}</h4>
                         </td>
                         <td v-if="URI == '/customer-orders'">
                             <h4>{{ item.order_type }}</h4>
@@ -122,7 +123,11 @@
 </template>
 
 <script>
+    import filters from '../../mixins/filters';
+    
     export default {
+        mixins: [filters],
+        
         props: ['id', 'findaname', 'url', 'data'],
 
         data() {
@@ -164,21 +169,7 @@
             async showResource(id) {
                 await this.$emit('show', id);
             }
-        },
-
-        filters: {
-            moment: date => {
-                return moment(date).format('Y, ddd, MMM Mo');
-            },
-
-            time: date => {
-                return moment(date).format('H:mm:ss');
-            },
-
-            formatted: price => {
-                return price / 100;
-            }
-        },
+        }
     }
 </script>
 
@@ -186,23 +177,21 @@
     body {
         overflow: scroll;
     }
+    .link {
+        position: fixed;
+        top:50px;
+        left:230px;
+    }
     .text-white {
         color: white;
     }
     table {
         width: 100%;
     }
-    .table > thead > tr > td {
-        padding: 1em;
-    }
-    .table > tbody > tr > td {
-        padding: 0.5em;
-    }
     thead {
         background-color: #605CA8;
     }
-
-    .mb-100 {
-        margin-bottom: 100px;
+    .mb-10 {
+        margin-bottom: 10px;
     }
 </style>

@@ -5,7 +5,7 @@
             @erase="deleteItems($event)"
             @show="addItem($event)"
             id="ID"
-            findaname="Order name"
+            findaname="Order Customer"
             :data="items"
         >
         </data-table>

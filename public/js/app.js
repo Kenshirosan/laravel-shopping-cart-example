@@ -86348,6 +86348,7 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_filters__ = __webpack_require__(347);
 
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
@@ -86369,9 +86370,19 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_filters__["a" /* default */]],
+
     data: function data() {
         return {
             items: []
@@ -86419,34 +86430,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
             return fetchOrders;
         }()
-    },
-
-    filters: {
-        moment: function (_moment) {
-            function moment(_x) {
-                return _moment.apply(this, arguments);
-            }
-
-            moment.toString = function () {
-                return _moment.toString();
-            };
-
-            return moment;
-        }(function (date) {
-            return moment(date).format('Y, ddd, MMM Do');
-        }),
-
-        time: function time(date) {
-            return moment(date).format('H:mm:ss');
-        },
-
-        regex: function regex(string) {
-            return string.replace(/[\[\]\:"]/g, ' ');
-        },
-
-        formatted: function formatted(price) {
-            return price / 100;
-        }
     }
 });
 
@@ -86475,15 +86458,41 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _c("li", { staticClass: "list-group-item" }, [
-              _c("p", [
-                _vm._v(
-                  _vm._s(order.name) + " " + _vm._s(order.last_name) + " paid "
-                ),
-                _c("strong", [
-                  _vm._v(_vm._s(_vm._f("formatted")(order.price)))
+            _c(
+              "li",
+              { staticClass: "list-group-item" },
+              [
+                _c("p", [
+                  _vm._v(
+                    _vm._s(order.name) +
+                      " " +
+                      _vm._s(order.last_name) +
+                      " ordered "
+                  ),
+                  _c("strong", { staticClass: "pull-right" }, [
+                    _vm._v(_vm._s(_vm._f("formatted")(order.price)))
+                  ])
                 ]),
-                _vm._v(" for " + _vm._s(_vm._f("regex")(order.items)) + " on "),
+                _vm._l(order.products, function(product) {
+                  return _c("div", { staticClass: "text-info" }, [
+                    _c("h4", [
+                      _c("strong", [
+                        _vm._v(
+                          _vm._s(product.qty) +
+                            " " +
+                            _vm._s(product.product_name)
+                        )
+                      ]),
+                      _vm._v(" "),
+                      product.options
+                        ? _c("small", { staticClass: "text-success" }, [
+                            _c("strong", [_vm._v(_vm._s(product.options))])
+                          ])
+                        : _vm._e()
+                    ])
+                  ])
+                }),
+                _vm._v("\n                    on "),
                 _c("strong", [
                   _vm._v(_vm._s(_vm._f("moment")(order.created_at)))
                 ]),
@@ -86491,9 +86500,11 @@ var render = function() {
                   " at " +
                     _vm._s(_vm._f("time")(order.created_at)) +
                     "\n                "
-                )
-              ])
-            ])
+                ),
+                _c("p")
+              ],
+              2
+            )
           ])
         })
       ],
@@ -86620,7 +86631,7 @@ var render = function() {
         "div",
         [
           _c("data-table", {
-            attrs: { id: "ID", findaname: "Order name", data: _vm.items },
+            attrs: { id: "ID", findaname: "Order Customer", data: _vm.items },
             on: {
               deleted: function($event) {
                 _vm.getItems()
@@ -88747,7 +88758,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\nbody[data-v-730c5c24] {\n    overflow: scroll;\n}\n.text-white[data-v-730c5c24] {\n    color: white;\n}\ntable[data-v-730c5c24] {\n    width: 100%;\n}\n.table > thead > tr > td[data-v-730c5c24] {\n    padding: 1em;\n}\n.table > tbody > tr > td[data-v-730c5c24] {\n    padding: 0.5em;\n}\nthead[data-v-730c5c24] {\n    background-color: #605CA8;\n}\n.mb-100[data-v-730c5c24] {\n    margin-bottom: 100px;\n}\n", ""]);
+exports.push([module.i, "\nbody[data-v-730c5c24] {\n    overflow: scroll;\n}\n.link[data-v-730c5c24] {\n    position: fixed;\n    top:50px;\n    left:230px;\n}\n.text-white[data-v-730c5c24] {\n    color: white;\n}\ntable[data-v-730c5c24] {\n    width: 100%;\n}\nthead[data-v-730c5c24] {\n    background-color: #605CA8;\n}\n.mb-10[data-v-730c5c24] {\n    margin-bottom: 10px;\n}\n", ""]);
 
 // exports
 
@@ -88760,6 +88771,7 @@ exports.push([module.i, "\nbody[data-v-730c5c24] {\n    overflow: scroll;\n}\n.t
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixins_filters__ = __webpack_require__(347);
 
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
@@ -88887,8 +88899,13 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    mixins: [__WEBPACK_IMPORTED_MODULE_1__mixins_filters__["a" /* default */]],
+
     props: ['id', 'findaname', 'url', 'data'],
 
     data: function data() {
@@ -88967,30 +88984,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
             return showResource;
         }()
-    },
-
-    filters: {
-        moment: function (_moment) {
-            function moment(_x3) {
-                return _moment.apply(this, arguments);
-            }
-
-            moment.toString = function () {
-                return _moment.toString();
-            };
-
-            return moment;
-        }(function (date) {
-            return moment(date).format('Y, ddd, MMM Mo');
-        }),
-
-        time: function time(date) {
-            return moment(date).format('H:mm:ss');
-        },
-
-        formatted: function formatted(price) {
-            return price / 100;
-        }
     }
 });
 
@@ -89004,7 +88997,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _vm.URI != "/customer-orders"
-      ? _c("div", { staticClass: "text-center mb-100" }, [_vm._m(0)])
+      ? _c("div", { staticClass: "link text-center mb-100" }, [_vm._m(0)])
       : _vm._e(),
     _vm._v(" "),
     _vm.URI == "/customer-orders"
@@ -89185,44 +89178,55 @@ var render = function() {
                               ]),
                               _vm._v(" "),
                               _vm._l(item.products, function(product) {
-                                return _c("div", [
-                                  _c("h4", { staticClass: "text-white" }, [
-                                    _c("strong", [
-                                      _vm._v(
-                                        _vm._s(product.qty) +
-                                          " " +
-                                          _vm._s(product.product_name)
-                                      )
+                                return _c(
+                                  "div",
+                                  { staticClass: "text-white" },
+                                  [
+                                    _c("h4", [
+                                      _c("strong", [
+                                        _vm._v(
+                                          _vm._s(product.qty) +
+                                            " " +
+                                            _vm._s(product.product_name)
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      product.options
+                                        ? _c(
+                                            "small",
+                                            { staticClass: "text-white" },
+                                            [
+                                              _c("strong", [
+                                                _vm._v(_vm._s(product.options))
+                                              ])
+                                            ]
+                                          )
+                                        : _vm._e()
                                     ])
-                                  ]),
-                                  _vm._v(" "),
-                                  product.options
-                                    ? _c("small", [
-                                        _vm._v(_vm._s(product.options))
-                                      ])
-                                    : _vm._e()
-                                ])
+                                  ]
+                                )
                               }),
                               _vm._v(" "),
-                              _c("p", { staticClass: "text-primary" }, [
-                                _c("small", [
-                                  _vm._v(
+                              _c("h4", { staticClass: "text-primary" }, [
+                                _vm._v(
+                                  "\n                            " +
                                     _vm._s(_vm._f("moment")(item.created_at)) +
-                                      " at " +
-                                      _vm._s(_vm._f("time")(item.created_at)) +
-                                      " "
-                                  )
-                                ])
+                                    " at " +
+                                    _vm._s(_vm._f("time")(item.created_at)) +
+                                    "\n                        "
+                                )
                               ]),
                               _vm._v(" "),
-                              _c("p", { staticClass: "text-danger" }, [
-                                _c("small", [
+                              _c(
+                                "h4",
+                                { staticClass: "text-danger text-right" },
+                                [
                                   _vm._v(
                                     "$" +
                                       _vm._s(_vm._f("formatted")(item.price))
                                   )
-                                ])
-                              ])
+                                ]
+                              )
                             ],
                             2
                           )
@@ -89374,6 +89378,40 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 344 */,
+/* 345 */,
+/* 346 */,
+/* 347 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ({
+    filters: {
+        moment: function (_moment) {
+            function moment(_x) {
+                return _moment.apply(this, arguments);
+            }
+
+            moment.toString = function () {
+                return _moment.toString();
+            };
+
+            return moment;
+        }(function (date) {
+            return moment(date).format('Y, ddd, MMM Do');
+        }),
+
+        time: function time(date) {
+            return moment(date).format('H:mm:ss');
+        },
+
+        formatted: function formatted(price) {
+            return price / 100;
+        }
+    }
+});
 
 /***/ })
 /******/ ]);
