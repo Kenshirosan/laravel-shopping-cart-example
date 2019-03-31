@@ -6,7 +6,7 @@
             <option name="option"
                     v-for="option in optiongroups"
                     v-text="option.name"
-                    v-bind:value="option.name"
+                    v-bind:value="option"
                     class="black-text"
                     ></option>
             </select>

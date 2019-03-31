@@ -16,9 +16,21 @@ class OrderDetail extends Model
         'product_id',
         'option_group_id',
         'option_id',
+        'qty',
+        'cart_row_id'
     ];
     
     public function order() {
         return $this->belongsTo(Order::class);
+    }
+    
+    public function products()
+    {
+        return $this->belongsTo(Product::class, 'product_id');
+    }
+    
+    public function options()
+    {
+        return $this->belongsTo(Option::class, 'option_id');
     }
 }

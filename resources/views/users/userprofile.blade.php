@@ -9,15 +9,15 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="panel panel-info">
-                    <div class="panel-heading">
-                        Order progress
-                    </div>
                     <div class="panel-body">
                         @if($orders->isEmpty())
                             No order Today !
                         @else
 
                         @foreach($orders as $order)
+                            <div class="panel-heading">
+                                Order progress
+                            </div>
                             <a href="/user-order/{{$order->id}}" class="btn btn-xs btn-primary pull-right">
                                 <p><strong>Print</strong></p>
                             </a>
@@ -31,7 +31,13 @@
                                 <p class="text-info">Order Comments : <strong>{{ $order->comments }}</strong></p>
                             @endif
                             <p class="text-info">You paid : <strong>{{ $order->price() }}</strong></p>
-                            <p>{{ regex($order->items) }}</p>
+                            @foreach($order->getProducts($order->id) as $order_detail)
+                            <p>
+                                <strong class="text-primary">{{ $order_detail['qty'] }}</strong>
+                                {{ $order_detail['product_name'] }}
+                                @if($order_detail['options']): {{ $order_detail['options'] }} @endif
+                            </p>
+                            @endforeach
                             @if($order->order_type === 'Delivery')
                                 <order-progress status="{{ $order->status->name}}" initial="{{ $order->status->percent }}" order_id="{{ $order->id }}"></order-progress>
                             @endif

@@ -30,7 +30,12 @@
                             <a href="{{ url('shop', [$item->model->slug]) }}"><img src="{{ asset('img/' . $item->model->image) }}" alt="product" class="img-responsive cart-image"></a>
                         </td>
                         <td>
-                            <a href="{{ url('shop', [$item->model->slug]) }}">{{ $item->name }} {{ regex($item->options) }}</a>
+                            <a href="{{ url('shop', [$item->model->slug]) }}">
+                                <p>{{ $item->name }}</p>
+                                @foreach($item->options as $option)
+                                    <small>{{ $option['name'] }}</small><br>
+                                @endforeach
+                            </a>
                         </td>
                         <td>
                             <form action="/cart/{{ $item->rowId}}" method="POST">

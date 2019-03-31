@@ -37,7 +37,7 @@ class CartController extends Controller
             'name' => 'required|string|exists:products,name',
             'quantity' => 'required|numeric|digits:1|max:6',
             'price' => 'required|numeric',
-            'option' => 'nullable|array|exists:options,name',
+            'options' => 'nullable|array|exists:options',
         ]);
 
         $duplicates = Cart::search(function ($cartItem, $rowQty) use ($request){
@@ -54,7 +54,7 @@ class CartController extends Controller
 
         }
 
-        Cart::add($request->id, $request->name, 1, $request->price, [ $request->option ] )->associate(Product::class);
+        Cart::add($request->id, $request->name, 1, $request->price, $request->option)->associate(Product::class);
         return response([], 200);
 
 

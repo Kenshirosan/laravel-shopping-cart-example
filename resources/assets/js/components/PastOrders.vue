@@ -44,26 +44,26 @@ import moment from 'moment';
             return {
                 orders: [],
                 pagination: {}
-            }
+            };
         },
 
         mounted() {
-            this.fetchOrders()
+            this.fetchOrders();
         },
 
         filters: {
             moment: date => {
-                return moment(date).fromNow()
+                return moment(date).fromNow();
             }
         },
 
         methods: {
             async fetchOrders(page_url) {
-                page_url = page_url || '/user/orders'
+                page_url = page_url || '/user/orders';
                 await axios.get(page_url)
                     .then( (response) => {
-                        this.orders = response.data.data
-                        this.pagination = response.data
+                        this.orders = response.data.data;
+                        this.pagination = response.data;
                     });
             }
         }

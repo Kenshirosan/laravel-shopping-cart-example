@@ -12,7 +12,7 @@ class OrderController extends Controller
     {
         $user = auth()->user();
 
-        return $allOrders = Order::whereRaw("user_id = $user->id and created_at < curdate()")
+        return Order::whereRaw("user_id = $user->id and created_at < curdate()")
                         ->orderBy('created_at', 'desc')
                         ->paginate(8);
     }

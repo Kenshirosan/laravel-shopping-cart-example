@@ -17,14 +17,16 @@ class CreateOrderDetailsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('order_id');
             $table->unsignedInteger('product_id');
-            $table->unsignedInteger('option_group_id');
-            $table->unsignedInteger('option_id');
-            
+            $table->unsignedInteger('qty');
+            $table->unsignedInteger('cart_row_id');
+            $table->unsignedInteger('option_group_id')->default(null);
+            $table->unsignedInteger('option_id')->default(null);
+
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->foreign('option_group_id')->references('id')->on('option_groups')->onDelete('cascade');
             $table->foreign('option_id')->references('id')->on('options')->onDelete('cascade');
-            
+
             $table->timestamps();
         });
     }
