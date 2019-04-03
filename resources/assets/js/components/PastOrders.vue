@@ -11,7 +11,14 @@
                     <p>Print</p>
                 </a>
                 <p>Order number : {{ order.id }}</p>
-                <p>${{ order.price / 100 }}</p>
+                <div v-for="product in order.products">
+                    <p>{{ product.product_name }}
+                        <small v-if="product.options" class="text-info">
+                            {{ product.options }}
+                        </small>
+                    </p>
+                </div>
+                <p>${{ order.price | formatted }}</p>
                 <p>{{ order.created_at | moment }}</p>
             </li>
         </ul>
@@ -36,9 +43,14 @@
 </template>
 
 <script>
+    
+import filters from '../mixins/filters';
+
 import moment from 'moment';
 
     export default {
+
+        mixins: [filters],
 
         data() {
             return {
