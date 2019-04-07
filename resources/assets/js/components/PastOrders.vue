@@ -63,12 +63,6 @@ import moment from 'moment';
             this.fetchOrders();
         },
 
-        filters: {
-            moment: date => {
-                return moment(date).fromNow();
-            }
-        },
-
         methods: {
             async fetchOrders(page_url) {
                 page_url = page_url || '/user/orders';
