@@ -199,7 +199,6 @@ return [
                 [
                     'text' => 'Add an option group',
                     'url'  => '/option-group',
-                    'icon' => 'glyphicon glyphicon-option-horizontal',
                     'icon_color' => 'green',
                 ],
                 [
