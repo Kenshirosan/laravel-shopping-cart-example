@@ -7,17 +7,16 @@ use App\Models\Product;
 use \Cart as Cart;
 use Illuminate\Http\Request;
 
-class CartController extends Controller
-{
+class CartController extends Controller {
 
     /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
-    public function index()
-    {
-        if(request()->expectsJson()) {
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index() {
+        $cart = Cart::content();
+        if (request()->expectsJson()) {
             return response([Cart::content(), Cart::total()], 200);
         }
 
@@ -25,13 +24,12 @@ class CartController extends Controller
     }
 
     /**
-    * Store a newly created resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\Response
-    */
-    public function store(Request $request)
-    {
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request) {
         request()->validate([
             'id' => 'required|exists:products,id',
             'name' => 'required|string|exists:products,name',
@@ -40,39 +38,39 @@ class CartController extends Controller
             'options' => 'nullable|array|exists:options',
         ]);
 
-        $duplicates = Cart::search(function ($cartItem, $rowQty) use ($request){
-            return $cartItem->id === $request->id && $cartItem->qty === 6;
-        });
+        $duplicates = Cart::search(function ($cartItem, $rowQty) use ($request) {
+                    return $cartItem->id === $request->id && $cartItem->qty === 6;
+                });
 
         if (!$duplicates->isEmpty()) {
             return response('You\'ve reached the maximum quantity allowed', 403);
         }
 
-        if($request->option == null) {
-            Cart::add($request->id, $request->name, 1, $request->price )->associate(Product::class);
+        if ($request->option == null) {
+            Cart::add($request->id, $request->name, 1, $request->price)->associate(Product::class);
             return response([], 200);
-
         }
 
+
         Cart::add($request->id, $request->name, 1, $request->price, $request->option)->associate(Product::class);
+
         return response([], 200);
 
 
-        if(!$request->expectsJson()) {
-            return redirect('/cart')->with('success_message',  "$request->name added !");
+        if (!$request->expectsJson()) {
+            return redirect('/cart')->with('success_message', "$request->name added !");
         }
     }
 
     /**
-    * Update the specified resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @param  int  $id
-    * @return \Illuminate\Http\JsonResponse
-    */
-    public function update(Request $request, $id)
-    {
-        if(auth()->check() && auth()->user()->isEmployee()){
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update(Request $request, $id) {
+        if (auth()->check() && auth()->user()->isEmployee()) {
             return response('You are not allowed', 403);
         }
 
@@ -83,41 +81,38 @@ class CartController extends Controller
 
             Cart::update($id, $request->quantity);
 
-            if($request->expectsJson()) {
+            if ($request->expectsJson()) {
                 return response([], 200);
             }
 
             session()->flash('flash', 'Quantity was updated successfully!');
             return redirect('/cart');
-
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             return response(['flash' => 'Something wrong happened.'], 400);
         }
     }
 
     /**
-    * Remove the specified resource from storage.
-    *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
-    public function destroy($id)
-    {
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id) {
         Cart::remove($id);
 
         return redirect('/cart')->with('flash', 'Item has been removed!');
     }
 
     /**
-    * Remove the resource from storage.
-    *
-    * @return \Illuminate\Http\Response
-    */
-    public function emptyCart()
-    {
+     * Remove the resource from storage.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function emptyCart() {
         Cart::destroy();
 
-        if(request()->expectsJson()) {
+        if (request()->expectsJson()) {
             return response([], 200);
         }
 
@@ -125,13 +120,12 @@ class CartController extends Controller
     }
 
     /**
-    * Switch item from shopping cart to wishlist.
-    *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
-    public function switchToWishlist($id)
-    {
+     * Switch item from shopping cart to wishlist.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function switchToWishlist($id) {
         // Maybe i'll finish a day..
         $item = Cart::get($id);
         // dump($item);
@@ -147,9 +141,10 @@ class CartController extends Controller
 
         // dd(request()->all());
         Cart::instance('wishlist')->add(['id' => $item->id, 'name' => $item->name, 'qty' => 1, 'price' => $item->price, $item->options])
-            ->associate('App\Product');
+                ->associate('App\Product');
 
         // Cart::destroy();
         return redirect('wishlist')->with('flash', 'Item has been moved to your Wishlist!');
     }
+
 }
