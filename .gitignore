@@ -12,4 +12,8 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 .env
+.settings/
+.buildpath/
+.project/
+webcreation.iml
 /nbproject/private/
