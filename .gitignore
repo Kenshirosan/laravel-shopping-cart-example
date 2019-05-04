@@ -16,4 +16,5 @@ npm-debug.log
 .buildpath/
 .project/
 webcreation.iml
+nbproject/
 /nbproject/private/
