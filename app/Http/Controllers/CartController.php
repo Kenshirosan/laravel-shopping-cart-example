@@ -49,12 +49,12 @@ class CartController extends Controller
         }
 
         if($request->option == null) {
-            Cart::add($request->id, $request->name, 1, $request->price )->associate(Product::class);
+            Cart::add($request->id, $request->name, 1, $request->price, 0)->associate(Product::class);
             return response([], 200);
 
         }
 
-        Cart::add($request->id, $request->name, 1, $request->price, $request->option)->associate(Product::class);
+        Cart::add($request->id, $request->name, 1, $request->price, 0, $request->option)->associate(Product::class);
         return response([], 200);
 
 

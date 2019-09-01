@@ -79,7 +79,7 @@
                         <td class="table-image"></td>
                         <td></td>
                         <td class="small-caps table-bg right">Subtotal</td>
-                        <td>${{ Cart::subtotal() /100 }}</td>
+                        <td>${{ Cart::subtotal() }}</td>
                     </tr>
                     <tr>
                         <td class="table-image"></td>
@@ -91,7 +91,7 @@
                         <td class="table-image"></td>
                         <td style="padding: 40px;"></td>
                         <td class="right">Your Total</td>
-                        <td>${{ Cart::total() /100 }}</td>
+                        <td>${{ Cart::total()  }}</td>
                         <td class="column-spacer"></td>
                     </tr>
                 </tbody>

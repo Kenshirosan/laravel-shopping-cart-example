@@ -70,7 +70,7 @@ export default {
         },
 
         resetForm() {
-            this.option_group_id = '',
+            this.option_group_id = '';
             this.name = '';
             this.percentage = '';
             this.id = '';

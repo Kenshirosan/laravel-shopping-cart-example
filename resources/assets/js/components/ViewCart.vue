@@ -30,7 +30,7 @@
                         <td class="center">${{ (item.subtotal / 100 + item.tax / 100).toFixed(2) }}</td>
                     </tr>
                     <tr>
-                        <td><h3>Total: ${{ price /100 }} </h3></td>
+                        <td><h3>Total: ${{ (this.$data.price) }}</h3></td>
                     </tr>
                 </tbody>
             </table>
@@ -49,7 +49,7 @@
         props: ['items', 'total'],
 
         data() {
-            return{
+            return {
                 products: this.items,
                 price: this.total
             }
@@ -77,7 +77,7 @@
                         this.products = response.data[0]
                         this.price = response.data[1]
                     }
-                });
+                }).catch(e => { console.log(e)});
             },
         }
     }
