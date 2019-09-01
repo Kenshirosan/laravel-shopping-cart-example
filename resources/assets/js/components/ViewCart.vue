@@ -15,7 +15,7 @@
                         <th></th>
                     </tr>
                 </thead>
-            <tbody class="indigo-text">
+                <tbody class="indigo-text">
                     <tr v-for="item in products">
                         <td>
                             <p>{{ item.name }}</p>
@@ -57,23 +57,25 @@
 
         created() {
             window.events.$on(
-                'productadded', () => {
-                    this.add(this.products)
-                }
+                    'productadded', () => {
+                this.add(this.products)
+            }
             );
         },
 
         methods: {
             async emptycart() {
                 await axios.delete('/emptyCart').then(flash('Cart empty !'))
-                                        .then(this.products = '')
-                                        .then(this.price = '')
-                                        .then(cartisempty())
-                                        .catch(e => { console.log(e)})
+                        .then(this.products = '')
+                        .then(this.price = '')
+                        .then(cartisempty())
+                        .catch(e => {
+                            console.log(e)
+                        })
             },
             async add() {
-                await axios.get('/cartcontent').then( response => {
-                    if(response.data) {
+                await axios.get('/cartcontent').then(response => {
+                    if (response.data) {
                         this.products = response.data[0]
                         this.price = response.data[1]
                     }
