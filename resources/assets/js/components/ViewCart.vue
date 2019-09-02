@@ -21,13 +21,13 @@
                             <p>{{ item.name }}</p>
                         </td>
                         <td v-if="item.options">
-                            <p><strong v-for="option in item.options[0]">{{ option }}, </strong></p>
+                            <p><strong v-for="option in item.options">{{ option.name }}, </strong></p>
                         </td>
                         <td>
                             <p>{{ item.qty }}</p>
                         </td>
-                        <td>${{ item.subtotal / 100 }}</td>
-                        <td class="center">${{ (item.subtotal / 100 + item.tax / 100).toFixed(2) }}</td>
+                        <td>${{ item.subtotal }}</td>
+                        <td class="center">${{ (item.subtotal  + item.tax).toFixed(2) }}</td>
                     </tr>
                     <tr>
                         <td><h3>Total: ${{ (this.$data.price) }}</h3></td>
@@ -79,7 +79,9 @@
                         this.products = response.data[0]
                         this.price = response.data[1]
                     }
-                }).catch(e => { console.log(e)});
+                }).catch(e => {
+                    console.log(e)
+                });
             },
         }
     }

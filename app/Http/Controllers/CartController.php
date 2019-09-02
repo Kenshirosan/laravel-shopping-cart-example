@@ -15,7 +15,6 @@ class CartController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $cart = Cart::content();
         if (request()->expectsJson()) {
             return response([Cart::content(), Cart::total()], 200);
         }
@@ -47,12 +46,12 @@ class CartController extends Controller {
         }
 
         if($request->option == null) {
-            Cart::add($request->id, $request->name, 1, $request->price, 0)->associate(Product::class);
+            Cart::add($request->id, $request->name, 1, $request->price / 100, 0)->associate(Product::class);
             return response([], 200);
 
         }
 
-        Cart::add($request->id, $request->name, 1, $request->price, 0, $request->option)->associate(Product::class);
+        Cart::add($request->id, $request->name, 1, $request->price / 100, 0, $request->option)->associate(Product::class);
 
         return response([], 200);
 

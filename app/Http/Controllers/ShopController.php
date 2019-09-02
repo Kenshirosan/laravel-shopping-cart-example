@@ -6,6 +6,7 @@ use App\Models\Sales;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\OptionGroup;
+use \Cart;
 
 class ShopController extends Controller
 {
@@ -16,6 +17,7 @@ class ShopController extends Controller
     */
     public function index()
     {
+
         $categories = Category::with(['products' => function ($query) {
             $query->where('holiday_special', false)->with('sales')->with('groups');
         }])->get();

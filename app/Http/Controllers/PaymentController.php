@@ -88,7 +88,7 @@ class PaymentController extends Controller {
     private function processOrder(Request $request) {
         $items = [];
         $cart = Cart::content()->toArray();
-        
+
         $items = [];
         foreach ($cart as $row) {
             $items[] = json_encode($row);
@@ -124,7 +124,7 @@ class PaymentController extends Controller {
             'taxes' => $taxes,
             'comments' => request('comments')
         ]);
-        
+
         $option_id = null;
         $option_group_id = null;
 
@@ -133,7 +133,7 @@ class PaymentController extends Controller {
                 foreach ($row['options'] as $option) {
                     $option_group_id = $option['pivot']['option_group_id'];
                     $option_id = $option['id'];
-                    
+
                     OrderDetail::create([
                         'order_id' => $order->id,
                         'product_id' => $row['id'],
@@ -152,7 +152,7 @@ class PaymentController extends Controller {
                 ]);
             }
         }
-        
+
 
         if ($code = request('code')) {
             $promocode = Promocode::where('code', $code)->firstOrFail();

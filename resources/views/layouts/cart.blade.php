@@ -60,7 +60,7 @@
                                 <input type="submit" name="submit" value="Remove 1" class="btn red btn-small">
                             </form>
                         </td>
-                        <td>${{ $item->subtotal /100 }}</td>
+                        <td>${{ $item->subtotal }}</td>
                         <td class=""></td>
                         <td>
                             <form action="/cart/{{ $item->rowId}}" method="POST" class="side-by-side">
@@ -85,7 +85,7 @@
                         <td class="table-image"></td>
                         <td></td>
                         <td class="small-caps table-bg right">Tax</td>
-                        <td>${{ Cart::tax() /100 }}</td>
+                        <td>${{ Cart::tax() }}</td>
                     </tr>
                     <tr class="border-bottom">
                         <td class="table-image"></td>

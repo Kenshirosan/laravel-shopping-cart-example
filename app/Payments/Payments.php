@@ -26,7 +26,9 @@ class Payments extends Model
 
         if(request('total')){
             $price = request('total');
-        } else $price = \Cart::total();
+        } else {
+            $price = \Cart::total() / 100;
+        }
 
         $charge = Charge::create([
             'customer' => $customer->id,

@@ -40,7 +40,7 @@
             @yield('content')
             <flash message="{{ session('flash') }}"></flash>
             <global-order-notification></global-order-notification>
-            <view-cart :items="{{ Cart::content() }}" :total="{{ (float)Cart::total(2)}}"></view-cart>
+            <view-cart :items="{{ Cart::content() }}" :total="{{ Cart::total() }}"></view-cart>
         </div>
         @include('includes.footer')
 
