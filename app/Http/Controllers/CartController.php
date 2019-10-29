@@ -16,7 +16,8 @@ class CartController extends Controller {
      */
     public function index() {
         if (request()->expectsJson()) {
-            return response([Cart::content(), Cart::total()], 200);
+
+            return response([Cart::content(), (float)Cart::total()], 200);
         }
 
         return view('layouts.cart');

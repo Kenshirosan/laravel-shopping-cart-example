@@ -5811,7 +5811,7 @@ module.exports = defaults;
         },
 
         formatted: function formatted(price) {
-            return price / 100;
+            return price;
         }
     }
 });

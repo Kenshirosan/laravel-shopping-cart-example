@@ -35,7 +35,7 @@ class Order extends Model {
     public function user() {
         return $this->belongsTo(User::class);
     }
-    
+
     public function orderDetails()
     {
         return $this->hasMany(OrderDetail::class)->with('products')->with('options');
@@ -45,7 +45,7 @@ class Order extends Model {
     {
         return $this->orderDetails;
     }
-    
+
     public function getProducts() {
         $sql_results =  DB::select('
                     SELECT
@@ -88,20 +88,20 @@ class Order extends Model {
 
         }
         return $products;
-        
+
     }
 
     public function getproductsAttribute()
     {
         return $this->getProducts();
     }
-    
+
     public function bestCustomers() {
         return $this->selectRaw('year(created_at) year, sum(price) total, user_id, name, last_name, email')
-                        ->whereRaw('year(created_at) = year(curdate())')
-                        ->groupBy('user_id', 'email', 'last_name', 'name', 'year')
-                        ->orderBy('total', 'desc')
-                        ->get();
+                    ->whereRaw('year(created_at) = year(curdate())')
+                    ->groupBy('user_id', 'email', 'last_name', 'name', 'year')
+                    ->orderBy('total', 'desc')
+                    ->get();
     }
 
     /**
@@ -152,7 +152,7 @@ class Order extends Model {
     }
 
     public function price() {
-        return money_format('$%i', ($this->price / 100));
+        return money_format('$%i', ($this->price));
     }
 
     public function tax() {

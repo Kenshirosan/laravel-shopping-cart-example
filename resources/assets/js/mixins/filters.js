@@ -9,7 +9,7 @@ export default {
         },
 
         formatted: price => {
-            return price / 100;
+            return price;
         }
     }
 }

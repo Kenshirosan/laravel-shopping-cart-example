@@ -25,9 +25,9 @@ class Payments extends Model
         ]);
 
         if(request('total')){
-            $price = request('total');
+            $price = request('total') * 100;
         } else {
-            $price = \Cart::total() / 100;
+            $price = Cart::total() * 100;
         }
 
         $charge = Charge::create([
