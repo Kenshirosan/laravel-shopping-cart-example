@@ -7,49 +7,49 @@
 </template>
 
 <script>
-    require('fullcalendar')
+    require('fullcalendar');
+
     export default {
         $('#calendar').fullCalendar({});
     }
 </script>
 
 <script>
-    import swal from 'sweetalert';
+import swal from 'sweetalert';
 
-    $(function () {
+$(function () {
     /* initialize the external events
-    --------------------------------------------*/
+     --------------------------------------------*/
     function init_events(ele) {
         ele.each(function () {
-            // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
+        // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
             // it doesn't need to have a start or end
             var eventObject = {
             // use the element's text as the event title
-              title: $.trim($(this).text())
+            title: $.trim($(this).text())
             }
             // store the Event Object in the DOM element so we can get to it later
             $(this).data('eventObject', eventObject)
-
-            // make the event draggable using jQuery UI
-            $(this).draggable({
-              zIndex        : 1070,
-              // will cause the event to go back to its original position after the drag
-              revert        : true,
-              revertDuration: 500
+                    // make the event draggable using jQuery UI
+                $(this).draggable({
+                zIndex        : 1070,
+                // will cause the event to go back to its original position after the drag
+                revert        : true,
+                revertDuration: 500
             })
         })
     }
 
     init_events($('#external-events div.external-event'))
 
-    /* initialize the calendar
-     -----------------------------------------------------------------*/
+            /* initialize the calendar
+             -----------------------------------------------------------------*/
 
-    //Date for the calendar events
+            //Date for the calendar events
     var date = new Date()
-    var d    = date.getDate(),
-        m    = date.getMonth(),
-        y    = date.getFullYear()
+    var d = date.getDate(),
+    m = date.getMonth(),
+    y = date.getFullYear()
     $('#calendar').fullCalendar({
         header    : {
             left  : 'prev, next, today',
@@ -62,138 +62,133 @@
             week : 'week',
             day  : 'day'
         },
-
-        // update or delete events on click, will implement a proper delete button sometimes...
+    // update or delete events on click, will implement a proper delete button sometimes...
         eventClick: function(event, element) {
             swal({
                 text: 'Pick a new date and/or time.',
-                content: 'div',
-                className: 'datetimepicker',
-                button: {
+                    content: 'div',
+                    className: 'datetimepicker',
+                    button: {
                     text: "Update",
-                    closeModal: true,
-                }
+                            closeModal: true,
+                    }
             })
 
             $('.datetimepicker').datetimepicker({
                 inline: true,
-                sideBySide: true
-            });
+                    sideBySide: true
+                });
+                $(".datetimepicker").on('click', function() {
+                    let date = $(this).data("DateTimePicker").date();
+                        if (date < new Date()) {
+                            adminflash("Invalid date", 'error')
+                            date = event.start;
+                        }
 
-            $(".datetimepicker").on('click', function() {
-            let date = $(this).data("DateTimePicker").date();
-            if (date < new Date()) {
-                return axios.delete('/things-to-do/'+event.id)
-                            .then(flash('Event Deleted'))
-                            .then(
-                                setTimeout(function() {
-                                    location.reload()
-                                }, 3000)
-                            );
-            }
-
-            date =  moment(date).format("YYYY-MM-DD HH:mm:ss");
-
-            event = {
-                id: event.id,
-                title: event.title,
-                start: date,
-                allDay: false,
-                backgroundColor: event.color,
-            }
-            axios.patch('/things-to-do/'+ event.id, event)
-                .then(flash("Event successfully modified"))
-                .then(
-                    setTimeout(function() {
-                       location.reload();
-                    }, 3000)
-                )
-            });
+                    date = moment(date).format("YYYY-MM-DD HH:mm:ss");
+                    event = {
+                        id: event.id,
+                        title: event.title,
+                        start: date,
+                        allDay: false,
+                        backgroundColor: event.color,
+                    }
+                    axios.patch('/things-to-do/' + event.id, event)
+                        .then(adminflash("Event successfully modified"))
+                        .then(
+                            setTimeout(function() {
+                                location.reload();
+                            }, 1000)
+                        ).catch(e => console.log(e))
+                });
         },
-      //fetch events and display on calendar
-      events: function(start, end, timezone, callback) {
-        $.ajax({
-            url: '/calendar',
-            dataType: 'json',
-            success: function(doc) {
+        //fetch events and display on calendar
+        events: function(start, end, timezone, callback) {
+            $.ajax({
+                url: '/calendar',
+                dataType: 'json',
+                success: function(doc) {
                 var events = [];
                 $(doc).each(function() {
                     events.push({
                         id: $(this).attr('id'),
-                        title: $(this).attr('title'),
-                        start: $(this).attr('start'),
-                        end: $(this).attr('end'),
-                        color: $(this).attr('color'),
-                        url: $(this).attr('url')
+                                title: $(this).attr('title'),
+                                start: $(this).attr('start'),
+                                end: $(this).attr('end'),
+                                color: $(this).attr('color'),
+                                url: $(this).attr('url')
+                        });
                     });
-                });
-                callback(events);
+                    callback(events);
+                }
+            });
+        },
+        editable  : true,
+        selectable: true,
+        droppable : true, // this allows things to be dropped onto the calendar
+        drop      : function (date, allDay) { // this function is called when something is dropped
+            // retrieve the dropped element's stored Event Object
+            var originalEventObject = $(this).data('eventObject')
+            // we need to copy it, so that multiple events don't have a reference to the same object
+            var copiedEventObject = $.extend({}, originalEventObject)
+                // assign it the date that was reported
+            copiedEventObject.start = date
+            copiedEventObject.allDay = false
+            copiedEventObject.color = $(this).css('background-color')
+            copiedEventObject.borderColor = $(this).css('border-color')
+                // persist event
+            axios.post('/things-to-do', copiedEventObject)
+                .then(flash("event successfully added"))
+                .then(
+                    setTimeout(function() {
+                    location.reload();
+                    }, 3000)
+                )
+
+            // render the event on the calendar
+            // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
+            $('#calendar').fullCalendar('renderEvent', copiedEventObject, true)
+
+                // is the "remove after drop" checkbox checked? then remove element
+            if ($('#drop-remove').is(':checked')) {
+                $(this).remove()
             }
-        });
-    },
-    editable  : true,
-    selectable: true,
-    droppable : true, // this allows things to be dropped onto the calendar
-    drop      : function ( date, allDay) { // this function is called when something is dropped
-        // retrieve the dropped element's stored Event Object
-        var originalEventObject = $(this).data('eventObject')
-        // we need to copy it, so that multiple events don't have a reference to the same object
-        var copiedEventObject = $.extend({}, originalEventObject)
-        // assign it the date that was reported
-        copiedEventObject.start           = date
-        copiedEventObject.allDay          = false
-        copiedEventObject.color = $(this).css('background-color')
-        copiedEventObject.borderColor     = $(this).css('border-color')
-        // persist event
-        axios.post('/things-to-do', copiedEventObject)
-            .then(flash("event successfully added"))
-            .then(
-                setTimeout(function() {
-                   location.reload();
-                }, 3000)
-            )
-
-        // render the event on the calendar
-        // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
-        $('#calendar').fullCalendar('renderEvent', copiedEventObject, true)
-
-        // is the "remove after drop" checkbox checked? then remove element
-        if ($('#drop-remove').is(':checked')) {
-          $(this).remove()
         }
-    }
-})
+    })
 
-    /* Create events to be dropped */
-    //Blue by default
+            /* Create events to be dropped */
+            //Blue by default
     var currColor = '#3c8dbc'
-    //Color chooser button
+            //Color chooser button
     var colorChooser = $('#color-chooser-btn')
     $('#color-chooser > li > a').click(function (e) {
-      e.preventDefault()
-      //Save color
-      currColor = $(this).css('color')
-      //Add color effect to button
-      $('#add-new-event').css({ 'background-color': currColor, 'border-color': 'white' })
+        e.preventDefault()
+        //Save color
+        currColor = $(this).css('color')
+        //Add color effect to button
+        $('#add-new-event').css({ 'background-color': currColor, 'border-color': 'white' })
     })
+
     $('#add-new-event').click(function (e) {
         e.preventDefault()
-      //Get value and make sure it is not null
+        //Get value and make sure it is not null
         var val = $('#new-event').val()
+
         if (val.length == 0) {
-        return
+            return
         }
 
-        //Create events
+    //Create events
         var event = $('<div />')
         event.css({
-        'background-color': currColor,
-        'border-color'    : 'rgb(0, 0, 0)',
-        'color'           : '#fff'
+            'background-color': currColor,
+            'border-color'    : 'rgb(0, 0, 0)',
+            'color'           : '#fff'
         }).addClass('external-event')
-        event.html(val)
-        $('#external-events').prepend(event)
 
+        event.html(val)
+
+        $('#external-events').prepend(event)
         //Add draggable funtionality
         init_events(event)
 

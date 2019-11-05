@@ -1,9 +1,9 @@
 <template>
     <div class="alert alert-flash"
-         :class="'alert-'+level"
-         role="alert"
-         v-show="show"
-         v-text="body">
+        :class="'alert-'+level"
+        role="alert"
+        v-show="show"
+        v-text="body">
     </div>
 </template>
 
@@ -55,5 +55,6 @@
         position: fixed;
         right: 25px;
         bottom: 25px;
+        z-index: 900;
     }
 </style>

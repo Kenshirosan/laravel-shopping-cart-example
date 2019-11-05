@@ -79850,7 +79850,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n.alert-flash {\n    position: fixed;\n    right: 25px;\n    bottom: 25px;\n}\n", ""]);
+exports.push([module.i, "\n.alert-flash {\n    position: fixed;\n    right: 25px;\n    bottom: 25px;\n    z-index: 900;\n}\n", ""]);
 
 // exports
 
@@ -82504,12 +82504,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
 $(function () {
     /* initialize the external events
-    --------------------------------------------*/
+     --------------------------------------------*/
     function init_events(ele) {
         ele.each(function () {
             // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
@@ -82519,7 +82520,6 @@ $(function () {
                 title: $.trim($(this).text())
                 // store the Event Object in the DOM element so we can get to it later
             };$(this).data('eventObject', eventObject);
-
             // make the event draggable using jQuery UI
             $(this).draggable({
                 zIndex: 1070,
@@ -82552,7 +82552,6 @@ $(function () {
             week: 'week',
             day: 'day'
         },
-
         // update or delete events on click, will implement a proper delete button sometimes...
         eventClick: function eventClick(event, element) {
             __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()({
@@ -82569,17 +82568,14 @@ $(function () {
                 inline: true,
                 sideBySide: true
             });
-
             $(".datetimepicker").on('click', function () {
                 var date = $(this).data("DateTimePicker").date();
                 if (date < new Date()) {
-                    return axios.delete('/things-to-do/' + event.id).then(flash('Event Deleted')).then(setTimeout(function () {
-                        location.reload();
-                    }, 3000));
+                    adminflash("Invalid date", 'error');
+                    date = event.start;
                 }
 
                 date = moment(date).format("YYYY-MM-DD HH:mm:ss");
-
                 event = {
                     id: event.id,
                     title: event.title,
@@ -82587,9 +82583,11 @@ $(function () {
                     allDay: false,
                     backgroundColor: event.color
                 };
-                axios.patch('/things-to-do/' + event.id, event).then(flash("Event successfully modified")).then(setTimeout(function () {
+                axios.patch('/things-to-do/' + event.id, event).then(adminflash("Event successfully modified")).then(setTimeout(function () {
                     location.reload();
-                }, 3000));
+                }, 1000)).catch(function (e) {
+                    return console.log(e);
+                });
             });
         },
         //fetch events and display on calendar
@@ -82655,10 +82653,12 @@ $(function () {
         //Add color effect to button
         $('#add-new-event').css({ 'background-color': currColor, 'border-color': 'white' });
     });
+
     $('#add-new-event').click(function (e) {
         e.preventDefault();
         //Get value and make sure it is not null
         var val = $('#new-event').val();
+
         if (val.length == 0) {
             return;
         }
@@ -82670,9 +82670,10 @@ $(function () {
             'border-color': 'rgb(0, 0, 0)',
             'color': '#fff'
         }).addClass('external-event');
-        event.html(val);
-        $('#external-events').prepend(event);
 
+        event.html(val);
+
+        $('#external-events').prepend(event);
         //Add draggable funtionality
         init_events(event);
 
