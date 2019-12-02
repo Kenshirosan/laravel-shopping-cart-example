@@ -14,23 +14,33 @@
             <h4>Pickup time : {{ $order->pickup_time }}</h4>
         @endif
         <h3>Order number: 00{{ $order->created_at->format('Ym') . $order->id }}</h3>
+        <h3><strong class="text-info">{{ $order->name }} {{ $order->last_name }}</strong></h3>
+        <p><small class="text-info">{{ $order->email }}</small></p>
+        <p><small class="text-info">{{ $order->phone_number }}</small></p>
     </header>
-    <table class="table">
-        <thead>
-            <tr>
-                <th><strong>Name</strong></th>
-                <th><strong>Email</strong></th>
-                <th><strong>Phone</strong></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong class="text-info">{{ $order->name }} {{ $order->last_name }}</strong></td>
-                <td><strong class="text-info">{{ $order->email }}</strong></td>
-                <td><strong class="text-info">{{ $order->phone_number }}</strong></td>
-            </tr>
-        </tbody>
-    </table>
+
+
+    <div class="spacer"></div>
+        <strong>Your order:</strong>
+        @foreach($order->products as $order_detail)
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th><strong>Qty</strong></th>
+                        <th><strong>Product</strong></th>
+                        <th><strong>Options</strong></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong class="text-info">{{ $order_detail['qty'] }}</strong></td>
+                        <td><strong class="text-info">{{ $order_detail['product_name'] }}</strong></td>
+                        <td><strong class="text-info">{{ $order_detail['options'] ? $order_detail['options'] : 'n/a' }}</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        @endforeach
+
     <table class="table">
         <thead>
             <tr>
@@ -47,13 +57,7 @@
             </tr>
         </tbody>
     </table>
-    <div class="spacer"></div>
-    <ul>
-    Ordered :
-        @foreach ($items as $item)
-            <li>{{ $item }}</li>
-        @endforeach
-    </ul>
+
     @if($order->comments != null)
         <p>Extra Comments:</p>
         <p><strong>{{ $order->comments }}</strong></p>

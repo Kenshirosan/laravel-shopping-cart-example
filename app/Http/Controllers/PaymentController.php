@@ -94,18 +94,18 @@ class PaymentController extends Controller {
             $items[] = json_encode($row);
         }
 
+        $price = Cart::total();
+        $taxes = Cart::tax();
+
         if(request('total')){
             $price = request('total');
-            $taxes = request('total') * 0.08;
-        } else {
-            $price = Cart::total();
-            $taxes = Cart::tax();
+            $taxes = request('total') * 0.1;
         }
+
+        $pickup_time = null;
 
         if (request('order_type') === 'Pick-up') {
             $pickup_time = Carbon::createFromFormat('H:i', request('pickup_time'))->toTimeString();
-        } else {
-            $pickup_time = null;
         }
 
         $order = Order::create([
@@ -125,22 +125,16 @@ class PaymentController extends Controller {
             'comments' => request('comments')
         ]);
 
-        $option_id = null;
-        $option_group_id = null;
-
         foreach($cart as $row) {
             if($row['options'] != []) {
                 foreach ($row['options'] as $option) {
-                    $option_group_id = $option['pivot']['option_group_id'];
-                    $option_id = $option['id'];
-
                     OrderDetail::create([
                         'order_id' => $order->id,
                         'product_id' => $row['id'],
                         'qty' => $row['qty'],
                         'cart_row_id' => $row['rowId'],
-                        'option_group_id' => $option_group_id,
-                        'option_id' => $option_id,
+                        'option_group_id' => $option['pivot']['option_group_id'],
+                        'option_id' => $option['id'],
                     ]);
                 }
             } else {

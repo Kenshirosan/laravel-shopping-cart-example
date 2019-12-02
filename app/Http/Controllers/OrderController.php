@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
-use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 
 class OrderController extends Controller
@@ -21,9 +20,7 @@ class OrderController extends Controller
     {
         $order = Order::where('id', $id)->firstOrFail();
 
-        $items = collect(regex($order->items));
-
-        return PDF::loadView('pdf.printtest', compact('order', 'items'))
+        return PDF::loadView('pdf.printtest', compact('order'))
                     ->stream('order.pdf');
     }
 }

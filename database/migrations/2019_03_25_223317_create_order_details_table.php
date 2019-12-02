@@ -18,7 +18,7 @@ class CreateOrderDetailsTable extends Migration
             $table->unsignedInteger('order_id');
             $table->unsignedInteger('product_id');
             $table->unsignedInteger('qty');
-            $table->unsignedInteger('cart_row_id');
+            $table->string('cart_row_id');
             $table->unsignedInteger('option_group_id')->default(null);
             $table->unsignedInteger('option_id')->default(null);
 

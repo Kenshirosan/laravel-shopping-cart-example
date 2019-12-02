@@ -108,8 +108,8 @@ class Product extends Model
     {
         return $this->is_on_sale
             ?
-                money_format('%i', ($this->price / 100) - (($this->price / 100) * $this->sales->percentage) )
+                $this->regularPrice() - (($this->price / 100) * $this->sales->percentage)
             :
-                money_format('%i', $this->price / 100);
+                $this->regularPrice();
     }
 }

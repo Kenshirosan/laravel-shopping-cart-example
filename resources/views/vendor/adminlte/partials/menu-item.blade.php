@@ -4,12 +4,13 @@
 {{-- this is not spaghetti code,
  it's a nice small block of php that eases my life :-),
 it displays the count in the sidebar --}}
+
 @php
     if($item['href'] == url('/calendar'))
     {
         $calendar = new \App\Models\Calendar();
 
-        $item['label'] = $calendar->getAppointments() ? : $item['label'];
+        $item['label'] = $calendar->getAppointmentsCount() ? : $item['label'];
     }
 
     if($item['href'] == url('/contact-us'))

@@ -42,10 +42,10 @@ $(function () {
 
     init_events($('#external-events div.external-event'))
 
-            /* initialize the calendar
-             -----------------------------------------------------------------*/
+    /* initialize the calendar
+     -----------------------------------------------------------------*/
 
-            //Date for the calendar events
+    //Date for the calendar events
     var date = new Date()
     var d = date.getDate(),
     m = date.getMonth(),
@@ -78,12 +78,14 @@ $(function () {
                 inline: true,
                     sideBySide: true
                 });
+
                 $(".datetimepicker").on('click', function() {
                     let date = $(this).data("DateTimePicker").date();
-                        if (date < new Date()) {
-                            adminflash("Invalid date", 'error')
-                            date = event.start;
-                        }
+
+                    if (date < new Date()) {
+                        adminflash("Invalid date", 'error')
+                        date = event.start;
+                    }
 
                     date = moment(date).format("YYYY-MM-DD HH:mm:ss");
                     event = {
@@ -102,23 +104,24 @@ $(function () {
                         ).catch(e => console.log(e))
                 });
         },
-        //fetch events and display on calendar
+//!!!!!!!!!!!!!!!! fetch events and display on calendar!!!!!!!!!!!!!!!!!!!!!!!!!!//
         events: function(start, end, timezone, callback) {
-            $.ajax({
+            $.get({
                 url: '/calendar',
                 dataType: 'json',
                 success: function(doc) {
-                var events = [];
-                $(doc).each(function() {
-                    events.push({
-                        id: $(this).attr('id'),
-                                title: $(this).attr('title'),
-                                start: $(this).attr('start'),
-                                end: $(this).attr('end'),
-                                color: $(this).attr('color'),
-                                url: $(this).attr('url')
+                    var events = [];
+                    $(doc).each(function() {
+                        events.push({
+                            id: $(this).attr('id'),
+                            title: $(this).attr('title'),
+                            start: $(this).attr('start'),
+                            end: $(this).attr('end'),
+                            color: $(this).attr('color'),
+                            url: $(this).attr('url')
                         });
                     });
+
                     callback(events);
                 }
             });

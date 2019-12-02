@@ -82568,8 +82568,10 @@ $(function () {
                 inline: true,
                 sideBySide: true
             });
+
             $(".datetimepicker").on('click', function () {
                 var date = $(this).data("DateTimePicker").date();
+
                 if (date < new Date()) {
                     adminflash("Invalid date", 'error');
                     date = event.start;
@@ -82590,9 +82592,9 @@ $(function () {
                 });
             });
         },
-        //fetch events and display on calendar
+        //!!!!!!!!!!!!!!!! fetch events and display on calendar!!!!!!!!!!!!!!!!!!!!!!!!!!//
         events: function events(start, end, timezone, callback) {
-            $.ajax({
+            $.get({
                 url: '/calendar',
                 dataType: 'json',
                 success: function success(doc) {
@@ -82607,6 +82609,7 @@ $(function () {
                             url: $(this).attr('url')
                         });
                     });
+
                     callback(events);
                 }
             });

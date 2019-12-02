@@ -2,14 +2,14 @@
 
 # Thank you for ordering with us !
 
-You paid : {{ $order->price() }} for  
+You paid : {{ $order->price() }} for
 
 @foreach($order->products as $order_detail)
-{{ $order_detail['qty'] }}
-{{ $order_detail['product_name'] }}
-@if($order_detail['options']): {{ $order_detail['options'] }} @endif  
+    {{ $order_detail['qty'] }}
+    {{ $order_detail['product_name'] }}
+    @if($order_detail['options']): {{ $order_detail['options'] }} @endif
 @endforeach
-                            
+
 @if($order->order_type === 'Pick-up')
 	Pick up at: {{ $order->pickup_time }}
 @endif

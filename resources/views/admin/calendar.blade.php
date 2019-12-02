@@ -75,7 +75,7 @@
           </div>
           <div class="box box-solid">
             <div class="box-body">
-              <strong>Click on any event to update it, set its date in the past to delete it.</strong>
+              <strong>Click on any event to update it.</strong>
             </div>
           </div>
         </div>

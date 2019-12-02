@@ -76,7 +76,6 @@ class Order extends Model {
 
             }
 
-
             $option_name = 'options';
             $option_value = $sql_result['option'];
 
@@ -156,11 +155,11 @@ class Order extends Model {
     }
 
     public function tax() {
-        return $this->taxes / 100;
+        return $this->taxes;
     }
 
     public function subtotal() {
-        return money_format('$%i', ($this->price - $this->taxes ) / 100);
+        return money_format('$%i', ($this->price - $this->taxes ));
     }
 
     public function yearlyTotal() {
