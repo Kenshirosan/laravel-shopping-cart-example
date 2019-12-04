@@ -16,14 +16,16 @@ use Illuminate\Support\Facades\Mail;
 use \Carbon\Carbon;
 use \Cart as Cart;
 
-class PaymentController extends Controller {
+class PaymentController extends Controller
+{
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public function index()
+    {
         $total = Cart::total();
         $discount = null;
         $code = null;
@@ -33,40 +35,49 @@ class PaymentController extends Controller {
     }
 
     /**
+     *
+     * Checks time validity for pick up order
+     */
+    private function checkTimeValidity(Request $request)
+    {
+        $now = Carbon::createFromFormat('H:i:s', Carbon::now()->toTimeString())->addMinutes(30);
+        $pickup_time = Carbon::createFromFormat('H:i', request('pickup_time'));
+        $minTime = Carbon::createFromFormat('H:i', "11:00");
+        $maxTime = Carbon::createFromFormat('H:i', "22:00");
+
+        $error = false;
+        $error_message = '';
+
+        if ($pickup_time < $minTime) {
+            $error = true;
+            $error_message = 'Sorry, this is too early';
+        }
+
+        if ($pickup_time < $now) {
+            $error = true;
+            $error_message = 'Sorry but You can\'t pick up earlier than ' . $now->toTimeString();
+        }
+
+        return [$error, $error_message];
+    }
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PaymentRequest $request) {
-        if (request('order_type') === 'Pick-up') {
-            $now = Carbon::createFromFormat('H:i:s', Carbon::now()->toTimeString())->addMinutes(30);
-            $pickup_time = Carbon::createFromFormat('H:i', request('pickup_time'));
-            $minTime = Carbon::createFromFormat('H:i', "11:00");
-            $maxTime = Carbon::createFromFormat('H:i', "22:00");
+    public function store(PaymentRequest $request)
+    {
+        $errors = $this->checkTimeValidity($request);
 
-            switch ($pickup_time) {
-                case $pickup_time < $minTime:
-                    return redirect('/checkout')->with('error_message', 'Sorry, this is too early');
-                    break;
-
-                case $pickup_time < $now:
-                    return redirect('/checkout')->with('error_message', 'Sorry but You can\'t pick up earlier than ' . $now->toTimeString());
-                    break;
-
-                case $pickup_time >= $maxTime:
-                    return redirect('/checkout')->with('error_message', 'Sorry, this is too late');
-                    break;
-                default:
-                    continue;
-                    break;
-            }
+        if ((request('order_type') === 'Pick-up') && ($errors[0])) {
+            return redirect('/checkout')->with('error_message', $errors[1]);
         }
 
         try {
-            ( new Payments() )->validateStripePayment($request);
+            (new Payments())->validateStripePayment($request);
         } catch (\Exception $e) {
-            return back()->with(['error_message' => $e->getMessage() ]);
+            return back()->with(['error_message' => $e->getMessage()]);
         }
 
         try {
@@ -85,7 +96,8 @@ class PaymentController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    private function processOrder(Request $request) {
+    private function processOrder(Request $request)
+    {
         $items = [];
         $cart = Cart::content()->toArray();
 
@@ -97,7 +109,7 @@ class PaymentController extends Controller {
         $price = Cart::total();
         $taxes = Cart::tax();
 
-        if(request('total')){
+        if (request('total')) {
             $price = request('total');
             $taxes = request('total') * 0.1;
         }
@@ -125,8 +137,8 @@ class PaymentController extends Controller {
             'comments' => request('comments')
         ]);
 
-        foreach($cart as $row) {
-            if($row['options'] != []) {
+        foreach ($cart as $row) {
+            if ($row['options'] != []) {
                 foreach ($row['options'] as $option) {
                     OrderDetail::create([
                         'order_id' => $order->id,
@@ -167,10 +179,10 @@ class PaymentController extends Controller {
      * delete the specified resource
      * unused unless someone asks for it, just don't want orders to be deleted. route protection
      */
-    public function delete($order) {
+    public function delete($order)
+    {
         if (!Auth::user()->isAdmin()) {
             return redirect()->back()->with(['error_message' => 'Page not found!']);
         }
     }
-
 }

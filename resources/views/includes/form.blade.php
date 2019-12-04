@@ -8,7 +8,7 @@
                 <small>
                     <p><strong>Your credit card number is not stored anywhere</strong> and never touches our server.</p>
                     <p>Our <a href="https://stripe.com/us" class="green-text">
-                        <strong class="security-infos">Secure Payment </strong></a> Provider is
+                            <strong class="security-infos">Secure Payment </strong></a> Provider is
                         <a href="https://www.pcisecuritystandards.org/" class="text-success">
                             <strong class="security-infos">PCI compliant</strong>
                         </a> and takes it from here.
@@ -20,7 +20,7 @@
     <div class="card">
         <div class="row">
             <div class="card-content">
-                    {{-- <label class="radio-inline">
+                {{-- <label class="radio-inline">
                         <toggle v-model="checked" class="ml-30"></toggle>
                     </label> --}}
                 <div class="col s12">
@@ -39,16 +39,7 @@
                     </label>
                 </div>
                 <div class="input-field col-s12 pickup-time{{ $errors->has('pickup_time') ? ' has-error' : '' }}">
-                    <input
-                        type="time"
-                        id="time"
-                        class="black-text"
-                        min="11:00"
-                        max="21:59"
-                        value="{{ Carbon\Carbon::now()->addMinutes(30)->format('H:i') }}"
-                        required
-                        name="pickup_time"
-                    >
+                    <input type="time" id="time" class="black-text" min="11:00" max="21:59" value="{{ Carbon\Carbon::now()->addMinutes(30)->format('H:i') }}" required name="pickup_time">
                     <span class="validity prefix"></span>
                     <label for="time" class="orange-text">Pick-up hour (11am to 10pm, 24hr format), minimum 30 minutes from now</label>
                 </div>
@@ -70,7 +61,7 @@
                 </small>
                 <div class="input-field col s12">
                     <i class="material-icons prefix">my_location</i>
-                    <input class="black-text" type="text" id="address" name="address" class="form-control" value=" {{ Auth::user()->address }} "/>
+                    <input class="black-text" type="text" id="address" name="address" class="form-control" value=" {{ Auth::user()->address }} " />
                     <label for="address">Address</label>
                 </div>
 
@@ -115,5 +106,5 @@
     </div>
 </div>
 @section('pickup-script')
-    @include('javascript.time')
+@include('javascript.time')
 @endsection

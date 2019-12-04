@@ -6,8 +6,8 @@
         $(inputTimer).hide();
 
         let types = document.querySelectorAll('input[type="radio"]');
-        types.forEach( type => {
-            type.addEventListener('click',  toggleElements);
+        types.forEach(type => {
+            type.addEventListener('click', toggleElements);
         });
 
         function toggleElements(e) {
