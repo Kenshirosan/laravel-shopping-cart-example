@@ -1,7 +1,7 @@
 <div class="card">
     @if($product->is_on_sale)
         <div class="sales">
-            <h2>{{ $product->sales->percentage  * 100 }}% Off!
+            <h2>{{ $product->getSalesPercentage() }}% Off!
                 <span><small>was ${{ $product->regularPrice() }}</small></span>
             </h2>
         </div>

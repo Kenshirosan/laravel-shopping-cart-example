@@ -67,6 +67,16 @@ class Product extends Model
         return $this->hasOne(Sales::class, 'product_id');
     }
 
+    public function getSalesPercentage()
+    {
+        return $this->sales->percentage * 100;
+    }
+
+    public function getRawSalesPercentage()
+    {
+        return $this->sales->percentage;
+    }
+
     public function is_on_sale()
     {
         return !! $this->sales()->count();
@@ -108,7 +118,7 @@ class Product extends Model
     {
         return $this->is_on_sale
             ?
-                $this->regularPrice() - (($this->price / 100) * $this->sales->percentage)
+                $this->regularPrice() - ($this->regularPrice() * $this->getRawSalesPercentage())
             :
                 $this->regularPrice();
     }
