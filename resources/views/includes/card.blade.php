@@ -43,6 +43,9 @@
                 @if( $product->groups )
                     :options="{{ $product->groups }}"
                 @endif
+                @if( $product->getWaysOfCooking() )
+                    :waysOfCooking="{{ $product->getWaysOfCooking() }}"
+                @endif
             >
             </add-to-cart>
         @endif

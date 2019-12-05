@@ -19,6 +19,7 @@ class AdminController extends Controller
     {
         $categories = Category::all();
         $optionGroups = OptionGroup::all();
+        $subcategories = (new Category)->getSubcategories();
 
         $orders = Order::limit(15)->orderBy('created_at', 'desc')->get();
 
@@ -27,7 +28,7 @@ class AdminController extends Controller
         }
 
         return view('admin.restaurantindex',
-            compact('optionGroups', 'categories'));
+            compact('optionGroups', 'categories', 'subcategories'));
     }
 
     /**

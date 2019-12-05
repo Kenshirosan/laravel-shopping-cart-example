@@ -81734,9 +81734,21 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['product', 'groups', 'options'],
+    props: ['product', 'groups', 'options', 'waysofcooking'],
 
     data: function data() {
         return {
@@ -81745,6 +81757,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             name: this.product.name,
             optiongroups: [],
             option: [],
+            ways: this.waysofcooking,
+            way: '',
             price: this.product.sales ? this.product.price - this.product.price * this.product.sales.percentage : this.product.price
         };
     },
@@ -81770,14 +81784,23 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 return _context.abrupt('return', swal("Wait!", 'Please pick an option for ' + this.product.name, "warning"));
 
                             case 3:
+                                if (!(options != undefined && this.option.length > 2)) {
+                                    _context.next = 5;
+                                    break;
+                                }
+
+                                return _context.abrupt('return', swal("Wait!", 'Two options maximum ' + this.product.name, "warning"));
+
+                            case 5:
                                 data = {
                                     id: this.id,
                                     name: this.name,
                                     quantity: this.quantity,
                                     option: this.option,
+                                    way: this.way,
                                     price: this.price
                                 };
-                                _context.next = 6;
+                                _context.next = 8;
                                 return axios.post('/cart', this.$data).then(function (res) {
                                     flash(_this.product.name + ' was added to cart');
                                     productitemscountchanged();
@@ -81786,7 +81809,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                     return console.log(err);
                                 });
 
-                            case 6:
+                            case 8:
                             case 'end':
                                 return _context.stop();
                         }
@@ -81802,6 +81825,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         }(),
         resetOptions: function resetOptions() {
             this.option = [];
+        },
+        resetWay: function resetWay() {
+            this.ways = [];
         },
         getOptionsArray: function getOptionsArray() {
             var _this2 = this;
@@ -81895,6 +81921,63 @@ var render = function() {
             : _vm._e(),
           _vm._v(" "),
           _c("label", { attrs: { for: "options" } }, [_vm._v("Choose")])
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.waysofcooking
+      ? _c("div", { staticClass: "input-field col s12" }, [
+          _vm.ways.length
+            ? _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.way,
+                      expression: "way"
+                    }
+                  ],
+                  attrs: { id: "ways", name: "ways", required: "" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.way = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "option",
+                    {
+                      staticClass: "black-text reset",
+                      attrs: { value: "", disabled: "" }
+                    },
+                    [_vm._v("How do you want it cooked ?")]
+                  ),
+                  _vm._v(" "),
+                  _vm._l(_vm.ways, function(way) {
+                    return _c("option", {
+                      staticClass: "black-text",
+                      attrs: { name: "ways" },
+                      domProps: { value: way, textContent: _vm._s(way) }
+                    })
+                  })
+                ],
+                2
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _c("label", { attrs: { for: "ways" } }, [_vm._v("Choose")])
         ])
       : _vm._e(),
     _vm._v(" "),

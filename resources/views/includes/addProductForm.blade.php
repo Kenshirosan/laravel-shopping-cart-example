@@ -20,7 +20,22 @@
             <input type="radio" name="holiday_special" value="1"> Yes<br>
             @if ($errors->has('name'))
                 <span class="help-block">
-                    <strong>{{ $errors->first('name') }}</strong>
+                    <strong>{{ $errors->first('holiday_special') }}</strong>
+                </span>
+            @endif
+        </div>
+    </div>
+    {{--  subcategory use for ways of cooking--}}
+    <div class="form-group{{ $errors->has('subcategory') ? ' has-error' : '' }}">
+        <label for="subcategory" class="col-md-4 control-label">Subcategory ?</label>
+        <div class="col-md-6">
+            <input type="radio" name="subcategory" value="" checked> No<br>
+            @foreach($subcategories as $subcategory)
+                <input type="radio" name="subcategory" value="{{ $subcategory }}"> {{ $subcategory }}<br>
+            @endforeach
+            @if ($errors->has('subcategory'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('subcategory') }}</strong>
                 </span>
             @endif
         </div>

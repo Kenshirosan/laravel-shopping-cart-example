@@ -28,6 +28,7 @@ class StoreProductRequest extends FormRequest
             'holiday_special' => 'required|boolean',
             'option_group_id' => 'nullable|array',
             'category_id' => 'required|numeric',
+            'subcategory' => 'nullable|string',
             'slug' => 'required|string',
             'description' => 'required|string',
             'price' => 'required|numeric',

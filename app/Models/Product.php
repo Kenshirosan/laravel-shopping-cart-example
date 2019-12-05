@@ -20,6 +20,7 @@ class Product extends Model
         'second_option_group_id',
         'category_id',
         'category',
+        'subcategory',
         'slug',
         'description',
         'price',
@@ -121,5 +122,10 @@ class Product extends Model
                 $this->regularPrice() - ($this->regularPrice() * $this->getRawSalesPercentage())
             :
                 $this->regularPrice();
+    }
+
+    public function getWaysOfCooking()
+    {
+        return json_encode((new WaysOfCooking($this))->getWays());
     }
 }
