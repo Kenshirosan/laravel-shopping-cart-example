@@ -47,7 +47,7 @@
                                             this.product.price
             }
         },
-
+// TODO: Send the way of cooking
         methods: {
             async addtocart() {
                 const options = this.optiongroups;

@@ -5,7 +5,7 @@ namespace App\Models;
 use DB;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Product extends WaysOfCooking
 {
     /**
      * The attributes that are mass assignable.
@@ -126,6 +126,6 @@ class Product extends Model
 
     public function getWaysOfCooking()
     {
-        return json_encode((new WaysOfCooking($this))->getWays());
+        return json_encode($this->getWays());
     }
 }

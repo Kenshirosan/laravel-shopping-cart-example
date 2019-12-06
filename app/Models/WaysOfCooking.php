@@ -22,14 +22,9 @@ class WaysOfCooking extends Model
         ]
     ];
 
-    public function __construct(Product $product)
-    {
-        $this->product = $product;
-    }
-
     public function type()
     {
-        return $this->product->subcategory;
+        return $this->subcategory;
     }
 
     public function getWays()
@@ -38,7 +33,7 @@ class WaysOfCooking extends Model
             return $this->ways[$this->type()];
         }
 
-        return null;
+        return [];
     }
 
 }
