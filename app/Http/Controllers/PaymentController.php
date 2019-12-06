@@ -58,7 +58,7 @@ class PaymentController extends Controller
             $error_message = 'Sorry but You can\'t pick up earlier than ' . $now->toTimeString();
         }
 
-        return [$error, $error_message];
+        return ['error' => $error, 'error_message' => $error_message];
     }
     /**
      * Store a newly created resource in storage.
@@ -70,15 +70,15 @@ class PaymentController extends Controller
     {
         $errors = $this->checkTimeValidity($request);
 
-        if ((request('order_type') === 'Pick-up') && ($errors[0])) {
-            return redirect('/checkout')->with('error_message', $errors[1]);
+        if ((request('order_type') === 'Pick-up') && ($errors['error'])) {
+            return redirect('/checkout')->with('error_message', $errors['error_message']);
         }
 
-        try {
-            (new Payments())->validateStripePayment($request);
-        } catch (\Exception $e) {
-            return back()->with(['error_message' => $e->getMessage()]);
-        }
+        // try {
+        //     (new Payments())->validateStripePayment($request);
+        // } catch (\Exception $e) {
+        //     return back()->with(['error_message' => $e->getMessage()]);
+        // }
 
         try {
             $this->processOrder($request);
@@ -136,10 +136,24 @@ class PaymentController extends Controller
             'taxes' => $taxes,
             'comments' => request('comments')
         ]);
+// TODO: Fix option way of doing this.
+foreach ($cart as $row) {
+    if ($row['options']['options']['options']) {
+        foreach ($row['options']['options']['options'] as $option) {
+            dump($option['name']);
+        }
+    }
 
+}
+
+die();
+        $way = null;
+        if ($row['options']['options']['way']) {
+            $way = $row['options']['options']['way'];
+        }
         foreach ($cart as $row) {
-            if ($row['options'] != []) {
-                foreach ($row['options'] as $option) {
+            if ($row['options']['options']['options']) {
+                foreach ($row['options']['options']['options'] as $option) {
                     OrderDetail::create([
                         'order_id' => $order->id,
                         'product_id' => $row['id'],
@@ -147,6 +161,7 @@ class PaymentController extends Controller
                         'cart_row_id' => $row['rowId'],
                         'option_group_id' => $option['pivot']['option_group_id'],
                         'option_id' => $option['id'],
+                        'wayofcooking' => $way
                     ]);
                 }
             } else {

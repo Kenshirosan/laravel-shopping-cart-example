@@ -21,7 +21,8 @@
                             <p>{{ item.name }}</p>
                         </td>
                         <td v-if="item.options">
-                            <p><strong v-for="option in item.options">{{ option.name }}, </strong></p>
+                            <p><strong v-for="option in item.options['options']['options']">{{ option.name }}, </strong></p>
+                            <p><strong v-if="item.options['options']['way']">{{ item.options['options']['way'] }} </strong></p>
                         </td>
                         <td>
                             <p>{{ item.qty }}</p>
@@ -57,9 +58,9 @@
 
         created() {
             window.events.$on(
-                    'productadded', () => {
-                this.add(this.products)
-            }
+                'productadded', () => {
+                    this.add(this.products)
+                }
             );
         },
 

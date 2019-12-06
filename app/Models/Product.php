@@ -5,7 +5,7 @@ namespace App\Models;
 use DB;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends WaysOfCooking
+class Product extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -25,6 +25,36 @@ class Product extends WaysOfCooking
         'description',
         'price',
         'image'
+    ];
+
+    /**
+     * @array ways of cooking food
+     */
+    protected $ways = [
+        'Meat' => [
+            'Rare',
+            'Medium Rare',
+            'Medium',
+            'Medium Well',
+            'Well Done'
+        ],
+        'Eggs' => [
+            'Sunny Side',
+            'Hard Boiled',
+            'Soft Boiled',
+            'Scrambled'
+        ],
+        'Chicken' => [
+            'Roasted',
+            'Sauteed',
+            'Fried'
+        ],
+        'Fish' => [
+            'Pan Seared',
+            'Sushi',
+            'Roasted',
+            'Grilled'
+        ]
     ];
 
     protected $appends = ['is_on_sale', 'favoritesCount', 'isFavorited'];
@@ -124,8 +154,17 @@ class Product extends WaysOfCooking
                 $this->regularPrice();
     }
 
+    /**
+     * @return json
+     */
     public function getWaysOfCooking()
     {
-        return json_encode($this->getWays());
+        $type = $this->type;
+
+        if(array_key_exists($type, $this->ways)) {
+            return json_encode($this->ways[$type]);
+        }
+
+        return [];
     }
 }

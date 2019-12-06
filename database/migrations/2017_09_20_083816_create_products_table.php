@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('name')->unique();
             $table->boolean('holiday_special')->default(false);
             $table->unsignedInteger('category_id')->index();
-            $table->string('subcategory');
+            $table->string('type');
             $table->string('slug')->unique();
             $table->text('description');
             $table->integer('price');

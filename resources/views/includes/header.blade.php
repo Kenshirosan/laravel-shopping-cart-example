@@ -8,6 +8,7 @@
                     <i class="material-icons">menu</i>
                 </a>
                 <ul class="right hide-on-med-and-down">
+{{-- TODO: correct this syntax --}}
                     @if( App\Models\Product::where('holiday_special', true)->exists() && $title != null)
                         <li class="{{ set_active('/holidays-special') }}">
                             <a href="{{ url('/holidays-special') }}">{{ $title }}</a>

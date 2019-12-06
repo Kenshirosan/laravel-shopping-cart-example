@@ -83,7 +83,7 @@
             },
 
             resetWay() {
-                this.ways = [];
+                this.way = '';
             },
 
             getOptionsArray() {

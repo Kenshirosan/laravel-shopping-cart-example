@@ -32,9 +32,7 @@
                         <td>
                             <a href="{{ url('shop', [$item->model->slug]) }}">
                                 <p>{{ $item->name }}</p>
-                                @foreach($item->options as $option)
-                                    <small>{{ $option['name'] }}</small><br>
-                                @endforeach
+                                @include('includes.cart-content-options')
                             </a>
                         </td>
                         <td>

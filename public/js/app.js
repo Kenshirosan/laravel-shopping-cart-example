@@ -81827,7 +81827,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             this.option = [];
         },
         resetWay: function resetWay() {
-            this.ways = [];
+            this.way = '';
         },
         getOptionsArray: function getOptionsArray() {
             var _this2 = this;
@@ -82305,6 +82305,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['items', 'total'],
@@ -82425,13 +82426,25 @@ var render = function() {
                     ? _c("td", [
                         _c(
                           "p",
-                          _vm._l(item.options, function(option) {
+                          _vm._l(item.options["options"]["options"], function(
+                            option
+                          ) {
                             return _c("strong", [
                               _vm._v(_vm._s(option.name) + ", ")
                             ])
                           }),
                           0
-                        )
+                        ),
+                        _vm._v(" "),
+                        _c("p", [
+                          item.options["options"]["way"]
+                            ? _c("strong", [
+                                _vm._v(
+                                  _vm._s(item.options["options"]["way"]) + " "
+                                )
+                              ])
+                            : _vm._e()
+                        ])
                       ])
                     : _vm._e(),
                   _vm._v(" "),

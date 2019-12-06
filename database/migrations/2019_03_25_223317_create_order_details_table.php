@@ -21,6 +21,7 @@ class CreateOrderDetailsTable extends Migration
             $table->string('cart_row_id');
             $table->unsignedInteger('option_group_id')->default(null);
             $table->unsignedInteger('option_id')->default(null);
+            $table->string('wayofcooking')->default(null);
 
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');

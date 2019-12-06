@@ -8,7 +8,7 @@ class Category extends Model
 {
     protected $fillable = ['name'];
 
-    protected $subcategories = ['Eggs', 'Meat'];
+    protected $subcategories = ['Eggs', 'Meat', 'Chicken', 'Fish', 'Seafood', 'Game'];
 
     public function products()
     {
