@@ -81476,6 +81476,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
 
 
 
@@ -81569,6 +81572,16 @@ var render = function() {
                                 _vm._v(
                                   "\n                        " +
                                     _vm._s(product.options) +
+                                    "\n                    "
+                                )
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          product.wayofcooking
+                            ? _c("small", { staticClass: "text-info" }, [
+                                _vm._v(
+                                  "\n                        , " +
+                                    _vm._s(product.wayofcooking) +
                                     "\n                    "
                                 )
                               ])
@@ -95987,6 +96000,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
 
 
 
@@ -96282,6 +96296,18 @@ var render = function() {
                                         [
                                           _c("strong", [
                                             _vm._v(_vm._s(product.options))
+                                          ])
+                                        ]
+                                      )
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  product.wayofcooking
+                                    ? _c(
+                                        "small",
+                                        { staticClass: "text-white" },
+                                        [
+                                          _c("strong", [
+                                            _vm._v(_vm._s(product.wayofcooking))
                                           ])
                                         ]
                                       )

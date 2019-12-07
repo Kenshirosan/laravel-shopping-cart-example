@@ -81,6 +81,7 @@
                             <div class="text-white" v-for="product in item.products">
                                 <h4><strong>{{ product.qty}} {{ product.product_name }}</strong>
                                     <small class="text-white" v-if="product.options"><strong>{{ product.options }}</strong></small>
+                                    <small class="text-white" v-if="product.wayofcooking"><strong>{{ product.wayofcooking }}</strong></small>
                                 </h4>
                             </div>
                             <h4 class="text-primary">
@@ -124,10 +125,10 @@
 
 <script>
     import filters from '../../mixins/filters';
-    
+
     export default {
         mixins: [filters],
-        
+
         props: ['id', 'findaname', 'url', 'data'],
 
         data() {

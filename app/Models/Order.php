@@ -53,7 +53,7 @@ class Order extends Model
         $sql_results =  DB::select(
             '
                     SELECT
-                        od.qty, od.cart_row_id, p.name product, op.name option
+                        od.qty, od.cart_row_id, od.wayofcooking, p.name product, op.name option
                     FROM
                             order_details od
                     LEFT JOIN orders o ON
@@ -87,6 +87,13 @@ class Order extends Model
             }
 
             $products[$sql_result['cart_row_id']][$option_name] = $option_value;
+
+            $wayofcooking = $sql_result['wayofcooking'];
+            if (array_key_exists($wayofcooking, $products[$sql_result['cart_row_id']])) {
+                $wayofcooking = $products[$sql_result['cart_row_id']]['wayofcooking'];
+            }
+
+            $products[$sql_result['cart_row_id']]['wayofcooking'] = $wayofcooking;
         }
         return $products;
     }

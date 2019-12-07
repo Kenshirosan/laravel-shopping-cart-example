@@ -29,6 +29,7 @@
                         <h4 class="text-info"><strong class="text-primary">{{ $order_detail['qty'] }}</strong>
                             {{ $order_detail['product_name'] }}
                             @if($order_detail['options']): {{ $order_detail['options'] }} @endif
+                            @if($order_detail['wayofcooking']): {{ $order_detail['wayofcooking'] }} @endif
                         </h4>
                     @endforeach
                 </td>

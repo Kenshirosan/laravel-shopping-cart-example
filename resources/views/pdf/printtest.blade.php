@@ -29,6 +29,7 @@
                         <th><strong>Qty</strong></th>
                         <th><strong>Product</strong></th>
                         <th><strong>Options</strong></th>
+                        <th><strong>Cooked</strong></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,6 +37,7 @@
                         <td><strong class="text-info">{{ $order_detail['qty'] }}</strong></td>
                         <td><strong class="text-info">{{ $order_detail['product_name'] }}</strong></td>
                         <td><strong class="text-info">{{ $order_detail['options'] ? $order_detail['options'] : 'n/a' }}</strong></td>
+                        <td><strong class="text-info">{{ $order_detail['wayofcooking'] ? $order_detail['wayofcooking'] : 'n/a' }}</strong></td>
                     </tr>
                 </tbody>
             </table>

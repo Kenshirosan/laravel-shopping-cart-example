@@ -65,8 +65,8 @@ class ProductController extends Controller
             'name' => ucfirst(request('name')),
             'holiday_special' => request('holiday_special'),
             'category_id' => request('category_id'),
-            'subcategory' => request('subcategory'),
             'slug' => request('slug'),
+            'type' => request('type'),
             'description' => request('description'),
             'price' => request('price'),
             'image' => $image

@@ -47,12 +47,6 @@ class CartController extends Controller {
             return response('You\'ve reached the maximum quantity allowed', 403);
         }
 
-
-        if( ($request->option == null) && ($request->way == null) ) {
-            Cart::add($request->id, $request->name, 1, $request->price / 100, 0, ['options' => ['options' => [], 'way' => '']])->associate(Product::class);
-            return response([], 200);
-        }
-
         Cart::add($request->id, $request->name, 1, $request->price / 100, 0, ['options' => ['options' => $request->option, 'way' => $request->way ] ])->associate(Product::class);
 
         return response([], 200);

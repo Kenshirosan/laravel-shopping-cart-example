@@ -7,7 +7,8 @@ You paid : {{ $order->price() }} for
 @foreach($order->products as $order_detail)
     {{ $order_detail['qty'] }}
     {{ $order_detail['product_name'] }}
-    @if($order_detail['options']): {{ $order_detail['options'] }} @endif
+    @if($order_detail['options']) {{ $order_detail['options'] }} @endif
+    @if($order_detail['wayofcooking'])Cooked: {{ $order_detail['wayofcooking'] }} @endif
 @endforeach
 
 @if($order->order_type === 'Pick-up')

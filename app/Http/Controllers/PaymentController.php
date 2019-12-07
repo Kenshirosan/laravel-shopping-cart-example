@@ -73,7 +73,7 @@ class PaymentController extends Controller
         if ((request('order_type') === 'Pick-up') && ($errors['error'])) {
             return redirect('/checkout')->with('error_message', $errors['error_message']);
         }
-
+// ICI A REMETTRE
         // try {
         //     (new Payments())->validateStripePayment($request);
         // } catch (\Exception $e) {
@@ -136,22 +136,13 @@ class PaymentController extends Controller
             'taxes' => $taxes,
             'comments' => request('comments')
         ]);
+// ICI A CHANGER
 // TODO: Fix option way of doing this.
-foreach ($cart as $row) {
-    if ($row['options']['options']['options']) {
-        foreach ($row['options']['options']['options'] as $option) {
-            dump($option['name']);
-        }
-    }
-
-}
-
-die();
-        $way = null;
-        if ($row['options']['options']['way']) {
-            $way = $row['options']['options']['way'];
-        }
         foreach ($cart as $row) {
+            $way = null;
+            if ($row['options']['options']['way']) {
+                $way = $row['options']['options']['way'];
+            }
             if ($row['options']['options']['options']) {
                 foreach ($row['options']['options']['options'] as $option) {
                     OrderDetail::create([
@@ -164,12 +155,14 @@ die();
                         'wayofcooking' => $way
                     ]);
                 }
-            } else {
+            }
+            else {
                 OrderDetail::create([
                     'order_id' => $order->id,
                     'product_id' => $row['id'],
                     'qty' => $row['qty'],
                     'cart_row_id' => $row['rowId'],
+                    'wayofcooking' => $way
                 ]);
             }
         }

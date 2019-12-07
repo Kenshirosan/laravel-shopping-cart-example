@@ -35,7 +35,8 @@
                             <p>
                                 <strong class="text-primary">{{ $order_detail['qty'] }}</strong>
                                 {{ $order_detail['product_name'] }}
-                                @if($order_detail['options']): {{ $order_detail['options'] }} @endif
+                                @if($order_detail['options'])<p>{{ $order_detail['options'] }} </p>@endif
+                                @if($order_detail['wayofcooking'])<p>Cooked: {{ $order_detail['wayofcooking'] }} </p>@endif
                             </p>
                             @endforeach
                             @if($order->order_type === 'Delivery')

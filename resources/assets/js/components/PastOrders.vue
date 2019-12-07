@@ -16,6 +16,9 @@
                         <small v-if="product.options" class="text-info">
                             {{ product.options }}
                         </small>
+                        <small v-if="product.wayofcooking" class="text-info">
+                            , {{ product.wayofcooking }}
+                        </small>
                     </p>
                 </div>
                 <p>${{ order.price | formatted }}</p>
@@ -43,7 +46,7 @@
 </template>
 
 <script>
-    
+
 import filters from '../mixins/filters';
 
 import moment from 'moment';
