@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 use DB;
 
 class Order extends Model
@@ -205,10 +206,10 @@ class Order extends Model
     {
         $taxcollection = [];
         foreach ($this->totalOrders()->values() as $taxes) {
-            array_push($taxcollection, $taxes * 0.08);
+            $taxcollection[] = $taxes * 0.08;
         }
-        $taxcollection = collect($taxcollection);
-        return $taxcollection;
+
+        return collect($taxcollection);
     }
 
     public function totalOrdersYearBefore()
@@ -224,11 +225,10 @@ class Order extends Model
     {
         $taxcollectionYearBefore = [];
         foreach ($this->totalOrdersYearBefore()->values() as $taxes) {
-            array_push($taxcollectionYearBefore, $taxes * 0.08);
+            $taxcollectionYearBefore[] = $taxes * 0.08;
         };
 
-        $taxcollectionYearBefore = collect($taxcollectionYearBefore);
-        return $taxcollectionYearBefore;
+        return collect($taxcollectionYearBefore);
     }
 
     public function averageOrder()
