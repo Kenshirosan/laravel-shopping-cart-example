@@ -184,7 +184,7 @@ class PaymentController extends Controller
 
         event(new UserOrdered($order)); // ready for real-time :) fully working !!
         (new Logger('Une commande a ete passe'));
-        (new Logger('Une commande a ete passe', 'erreur testing'));
+        
         $user_email = auth()->user()->email;
         if(env('APP_ENV') == 'local') {
             $user_email = env('MAIL_FROM_ADDRESS');
