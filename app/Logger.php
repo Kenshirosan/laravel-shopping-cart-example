@@ -47,9 +47,7 @@ class Logger extends Model
 
     public function logError($param, $error)
     {
-        $this->error = $error;
-
-        return $this->format($param, $this->error)->emailError($param, $error);
+        return $this->format($param, $error)->emailError($param, $error);
     }
 
     public function emailError($param, $error)
@@ -57,7 +55,7 @@ class Logger extends Model
         $args = func_get_args();
 
         if(file_put_contents('logs/errorlog.txt', $this->string, FILE_APPEND)) {
-            Mail::to('laurent@marseille-web.fr')->send(new ErrorMail($args));
+            Mail::to(env('MAIL_FROM_ADDRESS'))->send(new ErrorMail($args));
             return response(['Message' => 'An email has been sent to the site admin'], 200);
 
         }
@@ -69,9 +67,9 @@ class Logger extends Model
         $no_of_lines = [];
 
         foreach (glob("logs/*.txt") as $filename) {
-            $no_of_lines[] = $filename . ' has ' . count(file($filename)) . ' Lines';
-            $logs[] = $filename;
-            echo "$filename size " . filesize($filename) . "\r\n";
+            if(count(file($filename))) {
+                $logs[] = $filename;
+            }
         }
 
         foreach($logs as $log) {
