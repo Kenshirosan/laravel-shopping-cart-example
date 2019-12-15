@@ -50,4 +50,8 @@ Route::middleware(['auth', 'must-be-confirmed', 'employee', 'admin'])->group(fun
     Route::delete('/sales/{saleId}', 'SalesController@destroy');
     Route::get('/front-page-title', 'FrontPageController@index');
     Route::post('/front-page-title', 'FrontPageController@store');
+
+    Route::get('/logs', function() {
+        return App\Logger::readLogs();
+    });
 });

@@ -39,7 +39,7 @@ class Logger extends Model
     {
         $this->format($param);
 
-        if (file_put_contents('logs/log.txt', $this->string, FILE_APPEND)) {
+        if (file_put_contents('../logs/log.txt', $this->string, FILE_APPEND)) {
             echo 'Done';
         }
 
@@ -47,14 +47,14 @@ class Logger extends Model
 
     public function logError($param, $error)
     {
-        return $this->format($param, $error)->emailError($param, $error);
+        return $this->format($param, $error)->emailError($param, $this->error);
     }
 
     public function emailError($param, $error)
     {
         $args = func_get_args();
 
-        if(file_put_contents('logs/errorlog.txt', $this->string, FILE_APPEND)) {
+        if(file_put_contents('../logs/errorlog.txt', $this->string, FILE_APPEND)) {
             Mail::to(env('MAIL_FROM_ADDRESS'))->send(new ErrorMail($args));
             return response(['Message' => 'An email has been sent to the site admin'], 200);
 
@@ -66,7 +66,7 @@ class Logger extends Model
         $logs = [];
         $no_of_lines = [];
 
-        foreach (glob("logs/*.txt") as $filename) {
+        foreach (glob("../logs/*.txt") as $filename) {
             if(count(file($filename))) {
                 $logs[] = $filename;
             }
@@ -76,6 +76,5 @@ class Logger extends Model
             Reader::readFiles($log);
         }
 
-        return ['logs' => $logs, 'count' => $no_of_lines];
     }
 }

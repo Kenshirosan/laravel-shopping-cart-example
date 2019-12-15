@@ -264,6 +264,13 @@ return [
                     'icon_color' => 'danger'
                 ],
             ],
+        ],
+        [
+            'text' => 'Logs',
+            'icon' => 'file',
+            'icon_color' => 'aqua',
+            'url'  => '/logs',
+            'can' => 'see-admin-menu'
         ]
     ],
 

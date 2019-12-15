@@ -10,6 +10,7 @@ use App\Models\OrderDetail;
 use App\Models\Promocode;
 use App\Payments\Payments;
 use App\User;
+use App\Logger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -74,15 +75,18 @@ class PaymentController extends Controller
             return redirect('/checkout')->with('error_message', $errors['error_message']);
         }
 // ICI A REMETTRE
-        // try {
-        //     (new Payments())->validateStripePayment($request);
-        // } catch (\Exception $e) {
-        //     return back()->with(['error_message' => $e->getMessage()]);
-        // }
+         try {
+             (new Payments())->validateStripePayment($request);
+             (new Logger('Payment successful'));
+         } catch (\Exception $e) {
+             (new Logger('Something wrong happened with the payment of an order', 'Error, please check your site.'));
+             return back()->with(['error_message' => $e->getMessage()]);
+         }
 
         try {
             $this->processOrder($request);
         } catch (\Exception $e) {
+            (new Logger('Something wrong happened while processing and order', 'Error, please check your site.'));
             return back()->with(['error_message' => $e->getMessage()]);
         }
 
@@ -179,8 +183,14 @@ class PaymentController extends Controller
         }
 
         event(new UserOrdered($order)); // ready for real-time :) fully working !!
+        (new Logger('Une commande a ete passe'));
+        (new Logger('Une commande a ete passe', 'erreur testing'));
+        $user_email = auth()->user()->email;
+        if(env('APP_ENV') == 'local') {
+            $user_email = env('MAIL_FROM_ADDRESS');
+        }
 
-        return Mail::to(auth()->user()->email)->send(new ThankYou($order));
+        return Mail::to($user_email)->send(new ThankYou($order));
     }
 
     /**
