@@ -31,30 +31,30 @@ Features :
 
 
 download or clone then
-```
+```sh
 cd path/to/app
 ```
-```
+```sh
 npm install && npm run dev
 ```
-```
+```sh
 composer install
 ```
-```
+```sh
 mv .env.example .env && vim .env
 ```
 update database info, stripe keys, pusher keys, mail driver, keys, username, and analytics key.
 update pusher key in bootstrap.js (Echo).
 update stripe key in CheckoutForm.vue
-```
+```sh
 php artisan key:generate
 ```
-```
+```sh
 php artisan config:cache
 ```
-```
+```sh
 php artisan migrate
 ```
-```
+```sh
 php artisan serve
 ```

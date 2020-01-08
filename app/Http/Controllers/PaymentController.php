@@ -74,7 +74,7 @@ class PaymentController extends Controller
         if ((request('order_type') === 'Pick-up') && ($errors['error'])) {
             return redirect('/checkout')->with('error_message', $errors['error_message']);
         }
-// ICI A REMETTRE
+// Mettre un double try catch avec une transaction sql
          try {
              (new Payments())->validateStripePayment($request);
              (new Logger('Payment successful'));
@@ -184,7 +184,7 @@ class PaymentController extends Controller
 
         event(new UserOrdered($order)); // ready for real-time :) fully working !!
         (new Logger('Une commande a ete passe'));
-        
+
         $user_email = auth()->user()->email;
         if(env('APP_ENV') == 'local') {
             $user_email = env('MAIL_FROM_ADDRESS');

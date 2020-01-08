@@ -25,10 +25,10 @@ class Logger extends Model
     public function format($param, $error = null)
     {
         $date = date('Y-M-D H:i:s');
-        $string = '[' . $date . ']' . ' ' . $param . "\r\n";
+        $string = '[INFO ' . $date . ']' . ' ' . $param . "\r\n";
 
         if($error) {
-            $string = '[' . $date . ']' . ' ' . $param . ' ' . $error . "\r\n";
+            $string = '[[ERROR] ' . $date . ']' . ' ' . $param . ' ' . $error . "\r\n";
         }
 
         $this->string = $string;

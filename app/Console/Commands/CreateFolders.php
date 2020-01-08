@@ -37,6 +37,7 @@ class CreateFolders extends Command
      */
     public function handle()
     {
+        // changer la permission des dossiers
         $folder = $this->argument('folder');
         $this->info('Creating folder '. $folder);
         mkdir($folder);
