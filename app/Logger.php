@@ -25,7 +25,7 @@ class Logger extends Model
     public function format($param, $error = null)
     {
         $date = date('Y-M-D H:i:s');
-        $string = '[INFO ' . $date . ']' . ' ' . $param . "\r\n";
+        $string = '[[INFO] ' . $date . ']' . ' ' . $param . "\r\n";
 
         if($error) {
             $string = '[[ERROR] ' . $date . ']' . ' ' . $param . ' ' . $error . "\r\n";
@@ -56,25 +56,17 @@ class Logger extends Model
 
         if(file_put_contents('../logs/errorlog.txt', $this->string, FILE_APPEND)) {
             Mail::to(env('MAIL_FROM_ADDRESS'))->send(new ErrorMail($args));
-            return response(['Message' => 'An email has been sent to the site admin'], 200);
+            return response(['Message' => 'Something went wrong, an email has been sent to the site admin'], 200);
 
         }
     }
 
     public static function readLogs()
     {
-        $logs = [];
-        $no_of_lines = [];
-
         foreach (glob("../logs/*.txt") as $filename) {
             if(count(file($filename))) {
-                $logs[] = $filename;
+                Reader::readFiles($filename);
             }
         }
-
-        foreach($logs as $log) {
-            Reader::readFiles($log);
-        }
-
     }
 }
