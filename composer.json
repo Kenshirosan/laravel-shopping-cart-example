@@ -6,22 +6,23 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
-        "barryvdh/laravel-dompdf": "^0.8.3",
-        "bumbummen99/shoppingcart": "^2.8",
+        "barryvdh/laravel-dompdf": "^0.8.6",
+        "bumbummen99/shoppingcart": "^2.9",
         "fideloper/proxy": "~4.1",
         "intervention/image": "^2.4",
-        "jeroennoten/laravel-adminlte": "^1.24",
-        "laravel/framework": "5.8.*",
-        "laravel/tinker": "~1.0",
-        "pusher/pusher-php-server": "^3.3",
-        "spatie/laravel-analytics": "^3.6",
-        "stripe/stripe-php": "^6.29",
-        "zgabievi/promocodes": "^2.1"
+        "jeroennoten/laravel-adminlte": "^3.1",
+        "laravel/framework": "^7.0",
+        "laravel/tinker": "^2.0",
+        "laravel/ui": "^2.0",
+        "pusher/pusher-php-server": "^4.1",
+        "spatie/laravel-analytics": "^3.9",
+        "stripe/stripe-php": "^7.28",
+        "zgabievi/promocodes": "^2.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.8",
         "mockery/mockery": "1.2.*",
-        "phpunit/phpunit": "~7.2"
+        "phpunit/phpunit": "^8.5"
     },
     "autoload": {
         "classmap": [

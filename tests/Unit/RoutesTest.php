@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Unit;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -9,8 +9,8 @@ class RoutesTest extends TestCase
 {
     use DatabaseMigrations;
 
-     /** @test */
-    function any_user_may_not_navigate_admin_pages()
+
+    function testAnyUserMayNotNavigateAdminPages()
     {
         $response = $this->get('/');
         $response->assertRedirect('/shop');
@@ -45,8 +45,8 @@ class RoutesTest extends TestCase
         $this->get('/edit-css')->assertStatus(404);
     }
 
-    /** @test */
-    function auth_users_may_not_navigate_admin_pages()
+
+    function testAuthUsersMayNotNavigateAdminPages()
     {
         $this->signIn();
         $this->withExceptionHandling();
@@ -83,8 +83,8 @@ class RoutesTest extends TestCase
         $this->get('/edit-css')->assertStatus(404);
     }
 
-    /** @test */
-    function employees_may_not_navigate_admin_pages()
+
+    function testEmployeesMayNotNavigateAdminPages()
     {
         $this->withExceptionHandling();
 
@@ -116,8 +116,8 @@ class RoutesTest extends TestCase
         $this->get('/edit-css')->assertStatus(404);
     }
 
-    /** @test */
-    function admin_may_act_like_a_god()
+
+    function testAdminMayActLikeAGod()
     {
         $this->withExceptionHandling();
 

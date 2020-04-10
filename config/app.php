@@ -153,7 +153,7 @@ return [
          */
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        JeroenNoten\LaravelAdminLte\ServiceProvider::class,
+        JeroenNoten\LaravelAdminLte\AdminLteServiceProvider::class,
         Laravel\Tinker\TinkerServiceProvider::class,
         // Gabievi\Promocodes\PromocodesServiceProvider::class,
         Spatie\Analytics\AnalyticsServiceProvider::class,

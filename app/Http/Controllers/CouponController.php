@@ -31,7 +31,7 @@ class CouponController extends Controller
 
     /**
      * Store new coupons
-     * 
+     *
      * @param CouponRequest $request
      * @return json response
      */
@@ -85,7 +85,7 @@ class CouponController extends Controller
         $total = intval($subtotal + $taxes, 0);
 
         session()->flash('flash', 'Your coupon has been applied, Please do not leave this page');
-        // that shit has crached sometimes and I dunno why.. URL related, sent a response code of 1, then started working again.. hhhhhmmmmmmmm
+        // that shit has crashed sometimes and I dunno why.. URL related, sent a response code of 1, then started working again.. hhhhhmmmmmmmm
         return view('layouts.payment_form', compact('total', 'discount', 'code'));
         // return redirect('/checkout')->with(compact('total', 'discount', 'code'));
     }

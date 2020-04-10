@@ -20,3 +20,4 @@ nbproject/
 .idea/
 /nbproject/private/
 /logs
+/Http/Controllers/.php_cs.cache

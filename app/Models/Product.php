@@ -142,7 +142,7 @@ class Product extends Model
 
     public function regularPrice()
     {
-        return money_format('%i', $this->price / 100);
+        return sprintf('%01.2f', $this->price / 100);
     }
 
     public function price()
@@ -154,9 +154,6 @@ class Product extends Model
                 $this->regularPrice();
     }
 
-    /**
-     * @return json
-     */
     public function getWaysOfCooking()
     {
         $type = $this->type;
