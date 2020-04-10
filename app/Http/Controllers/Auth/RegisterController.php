@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -67,7 +68,7 @@ class RegisterController extends Controller
         $user = User::create([
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'confirmation_token' => str_limit($data['email'] . hash('sha256', $data['email'] . str_random()), 100)
+            'confirmation_token' => Str::limit($data['email'] . hash('sha256', $data['email'] . Str::random()), 100)
         ]);
 
         $email = $data['email'];
