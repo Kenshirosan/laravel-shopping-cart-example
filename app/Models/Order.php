@@ -171,7 +171,7 @@ class Order extends Model
 
     public function price()
     {
-        return money_format('$%i', ($this->price));
+        return sprintf('$%01.2f', $this->price);
     }
 
     public function tax()
@@ -181,7 +181,7 @@ class Order extends Model
 
     public function subtotal()
     {
-        return money_format('$%i', ($this->price - $this->taxes));
+        return sprintf('$%01.2f', $this->price - $this->taxes);
     }
 
     public function yearlyTotal()

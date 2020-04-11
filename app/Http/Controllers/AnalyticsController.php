@@ -8,6 +8,7 @@ class AnalyticsController extends Controller
 {
     public function index()
     {
+        //TODO: implement private analytics with apache.
         $dates = collect(date('Y'));
         $pageviews = collect(1);
         $sessions = collect(1);

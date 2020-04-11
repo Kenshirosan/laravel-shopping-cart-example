@@ -149,9 +149,9 @@ class Product extends Model
     {
         return $this->is_on_sale
             ?
-                $this->regularPrice() - ($this->regularPrice() * $this->getRawSalesPercentage())
+                '$' . ($this->regularPrice() - ($this->regularPrice() * $this->getRawSalesPercentage()))
             :
-                $this->regularPrice();
+                '$' . $this->regularPrice();
     }
 
     public function getWaysOfCooking()
