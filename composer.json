@@ -15,7 +15,6 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "pusher/pusher-php-server": "^4.1",
-        "spatie/laravel-analytics": "^3.9",
         "stripe/stripe-php": "^7.28",
         "zgabievi/promocodes": "^2.3"
     },

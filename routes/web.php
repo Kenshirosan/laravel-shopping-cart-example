@@ -1,5 +1,9 @@
 <?php
 
+Route::get('/apache', function(){
+   return apache_get_modules();
+});
+
 Route::get('/config', function () {
     try {
         Artisan::call('config:cache');
