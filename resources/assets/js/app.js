@@ -15,7 +15,7 @@ Vue.component('yearly-stats', require('./components/YearlyStats.vue'));
 Vue.component('analytics', require('./components/Analytics.vue'));
 Vue.component('toggle', require('./components/Toggle.vue'));
 Vue.component("Wysiwig", require("./components/Wysiwig.vue"));
-Vue.component('add-holiday-title', require('./components/AddHolidayTitle'))
+Vue.component('add-holiday-title', require('./components/AddHolidayTitle'));
 Vue.component('add-options', require('./components/AddOptions'));
 Vue.component('add-option-group', require('./components/AddOptionGroup'));
 Vue.component('latest-orders', require('./components/LatestOrders'));
