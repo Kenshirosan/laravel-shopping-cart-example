@@ -7,7 +7,7 @@
 </template>
 
 <script>
-    require('fullcalendar');
+    import fullcalendar from "fullcalendar";
 
     export default {
         $('#calendar').fullCalendar({});
@@ -15,7 +15,8 @@
 </script>
 
 <script>
-import swal from 'sweetalert';
+
+// import swal from 'sweetalert';
 
 $(function () {
     /* initialize the external events
@@ -197,6 +198,6 @@ $(function () {
 
         //Remove event from text input
         $('#new-event').val('')
-    })
-})
+    });
+});
 </script>

@@ -14,7 +14,7 @@
 </template>
 
 <style lang="scss">
-    @import '~trix/dist/trix.css';
+    @import '../../../node_modules/trix/dist/trix.css';
     trix-editor {
         height: 40em;
     }

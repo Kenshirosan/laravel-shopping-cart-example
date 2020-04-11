@@ -25,7 +25,7 @@ if (token) {
 }
 
 
-window.moment = require('moment');
+window.moment = require('../..//bower_components/moment/moment.js');
 window.Vue = require('vue');
 
 window.events = new Vue();
