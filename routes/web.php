@@ -39,7 +39,6 @@ Route::get('/count', function(){
     return Cart::count();
 });
 
-
 // ppl playing with shopping cart
 Route::resource('/shop', 'ShopController', ['only' => ['index', 'show']]);
 Route::resource('/cart', 'CartController');

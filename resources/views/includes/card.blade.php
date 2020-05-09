@@ -1,14 +1,14 @@
 <div class="card">
-    @if($product->is_on_sale)
-        <div class="sales">
-            <h2>{{ $product->getSalesPercentage() }}% Off!
-                <span><small>was ${{ $product->regularPrice() }}</small></span>
-            </h2>
-        </div>
-    @endif
     <div class="card-image waves-effect waves-light waves-block">
+        @if($product->is_on_sale)
+            <div class="sales">
+                <h2>{{ $product->getSalesPercentage() }}% Off!
+                    <span><small>was ${{ $product->regularPrice() }}</small></span>
+                </h2>
+            </div>
+        @endif
         <img class="activator" src="/img/{{ $product->image }}" alt="Picture of {{ $product->name }}">
-        <span class="card-title white black-text"><strong>${{ $product->price() }}</strong></span>
+        <span class="card-title white black-text"><strong>{{ $product->price() }}</strong></span>
     </div>
     <div class="card-content">
         <span class="card-title activator left cyan-text">{{ $product->name }}

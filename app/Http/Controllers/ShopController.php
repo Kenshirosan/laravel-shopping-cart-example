@@ -17,12 +17,13 @@ class ShopController extends Controller
     */
     public function index()
     {
-
         $categories = Category::with(['products' => function ($query) {
             $query->where('holiday_special', false)->with('sales')->with('groups');
         }])->get();
 
         if (request()->wantsJson()) {
+            header('Content-Type: application/json');
+            header("Access-Control-Allow-Origin: *");
             return response($categories, 200);
         }
 

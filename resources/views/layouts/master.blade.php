@@ -29,12 +29,13 @@
     @yield('landing-css')
 
     <!-- Favicon and Apple Icons -->
-    <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}">
+    {{-- <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}"> --}}
     {{-- Stripe recommends to put this script in head tags on all pages, helps ID not good behaviors --}}
     <script src="https://js.stripe.com/v3/"></script>
 </head>
     <body>
         <div id="app">
+            <div class="skewed"></div>
             @include('includes.header')
             @include('includes.messages')
             @yield('content')

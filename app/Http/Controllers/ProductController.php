@@ -72,14 +72,16 @@ class ProductController extends Controller
             'image' => $image
         ]);
 
-        foreach ($request['option_group_id'] as $group) {
-            if(!$group) {
-                foreach ($product->groups as $groups) {
-                    $product->groups()->detach($groups);
+        if($request['option_group_id']) {
+            foreach ($request['option_group_id'] as $group) {
+                if(!$group) {
+                    foreach ($product->groups as $groups) {
+                        $product->groups()->detach($groups);
+                    }
                 }
-            }
-            if($group !== null) {
-                $product->groups()->sync($request['option_group_id']);
+                if($group !== null) {
+                    $product->groups()->sync($request['option_group_id']);
+                }
             }
         }
 

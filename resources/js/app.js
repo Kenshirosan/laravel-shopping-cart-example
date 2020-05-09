@@ -1,6 +1,5 @@
 import './bootstrap';
 
-
 Vue.component('adminflash', require('./components/AdminFlash.vue').default);
 Vue.component('flash', require('./components/Flash.vue').default);
 Vue.component('cart-counter', require('./components/CartCounter.vue').default);
