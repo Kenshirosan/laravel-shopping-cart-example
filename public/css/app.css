@@ -8948,10 +8948,6 @@ input:valid + span.validity:before {
 
 img.product-layout-img,
 .scale_when_hover {
-  z-index: 1000;
-  text-transform: uppercase;
-  box-shadow: 0px 17px 10px -10px rgba(0, 0, 0, 0.4);
-  cursor: pointer;
   transition: all ease-in-out 300ms;
 }
 

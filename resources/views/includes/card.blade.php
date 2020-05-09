@@ -7,7 +7,7 @@
                 </h2>
             </div>
         @endif
-        <img class="activator" src="/img/{{ $product->image }}" alt="Picture of {{ $product->name }}">
+        <img class="activator scale_when_hover" src="/img/{{ $product->image }}" alt="Picture of {{ $product->name }}">
         <span class="card-title white black-text"><strong>{{ $product->price() }}</strong></span>
     </div>
     <div class="card-content">
@@ -22,7 +22,7 @@
     </div>
 
     <div class="card-action">
-        <a class="activator" href="#!">Read More</a>
+        <a class="activator readmore" href="#!">Read More</a>
         <favorite class="ml-20" :product="{{ $product }}"></favorite>
         @if($_SERVER['REQUEST_URI'] != "/shop/$product->slug")
             <a class="btn cyan right" href="/shop/{{ $product->slug }}">View Product</a>
