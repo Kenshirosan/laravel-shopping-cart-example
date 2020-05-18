@@ -96,6 +96,8 @@ class UserController extends Controller
 
         if(\Hash::check(request('password'), $user->password)) {
             $this->validate($request, [
+                'name' => 'required|string',
+                'last_name' => 'required|string',
                 'address' =>'required|string',
                 'address2' => 'nullable|string',
                 'zipcode' => 'required|numeric',
@@ -104,12 +106,17 @@ class UserController extends Controller
                 'password' => 'required|string|confirmed'
             ]);
 
+            $user->update([
+                'name' => $request->name,
+                'last_name' => $request->last_name,
+                'address' => $request->address,
+                'address2' => $request->address2,
+                'zipcode' => $request->zipcode,
+                'phone_number' => formatPhoneNumber($request->phone_number),
+            ]);
+
             if ($user->email !== request('email')) {
                 $user->update([
-                    'address' => $request->address,
-                    'address2' => $request->address2,
-                    'zipcode' => $request->zipcode,
-                    'phone_number' => formatPhoneNumber($request->phone_number),
                     'email' => $request->email,
                     'confirmed' => false,
                     'confirmation_token' => str_limit($request->email . hash('sha256', $request->email . str_random()), 100)
@@ -119,20 +126,12 @@ class UserController extends Controller
                 auth()->logout();
 
                 return redirect('/shop')->with(['success_message' => 'Credentials successfully updated, You now need to confirm your new email address']);
-            } else {
-                $user->update([
-                    'name' => $request->name,
-                    'last_name' => $request->last_name,
-                    'address' => $request->address,
-                    'address2' => $request->address2,
-                    'zipcode' => $request->zipcode,
-                    'phone_number' => formatPhoneNumber($request->phone_number)
-                ]);
-
-                return redirect('/edit/profile')->with([
-                    'success_message' => 'Credentials successfully updated'
-                ]);
             }
+
+            return redirect('/edit/profile')->with([
+                'success_message' => 'Credentials successfully updated'
+            ]);
+
         }
         return back()->with('error_message', 'Something went wrong, Maybe you typed the wrong password');
     }

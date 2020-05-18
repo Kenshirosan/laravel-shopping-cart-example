@@ -14,8 +14,8 @@
             subtitle.innerText = ucfirst(response.data.subtitle);
             subtitle.style.color = response.data.color;
             document.body.style.backgroundColor = response.data.background_color;
+
             wells.forEach(well => {
-                console.log(response.data.categories_title_color)
                 well.querySelector('.category-title').style.color = response.data.categories_title_color;
                 well.style.backgroundColor = response.data.well_color;
             });

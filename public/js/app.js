@@ -18859,6 +18859,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['product', 'groups', 'options', 'waysofcooking'],
   data: function data() {
@@ -18873,35 +18877,43 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       price: this.product.sales ? this.product.price - this.product.price * this.product.sales.percentage : this.product.price
     };
   },
-  // TODO: Send the way of cooking
   methods: {
     addtocart: function addtocart() {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var options, data;
+        var options, ways, data;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 options = _this.optiongroups;
+                ways = _this.ways;
 
                 if (!(options != undefined && options.length > 0 && _this.option == '')) {
-                  _context.next = 3;
+                  _context.next = 4;
                   break;
                 }
 
-                return _context.abrupt("return", swal("Wait!", "Please pick an option for ".concat(_this.product.name), "warning"));
+                return _context.abrupt("return", swal("Attention!", "Choisissez 2 accompagnements maximum ".concat(_this.product.name), "warning"));
 
-              case 3:
+              case 4:
                 if (!(options != undefined && _this.option.length > 2)) {
-                  _context.next = 5;
+                  _context.next = 6;
                   break;
                 }
 
-                return _context.abrupt("return", swal("Wait!", "Two options maximum ".concat(_this.product.name), "warning"));
+                return _context.abrupt("return", swal("Attention!", "Deux accompagnements maximum ".concat(_this.product.name), "warning"));
 
-              case 5:
+              case 6:
+                if (!(ways != undefined && ways.length > 0 && _this.way == '')) {
+                  _context.next = 8;
+                  break;
+                }
+
+                return _context.abrupt("return", swal("Attention!", "Choisissez la cuisson pour ".concat(_this.product.name), "warning"));
+
+              case 8:
                 data = {
                   id: _this.id,
                   name: _this.name,
@@ -18910,17 +18922,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   way: _this.way,
                   price: _this.price
                 };
-                _context.next = 8;
+                _context.next = 11;
                 return axios.post('/cart', _this.$data).then(function (res) {
                   flash("".concat(_this.product.name, " was added to cart"));
                   productitemscountchanged();
 
-                  _this.resetOptions();
+                  _this.resetFields();
+
+                  document.getElementById("addtocart").reset();
                 })["catch"](function (err) {
                   return console.log(err);
                 });
 
-              case 8:
+              case 11:
               case "end":
                 return _context.stop();
             }
@@ -18928,10 +18942,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-    resetOptions: function resetOptions() {
+    resetFields: function resetFields() {
       this.option = [];
-    },
-    resetWay: function resetWay() {
       this.way = '';
     },
     getOptionsArray: function getOptionsArray() {
@@ -90630,7 +90642,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("form", { attrs: { id: "addtocart" } }, [
     _vm.options
       ? _c("div", { staticClass: "input-field col s12" }, [
           _vm.optiongroups.length
@@ -90674,7 +90686,7 @@ var render = function() {
                       staticClass: "black-text reset",
                       attrs: { value: "", disabled: "" }
                     },
-                    [_vm._v("Choose")]
+                    [_vm._v("Choisissez 1 ou 2 accompagnements")]
                   ),
                   _vm._v(" "),
                   _vm._l(_vm.optiongroups, function(option) {
@@ -90690,9 +90702,7 @@ var render = function() {
                 ],
                 2
               )
-            : _vm._e(),
-          _vm._v(" "),
-          _c("label", { attrs: { for: "options" } }, [_vm._v("Choose")])
+            : _vm._e()
         ])
       : _vm._e(),
     _vm._v(" "),
@@ -90734,7 +90744,7 @@ var render = function() {
                       staticClass: "black-text reset",
                       attrs: { value: "", disabled: "" }
                     },
-                    [_vm._v("How do you want it cooked ?")]
+                    [_vm._v("Choisissez la cuisson")]
                   ),
                   _vm._v(" "),
                   _vm._l(_vm.ways, function(way) {
@@ -90747,32 +90757,32 @@ var render = function() {
                 ],
                 2
               )
-            : _vm._e(),
-          _vm._v(" "),
-          _c("label", { attrs: { for: "ways" } }, [_vm._v("Choose")])
+            : _vm._e()
         ])
       : _vm._e(),
     _vm._v(" "),
-    _c(
-      "a",
-      {
-        staticClass:
-          "btn scale_when_hover waves-effect waves-light waves-green",
-        attrs: { type: "submit" },
-        on: {
-          click: function($event) {
-            $event.preventDefault()
-            return _vm.addtocart($event)
+    _c("small", [
+      _c(
+        "a",
+        {
+          staticClass:
+            "btn-small small scale_when_hover waves-effect waves-light waves-green",
+          attrs: { type: "submit" },
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              return _vm.addtocart($event)
+            }
           }
-        }
-      },
-      [
-        _c("i", { staticClass: "material-icons left" }, [
-          _vm._v("shopping_cart ")
-        ]),
-        _vm._v("Add To Cart")
-      ]
-    )
+        },
+        [
+          _c("i", { staticClass: "material-icons left" }, [
+            _vm._v("shopping_cart ")
+          ]),
+          _vm._v("Ajouter\n        ")
+        ]
+      )
+    ])
   ])
 }
 var staticRenderFns = []
@@ -91257,7 +91267,7 @@ var render = function() {
   return _c(
     "button",
     {
-      staticClass: "btn purple lighten-2",
+      staticClass: "btn-small purple lighten-2",
       attrs: { type: "submit" },
       on: { click: _vm.toggle }
     },

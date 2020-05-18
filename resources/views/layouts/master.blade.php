@@ -55,6 +55,7 @@
         @yield('title-script')
         @yield('about-script')
         @yield('dropdown')
+        @yield('menu-script')
         <script>
             // added this cause the page loads in the middle, dunno why... So auto scroll to top...
             (function() {

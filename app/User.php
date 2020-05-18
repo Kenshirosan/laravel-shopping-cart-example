@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Address;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -32,6 +33,18 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token', 'theboss', 'employee'
     ];
+
+    protected $appends = ['addresses'];
+
+    public function getAddressesAttribute()
+    {
+        return $this->addresses();
+    }
+
+    public function addresses()
+    {
+        return $this->belongsToMany(Address::class, 'address_user', 'user_id', 'address_id');
+    }
 
     public function isAdmin()
     {

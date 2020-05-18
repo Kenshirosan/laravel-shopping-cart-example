@@ -1,9 +1,5 @@
 <?php
 
-Route::get('/apache', function(){
-   return apache_get_modules();
-});
-
 Route::get('/config', function () {
     try {
         Artisan::call('config:cache');
@@ -39,6 +35,8 @@ Route::get('/count', function(){
     return Cart::count();
 });
 
+
+Route::get('/alternate', 'ShopController@alternate');
 // ppl playing with shopping cart
 Route::resource('/shop', 'ShopController', ['only' => ['index', 'show']]);
 Route::resource('/cart', 'CartController');
