@@ -33,19 +33,24 @@
 
             async create() {
                 await axios.post(this.endpoint, this.product)
-                    .then(res => flash(`You liked ${this.product.name}`))
-                    .catch(err => flash(`You need to be authenticated to rate this product`, "red"));
+                    .then(res => {
+                        flash(`Vous avez liké ${this.product.name}`);
+                        this.active = true;
+                        this.count++;
+                    })
+                    .catch(err => flash(`Vous devez être authentifiez et avoir commandé pour liker ce produit`,
+                        "red"));
 
-                this.active = true;
-                this.count++;
             },
 
             async destroy() {
                 await axios.delete(this.endpoint, this.product)
-                    .then(res => flash(`You unliked ${this.product.name}`))
-                    .catch(err => flash(`Something went wrong, please try again later.`, "red"));
-                this.active = false;
-                this.count--;
+                    .then(res => {
+                        flash(`Vous unlikez ce produit: ${this.product.name}`);
+                        this.active = false;
+                        this.count--;
+                    })
+                    .catch(err => flash(`Quelque chose n'a pas fonctionné, ré-essayer plus tard.`, "red"));
             }
         }
     }

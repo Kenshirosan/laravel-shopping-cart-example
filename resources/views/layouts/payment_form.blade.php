@@ -6,18 +6,16 @@
 
 @section('content')
     <div class="row">
+        <h2 class="center">Votre Commande</h2>
         @include('includes.error')
         <form class="form-horizontal" method="POST" action="/order" id="payment-form">
             {{ csrf_field() }}
             <div class="col m4 s12">
                 <!--REVIEW ORDER-->
-                <h2>Review Your Order</h2>
                 @foreach (Cart::content() as $item)
                     <div class="card">
-                        <div class="card-title">
-                            <p>{{ $item->name }}</p>
-                        </div>
                         <div class="card-content">
+                            <span class="card-title cyan-text">{{ $item->name }}</span>
                             <img src="{{ asset('img/' . $item->model->image) }}" alt="product" class="img-responsive cart-image">
                             @include('includes.cart-content-options')
                             <p><small class="blue-text">Quantity:<span>{{ $item->qty }}</span></small></p>
@@ -26,12 +24,9 @@
                     </div>
                 @endforeach
                 <div class="card">
-                    <div class="card-title">
-                        <p>The moneyyy !</p>
-                    </div>
                     <div class="card-content">
-                        <h5 class="cyan-text pr-10"><span>Subtotal : $</span>{{ Cart::subtotal() }}</h5>
-                        <h5 class="cyan-text pr-10"><span>taxes : $</span>{{ Cart::tax() }}</h5>
+                        <h5 class="cyan-text pr-10"><span>Sous-total : $</span>{{ Cart::subtotal() }}</h5>
+                        <h5 class="cyan-text pr-10"><span>TVA : $</span>{{ Cart::tax() }}</h5>
                         <h5 class="cyan-text pr-10"><span>Total : $</span>{{ Cart::total() }}</h5>
                         @if($discount != null)
                             <span class="text-info">Congratulations ! {{ $discount * 100 }} % discount applied with code {{ $code }}</span>

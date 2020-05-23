@@ -1,6 +1,7 @@
 <template>
 <!-- https://codepen.io/aaroniker/pen/eYOVrNa -->
-<button class="order"><span class="default">Complete Order</span><span class="success">Order Placed
+<button @click="animate" class="order"><span class="default">Complete Order</span><span class="success">Order
+                                                                                                             Placed
     <svg viewbox="0 0 12 10">
         <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
     </svg></span>
@@ -19,18 +20,22 @@
 
 <script>
 export default {
-    $('.order').click(function(e) {
+    methods: {
+        animate() {
+            $('.order').click(function(e) {
+                let button = $(this);
 
-    let button = $(this);
+                if(!button.hasClass('animate')) {
+                    button.addClass('animate');
+                    setTimeout(() => {
+                        button.removeClass('animate');
+                    }, 10000);
+                }
 
-    if(!button.hasClass('animate')) {
-        button.addClass('animate');
-        setTimeout(() => {
-            button.removeClass('animate');
-        }, 10000);
+            });
+
+        }
     }
-
-    });
 
 }
 </script>
@@ -68,6 +73,7 @@ export default {
     transition: -webkit-transform .3s ease;
     transition: transform .3s ease;
     transition: transform .3s ease, -webkit-transform .3s ease;
+    margin-top: 28px;
 }
 
 .order span {

@@ -2,7 +2,7 @@
     <div>
         <div class="form-row">
             <label for="card-element">
-              Credit or debit card
+              Carte de debit ou de credit
             </label>
             <div id="card-element">
               <!-- a Stripe Element will be inserted here. -->
@@ -12,17 +12,22 @@
             <div id="card-errors" role="alert"></div>
         </div>
         <button class="stripe">Submit Payment</button>
+<!--        <cartbutton></cartbutton>-->
     </div>
 </template>
 
 <script>
+    // import cartbutton from './subcomponents/CartButton';
+
     export default {
+        // components: { cartbutton },
+
         mounted() {
             // Create a Stripe client
             var stripe = Stripe('pk_test_B9SEClbQcg35eUmOyH4adj7M');
 
             // Create an instance of Elements
-            var elements = stripe.elements( { "locale" : "en" } );
+            var elements = stripe.elements( { "locale" : "fr" } );
 
             // Custom styling can be passed to options when creating an Element.
             // (Note that this demo uses a wider set of styles than the guide below.)

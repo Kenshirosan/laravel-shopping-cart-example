@@ -19394,13 +19394,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+// import cartbutton from './subcomponents/CartButton';
 /* harmony default export */ __webpack_exports__["default"] = ({
+  // components: { cartbutton },
   mounted: function mounted() {
     // Create a Stripe client
     var stripe = Stripe('pk_test_B9SEClbQcg35eUmOyH4adj7M'); // Create an instance of Elements
 
     var elements = stripe.elements({
-      "locale": "en"
+      "locale": "fr"
     }); // Custom styling can be passed to options when creating an Element.
     // (Note that this demo uses a wider set of styles than the guide below.)
 
@@ -19586,16 +19589,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context.next = 2;
                 return axios.post(_this.endpoint, _this.product).then(function (res) {
-                  return flash("You liked ".concat(_this.product.name));
+                  flash("Vous avez lik\xE9 ".concat(_this.product.name));
+                  _this.active = true;
+                  _this.count++;
                 })["catch"](function (err) {
-                  return flash("You need to be authenticated to rate this product", "red");
+                  return flash("Vous devez \xEAtre authentifiez et avoir command\xE9 pour liker ce produit", "red");
                 });
 
               case 2:
-                _this.active = true;
-                _this.count++;
-
-              case 4:
               case "end":
                 return _context.stop();
             }
@@ -19613,16 +19614,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context2.next = 2;
                 return axios["delete"](_this2.endpoint, _this2.product).then(function (res) {
-                  return flash("You unliked ".concat(_this2.product.name));
+                  flash("Vous unlikez ce produit: ".concat(_this2.product.name));
+                  _this2.active = false;
+                  _this2.count--;
                 })["catch"](function (err) {
-                  return flash("Something went wrong, please try again later.", "red");
+                  return flash("Quelque chose n'a pas fonctionn\xE9, r\xE9-essayer plus tard.", "red");
                 });
 
               case 2:
-                _this2.active = false;
-                _this2.count--;
-
-              case 4:
               case "end":
                 return _context2.stop();
             }
@@ -90984,7 +90983,7 @@ var staticRenderFns = [
     return _c("div", [
       _c("div", { staticClass: "form-row" }, [
         _c("label", { attrs: { for: "card-element" } }, [
-          _vm._v("\n          Credit or debit card\n        ")
+          _vm._v("\n              Carte de debit ou de credit\n            ")
         ]),
         _vm._v(" "),
         _c("div", { attrs: { id: "card-element" } }),

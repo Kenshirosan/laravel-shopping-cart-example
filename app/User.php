@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Models\Address;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
