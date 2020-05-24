@@ -9,6 +9,11 @@
 @import "custom";
 @import "utilities";
 
+.parallax-container {
+	height: 0;
+}
+
+
 @media screen and (min-width: 1500px) {
 	.skewed {
 		position: absolute;
@@ -22,6 +27,7 @@
 		z-index: -1;
 		transform: skewY(12.5deg);
 		transform-origin: top right;
+
 	}
 }
 

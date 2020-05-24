@@ -158,7 +158,7 @@ p {
 }
 /* section */
 .section {
-  padding: 5rem 0;
+  padding-bottom: 5rem;
 }
 
 main {
@@ -186,9 +186,15 @@ Menu
   margin-right: auto;
 }
 .btnalt-container {
-  margin-bottom: 4rem;
   display: flex;
   justify-content: center;
+  position: sticky;
+  top: 0px;
+  z-index: 1;
+  background-color:  var(--clr-grey-10);
+  width: 30%;
+  margin: auto;
+  margin-bottom: 4rem;
 }
 .filter-btn {
   background: transparent;
@@ -210,19 +216,21 @@ Menu
 .section-center {
   width: 90vw;
   margin: 0 auto;
-  /*max-width: 1170px;*/
   display: grid;
   gap: 3rem 2rem;
-  /*justify-items: center;*/
 }
 .menu-item {
   display: grid;
   gap: 1rem 2rem;
   max-width: 25rem;
+  background-color: white;
+  box-shadow: inset 20px -20px 60px #d9d9d9,
+  inset -20px 20px 60px #ffffff;
 }
 .section-center article {
-  border: 1px dotted black;
+  /*border: 1px dotted black;*/
   padding: 1rem;
+  position: relative;
 }
 .photo {
   object-fit: cover;
@@ -248,7 +256,7 @@ Menu
 
 @media screen and (min-width: 768px) {
   .menu-item {
-    grid-template-columns: 225px 1fr;
+    grid-template-columns: 225px 1fr 100px;
     gap: 0 1.25rem;
     max-width: 60rem;
   }

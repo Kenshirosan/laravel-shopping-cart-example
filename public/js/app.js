@@ -113184,7 +113184,7 @@ if (token) {
   console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
-window.moment = __webpack_require__(/*! ../..//bower_components/moment/moment.js */ "./bower_components/moment/moment.js");
+window.moment = __webpack_require__(/*! ../../bower_components/moment/moment.js */ "./bower_components/moment/moment.js");
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 window.events = new Vue();
 

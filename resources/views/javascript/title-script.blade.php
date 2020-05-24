@@ -13,7 +13,7 @@
             title.style.color = response.data.color;
             subtitle.innerText = ucfirst(response.data.subtitle);
             subtitle.style.color = response.data.color;
-            document.body.style.backgroundColor = response.data.background_color;
+            // document.body.style.backgroundColor = response.data.background_color;
 
             wells.forEach(well => {
                 well.querySelector('.category-title').style.color = response.data.categories_title_color;

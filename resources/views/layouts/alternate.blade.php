@@ -18,18 +18,13 @@
     </noscript>
 
     <section class="shopping menu">
-        <div id="index-banner" class="parallax-container jumbotron">
-            <div class="section no-pad-bot">
+        <div id="index-banner" class="alternate-parallax-container jumbotron">
+            <div class="section">
                 <div class="container">
-                    {{-- <br><br> --}}
                     <h1 class="header center-align text-lighten-2 custom-title"></h1>
                     <div class="row">
                         <h5 class="custom-subtitle center-align header light"></h5>
                     </div>
-                    <div class="center-align">
-                        <a href="#cat" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Start Ordering</a>
-                    </div>
-                    <br><br>
                 </div>
             </div>
         </div>
@@ -76,6 +71,21 @@
                                     <a class="btn-small mt-15 cyan right" href="/shop/{{ $product->slug }}">Voir</a>
                                 @endif
                             </div>
+                            @can('see-admin-menu')
+                                <form method="POST" action="/delete/{{$product->slug}}/product" class="deleteForm">
+                                    {{ csrf_field() }}
+                                    {{ method_field('DELETE') }}
+                                    <button type="submit" name="submit" class="btn red danger deleteButton">Delete</button>
+                                </form>
+                                <a href="/update/{{ $product->slug }}" class="btn blue product-layout-img">Update</a>
+                            @endcan
+                            @if($product->is_on_sale)
+                                <div class="alternate-sales">
+                                    <h2>{{ $product->getSalesPercentage() }}% Off!
+                                        <span><small>was ${{ $product->regularPrice() }}</small></span>
+                                    </h2>
+                                </div>
+                            @endif
                         </article>
                     @endif
                 @endforeach
