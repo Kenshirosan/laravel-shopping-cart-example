@@ -1,5 +1,5 @@
 <template>
-    <button type="submit" class="btn-small purple lighten-2" @click="toggle">
+    <button type="submit" class="purple" @click="toggle">
         <span :class="classes" class="material-icons" style="padding: 0.2em">favorite</span>
         <span class="white-text" v-if="count > 0" v-text="count"></span>
     </button>

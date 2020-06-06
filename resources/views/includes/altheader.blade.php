@@ -1,5 +1,5 @@
 <header>
-     <nav class="blue darken-4">
+     <nav class="altheader">
         <div class="container">
             <div class="nav-wrapper">
                 <a class="brand-logo" href="{{ url('/') }}">{{ config('app.name') }}</a>
@@ -8,7 +8,7 @@
                 </a>
                 <ul class="right hide-on-med-and-down">
 {{-- TODO: correct this syntax --}}
-                    @if( (new App\Models\Product)->isHolidaySpecial() && $title != null)
+                    @if( App\Models\Product::where('holiday_special', true)->exists() && $title != null)
                         <li class="{{ set_active('/holidays-special') }}">
                             <a href="{{ url('/holidays-special') }}">{{ $title }}</a>
                         </li>
@@ -58,7 +58,7 @@
                     <li>
                         <button
                             type="button"
-                            class="btn btn-small modal-trigger waves-effect cyan waves-cyan"
+                            class="btn btn-small modal-trigger waves-effect waves-white"
                             data-target="modal">Preview Cart
                         </button>
                     </li>

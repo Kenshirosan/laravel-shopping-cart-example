@@ -35,8 +35,10 @@
 </head>
     <body>
         <div id="app">
+            <a href="#" id="back-to-top" title="Back to top"><span></span>&uarr;</a>
             <div class="skewed"></div>
-            @include('includes.header')
+{{--            @include('includes.header')--}}
+            @include('includes.altheader')
             @include('includes.messages')
             @yield('content')
             <flash message="{{ session('flash') }}"></flash>

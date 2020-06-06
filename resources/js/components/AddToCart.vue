@@ -23,11 +23,11 @@
             </select>
         </div>
         <small>
-            <a type="submit"
-               @click.prevent="addtocart"
-               class="btn-small small scale_when_hover waves-effect waves-light waves-green">
-                <i class="material-icons left">shopping_cart </i>Ajouter
-            </a>
+                <a type="submit"
+                   @click.prevent="addtocart"
+                   class="btn-small small scale_when_hover waves-effect waves-light waves-green">
+                    <i class="material-icons left">shopping_cart </i>Ajouter
+                </a>
         </small>
     </form>
 </template>
@@ -82,7 +82,6 @@
                     flash(`${this.product.name} was added to cart`);
                     productitemscountchanged();
                     this.resetFields();
-                    document.getElementById("addtocart").reset();
                 })
                 .catch(err => console.log(err));
 
@@ -91,6 +90,7 @@
             resetFields() {
                 this.option = [];
                 this.way = '';
+                document.getElementById("addtocart").reset();
             },
 
             getOptionsArray() {

@@ -14,13 +14,12 @@ class OptionsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        \View::composer('includes.header', function ($view) {
+        \View::composer(['includes.header', 'includes.altheader'], function ($view) {
 
             $title = HolidayTitle::first();
 
-            if (! $title == null) {
-                $title = $title->toArray();
-                $title = $title['holiday_page_title'];
+            if (!is_null($title)) {
+                $title = $title->pluck('holiday_page_title')->toArray()[0];
             }
 
             $view->with('title', $title);

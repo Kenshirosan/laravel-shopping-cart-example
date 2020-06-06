@@ -13,7 +13,7 @@ class ShopController extends Controller
     /**
     * Display a listing of the resource.
     *
-    * @return \Illuminate\Http\Response
+    * @return \Illuminate\Http\Response|\Illuminate\View\View
     */
     public function index()
     {

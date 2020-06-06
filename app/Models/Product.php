@@ -164,4 +164,9 @@ class Product extends Model
 
         return [];
     }
+
+    public function isHolidaySpecial()
+    {
+        return $this->where('holiday_special', true)->exists();
+    }
 }

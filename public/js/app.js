@@ -18928,8 +18928,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   productitemscountchanged();
 
                   _this.resetFields();
-
-                  document.getElementById("addtocart").reset();
                 })["catch"](function (err) {
                   return console.log(err);
                 });
@@ -18945,6 +18943,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     resetFields: function resetFields() {
       this.option = [];
       this.way = '';
+      document.getElementById("addtocart").reset();
     },
     getOptionsArray: function getOptionsArray() {
       var _this2 = this;
@@ -90778,7 +90777,7 @@ var render = function() {
           _c("i", { staticClass: "material-icons left" }, [
             _vm._v("shopping_cart ")
           ]),
-          _vm._v("Ajouter\n        ")
+          _vm._v("Ajouter\n            ")
         ]
       )
     ])
@@ -91266,7 +91265,7 @@ var render = function() {
   return _c(
     "button",
     {
-      staticClass: "btn-small purple lighten-2",
+      staticClass: "purple",
       attrs: { type: "submit" },
       on: { click: _vm.toggle }
     },
