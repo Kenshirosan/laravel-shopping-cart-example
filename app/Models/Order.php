@@ -51,19 +51,13 @@ class Order extends Model
 
     public function getProducts()
     {
-        $sql_results =  DB::select('
-            SELECT
-                od.qty, od.cart_row_id, od.wayofcooking, p.name product, op.name option
-            FROM
-                order_details od
-            LEFT JOIN orders o ON
-                od.order_id = o.id
-            LEFT JOIN options op ON
-                od.option_id = op.id
-            LEFT JOIN products p ON
-                od.product_id = p.id
-            WHERE
-                o.id = ' . $this->id
+        $sql_results =  DB::select("
+            SELECT od.qty, od.cart_row_id, od.wayofcooking, p.name product, op.name option
+            FROM order_details od
+                LEFT JOIN orders o ON od.order_id = o.id
+                LEFT JOIN options op ON od.option_id = op.id
+                LEFT JOIN products p ON od.product_id = p.id
+            WHERE o.id = " . $this->id
         );
 
         $products = array();
@@ -103,6 +97,7 @@ class Order extends Model
         return $this->getProducts();
     }
 
+    //TODO: Fix this
     public function bestCustomers()
     {
         return $this->selectRaw('year(created_at) year, sum(price) total, user_id, name, last_name, email')

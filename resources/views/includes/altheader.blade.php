@@ -10,25 +10,25 @@
 {{-- TODO: correct this syntax --}}
                     @if( App\Models\Product::where('holiday_special', true)->exists() && $title != null)
                         <li class="{{ set_active('/holidays-special') }}">
-                            <a href="{{ url('/holidays-special') }}">{{ $title }}</a>
+                            <a class="waves-effect waves-light" href="{{ url('/holidays-special') }}">{{ $title }}</a>
                         </li>
                     @endif
-                    <li><a href="/about">About Us</a></li>
-                    <li><a href="/contact-us">Contact</a></li>
+                    <li><a class="waves-effect waves-light" href="/about">About Us</a></li>
+                    <li><a class="waves-effect waves-light" href="/contact-us">Contact</a></li>
                     @if ( Auth::guest() )
-                        <li><a href="/login" class="btn waves-effect btn-small waves-light">Login</a></li>
-                        <li><a href="/register" class="btn waves-effect btn-small waves-light">Register</a></li>
+                        <li><a href="/login" class="waves-effect waves-light">Login</a></li>
+                        <li><a href="/register" class="waves-effect waves-light">Register</a></li>
                     @elseif ( Auth::check() )
                         @can('see-admin-menu')
-                            <li><a href="/restaurantpanel">Admin</a></li>
+                            <li><a class="waves-effect waves-light" href="/restaurantpanel">Admin</a></li>
                         @endcan
                         @can('see-employee-menu')
-                            <li><a href="/customer-orders">Today's order</a></li>
-                            <li><a href="/calendar">Calendar</a></li>
+                            <li><a class="waves-effect waves-light" href="/customer-orders">Today's order</a></li>
+                            <li><a class="waves-effect waves-light" href="/calendar">Calendar</a></li>
                         @endcan
                         <li>
                             <a
-                                class="btn btn-small cyan dropdown-button"
+                                class="cyan dropdown-button"
                                 role="button"
                                 href="#!"
                                 data-target="dropdown1">
@@ -58,15 +58,17 @@
                     <li>
                         <button
                             type="button"
-                            class="btn btn-small modal-trigger waves-effect waves-white"
+                            class="btn modal-trigger waves-effect waves-white"
                             data-target="modal">Preview Cart
                         </button>
                     </li>
-                    <li>
-                        <a href="#!">
-                            <cart-counter numberofitems="{{ Cart::instance()->count() }}"></cart-counter>
-                        </a>
-                    </li>
+                    @if( Cart::instance()->count() > 0)
+                        <li>
+                            <a href="#!">
+                                <cart-counter numberofitems="{{ Cart::instance()->count() }}"></cart-counter>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
                 <ul class="sidenav" id="mobile-nav">
                     @if( App\Models\Product::where('holiday_special', true)->exists() && $title != null)

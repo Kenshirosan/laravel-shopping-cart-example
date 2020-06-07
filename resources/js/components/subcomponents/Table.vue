@@ -1,14 +1,14 @@
 <template>
     <div>
-        <div class="link text-center mb-100" v-if="URI != '/customer-orders'">
+        <div class="link text-center mb-100" v-if="URI !== '/customer-orders'">
             <a href="/customer-orders" class="btn btn-success btn-lg"><h1>Go to Orders Page</h1></a>
         </div>
-        <div class="alert alert-warning text-center mb-100" v-if="URI == '/customer-orders'">
+        <div class="alert alert-warning text-center mb-100" v-if="URI === '/customer-orders'">
             <span><h1>Your Customers Ordered</h1></span>
         </div>
 
         <!-- AddOptions.vue Component -->
-        <div v-if="URI == '/add-options'">
+        <div v-if="URI === '/add-options'">
             <table class="table table-hover even" v-for="optiongroup in data">
                 <thead>
                 <tr class="text-white">
@@ -30,7 +30,7 @@
 
         <!-- Sales.vue Component -->
 
-        <div v-else-if="URI == '/sales'">
+        <div v-else-if="URI === '/sales'">
             <table class="table table-hover even">
                 <thead>
                 <tr class="text-white">
@@ -52,7 +52,7 @@
             </table>
         </div>
 
-        <!-- Table used in the folowing components -->
+        <!-- Table used in the following components -->
         <!-- AddOptionGroup.vue, BestCustomers.vue, AddCategories.vue, CouponLayout.vue, UserOrders.vue -->
         <div v-else>
             <table class="table table-hover table-striped table-bordered even">
@@ -60,23 +60,23 @@
                     <tr class="text-white">
                         <td><h4>{{ this.identifier }}</h4></td>
                         <td><h4>{{ this.title}}</h4></td>
-                        <td v-if="URI == '/best-customers'"><h4>Email</h4></td>
-                        <td v-if="URI == '/best-customers'"><h4>Amount this Year</h4></td>
-                        <td v-if="URI == '/customer-orders'"><h4>Order Status</h4></td>
-                        <td v-if="URI == '/customer-orders'"><h4>Order Type</h4></td>
+                        <td v-if="URI === '/best-customers'"><h4>Email</h4></td>
+                        <td v-if="URI === '/best-customers'"><h4>Amount this Year</h4></td>
+                        <td v-if="URI === '/customer-orders'"><h4>Order Status</h4></td>
+                        <td v-if="URI === '/customer-orders'"><h4>Order Type</h4></td>
                         <td><h4>Action</h4></td>
-                        <td v-if="URI == '/customer-orders'"><h4>See Order</h4></td>
+                        <td v-if="URI === '/customer-orders'"><h4>See Order</h4></td>
                     </tr>
                 </thead>
                 <tbody>
                     <tr class="text-info" v-for="item in data">
                         <td>{{ item.id || item.user_id }}</td>
-                        <td v-if="URI == '/best-customers'">{{ item.name + ' ' + item.last_name }}</td>
+                        <td v-if="URI === '/best-customers'">{{ item.name + ' ' + item.last_name }}</td>
                         <td v-else>{{ item.reward || item.name || item.holiday_page_title || item.products.name}}
                         </td>
-                        <td v-if="URI == '/best-customers'"><strong>{{ item.email }}</strong></td>
-                        <td v-if="URI == '/best-customers'" class="text-success">${{ item.total | formatted }}</td>
-                        <td v-if="URI == '/customer-orders'" :class="classes(item.hiddenOrder || item.status.name)">
+                        <td v-if="URI === '/best-customers'"><strong>{{ item.email }}</strong></td>
+                        <td v-if="URI === '/best-customers'" class="text-success">${{ item.total | formatted }}</td>
+                        <td v-if="URI === '/customer-orders'" :class="classes(item.hiddenOrder || item.status.name)">
                             <h4 class="text-info"><strong>{{ item.status.name }}</strong></h4>
                             <div class="text-white" v-for="product in item.products">
                                 <h4><strong>{{ product.qty}} {{ product.product_name }}</strong>
@@ -89,9 +89,9 @@
                             </h4>
                             <h4 class="text-danger text-right">${{ item.price | formatted }}</h4>
                         </td>
-                        <td v-if="URI == '/customer-orders'">
+                        <td v-if="URI === '/customer-orders'">
                             <h4>{{ item.order_type }}</h4>
-                            <p v-if="item.order_type == 'Pick-up'">at {{ item.pickup_time }}</p>
+                            <p v-if="item.order_type === 'Pick-up'">at {{ item.pickup_time }}</p>
                         </td>
                         <td>
                             <button
@@ -100,7 +100,7 @@
                                 @click.prevent="showResource(item.id)">Show
                             </button>
                             <button
-                                v-else-if="URI == '/best-customers'"
+                                v-else-if="URI === '/best-customers'"
                                 class="btn btn-primary btn-sm"
                                 @click.prevent="email(item.email)">Email
                             </button>
@@ -146,7 +146,7 @@
             },
 
             deleteBtnMethod() {
-                return window.location.pathname == '/customer-orders' ? 'Mark As Processed' : 'Delete'
+                return window.location.pathname === '/customer-orders' ? 'Mark As Processed' : 'Delete'
             }
         },
 

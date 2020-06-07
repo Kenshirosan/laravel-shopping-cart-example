@@ -20877,7 +20877,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return window.location.pathname;
     },
     deleteBtnMethod: function deleteBtnMethod() {
-      return window.location.pathname == '/customer-orders' ? 'Mark As Processed' : 'Delete';
+      return window.location.pathname === '/customer-orders' ? 'Mark As Processed' : 'Delete';
     }
   },
   methods: {
@@ -92643,17 +92643,17 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.URI != "/customer-orders"
+    _vm.URI !== "/customer-orders"
       ? _c("div", { staticClass: "link text-center mb-100" }, [_vm._m(0)])
       : _vm._e(),
     _vm._v(" "),
-    _vm.URI == "/customer-orders"
+    _vm.URI === "/customer-orders"
       ? _c("div", { staticClass: "alert alert-warning text-center mb-100" }, [
           _vm._m(1)
         ])
       : _vm._e(),
     _vm._v(" "),
-    _vm.URI == "/add-options"
+    _vm.URI === "/add-options"
       ? _c(
           "div",
           _vm._l(_vm.data, function(optiongroup) {
@@ -92699,7 +92699,7 @@ var render = function() {
           }),
           0
         )
-      : _vm.URI == "/sales"
+      : _vm.URI === "/sales"
       ? _c("div", [
           _c("table", { staticClass: "table table-hover even" }, [
             _vm._m(3),
@@ -92756,25 +92756,25 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_c("h4", [_vm._v(_vm._s(this.title))])]),
                   _vm._v(" "),
-                  _vm.URI == "/best-customers"
+                  _vm.URI === "/best-customers"
                     ? _c("td", [_c("h4", [_vm._v("Email")])])
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.URI == "/best-customers"
+                  _vm.URI === "/best-customers"
                     ? _c("td", [_c("h4", [_vm._v("Amount this Year")])])
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.URI == "/customer-orders"
+                  _vm.URI === "/customer-orders"
                     ? _c("td", [_c("h4", [_vm._v("Order Status")])])
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.URI == "/customer-orders"
+                  _vm.URI === "/customer-orders"
                     ? _c("td", [_c("h4", [_vm._v("Order Type")])])
                     : _vm._e(),
                   _vm._v(" "),
                   _vm._m(4),
                   _vm._v(" "),
-                  _vm.URI == "/customer-orders"
+                  _vm.URI === "/customer-orders"
                     ? _c("td", [_c("h4", [_vm._v("See Order")])])
                     : _vm._e()
                 ])
@@ -92786,7 +92786,7 @@ var render = function() {
                   return _c("tr", { staticClass: "text-info" }, [
                     _c("td", [_vm._v(_vm._s(item.id || item.user_id))]),
                     _vm._v(" "),
-                    _vm.URI == "/best-customers"
+                    _vm.URI === "/best-customers"
                       ? _c("td", [
                           _vm._v(_vm._s(item.name + " " + item.last_name))
                         ])
@@ -92801,17 +92801,17 @@ var render = function() {
                           )
                         ]),
                     _vm._v(" "),
-                    _vm.URI == "/best-customers"
+                    _vm.URI === "/best-customers"
                       ? _c("td", [_c("strong", [_vm._v(_vm._s(item.email))])])
                       : _vm._e(),
                     _vm._v(" "),
-                    _vm.URI == "/best-customers"
+                    _vm.URI === "/best-customers"
                       ? _c("td", { staticClass: "text-success" }, [
                           _vm._v("$" + _vm._s(_vm._f("formatted")(item.total)))
                         ])
                       : _vm._e(),
                     _vm._v(" "),
-                    _vm.URI == "/customer-orders"
+                    _vm.URI === "/customer-orders"
                       ? _c(
                           "td",
                           {
@@ -92886,11 +92886,11 @@ var render = function() {
                         )
                       : _vm._e(),
                     _vm._v(" "),
-                    _vm.URI == "/customer-orders"
+                    _vm.URI === "/customer-orders"
                       ? _c("td", [
                           _c("h4", [_vm._v(_vm._s(item.order_type))]),
                           _vm._v(" "),
-                          item.order_type == "Pick-up"
+                          item.order_type === "Pick-up"
                             ? _c("p", [
                                 _vm._v("at " + _vm._s(item.pickup_time))
                               ])
@@ -92913,7 +92913,7 @@ var render = function() {
                             },
                             [_vm._v("Show\n                        ")]
                           )
-                        : _vm.URI == "/best-customers"
+                        : _vm.URI === "/best-customers"
                         ? _c(
                             "button",
                             {
@@ -115617,7 +115617,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return axios.get(_this.URI).then(function (res) {
                   _this.items = res.data;
                 })["catch"](function (err) {
-                  return _this.showError();
+                  _this.showError(err);
                 });
 
               case 2:
@@ -115711,7 +115711,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.errors = new _utilities_Error__WEBPACK_IMPORTED_MODULE_1__["default"]();
     },
     showError: function showError(err) {
-      return this.errors.record(err.response.data.errors);
+      return this.errors.record(err.response.data.message);
     },
     resetForm: function resetForm() {
       this.option_group_id = '';

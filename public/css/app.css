@@ -8937,7 +8937,7 @@ nav {
 }
 
 .altheader {
-  background: transparent;
+  background: white;
   padding: 1em;
 }
 
@@ -9038,7 +9038,7 @@ Menu
   background: white;
   padding: 1em;
   border-radius: 50px;
-  box-shadow: -7px -7px 20px 0 rgba(255, 255, 255, 0.7), 7px 7px 20px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: inset -7px -7px 20px 0 rgba(255, 255, 255, 0.7), inset 7px 7px 20px 0 rgba(0, 0, 0, 0.2);
 }
 
 .cart-btn-container {
@@ -9057,10 +9057,6 @@ Menu
 
 .alt-img-sold-out {
   max-width: 100%;
-}
-
-.btnalt-container:hover {
-  box-shadow: inset -7px -7px 20px 0 rgba(255, 255, 255, 0.7), inset 7px 7px 20px 0 rgba(0, 0, 0, 0.2);
 }
 
 .filter-btn,
@@ -9112,7 +9108,7 @@ a.cart-btn {
   max-width: 25rem;
   background-color: transparent;
   border-radius: 10px;
-  box-shadow: -7px -7px 20px 0 rgba(255, 255, 255, 0.7), 7px 7px 20px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: inset -7px -7px 20px 0 rgba(255, 255, 255, 0.7), inset 7px 7px 20px 0 rgba(0, 0, 0, 0.2);
 }
 
 .menu-item:hover {
@@ -9152,13 +9148,18 @@ a.cart-btn {
   padding-top: 1rem;
 }
 
+.alternate-sales {
+  position: absolute;
+  top: -33px;
+  right: 0;
+}
+
 .alternate-sales h2 {
-  background: rgba(57, 41, 207, 0.5);
+  border-radius: 5px;
   font-size: 2em;
+  padding: 0.5em;
   text-align: center;
-  position: relative;
-  box-shadow: 0 0 0.3em 1px #333;
-  color: #dedede;
+  color: green;
 }
 
 @media screen and (min-width: 768px) {

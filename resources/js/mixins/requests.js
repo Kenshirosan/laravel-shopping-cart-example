@@ -24,7 +24,9 @@ export default {
                 .then(res => {
                     this.items = res.data;
                 })
-                .catch(err => this.showError());
+                .catch(err => {
+                    this.showError(err);
+                });
         },
 
         async addItems() {
@@ -66,7 +68,7 @@ export default {
         },
 
         showError(err) {
-            return this.errors.record(err.response.data.errors);
+            return this.errors.record(err.response.data.message);
         },
 
         resetForm() {

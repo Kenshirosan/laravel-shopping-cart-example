@@ -39,7 +39,13 @@
                                 </h4>
                             </a>
                         </div>
-                        <li class="list-group-item"><span class="info-box-text">{{ preg_replace('/[]:["]/ ', ' ', $order->items) }}</span></li>
+                        <li class="list-group-item">
+                            @foreach($order->products as $product)
+                                <span class="info-box-text">
+                                    {{  $product['product_name'] }}
+                                </span>
+                            @endforeach
+                        </li>
                         <li class="list-group-item"><span class="info-box-text">{{ $order->price() }}</span></li>
                         {{-- <hr> --}}
                         <li class="list-group-item"><span class="info-box-text">{{ $order->created_at->diffForHumans() }}</span>

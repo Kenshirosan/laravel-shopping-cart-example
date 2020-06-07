@@ -1,18 +1,25 @@
 <article class="menu-item" data-category="{{ $category->name  }}">
+    @if($product->is_on_sale)
+        <div class="alternate-sales">
+            <h2>{{ $product->getSalesPercentage() }}% Off!
+                <span><small><strike>${{ $product->regularPrice() }}</strike></small>{{ $product->price() }}</span>
+            </h2>
+        </div>
+    @endif
     <img src="/img/{{  $product->image }}"
-         alt=""
+         alt="Picture of {{ $product->name }}"
          class="photo">
     <div class="item-info">
         <header>
             <h4>{{ $product->name }}</h4>
-            <h4 class="price">{{ $product->price()  }}</h4>
+            @if(!$product->is_on_sale)
+                <h4 class="price">{{ $product->price()  }}</h4>
+            @endif
         </header>
         <p class="item-text">
             {{ $product->description }}
         </p>
         @if(!$product->is_eighty_six())
-{{--            <img class="activator sold-out right" src="/images/sold_out_stamp_cropped.jpg" alt="Product sold out !">--}}
-{{--        @else--}}
             <add-to-cart
                     :product="{{ $product }}"
                     @if( $product->groups )
@@ -24,10 +31,6 @@
             >
             </add-to-cart>
         @endif
-{{--        <favorite class="ml-20 mt-15" :product="{{ $product }}"></favorite>--}}
-{{--        @if($_SERVER['REQUEST_URI'] != "/shop/$product->slug")--}}
-{{--            <a class="btn-small mt-15 cyan right" href="/shop/{{ $product->slug }}">Voir</a>--}}
-{{--        @endif--}}
         <div class="cart-btn-container">
             @if($product->is_eighty_six())
                 <img class="alt-img-sold-out" src="/images/sold_out_stamp_cropped.jpg" alt="Product sold out !">
@@ -47,11 +50,4 @@
         </form>
         <a href="/update/{{ $product->slug }}" class="btn blue product-layout-img">Update</a>
     @endcan
-    @if($product->is_on_sale)
-        <div class="alternate-sales">
-            <h2>{{ $product->getSalesPercentage() }}% Off!
-                <span><small>was ${{ $product->regularPrice() }}</small></span>
-            </h2>
-        </div>
-    @endif
 </article>
