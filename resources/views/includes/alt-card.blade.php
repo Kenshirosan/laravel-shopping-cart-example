@@ -41,7 +41,8 @@
 {{--            @endif--}}
         </div>
     </div>
-    <div class="cart-btn-container">
+    <div role="separator"></div>
+        <div class="cart-btn-container">
         <favorite class="cart-btn" :product="{{ $product }}"></favorite>
         @if($_SERVER['REQUEST_URI'] != "/shop/$product->slug")
             <a class="cart-btn" href="/shop/{{ $product->slug }}">Voir</a>
