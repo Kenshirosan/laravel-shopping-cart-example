@@ -62,13 +62,12 @@
                             data-target="modal">Preview Cart
                         </button>
                     </li>
-                    @if( Cart::instance()->count() > 0)
-                        <li>
-                            <a href="#!">
-                                <cart-counter numberofitems="{{ Cart::instance()->count() }}"></cart-counter>
-                            </a>
-                        </li>
-                    @endif
+                    <li>
+                        <a href="#!">
+                            <cart-counter numberofitems="{{ Cart::instance()->count() }}"></cart-counter>
+                        </a>
+                    </li>
+
                 </ul>
                 <ul class="sidenav" id="mobile-nav">
                     @if( App\Models\Product::where('holiday_special', true)->exists() && $title != null)

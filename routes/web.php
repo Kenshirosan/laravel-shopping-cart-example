@@ -31,8 +31,8 @@ Route::get('/contact-us', 'MessageController@index'); // multipurpose index
 Route::post('/contact-us', 'MessageController@store');
 
 // Cart counter
-Route::get('/count', function(){
-    return Cart::count();
+Route::get('/count', function() {
+    return response(Cart::count(), 200);
 });
 
 

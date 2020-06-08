@@ -142,7 +142,7 @@ class Product extends Model
 
     public function regularPrice()
     {
-        return sprintf('%01.2f', $this->price / 100);
+        return sprintf('%1.2f', ($this->price / 100) + $this->taxes);
     }
 
     public function price()

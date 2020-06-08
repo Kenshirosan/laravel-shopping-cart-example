@@ -19330,15 +19330,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   created: function created() {
     var _this = this;
 
-    window.events.$on('productadded', function (count) {
-      _this.change(_this.count);
+    window.events.$on('productadded', function () {
+      _this.change();
     });
     window.events.$on('cartempty', function (count) {
-      _this.reset(_this.count);
+      _this.reset();
     });
   },
   methods: {
-    change: function change(count) {
+    change: function change() {
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -19359,7 +19359,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-    reset: function reset(count) {
+    reset: function reset() {
       this.count = 0;
     }
   }
@@ -90928,15 +90928,13 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.count > 0
+  return this.count > 0
     ? _c(
         "li",
         {
           staticClass: "active",
           on: {
-            productadded: function($event) {
-              return _vm.change()
-            },
+            productadded: _vm.change,
             cartempty: function($event) {
               return _vm.reset()
             }
@@ -90944,7 +90942,7 @@ var render = function() {
         },
         [
           _c("a", { attrs: { href: "/cart" } }, [
-            _vm._v("Cart : " + _vm._s(_vm.count) + " items")
+            _vm._v("Cart : " + _vm._s(this.count) + " items")
           ])
         ]
       )

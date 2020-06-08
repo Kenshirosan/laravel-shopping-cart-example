@@ -1,6 +1,6 @@
 <template>
-    <li class="active" v-if="count > 0" @productadded="change()" @cartempty="reset()">
-        <a href="/cart">Cart : {{ count }} items</a>
+    <li class="active" v-if="this.count > 0" @productadded="change" @cartempty="reset()">
+        <a href="/cart">Cart : {{ this.count }} items</a>
     </li>
 </template>
 
@@ -16,26 +16,27 @@
 
         created() {
             window.events.$on(
-                'productadded', count => {
-                    this.change(this.count)
+                'productadded', () => {
+                    this.change()
                 },
             );
 
             window.events.$on(
                 'cartempty', count => {
-                    this.reset(this.count)
+                    this.reset()
                 }
             );
         },
 
         methods: {
-            async change(count) {
-                await axios.get('/count').then( response => {
-                    this.count = response.data
-                });
+            async change() {
+                await axios.get('/count')
+                    .then( response => {
+                        this.count = response.data;
+                    });
             },
 
-            reset(count) {
+            reset() {
                 this.count = 0
             }
         }
