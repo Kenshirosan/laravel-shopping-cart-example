@@ -9044,7 +9044,7 @@ Menu
 .cart-btn-container {
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   z-index: 0;
   width: 100%;
   border-radius: 0;
@@ -9072,7 +9072,6 @@ Menu
   color: var(--clr-gold);
   cursor: pointer;
   transition: var(--transition);
-  box-shadow: -7px -7px 20px 0 rgba(255, 255, 255, 0.7), 7px 7px 20px 0 rgba(0, 0, 0, 0.2);
 }
 
 a.cart-btn {
@@ -9164,7 +9163,7 @@ a.cart-btn {
 
 @media screen and (min-width: 768px) {
   .menu-item {
-    grid-template-columns: 225px 1fr 100px;
+    grid-template-columns: 225px 1fr;
     gap: 0 1.25rem;
     max-width: 60rem;
   }
