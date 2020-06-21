@@ -27,7 +27,7 @@ class ShopController extends Controller
             return response($categories, 200);
         }
 
-        return view('layouts.shop', compact('categories'));
+        return view('layouts.alternate', compact('categories'));
     }
 
     /**

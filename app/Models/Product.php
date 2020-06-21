@@ -98,16 +98,6 @@ class Product extends Model
         return $this->hasOne(Sales::class, 'product_id');
     }
 
-    public function getSalesPercentage()
-    {
-        return $this->sales->percentage * 100;
-    }
-
-    public function getRawSalesPercentage()
-    {
-        return $this->sales->percentage;
-    }
-
     public function is_on_sale()
     {
         return !! $this->sales()->count();
@@ -142,24 +132,42 @@ class Product extends Model
 
     public function regularPrice()
     {
-        return sprintf('%1.2f', ($this->price / 100) + $this->taxes);
+        return sprintf('%1.2f', ($this->price / 100));
     }
 
     public function price()
     {
-        return $this->is_on_sale
-            ?
-                '$' . ($this->regularPrice() - ($this->regularPrice() * $this->getRawSalesPercentage()))
-            :
-                '$' . $this->regularPrice();
+        if($this->is_on_sale) {
+            return $this->getSalePrice();
+        }
+
+        return '$' . $this->regularPrice();
+    }
+
+    public function getSaleAmount()
+    {
+        return $this->regularPrice() * $this->getRawSalesPercentage();
+    }
+
+    public function getSalePrice()
+    {
+        return '$' . sprintf('%1.2f', ($this->regularPrice() - $this->getSaleAmount()));
+    }
+
+    public function getSalesPercentage()
+    {
+        return $this->sales->percentage * 100;
+    }
+
+    public function getRawSalesPercentage()
+    {
+        return $this->sales->percentage;
     }
 
     public function getWaysOfCooking()
     {
-        $type = $this->type;
-
-        if(array_key_exists($type, $this->ways)) {
-            return json_encode($this->ways[$type]);
+        if(array_key_exists($this->type, $this->ways)) {
+            return json_encode($this->ways[$this->type]);
         }
 
         return [];

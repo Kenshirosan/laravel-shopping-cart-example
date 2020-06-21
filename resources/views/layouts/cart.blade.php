@@ -83,7 +83,7 @@
                         <td class="table-image"></td>
                         <td></td>
                         <td class="small-caps table-bg right">Tax</td>
-                        <td>${{ Cart::tax() }}</td>
+                        <td>TVA: {{ config('cart.tax')  }}% ${{ Cart::tax() }}</td>
                     </tr>
                     <tr class="border-bottom">
                         <td class="table-image"></td>

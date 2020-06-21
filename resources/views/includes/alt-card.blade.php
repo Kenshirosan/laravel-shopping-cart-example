@@ -35,10 +35,6 @@
             @if($product->is_eighty_six())
                 <img class="alt-img-sold-out" src="/images/sold_out_stamp_cropped.jpg" alt="Product sold out !">
             @endif
-{{--            <favorite class="cart-btn" :product="{{ $product }}"></favorite>--}}
-{{--            @if($_SERVER['REQUEST_URI'] != "/shop/$product->slug")--}}
-{{--                <a class="cart-btn" href="/shop/{{ $product->slug }}">Voir</a>--}}
-{{--            @endif--}}
         </div>
     </div>
     <div role="separator"></div>
@@ -49,7 +45,7 @@
         @endif
     </div>
     @can('see-admin-menu')
-        <form method="POST" action="/delete/{{$product->slug}}/product" class="deleteForm">
+        <form method="POST" action="/delete/{{ $product->slug }}/product" class="deleteForm">
             {{ csrf_field() }}
             {{ method_field('DELETE') }}
             <button type="submit" name="submit" class="btn red danger deleteButton">Delete</button>
