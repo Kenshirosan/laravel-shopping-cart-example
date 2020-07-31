@@ -5,15 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Category;
 use App\Models\OptionGroup;
-use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
     /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
 
     public function index()
     {
@@ -27,15 +26,17 @@ class AdminController extends Controller
             return response($orders, 200);
         }
 
-        return view('admin.restaurantindex',
-            compact('optionGroups', 'categories', 'subcategories'));
+        return view(
+            'admin.restaurantindex',
+            compact('optionGroups', 'categories', 'subcategories')
+        );
     }
 
     /**
-    * Display the specified resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Display the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
 
     public function show()
     {
@@ -53,8 +54,16 @@ class AdminController extends Controller
 
         $averageOrder = $orders->averageOrder();
 
-        return view('admin.panel',
-            compact('yearlyTotal', 'totalOrders', 'taxcollection', 'totalOrdersYearBefore',
-            'taxcollectionYearBefore', 'averageOrder'));
+        return view(
+            'admin.panel',
+            compact(
+                'yearlyTotal',
+                'totalOrders',
+                'taxcollection',
+                'totalOrdersYearBefore',
+                'taxcollectionYearBefore',
+                'averageOrder'
+            )
+        );
     }
 }

@@ -3,13 +3,16 @@
         <h1
             v-if="URI === '/second-option-group'"
             class="text-center text-primary"
-            >Add a Second Option Group
+        >
+            Add a Second Option Group
         </h1>
         <h1 class="text-center text-primary" v-else>Add an Option Group</h1>
 
         <form class="form-horizontal" @submit.prevent="addItems()">
             <div class="form-group">
-                <label for="name" class="col-md-4 control-label">Option Group Name</label>
+                <label for="name" class="col-md-4 control-label"
+                    >Option Group Name</label
+                >
                 <div class="col-md-6">
                     <input
                         @focus="clearError()"
@@ -18,15 +21,21 @@
                         type="text"
                         class="form-control"
                         name="name"
-                        v-model="name" autofocus required
-                    >
-                   <error :error="errors.get('name')"></error>
+                        v-model="name"
+                        autofocus
+                        required
+                    />
+                    <error :error="errors.get('name')"></error>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-4 control-label"></label>
                 <div class="col-md-6">
-                    <input type="submit" value='Submit' class="btn btn-primary">
+                    <input
+                        type="submit"
+                        value="Submit"
+                        class="btn btn-primary"
+                    />
                 </div>
             </div>
         </form>
@@ -53,8 +62,8 @@
 
         data() {
             return {
-                name: '',
-                items: '',
+                name: ''
+                items: ''
             }
         }
     }
