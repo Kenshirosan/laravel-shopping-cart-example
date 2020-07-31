@@ -58,7 +58,8 @@ class ShopController extends Controller
         return view('layouts.alternate', compact('categories'));
     }
 
-    public function today() {
+    public function today()
+    {
         return response(Product::where('today', true)->pluck('image')->toArray(), 200);
     }
 }

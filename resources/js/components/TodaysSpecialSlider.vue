@@ -19,8 +19,6 @@
             };
         },
 
-        mounted() {},
-
         created() {
             this.startSlider();
 
