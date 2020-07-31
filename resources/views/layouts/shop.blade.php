@@ -31,7 +31,7 @@
                 <br><br>
                 </div>
             </div>
-            {{-- <div class="parallax"><img src="/img/caviar.jpg" alt="Unsplashed background img 1"></div> --}}
+{{--             <div class="parallax"><img src="/img/15903126420154.jpg" alt="Unsplashed background img 1"></div>--}}
         </div>
         @foreach ($categories as $category)
             @if(! $category->products->isEmpty())

@@ -22,29 +22,34 @@ let token = document.head.querySelector('meta[name="csrf-token"]');
 if (token) {
     window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
-    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+    console.error(
+        'CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token'
+    );
 }
-
 
 window.moment = require('../../bower_components/moment/moment.js');
 window.Vue = require('vue');
 
 window.events = new Vue();
 
-window.flash = function (message, level = 'green', duration = 3000) {
+window.flash = function(message, level = 'green', duration = 3000) {
     window.events.$emit('flash', { message, level, duration });
 };
 
-window.adminflash = function (message, level = 'success') {
+window.adminflash = function(message, level = 'success') {
     window.events.$emit('adminflash', { message, level });
 };
 
-window.productitemscountchanged = function () {
+window.productitemscountchanged = function() {
     window.events.$emit('productadded');
 };
 
-window.cartisempty = function () {
+window.cartisempty = function() {
     window.events.$emit('cartempty');
+};
+
+window.specialshavechanged = function() {
+    window.events.$emit('specialschanged');
 };
 
 window.ucfirst = function(string) {
@@ -52,12 +57,12 @@ window.ucfirst = function(string) {
 };
 
 // Optional real time order progress
-import Echo from 'laravel-echo'
+import Echo from 'laravel-echo';
 window.Pusher = require('pusher-js');
 
 window.Echo = new Echo({
     broadcaster: 'pusher',
     key: '2f56755e1aa83d0d08db',
     cluster: 'eu',
-    encrypted: true
+    encrypted: true,
 });

@@ -16,6 +16,7 @@ class Product extends Model
     protected $fillable = [
         'name',
         'holiday_special',
+        'today',
         'option_group_id',
         'second_option_group_id',
         'category_id',
@@ -57,7 +58,7 @@ class Product extends Model
         ]
     ];
 
-    protected $appends = ['is_on_sale', 'favoritesCount', 'isFavorited'];
+    protected $appends = ['is_on_sale', 'favoritesCount', 'isFavorited', 'isTodaySpecial'];
 
     public function favorites()
     {
@@ -156,7 +157,7 @@ class Product extends Model
 
     public function getSalesPercentage()
     {
-        return $this->sales->percentage * 100;
+        return $this->getRawSalesPercentage() * 100;
     }
 
     public function getRawSalesPercentage()
@@ -177,4 +178,10 @@ class Product extends Model
     {
         return $this->where('holiday_special', true)->exists();
     }
+
+    public function getIsTodaySpecialAttribute()
+    {
+        return $this->today;
+    }
+
 }

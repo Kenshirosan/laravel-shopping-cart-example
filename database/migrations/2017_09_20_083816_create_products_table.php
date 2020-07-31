@@ -16,6 +16,7 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
+            $table->boolean('today')->default(false);
             $table->boolean('holiday_special')->default(false);
             $table->unsignedInteger('category_id')->index();
             $table->string('type');

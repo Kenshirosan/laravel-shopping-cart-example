@@ -62,9 +62,9 @@
 
         data() {
             return {
-                name: ''
-                items: ''
-            }
-        }
-    }
+                name: '',
+                items: '',
+            };
+        },
+    };
 </script>

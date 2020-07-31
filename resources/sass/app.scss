@@ -50,3 +50,12 @@ img.product-layout-img:hover, .scale_when_hover:hover {
 	overflow: none;
 	transform: translate(0px, 5px) scale(1.05);
 }
+
+/// slider indicators
+.carousel .indicators .indicator-item {
+	background: rgba(255, 155, 155, 0.5);
+}
+
+.carousel .indicators .indicator-item.active {
+	background: #f80404;
+}

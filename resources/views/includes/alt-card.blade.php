@@ -21,13 +21,13 @@
         </p>
         @if(!$product->is_eighty_six())
             <add-to-cart
-                    :product="{{ $product }}"
-                    @if( $product->groups )
-                    :options="{{ $product->groups }}"
-                    @endif
-                    @if( $product->getWaysOfCooking() )
-                    :waysOfCooking="{{ $product->getWaysOfCooking() }}"
-                    @endif
+                :product="{{ $product }}"
+                @if( $product->groups )
+                :options="{{ $product->groups }}"
+                @endif
+                @if( $product->getWaysOfCooking() )
+                :waysOfCooking="{{ $product->getWaysOfCooking() }}"
+                @endif
             >
             </add-to-cart>
         @endif
@@ -38,7 +38,7 @@
         </div>
     </div>
     <div role="separator"></div>
-        <div class="cart-btn-container">
+    <div class="cart-btn-container">
         <favorite class="cart-btn" :product="{{ $product }}"></favorite>
         @if($_SERVER['REQUEST_URI'] != "/shop/$product->slug")
             <a class="cart-btn" href="/shop/{{ $product->slug }}">Voir</a>
@@ -51,5 +51,6 @@
             <button type="submit" name="submit" class="btn red danger deleteButton">Delete</button>
         </form>
         <a href="/update/{{ $product->slug }}" class="btn blue product-layout-img">Update</a>
+        <mark-as-today-special :todayspecial="{{ $product->isTodaySpecial  }}" :product="{{ $product->id }}"></mark-as-today-special>
     @endcan
 </article>

@@ -37,6 +37,9 @@ Route::get('/count', function() {
 
 
 Route::get('/alternate', 'ShopController@alternate');
+Route::get('today', 'ShopController@today');
+Route::post('/today/{product}', 'ProductController@todaySpecial');
+Route::delete('/today/{product}/delete', 'ProductController@deleteTodaySpecial');
 // ppl playing with shopping cart
 Route::resource('/shop', 'ShopController', ['only' => ['index', 'show']]);
 Route::resource('/cart', 'CartController');

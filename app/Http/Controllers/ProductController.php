@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Response;
 use Image;
 use App\User;
 use App\Models\Photo;
@@ -9,6 +10,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\OptionGroup;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreProductRequest;
 
@@ -16,11 +18,11 @@ use App\Http\Requests\StoreProductRequest;
 class ProductController extends Controller
 {
     /**
-    * Store a newly created resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\Response
-    */
+     * Store a newly created resource in storage.
+     *
+     * @param StoreProductRequest $request
+     * @return RedirectResponse
+     */
     public function store(StoreProductRequest $request)
     {
         try{
@@ -100,7 +102,7 @@ class ProductController extends Controller
                 'name' => ucfirst(request('name')),
                 'holiday_special' => request('holiday_special'),
                 'category_id' => request('category_id'),
-                'subcategory' => request('subcategory'),
+                'type' => request('subcategory'),
                 'slug' => request('slug'),
                 'description' => request('description'),
                 'price' => request('price'),
@@ -120,7 +122,7 @@ class ProductController extends Controller
     * Remove the specified resource from storage.
     *
     * @param    $product
-    * @return \Illuminate\Http\Response
+    * @return RedirectResponse || Response
     */
     public function destroy($product)
     {
@@ -146,5 +148,21 @@ class ProductController extends Controller
             return response([], 200);
         }
         return back()->with(['success_message' => 'Successfully deleted!']);
+    }
+
+    public function todaySpecial(Product $product)
+    {
+        $product->update([
+            'today' => true
+        ]);
+        return response(['create' => 'ok'], 200);
+    }
+
+    public function deleteTodaySpecial(Product $product)
+    {
+        $product->update([
+            'today' => false
+        ]);
+        return response(['delete' => 'ok'], 200);
     }
 }
