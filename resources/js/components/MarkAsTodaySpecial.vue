@@ -28,8 +28,8 @@
         computed: {
             message() {
                 return this.isTodaySpecial
-                    ? 'Enlever des plats du jour'
-                    : 'Ajouter aux plats du jour';
+                    ? 'Enlever des PDJ'
+                    : 'Ajouter aux PDJ';
             },
         },
 
@@ -40,7 +40,7 @@
                     .then(res => {
                         this.isTodaySpecial = false;
                         specialshavechanged();
-                        flash('Produit effacer des plats du jour', 'orange');
+                        flash('Produit effacer des PDJ', 'orange');
                     })
                     .catch(err => console.error(err.message));
             },
@@ -51,7 +51,7 @@
                     .then(res => {
                         this.isTodaySpecial = true;
                         specialshavechanged();
-                        flash('Produit ajouter aux plats du jour');
+                        flash('Produit ajouter aux plats du PDJ');
                     })
                     .catch(err => console.error(err));
             },

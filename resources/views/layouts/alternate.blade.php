@@ -18,9 +18,9 @@
             <div class="section">
                 <div class="container">
                     <h1 class="header center-align text-lighten-2 custom-title"></h1>
-                    <div class="row">
-                        <h5 class="custom-subtitle center-align header light"></h5>
-                    </div>
+{{--                    <div class="row">--}}
+{{--                        <h5 class="custom-subtitle center-align header light"></h5>--}}
+{{--                    </div>--}}
                     <div class="row">
                         <todays-special-slider></todays-special-slider>
                     </div>

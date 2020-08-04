@@ -6,12 +6,13 @@
         let wells = Array.from(document.querySelectorAll('.well'));
 
         axios.get('/customized-page-infos').then(response => {
-
-            jumbotron.style.background = `url(${response.data.image})no-repeat fixed center`;
+            jumbotron.style.backgroundImage = `url(${response.data.image})`;
             jumbotron.style.backgroundSize = 'cover';
-            title.innerText = ucfirst(response.data.title);
+            jumbotron.style.backgroundRepeat = 'no-repeat';
+            jumbotron.style.backgroundPosition = 'center';
+            title.innerHTML = ucfirst(response.data.title) + `<span> ${response.data.subtitle}</span>`;
             title.style.color = response.data.color;
-            subtitle.innerText = ucfirst(response.data.subtitle);
+            // subtitle.innerText = ucfirst(response.data.subtitle);
             subtitle.style.color = response.data.color;
             // document.body.style.backgroundColor = response.data.background_color;
 

@@ -27,11 +27,38 @@
 
 .custom-title {
     font-size: 4em;
+    margin-top: 0;
+}
+
+.custom-title span {
+    font-size: 0.5em;
 }
 
 .custom-subtitle {
     font-size: 3em;
 }
+
+.jumbotron {
+    position: relative;
+    z-index: 1;
+}
+.jumbotron::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    filter: opacity(75%);
+}
+.jumbotron h1 {
+  /* This will make it stack on top of the ::before */
+    position: relative;
+    z-index: 2;
+}
+
 
 #logout-form {
     display: none;
