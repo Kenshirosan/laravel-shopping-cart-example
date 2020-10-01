@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
     "content-hash": "78e3f104ff77d6f2dbf46ce34bce892d",
-=======
-    "content-hash": "55ad26fa3c30a3fc7a70bfe4fb1b1043",
->>>>>>> d54b5d2ba8acef67bde7915a7ae65799d7a21152
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -3986,23 +3982,6 @@
                 "portable",
                 "shim"
             ],
-<<<<<<< HEAD
-=======
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
->>>>>>> d54b5d2ba8acef67bde7915a7ae65799d7a21152
             "time": "2020-08-04T06:02:08+00:00"
         },
         {
@@ -7297,7 +7276,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.3"
+        "php": ">=5.6.4"
     },
     "platform-dev": []
 }
