@@ -5951,16 +5951,10 @@ label {
 /* Text Inputs + Textarea
    ========================================================================== */
 /* Style Placeholders */
-::-webkit-input-placeholder {
-  color: #d1d1d1;
-}
 ::-moz-placeholder {
   color: #d1d1d1;
 }
 :-ms-input-placeholder {
-  color: #d1d1d1;
-}
-::-ms-input-placeholder {
   color: #d1d1d1;
 }
 ::placeholder {
@@ -9240,8 +9234,7 @@ a.cart-btn {
   width: 100%;
   height: 100%;
   background-color: black;
-  -webkit-filter: opacity(75%);
-          filter: opacity(75%);
+  filter: opacity(75%);
 }
 
 .jumbotron h1 {

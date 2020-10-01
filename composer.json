@@ -7,21 +7,24 @@
     "require": {
         "php": ">=5.6.4",
         "barryvdh/laravel-dompdf": "^0.8.6",
-        "bumbummen99/shoppingcart": "^2.9",
+        "bumbummen99/shoppingcart": "^3.0",
         "fideloper/proxy": "~4.1",
         "intervention/image": "^2.4",
         "jeroennoten/laravel-adminlte": "^3.1",
-        "laravel/framework": "^7.0",
+        "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
-        "laravel/ui": "^2.0",
+        "laravel/ui": "^3.0",
+        "guzzlehttp/guzzle": "^7.0.1",
         "pusher/pusher-php-server": "^4.1",
         "stripe/stripe-php": "^7.28",
-        "zgabievi/promocodes": "^2.3"
+        "zgabievi/promocodes": "^8.1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.8",
         "mockery/mockery": "1.2.*",
-        "phpunit/phpunit": "^8.5"
+        "phpunit/phpunit": "^9.3",
+        "facade/ignition": "^2.3.6",
+        "nunomaduro/collision": "^5.0"
     },
     "autoload": {
         "classmap": [
@@ -31,7 +34,9 @@
             "app/helpers.php"
         ],
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
         }
     },
     "autoload-dev": {
@@ -42,21 +47,30 @@
     },
     "scripts": {
         "post-root-package-install": [
-            "php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-create-project-cmd": [
-            "php artisan key:generate"
+            "@php artisan key:generate --ansi"
         ],
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall"
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate"
+        ],
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
         ]
     },
     "config": {
         "preferred-install": "dist",
         "sort-packages": true,
         "optimize-autoloader": true
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
     }
 }
