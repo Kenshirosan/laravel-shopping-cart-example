@@ -3,7 +3,7 @@
 
 Laravel E-commerce
 
-Laravel e-commerce example application. Uses [Crinsane/LaravelShoppingcart](https://github.com/Crinsane/LaravelShoppingcart)
+Laravel e-commerce example application. Uses [bumbummen99/shoppingcart](https://github.com/bumbummen99/LaravelShoppingcart)
 
 Features :
 ---
