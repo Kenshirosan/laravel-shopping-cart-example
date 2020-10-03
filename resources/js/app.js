@@ -72,6 +72,14 @@ Vue.component(
     'data-table',
     require('./components/subcomponents/Table').default
 );
+Vue.component(
+    'add-coupon-to-cart',
+    require('./components/AddCouponToCart').default
+);
+Vue.component(
+    'cart-total-price',
+    require('./components/CartTotalPrice').default
+);
 
 const app = new Vue({
     el: '#app',

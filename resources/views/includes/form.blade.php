@@ -96,8 +96,6 @@
                     <textarea maxlength="500" id="comments" name="comments" class="black-text materialize-textarea" placeholder="Anything we need ton know? Allergies? A name on the order ? 500 characters max"></textarea>
                     <label for="comments">Comments</label>
                 </div>
-                <input type="hidden" name="code" value="{{ $code }}">
-                <input type="hidden" name="total" value="{{ $total }}">
             </div>
         </div>
     </div>

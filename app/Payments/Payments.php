@@ -6,7 +6,6 @@ use Stripe\Stripe;
 use Stripe\Charge;
 use \Cart as Cart;
 use Stripe\Customer;
-use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 
 
@@ -15,7 +14,7 @@ class Payments extends Model
     /**
     * Stripe validation
     */
-    public function validateStripePayment(Request $request)
+    public function validateStripePayment()
     {
         Stripe::setApiKey(config('services.stripe.secret'));
 
@@ -24,11 +23,7 @@ class Payments extends Model
             'source' => request('stripeToken')
         ]);
 
-        if(request('total')){
-            $price = request('total') * 100;
-        } else {
-            $price = Cart::total() * 100;
-        }
+        $price = Cart::total() * 100;
 
         $charge = Charge::create([
             'customer' => $customer->id,

@@ -23,17 +23,8 @@
                         </div>
                     </div>
                 @endforeach
-                <div class="card">
-                    <div class="card-content">
-                        <h5 class="cyan-text pr-10"><span>Sous-total : $</span>{{ Cart::subtotal() }}</h5>
-                        <h5 class="cyan-text pr-10"><span>TVA : $</span>{{ Cart::tax() }}</h5>
-                        <h5 class="cyan-text pr-10"><span>Total : $</span>{{ Cart::total() }}</h5>
-                        @if($discount != null)
-                            <span class="text-info">Congratulations ! {{ $discount * 100 }} % discount applied with code {{ $code }}</span>
-                            <h5 class="cyan-text pr-10"><span>Total including discount : $</span>{{ $total / 100  }}</h5>
-                        @endif
-                    </div>
-                </div>
+
+                <cart-total-price></cart-total-price>
             </div>
             <div class="col m6 s12">
                 @if( Auth::check() )
@@ -46,22 +37,7 @@
                 @endif
             </div>
         </form>
-    {{-- COUPON --}}
-    <div class="row">
-        <div class="col m2 s12">
-            <p class="blue-text">Do you have a coupon ?</p>
-            <div class="form-group">
-                <form action="/apply-coupon" method="POST" class="side-by-side">
-                    {{ csrf_field() }}
-                    <div class="col-md-6">
-                        <input type="text" name="coupon" placeholder="R5AH-JHXE">
-                    </div>
-                    <div class="col-md-6">
-                        <input type="submit" class="btn btn-primary" value="Submit">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+
+    <add-coupon-to-cart></add-coupon-to-cart>
 </div>
 @endsection

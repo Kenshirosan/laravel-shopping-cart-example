@@ -19,27 +19,34 @@ use \Cart as Cart;
 
 class PaymentController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
         $total = Cart::total();
-        $discount = null;
-        $code = null;
-        // $action = auth()->user()->isAdmin() ? '/create-invoice' : '';
 
-        return view('layouts.payment_form', compact('total', 'discount', 'code'));
+        if(request()->wantsJson()) {
+            $cartdata = [
+                'tax' => Cart::tax(),
+                'subtotal' => Cart::subtotal(),
+                'total' => Cart::total(),
+                'discount' => Cart::discount()
+            ];
+
+            return response($cartdata, 200);
+        }
+
+        return view('layouts.payment_form', compact('total'));
     }
 
     /**
      *
      * Checks time validity for pick up order
      */
-    private function checkTimeValidity(Request $request)
+    private function checkTimeValidity()
     {
         $now = Carbon::createFromFormat('H:i:s', Carbon::now()->toTimeString())->addMinutes(30);
         $pickup_time = Carbon::createFromFormat('H:i', request('pickup_time'));
@@ -61,22 +68,23 @@ class PaymentController extends Controller
 
         return ['error' => $error, 'error_message' => $error_message];
     }
+
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param PaymentRequest $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      */
     public function store(PaymentRequest $request)
     {
-        $errors = $this->checkTimeValidity($request);
+        $errors = $this->checkTimeValidity();
 
         if ((request('order_type') === 'Pick-up') && ($errors['error'])) {
             return redirect('/checkout')->with('error_message', $errors['error_message']);
         }
 // Mettre un double try catch avec une transaction sql
          try {
-             (new Payments())->validateStripePayment($request);
+             (new Payments())->validateStripePayment();
              (new Logger('Payment successful'));
          } catch (\Exception $e) {
              (new Logger('Something wrong happened with the payment of an order', 'Error, please check your site.'));
@@ -96,26 +104,16 @@ class PaymentController extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\Response
      */
-    private function processOrder(Request $request)
+    private function processOrder()
     {
-        $items = [];
         $cart = Cart::content()->toArray();
 
         $items = [];
         foreach ($cart as $row) {
             $items[] = json_encode($row);
-        }
-
-        $price = Cart::total();
-        $taxes = Cart::tax();
-
-        if (request('total')) {
-            $price = request('total');
-            $taxes = request('total') * 0.1;
         }
 
         $pickup_time = null;
@@ -136,8 +134,8 @@ class PaymentController extends Controller
             'zipcode' => request('zipcode'),
             'phone_number' => request('phone_number'),
             'items' => json_encode($items),
-            'price' => $price,
-            'taxes' => $taxes,
+            'price' => Cart::total(),
+            'taxes' => Cart::tax(),
             'comments' => request('comments')
         ]);
 // ICI A CHANGER
@@ -202,5 +200,12 @@ class PaymentController extends Controller
         if (!Auth::user()->isAdmin()) {
             return redirect()->back()->with(['error_message' => 'Page not found!']);
         }
+    }
+
+    public function deleteUserCoupon()
+    {
+        Cart::setGlobalDiscount(0);
+
+        return response([], 200);
     }
 }

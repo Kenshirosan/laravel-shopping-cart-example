@@ -61,33 +61,34 @@ class CouponController extends Controller
     public function update(Request $request)
     {
         $this->validate($request, [
-            'coupon' => 'required'
+            'coupon' => 'required|string|exists:promocodes,code'
         ]);
 
         $code = request('coupon');
 
         if (!$validCode = Promocode::where('code', $code)->first()){
-            return back()->with('warning_message', 'This coupon has expired');
+            $message = 'This coupon has expired';
+            return response()->json(['message' => $message], 403);
         }
 
-        if( ! \Promocodes::check($code) &&  $validCode->is_disposable){
-            return back()->with('error_message', 'This code has already been used');
+        if( ! \Promocodes::check($code) && $validCode->is_disposable){
+            $message = 'This coupon has already been used';
+            return response()->json(['message' => $message], 403);
         }
 
         $validCode = Promocode::where('code', $code)->firstOrFail();
 
-        $discount = $validCode->reward / 100;
-        $oldTotal =  Cart::subtotal();
-        $discountValue = Cart::subtotal() * $discount;
+        Cart::setGlobalDiscount($validCode->reward);
 
-        $subtotal = $oldTotal - $discountValue;
-        $taxes = $subtotal * 0.08;
-        $total = intval($subtotal + $taxes, 0);
+        $data = [
+            'code' => $validCode->code,
+            'tax' => Cart::tax(),
+            'subtotal' => Cart::subtotal(),
+            'total' => Cart::total(),
+            'discount' => Cart::discount()
+        ];
 
-        session()->flash('flash', 'Your coupon has been applied, Please do not leave this page');
-        // that shit has crashed sometimes and I dunno why.. URL related, sent a response code of 1, then started working again.. hhhhhmmmmmmmm
-        return view('layouts.payment_form', compact('total', 'discount', 'code'));
-        // return redirect('/checkout')->with(compact('total', 'discount', 'code'));
+        return response( compact('data'), 200);
     }
 
     public function destroy($id)

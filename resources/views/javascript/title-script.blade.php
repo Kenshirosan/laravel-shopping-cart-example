@@ -2,7 +2,7 @@
     (function() {
         let jumbotron = document.querySelector('.jumbotron');
         let title = document.querySelector('.custom-title');
-        let subtitle = document.querySelector('.custom-subtitle');
+        // let subtitle = document.querySelector('.custom-subtitle');
         let wells = Array.from(document.querySelectorAll('.well'));
 
         axios.get('/customized-page-infos').then(response => {
@@ -13,7 +13,7 @@
             title.innerHTML = ucfirst(response.data.title) + `<span> ${response.data.subtitle}</span>`;
             title.style.color = response.data.color;
             // subtitle.innerText = ucfirst(response.data.subtitle);
-            subtitle.style.color = response.data.color;
+            // subtitle.style.color = response.data.color;
             // document.body.style.backgroundColor = response.data.background_color;
 
             wells.forEach(well => {

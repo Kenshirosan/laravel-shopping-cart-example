@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/css/link.css">
     @yield('extra-css')
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/AdminLTE.min.css') }}">
-    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
     <!-- Favicon and Apple Icons -->
     <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}">
     {{-- Stripe recommends to put this script on all pages, helps ID not good behaviors --}}
@@ -27,7 +27,6 @@
         <flash message="{{ session('flash') }}"></flash>
         <view-cart :items="{{ Cart::content() }}" :total="{{ Cart::total() }}"></view-cart>
     </div>
-
 
     @include('includes.footer')
     <script>

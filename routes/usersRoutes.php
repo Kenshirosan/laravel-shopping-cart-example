@@ -10,6 +10,8 @@ Route::middleware(['auth', 'must-be-confirmed'])->group(function () {
     Route::delete('/erase/{account}', 'UserController@destroy');
     //CHECKOUT AND CART ROUTES
     Route::get('/checkout', 'PaymentController@index');
+    Route::get('/cart-data', 'PaymentController@index');
+    Route::delete('/user-coupons', 'PaymentController@deleteUserCoupon');
     Route::post('/order', 'PaymentController@store');
     Route::post('/apply-coupon', 'CouponController@update');
     Route::post('/product/{id}/favorites', 'FavoritesController@store');

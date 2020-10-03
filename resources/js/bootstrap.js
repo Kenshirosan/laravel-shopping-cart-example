@@ -32,27 +32,31 @@ window.Vue = require('vue');
 
 window.events = new Vue();
 
-window.flash = function(message, level = 'green', duration = 3000) {
+window.flash = function (message, level = 'green', duration = 3000) {
     window.events.$emit('flash', { message, level, duration });
 };
 
-window.adminflash = function(message, level = 'success') {
+window.adminflash = function (message, level = 'success') {
     window.events.$emit('adminflash', { message, level });
 };
 
-window.productitemscountchanged = function() {
+window.productitemscountchanged = function () {
     window.events.$emit('productadded');
 };
 
-window.cartisempty = function() {
+window.cartisempty = function () {
     window.events.$emit('cartempty');
 };
 
-window.specialshavechanged = function() {
+window.specialshavechanged = function () {
     window.events.$emit('specialschanged');
 };
 
-window.ucfirst = function(string) {
+window.cartHasDiscount = function (data) {
+    window.events.$emit('discount-applied', data);
+};
+
+window.ucfirst = function (string) {
     return string.charAt(0).toUpperCase() + string.substring(1);
 };
 
