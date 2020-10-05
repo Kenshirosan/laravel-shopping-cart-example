@@ -15,7 +15,7 @@
             <i class="material-icons">more_vert</i>
         </span>
           <!-- add activator to anything -->
-        @if( $product->is_eighty_six() )
+        @if( $product->isEightySix() )
             <img class="activator sold-out right" src="/images/sold_out_stamp_cropped.jpg" alt="Product sold out !">
         @endif
         <div class="clearfix"></div>
