@@ -18,19 +18,17 @@ class OrderProcessedController extends Controller
     //     return back();
     // }
 
-    // we show a resource but we hide a previously visible item in the view
     public function create($id)
     {
-        $order = Hideable::where('order_id', $id)->firstOrFail();
+        $order = Order::find($id);
 
-        $order->delete();
+        $order->unhide();
 
         $orders = ( new Order() )->todaysOrders();
 
         return response($orders, 200);
     }
 
-    // we delete a resource but we show a previously hidden item in the view
      public function destroy($id)
     {
         $order = Order::where('id', $id)->firstOrFail();
@@ -39,9 +37,7 @@ class OrderProcessedController extends Controller
             return back()->with(['error_message' => 'This order is already hidden']);
         }
 
-        Hideable::create([
-            'order_id' => request('id')
-        ]);
+        $order->hide();
 
         $orders = ( new Order() )->todaysOrders();
 

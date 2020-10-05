@@ -6,7 +6,7 @@
 
 @section('content')
     <h3 class="text-center text-info product-layout-img">Update {{ $product->name }}</h3>
-    @if($product->is_eighty_six())
+    @if($product->isEightySix())
         <div class="alert alert-danger">
             <h3 class="text-center product-layout-img"><i class="fa fa-info-circle"></i> {{ $product->name }} is 86</h3>
         </div>
@@ -179,8 +179,8 @@
     <div class="form-group{{ $errors->has('eighty_six') ? ' has-error' : '' }}">
         <label for="eighty_six" class="col-md-4 control-label"><strong class="text-danger">86 Product ?</strong></label>
         <div class="col-md-6">
-            <input type="radio" name="eighty_six" value="0" {{ $product->is_eighty_six() ? 'checked' : '' }}> No<br>
-            <input type="radio" name="eighty_six" value="1" {{ $product->is_eighty_six() ? '' : 'checked' }}> Yes<br>
+            <input type="radio" name="eighty_six" value="0" {{ $product->isEightySix() ? 'checked' : '' }}> No<br>
+            <input type="radio" name="eighty_six" value="1" {{ $product->isEightySix() ? '' : 'checked' }}> Yes<br>
             @if ($errors->has('name'))
                 <span class="help-block">
                     <strong>{{ $errors->first('eighty_six') }}</strong>
@@ -191,7 +191,8 @@
     <div class="form-group">
         <label for="submit" class="col-md-4 control-label"></label>
         <div class="col-md-6">
-            <input type=submit class="btn {{ $product->is_eighty_six() ? 'btn-primary' : 'btn-danger' }} form-control" value="{{ $product->is_eighty_six() ? 'Click to add Product' : '86 product' }}">
+            <input type=submit class="btn {{ $product->isEightySix() ? 'btn-primary' : 'btn-danger' }} form-control"
+                   value="{{ $product->isEightySix() ? 'Click to add Product' : '86 product' }}">
         </div>
     </div>
 </form>

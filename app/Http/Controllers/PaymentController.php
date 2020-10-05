@@ -9,9 +9,7 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Promocode;
 use App\Payments\Payments;
-use App\User;
 use App\Logger;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use \Carbon\Carbon;
@@ -22,7 +20,7 @@ class PaymentController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View
+     * @return \Illuminate\View\View|\Illuminate\Http\Response
      */
     public function index()
     {
@@ -48,7 +46,7 @@ class PaymentController extends Controller
      */
     private function checkTimeValidity()
     {
-        $now = Carbon::createFromFormat('H:i:s', Carbon::now()->toTimeString())->addMinutes(30);
+        $inThirtyMinutes = Carbon::createFromFormat('H:i:s', Carbon::now()->toTimeString())->addMinutes(30);
         $pickup_time = Carbon::createFromFormat('H:i', request('pickup_time'));
         $minTime = Carbon::createFromFormat('H:i', "11:00");
         $maxTime = Carbon::createFromFormat('H:i', "22:00");
@@ -61,9 +59,14 @@ class PaymentController extends Controller
             $error_message = 'Sorry, this is too early';
         }
 
-        if ($pickup_time < $now) {
+        if ($pickup_time < $inThirtyMinutes) {
             $error = true;
-            $error_message = 'Sorry but You can\'t pick up earlier than ' . $now->toTimeString();
+            $error_message = 'Sorry but You can\'t pick up earlier than ' . $inThirtyMinutes->toTimeString();
+        }
+
+        if ($pickup_time > $maxTime) {
+            $error = true;
+            $error_message = 'Sorry but You can\'t pick up later than ' . $maxTime->toTimeString();
         }
 
         return ['error' => $error, 'error_message' => $error_message];
@@ -180,7 +183,7 @@ class PaymentController extends Controller
             }
         }
 
-        event(new UserOrdered($order)); // ready for real-time :) fully working !!
+        event(new UserOrdered($order)); // ready for real-time
         (new Logger('Une commande a ete passe'));
 
         $user_email = auth()->user()->email;
@@ -193,15 +196,18 @@ class PaymentController extends Controller
 
     /**
      * delete the specified resource
-     * unused unless someone asks for it, just don't want orders to be deleted. route protection
+     * unused unless someone asks for it, don't want orders to be deleted. route protection
      */
-    public function delete($order)
+    public function delete(Order $order)
     {
         if (!Auth::user()->isAdmin()) {
             return redirect()->back()->with(['error_message' => 'Page not found!']);
         }
     }
 
+    /**
+     * @return \Illuminate\Http\Response
+     */
     public function deleteUserCoupon()
     {
         Cart::setGlobalDiscount(0);

@@ -9,7 +9,7 @@ use DB;
 
 class Order extends Model
 {
-
+    use Hideable;
     /**
      * The attributes that are mass assignable.
      *
@@ -30,8 +30,11 @@ class Order extends Model
         'price',
         'status_id',
         'taxes',
-        'comments'
+        'comments',
+        'hideable_id',
+        'hideable_type'
     ];
+
     protected $appends = ['hiddenOrder', 'products'];
 
     public function user()
@@ -117,17 +120,12 @@ class Order extends Model
 
     public function isHidden()
     {
-        return !!Hideable::where('order_id', request('id'))->count();
+        return $this->hidden()->where('hideable_id', request('id'))->count();
     }
 
     public function getIsHiddenOrderAttribute()
     {
-        return $this->isHiddenOrder();
-    }
-
-    public function isHiddenOrder()
-    {
-        return $this->hasMany(Hideable::class);
+        return $this->isHidden();
     }
 
     public function getHiddenOrderAttribute()
@@ -137,9 +135,9 @@ class Order extends Model
 
     public function hiddenOrder()
     {
-        $attributes = ['order_id' => $this->id];
+        $attributes = ['hideable_id' => $this->id];
 
-        return $this->isHiddenOrder()->where($attributes)->exists();
+        return $this->hidden()->where($attributes)->exists();
     }
 
     public function numberOfOrdersProcessedToday()
@@ -147,7 +145,7 @@ class Order extends Model
         $when = 'created_at';
         $today = date('Y-m-d');
 
-        return Hideable::whereDate($when, $today)->where('product_id', null)->count();
+        return $this->whereDate($when, $today)->where('product_id', null)->count();
     }
 
     public function todaysOrders()

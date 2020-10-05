@@ -4,18 +4,24 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Hideable extends Model
+trait Hideable
 {
-    protected $fillable = ['order_id', 'product_id'];
-
-
-    public function isHiddenOrder()
+    public function hidden()
     {
-        return $this->hasMany(Order::class, 'order_id');
+        return $this->morphOne($this, 'hideable');
     }
 
-    public function isHiddenProduct()
+    public function hide()
     {
-    	return $this->hasMany(Product::class, 'product_id');
+        return $this->hidden()->save($this);
     }
+
+    public function unhide()
+    {
+        return $this->hidden()->update([
+            'hideable_id' => null,
+            'hideable_type' => null,
+        ]);
+    }
+
 }

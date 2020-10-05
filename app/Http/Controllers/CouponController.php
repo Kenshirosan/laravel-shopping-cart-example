@@ -33,7 +33,7 @@ class CouponController extends Controller
      * Store new coupons
      *
      * @param CouponRequest $request
-     * @return json response
+     * @return \Illuminate\Http\Response
      */
     public function store(CouponRequest $request)
     {

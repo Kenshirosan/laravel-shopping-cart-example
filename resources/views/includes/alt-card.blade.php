@@ -19,7 +19,7 @@
         <p class="item-text">
             {{ $product->description }}
         </p>
-        @if(!$product->is_eighty_six())
+        @if(!$product->isEightySix())
             <add-to-cart
                 :product="{{ $product }}"
                 @if( $product->groups )
@@ -32,7 +32,7 @@
             </add-to-cart>
         @endif
         <div class="cart-btn-container">
-            @if($product->is_eighty_six())
+            @if($product->isEightySix())
                 <img class="alt-img-sold-out" src="/images/sold_out_stamp_cropped.jpg" alt="Product sold out !">
             @endif
         </div>

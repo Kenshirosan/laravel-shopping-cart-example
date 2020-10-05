@@ -15,11 +15,11 @@ class CreateHideablesTable extends Migration
     {
         Schema::create('hideables', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('order_id')->nullable()->unique();
-            $table->unsignedInteger('product_id')->nullable()->unique();
+            $table->unsignedInteger('hideable_id')->nullable()->unique();
+            $table->string('hideable_type', 80);
             $table->timestamps();
-
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+//            $table->morphs('hideable');
+//            $table->primary(['id', 'hideable_id', 'hideable_type']);
         });
     }
 

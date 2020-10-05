@@ -35,7 +35,7 @@
         </h1>
         <p class="cyan-text">{{ $product->description }}</p>
         <p>{{ $product->price() }}</p>
-        @if($product->is_eighty_six())
+        @if($product->isEightySix())
             <img class="activator sold-out right" src="/images/sold_out_stamp_cropped.jpg" alt="Product sold out !">
         @else
             <add-to-cart

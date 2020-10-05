@@ -20,6 +20,9 @@ class CreateProductsTable extends Migration
             $table->boolean('holiday_special')->default(false);
             $table->unsignedInteger('category_id')->index();
             $table->string('type');
+//            $table->morphs('hideable');
+            $table->unsignedInteger('hideable_id')->nullable()->unique();
+            $table->string('hideable_type', 80)->nullable();
             $table->string('slug')->unique();
             $table->text('description');
             $table->integer('price');

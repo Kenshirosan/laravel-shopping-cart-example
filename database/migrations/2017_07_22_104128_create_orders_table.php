@@ -18,6 +18,9 @@ class CreateOrdersTable extends Migration
             $table->string('order_type')->default('Delivery');
             $table->string('pickup_time')->nullable();
             $table->unsignedInteger('user_id')->nullable()->index();
+//            $table->morphs('hideable');
+            $table->unsignedInteger('hideable_id')->nullable()->unique();
+            $table->string('hideable_type', 80)->nullable();
             $table->string('name')->required();
             $table->string('last_name')->required();
             $table->string('address')->required();

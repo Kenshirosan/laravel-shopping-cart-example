@@ -16,9 +16,7 @@ class EightySixController extends Controller
 
     	$product = Product::where('id', $id)->firstOrFail();
 
-    	Hideable::create([
-    		'product_id' => $id
-    	]);
+        $product->hide();
 
 		return back()->with('success_message', "$product->name is 86");
     }
@@ -29,9 +27,9 @@ class EightySixController extends Controller
     		'eighty_six' => 'required|boolean'
     	]);
 
-    	$hideable = Hideable::where('product_id', $id)->firstOrFail();
+    	$product = Product::where('id', $id)->firstOrFail();
 
-    	$hideable->delete();
+    	$product->unhide();
 
     	return back()->with('success_message', 'Success');
     }

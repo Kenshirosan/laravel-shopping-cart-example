@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    use Hideable;
     /**
      * The attributes that are mass assignable.
      *
@@ -25,7 +26,9 @@ class Product extends Model
         'slug',
         'description',
         'price',
-        'image'
+        'image',
+        'hideable_id',
+        'hideable_type'
     ];
 
     /**
@@ -109,16 +112,12 @@ class Product extends Model
         return $this->is_on_sale();
     }
 
-    public function isHiddenProduct()
-    {
-        return $this->hasMany(Hideable::class);
-    }
 
-    public function is_eighty_six()
+    public function isEightySix()
     {
-        $attributes = ['product_id' => $this->id];
+        $attributes = ['id' => $this->id];
 
-        return $this->isHiddenProduct()->where($attributes)->exists();
+        return $this->hidden()->where($attributes)->exists();
     }
 
     public function category()
