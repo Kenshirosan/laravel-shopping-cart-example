@@ -6,26 +6,28 @@ use Illuminate\Database\Eloquent\Model;
 
 class OptionGroup extends Model
 {
-    use Groupable;
-
     protected $fillable = ['name'];
 
-    protected $appends = ['options'];
-
+    protected $appends = ['options', 'products'];
 
     public function getOptionsAttribute()
     {
         return $this->options()->get();
     }
 
-    public function products()
+    public function getProductsAttribute()
     {
-        return $this->belongsToMany(Product::class, 'group_product', 'option_group_id', 'product_id');
+        return $this->products()->get();
     }
 
-    public function product($product)
+    public function options()
     {
-        return $this->products()->attach($product);
+        return $this->morphedByMany(Option::class, 'groupable')->withTimestamps();
+    }
+
+    public function products()
+    {
+        return $this->morphedByMany(Product::class, 'groupable')->withTimestamps();
     }
 
 }

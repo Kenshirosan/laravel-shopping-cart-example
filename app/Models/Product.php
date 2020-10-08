@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    use Hideable;
+    use Hideable; use Groupable;
     /**
      * The attributes that are mass assignable.
      *
@@ -112,7 +112,6 @@ class Product extends Model
         return $this->is_on_sale();
     }
 
-
     public function isEightySix()
     {
         $attributes = ['id' => $this->id];
@@ -123,11 +122,6 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');
-    }
-
-    public function groups()
-    {
-        return $this->belongsToMany(OptionGroup::class, 'group_product');
     }
 
     public function regularPrice()

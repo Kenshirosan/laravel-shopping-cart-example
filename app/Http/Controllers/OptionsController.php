@@ -6,7 +6,6 @@ use App\Http\Requests\OptionRequest;
 use App\Models\Option;
 use App\Models\OptionGroup;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class OptionsController extends Controller
 {
@@ -27,9 +26,7 @@ class OptionsController extends Controller
             'name' => request('name')
         ]);
 
-        $group = OptionGroup::where('id', $request['option_group_id'])->firstOrFail();
-
-        $group->option($option);
+        $option->group($request['option_group_id']);
         $optionGroups = OptionGroup::with('options')->get();
 
         return response($optionGroups, 200);

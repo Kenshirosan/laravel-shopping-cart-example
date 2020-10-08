@@ -45,6 +45,7 @@ class Favorite extends Model
 
     public function product()
     {
+        // ???
         return Restaurant::where('id', $this->favorited->id);
     }
 

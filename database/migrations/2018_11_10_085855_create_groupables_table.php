@@ -14,12 +14,12 @@ class CreateGroupablesTable extends Migration
     public function up()
     {
         Schema::create('groupables', function (Blueprint $table) {
-            $table->primary(['option_group_id', 'groupable_id', 'groupable_type']);
-
             $table->unsignedInteger('option_group_id');
             $table->unsignedInteger('groupable_id');
             $table->string('groupable_type');
             $table->timestamps();
+
+            $table->primary(['option_group_id', 'groupable_id', 'groupable_type']);
         });
     }
 

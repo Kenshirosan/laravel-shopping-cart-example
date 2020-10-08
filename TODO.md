@@ -1,6 +1,6 @@
 # TODO
 
-- User addresses
-- Fix Groupable
+- User addresses // A user can have many addresses, an address belongs to many users
 - Calendar ?
 - Create Invoice ?
+- Thet thing Restaurant:: in favorites ?

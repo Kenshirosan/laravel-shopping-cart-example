@@ -4,14 +4,14 @@ namespace App\Models;
 
 trait Groupable
 {
-    public function options()
+    public function groups()
     {
-        return $this->morphedByMany(Option::class, 'groupable')->withTimestamps();
+        return $this->morphToMany(OptionGroup::class, 'groupable', 'groupables');
     }
 
-    public function option($option)
+    public function group($group)
     {
-        return $this->options()->attach($option);
+        return $this->groups()->attach($group);
     }
 
 }

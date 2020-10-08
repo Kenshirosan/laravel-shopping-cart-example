@@ -12,13 +12,14 @@ class Option extends Model
         'name'
     ];
 
-    public function products()
-    {
-        return $this->belongsTo(Product::class);
-    }
+//    public function products()
+//    {
+//        return $this->belongsTo(Product::class);
+//    }
+//
+//    public function products()
+//    {
+//        return $this->hasManyThrough(OptionGroup::class, 'groupable')->withTimestamps();
+//    }
 
-    public function groups()
-    {
-        return $this->morphToMany(OptionGroup::class, 'groupable');
-    }
 }
