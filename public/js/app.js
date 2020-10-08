@@ -18943,8 +18943,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['product', 'groups', 'options', 'waysofcooking'],
+  props: ['product', 'options', 'waysofcooking'],
   data: function data() {
     return {
       id: this.product.id,
@@ -18952,7 +18973,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       name: this.product.name,
       optiongroups: [],
       option: [],
-      ways: this.waysofcooking,
       way: '',
       price: this.product.sales ? this.product.price - this.product.price * this.product.sales.percentage : this.product.price
     };
@@ -18962,20 +18982,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var options, ways, data;
+        var options, ways;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 options = _this.optiongroups;
-                ways = _this.ways;
+                ways = _this.$props.waysofcooking;
 
                 if (!(options != undefined && options.length > 0 && _this.option == '')) {
                   _context.next = 4;
                   break;
                 }
 
-                return _context.abrupt("return", swal("Attention!", "Choisissez 2 accompagnements maximum ".concat(_this.product.name), "warning"));
+                return _context.abrupt("return", swal('Attention!', "Choisissez 2 accompagnements maximum ".concat(_this.product.name), 'warning'));
 
               case 4:
                 if (!(options != undefined && _this.option.length > 2)) {
@@ -18983,7 +19003,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   break;
                 }
 
-                return _context.abrupt("return", swal("Attention!", "Deux accompagnements maximum ".concat(_this.product.name), "warning"));
+                return _context.abrupt("return", swal('Attention!', "Deux accompagnements maximum ".concat(_this.product.name), 'warning'));
 
               case 6:
                 if (!(ways != undefined && ways.length > 0 && _this.way == '')) {
@@ -18991,18 +19011,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   break;
                 }
 
-                return _context.abrupt("return", swal("Attention!", "Choisissez la cuisson pour ".concat(_this.product.name), "warning"));
+                return _context.abrupt("return", swal('Attention!', "Choisissez la cuisson pour ".concat(_this.product.name), 'warning'));
 
               case 8:
-                data = {
-                  id: _this.id,
-                  name: _this.name,
-                  quantity: _this.quantity,
-                  option: _this.option,
-                  way: _this.way,
-                  price: _this.price
-                };
-                _context.next = 11;
+                _context.next = 10;
                 return axios.post('/cart', _this.$data).then(function (res) {
                   flash("".concat(_this.product.name, " was added to cart"));
                   productitemscountchanged();
@@ -19012,7 +19024,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   return console.log(err);
                 });
 
-              case 11:
+              case 10:
               case "end":
                 return _context.stop();
             }
@@ -19023,7 +19035,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     resetFields: function resetFields() {
       this.option = [];
       this.way = '';
-      document.getElementById("addtocart").reset();
+      document.getElementById('addtocart').reset();
     },
     getOptionsArray: function getOptionsArray() {
       var _this2 = this;
@@ -91854,7 +91866,7 @@ var render = function() {
     _vm._v(" "),
     _vm.waysofcooking
       ? _c("div", { staticClass: "input-field col s12" }, [
-          _vm.ways.length
+          _vm.waysofcooking.length
             ? _c(
                 "select",
                 {
@@ -91893,7 +91905,7 @@ var render = function() {
                     [_vm._v("Choisissez la cuisson")]
                   ),
                   _vm._v(" "),
-                  _vm._l(_vm.ways, function(way) {
+                  _vm._l(_vm.waysofcooking, function(way) {
                     return _c("option", {
                       staticClass: "black-text",
                       attrs: { name: "ways" },
@@ -91925,7 +91937,7 @@ var render = function() {
           _c("i", { staticClass: "material-icons left" }, [
             _vm._v("shopping_cart ")
           ]),
-          _vm._v("Ajouter\n            ")
+          _vm._v("Ajouter\n        ")
         ]
       )
     ])
