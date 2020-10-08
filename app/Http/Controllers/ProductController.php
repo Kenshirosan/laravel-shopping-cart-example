@@ -130,7 +130,7 @@ class ProductController extends Controller
 
         if ($product->groups) {
             foreach ($product->groups as $group) {
-                $product->groups()->detach($group);
+                $product->degroup($group);
             }
         }
 

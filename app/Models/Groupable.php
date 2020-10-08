@@ -14,4 +14,9 @@ trait Groupable
         return $this->groups()->attach($group);
     }
 
+    public function degroup($group)
+    {
+        return $this->groups()->detach($group);
+    }
+
 }
