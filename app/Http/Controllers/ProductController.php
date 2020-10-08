@@ -112,7 +112,7 @@ class ProductController extends Controller
             foreach ($request['option_group_id'] as $id) {
                 $group = OptionGroup::where('id', $id)->get();
 
-                $product->groups()->attach($group);
+                $product->group($group);
             }
         }
 

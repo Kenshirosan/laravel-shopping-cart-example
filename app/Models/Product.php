@@ -160,11 +160,13 @@ class Product extends Model
 
     public function getWaysOfCooking()
     {
+        $ret = [];
+
         if(array_key_exists($this->type, $this->ways)) {
-            return json_encode($this->ways[$this->type]);
+            $ret = json_encode($this->ways[$this->type]);
         }
 
-        return [];
+        return $ret;
     }
 
     public function isHolidaySpecial()
