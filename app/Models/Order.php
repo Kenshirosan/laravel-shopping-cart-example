@@ -120,7 +120,7 @@ class Order extends Model
 
     public function isHidden()
     {
-        return $this->hidden()->where('hideable_id', request('id'))->count();
+        return $this->hidden()->where('hideable_id', $this->id)->count();
     }
 
     public function getIsHiddenOrderAttribute()
@@ -135,9 +135,7 @@ class Order extends Model
 
     public function hiddenOrder()
     {
-        $attributes = ['hideable_id' => $this->id];
-
-        return $this->hidden()->where($attributes)->exists();
+        return $this->hidden()->where('hideable_id', $this->id)->exists();
     }
 
     public function numberOfOrdersProcessedToday()
@@ -145,7 +143,7 @@ class Order extends Model
         $when = 'created_at';
         $today = date('Y-m-d');
 
-        return $this->whereDate($when, $today)->where('product_id', null)->count();
+        return $this->whereDate($when, $today)->whereNotNull('hideable_id')->count();
     }
 
     public function todaysOrders()

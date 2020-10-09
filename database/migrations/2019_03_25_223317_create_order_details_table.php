@@ -24,9 +24,9 @@ class CreateOrderDetailsTable extends Migration
             $table->string('wayofcooking')->default(null);
 
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->foreign('option_group_id')->references('id')->on('option_groups')->onDelete('cascade');
-            $table->foreign('option_id')->references('id')->on('options')->onDelete('cascade');
+//            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+//            $table->foreign('option_group_id')->references('id')->on('option_groups')->onDelete('cascade');
+//            $table->foreign('option_id')->references('id')->on('options')->onDelete('cascade');
 
             $table->timestamps();
         });

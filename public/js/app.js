@@ -20644,12 +20644,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mixins: [_mixins_requests__WEBPACK_IMPORTED_MODULE_0__["default"]],
   data: function data() {
     return {
-      items: ''
+      items: '',
+      processed: 0
     };
   },
   mounted: function mounted() {
@@ -20658,6 +20666,28 @@ __webpack_require__.r(__webpack_exports__);
     Echo["private"]('user_ordered').listen('UserOrdered', function (order) {
       _this.getItems();
     });
+    window.events.$on('erase', function (data) {
+      _this.deleteItems(data);
+
+      _this.getOrdersProcessed();
+    });
+    window.events.$on('show', function (data) {
+      _this.addItem(data);
+
+      _this.getOrdersProcessed();
+    });
+    this.getOrdersProcessed();
+  },
+  methods: {
+    getOrdersProcessed: function getOrdersProcessed() {
+      var _this2 = this;
+
+      axios.get('/orders-processed').then(function (res) {
+        return _this2.processed = res.data;
+      })["catch"](function (err) {
+        return console.error(err);
+      });
+    }
   }
 });
 
@@ -21086,15 +21116,101 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _mixins_filters__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../mixins/filters */ "./resources/js/mixins/filters.js");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
+/* harmony import */ var _mixins_filters__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../mixins/filters */ "./resources/js/mixins/filters.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -21222,7 +21338,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mixins: [_mixins_filters__WEBPACK_IMPORTED_MODULE_1__["default"]],
+  mixins: [_mixins_filters__WEBPACK_IMPORTED_MODULE_0__["default"]],
   props: ['id', 'findaname', 'url', 'data'],
   data: function data() {
     return {
@@ -21251,43 +21367,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     email: function email(emailAddress) {
       return window.location.href = "mailto:".concat(emailAddress);
     },
+    // Global Event
     deleteResource: function deleteResource(id) {
-      var _this = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return _this.$emit('erase', id);
-
-              case 2:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
+      erase(id);
     },
+    // Global Event
     showResource: function showResource(id) {
-      var _this2 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return _this2.$emit('show', id);
-
-              case 2:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }))();
+      show(id);
     }
   }
 });
@@ -37638,7 +37724,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\nbody[data-v-386b4d3a] {\n    overflow: scroll;\n}\n.link[data-v-386b4d3a] {\n    position: fixed;\n    top:50px;\n    left:230px;\n}\n.text-white[data-v-386b4d3a] {\n    color: white;\n}\ntable[data-v-386b4d3a] {\n    width: 100%;\n}\nthead[data-v-386b4d3a] {\n    background-color: #605CA8;\n}\n.mb-10[data-v-386b4d3a] {\n    margin-bottom: 10px;\n}\n", ""]);
+exports.push([module.i, "\nbody[data-v-386b4d3a] {\n    overflow: scroll;\n}\n.link[data-v-386b4d3a] {\n    position: fixed;\n    top: 50px;\n    left: 230px;\n}\n.text-white[data-v-386b4d3a] {\n    color: white;\n}\ntable[data-v-386b4d3a] {\n    width: 100%;\n}\nthead[data-v-386b4d3a] {\n    background-color: #605ca8;\n}\n.mb-10[data-v-386b4d3a] {\n    margin-bottom: 10px;\n}\n", ""]);
 
 // exports
 
@@ -93390,28 +93476,32 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.items.length > 0
-    ? _c(
-        "div",
-        [
-          _c("data-table", {
-            attrs: { id: "ID", findaname: "Order Customer", data: _vm.items },
-            on: {
-              deleted: function($event) {
-                return _vm.getItems()
-              },
-              erase: function($event) {
-                return _vm.deleteItems($event)
-              },
-              show: function($event) {
-                return _vm.addItem($event)
+  return _c("div", [
+    _c("div", { staticClass: "col-md-6 col-md-offset-3" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("h2", { staticClass: "text-info text-center" }, [
+          _c("strong", [_vm._v(_vm._s(_vm.processed) + " Order processed")])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _vm.items.length > 0
+      ? _c(
+          "div",
+          [
+            _c("data-table", {
+              attrs: { id: "ID", findaname: "Order Customer", data: _vm.items },
+              on: {
+                deleted: function($event) {
+                  return _vm.getItems()
+                }
               }
-            }
-          })
-        ],
-        1
-      )
-    : _c("div", { staticClass: "col-md-6 col-md-offset-3" }, [_vm._m(0)])
+            })
+          ],
+          1
+        )
+      : _c("div", { staticClass: "col-md-6 col-md-offset-3" }, [_vm._m(0)])
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -93990,7 +94080,11 @@ var render = function() {
                             }
                           }
                         },
-                        [_vm._v("Delete")]
+                        [
+                          _vm._v(
+                            "\n                            Delete\n                        "
+                          )
+                        ]
                       )
                     ])
                   ])
@@ -94035,7 +94129,11 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("Delete")]
+                          [
+                            _vm._v(
+                              "\n                            Delete\n                        "
+                            )
+                          ]
                         )
                       ])
                     ])
@@ -94090,16 +94188,22 @@ var render = function() {
                     _vm._v(" "),
                     _vm.URI === "/best-customers"
                       ? _c("td", [
-                          _vm._v(_vm._s(item.name + " " + item.last_name))
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(item.name + " " + item.last_name) +
+                              "\n                    "
+                          )
                         ])
                       : _c("td", [
                           _vm._v(
-                            _vm._s(
-                              item.reward ||
-                                item.name ||
-                                item.holiday_page_title ||
-                                item.products.name
-                            ) + "\n                    "
+                            "\n                        " +
+                              _vm._s(
+                                item.reward ||
+                                  item.name ||
+                                  item.holiday_page_title ||
+                                  item.products.name
+                              ) +
+                              "\n                    "
                           )
                         ]),
                     _vm._v(" "),
@@ -94109,7 +94213,11 @@ var render = function() {
                     _vm._v(" "),
                     _vm.URI === "/best-customers"
                       ? _c("td", { staticClass: "text-success" }, [
-                          _vm._v("$" + _vm._s(_vm._f("formatted")(item.total)))
+                          _vm._v(
+                            "\n                        $" +
+                              _vm._s(_vm._f("formatted")(item.total)) +
+                              "\n                    "
+                          )
                         ])
                       : _vm._e(),
                     _vm._v(" "),
@@ -94132,7 +94240,7 @@ var render = function() {
                                   _c("strong", [
                                     _vm._v(
                                       _vm._s(product.qty) +
-                                        " " +
+                                        "\n                                    " +
                                         _vm._s(product.product_name)
                                     )
                                   ]),
@@ -94168,7 +94276,7 @@ var render = function() {
                               _vm._v(
                                 "\n                            " +
                                   _vm._s(_vm._f("moment")(item.created_at)) +
-                                  " at " +
+                                  " at\n                            " +
                                   _vm._s(_vm._f("time")(item.created_at)) +
                                   "\n                        "
                               )
@@ -94179,7 +94287,9 @@ var render = function() {
                               { staticClass: "text-danger text-right" },
                               [
                                 _vm._v(
-                                  "$" + _vm._s(_vm._f("formatted")(item.price))
+                                  "\n                            $" +
+                                    _vm._s(_vm._f("formatted")(item.price)) +
+                                    "\n                        "
                                 )
                               ]
                             )
@@ -94194,7 +94304,11 @@ var render = function() {
                           _vm._v(" "),
                           item.order_type === "Pick-up"
                             ? _c("p", [
-                                _vm._v("at " + _vm._s(item.pickup_time))
+                                _vm._v(
+                                  "\n                            at " +
+                                    _vm._s(item.pickup_time) +
+                                    "\n                        "
+                                )
                               ])
                             : _vm._e()
                         ])
@@ -94213,7 +94327,11 @@ var render = function() {
                                 }
                               }
                             },
-                            [_vm._v("Show\n                        ")]
+                            [
+                              _vm._v(
+                                "\n                            Show\n                        "
+                              )
+                            ]
                           )
                         : _vm.URI === "/best-customers"
                         ? _c(
@@ -94227,7 +94345,11 @@ var render = function() {
                                 }
                               }
                             },
-                            [_vm._v("Email\n                        ")]
+                            [
+                              _vm._v(
+                                "\n                            Email\n                        "
+                              )
+                            ]
                           )
                         : _c(
                             "button",
@@ -94242,7 +94364,8 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                _vm._s(_vm.deleteBtnMethod) +
+                                "\n                            " +
+                                  _vm._s(_vm.deleteBtnMethod) +
                                   "\n                        "
                               )
                             ]
@@ -114534,6 +114657,14 @@ window.cartHasDiscount = function (data) {
 
 window.ucfirst = function (string) {
   return string.charAt(0).toUpperCase() + string.substring(1);
+};
+
+window.erase = function (data) {
+  window.events.$emit('erase', data);
+};
+
+window.show = function (data) {
+  window.events.$emit('show', data);
 }; // Optional real time order progress
 
 

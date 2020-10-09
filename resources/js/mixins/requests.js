@@ -1,17 +1,16 @@
 import Error from '../utilities/Error';
 
 export default {
-
     data() {
         return {
-            errors: new Error()
-        }
+            errors: new Error(),
+        };
     },
 
     computed: {
         URI() {
             return this.endpoint || window.location.pathname;
-        }
+        },
     },
 
     created() {
@@ -20,7 +19,8 @@ export default {
 
     methods: {
         async getItems() {
-            await axios.get(this.URI)
+            await axios
+                .get(this.URI)
                 .then(res => {
                     this.items = res.data;
                 })
@@ -30,12 +30,17 @@ export default {
         },
 
         async addItems() {
-            await axios.post(this.URI, this.$data)
+            await axios
+                .post(this.URI, this.$data)
                 .then(res => {
                     this.items = res.data;
 
                     if (this.URI == '/contact-us') {
-                        flash('Thank you! Your message was received, we will contact you ASAP.', 'green', '5000');
+                        flash(
+                            'Thank you! Your message was received, we will contact you ASAP.',
+                            'green',
+                            '5000'
+                        );
                     } else {
                         adminflash('Success');
                     }
@@ -46,7 +51,8 @@ export default {
         },
 
         async deleteItems(id) {
-            await axios.delete(this.URI + '/' + id)
+            await axios
+                .delete(this.URI + '/' + id)
                 .then(res => {
                     adminflash('Success');
                     this.items = res.data;
@@ -55,7 +61,8 @@ export default {
         },
 
         async addItem(id) {
-            await axios.post(this.URI + '/' + id)
+            await axios
+                .post(this.URI + '/' + id)
                 .then(res => {
                     adminflash('Success');
                     this.items = res.data;
@@ -81,6 +88,6 @@ export default {
             this.phone = '';
             this.email = '';
             this.message = '';
-        }
-    }
-}
+        },
+    },
+};

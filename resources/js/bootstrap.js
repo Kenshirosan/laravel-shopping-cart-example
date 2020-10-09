@@ -60,6 +60,14 @@ window.ucfirst = function (string) {
     return string.charAt(0).toUpperCase() + string.substring(1);
 };
 
+window.erase = function (data) {
+    window.events.$emit('erase', data);
+};
+
+window.show = function (data) {
+    window.events.$emit('show', data);
+};
+
 // Optional real time order progress
 import Echo from 'laravel-echo';
 window.Pusher = require('pusher-js');

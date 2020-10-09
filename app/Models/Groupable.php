@@ -6,7 +6,7 @@ trait Groupable
 {
     public function groups()
     {
-        return $this->morphToMany(OptionGroup::class, 'groupable', 'groupables');
+        return $this->morphToMany(OptionGroup::class, 'groupable', 'groupables')->withTimestamps();
     }
 
     public function group($group)

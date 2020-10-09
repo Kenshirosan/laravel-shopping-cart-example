@@ -12,7 +12,7 @@ class CheckController extends Controller
     /**
     * Display a listing of the resource.
     *
-    * @return \Illuminate\Http\Response
+    * @return \Illuminate\Contracts\View\View|\Illuminate\Http\Response
     */
     public function index()
     {
@@ -25,16 +25,19 @@ class CheckController extends Controller
         return view('pdf.userorder');
     }
 
-    /**
-    * Display the specified resource.
-    *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
-    public function show($id)
+    public function processed()
     {
-        $order = Order::findOrFail($id);
+        return (new Order() )->numberOfOrdersProcessedToday();
+    }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param Order $order
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function show(Order $order)
+    {
         $currentStatus = $order->status_id;
         $statuses = Status::all();
 
@@ -42,17 +45,14 @@ class CheckController extends Controller
     }
 
     /**
-    * create a pdf of orders
-    *
-    * @param $id
-    * @return DOMpdf instance
-    **/
-    public function create($id)
+     * create a pdf of orders
+     *
+     * @param Order $order
+     * @return DOMpdf instance
+     */
+    public function create(Order $order)
     {
-        $order = Order::findOrFail($id);
-
-        $items = collect(regex($order->items));
-
+        $items = $order->getProducts();
         return PDF::loadView('pdf.printtest', compact('order', 'items'))
                     ->stream('order.pdf');
     }

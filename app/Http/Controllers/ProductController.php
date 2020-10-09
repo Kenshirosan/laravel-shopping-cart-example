@@ -134,8 +134,7 @@ class ProductController extends Controller
             }
         }
 
-        $file = $product->image;
-        Storage::disk('custom')->delete('img/' . $file);
+        Storage::disk('custom')->delete('img/' . $product->image);
 
         $files = Photo::where('product_id', $product->id)->get();
 

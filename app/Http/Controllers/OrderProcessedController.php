@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
-use App\Models\Hideable;
 // use App\Mail\ThankYou;
-use Illuminate\Http\Request;
 
 class OrderProcessedController extends Controller
 {
@@ -18,10 +16,8 @@ class OrderProcessedController extends Controller
     //     return back();
     // }
 
-    public function create($id)
+    public function create(Order $order)
     {
-        $order = Order::find($id);
-
         $order->unhide();
 
         $orders = ( new Order() )->todaysOrders();
@@ -29,10 +25,8 @@ class OrderProcessedController extends Controller
         return response($orders, 200);
     }
 
-     public function destroy($id)
+     public function destroy(Order $order)
     {
-        $order = Order::where('id', $id)->firstOrFail();
-
         if($order->isHidden()){
             return back()->with(['error_message' => 'This order is already hidden']);
         }

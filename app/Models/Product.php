@@ -114,9 +114,7 @@ class Product extends Model
 
     public function isEightySix()
     {
-        $attributes = ['id' => $this->id];
-
-        return $this->hidden()->where($attributes)->exists();
+        return $this->hidden()->where('id', $this->id)->exists();
     }
 
     public function category()
