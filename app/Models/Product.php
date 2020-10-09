@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use DB;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    use Hideable; use Groupable;
+    use Hideable; use Groupable; use HasFactory;
     /**
      * The attributes that are mass assignable.
      *
@@ -18,11 +19,8 @@ class Product extends Model
         'name',
         'holiday_special',
         'today',
-        'option_group_id',
-        'second_option_group_id',
         'category_id',
-        'category',
-        'subcategory',
+        'type',
         'slug',
         'description',
         'price',

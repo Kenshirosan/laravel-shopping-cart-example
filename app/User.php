@@ -4,13 +4,13 @@ namespace App;
 
 use App\Models\Address;
 use App\Models\Order;
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable; use HasFactory;
     /**
     * The attributes that are mass assignable.
     *
