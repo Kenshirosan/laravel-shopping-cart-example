@@ -37,9 +37,7 @@ class CouponController extends Controller
      */
     public function store(CouponRequest $request)
     {
-        $quantity = request('quantity');
-        $reward = request('reward');
-        Promocodes::createDisposable($quantity, $reward, $data = [], $expires_in = null);
+        Promocodes::createDisposable($request->quantity, $request->reward, [],null, 1);
 
         $attr = ['expires_at' => null, 'is_disposable' => true];
         $coupons = Promocode::where($attr)->get();
@@ -49,9 +47,7 @@ class CouponController extends Controller
 
     public function storeCouponsForEveryone(CouponRequest $request)
     {
-        $quantity = request('quantity');
-        $reward = request('reward');
-        Promocodes::create($quantity, $reward, $data = [], $expires_in = null);
+        Promocodes::create($request->quantity, $request->reward, [], null, 1);
 
         $couponsForAll = Promocode::where('is_disposable', false)->get();
 

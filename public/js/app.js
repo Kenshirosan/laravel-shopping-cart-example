@@ -18459,6 +18459,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mixins: [_mixins_requests__WEBPACK_IMPORTED_MODULE_0__["default"]],
@@ -18471,6 +18479,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.getItems();
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    window.events.$on('erase', function (data) {
+      return _this.deleteItems(data);
+    });
   }
 });
 
@@ -18786,11 +18801,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mixins: [_mixins_requests__WEBPACK_IMPORTED_MODULE_0__["default"]],
@@ -18799,6 +18809,13 @@ __webpack_require__.r(__webpack_exports__);
       name: '',
       items: ''
     };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    window.events.$on('erase', function (data) {
+      return _this.deleteItems(data);
+    });
   }
 });
 
@@ -18877,6 +18894,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mixins: [_mixins_requests__WEBPACK_IMPORTED_MODULE_0__["default"]],
@@ -18887,6 +18919,13 @@ __webpack_require__.r(__webpack_exports__);
       items: [],
       optionalItems: []
     };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    window.events.$on('erase', function (data) {
+      return _this.deleteItems(data);
+    });
   }
 });
 
@@ -21068,6 +21107,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mixins: [_mixins_requests__WEBPACK_IMPORTED_MODULE_0__["default"]],
@@ -21080,6 +21136,13 @@ __webpack_require__.r(__webpack_exports__);
       quantity: '',
       items: ''
     };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    window.events.$on('erase', function (data) {
+      return _this.deleteItems(data);
+    });
   }
 });
 
@@ -21117,6 +21180,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mixins_filters__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../mixins/filters */ "./resources/js/mixins/filters.js");
+//
+//
 //
 //
 //
@@ -91227,9 +91292,6 @@ var render = function() {
               on: {
                 deleted: function($event) {
                   return _vm.getItems()
-                },
-                erase: function($event) {
-                  return _vm.deleteItems($event)
                 }
               }
             })
@@ -91257,7 +91319,7 @@ var staticRenderFns = [
       _c("div", { staticClass: "col-md-6" }, [
         _c("input", {
           staticClass: "btn btn-primary",
-          attrs: { type: "submit", value: "Submit" }
+          attrs: { id: "submit", type: "submit", value: "Submit" }
         })
       ])
     ])
@@ -91615,12 +91677,7 @@ var render = function() {
           { staticClass: "container" },
           [
             _c("data-table", {
-              attrs: { id: "ID", findaname: "Option Group", data: this.items },
-              on: {
-                erase: function($event) {
-                  return _vm.deleteItems($event)
-                }
-              }
+              attrs: { id: "ID", findaname: "Option Group", data: this.items }
             })
           ],
           1
@@ -91824,11 +91881,6 @@ var render = function() {
                 findaname: "Option Group",
                 data: this.items,
                 options: this.optionalItems
-              },
-              on: {
-                erase: function($event) {
-                  return _vm.deleteItems($event)
-                }
               }
             })
           ],
@@ -93911,11 +93963,6 @@ var render = function() {
                 findaname: "Reward",
                 url: this.endpoint,
                 data: this.items
-              },
-              on: {
-                erase: function($event) {
-                  return _vm.deleteItems($event)
-                }
               }
             })
           ],
@@ -94156,6 +94203,10 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_c("h4", [_vm._v(_vm._s(this.title))])]),
                   _vm._v(" "),
+                  _vm.URI === "/create-coupon"
+                    ? _c("td", [_c("h4", [_vm._v("Code")])])
+                    : _vm._e(),
+                  _vm._v(" "),
                   _vm.URI === "/best-customers"
                     ? _c("td", [_c("h4", [_vm._v("Email")])])
                     : _vm._e(),
@@ -94206,6 +94257,10 @@ var render = function() {
                               "\n                    "
                           )
                         ]),
+                    _vm._v(" "),
+                    _vm.URI === "/create-coupon"
+                      ? _c("td", [_vm._v(_vm._s(item.code))])
+                      : _vm._e(),
                     _vm._v(" "),
                     _vm.URI === "/best-customers"
                       ? _c("td", [_c("strong", [_vm._v(_vm._s(item.email))])])

@@ -43,12 +43,7 @@
         <div class="mb-100"></div>
 
         <div class="container" v-if="items">
-            <data-table
-                @erase="deleteItems($event)"
-                id="ID"
-                findaname="Option Group"
-                :data="this.items"
-            >
+            <data-table id="ID" findaname="Option Group" :data="this.items">
             </data-table>
         </div>
     </div>
@@ -65,6 +60,10 @@
                 name: '',
                 items: '',
             };
+        },
+
+        mounted() {
+            window.events.$on('erase', data => this.deleteItems(data));
         },
     };
 </script>

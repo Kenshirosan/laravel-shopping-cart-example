@@ -93,6 +93,7 @@
                         <td>
                             <h4>{{ this.title }}</h4>
                         </td>
+                        <td v-if="URI === '/create-coupon'"><h4>Code</h4></td>
                         <td v-if="URI === '/best-customers'"><h4>Email</h4></td>
                         <td v-if="URI === '/best-customers'">
                             <h4>Amount this Year</h4>
@@ -123,6 +124,7 @@
                                 item.products.name
                             }}
                         </td>
+                        <td v-if="URI === '/create-coupon'">{{ item.code }}</td>
                         <td v-if="URI === '/best-customers'">
                             <strong>{{ item.email }}</strong>
                         </td>
