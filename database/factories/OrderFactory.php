@@ -33,7 +33,7 @@ class OrderFactory extends Factory
             'zipcode' => $this->faker->postcode,
             'email' => $this->faker->safeEmail,
             'items' => '["{\"rowId\":\"dde9ecbd6fafe842eef36650588d573a\",\"id\":34,\"name\":\"Hamburger, The only one\",\"qty\":1,\"price\":15.55,\"weight\":0,\"options\":{\"options\":{\"options\":[],\"way\":\"Medium Rare\"}},\"discount\":0,\"tax\":1.56,\"subtotal\":15.55}","{\"rowId\":\"b061c180291d38c14410ec09e58b8212\",\"id\":39,\"name\":\"Roasted Chicken\",\"qty\":1,\"price\":21.25,\"weight\":0,\"options\":{\"options\":{\"options\":[],\"way\":null}},\"discount\":0,\"tax\":2.13,\"subtotal\":21.25}"]',
-            'price' => $this->faker->randomNumber(2),
+            'price' => $this->faker->randomNumber(4),
             'phone_number' => $this->faker->phoneNumber,
             'taxes' => 1
         ];

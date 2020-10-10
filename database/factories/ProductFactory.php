@@ -24,7 +24,7 @@ class ProductFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word,
+            'name' => $this->faker->unique()->word,
             'holiday_special' => false,
             'today' => false,
             'category_id' => function () {
@@ -33,7 +33,7 @@ class ProductFactory extends Factory
             'type' => $this->faker->word,
             'slug' => $this->faker->domainWord,
             'description' => $this->faker->text,
-            'price' => $this->faker->randomNumber(2),
+            'price' => $this->faker->randomNumber(4),
 //            'image' => $this->faker->image('public/img'), // If need Images
             'image' => 'public/img/img.jpg',
 

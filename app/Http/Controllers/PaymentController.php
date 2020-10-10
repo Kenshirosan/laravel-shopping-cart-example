@@ -20,7 +20,7 @@ class PaymentController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View|\Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function index()
     {
@@ -137,8 +137,8 @@ class PaymentController extends Controller
             'zipcode' => request('zipcode'),
             'phone_number' => request('phone_number'),
             'items' => json_encode($items),
-            'price' => Cart::total(),
-            'taxes' => Cart::tax(),
+            'price' => Cart::total() * 100,
+            'taxes' => Cart::tax() * 100,
             'comments' => request('comments')
         ]);
 // ICI A CHANGER
@@ -184,7 +184,7 @@ class PaymentController extends Controller
         }
 
         event(new UserOrdered($order)); // ready for real-time
-        (new Logger('Une commande a ete passe'));
+        (new Logger('Une commande a été passé'));
 
         $user_email = auth()->user()->email;
         if(env('APP_ENV') == 'local') {

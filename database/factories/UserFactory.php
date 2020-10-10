@@ -46,7 +46,8 @@ class UserFactory extends Factory
                 'email' => 'l.neveux@icloud.com',
                 'password' => bcrypt('admin'),
                 'employee' => true,
-                'theboss' => true
+                'theboss' => true,
+                'confirmed' => true
             ];
         });
     }
@@ -58,6 +59,7 @@ class UserFactory extends Factory
                 'email' => 'employee@restaurant.com',
                 'password' => bcrypt('employee'),
                 'employee' => true,
+                'confirmed' => true
             ];
         });
     }

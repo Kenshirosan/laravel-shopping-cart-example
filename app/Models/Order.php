@@ -2,11 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Model;
-use App\User;
 use DB;
+use App\User;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends Model
 {
@@ -162,17 +161,17 @@ class Order extends Model
 
     public function price()
     {
-        return sprintf('$%01.2f', $this->price);
+        return sprintf('$%01.2f', $this->price / 100);
     }
 
     public function tax()
     {
-        return $this->taxes;
+        return sprintf('$%01.2f', $this->taxes / 100);
     }
 
     public function subtotal()
     {
-        return sprintf('$%01.2f', $this->price - $this->taxes);
+        return sprintf('$%01.2f', ($this->price - $this->taxes) / 100);
     }
 
     public function yearlyTotal()
