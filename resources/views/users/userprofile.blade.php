@@ -53,6 +53,7 @@
                     <div class="panel-body">
                         @include('includes.profileForm')
                         @if(! auth()->user()->isEmployee())
+                            <add-an-address></add-an-address>
                             <a class="btn btn-danger pull-right" href="/erase/{{ $user->id }}">
                                 Delete your account
                             </a>

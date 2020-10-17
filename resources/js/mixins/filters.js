@@ -10,7 +10,16 @@ export default {
 
         formatted: price => {
             return price;
-        }
-    }
-}
+        },
 
+        tel: phone => {
+            console.log(phone, 'OUIN');
+            phone = phone.replace('(', '');
+            phone = phone.replace(')', '');
+            phone = phone.replace('-', ' ');
+            // '/[() -]/'
+            console.log(phone, 'OUIN');
+            return phone;
+        },
+    },
+};

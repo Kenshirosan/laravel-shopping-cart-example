@@ -49,15 +49,32 @@ class User extends Authenticatable
     ];
 
     protected $appends = ['addresses'];
+    /**
+     * @var mixed
+     */
+    protected $employee;
+    /**
+     * @var mixed
+     */
+    protected $theboss;
+    /**
+     * @var bool|mixed
+     */
+    protected $confirmed;
+    /**
+     * @var mixed|null
+     */
+    protected $confirmation_token;
 
     public function getAddressesAttribute()
     {
-        return $this->addresses();
+        return $this->addresses()->get();
     }
 
     public function addresses()
     {
-        return $this->belongsToMany(Address::class, 'address_user', 'user_id', 'address_id');
+        return $this->belongsToMany(Address::class, 'address_user', 'user_id', 'address_id')
+            ->withTimestamps();
     }
 
     public function isAdmin()

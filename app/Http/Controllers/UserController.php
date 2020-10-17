@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Mail\Welcome;
 use App\Models\Order;
-use App\Models\Promocode;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use \Cart as Cart;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -77,8 +77,7 @@ class UserController extends Controller
 
     public function edit()
     {
-        $user = Auth::user();
-
+        $user = User::with('addresses')->findOrFail(Auth::user()->id);
         $orders = Order::selectRaw('*')
                         ->whereRaw('day(created_at) = day(curdate())
                                     and year(created_at) = year(curdate())
@@ -90,50 +89,48 @@ class UserController extends Controller
         return view('users.userprofile', compact('user', 'orders'));
     }
 
-    public function update(Request $request, $id)
+    public function update(User $user)
     {
-        $user = User::where('id', $id)->firstOrFail();
-
+//        $user = User::where('id', $id)->firstOrFail();
+//dd(request()->all());
         if(\Hash::check(request('password'), $user->password)) {
-            $this->validate($request, [
+            request()->validate([
                 'name' => 'required|string',
                 'last_name' => 'required|string',
                 'address' =>'required|string',
                 'address2' => 'nullable|string',
-                'zipcode' => 'required|numeric',
-                'phone_number' => 'required|numeric|digits:10',
+                'zipcode' => 'required',
+                'phone_number' => 'required',
                 'email' => 'required|email',
                 'password' => 'required|string|confirmed'
             ]);
 
             $user->update([
-                'name' => $request->name,
-                'last_name' => $request->last_name,
-                'address' => $request->address,
-                'address2' => $request->address2,
-                'zipcode' => $request->zipcode,
-                'phone_number' => formatPhoneNumber($request->phone_number),
+                'name' => request('name'),
+                'last_name' => request('last_name'),
+                'address' => request('address'),
+                'address2' => request('address_2'),
+                'zipcode' => request('zipcode'),
+                'phone_number' => formatPhoneNumber(request('phone_number')),
             ]);
 
             if ($user->email !== request('email')) {
-                $user->update([
-                    'email' => $request->email,
+                $email = request('email');
+                $user = $user->update([
+                    'email' => $email,
                     'confirmed' => false,
-                    'confirmation_token' => str_limit($request->email . hash('sha256', $request->email . str_random()), 100)
+                    'confirmation_token' => Str::limit($email . hash('sha256', $email . Str::random()), 100)
                 ]);
+                Mail::to($email)->send(new Welcome($user));
 
-                Mail::to($user->email)->send(new Welcome($user));
-                auth()->logout();
-
-                return redirect('/shop')->with(['success_message' => 'Credentials successfully updated, You now need to confirm your new email address']);
+                return response(['success_message' => 'Credentials successfully updated, You now need to confirm your new email address'], 200);
             }
 
-            return redirect('/edit/profile')->with([
-                'success_message' => 'Credentials successfully updated'
-            ]);
+            return response('ok', 200);
 
         }
-        return back()->with('error_message', 'Something went wrong, Maybe you typed the wrong password');
+
+        return response('error_message', 'Something went wrong, Maybe you typed the wrong password');
     }
 
     public function destroy($id)

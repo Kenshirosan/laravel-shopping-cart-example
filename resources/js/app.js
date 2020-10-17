@@ -80,6 +80,11 @@ Vue.component(
     'cart-total-price',
     require('./components/CartTotalPrice').default
 );
+Vue.component('addresses', require('./components/Addresses').default);
+Vue.component(
+    'add-an-address',
+    require('./components/subcomponents/AddAnAddress').default
+);
 
 const app = new Vue({
     el: '#app',

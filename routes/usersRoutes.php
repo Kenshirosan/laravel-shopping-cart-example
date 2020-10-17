@@ -5,7 +5,9 @@ Route::middleware(['auth', 'must-be-confirmed'])->group(function () {
     Route::get('/edit/profile', 'UserController@edit');
     Route::get('/user/orders', 'OrderController@index');
     Route::get('/user-order/{order_id}', 'OrderController@show');
-    Route::patch('/edit-profile/{id}', 'UserController@update');
+    Route::post('/create/address', 'AddressesController@store');
+    Route::patch('/edit-profile/{user}', 'UserController@update');
+    Route::patch('/address/{user}/{address}/update', 'AddressesController@update');
     Route::get('/erase/{user_id}', 'UserController@show');
     Route::delete('/erase/{account}', 'UserController@destroy');
     //CHECKOUT AND CART ROUTES
