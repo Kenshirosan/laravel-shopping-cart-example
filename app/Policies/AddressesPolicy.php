@@ -29,8 +29,9 @@ class AddressesPolicy
     public function update(User $user, Address $address)
     {
         foreach(auth()->user()->addresses as $ad) {
-            if($ad->pivot_address_id === $address->id &&
-                $ad->pivot_user_id === $user->id &&
+
+            if($ad->pivot->address_id === $address->id &&
+                $ad->pivot->user_id === $user->id &&
                 auth()->user()->id === $user->id)
             {
                 return true;

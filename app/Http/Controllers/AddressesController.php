@@ -59,6 +59,10 @@ class AddressesController extends Controller
             'is_primary' => 'required'
         ]);
 
+        if(request('is_primary') === 1) {
+            $user->cancelDefaultAddress();
+        }
+
         $address->update([
             'name' => request('name'),
             'address' => request('address'),
@@ -69,6 +73,7 @@ class AddressesController extends Controller
             'country' => request('country'),
             'is_primary' => request('is_primary'),
         ]);
+
 
         return response(['success_message' => 'You address has been updated']);
     }

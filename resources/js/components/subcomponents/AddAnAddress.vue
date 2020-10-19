@@ -89,23 +89,26 @@
                             required
                         />
                     </div>
-                    <label class="radio-inline"
-                        ><input
-                            v-model="address.is_primary"
-                            v-bind:value="1"
-                            type="radio"
-                            name="optradio"
-                            checked
-                        />Yes</label
-                    >
-                    <label class="radio-inline"
-                        ><input
-                            v-model="address.is_primary"
-                            v-bind:value="0"
-                            type="radio"
-                            name="optradio"
-                        />No</label
-                    >
+                    <div class="form-group">
+                        <label>Default Address ?</label>
+                        <label class="radio-inline"
+                            ><input
+                                v-model="address.is_primary"
+                                v-bind:value="1"
+                                type="radio"
+                                name="optradio"
+                                checked
+                            />Yes</label
+                        >
+                        <label class="radio-inline"
+                            ><input
+                                v-model="address.is_primary"
+                                v-bind:value="0"
+                                type="radio"
+                                name="optradio"
+                            />No</label
+                        >
+                    </div>
                     <div class="form-group">
                         <input
                             type="submit"
@@ -141,10 +144,13 @@
             addAddress() {
                 axios
                     .post('/create/address', this.address)
-                    .then(res => console.log(res))
+                    .then(res => {
+                        console.log(res);
+                        this.$emit('addressAdded');
+                        this.address = {};
+                        this.show = false;
+                    })
                     .catch(err => console.error(err));
-                // this.address = {};
-                // this.show = false;
             },
         },
     };

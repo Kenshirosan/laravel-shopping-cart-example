@@ -19104,8 +19104,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _subcomponents_AddAnAddress__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./subcomponents/AddAnAddress */ "./resources/js/components/subcomponents/AddAnAddress.vue");
-/* harmony import */ var _mixins_filters__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../mixins/filters */ "./resources/js/mixins/filters.js");
+/* harmony import */ var _mixins_filters__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../mixins/filters */ "./resources/js/mixins/filters.js");
 //
 //
 //
@@ -19354,11 +19353,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: ['AddAnAddress'],
-  mixins: [_mixins_filters__WEBPACK_IMPORTED_MODULE_1__["default"]],
+  mixins: [_mixins_filters__WEBPACK_IMPORTED_MODULE_0__["default"]],
   props: ['user'],
   data: function data() {
     return {
@@ -19370,7 +19388,8 @@ __webpack_require__.r(__webpack_exports__);
         city: '',
         zipcode: '',
         state: '',
-        country: ''
+        country: '',
+        is_primary: ''
       },
       errors: [],
       userObj: {}
@@ -21468,6 +21487,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -21486,12 +21508,18 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     addAddress: function addAddress() {
+      var _this = this;
+
       axios.post('/create/address', this.address).then(function (res) {
-        return console.log(res);
+        console.log(res);
+
+        _this.$emit('addressAdded');
+
+        _this.address = {};
+        _this.show = false;
       })["catch"](function (err) {
         return console.error(err);
-      }); // this.address = {};
-      // this.show = false;
+      });
     }
   }
 });
@@ -92593,7 +92621,7 @@ var render = function() {
                   }
                 }
               },
-              [_vm._v(_vm._s(address.address))]
+              [_vm._v(_vm._s(address.name))]
             )
           ])
         ])
@@ -93101,6 +93129,58 @@ var render = function() {
                       _c("strong", [_vm._v(_vm._s(_vm.errors.zipcode))])
                     ])
                   : _vm._e(),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("Default Address ?")]),
+                  _vm._v(" "),
+                  _c("label", { staticClass: "radio-inline" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.addressObj.is_primary,
+                          expression: "addressObj.is_primary"
+                        }
+                      ],
+                      attrs: { type: "radio", name: "is_primary", checked: "" },
+                      domProps: {
+                        value: 1,
+                        checked: _vm._q(_vm.addressObj.is_primary, 1)
+                      },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(_vm.addressObj, "is_primary", 1)
+                        }
+                      }
+                    }),
+                    _vm._v("Yes")
+                  ]),
+                  _vm._v(" "),
+                  _c("label", { staticClass: "radio-inline" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.addressObj.is_primary,
+                          expression: "addressObj.is_primary"
+                        }
+                      ],
+                      attrs: { type: "radio", name: "is_primary" },
+                      domProps: {
+                        value: 0,
+                        checked: _vm._q(_vm.addressObj.is_primary, 0)
+                      },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(_vm.addressObj, "is_primary", 0)
+                        }
+                      }
+                    }),
+                    _vm._v("No")
+                  ])
+                ]),
                 _vm._v(" "),
                 _vm._m(2)
               ]
@@ -95137,52 +95217,56 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _c("label", { staticClass: "radio-inline" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.address.is_primary,
-                        expression: "address.is_primary"
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("Default Address ?")]),
+                  _vm._v(" "),
+                  _c("label", { staticClass: "radio-inline" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.address.is_primary,
+                          expression: "address.is_primary"
+                        }
+                      ],
+                      attrs: { type: "radio", name: "optradio", checked: "" },
+                      domProps: {
+                        value: 1,
+                        checked: _vm._q(_vm.address.is_primary, 1)
+                      },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(_vm.address, "is_primary", 1)
+                        }
                       }
-                    ],
-                    attrs: { type: "radio", name: "optradio", checked: "" },
-                    domProps: {
-                      value: 1,
-                      checked: _vm._q(_vm.address.is_primary, 1)
-                    },
-                    on: {
-                      change: function($event) {
-                        return _vm.$set(_vm.address, "is_primary", 1)
+                    }),
+                    _vm._v("Yes")
+                  ]),
+                  _vm._v(" "),
+                  _c("label", { staticClass: "radio-inline" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.address.is_primary,
+                          expression: "address.is_primary"
+                        }
+                      ],
+                      attrs: { type: "radio", name: "optradio" },
+                      domProps: {
+                        value: 0,
+                        checked: _vm._q(_vm.address.is_primary, 0)
+                      },
+                      on: {
+                        change: function($event) {
+                          return _vm.$set(_vm.address, "is_primary", 0)
+                        }
                       }
-                    }
-                  }),
-                  _vm._v("Yes")
-                ]),
-                _vm._v(" "),
-                _c("label", { staticClass: "radio-inline" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.address.is_primary,
-                        expression: "address.is_primary"
-                      }
-                    ],
-                    attrs: { type: "radio", name: "optradio" },
-                    domProps: {
-                      value: 0,
-                      checked: _vm._q(_vm.address.is_primary, 0)
-                    },
-                    on: {
-                      change: function($event) {
-                        return _vm.$set(_vm.address, "is_primary", 0)
-                      }
-                    }
-                  }),
-                  _vm._v("No")
+                    }),
+                    _vm._v("No")
+                  ])
                 ]),
                 _vm._v(" "),
                 _vm._m(0)

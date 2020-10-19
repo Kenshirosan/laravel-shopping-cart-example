@@ -77,6 +77,15 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
+    public function cancelDefaultAddress()
+    {
+        foreach($this->addresses as $ad) {
+            $ad->update([
+                'is_primary' => false,
+            ]);
+        }
+    }
+
     public function isAdmin()
     {
         return $this->theboss;

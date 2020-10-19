@@ -7,7 +7,7 @@
         <ul v-for="(address, index) in addresses">
             <li>
                 <a href="!#" @click.prevent="switchAddress(index)">{{
-                    address.address
+                    address.name
                 }}</a>
             </li>
         </ul>
@@ -233,6 +233,27 @@
                         </span>
 
                         <div class="form-group">
+                            <label>Default Address ?</label>
+                            <label class="radio-inline"
+                                ><input
+                                    v-model="addressObj.is_primary"
+                                    v-bind:value="1"
+                                    type="radio"
+                                    name="is_primary"
+                                    checked
+                                />Yes</label
+                            >
+                            <label class="radio-inline"
+                                ><input
+                                    v-model="addressObj.is_primary"
+                                    v-bind:value="0"
+                                    type="radio"
+                                    name="is_primary"
+                                />No</label
+                            >
+                        </div>
+
+                        <div class="form-group">
                             <input
                                 type="submit"
                                 value="Update your address"
@@ -247,12 +268,9 @@
 </template>
 
 <script>
-    import AddAnAddress from './subcomponents/AddAnAddress';
     import filters from '../mixins/filters';
 
     export default {
-        components: ['AddAnAddress'],
-
         mixins: [filters],
 
         props: ['user'],
@@ -268,6 +286,7 @@
                     zipcode: '',
                     state: '',
                     country: '',
+                    is_primary: '',
                 },
                 errors: [],
                 userObj: {},
