@@ -5,7 +5,7 @@
         </div>
 
         <div class="row">
-            <form class="form-horizontal" @submit.prevent="addItems()">
+            <form class="form-horizontal" @submit.prevent="addItems">
                 <div class="form-group">
                     <label for="name" class="col-md-4 control-label"
                         >Option Name</label
@@ -41,8 +41,10 @@
                             <option
                                 v-for="optiongroup in items"
                                 name="option_group_id"
+                                v-bind:key="optiongroup.id"
                                 v-bind:value="optiongroup.id"
-                                >{{ optiongroup.name }}
+                            >
+                                {{ optiongroup.name }}
                             </option>
                         </select>
                         <error :error="errors.get('option_group_id')"></error>

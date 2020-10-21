@@ -9,6 +9,12 @@
                 <a href="!#" @click.prevent="switchAddress(index)">{{
                     address.name
                 }}</a>
+                <button
+                    class="pull-right btn btn-xs btn-danger"
+                    @click="deleteAddress(address.id, index)"
+                >
+                    Delete Address
+                </button>
             </li>
         </ul>
         <div class="container">
@@ -293,6 +299,12 @@
             };
         },
 
+        created() {
+            window.events.$on('address-added', payload => {
+                this.updateAddresses(payload);
+            });
+        },
+
         mounted() {
             this.userObj = JSON.parse(this.$props.user);
             this.addresses = this.userObj.addresses;
@@ -304,13 +316,19 @@
                 this.addressObj = this.addresses[id];
             },
 
+            updateAddresses(data) {
+                this.addresses.push(data);
+            },
+
             updateAddress() {
                 axios
                     .patch(
                         `/address/${this.userObj.id}/${this.addressObj.id}/update`,
                         this.addressObj
                     )
-                    .then(res => console.log(res))
+                    .then(res => {
+                        flash(res.data.success_message);
+                    })
                     .catch(err => console.error(err));
             },
 
@@ -318,6 +336,18 @@
                 axios
                     .patch(`/edit-profile/${this.userObj.id}`, this.userObj)
                     .then(res => console.log(res))
+                    .catch(err => console.error(err));
+            },
+
+            deleteAddress(addressId, index) {
+                axios
+                    .delete(
+                        `/delete-address/${this.userObj.id}/${addressId}/address`
+                    )
+                    .then(res => {
+                        flash(res.data.success_message);
+                        this.addresses.splice(index, 1);
+                    })
                     .catch(err => console.error(err));
             },
         },

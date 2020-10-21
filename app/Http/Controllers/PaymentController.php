@@ -80,6 +80,7 @@ class PaymentController extends Controller
      */
     public function store(PaymentRequest $request)
     {
+//        dd($request->all());
         $errors = $this->checkTimeValidity();
 
         if ((request('order_type') === 'Pick-up') && ($errors['error'])) {
@@ -87,9 +88,10 @@ class PaymentController extends Controller
         }
 // Mettre un double try catch avec une transaction sql
          try {
-             (new Payments())->validateStripePayment();
+//             (new Payments())->validateStripePayment();
              (new Logger('Payment successful'));
          } catch (\Exception $e) {
+            dd($e->getMessage());
              (new Logger('Something wrong happened with the payment of an order', 'Error, please check your site.'));
              return back()->with(['error_message' => $e->getMessage()]);
          }
@@ -183,7 +185,7 @@ class PaymentController extends Controller
             }
         }
 
-        event(new UserOrdered($order)); // ready for real-time
+       // event(new UserOrdered($order)); // ready for real-time
         (new Logger('Une commande a été passé'));
 
         $user_email = auth()->user()->email;

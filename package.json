@@ -11,11 +11,11 @@
     },
     "devDependencies": {
         "axios": "^0.18.*",
-        "chart.js": "^2.9.3",
+        "chart.js": "^2.9.4",
         "cross-env": "^3.2.4",
         "eslint-plugin-vue": "^6.2.2",
         "jquery": "^3.5.1",
-        "laravel-mix": "^5.0.6",
+        "laravel-mix": "^5.0.7",
         "materialize-css": "^1.0.0",
         "resolve-url-loader": "^2.3.1",
         "sass-loader": "^8.0.2",
@@ -24,7 +24,7 @@
     },
     "dependencies": {
         "fullcalendar": "^3.10.2",
-        "laravel-echo": "^1.8.1",
+        "laravel-echo": "^1.9.0",
         "pusher-js": "^4.4.0",
         "sass": "^1.27.0",
         "sweetalert": "^2.1.2",

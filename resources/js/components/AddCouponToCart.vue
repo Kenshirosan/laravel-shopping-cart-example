@@ -1,31 +1,29 @@
 <template>
-    <div class="row">
-        <div class="col m2 s12">
-            <p class="blue-text">Do you have a coupon ?</p>
-            <div class="form-group">
-                <form
-                    action="/apply-coupon"
-                    method="POST"
-                    class="side-by-side"
-                    @submit.prevent="applyCoupon"
-                >
-                    <div class="col-md-6">
-                        <input
-                            type="text"
-                            name="coupon"
-                            placeholder="R5AH-JHXE"
-                            v-model="coupon"
-                        />
-                    </div>
-                    <div class="col-md-6">
-                        <input
-                            type="submit"
-                            class="btn btn-primary"
-                            value="Submit"
-                        />
-                    </div>
-                </form>
-            </div>
+    <div class="col m2 s12">
+        <p class="blue-text">Do you have a coupon ?</p>
+        <div class="form-group">
+            <form
+                action="/apply-coupon"
+                method="POST"
+                class="side-by-side"
+                @submit.prevent="applyCoupon"
+            >
+                <div class="col-md-6">
+                    <input
+                        type="text"
+                        name="coupon"
+                        placeholder="R5AH-JHXE"
+                        v-model="coupon"
+                    />
+                </div>
+                <div class="col-md-6">
+                    <input
+                        type="submit"
+                        class="btn btn-primary"
+                        value="Submit"
+                    />
+                </div>
+            </form>
         </div>
     </div>
 </template>

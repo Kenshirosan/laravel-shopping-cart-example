@@ -85,11 +85,8 @@ Vue.component(
     'add-an-address',
     require('./components/subcomponents/AddAnAddress').default
 );
+Vue.component('cart-addresses', require('./components/CartAddresses').default);
 
 const app = new Vue({
     el: '#app',
-
-    data: {
-        checked: false,
-    },
 });

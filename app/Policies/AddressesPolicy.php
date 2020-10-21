@@ -23,7 +23,8 @@ class AddressesPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \App\Models\Address  $address
+     * @param User $user
+     * @param \App\Models\Address $address
      * @return mixed
      */
     public function update(User $user, Address $address)

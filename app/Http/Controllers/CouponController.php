@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use \Cart as Cart;
 use App\Models\Promocode;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CouponRequest;
 use Gabievi\Promocodes\Facades\Promocodes;
 

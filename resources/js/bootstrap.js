@@ -68,6 +68,10 @@ window.show = function (data) {
     window.events.$emit('show', data);
 };
 
+window.addressAdded = function (data) {
+    window.events.$emit('address-added', data);
+};
+
 // Optional real time order progress
 import Echo from 'laravel-echo';
 window.Pusher = require('pusher-js');

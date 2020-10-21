@@ -36,6 +36,16 @@ Route::get('/count', function() {
 });
 
 
+Route::get('welcome/{locale}', function ($locale) {
+    if (! in_array($locale, ['en', 'fr'])) {
+        abort(400);
+    }
+
+    App::setLocale($locale);
+//    dd(App::getLocale());
+    echo __('messages.welcome');
+});
+
 Route::get('/alternate', 'ShopController@alternate');
 Route::get('today', 'ShopController@today');
 Route::post('/today/{product}', 'ProductController@todaySpecial');

@@ -8948,12 +8948,11 @@ nav ul button.btn {
   background: white;
   border: none;
   border-radius: 25px;
-  color: #32cfcf;
   font-size: 15px;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 2px;
-  box-shadow: -7px -7px 20px 0 rgba(255, 255, 255, 0.7);
+  box-shadow: 7px 7px 20px 0 rgba(0, 0, 0, 0.4);
 }
 
 nav ul a.btn:hover,

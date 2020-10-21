@@ -30,8 +30,4 @@ class Address extends Model
         return $this->users()->attach($id);
     }
 
-    public function delete()
-    {
-        return Address::destroy($this->id);
-    }
 }

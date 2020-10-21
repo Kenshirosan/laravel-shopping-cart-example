@@ -52,7 +52,7 @@ export default {
 
         async deleteItems(id) {
             await axios
-                .delete(this.URI + '/' + id)
+                .delete(`${this.URI}/${id}`)
                 .then(res => {
                     adminflash('Success');
                     this.items = res.data;

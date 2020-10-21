@@ -1,7 +1,8 @@
 # TODO
 
-- User addresses 
-  - Use one of addresses in orders
+- Fix Payment
+- Translations
+- Fix shit everywhere in controllers
 - Calendar ?
 - Create Invoice ?
 - The thing Restaurant:: in favorites ?

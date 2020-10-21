@@ -162,13 +162,11 @@ nav ul a.btn, nav ul button.btn  {
     background: white;
     border: none;
     border-radius: 25px;
-    color: rgb(50, 207, 207);
     font-size: 15px;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 2px;
-    box-shadow: -7px -7px 20px 0 rgba(255, 255, 255, 0.7);
-                //7px 7px 20px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 7px 7px 20px 0 rgba(0, 0, 0, 0.4);
 }
 
 nav ul a.btn:hover, nav ul button.btn:hover {

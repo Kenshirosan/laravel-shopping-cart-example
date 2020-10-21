@@ -48,24 +48,6 @@ class User extends Authenticatable
         'employee'
     ];
 
-    protected $appends = ['addresses'];
-    /**
-     * @var mixed
-     */
-    protected $employee;
-    /**
-     * @var mixed
-     */
-    protected $theboss;
-    /**
-     * @var bool|mixed
-     */
-    protected $confirmed;
-    /**
-     * @var mixed|null
-     */
-    protected $confirmation_token;
-
     public function getAddressesAttribute()
     {
         return $this->addresses()->get();
@@ -82,6 +64,17 @@ class User extends Authenticatable
         foreach($this->addresses as $ad) {
             $ad->update([
                 'is_primary' => false,
+            ]);
+        }
+    }
+
+    public function makeDefaultAddress()
+    {
+        if($this->addresses->count() > 0) {
+            $address = $this->addresses->first();
+
+            $address->update([
+                'is_primary' => true,
             ]);
         }
     }

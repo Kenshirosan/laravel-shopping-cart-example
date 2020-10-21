@@ -145,10 +145,10 @@
                 axios
                     .post('/create/address', this.address)
                     .then(res => {
-                        console.log(res);
-                        this.$emit('addressAdded');
+                        addressAdded(res.data.address);
                         this.address = {};
                         this.show = false;
+                        flash(res.data.message.success_message);
                     })
                     .catch(err => console.error(err));
             },

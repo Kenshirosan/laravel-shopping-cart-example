@@ -1,8 +1,14 @@
 <template>
     <div class="alert-section" v-show="show">
         <div class="alert-element is-active" :class="`${level}`">
-            <div class="icon"><i class="material-icons green-text">notifications</i></div>
-            <div class="text"><span class="white-text"><strong>{{ body }}</strong></span></div>
+            <div class="icon">
+                <i class="material-icons green-text">notifications</i>
+            </div>
+            <div class="text">
+                <span class="white-text"
+                    ><strong>{{ body }}</strong></span
+                >
+            </div>
         </div>
     </div>
 </template>
@@ -16,41 +22,33 @@
                 body: this.message,
                 level: 'green',
                 duration: 3000,
-                show: false
-            }
+                show: false,
+            };
         },
         created() {
             if (this.message) {
                 this.flash();
             }
-            window.events.$on(
-                'flash', data => this.flash(data)
-            );
+            window.events.$on('flash', data => this.flash(data));
         },
         methods: {
             flash(data) {
-                if(data){
+                if (data) {
                     this.body = data.message;
                     this.level = data.level;
                 }
 
                 this.show = true;
-                // this.animate();
 
                 this.hide(data.duration);
             },
 
-            animate() {
-                $('.alert-element').addClass('is-active');
-            },
-
             hide(duration) {
                 setTimeout(() => {
-                    // $('.alert-element').removeClass('is-active');
                     this.show = false;
                 }, duration);
-            }
-        }
+            },
+        },
     };
 </script>
 
@@ -69,7 +67,8 @@
         perspective: 1000px;
         opacity: 0;
         transform-origin: bottom left;
-        transform: rotate(90deg) scale(0.5) translate(100px, -300px) rotateX(90deg);
+        transform: rotate(90deg) scale(0.5) translate(100px, -300px)
+            rotateX(90deg);
         transition: all 250ms cubic-bezier(0, 0.6, 0.35, 1.4);
     }
     .alert-section .alert-element .icon {
@@ -79,13 +78,13 @@
         border-radius: 4px 0px 0px 4px;
         overflow: hidden;
     }
-    .alert-section  .alert-element .icon i {
+    .alert-section .alert-element .icon i {
         transform: scale(0.2) translateY(50px);
         opacity: 0;
         transition: all 250ms cubic-bezier(0, 0.6, 0.35, 1.4) 400ms;
     }
 
-    .alert-section  .alert-element .text {
+    .alert-section .alert-element .text {
         background: transparent;
         padding: 0 20px;
         display: flex;
@@ -108,5 +107,4 @@
         transform: rotateY(0deg);
         opacity: 1;
     }
-
 </style>
