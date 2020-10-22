@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Session;
+
 Route::get('/config', function () {
     try {
         Artisan::call('config:cache');
@@ -35,21 +37,10 @@ Route::get('/count', function() {
     return response(Cart::count(), 200);
 });
 
-
-Route::get('welcome/{locale}', function ($locale) {
-    if (! in_array($locale, ['en', 'fr'])) {
-        abort(400);
-    }
-
-    App::setLocale($locale);
-//    dd(App::getLocale());
-    echo __('messages.welcome');
-});
-
+Route::get('/lang/{locale}', 'ShopController@setLocale');
 Route::get('/alternate', 'ShopController@alternate');
 Route::get('today', 'ShopController@today');
-Route::post('/today/{product}', 'ProductController@todaySpecial');
-Route::delete('/today/{product}/delete', 'ProductController@deleteTodaySpecial');
+
 // ppl playing with shopping cart
 Route::resource('/shop', 'ShopController', ['only' => ['index', 'show']]);
 Route::resource('/cart', 'CartController');

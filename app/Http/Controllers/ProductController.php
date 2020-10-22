@@ -59,7 +59,7 @@ class ProductController extends Controller
             $avatar = $request->file('image');
             $image = time() . '.' . $avatar->getClientOriginalExtension();
             $path = public_path('img/' . $image);
-            Image::make($avatar->getRealPath())->resize(800, 500)->save($path);
+            Image::make($avatar->getRealPath())->save($path);
 
         }
 
@@ -96,7 +96,7 @@ class ProductController extends Controller
             $avatar = $request->file('image');
             $image = time() . '.' . $avatar->getClientOriginalExtension();
             $path = public_path('img/' . $image);
-            Image::make($avatar->getRealPath())->resize(800, 500)->save($path);
+            Image::make($avatar->getRealPath())->save($path);
 
             $product = Product::create([
                 'name' => ucfirst(request('name')),
@@ -146,22 +146,14 @@ class ProductController extends Controller
         if (request()->expectsJson()) {
             return response([], 200);
         }
+
         return back()->with(['success_message' => 'Successfully deleted!']);
     }
 
-    public function todaySpecial(Product $product)
+    public function toggleTodaySpecial(Product $product)
     {
-        $product->update([
-            'today' => true
-        ]);
-        return response(['create' => 'ok'], 200);
-    }
+        $product->toggleTodaySpecial();
 
-    public function deleteTodaySpecial(Product $product)
-    {
-        $product->update([
-            'today' => false
-        ]);
-        return response(['delete' => 'ok'], 200);
+        return response(['create' => 'ok'], 200);
     }
 }

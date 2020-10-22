@@ -57,6 +57,7 @@
         @yield('title-script')
         @yield('about-script')
         @yield('dropdown')
+        @yield('lang')
         @yield('menu-script')
         <script>
 

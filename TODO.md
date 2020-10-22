@@ -1,8 +1,8 @@
 # TODO
 
-- Fix Payment
-- Translations
-- Fix shit everywhere in controllers
-- Calendar ?
-- Create Invoice ?
-- The thing Restaurant:: in favorites ?
+- [ ] Fix Payment
+- [ ] Translations BDD
+- [ ] Fix shit everywhere in controllers
+- [ ] Calendar ?
+- [ ] Create Invoice ?
+- [ ] The thing Restaurant:: in favorites ?

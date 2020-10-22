@@ -2,14 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Sales;
 use App\Models\Product;
 use App\Models\Category;
-use App\Models\OptionGroup;
+use App;
 use \Cart;
 
 class ShopController extends Controller
 {
+    public function setLocale($locale)
+    {
+        App::setLocale($locale);
+        session()->put('locale', $locale);
+
+        return back();
+    }
     /**
     * Display a listing of the resource.
     *

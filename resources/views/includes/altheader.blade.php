@@ -6,6 +6,7 @@
                 <a href="#" data-target="mobile-nav" class="sidenav-trigger">
                     <i class="material-icons">menu</i>
                 </a>
+                @include('includes.locale')
                 <ul class="right hide-on-med-and-down">
 {{-- TODO: correct this syntax --}}
                     @if( App\Models\Product::where('holiday_special', true)->exists() && $title != null)
@@ -144,6 +145,7 @@
         </div>
     </nav>
 </header>
+
 @section('dropdown')
 <script>
     $(document).ready(function () {

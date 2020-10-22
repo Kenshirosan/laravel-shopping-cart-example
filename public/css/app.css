@@ -8945,9 +8945,8 @@ nav ul button.btn {
   min-width: 150px;
   padding: 0 10px;
   margin: 20px;
-  background: white;
   border: none;
-  border-radius: 25px;
+  border-radius: 5px;
   font-size: 15px;
   font-weight: bold;
   text-transform: uppercase;

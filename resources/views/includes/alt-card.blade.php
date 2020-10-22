@@ -50,7 +50,7 @@
             {{ method_field('DELETE') }}
             <button type="submit" name="submit" class="btn red danger deleteButton">Delete</button>
         </form>
-        <a href="/update/{{ $product->slug }}" class="btn blue product-layout-img">Update</a>
+        <a href="/update/{{ $product->slug }}" class="btn blue product-layout-img">Edit product</a>
         <mark-as-today-special :todayspecial="{{ $product->isTodaySpecial  }}" :product="{{ $product->id }}"></mark-as-today-special>
     @endcan
 </article>

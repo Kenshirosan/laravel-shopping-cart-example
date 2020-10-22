@@ -43,6 +43,9 @@ Route::middleware(['auth', 'must-be-confirmed', 'employee', 'admin'])->group(fun
     Route::get('/analytics', 'AnalyticsController@index');
     Route::get('/create-invoice', 'InvoiceController@index');
     Route::post('/create-invoice', 'InvoiceController@store');
+
+    Route::post('/today/{product}', 'ProductController@toggleTodaySpecial');
+    Route::delete('/today/{product}/delete', 'ProductController@toggleTodaySpecial');
     //ADD A BUNCH OF PICS ON PRODUCT VIEW
     Route::post('/shop/{slug}/{photo}','PhotosController@store');
     Route::get('/sales', 'SalesController@index');

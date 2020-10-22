@@ -175,4 +175,22 @@ class Product extends Model
         return $this->today;
     }
 
+    public function toggleTodaySpecial()
+    {
+        return $this->today ? $this->deleteTodaySpecial() : $this->todaySpecial();
+    }
+
+    public function todaySpecial()
+    {
+        return $this->update([
+            'today' => true
+        ]);
+    }
+
+    public function deleteTodaySpecial()
+    {
+        return $this->update([
+            'today' => false
+        ]);
+    }
 }
