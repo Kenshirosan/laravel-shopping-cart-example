@@ -31,12 +31,10 @@
                                 v-model="userObj.name"
                                 placeholder="First Name"
                                 required
+                                @focus="clearError"
                             />
                         </div>
-
-                        <span class="help-block" v-if="errors">
-                            <strong>{{ errors.name }}</strong>
-                        </span>
+                        <error :error="errors.get('name')"></error>
 
                         <div class="form-group">
                             <label>Last Name:</label>
@@ -47,12 +45,10 @@
                                 v-model="userObj.last_name"
                                 placeholder="Last Name"
                                 required
+                                @focus="clearError"
                             />
                         </div>
-
-                        <span class="help-block" v-if="errors">
-                            <strong>{{ errors.last_name }}</strong>
-                        </span>
+                        <error :error="errors.get('last_name')"></error>
 
                         <div class="form-group">
                             <label>Phone Number:</label>
@@ -63,15 +59,13 @@
                                 v-model="userObj.phone_number"
                                 placeholder="Phone Number"
                                 required
+                                @focus="clearError"
                             />
                             <small class="text-info">
                                 {{ userObj.phone_number }}
                             </small>
                         </div>
-
-                        <span class="help-block">
-                            <strong>{{ errors.phone_number }}</strong>
-                        </span>
+                        <error :error="errors.get('phone_number')"></error>
 
                         <label>Email Address:</label>
                         <div class="form-group">
@@ -83,6 +77,7 @@
                                 v-model="userObj.email"
                                 placeholder="Your Email"
                                 required
+                                @focus="clearError"
                             />
                             <small class="text-info">
                                 Please note you'll need to verify your email
@@ -90,9 +85,7 @@
                             </small>
                         </div>
 
-                        <span class="help-block">
-                            <strong>{{ errors.email }}</strong>
-                        </span>
+                        <error :error="errors.get('email')"></error>
 
                         <label>Password:</label>
                         <div class="form-group">
@@ -103,6 +96,7 @@
                                 v-model="userObj.password"
                                 placeholder="Your Password"
                                 required
+                                @focus="clearError"
                             />
                         </div>
 
@@ -116,8 +110,10 @@
                                 v-model="userObj.password_confirmation"
                                 placeholder="Password Confirmation"
                                 required
+                                @focus="clearError"
                             />
                         </div>
+                        <error :error="errors.get('password')"></error>
                         <div class="form-group">
                             <input
                                 type="submit"
@@ -147,9 +143,10 @@
                                 class="form-control"
                                 v-model="addressObj.name"
                                 placeholder="Name"
-                                required
+                                @focus="clearError"
                             />
                         </div>
+                        <error :error="errors.get('name')"></error>
                         <label>Address:</label>
                         <div class="form-group">
                             <input
@@ -159,12 +156,10 @@
                                 v-model="addressObj.address"
                                 placeholder="Address"
                                 required
+                                @focus="clearError"
                             />
                         </div>
-
-                        <span class="help-block">
-                            <strong>{{ errors.address }}</strong>
-                        </span>
+                        <error :error="errors.get('address')"></error>
 
                         <label>Address 2:</label>
                         <div class="form-group">
@@ -175,12 +170,10 @@
                                 v-model="addressObj.address_2"
                                 placeholder="Address 2"
                                 required
+                                @focus="clearError"
                             />
                         </div>
-
-                        <span class="help-block" v-if="errors">
-                            <strong>{{ errors.address2 }}</strong>
-                        </span>
+                        <error :error="errors.get('address_2')"></error>
 
                         <label>City :</label>
                         <div class="form-group">
@@ -189,12 +182,11 @@
                                 class="form-control"
                                 placeholder="City"
                                 v-model="addressObj.city"
+                                required
+                                @focus="clearError"
                             />
                         </div>
-
-                        <span class="help-block" v-if="errors">
-                            <strong>{{ errors.city }}</strong>
-                        </span>
+                        <error :error="errors.get('city')"></error>
 
                         <label>Country :</label>
                         <div class="form-group">
@@ -203,12 +195,11 @@
                                 class="form-control"
                                 placeholder="Country"
                                 v-model="addressObj.country"
+                                required
+                                @focus="clearError"
                             />
                         </div>
-
-                        <span class="help-block" v-if="errors">
-                            <strong>{{ errors.country }}</strong>
-                        </span>
+                        <error :error="errors.get('country')"></error>
 
                         <label>State :</label>
                         <div class="form-group">
@@ -217,12 +208,11 @@
                                 class="form-control"
                                 placeholder="State"
                                 v-model="addressObj.state"
+                                required
+                                @focus="clearError"
                             />
                         </div>
-
-                        <span class="help-block" v-if="errors">
-                            <strong>{{ errors.state }}</strong>
-                        </span>
+                        <error :error="errors.get('state')"></error>
 
                         <label>Zipcode:</label>
                         <div class="form-group">
@@ -231,12 +221,11 @@
                                 class="form-control"
                                 placeholder="Zipcode"
                                 v-model="addressObj.zipcode"
+                                @focus="clearError"
+                                required
                             />
                         </div>
-
-                        <span class="help-block" v-if="errors">
-                            <strong>{{ errors.zipcode }}</strong>
-                        </span>
+                        <error :error="errors.get('zipcode')"></error>
 
                         <div class="form-group">
                             <label>Default Address ?</label>
@@ -247,6 +236,7 @@
                                     type="radio"
                                     name="is_primary"
                                     checked
+                                    @focus="clearError"
                                 />Yes</label
                             >
                             <label class="radio-inline"
@@ -255,9 +245,11 @@
                                     v-bind:value="0"
                                     type="radio"
                                     name="is_primary"
+                                    @focus="clearError"
                                 />No</label
                             >
                         </div>
+                        <error :error="errors.get('is_primary')"></error>
 
                         <div class="form-group">
                             <input
@@ -275,9 +267,10 @@
 
 <script>
     import filters from '../mixins/filters';
+    import requests from '../mixins/requests';
 
     export default {
-        mixins: [filters],
+        mixins: [filters, requests],
 
         props: ['user'],
 
@@ -294,7 +287,6 @@
                     country: '',
                     is_primary: '',
                 },
-                errors: [],
                 userObj: {},
             };
         },
@@ -308,12 +300,20 @@
         mounted() {
             this.userObj = JSON.parse(this.$props.user);
             this.addresses = this.userObj.addresses;
-            this.addressObj = this.addresses[0];
+            this.assignDefaultAddress();
         },
 
         methods: {
             switchAddress(id) {
                 this.addressObj = this.addresses[id];
+            },
+
+            assignDefaultAddress() {
+                this.addresses.map(address => {
+                    if (address.is_primary) {
+                        return (this.addressObj = address);
+                    }
+                });
             },
 
             updateAddresses(data) {
@@ -329,14 +329,14 @@
                     .then(res => {
                         flash(res.data.success_message);
                     })
-                    .catch(err => console.error(err));
+                    .catch(err => this.showError(err));
             },
 
             updateUser() {
                 axios
                     .patch(`/edit-profile/${this.userObj.id}`, this.userObj)
                     .then(res => console.log(res))
-                    .catch(err => console.error(err));
+                    .catch(err => this.showError(err));
             },
 
             deleteAddress(addressId, index) {
@@ -348,7 +348,7 @@
                         flash(res.data.success_message);
                         this.addresses.splice(index, 1);
                     })
-                    .catch(err => console.error(err));
+                    .catch(err => this.showError(err));
             },
         },
     };

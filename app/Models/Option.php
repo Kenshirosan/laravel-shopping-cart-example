@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Option extends Model
 {
-    use Groupable;
+    use Groupable; use Translatable;
 
     protected $fillable = [
         'name'

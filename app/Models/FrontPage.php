@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class FrontPage extends Model
 {
+    use Translatable;
+
     protected $fillable = [
     	'title',
         'subtitle',

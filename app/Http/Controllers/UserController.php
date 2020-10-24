@@ -78,6 +78,7 @@ class UserController extends Controller
     public function edit()
     {
         $user = User::with('addresses')->findOrFail(Auth::user()->id);
+
         $orders = Order::selectRaw('*')
                         ->whereRaw('day(created_at) = day(curdate())
                                     and year(created_at) = year(curdate())
@@ -91,8 +92,6 @@ class UserController extends Controller
 
     public function update(User $user)
     {
-//        $user = User::where('id', $id)->firstOrFail();
-//dd(request()->all());
         if(\Hash::check(request('password'), $user->password)) {
             request()->validate([
                 'name' => 'required|string',

@@ -19105,14 +19105,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mixins_filters__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../mixins/filters */ "./resources/js/mixins/filters.js");
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var _mixins_requests__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../mixins/requests */ "./resources/js/mixins/requests.js");
 //
 //
 //
@@ -19381,8 +19374,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mixins: [_mixins_filters__WEBPACK_IMPORTED_MODULE_0__["default"]],
+  mixins: [_mixins_filters__WEBPACK_IMPORTED_MODULE_0__["default"], _mixins_requests__WEBPACK_IMPORTED_MODULE_1__["default"]],
   props: ['user'],
   data: function data() {
     return {
@@ -19397,7 +19391,6 @@ __webpack_require__.r(__webpack_exports__);
         country: '',
         is_primary: ''
       },
-      errors: [],
       userObj: {}
     };
   },
@@ -19411,38 +19404,51 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.userObj = JSON.parse(this.$props.user);
     this.addresses = this.userObj.addresses;
-    this.addressObj = this.addresses[0];
+    this.assignDefaultAddress();
   },
   methods: {
     switchAddress: function switchAddress(id) {
       this.addressObj = this.addresses[id];
     },
+    assignDefaultAddress: function assignDefaultAddress() {
+      var _this2 = this;
+
+      this.addresses.map(function (address) {
+        if (address.is_primary) {
+          return _this2.addressObj = address;
+        }
+      });
+    },
     updateAddresses: function updateAddresses(data) {
       this.addresses.push(data);
     },
     updateAddress: function updateAddress() {
+      var _this3 = this;
+
       axios.patch("/address/".concat(this.userObj.id, "/").concat(this.addressObj.id, "/update"), this.addressObj).then(function (res) {
         flash(res.data.success_message);
       })["catch"](function (err) {
-        return console.error(err);
+        return _this3.showError(err);
       });
     },
     updateUser: function updateUser() {
+      var _this4 = this;
+
       axios.patch("/edit-profile/".concat(this.userObj.id), this.userObj).then(function (res) {
         return console.log(res);
       })["catch"](function (err) {
-        return console.error(err);
+        return _this4.showError(err);
       });
     },
     deleteAddress: function deleteAddress(addressId, index) {
-      var _this2 = this;
+      var _this5 = this;
 
       axios["delete"]("/delete-address/".concat(this.userObj.id, "/").concat(addressId, "/address")).then(function (res) {
         flash(res.data.success_message);
 
-        _this2.addresses.splice(index, 1);
+        _this5.addresses.splice(index, 1);
       })["catch"](function (err) {
-        return console.error(err);
+        return _this5.showError(err);
       });
     }
   }
@@ -21565,6 +21571,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _mixins_requests__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../mixins/requests */ "./resources/js/mixins/requests.js");
 //
 //
 //
@@ -21689,7 +21696,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mixins: [_mixins_requests__WEBPACK_IMPORTED_MODULE_0__["default"]],
   data: function data() {
     return {
       address: {
@@ -21715,7 +21739,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.show = false;
         flash(res.data.message.success_message);
       })["catch"](function (err) {
-        return console.error(err);
+        _this.showError(err);
       });
     }
   }
@@ -38485,7 +38509,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\nspan[data-v-7ad39318] {\n    font-size: 1.5em;\n    padding: 0.5em;\n}\n", ""]);
+exports.push([module.i, "\nspan[data-v-7ad39318] {\n    margin-top: 5px;\n    font-size: 1em;\n    padding: 0.5em;\n}\n", ""]);
 
 // exports
 
@@ -96891,6 +96915,7 @@ var render = function() {
                     },
                     domProps: { value: _vm.userObj.name },
                     on: {
+                      focus: _vm.clearError,
                       input: function($event) {
                         if ($event.target.composing) {
                           return
@@ -96901,11 +96926,7 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _vm.errors
-                  ? _c("span", { staticClass: "help-block" }, [
-                      _c("strong", [_vm._v(_vm._s(_vm.errors.name))])
-                    ])
-                  : _vm._e(),
+                _c("error", { attrs: { error: _vm.errors.get("name") } }),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
                   _c("label", [_vm._v("Last Name:")]),
@@ -96928,6 +96949,7 @@ var render = function() {
                     },
                     domProps: { value: _vm.userObj.last_name },
                     on: {
+                      focus: _vm.clearError,
                       input: function($event) {
                         if ($event.target.composing) {
                           return
@@ -96938,11 +96960,7 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _vm.errors
-                  ? _c("span", { staticClass: "help-block" }, [
-                      _c("strong", [_vm._v(_vm._s(_vm.errors.last_name))])
-                    ])
-                  : _vm._e(),
+                _c("error", { attrs: { error: _vm.errors.get("last_name") } }),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
                   _c("label", [_vm._v("Phone Number:")]),
@@ -96965,6 +96983,7 @@ var render = function() {
                     },
                     domProps: { value: _vm.userObj.phone_number },
                     on: {
+                      focus: _vm.clearError,
                       input: function($event) {
                         if ($event.target.composing) {
                           return
@@ -96987,9 +97006,9 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _c("span", { staticClass: "help-block" }, [
-                  _c("strong", [_vm._v(_vm._s(_vm.errors.phone_number))])
-                ]),
+                _c("error", {
+                  attrs: { error: _vm.errors.get("phone_number") }
+                }),
                 _vm._v(" "),
                 _c("label", [_vm._v("Email Address:")]),
                 _vm._v(" "),
@@ -97013,6 +97032,7 @@ var render = function() {
                     },
                     domProps: { value: _vm.userObj.email },
                     on: {
+                      focus: _vm.clearError,
                       input: function($event) {
                         if ($event.target.composing) {
                           return
@@ -97029,9 +97049,7 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _c("span", { staticClass: "help-block" }, [
-                  _c("strong", [_vm._v(_vm._s(_vm.errors.email))])
-                ]),
+                _c("error", { attrs: { error: _vm.errors.get("email") } }),
                 _vm._v(" "),
                 _c("label", [_vm._v("Password:")]),
                 _vm._v(" "),
@@ -97054,6 +97072,7 @@ var render = function() {
                     },
                     domProps: { value: _vm.userObj.password },
                     on: {
+                      focus: _vm.clearError,
                       input: function($event) {
                         if ($event.target.composing) {
                           return
@@ -97086,6 +97105,7 @@ var render = function() {
                     },
                     domProps: { value: _vm.userObj.password_confirmation },
                     on: {
+                      focus: _vm.clearError,
                       input: function($event) {
                         if ($event.target.composing) {
                           return
@@ -97100,8 +97120,11 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
+                _c("error", { attrs: { error: _vm.errors.get("password") } }),
+                _vm._v(" "),
                 _vm._m(1)
-              ]
+              ],
+              1
             )
           ]),
           _vm._v(" "),
@@ -97134,14 +97157,10 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      name: "name",
-                      placeholder: "Name",
-                      required: ""
-                    },
+                    attrs: { type: "text", name: "name", placeholder: "Name" },
                     domProps: { value: _vm.addressObj.name },
                     on: {
+                      focus: _vm.clearError,
                       input: function($event) {
                         if ($event.target.composing) {
                           return
@@ -97151,6 +97170,8 @@ var render = function() {
                     }
                   })
                 ]),
+                _vm._v(" "),
+                _c("error", { attrs: { error: _vm.errors.get("name") } }),
                 _vm._v(" "),
                 _c("label", [_vm._v("Address:")]),
                 _vm._v(" "),
@@ -97173,6 +97194,7 @@ var render = function() {
                     },
                     domProps: { value: _vm.addressObj.address },
                     on: {
+                      focus: _vm.clearError,
                       input: function($event) {
                         if ($event.target.composing) {
                           return
@@ -97183,9 +97205,7 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _c("span", { staticClass: "help-block" }, [
-                  _c("strong", [_vm._v(_vm._s(_vm.errors.address))])
-                ]),
+                _c("error", { attrs: { error: _vm.errors.get("address") } }),
                 _vm._v(" "),
                 _c("label", [_vm._v("Address 2:")]),
                 _vm._v(" "),
@@ -97208,6 +97228,7 @@ var render = function() {
                     },
                     domProps: { value: _vm.addressObj.address_2 },
                     on: {
+                      focus: _vm.clearError,
                       input: function($event) {
                         if ($event.target.composing) {
                           return
@@ -97222,11 +97243,7 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _vm.errors
-                  ? _c("span", { staticClass: "help-block" }, [
-                      _c("strong", [_vm._v(_vm._s(_vm.errors.address2))])
-                    ])
-                  : _vm._e(),
+                _c("error", { attrs: { error: _vm.errors.get("address_2") } }),
                 _vm._v(" "),
                 _c("label", [_vm._v("City :")]),
                 _vm._v(" "),
@@ -97241,9 +97258,10 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control",
-                    attrs: { type: "text", placeholder: "City" },
+                    attrs: { type: "text", placeholder: "City", required: "" },
                     domProps: { value: _vm.addressObj.city },
                     on: {
+                      focus: _vm.clearError,
                       input: function($event) {
                         if ($event.target.composing) {
                           return
@@ -97254,11 +97272,7 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _vm.errors
-                  ? _c("span", { staticClass: "help-block" }, [
-                      _c("strong", [_vm._v(_vm._s(_vm.errors.city))])
-                    ])
-                  : _vm._e(),
+                _c("error", { attrs: { error: _vm.errors.get("city") } }),
                 _vm._v(" "),
                 _c("label", [_vm._v("Country :")]),
                 _vm._v(" "),
@@ -97273,9 +97287,14 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control",
-                    attrs: { type: "text", placeholder: "Country" },
+                    attrs: {
+                      type: "text",
+                      placeholder: "Country",
+                      required: ""
+                    },
                     domProps: { value: _vm.addressObj.country },
                     on: {
+                      focus: _vm.clearError,
                       input: function($event) {
                         if ($event.target.composing) {
                           return
@@ -97286,11 +97305,7 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _vm.errors
-                  ? _c("span", { staticClass: "help-block" }, [
-                      _c("strong", [_vm._v(_vm._s(_vm.errors.country))])
-                    ])
-                  : _vm._e(),
+                _c("error", { attrs: { error: _vm.errors.get("country") } }),
                 _vm._v(" "),
                 _c("label", [_vm._v("State :")]),
                 _vm._v(" "),
@@ -97305,9 +97320,10 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control",
-                    attrs: { type: "text", placeholder: "State" },
+                    attrs: { type: "text", placeholder: "State", required: "" },
                     domProps: { value: _vm.addressObj.state },
                     on: {
+                      focus: _vm.clearError,
                       input: function($event) {
                         if ($event.target.composing) {
                           return
@@ -97318,11 +97334,7 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _vm.errors
-                  ? _c("span", { staticClass: "help-block" }, [
-                      _c("strong", [_vm._v(_vm._s(_vm.errors.state))])
-                    ])
-                  : _vm._e(),
+                _c("error", { attrs: { error: _vm.errors.get("state") } }),
                 _vm._v(" "),
                 _c("label", [_vm._v("Zipcode:")]),
                 _vm._v(" "),
@@ -97337,9 +97349,14 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control",
-                    attrs: { type: "text", placeholder: "Zipcode" },
+                    attrs: {
+                      type: "text",
+                      placeholder: "Zipcode",
+                      required: ""
+                    },
                     domProps: { value: _vm.addressObj.zipcode },
                     on: {
+                      focus: _vm.clearError,
                       input: function($event) {
                         if ($event.target.composing) {
                           return
@@ -97350,11 +97367,7 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _vm.errors
-                  ? _c("span", { staticClass: "help-block" }, [
-                      _c("strong", [_vm._v(_vm._s(_vm.errors.zipcode))])
-                    ])
-                  : _vm._e(),
+                _c("error", { attrs: { error: _vm.errors.get("zipcode") } }),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
                   _c("label", [_vm._v("Default Address ?")]),
@@ -97375,6 +97388,7 @@ var render = function() {
                         checked: _vm._q(_vm.addressObj.is_primary, 1)
                       },
                       on: {
+                        focus: _vm.clearError,
                         change: function($event) {
                           return _vm.$set(_vm.addressObj, "is_primary", 1)
                         }
@@ -97399,6 +97413,7 @@ var render = function() {
                         checked: _vm._q(_vm.addressObj.is_primary, 0)
                       },
                       on: {
+                        focus: _vm.clearError,
                         change: function($event) {
                           return _vm.$set(_vm.addressObj, "is_primary", 0)
                         }
@@ -97408,8 +97423,11 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
+                _c("error", { attrs: { error: _vm.errors.get("is_primary") } }),
+                _vm._v(" "),
                 _vm._m(2)
-              ]
+              ],
+              1
             )
           ])
         ])
@@ -99539,6 +99557,7 @@ var render = function() {
                     },
                     domProps: { value: _vm.address.name },
                     on: {
+                      focus: _vm.clearError,
                       input: function($event) {
                         if ($event.target.composing) {
                           return
@@ -99548,6 +99567,8 @@ var render = function() {
                     }
                   })
                 ]),
+                _vm._v(" "),
+                _c("error", { attrs: { error: _vm.errors.get("name") } }),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
                   _c("label", [_vm._v("Address :")]),
@@ -99570,6 +99591,7 @@ var render = function() {
                     },
                     domProps: { value: _vm.address.address },
                     on: {
+                      focus: _vm.clearError,
                       input: function($event) {
                         if ($event.target.composing) {
                           return
@@ -99579,6 +99601,8 @@ var render = function() {
                     }
                   })
                 ]),
+                _vm._v(" "),
+                _c("error", { attrs: { error: _vm.errors.get("address") } }),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
                   _c("label", [_vm._v("Address :")]),
@@ -99601,6 +99625,7 @@ var render = function() {
                     },
                     domProps: { value: _vm.address.address_2 },
                     on: {
+                      focus: _vm.clearError,
                       input: function($event) {
                         if ($event.target.composing) {
                           return
@@ -99610,6 +99635,8 @@ var render = function() {
                     }
                   })
                 ]),
+                _vm._v(" "),
+                _c("error", { attrs: { error: _vm.errors.get("address_2") } }),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
                   _c("label", [_vm._v("Zipcode :")]),
@@ -99632,6 +99659,7 @@ var render = function() {
                     },
                     domProps: { value: _vm.address.zipcode },
                     on: {
+                      focus: _vm.clearError,
                       input: function($event) {
                         if ($event.target.composing) {
                           return
@@ -99641,6 +99669,8 @@ var render = function() {
                     }
                   })
                 ]),
+                _vm._v(" "),
+                _c("error", { attrs: { error: _vm.errors.get("zipcode") } }),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
                   _c("label", [_vm._v("City :")]),
@@ -99663,6 +99693,7 @@ var render = function() {
                     },
                     domProps: { value: _vm.address.city },
                     on: {
+                      focus: _vm.clearError,
                       input: function($event) {
                         if ($event.target.composing) {
                           return
@@ -99672,6 +99703,8 @@ var render = function() {
                     }
                   })
                 ]),
+                _vm._v(" "),
+                _c("error", { attrs: { error: _vm.errors.get("city") } }),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
                   _c("label", [_vm._v("State :")]),
@@ -99694,6 +99727,7 @@ var render = function() {
                     },
                     domProps: { value: _vm.address.state },
                     on: {
+                      focus: _vm.clearError,
                       input: function($event) {
                         if ($event.target.composing) {
                           return
@@ -99703,6 +99737,8 @@ var render = function() {
                     }
                   })
                 ]),
+                _vm._v(" "),
+                _c("error", { attrs: { error: _vm.errors.get("state") } }),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
                   _c("label", [_vm._v("Country :")]),
@@ -99725,6 +99761,7 @@ var render = function() {
                     },
                     domProps: { value: _vm.address.country },
                     on: {
+                      focus: _vm.clearError,
                       input: function($event) {
                         if ($event.target.composing) {
                           return
@@ -99734,6 +99771,8 @@ var render = function() {
                     }
                   })
                 ]),
+                _vm._v(" "),
+                _c("error", { attrs: { error: _vm.errors.get("country") } }),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
                   _c("label", [_vm._v("Default Address ?")]),
@@ -99787,8 +99826,11 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
+                _c("error", { attrs: { error: _vm.errors.get("is_primary") } }),
+                _vm._v(" "),
                 _vm._m(0)
-              ]
+              ],
+              1
             )
           : _vm._e()
       ])
@@ -100059,7 +100101,7 @@ var render = function() {
   return _vm.error
     ? _c(
         "span",
-        { staticClass: "red text-white" },
+        { staticClass: "bg-red-gradient text-white" },
         [
           _c("strong", [_vm._v(_vm._s(_vm.error))]),
           _vm._v(" "),
@@ -123740,7 +123782,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.errors = new _utilities_Error__WEBPACK_IMPORTED_MODULE_1__["default"]();
     },
     showError: function showError(err) {
-      return this.errors.record(err.response.data.message);
+      return this.errors.record(err.response.data.errors);
     },
     resetForm: function resetForm() {
       this.option_group_id = '';

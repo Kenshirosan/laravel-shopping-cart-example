@@ -54,6 +54,9 @@ Route::middleware(['auth', 'must-be-confirmed', 'employee', 'admin'])->group(fun
     Route::get('/front-page-title', 'FrontPageController@index');
     Route::post('/front-page-title', 'FrontPageController@store');
 
+    // Translations
+    Route::get('/translate', 'TranslationsController@index');
+
     Route::get('/logs', function() {
         return App\Logger::readLogs();
     });

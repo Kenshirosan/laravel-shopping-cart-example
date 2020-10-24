@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    use Hideable; use Groupable; use HasFactory;
+    use Hideable; use Groupable; use HasFactory; use Translatable;
     /**
      * The attributes that are mass assignable.
      *
@@ -177,10 +177,10 @@ class Product extends Model
 
     public function toggleTodaySpecial()
     {
-        return $this->today ? $this->deleteTodaySpecial() : $this->todaySpecial();
+        return $this->today ? $this->deleteTodaySpecial() : $this->makeTodaySpecial();
     }
 
-    public function todaySpecial()
+    public function makeTodaySpecial()
     {
         return $this->update([
             'today' => true

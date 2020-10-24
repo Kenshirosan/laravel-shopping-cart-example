@@ -15,6 +15,7 @@
                     <div class="form-group">
                         <label>Address Name :</label>
                         <input
+                            @focus="clearError"
                             type="text"
                             name="addressName"
                             class="form-control"
@@ -23,9 +24,11 @@
                             required
                         />
                     </div>
+                    <error :error="errors.get('name')"></error>
                     <div class="form-group">
                         <label>Address :</label>
                         <input
+                            @focus="clearError"
                             type="text"
                             name="address"
                             class="form-control"
@@ -34,9 +37,11 @@
                             required
                         />
                     </div>
+                    <error :error="errors.get('address')"></error>
                     <div class="form-group">
                         <label>Address :</label>
                         <input
+                            @focus="clearError"
                             type="text"
                             name="address_2"
                             class="form-control"
@@ -45,9 +50,11 @@
                             required
                         />
                     </div>
+                    <error :error="errors.get('address_2')"></error>
                     <div class="form-group">
                         <label>Zipcode :</label>
                         <input
+                            @focus="clearError"
                             type="text"
                             name="zipcode"
                             class="form-control"
@@ -56,9 +63,11 @@
                             required
                         />
                     </div>
+                    <error :error="errors.get('zipcode')"></error>
                     <div class="form-group">
                         <label>City :</label>
                         <input
+                            @focus="clearError"
                             type="text"
                             name="city"
                             class="form-control"
@@ -67,9 +76,11 @@
                             required
                         />
                     </div>
+                    <error :error="errors.get('city')"></error>
                     <div class="form-group">
                         <label>State :</label>
                         <input
+                            @focus="clearError"
                             type="text"
                             name="state"
                             class="form-control"
@@ -78,9 +89,11 @@
                             required
                         />
                     </div>
+                    <error :error="errors.get('state')"></error>
                     <div class="form-group">
                         <label>Country :</label>
                         <input
+                            @focus="clearError"
                             type="text"
                             name="country"
                             class="form-control"
@@ -89,6 +102,7 @@
                             required
                         />
                     </div>
+                    <error :error="errors.get('country')"></error>
                     <div class="form-group">
                         <label>Default Address ?</label>
                         <label class="radio-inline"
@@ -109,6 +123,7 @@
                             />No</label
                         >
                     </div>
+                    <error :error="errors.get('is_primary')"></error>
                     <div class="form-group">
                         <input
                             type="submit"
@@ -123,7 +138,11 @@
 </template>
 
 <script>
+    import requests from '../../mixins/requests';
+
     export default {
+        mixins: [requests],
+
         data() {
             return {
                 address: {
@@ -150,7 +169,9 @@
                         this.show = false;
                         flash(res.data.message.success_message);
                     })
-                    .catch(err => console.error(err));
+                    .catch(err => {
+                        this.showError(err);
+                    });
             },
         },
     };

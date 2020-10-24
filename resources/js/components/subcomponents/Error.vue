@@ -1,5 +1,5 @@
 <template>
-    <span class="red text-white" v-if="error">
+    <span class="bg-red-gradient text-white" v-if="error">
         <strong>{{ error }}</strong>
         <slot></slot>
     </span>
@@ -7,12 +7,13 @@
 
 <script>
     export default {
-        props: ['error']
-    }
+        props: ['error'],
+    };
 </script>
 <style scoped>
     span {
-        font-size: 1.5em;
+        margin-top: 5px;
+        font-size: 1em;
         padding: 0.5em;
     }
 </style>

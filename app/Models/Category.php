@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Category extends Model
 {
-    use hasFactory;
+    use hasFactory; use Translatable;
 
     protected $fillable = ['name'];
 
-    protected $subcategories = ['Eggs', 'Meat', 'Chicken', 'Fish', 'Seafood', 'Game'];
+    protected $subcategories = ['Eggs', 'Meat', 'Chicken', 'Fish', 'Seafood', 'Game', 'Side'];
 
     public function products()
     {

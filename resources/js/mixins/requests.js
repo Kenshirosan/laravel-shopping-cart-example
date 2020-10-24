@@ -75,7 +75,7 @@ export default {
         },
 
         showError(err) {
-            return this.errors.record(err.response.data.message);
+            return this.errors.record(err.response.data.errors);
         },
 
         resetForm() {

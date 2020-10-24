@@ -60,7 +60,6 @@ class ProductController extends Controller
             $image = time() . '.' . $avatar->getClientOriginalExtension();
             $path = public_path('img/' . $image);
             Image::make($avatar->getRealPath())->save($path);
-
         }
 
         $product->update([
@@ -108,6 +107,8 @@ class ProductController extends Controller
                 'price' => request('price'),
                 'image' => $image
             ]);
+
+            // Créer translation langage défaut ici ? 
 
             foreach ($request['option_group_id'] as $id) {
                 $group = OptionGroup::where('id', $id)->get();

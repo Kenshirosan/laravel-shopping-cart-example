@@ -111,94 +111,102 @@ return [
     'menu' => [
         '',
         [
-            'text' => 'Add a product',
-            'url'  => '/restaurantpanel',
-            'icon' => 'shopping-cart',
+            'text'       => 'Add a product',
+            'url'        => '/restaurantpanel',
+            'icon'       => 'shopping-cart',
             'icon_color' => 'success',
-            'can' => 'see-admin-menu'
+            'can'        => 'see-admin-menu'
         ],
         [
-            'text' => 'Add custom title/colors/image',
-            'url'  => '/front-page-title',
-            'icon' => 'info-circle',
+            'text'       => 'Add custom title/colors/image',
+            'url'        => '/front-page-title',
+            'icon'       => 'info-circle',
             'icon_color' => 'primary',
-            'can' => 'see-admin-menu'
+            'can'        => 'see-admin-menu'
         ],
         [
-            'text' => 'Add About infos',
-            'url'  => '/add-about-page',
-            'icon' => 'info-circle',
+            'text'       => 'Add About infos',
+            'url'        => '/add-about-page',
+            'icon'       => 'info-circle',
             'icon_color' => 'primary',
-            'can' => 'see-admin-menu'
+            'can'        => 'see-admin-menu'
         ],
         [
-            'text' => 'Create an Invoice',
-            'url'  => '/create-invoice',
-            'icon' => 'dollar',
+            'text'       => 'Create an Invoice',
+            'url'        => '/create-invoice',
+            'icon'       => 'dollar',
             'icon_color' => 'primary',
-            'can' => 'see-admin-menu'
+            'can'        => 'see-admin-menu'
         ],
         [
-            'text' => 'Create a Sale',
-            'url'  => '/sales',
-            'icon' => 'dollar',
+            'text'       => 'Create a Sale',
+            'url'        => '/sales',
+            'icon'       => 'dollar',
             'icon_color' => 'success',
-            'can' => 'see-admin-menu'
+            'can'        => 'see-admin-menu'
         ],
         [
-            'text' => 'Add a title for the special\'s page',
-            'url'  => '/add-holiday-title',
-            'icon' => 'shopping-cart',
+            'text'       => 'Add a title for the special\'s page',
+            'url'        => '/add-holiday-title',
+            'icon'       => 'shopping-cart',
             'icon_color' => 'success',
-            'can' => 'see-admin-menu'
+            'can'        => 'see-admin-menu'
+        ],
+        [
+            'text'        => 'Translations',
+            'url'         => '/translate',
+            'icon_color'  => 'green',
+            'label'       => '',
+            'label_color' => 'info',
+            'can'         => 'see-admin-menu'
         ],
         [
             'text'        => 'View sales',
             'url'         => '/panel',
             'icon'        => 'dollar',
-            'icon_color' => 'success',
-            'can' => 'see-admin-menu'
+            'icon_color'  => 'success',
+            'can'         => 'see-admin-menu'
         ],
         [
             'text'        => 'View analytics',
             'url'         => '/analytics',
             'icon'        => 'dollar',
-            'icon_color' => 'success',
-            'can' => 'see-admin-menu'
+            'icon_color'  => 'success',
+            'can'         => 'see-admin-menu'
         ],
         [
             'text'        => 'Search an order',
             'url'         => '/search-orders',
             'icon'        => 'search',
-            'icon_color' => 'info',
-            'can' => 'see-employee-menu'
+            'icon_color'  => 'info',
+            'can'         => 'see-employee-menu'
         ],
         [
             'text'        => 'Today\'s orders',
             'url'         => '/customer-orders',
             'icon'        => 'info-circle',
-            'icon_color' => 'success',
-            'label' => '',
+            'icon_color'  => 'success',
+            'label'       => '',
             'label_color' => 'info',
-            'can' => 'see-employee-menu'
+            'can'         => 'see-employee-menu'
         ],
         [
             'text'       => 'Best Customers',
             'url'        => '/best-customers',
             'icon'       => 'plus',
             'icon_color' => 'success',
-            'can' => 'see-admin-menu'
+            'can'        => 'see-admin-menu'
         ],
 
         [
-            'text'    => 'Add options/Categories',
-            'icon'    => 'share',
+            'text'       => 'Add options/Categories',
+            'icon'       => 'share',
             'icon_color' => 'aqua',
-            'can' => 'see-admin-menu',
-            'submenu' => [
+            'can'        => 'see-admin-menu',
+            'submenu'    => [
                 [
-                    'text' => 'Add an option group',
-                    'url'  => '/option-group',
+                    'text'       => 'Add an option group',
+                    'url'        => '/option-group',
                     'icon_color' => 'green',
                 ],
                 [
@@ -220,57 +228,57 @@ return [
             ],
         ],
         [
-            'text'    => 'Booking / appointments',
-            'url'  => '/calendar',
-            'icon'    => 'calendar-plus-o',
-            'icon_color' => 'green',
-            'label' => '',
+            'text'        => 'Booking / appointments',
+            'url'         => '/calendar',
+            'icon'        => 'calendar-plus-o',
+            'icon_color'  => 'green',
+            'label'       => '',
             'label_color' => 'info',
-            'can' => 'see-employee-menu'
+            'can'         => 'see-employee-menu'
         ],
         [
-            'text'    => 'Messages',
-            'url'  => '/contact-us',
-            'icon'    => 'envelope',
-            'icon_color' => 'green',
+            'text'        => 'Messages',
+            'url'         => '/contact-us',
+            'icon'        => 'envelope',
+            'icon_color'  => 'green',
             'label'       => '',
             'label_color' => 'success',
-            'can' => 'see-admin-menu'
+            'can'         => 'see-admin-menu'
         ],
 
         'ACCOUNT SETTINGS',
         [
-            'text' => 'Profile',
-            'url'  => '/edit/profile',
-            'icon' => 'user',
+            'text'       => 'Profile',
+            'url'        => '/edit/profile',
+            'icon'       => 'user',
             'icon_color' => 'success',
         ],
         [
-            'text'    => 'Add/Delete Employees',
-            'icon'    => 'share',
+            'text'       => 'Add/Delete Employees',
+            'icon'       => 'share',
             'icon_color' => 'aqua',
-            'can' => 'see-admin-menu',
-            'submenu' => [
+            'can'        => 'see-admin-menu',
+            'submenu'    => [
                 [
-                    'text' => 'Add an Employee',
-                    'url'  => '/add-user',
-                    'icon' => 'user',
+                    'text'       => 'Add an Employee',
+                    'url'        => '/add-user',
+                    'icon'       => 'user',
                     'icon_color' => 'primary',
                 ],
                 [
-                    'text' => 'Users/Employees',
-                    'url'  => '/delete-user',
-                    'icon' => 'user',
+                    'text'       => 'Users/Employees',
+                    'url'        => '/delete-user',
+                    'icon'       => 'user',
                     'icon_color' => 'danger'
                 ],
             ],
         ],
         [
-            'text' => 'Logs',
-            'icon' => 'file',
+            'text'       => 'Logs',
+            'icon'       => 'file',
             'icon_color' => 'aqua',
-            'url'  => '/logs',
-            'can' => 'see-admin-menu'
+            'url'        => '/logs',
+            'can'        => 'see-admin-menu'
         ]
     ],
 
@@ -305,6 +313,6 @@ return [
     */
 
     'plugins' => [
-        'datatables' => true,
+        'datatables' => false,
     ],
 ];
