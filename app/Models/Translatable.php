@@ -12,7 +12,14 @@ trait Translatable
 
     public function translation()
     {
-        return $this->translated()->first();
+        $lang = Language::where('language', app()->getLocale())->first();
+
+        return $this->translated()->where('language_id', $lang->id)->pluck('translation')->first();
+    }
+
+    public function translations()
+    {
+        return $this->translated();
     }
 
     public function translate($translation)
@@ -20,9 +27,21 @@ trait Translatable
         $this->translated()->attach($translation);
     }
 
+    public function deleteTranslations()
+    {
+        if($this->has('translations')) {
+            foreach($this->translations as $translation) {
+                $this->deleteTranslation($translation);
+                $translation->delete();
+            }
+        }
+    }
+
     public function deleteTranslation($translation)
     {
         $this->translated()->detach($translation);
     }
+
+
 
 }

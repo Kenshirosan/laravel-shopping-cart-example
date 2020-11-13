@@ -153,5 +153,8 @@
                 </p>
             @endif
         </div>
+        <div class="row">
+            <iframe width="100%" height="50%" src="/shop" frameborder="0"></iframe>
+        </div>
     </div>
 @endsection

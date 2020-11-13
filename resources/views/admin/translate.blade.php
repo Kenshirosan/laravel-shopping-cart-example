@@ -38,15 +38,17 @@
                         <td>{{ $product->id }}</td>
                         <td>{{ $product->description }}</td>
                         @if($product->translation())
+                            {{ dump($product->translation())  }}
                             <td>
-                                {{ $product->translation()->translation }}
-                                Language : {{ $product->translation()->language->language }}
+                                {{ $product->translation() }}
+                                Language : {{ $product->translation() }}
                             </td>
                         @endif
                     </tr>
                 @endforeach
             </tbody>
         </table>
+        {{ die() }}
         <table class="table table-hover even">
             <thead>
                 <tr>
@@ -78,8 +80,8 @@
                         <td>{{ $f->title }}</td>
                         @if($f->translation())
                             <td>
-                                {{ $f->translation()->translation }}
-                                Language : {{ $f->translation()->language->language }}
+                                {{ $f->translation() }}
+                                Language : {{ $f->translation() }}
                             </td>
                         @endif
                     </tr>

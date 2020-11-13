@@ -9,7 +9,19 @@ class Translation extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['translation'];
+    protected $fillable = ['translation', 'language_id'];
+
+    public function storeTranslation($string)
+    {
+        $lang = Language::where('language', app()->getLocale())->first();
+
+        $translation = self::create([
+            'translation' => $string,
+            'language_id' => $lang->id,
+        ]);
+
+        return $translation;
+    }
 
     public function language()
     {

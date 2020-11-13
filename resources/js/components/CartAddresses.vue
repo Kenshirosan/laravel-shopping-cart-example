@@ -29,12 +29,12 @@
             <i class="material-icons prefix">account_circle</i>
             <input
                 type="text"
-                id="first_name"
+                id="last_name"
                 name="last_name"
                 class="form-control black-text"
                 v-model="user.last_name"
             />
-            <label for="last_name">First Name</label>
+            <label for="last_name">Last Name</label>
         </div>
 
         <div class="input-field col m12 s12">
@@ -83,7 +83,7 @@
                 name="phone_number"
                 v-model="user.phone_number"
             />
-            <label for="Phone">Phone</label>
+            <label for="tel">Phone</label>
         </div>
 
         <div class="input-field col m4 s12">
@@ -91,6 +91,7 @@
             <input
                 type="email"
                 class="form-control black-text"
+                id="email"
                 readonly
                 name="email"
                 v-model="user.email"

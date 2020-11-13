@@ -19915,6 +19915,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CartAddresses',
   props: ['addresses', 'user'],
@@ -97688,7 +97689,7 @@ var render = function() {
             }
           ],
           staticClass: "form-control black-text",
-          attrs: { type: "text", id: "first_name", name: "last_name" },
+          attrs: { type: "text", id: "last_name", name: "last_name" },
           domProps: { value: _vm.user.last_name },
           on: {
             input: function($event) {
@@ -97700,7 +97701,7 @@ var render = function() {
           }
         }),
         _vm._v(" "),
-        _c("label", { attrs: { for: "last_name" } }, [_vm._v("First Name")])
+        _c("label", { attrs: { for: "last_name" } }, [_vm._v("Last Name")])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "input-field col m12 s12" }, [
@@ -97822,7 +97823,7 @@ var render = function() {
           }
         }),
         _vm._v(" "),
-        _c("label", { attrs: { for: "Phone" } }, [_vm._v("Phone")])
+        _c("label", { attrs: { for: "tel" } }, [_vm._v("Phone")])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "input-field col m4 s12" }, [
@@ -97838,7 +97839,7 @@ var render = function() {
             }
           ],
           staticClass: "form-control black-text",
-          attrs: { type: "email", readonly: "", name: "email" },
+          attrs: { type: "email", id: "email", readonly: "", name: "email" },
           domProps: { value: _vm.user.email },
           on: {
             input: function($event) {

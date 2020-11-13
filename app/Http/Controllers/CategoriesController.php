@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Translatable;
+use App\Models\Translation;
 use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
 {
+    use Translatable;
     /**
      * Show the form for creating a new resource.
      *
@@ -35,7 +38,11 @@ class CategoriesController extends Controller
             'name' => 'required|string',
         ]);
 
-        Category::create($request->all());
+        $category = Category::create($request->all());
+
+        $translation = (new Translation())->storeTranslation($category->name);
+
+        $category->translate($translation);
 
         $categories = Category::all();
 
@@ -51,6 +58,8 @@ class CategoriesController extends Controller
     public function destroy($id)
     {
        $category = Category::where('id', $id)->firstOrFail();
+
+       $category->deleteTranslations();
 
        $category->delete();
 

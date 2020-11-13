@@ -65,12 +65,11 @@ class FrontPageController extends Controller
 
     protected function createInfos(Request $request)
     {
-        // test without resizing images
     	$file = $request->file('image');
 
         $name = time() . $file->getClientOriginalName();
         $path = 'img/' . $name;
-        $file = Image::make($file->getRealPath())->resize(800, 500)->save($path);
+        Image::make($file->getRealPath())->save($path);
 
         $infos = new FrontPage();
         $infos->title = $request['title'];

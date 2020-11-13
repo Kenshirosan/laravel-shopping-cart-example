@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\About;
-use App\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\AboutPage;
+
 
 class SiteController extends Controller
 {
     public function index()
     {
-        $about = About::first();
+        $about = AboutPage::first();
 
         if (request()->expectsJson()) {
             return response($about, 200);

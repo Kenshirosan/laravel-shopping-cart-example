@@ -3,8 +3,8 @@
 Route::middleware(['auth', 'must-be-confirmed', 'employee', 'admin'])->group(function () {
     // testing server performance : send email in a loop
     // Route::get('/test-server', 'OrderProcessedController@index');
-    Route::get('/add-about-page', 'AboutController@index');
-    Route::put('/add-about-page', 'AboutController@store');
+    Route::get('/add-about-page', 'AboutPageController@index');
+    Route::put('/add-about-page', 'AboutPageController@store');
     Route::get('/add-user', 'UserController@create');
     Route::post('/add-user', 'UserController@store');
     Route::get('/delete-user', 'UserController@index');

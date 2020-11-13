@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Language;
+use App\Models\Translation;
 use Illuminate\Http\Response;
 use Image;
 use App\User;
@@ -108,7 +110,16 @@ class ProductController extends Controller
                 'image' => $image
             ]);
 
-            // Créer translation langage défaut ici ? 
+            $locale = app()->getLocale();
+
+            $lang = Language::where('language', $locale)->first();
+
+            $translation = Translation::create([
+                'translation' => $product->description,
+                'language_id' => $lang->id,
+            ]);
+
+            $product->translate($translation);
 
             foreach ($request['option_group_id'] as $id) {
                 $group = OptionGroup::where('id', $id)->get();
@@ -134,6 +145,8 @@ class ProductController extends Controller
                 $product->degroup($group);
             }
         }
+
+        $product->deleteTranslations();
 
         Storage::disk('custom')->delete('img/' . $product->image);
 

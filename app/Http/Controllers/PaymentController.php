@@ -8,6 +8,7 @@ use App\Mail\ThankYou;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Promocode;
+use App\Models\SortOrdersByTime;
 use App\Payments\Payments;
 use App\Logger;
 use Illuminate\Support\Facades\Auth;
