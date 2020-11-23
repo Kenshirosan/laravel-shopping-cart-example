@@ -77,7 +77,7 @@ export default {
         showError(err) {
             return this.errors.record(err.response.data.errors);
         },
-
+// form.reset() ?
         resetForm() {
             this.option_group_id = '';
             this.name = '';

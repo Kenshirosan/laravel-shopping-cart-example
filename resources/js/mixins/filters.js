@@ -11,7 +11,7 @@ export default {
         formatted: price => {
             return price;
         },
-
+// TODO :
         tel: phone => {
             console.log(phone, 'OUIN');
             phone = phone.replace('(', '');

@@ -22,11 +22,11 @@ class DatabaseSeeder extends Seeder
         Category::factory(5)->create();
         Product::factory(10)->create();
         Order::factory(20)->create();
-        SortOrdersByTime::factory(152)->breakfast();
-        SortOrdersByTime::factory(225)->lunch();
-        SortOrdersByTime::factory(295)->dinner();
-        SortOrdersByTime::factory(152)->breakfast()->pickUp();
-        SortOrdersByTime::factory(225)->lunch()->pickUp();
-        SortOrdersByTime::factory(295)->dinner()->pickUp();
+        SortOrdersByTime::factory(152)->breakfast()->create();
+        SortOrdersByTime::factory(225)->lunch()->create();
+        SortOrdersByTime::factory(295)->dinner()->create();
+        SortOrdersByTime::factory(152)->breakfast()->pickUp()->create();
+        SortOrdersByTime::factory(225)->lunch()->pickUp()->create();
+        SortOrdersByTime::factory(295)->dinner()->pickUp()->create();
     }
 }

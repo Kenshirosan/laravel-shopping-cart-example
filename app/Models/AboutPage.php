@@ -10,7 +10,7 @@ class AboutPage extends Model
 
     protected $table = 'abouts';
 
-    protected $appends = ['translations'];
+//    protected $appends = ['translations'];
 
     protected $fillable = ['about'];
 

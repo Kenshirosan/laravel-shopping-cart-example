@@ -17,10 +17,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/AdminLTE.min.css') }}">
-    @if(config('adminlte.plugins.datatables'))
-        <!-- DataTables -->
-        <link rel="stylesheet" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
-    @endif
+{{--    @if(config('adminlte.plugins.datatables'))--}}
+{{--        <!-- DataTables -->--}}
+{{--        <link rel="stylesheet" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">--}}
+{{--    @endif--}}
 
     @yield('adminlte_css')
     @yield('css')

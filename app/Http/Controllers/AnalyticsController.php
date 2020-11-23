@@ -3,26 +3,38 @@
 namespace App\Http\Controllers;
 
 use App\Models\SortOrdersByTime;
+use App\Repositories\AnalyticsRepository;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class AnalyticsController extends Controller
 {
+    protected $repository;
+
+    public function __construct(AnalyticsRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     public function index()
     {
         //TODO: implement private analytics with apache.
-        $data = DB::select('
-            SELECT COUNT(date) as count, day, date, type
-            FROM sort_orders_by_times 
-            WHERE date LIKE \'2020%\'
-            GROUP BY day, date, type;
-        ');
 
-        dd($data);
-        $dates = collect(date('Y'));
-        $pageviews = collect(1);
-        $sessions = collect(1);
+        return view('admin.analytics');
+    }
 
-        return view('admin.analytics', compact('dates', 'pageviews', 'sessions'));
+    public function query($moment, $date, $type)
+    {
+        $data = $this->repository->query($moment, $date, $type);
+
+        return response($data, 200);
+    }
+
+    public function export($params)
+    {
+        $data = $this->repository->export($params);
+
+        return response($data, 200);
     }
 }

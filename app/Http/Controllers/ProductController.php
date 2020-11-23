@@ -110,9 +110,7 @@ class ProductController extends Controller
                 'image' => $image
             ]);
 
-            $locale = app()->getLocale();
-
-            $lang = Language::where('language', $locale)->first();
+            $lang = Language::where('language', app()->getLocale())->first();
 
             $translation = Translation::create([
                 'translation' => $product->description,

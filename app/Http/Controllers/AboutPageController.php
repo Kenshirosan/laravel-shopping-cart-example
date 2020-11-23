@@ -19,11 +19,11 @@ class AboutPageController extends Controller
             'value' => 'string'
         ]);
 
-        $about = AboutPage::updateOrCreate(
-            ['id' => 1],
-            ['about' => $request['value']]
-        );
-
+//        firstOrNew
+        $about = AboutPage::firstOrNew(['id' => 1]);
+//        dd($about);
+        $about->about = $request['value'];
+        $about->save();
 
         if(!$translation = $about->translations()->first()) {
             $translation = (new Translation())->storeTranslation($about->about);
