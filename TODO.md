@@ -4,10 +4,11 @@
 - [ ] Fix Payment
 - [ ] Translation Views
 - [x] Analytics
-- [ ] Decide what to put in charts
+- [x] Decide what to put in charts
 - [ ] Decide what to export as CSV
+- [ ] Fix CSV export
 - [ ] Sound notification on order.
-- [ ] Need a repository :/  for analytics
+- [x] Need a repository :/  for analytics
 - [ ] Iframe changes color in real time
 ---
 > Pas urgent
@@ -18,10 +19,3 @@
 - [ ] The thing Restaurant:: in favorites ?
 
 ---
-
-Afficher un graphique avec courbes des repas classés par partie du jour, et par type,et par jour  
-
-Afficher un graphique avec courbes des repas classés par partie du jour, et par type,et par mois  
-
-Afficher un graphique avec courbes des repas classés par partie du jour, et par type,et par année  
-

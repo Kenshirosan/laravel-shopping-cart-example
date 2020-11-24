@@ -32,6 +32,7 @@ class AnalyticsRepository
         $this->lastYearDate = substr(Carbon::createFromFormat('Y-m', $this->lastYearDateString)->toDateString(), 0, 7);
     }
 
+    //TODO: fix this shit
     public function export($query)
     {
         $data = $this->$query();
@@ -92,11 +93,11 @@ class AnalyticsRepository
         ';
 
         if($type === 'all') {
-            $annee = substr($date, 0, 4);
-            $total = SortOrdersByTime::where('date', 'like', $annee . '%')->count();
-//            $query = 'SELECT count(date) AS total, substr(date, 1, 4) AS annee FROM sort_orders_by_times WHERE date LIKE \'' . $date .'%\' group by annee';
-
-            return ['annee' => $annee, 'total' => $total];
+            $query = '
+                SELECT count(date) AS total, substr(date, 1, 4) AS annee 
+                FROM sort_orders_by_times 
+                WHERE date LIKE \'' . $date .'%\' 
+                GROUP BY annee';
         }
 
         return DB::select($query);

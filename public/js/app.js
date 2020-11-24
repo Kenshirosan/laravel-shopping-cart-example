@@ -19557,9 +19557,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   computed: {
     totalCount: function totalCount() {
       var total = 0;
-      Array.isArray(this.analytics) ? this.analytics.map(function (a) {
-        total += a.count;
-      }) : total = this.analytics.total;
+      this.analytics.map(function (a) {
+        total += a.count || a.total;
+      });
       return total;
     }
   },
@@ -19611,26 +19611,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         barPercentage: 1,
         categoryPercentage: 1
       };
+      var analytics = this.analytics.map(function (a) {
+        return a.count || a.total;
+      });
       var data = {
-        labels: Array.isArray(this.analytics) ? this.analytics.map(function (a) {
-          return a.day;
-        }) : [this.analytics.annee],
+        labels: this.analytics.map(function (a) {
+          return a.day || a.annee;
+        }),
         datasets: [{
           label: "".concat(this.label, " : ").concat(this.totalCount),
-          data: Array.isArray(this.analytics) ? this.analytics.map(function (a) {
-            return a.count;
-          }) : [this.analytics.total],
+          data: analytics,
           backgroundColor: this.color,
           borderColor: this.color
-        } // {
-        //     label: `${this.label} : ${this.totalCount}`,
-        //     data: Array.isArray(this.analytics) ? this.analytics.map(a => a.count) : [this.analytics.total],
-        //     // Changes this dataset to become a line
-        //     backgroundColor: this.color,
-        //     borderColor: this.color,
-        //     type: 'line'
-        // }
-        ]
+        }, {
+          label: "".concat(this.label, " : ").concat(this.totalCount),
+          data: analytics,
+          // Changes this dataset to become a line
+          backgroundColor: 'transparent',
+          borderColor: 'red',
+          type: 'line'
+        }]
       };
       var context = this.$el.firstChild.getContext('2d');
       new chart_js__WEBPACK_IMPORTED_MODULE_1___default.a(context, {

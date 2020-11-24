@@ -25,9 +25,9 @@
             totalCount() {
                 let total = 0;
 
-                Array.isArray(this.analytics) ? this.analytics.map(a => {
-                     total += a.count;
-                }) : total = this.analytics.total;
+                this.analytics.map(a => {
+                     total += a.count || a.total;
+                });
 
                 return total;
             },
@@ -67,23 +67,24 @@
                     categoryPercentage: 1,
                 };
 
+                let analytics = this.analytics.map(a => a.count || a.total)
                 let data = {
-                    labels: Array.isArray(this.analytics) ? this.analytics.map(a => a.day) : [this.analytics.annee],
+                    labels: this.analytics.map(a => a.day || a.annee),
                     datasets: [
                         {
                             label: `${this.label} : ${this.totalCount}`,
-                            data: Array.isArray(this.analytics) ? this.analytics.map(a => a.count) : [this.analytics.total],
+                            data: analytics,
                             backgroundColor: this.color,
                             borderColor: this.color,
                         },
-                        // {
-                        //     label: `${this.label} : ${this.totalCount}`,
-                        //     data: Array.isArray(this.analytics) ? this.analytics.map(a => a.count) : [this.analytics.total],
-                        //     // Changes this dataset to become a line
-                        //     backgroundColor: this.color,
-                        //     borderColor: this.color,
-                        //     type: 'line'
-                        // }
+                        {
+                            label: `${this.label} : ${this.totalCount}`,
+                            data: analytics,
+                            // Changes this dataset to become a line
+                            backgroundColor: 'transparent',
+                            borderColor: 'red',
+                            type: 'line'
+                        }
                     ],
                 };
 
