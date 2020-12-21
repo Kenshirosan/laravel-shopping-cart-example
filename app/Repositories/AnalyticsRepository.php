@@ -47,6 +47,7 @@ class AnalyticsRepository
 
         foreach ($data as $sale) {
             try {
+                //$csv->insertAll();
                 $csv->insertOne($sale);
             } catch (CannotInsertRecord $e) {
                 die($e->getMessage());
@@ -94,9 +95,8 @@ class AnalyticsRepository
 
         if($type === 'all') {
             $query = '
-                SELECT count(date) AS total, substr(date, 1, 4) AS annee 
+                SELECT COUNT(date) AS total, substr(date, 1, 4) AS annee 
                 FROM sort_orders_by_times 
-                WHERE date LIKE \'' . $date .'%\' 
                 GROUP BY annee';
         }
 

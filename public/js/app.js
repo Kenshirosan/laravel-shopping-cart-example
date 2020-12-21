@@ -19627,8 +19627,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           label: "".concat(this.label, " : ").concat(this.totalCount),
           data: analytics,
           // Changes this dataset to become a line
-          backgroundColor: 'transparent',
-          borderColor: 'red',
+          backgroundColor: 'rgba(0, 255, 0, 0.1)',
+          borderColor: 'transparent',
           type: 'line'
         }]
       };

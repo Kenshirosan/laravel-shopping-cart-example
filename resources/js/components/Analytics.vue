@@ -81,8 +81,8 @@
                             label: `${this.label} : ${this.totalCount}`,
                             data: analytics,
                             // Changes this dataset to become a line
-                            backgroundColor: 'transparent',
-                            borderColor: 'red',
+                            backgroundColor: 'rgba(0, 255, 0, 0.1)',
+                            borderColor: 'transparent',
                             type: 'line'
                         }
                     ],

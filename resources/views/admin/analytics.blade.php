@@ -111,13 +111,9 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-6">
+            <div class="col-md-8 col-md-offset-2 ">
                 <h2 class="text-center text-info">Nombre de repas total cette annee.</h2>
                 <analytics label="Nombre de repas Midi" type="Lunch/date/all" color="rgba(80, 255, 132, 0.5)"></analytics>
-            </div>
-            <div class="col-md-6">
-                <h2 class="text-center text-info">Nombre de repas total l'annee derniere.</h2>
-                <analytics label="Nombre de repas Soir" type="Dinner/lastYear/all" color="rgba(250, 120, 0, 0.5)"></analytics>
             </div>
         </div>
     </div>
