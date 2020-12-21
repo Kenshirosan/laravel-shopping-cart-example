@@ -15,7 +15,6 @@
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.0",
-        "league/csv": "^9.6",
         "pusher/pusher-php-server": "^4.1",
         "stripe/stripe-php": "^7.28",
         "zgabievi/promocodes": "^8.1.0"

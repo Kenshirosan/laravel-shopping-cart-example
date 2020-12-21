@@ -16,4 +16,8 @@ Route::middleware(['auth', 'must-be-confirmed', 'employee'])->group(function () 
     Route::get('/livesearch','SearchController@show');
     Route::post('/customer-orders/{order}', 'OrderProcessedController@create');
     Route::delete('/customer-orders/{order}', 'OrderProcessedController@destroy');
+    Route::get('/analytics', 'AnalyticsController@index');
+    Route::get('/analytics/{moment}/{date}/{type}', 'AnalyticsController@query');
+    Route::get('/analytics/export/{type}', 'AnalyticsController@export');
+    Route::get('/analytics/data/years', 'AnalyticsController@getYears');
 });

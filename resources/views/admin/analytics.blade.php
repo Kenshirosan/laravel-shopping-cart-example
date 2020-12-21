@@ -7,6 +7,12 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
+            <h2 class="text-center text-info">Export Data</h2>
+            <export-data></export-data>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <div class="col-md-6">
                 <h2 class="text-center text-info">Nombre de repas en livraison : Le midi par jour ce mois.</h2>
                 <analytics label="Nombre de repas Midi" type="Lunch/date/Delivery" color="rgba(80, 255, 13, 0.32)"></analytics>

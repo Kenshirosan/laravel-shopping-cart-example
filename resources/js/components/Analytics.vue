@@ -1,9 +1,6 @@
 <template>
     <div>
         <canvas width="600" height="200"></canvas>
-        <form @submit.prevent="exportCSV">
-            <button type="submit">Exportez les donnees brut</button>
-        </form>
     </div>
 </template>
 
@@ -38,12 +35,6 @@
         },
 
         methods: {
-            exportCSV() {
-                axios.get(`/analytics/export/${this.type}`)
-                    .then(res => flash('Telechargement OK'))
-                    .catch(err => console.error(err));
-            },
-
             async getAnalytics() {
                 await axios.get(`/analytics/${this.type}`)
                     .then(res => {

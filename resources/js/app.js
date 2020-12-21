@@ -19,6 +19,7 @@ Vue.component(
 );
 Vue.component('yearly-stats', require('./components/YearlyStats.vue').default);
 Vue.component('analytics', require('./components/Analytics.vue').default);
+Vue.component('export-data', require('./components/subcomponents/ExportData.vue').default);
 Vue.component('toggle', require('./components/Toggle.vue').default);
 Vue.component('Wysiwig', require('./components/Wysiwig.vue').default);
 Vue.component(

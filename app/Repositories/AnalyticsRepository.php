@@ -4,12 +4,8 @@
 namespace App\Repositories;
 
 
-use App\Models\SortOrdersByTime;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-use League\Csv\CannotInsertRecord;
-use League\Csv\Writer;
-use SplTempFileObject;
 
 class AnalyticsRepository
 {
@@ -32,31 +28,25 @@ class AnalyticsRepository
         $this->lastYearDate = substr(Carbon::createFromFormat('Y-m', $this->lastYearDateString)->toDateString(), 0, 7);
     }
 
-    //TODO: fix this shit
-    public function export($query)
+    public function export($year)
     {
-        $data = $this->$query();
+        header("Content-type: text/csv");
+        header("Cache-Control: no-store, no-cache");
+        header('Content-Disposition: attachment; filename="data.csv"');
 
-        $csv = Writer::createFromFileObject(new SplTempFileObject());
+        $query = "SELECT * FROM sort_orders_by_times WHERE substr(date, 1, 4) = {$year}";
+        $res = DB::select($query);
 
-        try {
-            $csv->insertOne(['count', 'day']);
-        } catch (CannotInsertRecord $e) {
-            die($e->getMessage());
+        $file = fopen('php://output','w');
+        $headers  = ['id', 'time', 'date', 'day', 'type', 'moment', 'created_at', 'updated_at'];
+        fputcsv($file, $headers);
+        foreach ($res as $fields) {
+            fputcsv($file, (array)$fields);
         }
 
-        foreach ($data as $sale) {
-            try {
-                //$csv->insertAll();
-                $csv->insertOne($sale);
-            } catch (CannotInsertRecord $e) {
-                die($e->getMessage());
-            }
-        }
-
-        $csv->output('data.csv');
-
-        return response([], 200);
+        fclose($file);
+        echo $file;
+        die();
 
     }
 
@@ -99,6 +89,16 @@ class AnalyticsRepository
                 FROM sort_orders_by_times 
                 GROUP BY annee';
         }
+
+        return DB::select($query);
+    }
+
+    public function getYears()
+    {
+        $query = '
+            SELECT substr(date, 1, 4) AS annee 
+            FROM sort_orders_by_times 
+            GROUP BY annee;';
 
         return DB::select($query);
     }

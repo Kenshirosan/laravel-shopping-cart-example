@@ -40,9 +40,6 @@ Route::middleware(['auth', 'must-be-confirmed', 'employee', 'admin'])->group(fun
     Route::delete('/add-category/{id}', 'CategoriesController@destroy');
     Route::get('/message/{id}', 'MessageController@show');
     Route::delete('/delete/{id}', 'MessageController@destroy');
-    Route::get('/analytics', 'AnalyticsController@index');
-    Route::get('/analytics/{moment}/{date}/{type}', 'AnalyticsController@query');
-    Route::get('/analytics/export/{type}', 'AnalyticsController@export');
     Route::get('/create-invoice', 'InvoiceController@index');
     Route::post('/create-invoice', 'InvoiceController@store');
 

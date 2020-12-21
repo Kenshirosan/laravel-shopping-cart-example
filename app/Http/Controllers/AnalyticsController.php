@@ -37,4 +37,11 @@ class AnalyticsController extends Controller
 
         return response($data, 200);
     }
+
+    public function getYears()
+    {
+        $years = $this->repository->getYears();
+
+        return response($years, 200);
+    }
 }
