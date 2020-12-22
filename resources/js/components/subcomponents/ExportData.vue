@@ -26,13 +26,13 @@ export default {
         exportCSV() {
             axios.get(`/analytics/export/${this.year}`, {responseType: 'blob'})
                 .then(res => {
-                    const url = window.URL.createObjectURL(new Blob([res.data]));
+                    const url = URL.createObjectURL(new Blob([res.data]));
                     const link = document.createElement('a');
                     link.href = url;
                     link.setAttribute('download', `data-${this.year}.csv`);
                     document.body.appendChild(link);
                     link.click();
-                    flash('Telechargement OK');
+                    adminflash('Telechargement OK');
                 })
                 .catch(err => console.error(err));
         },

@@ -22009,13 +22009,13 @@ __webpack_require__.r(__webpack_exports__);
       axios.get("/analytics/export/".concat(this.year), {
         responseType: 'blob'
       }).then(function (res) {
-        var url = window.URL.createObjectURL(new Blob([res.data]));
+        var url = URL.createObjectURL(new Blob([res.data]));
         var link = document.createElement('a');
         link.href = url;
         link.setAttribute('download', "data-".concat(_this.year, ".csv"));
         document.body.appendChild(link);
         link.click();
-        flash('Telechargement OK');
+        adminflash('Telechargement OK');
       })["catch"](function (err) {
         return console.error(err);
       });
@@ -38563,7 +38563,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.alert-flash {\n    position: fixed;\n    right: 25px;\n    bottom: 25px;\n    z-index: 900;\n}\n", ""]);
+exports.push([module.i, "\n.alert-flash {\n    position: fixed;\n    right: 25px;\n    top: 60px;\n    z-index: 900;\n}\n", ""]);
 
 // exports
 
