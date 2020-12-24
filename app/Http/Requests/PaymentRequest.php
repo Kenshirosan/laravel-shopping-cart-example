@@ -34,7 +34,7 @@ class PaymentRequest extends FormRequest
             'zipcode' => 'required|numeric',
             'phone_number' => 'required|exists:users,phone_number',
             'email' => 'required|exists:users,email',
-            'total' => 'nullable|numeric',
+            'price' => 'nullable|numeric',
             'taxes' => 'nullable|numeric',
             'code' => 'nullable|string',
             'comments' => 'nullable|string'

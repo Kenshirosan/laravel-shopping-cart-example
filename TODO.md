@@ -6,6 +6,7 @@
 - [ ] Sound notification on order.
 - [ ] Iframe changes color in real time
 - [ ] Fix money format in MonthlyStats and YearlyStats.
+- [ ] Fix /best-customers
 ---
 > Pas urgent
 >
@@ -13,5 +14,5 @@
 - [ ] Calendar ?
 - [ ] Create Invoice q ?
 - [ ] The thing Restaurant:: in favorites ?
-
+- [ ] Bug showing wrong stuff order processed on /customer-orders
 ---

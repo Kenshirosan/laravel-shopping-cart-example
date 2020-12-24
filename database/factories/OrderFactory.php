@@ -23,6 +23,7 @@ class OrderFactory extends Factory
     public function definition()
     {
         return [
+            'order_type' => 'Delivery',
             'user_id' => function () {
                 return User::inRandomOrder()->first()->id;
             },
@@ -45,6 +46,15 @@ class OrderFactory extends Factory
             return [
                 'hideable_id' => 999,
                 'hideable_type' => 'App\Models\Order'
+            ];
+        });
+    }
+
+    public function pickup()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'order_type' => 'Pick-up',
             ];
         });
     }

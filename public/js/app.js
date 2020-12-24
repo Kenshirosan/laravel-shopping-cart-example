@@ -99682,14 +99682,14 @@ var render = function() {
         _c(
           "button",
           {
-            staticClass: "btn btn-success",
+            staticClass: "btn btn-lg btn-success",
             on: {
               click: function($event) {
                 _vm.show = !_vm.show
               }
             }
           },
-          [_vm._v("\n                Add An Address\n            ")]
+          [_vm._m(0)]
         ),
         _vm._v(" "),
         _vm.show
@@ -99999,7 +99999,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("error", { attrs: { error: _vm.errors.get("is_primary") } }),
                 _vm._v(" "),
-                _vm._m(0)
+                _vm._m(1)
               ],
               1
             )
@@ -100009,6 +100009,12 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h4", [_c("strong", [_vm._v("Add An Address")])])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

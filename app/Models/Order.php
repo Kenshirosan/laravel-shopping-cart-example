@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use DB;
+use Illuminate\Support\Facades\DB;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

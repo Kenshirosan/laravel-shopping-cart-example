@@ -35,9 +35,9 @@
                             <p>
                                 <strong class="text-primary">{{ $order_detail['qty'] }}</strong>
                                 {{ $order_detail['product_name'] }}
-                                @if($order_detail['options'])<p>{{ $order_detail['options'] }} </p>@endif
-                                @if($order_detail['wayofcooking'])<p>Cooked: {{ $order_detail['wayofcooking'] }} </p>@endif
                             </p>
+                                @if($order_detail['options'])<p>{{ $order_detail['options'] }} </p>@endif
+                                @if($order_detail['wayofcooking'])<p>Cooked: <strong>{{ $order_detail['wayofcooking'] }} </strong></p>@endif
                             @endforeach
                             @if($order->order_type === 'Delivery')
                                 <order-progress status="{{ $order->status->name}}" initial="{{ $order->status->percent }}" order_id="{{ $order->id }}"></order-progress>
@@ -51,9 +51,9 @@
                 <div class="panel panel-info">
                     <div class="panel-heading">Your informations</div>
                     <div class="panel-body">
+                        <add-an-address></add-an-address>
                         @include('includes.profileForm')
                         @if(! auth()->user()->isEmployee())
-                            <add-an-address></add-an-address>
                             <a class="btn btn-danger pull-right" href="/erase/{{ $user->id }}">
                                 Delete your account
                             </a>

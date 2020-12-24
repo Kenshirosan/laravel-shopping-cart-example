@@ -55,7 +55,7 @@ class Logger extends Model
         $args = func_get_args();
 
         if(file_put_contents('../logs/errorlog.txt', $this->string, FILE_APPEND)) {
-            Mail::to(env('MAIL_FROM_ADDRESS'))->send(new ErrorMail($args));
+//            Mail::to(env('MAIL_FROM_ADDRESS'))->send(new ErrorMail($args));
             return response(['Message' => 'Something went wrong, an email has been sent to the site admin'], 200);
 
         }

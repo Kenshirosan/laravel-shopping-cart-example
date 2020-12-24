@@ -89,11 +89,11 @@ class PaymentController extends Controller
         }
 // Mettre un double try catch avec une transaction sql
          try {
-//             (new Payments())->validateStripePayment();
+             (new Payments())->validateStripePayment();
              (new Logger('Payment successful'));
          } catch (\Exception $e) {
             dd($e->getMessage());
-             (new Logger('Something wrong happened with the payment of an order', 'Error, please check your site.'));
+//             (new Logger('Something wrong happened with the payment of an order', 'Error, please check your site.'));
              return back()->with(['error_message' => $e->getMessage()]);
          }
 
@@ -127,7 +127,7 @@ class PaymentController extends Controller
         if (request('order_type') === 'Pick-up') {
             $pickup_time = Carbon::createFromFormat('H:i', request('pickup_time'))->toTimeString();
         }
-
+//dd(request()->all());
         $order = Order::create([
             'order_type' => request('order_type'),
             'pickup_time' => $pickup_time,
@@ -144,6 +144,8 @@ class PaymentController extends Controller
             'taxes' => Cart::tax() * 100,
             'comments' => request('comments')
         ]);
+
+        SortOrdersByTime::record($order->order_type);
 // ICI A CHANGER
 // TODO: Fix option way of doing this.
         foreach ($cart as $row) {
