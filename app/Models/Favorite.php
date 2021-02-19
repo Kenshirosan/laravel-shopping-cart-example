@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 class Favorite extends Model
 {
@@ -46,11 +47,11 @@ class Favorite extends Model
     public function product()
     {
         // ???
-        return Restaurant::where('id', $this->favorited->id);
+//        return Restaurant::where('id', $this->favorited->id);
     }
 
-    public function favoritesCount()
+    public function favoritesCount($id)
     {
-        return $this->where('id', $id)->get();
+        return $this->where('id', $id)->count();
     }
 }

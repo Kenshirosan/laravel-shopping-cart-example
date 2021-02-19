@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Language;
 use App\Models\Translation;
 use Illuminate\Http\Response;
-use Image;
 use App\User;
 use App\Models\Photo;
 use App\Models\Product;
@@ -14,7 +13,7 @@ use App\Models\OptionGroup;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
-use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\StoreProductRequest;use Intervention\Image\Facades\Image;
 
 
 class ProductController extends Controller

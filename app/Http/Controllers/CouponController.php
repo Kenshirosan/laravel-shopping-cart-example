@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use \Cart as Cart;
+
 use App\Models\Promocode;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use App\Http\Requests\CouponRequest;
 use Gabievi\Promocodes\Facades\Promocodes;
@@ -66,7 +67,7 @@ class CouponController extends Controller
             return response()->json(['message' => $message], 403);
         }
 
-        if( ! \Promocodes::check($code) && $validCode->is_disposable){
+        if( ! Promocodes::check($code) && $validCode->is_disposable){
             $message = 'This coupon has already been used';
             return response()->json(['message' => $message], 403);
         }

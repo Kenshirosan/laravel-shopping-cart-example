@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use \Cart as Cart;
 use App\Models\Product;
 use App\Http\Requests;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
 class WishlistController extends Controller

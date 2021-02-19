@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Image;
 use App\Models\Photo;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class PhotosController extends Controller
 {

@@ -7,8 +7,8 @@ use App\Models\Order;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use \Cart as Cart;
 use Illuminate\Support\Str;
 
 class UserController extends Controller
@@ -92,7 +92,7 @@ class UserController extends Controller
 
     public function update(User $user)
     {
-        if(\Hash::check(request('password'), $user->password)) {
+        if(Hash::check(request('password'), $user->password)) {
             request()->validate([
                 'name' => 'required|string',
                 'last_name' => 'required|string',

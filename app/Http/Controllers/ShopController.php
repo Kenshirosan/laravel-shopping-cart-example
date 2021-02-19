@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Category;
-use App;
-use \Cart;
+use Illuminate\Support\Facades\App;
 
 class ShopController extends Controller
 {

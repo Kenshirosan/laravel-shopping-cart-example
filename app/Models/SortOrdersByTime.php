@@ -5,8 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use App\Interfaces\Sort;
 
-class SortOrdersByTime extends Model
+class SortOrdersByTime extends Model implements Sort
 {
     use HasFactory;
 
@@ -15,6 +16,8 @@ class SortOrdersByTime extends Model
     protected $table = 'sort_orders_by_times';
 
     protected $fillable = ['time', 'date', 'day', 'type', 'moment'];
+
+    public function __construct() {}
 
     protected function getPartOfDay()
     {
@@ -32,7 +35,7 @@ class SortOrdersByTime extends Model
         return $dayPart;
     }
 
-    public static function record($type)
+    private static function record($type)
     {
         $static = new static();
 

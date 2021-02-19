@@ -11,10 +11,12 @@ use App\Models\Promocode;
 use App\Models\SortOrdersByTime;
 use App\Payments\Payments;
 use App\Logger;
+use Gabievi\Promocodes\Facades\Promocodes;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use \Carbon\Carbon;
-use \Cart as Cart;
+
 
 class PaymentController extends Controller
 {
@@ -181,10 +183,10 @@ class PaymentController extends Controller
         if ($code = request('code')) {
             $promocode = Promocode::where('code', $code)->firstOrFail();
             if ($promocode && $promocode->is_disposable) {
-                \Promocodes::apply($code);
+                Promocodes::apply($code);
 
-                \Promocodes::disable($code);
-                \Promocodes::clearRedundant();
+                Promocodes::disable($code);
+                Promocodes::clearRedundant();
             }
         }
 

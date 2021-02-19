@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Option;
 use App\Models\Product;
-use \Cart as Cart;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
 class CartController extends Controller {
