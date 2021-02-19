@@ -42,11 +42,11 @@ class ProductController extends Controller
         $product = Product::where('slug', $slug)->with('groups')->firstOrFail();
         $categories = Category::all();
         $optionGroups = OptionGroup::all();
-
+        $subcategories = (new Category)->getSubcategories();
         $action = $product->isEightySix() ? "/delete/eighty_six/$product->id" : "/eighty_six/$product->id";
         $method = $product->isEightySix() ? 'DELETE' : 'POST';
 
-        return view('admin.updateProduct', compact('product', 'categories','optionGroups','method', 'action'));
+        return view('admin.updateProduct', compact('product', 'subcategories', 'categories','optionGroups','method', 'action'));
     }
 
     public function update(StoreProductRequest $request, $slug)
@@ -69,7 +69,7 @@ class ProductController extends Controller
             'holiday_special' => request('holiday_special'),
             'category_id' => request('category_id'),
             'slug' => request('slug'),
-            'type' => request('type'),
+            'type' => request('subcategory'),
             'description' => request('description'),
             'price' => request('price'),
             'image' => $image

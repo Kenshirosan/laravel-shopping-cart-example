@@ -40,6 +40,27 @@
         </div>
     </div>
 
+    <div class="form-group{{ $errors->has('subcategory') ? ' has-error' : '' }}">
+        <label for="subcategory" class="col-md-4 control-label">Subcategory ?</label>
+        <div class="col-md-6">
+            <input type="radio" name="subcategory" value=""> No<br>
+            @foreach($subcategories as $subcategory)
+                @if($product->type === $subcategory)
+                    <input checked type="radio" name="subcategory" value="{{ $product->type }}"> {{ $product->type }}<br>
+                @else
+                    <input type="radio" name="subcategory" value="{{ $subcategory }}"> {{ $subcategory }}<br>
+                @endif
+            @endforeach
+            @if ($errors->has('subcategory'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('subcategory') }}</strong>
+                </span>
+            @endif
+        </div>
+    </div>
+
+
+
     @if( !$product->groups )
     <div class="form-group{{ $errors->has('option_group_id') ? ' has-error' : '' }}">
         <label for="option" class="col-md-4 control-label">Option 1</label>

@@ -83,7 +83,7 @@
           <div class="box box-primary">
             <div class="box-body no-padding">
               <!-- THE CALENDAR -->
-              <calendar></calendar>
+              <calendar></calendar>--
 
             </div>
           </div>

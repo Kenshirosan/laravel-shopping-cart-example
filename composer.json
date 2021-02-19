@@ -20,11 +20,12 @@
         "zgabievi/promocodes": "^8.1.0"
     },
     "require-dev": {
+        "facade/ignition": "^2.3.6",
         "fzaninotto/faker": "~1.8",
         "mockery/mockery": "1.2.*",
-        "phpunit/phpunit": "^9.3",
-        "facade/ignition": "^2.3.6",
-        "nunomaduro/collision": "^5.0"
+        "nunomaduro/collision": "^5.0",
+        "phpstan/phpstan": "^0.12.77",
+        "phpunit/phpunit": "^9.3"
     },
     "autoload": {
         "classmap": [
