@@ -10,9 +10,10 @@
 ---
 > Pas urgent
 >
-- [ ] Fix shit everywhere in controllers
+- [ ] Fix shit everywhere in controllers // almost there
 - [ ] Calendar ?
 - [ ] Create Invoice q ?
-- [ ] The thing Restaurant:: in favorites ?
+- [x] The thing Restaurant:: in favorites ?
+- [ ] Implement this favorite thing
 - [ ] Bug showing wrong stuff order processed on /customer-orders
 ---

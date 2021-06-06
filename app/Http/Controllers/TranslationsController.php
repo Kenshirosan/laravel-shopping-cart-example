@@ -19,4 +19,10 @@ class TranslationsController extends Controller
 
         return view ('admin.translate', compact('cat', 'products', 'options', 'fp'));
     }
+
+    public function store(Request $request, $translation)
+    {
+
+
+    }
 }

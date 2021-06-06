@@ -27,9 +27,9 @@ class CreateFunction extends Migration
                     END IF;
                     RETURN day_part;
                 END;
-                
-                CREATE FUNCTION get_order_type() RETURNS TEXT
-	                READS SQL DATA
+
+                CREATE FUNCTION get_order_type()
+                RETURNS TEXT READS SQL DATA
                     BEGIN
                         RETURN (SELECT order_type FROM orders WHERE id = (SELECT LAST_INSERT_ID()));
                     END;
