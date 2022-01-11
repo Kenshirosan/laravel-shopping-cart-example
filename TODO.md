@@ -7,6 +7,7 @@
 - [ ] Fix money format in MonthlyStats and YearlyStats.
 - [ ] Fix /best-customers
 - [ ] Fix Calendar, make booking possible
+- [ ] Fix no holiday title issue
 ---
 > Pas urgent
 >
@@ -16,4 +17,5 @@
 - [x] The thing Restaurant:: in favorites ?
 - [ ] Implement this favorite thing
 - [ ] Bug showing wrong stuff order processed on /customer-orders
+
 ---

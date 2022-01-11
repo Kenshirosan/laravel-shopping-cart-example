@@ -23,7 +23,7 @@ class UserRegistered
      */
     public function __construct(User $user)
     {
-        return $this->user = $user;
+        $this->user = $user;
     }
 
     /**

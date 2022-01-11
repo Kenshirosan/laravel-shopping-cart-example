@@ -79,7 +79,6 @@
                 class="form-control black-text"
                 id="tel"
                 type="tel"
-                readonly
                 name="phone_number"
                 v-model="user.phone_number"
             />

@@ -1,6 +1,7 @@
 <script>
     const btns = document.querySelectorAll('.filter-btn');
     const items = document.querySelectorAll('.menu-item');
+
     btns.forEach(btn => {
         btn.addEventListener('click', function(e) {
             e.preventDefault();

@@ -31,6 +31,7 @@ class OrderStatusChanged implements ShouldBroadcast
      */
     public function broadcastOn()
     {
+//        return ['localhost:5000 '.$this->order->id]; // Invalid channel name
         return new PrivateChannel('order-tracker.' . $this->order->id);
     }
 

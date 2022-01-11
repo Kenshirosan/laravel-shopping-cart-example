@@ -19990,7 +19990,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CartAddresses',
   props: ['addresses', 'user'],
@@ -97981,7 +97980,7 @@ var render = function() {
             }
           ],
           staticClass: "form-control black-text",
-          attrs: { id: "tel", type: "tel", readonly: "", name: "phone_number" },
+          attrs: { id: "tel", type: "tel", name: "phone_number" },
           domProps: { value: _vm.user.phone_number },
           on: {
             input: function($event) {
@@ -121035,10 +121034,10 @@ window.addressAdded = function (data) {
 
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
-  broadcaster: 'pusher',
-  key: '2f56755e1aa83d0d08db',
-  cluster: 'eu',
-  encrypted: true
+  broadcaster: 'http://localhost:3000' // key: '2f56755e1aa83d0d08db',
+  // cluster: 'eu',
+  // encrypted: true,
+
 });
 
 /***/ }),
@@ -124186,8 +124185,8 @@ var Error = /*#__PURE__*/function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /usr/home/laurent/public_html/webcreation/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /usr/home/laurent/public_html/webcreation/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/laurent/public_html/webcreation/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/laurent/public_html/webcreation/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

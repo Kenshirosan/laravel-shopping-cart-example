@@ -18,14 +18,15 @@ class UserOrdered implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $order;
-    // *
-    //  * Create a new event instance.
-    //  *
-    // * @return void
 
+    /**
+     * Create a new event instance.
+     *
+     * @return void
+     */
     public function __construct(Order $order)
     {
-        return $this->order = $order;
+        $this->order = $order;
     }
 
     /**
