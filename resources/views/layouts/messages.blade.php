@@ -10,6 +10,6 @@
             <h4 class="blue-text">Let us know what you think</h4>
             <small class="orange-text">(All fields are mandatory)</small>
         </div>
-            <contact-us></contact-us>
-        </div>
+        <contact-us></contact-us>
+    </div>
 @endsection
